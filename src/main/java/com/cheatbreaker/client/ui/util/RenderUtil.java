@@ -1,10 +1,8 @@
 package com.cheatbreaker.client.ui.util;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class RenderUtil {
@@ -27,7 +25,7 @@ public class RenderUtil {
         float f6 = 0.0f;
         float f7 = 0.0f;
         GL11.glEnable(3042);
-        Minecraft.getMinecraft().getTextureManager().bindTexture(location);
+        Ref.getMinecraft().bridge$getTextureManager().bridge$bindTexture(location);
         GL11.glBegin(7);
         GL11.glTexCoord2d(f6 / size, f7 / size);
         GL11.glVertex2d(x, y);
@@ -42,15 +40,15 @@ public class RenderUtil {
     }
 
     public static void drawIcon(String location, float size, float x, float y) {
-        drawIcon(new ResourceLocation(location), size, x, y);
+        drawIcon(Ref.getInstanceCreator().createResourceLocation(location), size, x, y);
     }
 
-    public static void lIIIIlIIllIIlIIlIIIlIIllI(ResourceLocation resourceLocation, float f, float f2, float f3, float f4) {
+    public static void lIIIIlIIllIIlIIlIIIlIIllI(ResourceLocationBridge resourceLocation, float f, float f2, float f3, float f4) {
         float f5 = f3 / 2.0f;
         float f6 = 0.0f;
         float f7 = 0.0f;
         GL11.glEnable(3042);
-        Minecraft.getMinecraft().getTextureManager().bindTexture(resourceLocation);
+        Ref.getMinecraft().bridge$getTextureManager().bridge$bindTexture(resourceLocation);
         GL11.glBegin(7);
         GL11.glTexCoord2d(f6 / f5, f7 / f5);
         GL11.glVertex2d(f, f2);

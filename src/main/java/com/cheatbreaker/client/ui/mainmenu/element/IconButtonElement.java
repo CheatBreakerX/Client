@@ -1,15 +1,14 @@
 package com.cheatbreaker.client.ui.mainmenu.element;
 
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.ui.fading.ColorFade;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class IconButtonElement
-        extends AbstractElement {
-    private ResourceLocation IIIllIllIlIlllllllIlIlIII;
+public class IconButtonElement extends AbstractElement {
+    private ResourceLocationBridge IIIllIllIlIlllllllIlIlIII;
     private String IllIIIIIIIlIlIllllIIllIII;
     private boolean lIIIIllIIlIlIllIIIlIllIlI;
     private final ColorFade IlllIllIlIIIIlIIlIIllIIIl;
@@ -17,14 +16,14 @@ public class IconButtonElement
     private final ColorFade llIIlllIIIIlllIllIlIlllIl;
     private float lIIlIlIllIIlIIIlIIIlllIII = 4;
 
-    public IconButtonElement(ResourceLocation resourceLocation) {
+    public IconButtonElement(ResourceLocationBridge resourceLocation) {
         this.IIIllIllIlIlllllllIlIlIII = resourceLocation;
         this.IlllIllIlIIIIlIIlIIllIIIl = new ColorFade(0x4FFFFFFF, -1353670564);
         this.IlIlllIIIIllIllllIllIIlIl = new ColorFade(444958085, 1063565678);
         this.llIIlllIIIIlllIllIlIlllIl = new ColorFade(444958085, 1062577506);
     }
 
-    public IconButtonElement(float f, ResourceLocation resourceLocation) {
+    public IconButtonElement(float f, ResourceLocationBridge resourceLocation) {
         this.IIIllIllIlIlllllllIlIlIII = resourceLocation;
         this.lIIlIlIllIIlIIIlIIIlllIII = f;
         this.IlllIllIlIIIIlIIlIIllIIIl = new ColorFade(0x4FFFFFFF, -1353670564);
@@ -61,7 +60,7 @@ public class IconButtonElement
         return false;
     }
 
-    public void lIIIIlIIllIIlIIlIIIlIIllI(ResourceLocation resourceLocation) {
+    public void lIIIIlIIllIIlIIlIIIlIIllI(ResourceLocationBridge resourceLocation) {
         this.IIIllIllIlIlllllllIlIlIII = resourceLocation;
     }
 

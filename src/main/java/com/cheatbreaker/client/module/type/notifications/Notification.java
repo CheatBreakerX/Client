@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.module.type.notifications;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;

@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.util.voicechat;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.entity.player.EntityPlayerBridge;
 import com.cheatbreaker.client.CheatBreaker;

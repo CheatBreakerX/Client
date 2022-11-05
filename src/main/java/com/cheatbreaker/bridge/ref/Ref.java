@@ -1,28 +1,21 @@
-package com.cheatbreaker.bridge;
+package com.cheatbreaker.bridge.ref;
 
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.ext.GLBridge;
-import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.client.gui.ScaledResolution;
 
 public class Ref {
+    // These fields can be set from the version specific mod and be used equally throughout all versions without having to change much.
     @Getter @Setter
     private static GLBridge glBridge = null;
     @Getter @Setter
     private static MinecraftBridge minecraft = null;
     @Getter @Setter
     private static TessellatorBridge tessellator = null;
-
-    public static ResourceLocationBridge createResourceLocation(String path) {
-        return createResourceLocation("minecraft", path);
-    }
-
-    public static ResourceLocationBridge createResourceLocation(String domain, String path) {
-        return (ResourceLocationBridge) new ResourceLocation(domain + ":" + path);
-    }
+    @Getter @Setter
+    private static IInstanceCreator instanceCreator;
 
     public static void modified$drawRect(float left, float top, float right, float bottom, int color) {
         float tempVar;
@@ -107,9 +100,5 @@ public class Ref {
         modified$drawRect(f3 - f5, f2 + f5, f3, f4 - f5, n);
         modified$drawRect(f, f2, f3, f2 + f5, n);
         modified$drawRect(f, f4 - f5, f3, f4, n);
-    }
-
-    public static ScaledResolution createScaledResolution() {
-        return new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
     }
 }

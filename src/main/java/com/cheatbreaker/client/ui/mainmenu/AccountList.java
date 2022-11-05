@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.ui.mainmenu;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.ui.fading.ColorFade;
 import com.cheatbreaker.client.ui.fading.MinMaxFade;
 import com.cheatbreaker.client.ui.mainmenu.element.ScrollableElement;

@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.util.cosmetic;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 
 public class Cosmetic {
@@ -22,8 +22,8 @@ public class Cosmetic {
         this.type = type;
         this.scale = scale;
         this.equipped = equipped;
-        this.location = Ref.createResourceLocation(location);
-        this.previewLocation = Ref.createResourceLocation("preview/" + (location.equals("") ? "unknown.png" : location));
+        this.location = Ref.getInstanceCreator().createResourceLocation(location);
+        this.previewLocation = Ref.getInstanceCreator().createResourceLocation("preview/" + (location.equals("") ? "unknown.png" : location));
     }
 
     public String getName() {

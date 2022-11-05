@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.ui.util;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

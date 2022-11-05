@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.util.thread;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.util.SessionServer;
 import com.google.gson.JsonArray;

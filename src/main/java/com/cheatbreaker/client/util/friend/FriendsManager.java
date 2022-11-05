@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.util.friend;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.client.ui.overlay.friend.FriendRequest;
 

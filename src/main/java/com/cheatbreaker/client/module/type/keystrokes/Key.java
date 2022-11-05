@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.module.type.keystrokes;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.ui.module.CBModulesGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;

@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.module.type;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.event.type.DisconnectEvent;

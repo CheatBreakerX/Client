@@ -1,8 +1,12 @@
 package com.cheatbreaker.client;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.client.MinecraftBridge;
+import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
+import com.cheatbreaker.bridge.client.renderer.ThreadDownloadImageDataBridge;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.audio.SoundManagerBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
+import com.cheatbreaker.bridge.util.SessionBridge;
 import com.cheatbreaker.client.audio.AudioDevice;
 import com.cheatbreaker.client.config.ConfigManager;
 import com.cheatbreaker.client.config.GlobalSettings;
@@ -82,7 +86,7 @@ public class CheatBreaker {
 
     public static final AudioFormat universalAudioFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 16000.0f, 16, 1, 2, 16000.0f, false);
 
-    public List<Session> sessions;
+    public List<SessionBridge> sessions;
 
     private List<Cosmetic> cosmetics = new ArrayList<>();
     private AssetsWebSocket websocket;
@@ -213,7 +217,7 @@ public class CheatBreaker {
                 File file2 = new File(file, resourceLocation.bridge$getResourcePath().replaceAll("([a-zA-Z0-9/]+)/", ""));
                 if (!file2.exists()) {
                     try {
-                        InputStream stream = Minecraft.getMinecraft().getResourceManager().getResource(resourceLocation).getInputStream();
+                        InputStream stream = Ref.getMinecraft().bridge$getResourceManager().bridge$getResource(resourceLocation).bridge$getInputStream();
                         Files.copy(stream, file2.toPath());
                         stream.close();
                     }
@@ -293,7 +297,7 @@ public class CheatBreaker {
     }
 
     public float getScaleFactor() {
-        switch (Minecraft.getMinecraft().gameSettings.guiScale) {
+        switch (Ref.getMinecraft().bridge$getGameSettings().bridge$getGuiScale()) {
             case 0: {
                 return 2.0f;
             }
@@ -319,9 +323,9 @@ public class CheatBreaker {
     }
 
     public ResourceLocationBridge getHeadLocation(String displayName) {
-        ResourceLocationBridge playerSkin = this.playerSkins.getOrDefault(displayName, Ref.createResourceLocation("client/heads/" + displayName + ".png"));
+        ResourceLocationBridge playerSkin = this.playerSkins.getOrDefault(displayName, Ref.getInstanceCreator().createResourceLocation("client/heads/" + displayName + ".png"));
         if (!this.playerSkins.containsKey(displayName)) {
-            ThreadDownloadImageData skinData = new ThreadDownloadImageData(null, "https://minotar.net/helm/" + displayName + "/32.png", Ref.createResourceLocation("client/defaults/steve.png"), null);
+            ThreadDownloadImageDataBridge skinData = Ref.getInstanceCreator().createThreadDownloadImageData(null, "https://minotar.net/helm/" + displayName + "/32.png", Ref.getInstanceCreator().createResourceLocation("client/defaults/steve.png"), null);
             Ref.getMinecraft().bridge$getTextureManager().bridge$loadTexture(playerSkin, skinData);
             this.playerSkins.put(displayName, playerSkin);
         }
@@ -384,18 +388,18 @@ public class CheatBreaker {
     public void onRenderGameOverlay(RenderGameOverlayEvent.Post event) {
         if (event.type == RenderGameOverlayEvent.ElementType.EXPERIENCE)
         {
-            Minecraft mc = Minecraft.getMinecraft();
-            ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+            MinecraftBridge mc = Ref.getMinecraft();
+            ScaledResolutionBridge scaledresolution = Ref.getInstanceCreator().createScaledResolution();
 
-            if (!mc.gameSettings.showDebugInfo) {
+            if (!mc.bridge$getGameSettings().bridge$getShowDebugInfo()) {
                 CheatBreaker.getInstance().getEventBus().callEvent(new GuiDrawEvent(scaledresolution));
             }
 
-            if (mc.currentScreen instanceof CBModulesGui || mc.currentScreen instanceof CBModulePlaceGui) {
+            if (mc.bridge$getCurrentScreen() instanceof CBModulesGui || mc.bridge$getCurrentScreen() instanceof CBModulePlaceGui) {
                 CheatBreaker.getInstance().getEventBus().callEvent(new RenderPreviewEvent(scaledresolution));
             }
 
-            if (mc.currentScreen == null) {
+            if (mc.bridge$getCurrentScreen() == null) {
                 OverlayGui.getInstance().renderGameOverlay();
             }
         }

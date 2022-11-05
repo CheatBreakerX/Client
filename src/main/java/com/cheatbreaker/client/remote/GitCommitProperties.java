@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.remote;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
@@ -13,7 +13,7 @@ import java.util.Properties;
 public class GitCommitProperties {
     public static void loadProperties() {
         try {
-            final ResourceLocationBridge resourceLocation = Ref.createResourceLocation("client/properties/app.properties");
+            final ResourceLocationBridge resourceLocation = Ref.getInstanceCreator().createResourceLocation("client/properties/app.properties");
             final Properties properties = new Properties();
             InputStream inputStream = Ref.getMinecraft().bridge$getResourceManager().bridge$getResource(resourceLocation).bridge$getInputStream();
 

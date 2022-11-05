@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.util.worldborder;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
@@ -24,7 +24,7 @@ public class WorldBorderManager {
 
     private final MinecraftBridge minecraft = Ref.getMinecraft();
     private final CheatBreaker cheatbreaker = CheatBreaker.getInstance();
-    private static final ResourceLocationBridge forceFieldTexture = Ref.createResourceLocation("textures/misc/forcefield.png");
+    private static final ResourceLocationBridge forceFieldTexture = Ref.getInstanceCreator().createResourceLocation("textures/misc/forcefield.png");
     private final List<WorldBorder> borderList = new ArrayList<>();
 
     public WorldBorderManager() {

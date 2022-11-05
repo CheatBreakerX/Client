@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.module.staff;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.config.Setting;
 
 import java.util.ArrayList;

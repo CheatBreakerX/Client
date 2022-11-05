@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.ui.mainmenu.element;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;

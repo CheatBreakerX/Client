@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.util.hologram;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.gui.FontRendererBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import org.lwjgl.opengl.GL11;

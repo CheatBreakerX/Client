@@ -1,10 +1,10 @@
 package com.cheatbreaker.client.ui.util.font;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.client.renderer.texture.DynamicTextureBridge;
+import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.CheatBreaker;
-import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.List;
 
 	private char COLOR_CODE_START = '\u00a7';
 
-	public CBFontRenderer(ResourceLocation resourceLocation, float size) {
+	public CBFontRenderer(ResourceLocationBridge resourceLocation, float size) {
 		super(resourceLocation, size);
 
 		this.setupMinecraftColorCodes();
@@ -58,7 +58,7 @@ import java.util.List;
 	@SuppressWarnings("ConstantConditions")
 	public float drawString(String text, double x, double y, int color, boolean shadow) {
 		// START SCALE FIX
-		float scaleFactor = Ref.createScaledResolution().getScaleFactor();
+		float scaleFactor = Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor();
 		float scale = (2.0f / scaleFactor);
 
 		boolean followMinecraftScale = false;
@@ -124,7 +124,7 @@ import java.util.List;
 
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, tex.getGlTextureId());
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, tex.bridge$getGlTextureId());
 
 			for (int i = 0; i < size; i++) {
 				char character = text.charAt(i);
@@ -144,7 +144,7 @@ import java.util.List;
 						underline = false;
 						strike = false;
 
-						GL11.glBindTexture(GL11.GL_TEXTURE_2D, tex.getGlTextureId());
+						GL11.glBindTexture(GL11.GL_TEXTURE_2D, tex.bridge$getGlTextureId());
 
 						currentData = this.charData;
 
@@ -164,10 +164,10 @@ import java.util.List;
 						bold = true;
 
 						if (italic) {
-							GL11.glBindTexture(GL11.GL_TEXTURE_2D, texItalicBold.getGlTextureId());
+							GL11.glBindTexture(GL11.GL_TEXTURE_2D, texItalicBold.bridge$getGlTextureId());
 							currentData = this.boldItalicChars;
 						} else {
-							GL11.glBindTexture(GL11.GL_TEXTURE_2D, texBold.getGlTextureId());
+							GL11.glBindTexture(GL11.GL_TEXTURE_2D, texBold.bridge$getGlTextureId());
 							currentData = this.boldChars;
 						}
 					} else if (colorIndex == 18) {
@@ -178,10 +178,10 @@ import java.util.List;
 						italic = true;
 
 						if (bold) {
-							GL11.glBindTexture(GL11.GL_TEXTURE_2D, texItalicBold.getGlTextureId());
+							GL11.glBindTexture(GL11.GL_TEXTURE_2D, texItalicBold.bridge$getGlTextureId());
 							currentData = this.boldItalicChars;
 						} else {
-							GL11.glBindTexture(GL11.GL_TEXTURE_2D, texItalic.getGlTextureId());
+							GL11.glBindTexture(GL11.GL_TEXTURE_2D, texItalic.bridge$getGlTextureId());
 							currentData = this.italicChars;
 						}
 					} else if (colorIndex == 21) {
@@ -191,7 +191,7 @@ import java.util.List;
 						strike = false;
 						GL11.glColor4f((color >> 16 & 0xFF) / 255.0F, (color >> 8 & 0xFF) / 255.0F,
 								(color & 0xFF) / 255.0F, alpha);
-						GL11.glBindTexture(GL11.GL_TEXTURE_2D, tex.getGlTextureId());
+						GL11.glBindTexture(GL11.GL_TEXTURE_2D, tex.bridge$getGlTextureId());
 						currentData = this.charData;
 					}
 
@@ -287,7 +287,7 @@ import java.util.List;
 		}
 
 		if (followMinecraftScale) {
-			return (int) ((width / 2) * (2.0f / Ref.createScaledResolution().getScaleFactor()));
+			return (int) ((width / 2) * (2.0f / Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor()));
 		} else {
 			return width / 2;
 		}
@@ -345,9 +345,9 @@ import java.util.List;
 		setupBoldItalicIDs();
 	}
 
-	protected DynamicTexture texBold;
-	protected DynamicTexture texItalic;
-	protected DynamicTexture texItalicBold;
+	protected DynamicTextureBridge texBold;
+	protected DynamicTextureBridge texItalic;
+	protected DynamicTextureBridge texItalicBold;
 
 	private void setupBoldItalicIDs() {
 		texBold = setupTexture(this.font.deriveFont(1), this.antiAlias, this.fractionalMetrics, this.boldChars);
@@ -398,7 +398,7 @@ import java.util.List;
 				string2 = string4.substring(string4.length() - 1);
 			}
 			stringBuilder2.append(string3).append("\n");
-			String string5 = EnumChatFormatting.getTextWithoutFormattingCodes(stringBuilder.toString());
+			String string5 = EnumChatFormattingBridge.getTextWithoutFormattingCodes(stringBuilder.toString());
 			stringBuilder.setLength(0);
 			stringBuilder.append(string2).append(string5);
 		}

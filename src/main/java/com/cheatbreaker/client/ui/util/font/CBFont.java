@@ -1,10 +1,9 @@
 package com.cheatbreaker.client.ui.util.font;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.client.renderer.texture.DynamicTextureBridge;
+import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.CheatBreaker;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -17,7 +16,7 @@ import java.io.InputStream;
 
 	protected CharData[] charData = new CharData[256];
 
-	protected DynamicTexture tex;
+	protected DynamicTextureBridge tex;
 	protected Font font;
 
 	protected boolean antiAlias;
@@ -30,12 +29,11 @@ import java.io.InputStream;
 
 	public float dbg_fontSize;
 
-	public CBFont(ResourceLocation resourceLocation, float size) {
+	public CBFont(ResourceLocationBridge resourceLocation, float size) {
 		this.dbg_fontSize = size;
 		Font tmp;
 		try {
-			InputStream is = Minecraft.getMinecraft().getResourceManager().getResource(resourceLocation)
-					.getInputStream();
+			InputStream is = Ref.getMinecraft().bridge$getResourceManager().bridge$getResource(resourceLocation).bridge$getInputStream();
 			tmp = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(size);
 		} catch (IOException | FontFormatException e) {
 			tmp = new Font("Arial", Font.PLAIN, (int) size);
@@ -48,11 +46,11 @@ import java.io.InputStream;
 		this.tex = this.setupTexture(this.font, true, true, this.charData);
 	}
 
-	protected DynamicTexture setupTexture(Font font, boolean antiAlias, boolean fractionalMetrics, CharData[] chars) {
+	protected DynamicTextureBridge setupTexture(Font font, boolean antiAlias, boolean fractionalMetrics, CharData[] chars) {
 		BufferedImage img = generateFontImage(font, antiAlias, fractionalMetrics, chars);
 
 		try {
-			return new DynamicTexture(img);
+			return Ref.getInstanceCreator().createDynamicTexture(img);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -171,7 +169,7 @@ import java.io.InputStream;
 		}
 
 		if (followMinecraftScale) {
-			return (int) (((this.fontHeight * (2f / Ref.createScaledResolution().getScaleFactor())) - 8) / 2);
+			return (int) (((this.fontHeight * (2f / Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor())) - 8) / 2);
 		}
 
 		return (this.fontHeight - 8) / 2;

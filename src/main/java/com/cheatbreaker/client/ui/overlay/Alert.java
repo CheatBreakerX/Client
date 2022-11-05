@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.ui.overlay;
 
-import com.cheatbreaker.bridge.Ref;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.ui.fading.AbstractFade;
 import com.cheatbreaker.client.ui.fading.FloatFade;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
