@@ -209,11 +209,11 @@ public class CheatBreaker {
     private void createDefaultConfigPresets() {
         File file = ConfigManager.profilesDir;
         if (file.exists() || file.mkdirs()) {
-            for (ResourceLocationBridge ResourceLocationBridge : presetLocations) {
-                File file2 = new File(file, ResourceLocationBridge.bridge$getResourcePath().replaceAll("([a-zA-Z0-9/]+)/", ""));
+            for (ResourceLocationBridge location : presetLocations) {
+                File file2 = new File(file, location.bridge$getResourcePath().replaceAll("([a-zA-Z0-9/]+)/", ""));
                 if (!file2.exists()) {
                     try {
-                        InputStream stream = Ref.getMinecraft().bridge$getResourceManager().bridge$getResource(ResourceLocationBridge).bridge$getInputStream();
+                        InputStream stream = Ref.getMinecraft().bridge$getResourceManager().bridge$getResource(location).bridge$getInputStream();
                         Files.copy(stream, file2.toPath());
                         stream.close();
                     }

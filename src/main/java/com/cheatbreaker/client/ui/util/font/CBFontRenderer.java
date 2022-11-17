@@ -20,8 +20,8 @@ import java.util.List;
 
 	private char COLOR_CODE_START = '\u00a7';
 
-	public CBFontRenderer(ResourceLocationBridge ResourceLocationBridge, float size) {
-		super(ResourceLocationBridge, size);
+	public CBFontRenderer(ResourceLocationBridge location, float size) {
+		super(location, size);
 
 		this.setupMinecraftColorCodes();
 		this.setupBoldItalicIDs();

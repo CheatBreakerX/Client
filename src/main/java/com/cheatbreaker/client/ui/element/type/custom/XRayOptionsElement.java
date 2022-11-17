@@ -57,7 +57,7 @@ public class XRayOptionsElement
             } else if (bl) {
                 Ref.modified$drawRect(n5 - 2, n6 - 2, n5 + 18, n6 + 18, 0x4F0000FF);
             }
-            this.itemRenderer.renderItemIntoGUI(minecraft.fontRenderer, minecraft.getTextureManager(), new ItemStack(item), n5, n6);
+            this.itemRenderer.renderItemIntoGUI(minecraft.bridge$getFontRenderer(), minecraft.getTextureManager(), new ItemStack(item), n5, n6);
             ++n3;
         }
         RenderHelper.disableStandardItemLighting();

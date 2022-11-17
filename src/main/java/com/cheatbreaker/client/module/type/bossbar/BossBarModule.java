@@ -25,7 +25,7 @@ public class BossBarModule extends AbstractModule {
         this.scaleAndTranslate(renderPreviewEvent.getResolution());
         if (BossStatus.bossName == null || BossStatus.statusBarTime <= 0) {
             this.minecraft.bridge$getTextureManager().bridge$bindTexture(Gui.icons);
-            FontRenderer fontRenderer = this.minecraft.fontRenderer;
+            FontRenderer fontRenderer = this.minecraft.bridge$getFontRenderer();
             int n2 = 182;
             int n3 = 0;
             float f = 1.0f;
@@ -50,7 +50,7 @@ public class BossBarModule extends AbstractModule {
         this.scaleAndTranslate(guiDrawEvent.getResolution());
         if (BossStatus.bossName != null || BossStatus.statusBarTime > 0) {
             this.minecraft.bridge$getTextureManager().bridge$bindTexture(Gui.icons);
-            FontRenderer fontRenderer = this.minecraft.fontRenderer;
+            FontRenderer fontRenderer = this.minecraft.bridge$getFontRenderer();
             int n2 = 182;
             int n3 = 0;
             float f = 1.0f;

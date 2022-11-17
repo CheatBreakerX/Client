@@ -36,7 +36,7 @@ public class CooldownRenderer {
         GL11.glTranslatef(-0.5f, -1, 0.0f);
         GL11.glScalef(f5, f5, f5);
         RenderHelper.enableStandardItemLighting();
-        ArmourStatusModule.renderItem.renderItemAndEffectIntoGUI(this.IIIIllIIllIIIIllIllIIIlIl.fontRenderer, this.IIIIllIIllIIIIllIllIIIlIl.getTextureManager(), this.item, (int)((f + (float)(n2 / 2)) / f5), (int)((f2 + (float)(n2 / 2)) / f5));
+        ArmourStatusModule.renderItem.renderItemAndEffectIntoGUI(this.IIIIllIIllIIIIllIllIIIlIl.bridge$getFontRenderer(), this.IIIIllIIllIIIIllIllIIIlIl.getTextureManager(), this.item, (int)((f + (float)(n2 / 2)) / f5), (int)((f2 + (float)(n2 / 2)) / f5));
         RenderHelper.disableStandardItemLighting();
         GL11.glPopMatrix();
         ArmourStatusModule.renderItem.zLevel = f4;

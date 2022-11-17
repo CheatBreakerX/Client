@@ -141,7 +141,7 @@ public class TeammatesModule {
         } else {
             this.drawMarker(ilIlllIlIlIIllllIlllIlIII, n2, (float)n4, (float)n3);
             if (n > 40 && ((Boolean) CheatBreaker.getInstance().getGlobalSettings().showDistance.getValue())) {
-                this.minecraft.fontRenderer.drawString("(" + n + "m)", 0, 10, -1);
+                this.minecraft.bridge$getFontRenderer().bridge$drawString("(" + n + "m)", 0, 10, -1);
             }
         }
         GL11.glPopMatrix();

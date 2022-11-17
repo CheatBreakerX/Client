@@ -24,7 +24,7 @@ public abstract class AbstractGui extends CBGuiScreen {
     @Override
     public void setWorldAndResolution(final MinecraftBridge mc, final int displayWidth, final int displayHeight) {
         this.mc = mc;
-        this.fontRendererObj = mc.bridge$getFontRenderer();
+        this.bridge$getFontRenderer()Obj = mc.bridge$getFontRenderer();
         this.width = displayWidth;
         this.height = displayHeight;
         this.buttonList.clear();

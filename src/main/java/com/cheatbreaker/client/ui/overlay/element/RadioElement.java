@@ -91,7 +91,7 @@ public class RadioElement extends DraggableElement {
                 Ref.getMinecraft().getTextureManager().loadTexture(station.currentResource, threadDownloadImageData);
             }
             GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-            ResourceLocationBridge ResourceLocationBridge = station.currentResource == null ? this.dashIcon : station.currentResource;
+            ResourceLocationBridge location = station.currentResource == null ? this.dashIcon : station.currentResource;
             RenderUtil.drawIcon(ResourceLocationBridge, this.IlIlllIIIIllIllllIllIIlIl / 2.0f, this.x, this.y);
             float f3 = this.x + (float)50;
             if (this.mc.currentScreen == OverlayGui.getInstance()) {

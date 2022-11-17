@@ -1,5 +1,7 @@
 package com.cheatbreaker.client.module.type;
 
+import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.event.type.RenderPreviewEvent;
@@ -11,7 +13,6 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Collection;
@@ -84,27 +85,27 @@ public class PotionStatusModule extends AbstractModule {
                 int n4 = 0;
                 if ((Boolean) this.showEffectName.getValue()) {
                     string = I18n.format(potionEffect.getEffectName()) + this.getLevelName(potionEffect.getAmplifier());
-                    n4 = this.minecraft.fontRenderer.getStringWidth(string) + 20;
+                    n4 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                     if (position == CBPositionEnum.RIGHT) {
-                        this.minecraft.fontRenderer.drawStringWithShadow(string + "\u00a7r", (int) width - n4, n, this.nameColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width - n4, n, this.nameColor.getColorValue());
                     } else if (position == CBPositionEnum.LEFT) {
-                        this.minecraft.fontRenderer.drawStringWithShadow(string + "\u00a7r", 20, n, this.nameColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", 20, n, this.nameColor.getColorValue());
                     } else if (position == CBPositionEnum.CENTER) {
-                        this.minecraft.fontRenderer.drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n4 / 2) + 20, n, this.nameColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n4 / 2) + 20, n, this.nameColor.getColorValue());
                     }
                     if (n4 > n2) {
                         n2 = n4;
                     }
                 }
                 string = Potion.getDurationString(potionEffect);
-                int n5 = this.minecraft.fontRenderer.getStringWidth(string) + 20;
+                int n5 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                 if (shouldBlink) {
                     if (position == CBPositionEnum.RIGHT) {
-                        this.minecraft.fontRenderer.drawStringWithShadow(string + "\u00a7r", (int) width - n5, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width - n5, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
                     } else if (position == CBPositionEnum.LEFT) {
-                        this.minecraft.fontRenderer.drawStringWithShadow(string + "\u00a7r", 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
                     } else if (position == CBPositionEnum.CENTER) {
-                        this.minecraft.fontRenderer.drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n5 / 2) + 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n5 / 2) + 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
                     }
                 }
                 if ((potion = Potion.potionTypes[potionEffect.getPotionID()]).hasStatusIcon()) {
@@ -156,27 +157,27 @@ public class PotionStatusModule extends AbstractModule {
                 int n4 = 0;
                 if ((Boolean) this.showEffectName.getValue()) {
                     string = I18n.format(potionEffect.getEffectName()) + this.getLevelName(potionEffect.getAmplifier());
-                    n4 = this.minecraft.fontRenderer.getStringWidth(string) + 20;
+                    n4 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                     if (position == CBPositionEnum.RIGHT) {
-                        this.minecraft.fontRenderer.drawStringWithShadow(string + "\u00a7r", (int) width - n4, n, this.nameColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width - n4, n, this.nameColor.getColorValue());
                     } else if (position == CBPositionEnum.LEFT) {
-                        this.minecraft.fontRenderer.drawStringWithShadow(string + "\u00a7r", 20, n, this.nameColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", 20, n, this.nameColor.getColorValue());
                     } else if (position == CBPositionEnum.CENTER) {
-                        this.minecraft.fontRenderer.drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n4 / 2) + 20, n, this.nameColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n4 / 2) + 20, n, this.nameColor.getColorValue());
                     }
                     if (n4 > n2) {
                         n2 = n4;
                     }
                 }
                 string = Potion.getDurationString(potionEffect);
-                int n5 = this.minecraft.fontRenderer.getStringWidth(string) + 20;
+                int n5 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                 if (shouldBlink) {
                     if (position == CBPositionEnum.RIGHT) {
-                        this.minecraft.fontRenderer.drawStringWithShadow(string + "\u00a7r", (int) width - n5, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width - n5, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
                     } else if (position == CBPositionEnum.LEFT) {
-                        this.minecraft.fontRenderer.drawStringWithShadow(string + "\u00a7r", 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
                     } else if (position == CBPositionEnum.CENTER) {
-                        this.minecraft.fontRenderer.drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n5 / 2) + 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n5 / 2) + 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
                     }
                 }
                 if ((potion = Potion.potionTypes[potionEffect.getPotionID()]).hasStatusIcon()) {

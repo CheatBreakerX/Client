@@ -76,8 +76,8 @@ public class DirectionHudModule extends AbstractModule {
                 HudUtil.drawTexturedModalRect(n3, n2, n - 128, 12, 65, 12, -100);
             }
         }
-        this.minecraft.fontRenderer.drawString("|", n3 + 32, n2 + 1, this.markerColor.getColorValue());
-        this.minecraft.fontRenderer.drawString("|\u00a7r", n3 + 32, n2 + 5, this.markerColor.getColorValue());
+        this.minecraft.bridge$getFontRenderer().bridge$drawString("|", n3 + 32, n2 + 1, this.markerColor.getColorValue());
+        this.minecraft.bridge$getFontRenderer().bridge$drawString("|\u00a7r", n3 + 32, n2 + 5, this.markerColor.getColorValue());
     }
 
 

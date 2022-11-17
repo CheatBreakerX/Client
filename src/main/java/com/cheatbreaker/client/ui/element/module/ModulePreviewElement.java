@@ -55,19 +55,19 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
         if (this.module == CheatBreaker.getInstance().moduleManager.armourStatus) {
             n3 = -10;
             object = "329/329";
-            f2 = Ref.getMinecraft().fontRenderer.getStringWidth((String)object);
-            Ref.getMinecraft().fontRenderer.drawStringWithShadow((String)object, (int)((float)(this.x + 1 + this.width / 2) - f2 / 2.0f), this.y + this.height / 2 - 18, -1);
+            f2 = Ref.getMinecraft().bridge$getFontRenderer().bridge$getStringWidth((String)object);
+            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawStringWithShadow((String)object, (int)((float)(this.x + 1 + this.width / 2) - f2 / 2.0f), this.y + this.height / 2 - 18, -1);
         } else if (this.module == CheatBreaker.getInstance().moduleManager.potionStatus) {
             n4 = -30;
-            Ref.getMinecraft().fontRenderer.drawStringWithShadow("Speed II", this.x + 8 + this.width / 2 - 20, this.y + this.height / 2 - 36, -1);
-            Ref.getMinecraft().fontRenderer.drawStringWithShadow("0:42", this.x + 8 + this.width / 2 - 20, this.y + this.height / 2 - 26, -1);
+            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawStringWithShadow("Speed II", this.x + 8 + this.width / 2 - 20, this.y + this.height / 2 - 36, -1);
+            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawStringWithShadow("0:42", this.x + 8 + this.width / 2 - 20, this.y + this.height / 2 - 26, -1);
         } else if (this.module == CheatBreaker.getInstance().moduleManager.scoreboard) {
             Ref.modified$drawRect(this.x + 20, this.y + this.height / 2f - 44, this.x + this.width - 20, this.y + this.height / 2 - 6, 0x6F000000);
-            Ref.getMinecraft().fontRenderer.drawString("Score", this.x + this.width / 2, this.y + this.height / 2 - 40, -1);
-            Ref.getMinecraft().fontRenderer.drawStringWithShadow("Steve", this.x + 24, this.y + this.height / 2 - 28, -1);
-            Ref.getMinecraft().fontRenderer.drawStringWithShadow("Alex", this.x + 24, this.y + this.height / 2 - 18, -1);
-            Ref.getMinecraft().fontRenderer.drawString(EnumChatFormatting.RED + "0", this.x + this.width - 26, this.y + this.height / 2 - 18, -1);
-            Ref.getMinecraft().fontRenderer.drawString(EnumChatFormatting.RED + "1", this.x + this.width - 26, this.y + this.height / 2 - 28, -1);
+            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString("Score", this.x + this.width / 2, this.y + this.height / 2 - 40, -1);
+            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawStringWithShadow("Steve", this.x + 24, this.y + this.height / 2 - 28, -1);
+            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawStringWithShadow("Alex", this.x + 24, this.y + this.height / 2 - 18, -1);
+            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString(EnumChatFormatting.RED + "0", this.x + this.width - 26, this.y + this.height / 2 - 18, -1);
+            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString(EnumChatFormatting.RED + "1", this.x + this.width - 26, this.y + this.height / 2 - 28, -1);
         }
         if (this.module == CheatBreaker.getInstance().moduleManager.cooldowns) {
             object = new CooldownRenderer("EnderPearl", 368, 9000L);
@@ -85,11 +85,11 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
                 object = this.module.getPreviewLabel();
             }
             GL11.glScalef(f2, f2, f2);
-            float f3 = (float)Ref.getMinecraft().fontRenderer.getStringWidth((String)object) * f2;
+            float f3 = (float)Ref.getMinecraft().bridge$getFontRenderer().bridge$getStringWidth((String)object) * f2;
             if (this.module.getPreviewType() == null) {
-                Ref.getMinecraft().fontRenderer.drawString((String)object, (int)(((float)(this.x + 1 + this.width / 2) - f3 / 2.0f) / f2), (int)((float)(this.y + this.height / 2 - 32) / f2), -13750738);
+                Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString((String)object, (int)(((float)(this.x + 1 + this.width / 2) - f3 / 2.0f) / f2), (int)((float)(this.y + this.height / 2 - 32) / f2), -13750738);
             } else {
-                Ref.getMinecraft().fontRenderer.drawStringWithShadow((String)object, (int)(((float)(this.x + 1 + this.width / 2) - f3 / 2.0f) / f2), (int)((float)(this.y + this.height / 2 - 32) / f2), -1);
+                Ref.getMinecraft().bridge$getFontRenderer().bridge$drawStringWithShadow((String)object, (int)(((float)(this.x + 1 + this.width / 2) - f3 / 2.0f) / f2), (int)((float)(this.y + this.height / 2 - 32) / f2), -1);
             }
         } else if (this.module.getPreviewType() == AbstractModule.PreviewType.ICON) {
             float f4 = this.module.getPreviewIconWidth();

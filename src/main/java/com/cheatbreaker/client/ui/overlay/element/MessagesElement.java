@@ -76,7 +76,7 @@ public class MessagesElement extends DraggableElement {
         FontRegistry.getPlayRegular16px().drawString(this.friend.getName(), this.x + (float)52, this.y + 2.0f, -1);
         FontRegistry.getPlayRegular16px().drawString(this.friend.getStatusString(), this.x + (float)52, this.y + (float)11, -5460820);
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        ResourceLocationBridge ResourceLocationBridge = CheatBreaker.getInstance().getHeadLocation(EnumChatFormatting.getTextWithoutFormattingCodes(this.friend.getName()));
+        ResourceLocationBridge location = CheatBreaker.getInstance().getHeadLocation(EnumChatFormatting.getTextWithoutFormattingCodes(this.friend.getName()));
         RenderUtil.drawIcon(ResourceLocationBridge, (float)7, this.x + (float)28, this.y + (float)4);
         Ref.modified$drawRect(this.x + (float) 27, this.y + (float) 22, this.x + this.width - 2.0f, this.y + this.height - (float) 17, -1356783327);
         this.recentsScrollable.drawScrollable(mouseX, mouseY, bl);

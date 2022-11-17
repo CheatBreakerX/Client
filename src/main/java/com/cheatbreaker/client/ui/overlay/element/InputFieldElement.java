@@ -27,7 +27,7 @@ public class InputFieldElement extends AbstractElement {
     private final String text;
 
     public InputFieldElement(CBFontRenderer fontRenderer, String text, int n, int n2) {
-        this.fontRenderer = fontRenderer;
+        this.bridge$getFontRenderer() = fontRenderer;
         this.text = text;
         this.IlIIlIIIIlIIIIllllIIlIllI = n;
     }
@@ -288,8 +288,8 @@ public class InputFieldElement extends AbstractElement {
             if (this.IlIlllIIIIllIllllIllIIlIl) {
                 f3 -= (float)4;
             }
-            String string = this.fontRenderer.lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), this.IIIIIIlIlIlIllllllIlllIlI());
-            this.IIIIllIIllIIIIllIllIIIlIl(this.fontRenderer.lIIIIlIIllIIlIIlIIIlIIllI(string, f3).length() + this.llIlIIIlIIIIlIlllIlIIIIll);
+            String string = this.bridge$getFontRenderer().lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), this.IIIIIIlIlIlIllllllIlllIlI());
+            this.IIIIllIIllIIIIllIllIIIlIl(this.bridge$getFontRenderer().lIIIIlIIllIIlIIlIIIlIIllI(string, f3).length() + this.llIlIIIlIIIIlIlllIlIIIIll);
         }
         return false;
     }
@@ -302,7 +302,7 @@ public class InputFieldElement extends AbstractElement {
             int n = this.IIIlllIIIllIllIlIIIIIIlII ? this.lIIIIIllllIIIIlIlIIIIlIlI : this.IIIIIIlIlIlIllllllIlllIlI;
             int n2 = this.IIIlIIllllIIllllllIlIIIll - this.llIlIIIlIIIIlIlllIlIIIIll;
             int n3 = this.lllIIIIIlIllIlIIIllllllII - this.llIlIIIlIIIIlIlllIlIIIIll;
-            String string = this.fontRenderer.lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), this.IIIIIIlIlIlIllllllIlllIlI());
+            String string = this.bridge$getFontRenderer().lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), this.IIIIIIlIlIlIllllllIlllIlI());
             boolean bl = n2 >= 0 && n2 <= string.length();
             boolean bl2 = this.lIIlIlIllIIlIIIlIIIlllIII && this.IlllIllIlIIIIlIIlIIllIIIl / 6 % 2 == 0 && bl;
             float f = this.IlIlllIIIIllIllllIllIIlIl ? this.x + (float)4 : this.x;
@@ -313,9 +313,9 @@ public class InputFieldElement extends AbstractElement {
             }
             if (string.length() > 0) {
                 String string2 = bl ? string.substring(0, n2) : string;
-                f3 = this.fontRenderer.drawString(string2, f, f2, n);
+                f3 = this.bridge$getFontRenderer().bridge$drawString(string2, f, f2, n);
             } else if (!this.lllIIIIIlIllIlIIIllllllII()) {
-                this.fontRenderer.drawString(this.text, f, f2, n);
+                this.bridge$getFontRenderer().bridge$drawString(this.text, f, f2, n);
             }
             boolean bl3 = this.IIIlIIllllIIllllllIlIIIll < this.IllIIIIIIIlIlIllllIIllIII.length() || this.IllIIIIIIIlIlIllllIIllIII.length() >= this.IIIlllIIIllIllIlIIIIIIlII();
             float f4 = f3;
@@ -326,18 +326,18 @@ public class InputFieldElement extends AbstractElement {
                 f3 -= 1.0f;
             }
             if (string.length() > 0 && bl && n2 < string.length()) {
-                this.fontRenderer.drawString(string.substring(n2), f3, f2, n);
+                this.bridge$getFontRenderer().bridge$drawString(string.substring(n2), f3, f2, n);
             }
             if (bl2) {
                 if (bl3) {
-                    Ref.modified$drawRect(f4, f2 - 1.0f, f4 + 1.0f, f2 + 1.0f + (float)this.fontRenderer.getHeight(), -3092272);
+                    Ref.modified$drawRect(f4, f2 - 1.0f, f4 + 1.0f, f2 + 1.0f + (float)this.bridge$getFontRenderer().bridge$getHeight(), -3092272);
                 } else {
-                    this.fontRenderer.drawString("_", f4, f2, n);
+                    this.bridge$getFontRenderer().bridge$drawString("_", f4, f2, n);
                 }
             }
             if (n3 != n2) {
-                float f5 = f + (float)this.fontRenderer.getStringWidth(string.substring(0, n3));
-                this.lIIIIIIIIIlIllIIllIlIIlIl(f4, f2 - 1.0f + 2.0f, f5 - 1.0f, f2 + 1.0f + (float)this.fontRenderer.getHeight() + 2.0f);
+                float f5 = f + (float)this.bridge$getFontRenderer().bridge$getStringWidth(string.substring(0, n3));
+                this.lIIIIIIIIIlIllIIllIlIIlIl(f4, f2 - 1.0f + 2.0f, f5 - 1.0f, f2 + 1.0f + (float)this.bridge$getFontRenderer().bridge$getHeight() + 2.0f);
             }
         }
     }
@@ -438,15 +438,15 @@ public class InputFieldElement extends AbstractElement {
             n = 0;
         }
         this.lllIIIIIlIllIlIIIllllllII = n;
-        if (this.fontRenderer != null) {
+        if (this.bridge$getFontRenderer() != null) {
             if (this.llIlIIIlIIIIlIlllIlIIIIll > n2) {
                 this.llIlIIIlIIIIlIlllIlIIIIll = n2;
             }
             float f = this.IIIIIIlIlIlIllllllIlllIlI();
-            String string = this.fontRenderer.lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), f);
+            String string = this.bridge$getFontRenderer().lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), f);
             int n3 = string.length() + this.llIlIIIlIIIIlIlllIlIIIIll;
             if (n == this.llIlIIIlIIIIlIlllIlIIIIll) {
-                this.llIlIIIlIIIIlIlllIlIIIIll -= this.fontRenderer.lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII, f, true).length();
+                this.llIlIIIlIIIIlIlllIlIIIIll -= this.bridge$getFontRenderer().lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII, f, true).length();
             }
             if (n > n3) {
                 this.llIlIIIlIIIIlIlllIlIIIIll += n - n3;

@@ -54,15 +54,15 @@ public class CoordinatesModule extends AbstractModule {
             float f = 4;
             if (this.mode.getValue().equals("Horizontal")) {
                 object = (Boolean) this.hideYCoordinate.getValue() ? (Boolean) this.showCoordinates.getValue() ? String.format("(%1$d, %2$d) ", n, n3) : "" : (Boolean) this.showCoordinates.getValue() ? String.format("(%1$d, %2$d, %3$d) ", n, n2, n3) : "";
-                n4 = this.minecraft.fontRenderer.drawStringWithShadow(object, 0, 0, this.coordinatesColor.getColorValue());
+                n4 = this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(object, 0, 0, this.coordinatesColor.getColorValue());
             } else {
                 n4 = 50;
                 f = (Boolean) this.hideYCoordinate.getValue() ? 8.066038f * 1.1777778f : (float) 16;
-                this.minecraft.fontRenderer.drawStringWithShadow("X: " + n, 0, 0, this.coordinatesColor.getColorValue());
+                this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow("X: " + n, 0, 0, this.coordinatesColor.getColorValue());
                 if (!((Boolean) this.hideYCoordinate.getValue())) {
-                    this.minecraft.fontRenderer.drawStringWithShadow("Y: " + n2, 0, 12, this.coordinatesColor.getColorValue());
+                    this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow("Y: " + n2, 0, 12, this.coordinatesColor.getColorValue());
                 }
-                this.minecraft.fontRenderer.drawStringWithShadow("Z: " + n3, 0, (Boolean) this.hideYCoordinate.getValue() ? 12 : 24, this.coordinatesColor.getColorValue());
+                this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow("Z: " + n3, 0, (Boolean) this.hideYCoordinate.getValue() ? 12 : 24, this.coordinatesColor.getColorValue());
             }
             if (((Boolean)this.showDirection.getValue())) {
                 String[] directions = new String[]{"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
@@ -70,8 +70,8 @@ public class CoordinatesModule extends AbstractModule {
                 d += 11.682692039868188 * (double)1.925926f;
                 d %= 360;
                 String string = directions[MathHelper.floor_double(d /= (double)45)];
-                this.minecraft.fontRenderer.drawStringWithShadow(string, n4, (int) f - 4, this.directionColor.getColorValue());
-                n4 += this.minecraft.fontRenderer.getStringWidth(string);
+                this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string, n4, (int) f - 4, this.directionColor.getColorValue());
+                n4 += this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string);
             }
             this.setDimensions(n4, (float) 18 + f);
         }

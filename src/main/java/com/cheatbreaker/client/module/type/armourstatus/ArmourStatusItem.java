@@ -46,7 +46,7 @@ public class ArmourStatusItem {
     }
 
     private void IlllIIIlIlllIllIlIIlllIlI() {
-        int n = this.IlIlIIIlllIIIlIlllIlIllIl = (Boolean) ArmourStatusModule.itemName.getValue() ? Math.max(Ref.getMinecraft().fontRenderer.FONT_HEIGHT * 2, this.IlllIIIlIlllIllIlIIlllIlI) : Math.max(this.llIIlllIIIIlllIllIlIlllIl.fontRenderer.FONT_HEIGHT, this.IlllIIIlIlllIllIlIIlllIlI);
+        int n = this.IlIlIIIlllIIIlIlllIlIllIl = (Boolean) ArmourStatusModule.itemName.getValue() ? Math.max(Ref.getMinecraft().bridge$getFontRenderer().FONT_HEIGHT * 2, this.IlllIIIlIlllIllIlIIlllIlI) : Math.max(this.llIIlllIIIIlllIllIlIlllIl.bridge$getFontRenderer().FONT_HEIGHT, this.IlllIIIlIlllIllIlIIlllIlI);
         if (this.lIIIIlIIllIIlIIlIIIlIIllI != null) {
             int n2 = 1;
             int n3 = 1;
@@ -59,13 +59,13 @@ public class ArmourStatusItem {
                     this.lIIIIllIIlIlIllIIIlIllIlI = "§" + ArmourStatusDamageComparable.getDamageColor(ArmourStatusModule.damageColors, ((String)ArmourStatusModule.damageThreshold.getValue()).equalsIgnoreCase("percent") ? n2 * 100 / n3 : n2) + n2 * 100 / n3 + "%";
                 }
             }
-            this.IlllIllIlIIIIlIIlIIllIIIl = this.llIIlllIIIIlllIllIlIlllIl.fontRenderer.getStringWidth(lIIIIlIIllIIlIIlIIIlIIllI(this.lIIIIllIIlIlIllIIIlIllIlI));
+            this.IlllIllIlIIIIlIIlIIllIIIl = this.llIIlllIIIIlllIllIlIlllIl.bridge$getFontRenderer().bridge$getStringWidth(lIIIIlIIllIIlIIlIIIlIIllI(this.lIIIIllIIlIlIllIIIlIllIlI));
             this.IIIIllIIllIIIIllIllIIIlIl = this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl + this.IlllIllIlIIIIlIIlIIllIIIl;
             if ((Boolean) ArmourStatusModule.itemName.getValue()) {
                 this.IIIllIllIlIlllllllIlIlIII = this.lIIIIlIIllIIlIIlIIIlIIllI.getDisplayName();
-                this.IIIIllIIllIIIIllIllIIIlIl = this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl + Math.max(this.llIIlllIIIIlllIllIlIlllIl.fontRenderer.getStringWidth(lIIIIlIIllIIlIIlIIIlIIllI(this.IIIllIllIlIlllllllIlIlIII)), this.IlllIllIlIIIIlIIlIIllIIIl);
+                this.IIIIllIIllIIIIllIllIIIlIl = this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl + Math.max(this.llIIlllIIIIlllIllIlIlllIl.bridge$getFontRenderer().bridge$getStringWidth(lIIIIlIIllIIlIIlIIIlIIllI(this.IIIllIllIlIlllllllIlIlIII)), this.IlllIllIlIIIIlIIlIIllIIIl);
             }
-            this.IllIIIIIIIlIlIllllIIllIII = this.llIIlllIIIIlllIllIlIlllIl.fontRenderer.getStringWidth(lIIIIlIIllIIlIIlIIIlIIllI(this.IIIllIllIlIlllllllIlIlIII));
+            this.IllIIIIIIIlIlIllllIIllIII = this.llIIlllIIIIlllIllIlIlllIl.bridge$getFontRenderer().bridge$getStringWidth(lIIIIlIIllIIlIIlIIIlIIllI(this.IIIllIllIlIlllllllIlIlIII));
         }
     }
 
@@ -78,21 +78,21 @@ public class ArmourStatusItem {
         CBGuiAnchor cBGuiAnchor = CheatBreaker.getInstance().moduleManager.armourStatus.getGuiAnchor();
         boolean bl = CBAnchorHelper.getHorizontalPositionEnum(cBGuiAnchor) == CBPositionEnum.RIGHT;
         if (bl) {
-            ArmourStatusModule.renderItem.renderItemIntoGUI(this.llIIlllIIIIlllIllIlIlllIl.fontRenderer, this.llIIlllIIIIlllIllIlIlllIl.getTextureManager(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)(f - (float)(this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl)), (int)f2);
-            HudUtil.renderItemOverlayIntoGUI(this.llIIlllIIIIlllIllIlIlllIl.fontRenderer, this.lIIIIlIIllIIlIIlIIIlIIllI, (int)(f - (float)(this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl)), (int)f2, (Boolean)ArmourStatusModule.damageOverlay.getValue(), (Boolean)ArmourStatusModule.itemCount.getValue());
+            ArmourStatusModule.renderItem.renderItemIntoGUI(this.llIIlllIIIIlllIllIlIlllIl.bridge$getFontRenderer(), this.llIIlllIIIIlllIllIlIlllIl.getTextureManager(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)(f - (float)(this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl)), (int)f2);
+            HudUtil.renderItemOverlayIntoGUI(this.llIIlllIIIIlllIllIlIlllIl.bridge$getFontRenderer(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)(f - (float)(this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl)), (int)f2, (Boolean)ArmourStatusModule.damageOverlay.getValue(), (Boolean)ArmourStatusModule.itemCount.getValue());
             RenderHelper.disableStandardItemLighting();
             GL11.glDisable(32826);
             GL11.glDisable(3042);
-            this.llIIlllIIIIlllIllIlIlllIl.fontRenderer.drawStringWithShadow(this.IIIllIllIlIlllllllIlIlIII + "§r", (int)f - (this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl) - this.IllIIIIIIIlIlIllllIIllIII, (int)f2, 0xFFFFFF);
-            this.llIIlllIIIIlllIllIlIlllIl.fontRenderer.drawStringWithShadow(this.lIIIIllIIlIlIllIIIlIllIlI + "§r", (int)f - (this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl) - this.IlllIllIlIIIIlIIlIIllIIIl, (int)f2 + ((Boolean) ArmourStatusModule.itemName.getValue() ? this.IlIlIIIlllIIIlIlllIlIllIl / 2 : this.IlIlIIIlllIIIlIlllIlIllIl / 4), 0xFFFFFF);
+            this.llIIlllIIIIlllIllIlIlllIl.bridge$getFontRenderer().bridge$drawStringWithShadow(this.IIIllIllIlIlllllllIlIlIII + "§r", (int)f - (this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl) - this.IllIIIIIIIlIlIllllIIllIII, (int)f2, 0xFFFFFF);
+            this.llIIlllIIIIlllIllIlIlllIl.bridge$getFontRenderer().bridge$drawStringWithShadow(this.lIIIIllIIlIlIllIIIlIllIlI + "§r", (int)f - (this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl) - this.IlllIllIlIIIIlIIlIIllIIIl, (int)f2 + ((Boolean) ArmourStatusModule.itemName.getValue() ? this.IlIlIIIlllIIIlIlllIlIllIl / 2 : this.IlIlIIIlllIIIlIlllIlIllIl / 4), 0xFFFFFF);
         } else {
-            ArmourStatusModule.renderItem.renderItemIntoGUI(this.llIIlllIIIIlllIllIlIlllIl.fontRenderer, this.llIIlllIIIIlllIllIlIlllIl.getTextureManager(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)f, (int)f2);
-            HudUtil.renderItemOverlayIntoGUI(this.llIIlllIIIIlllIllIlIlllIl.fontRenderer, this.lIIIIlIIllIIlIIlIIIlIIllI, (int)f, (int)f2, (Boolean)ArmourStatusModule.damageOverlay.getValue(), (Boolean)ArmourStatusModule.itemCount.getValue());
+            ArmourStatusModule.renderItem.renderItemIntoGUI(this.llIIlllIIIIlllIllIlIlllIl.bridge$getFontRenderer(), this.llIIlllIIIIlllIllIlIlllIl.getTextureManager(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)f, (int)f2);
+            HudUtil.renderItemOverlayIntoGUI(this.llIIlllIIIIlllIllIlIlllIl.bridge$getFontRenderer(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)f, (int)f2, (Boolean)ArmourStatusModule.damageOverlay.getValue(), (Boolean)ArmourStatusModule.itemCount.getValue());
             RenderHelper.disableStandardItemLighting();
             GL11.glDisable(32826);
             GL11.glDisable(3042);
-            this.llIIlllIIIIlllIllIlIlllIl.fontRenderer.drawStringWithShadow(this.IIIllIllIlIlllllllIlIlIII + "§r", (int)f + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl, (int)f2, 0xFFFFFF);
-            this.llIIlllIIIIlllIllIlIlllIl.fontRenderer.drawStringWithShadow(this.lIIIIllIIlIlIllIIIlIllIlI + "§r", (int)f + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl, (int)f2 + ((Boolean) ArmourStatusModule.itemName.getValue() ? this.IlIlIIIlllIIIlIlllIlIllIl / 2 : this.IlIlIIIlllIIIlIlllIlIllIl / 4), 0xFFFFFF);
+            this.llIIlllIIIIlllIllIlIlllIl.bridge$getFontRenderer().bridge$drawStringWithShadow(this.IIIllIllIlIlllllllIlIlIII + "§r", (int)f + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl, (int)f2, 0xFFFFFF);
+            this.llIIlllIIIIlllIllIlIlllIl.bridge$getFontRenderer().bridge$drawStringWithShadow(this.lIIIIllIIlIlIllIIIlIllIlI + "§r", (int)f + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl, (int)f2 + ((Boolean) ArmourStatusModule.itemName.getValue() ? this.IlIlIIIlllIIIlIlllIlIllIl / 2 : this.IlIlIIIlllIIIlIlllIlIllIl / 4), 0xFFFFFF);
         }
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     }

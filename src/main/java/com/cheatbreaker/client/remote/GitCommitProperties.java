@@ -13,7 +13,7 @@ import java.util.Properties;
 public class GitCommitProperties {
     public static void loadProperties() {
         try {
-            final ResourceLocationBridge ResourceLocationBridge = Ref.getInstanceCreator().createResourceLocationBridge("client/properties/app.properties");
+            final ResourceLocationBridge location = Ref.getInstanceCreator().createResourceLocationBridge("client/properties/app.properties");
             final Properties properties = new Properties();
             InputStream inputStream = Ref.getMinecraft().bridge$getResourceManager().bridge$getResource(ResourceLocationBridge).bridge$getInputStream();
 

@@ -69,10 +69,10 @@ public class ToggleSprintModule extends AbstractModule {
         }
         if ((Boolean) showHudText.getValue() && ((Boolean) showWhileTyping.getValue() || !(this.minecraft.currentScreen instanceof GuiChat))) {
             GL11.glPushMatrix();
-            int n = this.minecraft.fontRenderer.getStringWidth(MinecraftMovementInputHelper.toggleSprintString);
+            int n = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(MinecraftMovementInputHelper.toggleSprintString);
             this.setDimensions(n, 18);
             this.scaleAndTranslate(guiDrawEvent.getResolution());
-            this.minecraft.fontRenderer.drawStringWithShadow(MinecraftMovementInputHelper.toggleSprintString, 0, 0, this.textColor.getColorValue());
+            this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(MinecraftMovementInputHelper.toggleSprintString, 0, 0, this.textColor.getColorValue());
             GL11.glPopMatrix();
         } else {
             this.setDimensions(50, 18);

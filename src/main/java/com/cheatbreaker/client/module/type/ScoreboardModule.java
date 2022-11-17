@@ -43,7 +43,7 @@ public class ScoreboardModule extends AbstractModule {
         objective.setDisplayName(EnumChatFormatting.RED + "" + EnumChatFormatting.BOLD + "Cheat" + EnumChatFormatting.RESET + "" + EnumChatFormatting.WHITE + "Breaker");
         scoreboard.func_96529_a("Steve", objective);
         scoreboard.func_96529_a("Alex", objective);
-        this.drawObjective(objective, this.minecraft.fontRenderer);
+        this.drawObjective(objective, this.minecraft.bridge$getFontRenderer());
         GL11.glPopMatrix();
     }
 
@@ -56,7 +56,7 @@ public class ScoreboardModule extends AbstractModule {
         GL11.glTranslatef(this.isRemoveNumbers() ? (float) -12 : 2.0f, this.height, 0.0f);
         ScoreObjective objective = this.minecraft.bridge$getTheWorld().getScoreboard().func_96539_a(1);
         if (objective != null) {
-            this.drawObjective(objective, this.minecraft.fontRenderer);
+            this.drawObjective(objective, this.minecraft.bridge$getFontRenderer());
         }
         GL11.glPopMatrix();
     }

@@ -29,11 +29,11 @@ import java.io.InputStream;
 
 	public float dbg_fontSize;
 
-	public CBFont(ResourceLocationBridge ResourceLocationBridge, float size) {
+	public CBFont(ResourceLocationBridge location, float size) {
 		this.dbg_fontSize = size;
 		Font tmp;
 		try {
-			InputStream is = Ref.getMinecraft().bridge$getResourceManager().bridge$getResource(ResourceLocationBridge).bridge$getInputStream();
+			InputStream is = Ref.getMinecraft().bridge$getResourceManager().bridge$getResource(location).bridge$getInputStream();
 			tmp = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(size);
 		} catch (IOException | FontFormatException e) {
 			tmp = new Font("Arial", Font.PLAIN, (int) size);

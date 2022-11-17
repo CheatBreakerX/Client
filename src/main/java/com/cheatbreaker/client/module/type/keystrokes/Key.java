@@ -68,7 +68,7 @@ public class Key {
             // added pixel perfect aligning
             int width = Ref.getMinecraft().bridge$getFontRenderer().bridge$getStringWidth(displayString);
             int offset = displayString.length() == 1 ? 1 : (displayString.contains("R") ? 2 : 1);
-            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString(this.displayString, (n + this.width / 2.0f) - width / 2f + offset, (n2 + this.height / 2.0f - minecraft.fontRenderer.FONT_HEIGHT / 2f + 1.0f), pressed ? n4 : n3);
+            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString(this.displayString, (n + this.width / 2.0f) - width / 2f + offset, (n2 + this.height / 2.0f - minecraft.bridge$getFontRenderer().FONT_HEIGHT / 2f + 1.0f), pressed ? n4 : n3);
         }
     }
 

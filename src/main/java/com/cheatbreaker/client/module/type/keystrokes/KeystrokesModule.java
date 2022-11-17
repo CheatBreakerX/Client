@@ -99,10 +99,10 @@ public class KeystrokesModule
         String a = Keyboard.getKeyName(n2);
         String s = Keyboard.getKeyName(n3);
         String d = Keyboard.getKeyName(n4);
-        float upKeyWidth = (float)this.minecraft.fontRenderer.getStringWidth(w) * (Float) this.scale.getValue();
-        float leftKeyWidth = (float)this.minecraft.fontRenderer.getStringWidth(a) * (Float) this.scale.getValue();
-        float downKeyWidth = (float)this.minecraft.fontRenderer.getStringWidth(s) * (Float) this.scale.getValue();
-        float rightKeyWidth = (float)this.minecraft.fontRenderer.getStringWidth(d) * (Float) this.scale.getValue();
+        float upKeyWidth = (float)this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(w) * (Float) this.scale.getValue();
+        float leftKeyWidth = (float)this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(a) * (Float) this.scale.getValue();
+        float downKeyWidth = (float)this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(s) * (Float) this.scale.getValue();
+        float rightKeyWidth = (float)this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(d) * (Float) this.scale.getValue();
         int jump = this.minecraft.gameSettings.keyBindJump.getKeyCode();
         int attack = this.minecraft.gameSettings.keyBindAttack.getKeyCode();
         int use = this.minecraft.gameSettings.keyBindUseItem.getKeyCode();

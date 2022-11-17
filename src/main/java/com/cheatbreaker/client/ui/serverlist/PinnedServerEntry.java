@@ -148,14 +148,14 @@ public class PinnedServerEntry implements GuiListExtended.IGuiListEntry {
         boolean outOfDateClient = this.server.field_82821_f > 5;
         boolean outOfDateServer = this.server.field_82821_f < 5;
         boolean outOfDate = (outOfDateClient || outOfDateServer) && this.server.field_82821_f != -1332;
-        this.mc.fontRenderer.drawString(this.server.serverName, n2 + 32 + 3, n3 + 1, 0xFFFFFF);
-        List<String> list = this.mc.fontRenderer.listFormattedStringToWidth(this.server.serverMOTD, n4 - 32 - 2);
+        this.mc.bridge$getFontRenderer().bridge$drawString(this.server.serverName, n2 + 32 + 3, n3 + 1, 0xFFFFFF);
+        List<String> list = this.mc.bridge$getFontRenderer().listFormattedStringToWidth(this.server.serverMOTD, n4 - 32 - 2);
         for (int i = 0; i < Math.min(list.size(), 2); ++i) {
-            this.mc.fontRenderer.drawString((String)list.get(i), n2 + 32 + 3, n3 + 12 + this.mc.fontRenderer.FONT_HEIGHT * i, 0x808080);
+            this.mc.bridge$getFontRenderer().bridge$drawString((String)list.get(i), n2 + 32 + 3, n3 + 12 + this.mc.bridge$getFontRenderer().FONT_HEIGHT * i, 0x808080);
         }
         String string2 = outOfDate ? (Object)((Object)EnumChatFormatting.DARK_RED) + this.server.gameVersion : this.server.populationInfo;
-        int n9 = this.mc.fontRenderer.getStringWidth(string2);
-        this.mc.fontRenderer.drawString(string2, n2 + n4 - n9 - 15 - 2, n3 + 1, 0x808080);
+        int n9 = this.mc.bridge$getFontRenderer().bridge$getStringWidth(string2);
+        this.mc.bridge$getFontRenderer().bridge$drawString(string2, n2 + n4 - n9 - 15 - 2, n3 + 1, 0x808080);
         int n10 = 0;
         String string3 = null;
         if (outOfDate) {
