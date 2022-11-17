@@ -8,4 +8,5 @@ public interface GameSettingsBridge {
     KeyBindingBridge[] bridge$getKeyBindings();
     void bridge$setKeyBindings(KeyBindingBridge[] keyBindings);
     int bridge$getThirdPersonView();
+    int bridge$getRenderDistanceChunks();
 }

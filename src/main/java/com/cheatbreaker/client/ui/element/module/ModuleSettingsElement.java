@@ -1,6 +1,7 @@
 package com.cheatbreaker.client.ui.element.module;
 
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
@@ -8,10 +9,8 @@ import com.cheatbreaker.client.ui.element.AbstractScrollableElement;
 import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
-// IIllllIllllIIIlIIllllIlll
 public class ModuleSettingsElement extends AbstractModulesGuiElement {
     private final int IllIIIIIIIlIlIllllIIllIII;
     public final AbstractModule module;

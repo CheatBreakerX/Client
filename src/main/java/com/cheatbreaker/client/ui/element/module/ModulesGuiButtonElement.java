@@ -8,7 +8,6 @@ import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 public class ModulesGuiButtonElement
@@ -26,7 +25,7 @@ public class ModulesGuiButtonElement
         this.setDimensions(n, n2, n3, n4);
         this.lIIIIlIIllIIlIIlIIIlIIllI = n5;
         this.lIIIIllIIlIlIllIIIlIllIlI = lllIllIllIlIllIlIIllllIIl2;
-        this.bridge$getFontRenderer() = fontRenderer;
+        this.fontRenderer = fontRenderer;
     }
 
     public ModulesGuiButtonElement(AbstractScrollableElement lllIllIllIlIllIlIIllllIIl2, String string, int n, int n2, int n3, int n4, int n5, float f) {
@@ -62,8 +61,8 @@ public class ModulesGuiButtonElement
             RenderUtil.drawIcon(Ref.getInstanceCreator().createResourceLocationBridge("client/icons/" + this.displayString), 8f, (float)(this.x + 6), (float)(this.y + 6));
             GL11.glPopMatrix();
         } else {
-            f2 = this.bridge$getFontRenderer() == FontRegistry.getPlayBold22px() ? 2.0f : 0.5f;
-            this.bridge$getFontRenderer().bridge$drawCenteredString(this.displayString.toUpperCase(), this.x + this.width / 2, (float)(this.y + this.height / 2 - this.bridge$getFontRenderer().bridge$getHeight()) + f2, CheatBreaker.getInstance().globalSettings.isDarkMode() ? -1 : 1862270976);
+            f2 = this.fontRenderer == FontRegistry.getPlayBold22px() ? 2.0f : 0.5f;
+            this.fontRenderer.drawCenteredString(this.displayString.toUpperCase(), this.x + this.width / 2, (float)(this.y + this.height / 2 - this.fontRenderer.getHeight()) + f2, CheatBreaker.getInstance().globalSettings.isDarkMode() ? -1 : 1862270976);
         }
     }
 

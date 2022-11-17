@@ -1,6 +1,7 @@
 package com.cheatbreaker.client.ui.element.module;
 
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.module.AbstractModule;
@@ -12,10 +13,6 @@ import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Objects;
@@ -66,8 +63,8 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
             Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString("Score", this.x + this.width / 2, this.y + this.height / 2 - 40, -1);
             Ref.getMinecraft().bridge$getFontRenderer().bridge$drawStringWithShadow("Steve", this.x + 24, this.y + this.height / 2 - 28, -1);
             Ref.getMinecraft().bridge$getFontRenderer().bridge$drawStringWithShadow("Alex", this.x + 24, this.y + this.height / 2 - 18, -1);
-            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString(EnumChatFormatting.RED + "0", this.x + this.width - 26, this.y + this.height / 2 - 18, -1);
-            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString(EnumChatFormatting.RED + "1", this.x + this.width - 26, this.y + this.height / 2 - 28, -1);
+            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString(EnumChatFormattingBridge.RED + "0", this.x + this.width - 26, this.y + this.height / 2 - 18, -1);
+            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString(EnumChatFormattingBridge.RED + "1", this.x + this.width - 26, this.y + this.height / 2 - 28, -1);
         }
         if (this.module == CheatBreaker.getInstance().moduleManager.cooldowns) {
             object = new CooldownRenderer("EnderPearl", 368, 9000L);
@@ -143,7 +140,7 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
                 if (this.module.getGuiAnchor() == null) {
                     this.module.setState(true);
                 } else {
-                    Ref.getMinecraft().displayGuiScreen(new CBModulePlaceGui(CBModulesGui.instance, this.module));
+                    Ref.getMinecraft().bridge$displayGuiScreen(new CBModulePlaceGui(CBModulesGui.instance, this.module));
                 }
             } else {
                 this.module.setRenderHud(!this.module.isRenderHud());
@@ -152,7 +149,7 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
                     if (this.module.getGuiAnchor() == null) {
                         this.module.setState(true);
                     } else {
-                        Ref.getMinecraft().displayGuiScreen(new CBModulePlaceGui(CBModulesGui.instance, this.module));
+                        Ref.getMinecraft().bridge$displayGuiScreen(new CBModulePlaceGui(CBModulesGui.instance, this.module));
                     }
                 } else if (this.module.isEditable && this.module.isEnabled()) {
                     this.module.setState(false);

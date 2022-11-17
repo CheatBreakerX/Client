@@ -1,5 +1,6 @@
 package com.cheatbreaker.client.util.worldborder;
 
+import com.cheatbreaker.bridge.client.entity.EntityClientPlayerMPBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
@@ -8,11 +9,6 @@ import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.event.type.CollisionEvent;
 import com.cheatbreaker.client.event.type.RenderWorldEvent;
 import com.cheatbreaker.client.event.type.TickEvent;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import javax.vecmath.Vector2d;
@@ -46,12 +42,12 @@ public class WorldBorderManager {
 
     private void onWorldRender(RenderWorldEvent renderWorldEvent) {
         if (!this.borderList.isEmpty()) {
-            EntityClientPlayerMP playerMP = this.minecraft.bridge$getThePlayer();
+            EntityClientPlayerMPBridge playerMP = this.minecraft.bridge$getThePlayer();
             float f = renderWorldEvent.getPartialTicks();
             this.borderList.stream().filter(WorldBorder::worldEqualsWorld).forEach(border -> {
                 TessellatorBridge tessellator = Ref.getTessellator();
                 double d = this.minecraft.bridge$getGameSettings().bridge$getRenderDistanceChunks() * 16;
-                if (playerMP.posX >= border.IIIIllIlIIIllIlllIlllllIl() - d || playerMP.posX <= border.IlIlIIIlllIIIlIlllIlIllIl() + d || playerMP.posZ >= border.IIIIllIIllIIIIllIllIIIlIl() - d || playerMP.posZ <= border.IIIllIllIlIlllllllIlIlIII() + d) {
+                if (playerMP.bridge$getPosX() >= border.IIIIllIlIIIllIlllIlllllIl() - d || playerMP.bridge$getPosX() <= border.IlIlIIIlllIIIlIlllIlIllIl() + d || playerMP.bridge$getPosZ() >= border.IIIIllIIllIIIIllIllIIIlIl() - d || playerMP.bridge$getPosZ() <= border.IIIllIllIlIlllllllIlIlIII() + d) {
                     float f2;
                     double d2;
                     double d3;

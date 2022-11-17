@@ -1,6 +1,7 @@
 package com.cheatbreaker.client.ui.module;
 
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.config.Profile;
 import com.cheatbreaker.client.ui.element.profile.ProfileElement;
@@ -16,9 +17,8 @@ import org.lwjgl.opengl.GL11;
 import java.io.File;
 import java.nio.file.Files;
 
-public class CBProfileCreateGui
-        extends GuiScreen {
-    private final GuiScreen guiScreen;
+public class CBProfileCreateGui extends CBGuiScreen {
+    private final CBGuiScreen guiScreen;
     private final float IlllIIIlIlllIllIlIIlllIlI;
     private final int IIIIllIlIIIllIlllIlllllIl;
     private final ProfilesListElement parent;
@@ -27,12 +27,12 @@ public class CBProfileCreateGui
     private boolean IIIllIllIlIlllllllIlIlIII = false;
     private Profile profile;
 
-    public CBProfileCreateGui(Profile profile, GuiScreen guiScreen, ProfilesListElement parent, int n, float f) {
+    public CBProfileCreateGui(Profile profile, CBGuiScreen guiScreen, ProfilesListElement parent, int n, float f) {
         this(guiScreen, parent, n, f);
         this.profile = profile;
     }
 
-    public CBProfileCreateGui(GuiScreen guiScreen, ProfilesListElement parent, int n, float f) {
+    public CBProfileCreateGui(CBGuiScreen guiScreen, ProfilesListElement parent, int n, float f) {
         this.guiScreen = guiScreen;
         this.IlllIIIlIlllIllIlIIlllIlI = f;
         this.parent = parent;

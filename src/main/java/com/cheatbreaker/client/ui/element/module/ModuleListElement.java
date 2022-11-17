@@ -12,9 +12,6 @@ import com.cheatbreaker.client.ui.element.type.custom.*;
 import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
