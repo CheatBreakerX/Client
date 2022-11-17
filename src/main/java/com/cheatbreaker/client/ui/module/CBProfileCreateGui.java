@@ -110,8 +110,8 @@ public class CBProfileCreateGui
                     break;
                 }
                 if (this.profile != null && this.profile.isEditable()) {
-                    File file = new File(Minecraft.getMinecraft().mcDataDir, "config" + File.separator + "client" + File.separator + "profiles" + File.separator + this.profile.getName() + ".cfg");
-                    File file2 = new File(Minecraft.getMinecraft().mcDataDir, "config" + File.separator + "client" + File.separator + "profiles" + File.separator + this.lIIIIIIIIIlIllIIllIlIIlIl.getText() + ".cfg");
+                    File file = new File(Ref.getMinecraft().mcDataDir, "config" + File.separator + "client" + File.separator + "profiles" + File.separator + this.profile.getName() + ".cfg");
+                    File file2 = new File(Ref.getMinecraft().mcDataDir, "config" + File.separator + "client" + File.separator + "profiles" + File.separator + this.lIIIIIIIIIlIllIIllIlIIlIl.getText() + ".cfg");
                     if (!file.exists()) break;
                     try {
                         Files.copy(file.toPath(), file2.toPath());

@@ -12,7 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import javax.vecmath.Vector2d;
@@ -24,7 +24,7 @@ public class WorldBorderManager {
 
     private final MinecraftBridge minecraft = Ref.getMinecraft();
     private final CheatBreaker cheatbreaker = CheatBreaker.getInstance();
-    private static final ResourceLocationBridge forceFieldTexture = Ref.getInstanceCreator().createResourceLocation("textures/misc/forcefield.png");
+    private static final ResourceLocationBridge forceFieldTexture = Ref.getInstanceCreator().createResourceLocationBridge("textures/misc/forcefield.png");
     private final List<WorldBorder> borderList = new ArrayList<>();
 
     public WorldBorderManager() {
@@ -46,7 +46,7 @@ public class WorldBorderManager {
 
     private void onWorldRender(RenderWorldEvent renderWorldEvent) {
         if (!this.borderList.isEmpty()) {
-            EntityClientPlayerMP playerMP = this.minecraft.thePlayer;
+            EntityClientPlayerMP playerMP = this.minecraft.bridge$getThePlayer();
             float f = renderWorldEvent.getPartialTicks();
             this.borderList.stream().filter(WorldBorder::worldEqualsWorld).forEach(border -> {
                 TessellatorBridge tessellator = Ref.getTessellator();

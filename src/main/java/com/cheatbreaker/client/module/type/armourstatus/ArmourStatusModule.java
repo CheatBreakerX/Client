@@ -6,11 +6,11 @@ import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.ScaledResolutionBridge;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class ArmourStatusModule extends AbstractModule {
     public static RenderItem renderItem;
     public static final List<ArmourStatusDamageComparable> damageColors;
     private static List<ArmourStatusItem> items;
-    private static ScaledResolution lIIIIIllllIIIIlIlIIIIlIlI;
+    private static ScaledResolutionBridge lIIIIIllllIIIIlIlIIIIlIlI;
 
     public ArmourStatusModule() {
         super("Armor Status");
@@ -60,7 +60,7 @@ public class ArmourStatusModule extends AbstractModule {
         damageColors.add(new ArmourStatusDamageComparable(60, "e"));
         damageColors.add(new ArmourStatusDamageComparable(80, "7"));
         damageColors.add(new ArmourStatusDamageComparable(100, "f"));
-        this.setPreviewIcon(new ResourceLocation("client/icons/mods/diamond_chestplate.png"), 34, 34);
+        this.setPreviewIcon(Ref.getInstanceCreator().createResourceLocationBridge("client/icons/mods/diamond_chestplate.png"), 34, 34);
        // this.addEvent(RenderPreviewEvent.class, this::renderPreview);
         //this.addEvent(GuiDrawEvent.class, this::renderReal);
     }
@@ -71,7 +71,7 @@ public class ArmourStatusModule extends AbstractModule {
         }
         ArrayList<ArmourStatusItem> arrayList = new ArrayList<ArmourStatusItem>();
         for (int i = 3; i >= 0; --i) {
-            ItemStack lIlIlIlIlIllllIlllIIIlIlI2 = this.minecraft.thePlayer.inventory.armorInventory[i];
+            ItemStack lIlIlIlIlIllllIlllIIIlIlI2 = this.minecraft.bridge$getThePlayer().inventory.armorInventory[i];
             arrayList.add(new ArmourStatusItem(lIlIlIlIlIllllIlllIIIlIlI2, 16, 16, 2, true));
         }
         if (arrayList.isEmpty()) {
@@ -80,8 +80,8 @@ public class ArmourStatusModule extends AbstractModule {
             arrayList.add(new ArmourStatusItem(new ItemStack(Item.getItemById(312)), 16, 16, 2, true));
             arrayList.add(new ArmourStatusItem(new ItemStack(Item.getItemById(313)), 16, 16, 2, true));
         }
-        if ((Boolean) equippedItem.getValue() && this.minecraft.thePlayer.getCurrentEquippedItem() != null) {
-            arrayList.add(new ArmourStatusItem(this.minecraft.thePlayer.getCurrentEquippedItem(), 16, 16, 2, false));
+        if ((Boolean) equippedItem.getValue() && this.minecraft.bridge$getThePlayer().getCurrentEquippedItem() != null) {
+            arrayList.add(new ArmourStatusItem(this.minecraft.bridge$getThePlayer().getCurrentEquippedItem(), 16, 16, 2, false));
         } else if ((Boolean) equippedItem.getValue()) {
             arrayList.add(new ArmourStatusItem(new ItemStack(Item.getItemById(276)), 16, 16, 2, false));
         }
@@ -117,9 +117,9 @@ public class ArmourStatusModule extends AbstractModule {
         for (int i = 3; i >= -1; --i) {
             ItemStack stack = null;
             if (i == -1 && (Boolean) equippedItem.getValue()) {
-                stack = minecraft.thePlayer.getCurrentEquippedItem();
+                stack = minecraft.bridge$getThePlayer().getCurrentEquippedItem();
             } else if (i != -1) {
-                stack = minecraft.thePlayer.inventory.armorInventory[i];
+                stack = minecraft.bridge$getThePlayer().inventory.armorInventory[i];
             }
             if (stack == null) continue;
             items.add(new ArmourStatusItem(stack, 16, 16, 2, i > -1));

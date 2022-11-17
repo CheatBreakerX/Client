@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class XRayOptionsElement
     @Override
     public void handleDrawElement(int mouseX, int mouseY, float partialTicks) {
         FontRegistry.getUbuntuMedium16px().drawString(this.lIIIIlIIllIIlIIlIIIlIIllI.toUpperCase(), this.x + 10, (float)(this.y + 2), CheatBreaker.getInstance().globalSettings.isDarkMode() ? 0xFFFFFFFF : -1895825407);
-        Minecraft minecraft = Minecraft.getMinecraft();
+        Minecraft minecraft = Ref.getMinecraft();
         List<Integer> list = CheatBreaker.getInstance().moduleManager.xray.lIllIllIlIIllIllIlIlIIlIl();
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glEnable(32826);
@@ -91,9 +91,9 @@ public class XRayOptionsElement
                         CheatBreaker.getInstance().moduleManager.xray.lIllIllIlIIllIllIlIlIIlIl().add(n9);
                     }
                     if (CheatBreaker.getInstance().moduleManager.xray.isEnabled()) {
-                        Minecraft.getMinecraft().renderGlobal.loadRenderers();
+                        Ref.getMinecraft().renderGlobal.loadRenderers();
                     }
-                    Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                 }
                 ++n5;
             }

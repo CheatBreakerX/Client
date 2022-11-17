@@ -5,7 +5,7 @@ import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.config.GlobalSettings;
 import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 public class CrosshairElement extends AbstractModulesGuiElement {
@@ -18,7 +18,7 @@ public class CrosshairElement extends AbstractModulesGuiElement {
     public void handleDrawElement(int mouseX, int mouseY, float partialTicks) {
         Ref.modified$drawRect(this.x + (this.width / 2 - 15) - 41, this.y + 4, this.x + (this.width / 2 - 15) + 41, this.y + 51, -16777216);
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(new ResourceLocation("client/defaults/crosshair.png"), (float)(this.x + (this.width / 2 - 15) - 40), (float)(this.y + 5), (float)80, 45);
+        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(Ref.getInstanceCreator().createResourceLocationBridge("client/defaults/crosshair.png"), (float)(this.x + (this.width / 2 - 15) - 40), (float)(this.y + 5), (float)80, 45);
         GlobalSettings globalSettings = CheatBreaker.getInstance().globalSettings;
         GL11.glPushMatrix();
         float f2 = 1.0f / CheatBreaker.getInstance().getScaleFactor();

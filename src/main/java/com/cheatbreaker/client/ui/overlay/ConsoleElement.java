@@ -11,7 +11,7 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.websocket.shared.WSPacketConsole;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;
@@ -133,7 +133,7 @@ public class ConsoleElement extends DraggableElement {
             this.updateDraggingPosition(f, f2);
         }
         if (this.closeButton.isMouseInside(f, f2)) {
-            this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             OverlayGui.getInstance().removeElements(this);
             return true;
         }
@@ -154,7 +154,7 @@ public class ConsoleElement extends DraggableElement {
             CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketConsole(string));
         }
         this.textInputElement.setText("");
-        this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+        this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
     }
 
     @Override

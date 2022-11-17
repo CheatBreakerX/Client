@@ -4,7 +4,7 @@ import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -46,7 +46,7 @@ public class KeystrokesModule
         this.backgroundColor = new Setting(this, "Background Color").setValue(0x6F000000).setMinMax(Integer.MIN_VALUE, Integer.MAX_VALUE);
         this.backgroundColorPressed = new Setting(this, "Background Color (Pressed)").setValue(0x6FFFFFFF).setMinMax(Integer.MIN_VALUE, Integer.MAX_VALUE);
         this.initialize();
-        this.setPreviewIcon(new ResourceLocation("client/icons/mods/wasd.png"), 55, 37);
+        this.setPreviewIcon(Ref.getInstanceCreator().createResourceLocationBridge("client/icons/mods/wasd.png"), 55, 37);
         this.addEvent(GuiDrawEvent.class, this::onDraw);
     }
 

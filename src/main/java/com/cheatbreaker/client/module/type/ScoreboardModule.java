@@ -32,7 +32,7 @@ public class ScoreboardModule extends AbstractModule {
         if (!this.isRenderHud()) {
             return;
         }
-        if (this.minecraft.theWorld.getScoreboard().func_96539_a(1) != null) {
+        if (this.minecraft.bridge$getTheWorld().getScoreboard().func_96539_a(1) != null) {
             return;
         }
         GL11.glPushMatrix();
@@ -54,7 +54,7 @@ public class ScoreboardModule extends AbstractModule {
         GL11.glPushMatrix();
         this.scaleAndTranslate(guiDrawEvent.getResolution());
         GL11.glTranslatef(this.isRemoveNumbers() ? (float) -12 : 2.0f, this.height, 0.0f);
-        ScoreObjective objective = this.minecraft.theWorld.getScoreboard().func_96539_a(1);
+        ScoreObjective objective = this.minecraft.bridge$getTheWorld().getScoreboard().func_96539_a(1);
         if (objective != null) {
             this.drawObjective(objective, this.minecraft.fontRenderer);
         }

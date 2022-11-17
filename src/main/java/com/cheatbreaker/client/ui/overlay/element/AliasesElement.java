@@ -8,7 +8,7 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.friend.Friend;
 import com.cheatbreaker.client.util.thread.AliasesThread;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +72,7 @@ public class AliasesElement
         this.scrollContainer.handleElementMouseClicked(f, f2, n, bl);
         this.closeButton.handleElementMouseClicked(f, f2, n, bl);
         if (this.closeButton.isMouseInside(f, f2)) {
-            this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             OverlayGui.getInstance().removeElements(this);
             return true;
         }

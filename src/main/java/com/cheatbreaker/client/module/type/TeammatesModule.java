@@ -1,5 +1,7 @@
 package com.cheatbreaker.client.module.type;
 
+import com.cheatbreaker.bridge.client.MinecraftBridge;
+import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.client.CheatBreaker;
@@ -8,7 +10,7 @@ import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.util.teammates.IlIlIIlllIIIIIlIlIlIIIllI;
 import com.cheatbreaker.client.util.teammates.Teammate;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.ScaledResolutionBridge;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.settings.GameSettings;
@@ -30,16 +32,16 @@ public class TeammatesModule {
     private final List<Teammate> teammates;
     private final int[] IIIIllIlIIIllIlllIlllllIl = new int[]{-15007996, -43234, -3603713, -16580641, -8912129, -16601345, -2786, -64828, -15629042, -10744187};
     private boolean IIIIllIIllIIIIllIllIIIlIl = false;
-    private final Minecraft minecraft = Minecraft.getMinecraft();
+    private final MinecraftBridge minecraft = Ref.getMinecraft();
 
     public TeammatesModule() {
         this.teammates = new ArrayList<>();
     }
 
     public double getDistance(double d, double d2, double d3) {
-        double d4 = d - this.minecraft.thePlayer.posX;
-        double d5 = d2 - this.minecraft.thePlayer.posY;
-        double d6 = d3 - this.minecraft.thePlayer.posZ;
+        double d4 = d - this.minecraft.bridge$getThePlayer().bridge$getPosX();
+        double d5 = d2 - this.minecraft.bridge$getThePlayer().bridge$getPosY();
+        double d6 = d3 - this.minecraft.bridge$getThePlayer().bridge$getPosZ();
         return Math.sqrt(d4 * d4 + d5 * d5 + d6 * d6);
     }
 
@@ -49,17 +51,17 @@ public class TeammatesModule {
         }
         IntBuffer intBuffer = BufferUtils.createIntBuffer(16);
         GL11.glGetInteger(2978, intBuffer);
-        float f2 = (float)(this.minecraft.thePlayer.lastTickPosX + (this.minecraft.thePlayer.posX - this.minecraft.thePlayer.lastTickPosX) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) RenderManager.renderPosX;
-        float f3 = (float)(this.minecraft.thePlayer.lastTickPosY + (this.minecraft.thePlayer.posY - this.minecraft.thePlayer.lastTickPosY) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) RenderManager.renderPosY;
-        float f4 = (float)(this.minecraft.thePlayer.lastTickPosZ + (this.minecraft.thePlayer.posZ - this.minecraft.thePlayer.lastTickPosZ) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) RenderManager.renderPosZ;
-        double d = (double)(this.minecraft.thePlayer.rotationPitch + (float)90) * (0.3249923327873289 * 9.666666984558105) / (double)180;
-        double d2 = (double)(this.minecraft.thePlayer.rotationYaw + (float)90) * (7.479982742083262 * (double)0.42f) / (double)180;
+        float f2 = (float)(this.minecraft.bridge$getThePlayer().lastTickPosX + (this.minecraft.bridge$getThePlayer().posX - this.minecraft.bridge$getThePlayer().lastTickPosX) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) RenderManager.renderPosX;
+        float f3 = (float)(this.minecraft.bridge$getThePlayer().lastTickPosY + (this.minecraft.bridge$getThePlayer().posY - this.minecraft.bridge$getThePlayer().lastTickPosY) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) RenderManager.renderPosY;
+        float f4 = (float)(this.minecraft.bridge$getThePlayer().lastTickPosZ + (this.minecraft.bridge$getThePlayer().posZ - this.minecraft.bridge$getThePlayer().lastTickPosZ) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) RenderManager.renderPosZ;
+        double d = (double)(this.minecraft.bridge$getThePlayer().rotationPitch + (float)90) * (0.3249923327873289 * 9.666666984558105) / (double)180;
+        double d2 = (double)(this.minecraft.bridge$getThePlayer().rotationYaw + (float)90) * (7.479982742083262 * (double)0.42f) / (double)180;
         Vec3 vec3 = Vec3.createVectorHelper(Math.sin(d) * Math.cos(d2), Math.cos(d), Math.sin(d) * Math.sin(d2));
         if (this.minecraft.gameSettings.thirdPersonView == 2) {
             vec3 = Vec3.createVectorHelper(vec3.xCoord * (double)-1, vec3.yCoord * (double)-1, vec3.zCoord * (double)-1);
         }
         for (Teammate teammate : this.teammates) {
-            EntityPlayer entityPlayer = this.minecraft.theWorld.getPlayerEntityByName(teammate.IlllIIIlIlllIllIlIIlllIlI());
+            EntityPlayer entityPlayer = this.minecraft.bridge$getTheWorld().getPlayerEntityByName(teammate.IlllIIIlIlllIllIlIIlllIlI());
             if (entityPlayer == null) {
                 double d3;
                 if (System.currentTimeMillis() - teammate.lIIIIIIIIIlIllIIllIlIIlIl() > teammate.IIIIllIlIIIllIlllIlllllIl()) continue;
@@ -75,7 +77,7 @@ public class TeammatesModule {
                 this.lIIIIlIIllIIlIIlIIIlIIllI(guiDrawEvent.getResolution(), teammate, (float)d4, (float)d5, (float)d6, intBuffer, (int)d7);
                 continue;
             }
-            if (entityPlayer == this.minecraft.thePlayer) continue;
+            if (entityPlayer == this.minecraft.bridge$getThePlayer()) continue;
             float f5 = (float)(entityPlayer.lastTickPosX + (entityPlayer.posX - entityPlayer.lastTickPosX) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks() - (double)f2);
             float f6 = (float)(entityPlayer.lastTickPosY + (entityPlayer.posY - entityPlayer.lastTickPosY) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks() - (double)f3) + entityPlayer.height + 1.0f;
             float f7 = (float)(entityPlayer.lastTickPosZ + (entityPlayer.posZ - entityPlayer.lastTickPosZ) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks() - (double)f4);
@@ -84,7 +86,7 @@ public class TeammatesModule {
         }
     }
 
-    private void lIIIIlIIllIIlIIlIIIlIIllI(ScaledResolution scaledResolution, Teammate ilIlllIlIlIIllllIlllIlIII, float f, float f2, float f3, IntBuffer intBuffer, int n) {
+    private void lIIIIlIIllIIlIIlIIIlIIllI(ScaledResolutionBridge scaledResolution, Teammate ilIlllIlIlIIllllIlllIlIII, float f, float f2, float f3, IntBuffer intBuffer, int n) {
         Vec3 vec3 = Vec3.createVectorHelper(f, f2, f3);
         double d = vec3.lengthVector();
         if (vec3.dotProduct(vec3 = vec3.normalize()) <= 2.0714285373687744 * 0.009655172572549829) {

@@ -20,8 +20,8 @@ import java.util.List;
 
 	private char COLOR_CODE_START = '\u00a7';
 
-	public CBFontRenderer(ResourceLocationBridge resourceLocation, float size) {
-		super(resourceLocation, size);
+	public CBFontRenderer(ResourceLocationBridge ResourceLocationBridge, float size) {
+		super(ResourceLocationBridge, size);
 
 		this.setupMinecraftColorCodes();
 		this.setupBoldItalicIDs();
@@ -58,7 +58,7 @@ import java.util.List;
 	@SuppressWarnings("ConstantConditions")
 	public float drawString(String text, double x, double y, int color, boolean shadow) {
 		// START SCALE FIX
-		float scaleFactor = Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor();
+		float scaleFactor = Ref.getInstanceCreator().createScaledResolutionBridge().bridge$getScaleFactor();
 		float scale = (2.0f / scaleFactor);
 
 		boolean followMinecraftScale = false;
@@ -287,7 +287,7 @@ import java.util.List;
 		}
 
 		if (followMinecraftScale) {
-			return (int) ((width / 2) * (2.0f / Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor()));
+			return (int) ((width / 2) * (2.0f / Ref.getInstanceCreator().createScaledResolutionBridge().bridge$getScaleFactor()));
 		} else {
 			return width / 2;
 		}

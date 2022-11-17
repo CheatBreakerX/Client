@@ -8,7 +8,7 @@ import com.cheatbreaker.client.ui.element.AbstractScrollableElement;
 import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 // IIllllIllllIIIlIIllllIlll
@@ -17,7 +17,7 @@ public class ModuleSettingsElement extends AbstractModulesGuiElement {
     public final AbstractModule module;
     private final AbstractScrollableElement parent;
     private int IlllIllIlIIIIlIIlIIllIIIl = 0;
-    private ResourceLocation rightIcon = new ResourceLocation("client/icons/right.png");
+    private ResourceLocationBridge rightIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/right.png");
 
     public ModuleSettingsElement(AbstractScrollableElement parent, int n, AbstractModule module, float f) {
         super(f);

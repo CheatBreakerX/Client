@@ -9,7 +9,7 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -158,7 +158,7 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
             CheatBreaker.getInstance().globalSettings.IlIIlIIlIllIIIIllIIllIlIl.remove(0);
         }
         CheatBreaker.getInstance().globalSettings.IlIIlIIlIllIIIIllIIllIlIl.add(new ColorPickerColorElement(this.scale, (Integer)this.setting.getValue()));
-        Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+        Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
     }
 
     private void lIIIIIIIIIlIllIIllIlIIlIl(int n2) {
@@ -272,7 +272,7 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
                 } else {
                     this.setting.setValue(new Color(colorPickerColorElement.color, true).getRGB());
                 }
-                Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                 float[] arrf = Color.RGBtoHSB(colorPickerColorElement.color >> 16 & 0xFF, colorPickerColorElement.color >> 8 & 0xFF, colorPickerColorElement.color & 0xFF, null);
                 this.IIIlllIIIllIllIlIIIIIIlII = arrf[0];
                 n8 = (int)(arrf[1] * this.pickerWidth);
@@ -289,7 +289,7 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
         boolean bl2 = (float) mouseX > (float)(this.x + this.width - 40) * this.scale && (float) mouseX < (float)(this.x + this.width - 12) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 18 + this.yOffset) * this.scale;
         bl = (float) mouseX > (float)this.x * this.scale && (float) mouseX < (float)(this.x + this.width - 40) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 18 + this.yOffset) * this.scale;
         if (bl) {
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             float[] arrf = Color.RGBtoHSB((Integer)this.setting.getValue() >> 16 & 0xFF, (Integer)this.setting.getValue() >> 8 & 0xFF, (Integer)this.setting.getValue() & 0xFF, null);
             this.IIIlllIIIllIllIlIIIIIIlII = arrf[0];
             int n4 = (int)(arrf[1] * this.pickerWidth);
@@ -305,7 +305,7 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
                 }
                 CheatBreaker.getInstance().globalSettings.favouriteColors.add(new ColorPickerColorElement(this.scale, (Integer)this.setting.getValue()));
             }
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
         } else if (this.lIIIIllIIlIlIllIIIlIllIlI) {
             boolean bl4;
             this.lIIIIlIIllIIlIIlIIIlIIllI(this.colors, 0, 0, mouseX, mouseY);
@@ -322,7 +322,7 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
                 this.llIIlllIIIIlllIllIlIlllIl = true;
             }
             if (bl4) {
-                Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                 this.setting.rainbow = !this.setting.rainbow;
             }
         }

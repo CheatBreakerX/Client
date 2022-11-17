@@ -55,10 +55,10 @@ public final class HudUtil {
                 int count = 0;
 
                 if (itemStack.getMaxStackSize() > 1) {
-                    count = HudUtil.countInInventory(Minecraft.getMinecraft().thePlayer, itemStack.getItem(),
+                    count = HudUtil.countInInventory(Ref.getMinecraft().bridge$getThePlayer(), itemStack.getItem(),
                             itemStack.getItemDamage());
                 } else if (itemStack.getItem().equals(Items.bow)) {
-                    count = HudUtil.countInInventory(Minecraft.getMinecraft().thePlayer, Items.arrow);
+                    count = HudUtil.countInInventory(Ref.getMinecraft().bridge$getThePlayer(), Items.arrow);
                 }
 
                 if (count > 1) {

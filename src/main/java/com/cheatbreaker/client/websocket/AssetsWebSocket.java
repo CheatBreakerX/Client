@@ -55,7 +55,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class AssetsWebSocket extends WebSocketClient {
-    private final Minecraft minecraft = Minecraft.getMinecraft();
+    private final Minecraft minecraft = Ref.getMinecraft();
     private final List<String> playersCache = new ArrayList<>();
 
     public AssetsWebSocket(URI uRI, Map<String,String> map) {
@@ -83,7 +83,7 @@ public class AssetsWebSocket extends WebSocketClient {
             packet.read(buf);
             packet.handle(this);
 
-            Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Handling incoming packet from websocket: " + packetClass.getCanonicalName()));
+            Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Handling incoming packet from websocket: " + packetClass.getCanonicalName()));
         }
         catch (Exception exception) {
             System.out.println("Error from: " + packetClass);
@@ -94,7 +94,7 @@ public class AssetsWebSocket extends WebSocketClient {
     @Override
     public void onOpen(ServerHandshake handshake) {
         System.out.println("[CB] Connection established");
-//        if (Objects.equals(Minecraft.getMinecraft().getSession().getUsername(), Minecraft.getMinecraft().getSession().getPlayerID())) {
+//        if (Objects.equals(Ref.getMinecraft().bridge$getSession().bridge$getUsername(), Ref.getMinecraft().bridge$getSession().getPlayerID())) {
 //            this.close();
 //        }
     }
@@ -265,8 +265,8 @@ public class AssetsWebSocket extends WebSocketClient {
     }
 
     public EntityPlayer theWorld$getPlayerFromUUID(String uuid) {
-        for (int i = 0; i < this.minecraft.theWorld.playerEntities.size(); ++i) {
-            EntityPlayer entityplayer = (EntityPlayer)this.minecraft.theWorld.playerEntities.get(i);
+        for (int i = 0; i < this.minecraft.bridge$getTheWorld().playerEntities.size(); ++i) {
+            EntityPlayer entityplayer = (EntityPlayer)this.minecraft.bridge$getTheWorld().playerEntities.get(i);
 
             if (uuid.replaceAll("-", "").equals(entityplayer.getUniqueID().toString().replaceAll("-", ""))) {
                 return entityplayer;
@@ -289,25 +289,25 @@ public class AssetsWebSocket extends WebSocketClient {
 //                    continue;
                 if (!(player instanceof AbstractClientPlayer)) {
                     CheatBreaker.getInstance().cbInfo("Player " + string + " (str) is not instance of AbstractClientPlayer!");
-                    Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Player " + string + " (str) is not instance of AbstractClientPlayer!"));
+                    Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Player " + string + " (str) is not instance of AbstractClientPlayer!"));
                     continue;
                 }
 
                 if (!cosmetic.isEquipped()) {
                     CheatBreaker.getInstance().cbInfo("System tried to apply cape to " + player.getDisplayName() + "\u00a7r using " + cosmetic.getLocation() + " but failed as it is not equipped.");
-                    Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("System tried to apply cape to " + player.getDisplayName() + "\u00a7r using " + cosmetic.getLocation() + " but failed as it is not equipped."));
+                    Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("System tried to apply cape to " + player.getDisplayName() + "\u00a7r using " + cosmetic.getLocation() + " but failed as it is not equipped."));
                     continue;
                 }
 
                 CheatBreaker.getInstance().cbInfo("Player " + string + " passed checks!");
-                Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Player " + string + " passed checks!"));
+                Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Player " + string + " passed checks!"));
 
                 if (cosmetic.getType().equals("cape")) {
                     ((AbstractClientPlayerBridge) ((AbstractClientPlayer) player)).bridge$setLocationCape(cosmetic.getLocation());
-                    Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Set cape location for " + player.getDisplayName() + "\u00a7r to " + cosmetic.getLocation()));
+                    Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Set cape location for " + player.getDisplayName() + "\u00a7r to " + cosmetic.getLocation()));
                 } else {
                     CheatBreaker.getInstance().cbInfo("Type is not cape!");
-                    Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Type is not cape!"));
+                    Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Type is not cape!"));
                 }
             }
             catch (Exception exception) {
@@ -367,7 +367,7 @@ public class AssetsWebSocket extends WebSocketClient {
             WSPacketClientJoinServerResponse response = new WSPacketClientJoinServerResponse(secretKey, publicKey, packetJoinServer.getEncryptedPublicKey());
             response.write(buf);
             this.sendToServer(response);
-            File file = new File(Minecraft.getMinecraft().mcDataDir + File.separator + "config" + File.separator + "client" + File.separator + "profiles.txt");
+            File file = new File(Ref.getMinecraft().mcDataDir + File.separator + "config" + File.separator + "client" + File.separator + "profiles.txt");
             if (file.exists()) {
                 this.sendToServer(new WSPacketClientProfilesExist());
             }
@@ -390,11 +390,11 @@ public class AssetsWebSocket extends WebSocketClient {
     }
 
     public void lIIIIlIIllIIlIIlIIIlIIllI(AbstractClientPlayer abstractClientPlayer) {
-        if (abstractClientPlayer.getGameProfile() == null || this.minecraft.thePlayer == null) {
+        if (abstractClientPlayer.getGameProfile() == null || this.minecraft.bridge$getThePlayer() == null) {
             return;
         }
         String string = abstractClientPlayer.getUniqueID().toString();
-        if (!this.playersCache.contains(string) && !string.equals(this.minecraft.thePlayer.getUniqueID().toString())) {
+        if (!this.playersCache.contains(string) && !string.equals(this.minecraft.bridge$getThePlayer().getUniqueID().toString())) {
             this.playersCache.add(string);
             this.sendToServer(new WSPacketClientPlayerJoin(string));
         }
@@ -443,12 +443,12 @@ public class AssetsWebSocket extends WebSocketClient {
 
     // crashes the client in obnoxious ways.
     public void handleForceCrash(WSPacketForceCrash packetForceCrash) {
-//        Minecraft.getMinecraft().forceCrash = true; // NOT TODO: FIX
+//        Ref.getMinecraft().forceCrash = true; // NOT TODO: FIX
     }
 
     public void lIIIIlIIllIIlIIlIIIlIIllI(Profile iIlIllllIIlIlIIIlllIIllIl) {
         try {
-            File file = new File(Minecraft.getMinecraft().mcDataDir + File.separator + "config" + File.separator + "client" + File.separator + "profiles.txt");
+            File file = new File(Ref.getMinecraft().mcDataDir + File.separator + "config" + File.separator + "client" + File.separator + "profiles.txt");
             if (!file.exists()) {
                 file.createNewFile();
             }

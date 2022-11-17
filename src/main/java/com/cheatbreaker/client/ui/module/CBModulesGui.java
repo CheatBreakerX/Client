@@ -1,6 +1,10 @@
 package com.cheatbreaker.client.ui.module;
 
+import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
+import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
@@ -12,12 +16,6 @@ import com.cheatbreaker.client.ui.element.profile.ProfilesListElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -26,11 +24,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CBModulesGui extends GuiScreen {
+public class CBModulesGui extends CBGuiScreen {
 
     public static CBModulesGui instance;
-    private final ResourceLocation cogIcon = new ResourceLocation("client/icons/cog-64.png");
-    private final ResourceLocation deleteIcon = new ResourceLocation("client/icons/delete-64.png");
+    private final ResourceLocationBridge cogIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/cog-64.png");
+    private final ResourceLocationBridge deleteIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/delete-64.png");
     private final List<CBModulePosition> positions = new ArrayList<>();
     private final List<AbstractScrollableElement> IllIIlIIlllllIllIIIlllIII = new ArrayList();
     private final List<ModulesGuiButtonElement> buttons = new ArrayList<>();
@@ -160,7 +158,7 @@ public class CBModulesGui extends GuiScreen {
         Rectangle object;
         super.drawScreen(mouseX, mouseY, f);
         ///this.lIIlllIIlIlllllllllIIIIIl(); blur shader
-        ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolutionBridge();
         float scale = 1.0f / CheatBreaker.getInstance().getScaleFactor();
         if (draggingModule != null) {
             if (!Mouse.isButtonDown(1)) {
@@ -307,7 +305,7 @@ public class CBModulesGui extends GuiScreen {
         if (f13 > 1.0f) {
             GL11.glTranslatef(-((float)(this.IIllIlIllIlIllIIlIllIlIII * 2) - (float)32) / (float)12 - 1.0f, 0.0f, 0.0f);
         }
-        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(new ResourceLocation("client/logo_white.png"), (float)(n5 / 2 - 14), (float)(n6 / 2 - 47 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), (float)28, 15);
+        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(Ref.getInstanceCreator().createResourceLocationBridge("client/logo_white.png"), (float)(n5 / 2 - 14), (float)(n6 / 2 - 47 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), (float)28, 15);
         if (f13 > 2.0f) {
             FontRegistry.getPlayBold18px().drawString("| CHEAT", n5 / 2 + 18, (float)(n6 / 2 - 42 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), n7);
             FontRegistry.getPlayRegular18px().drawString("BREAKER", n5 / 2 + 53, (float)(n6 / 2 - 42 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), n7);
@@ -319,7 +317,7 @@ public class CBModulesGui extends GuiScreen {
         if (draggingModule == null) {
             GL11.glPushMatrix();
             GL11.glEnable(3089);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(n5 / 2 - 185, n6 / 2 + 15, n5 / 2 + 185, n6 - 20, (float)scaledResolution.getScaleFactor() * scale, n6);
+            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(n5 / 2 - 185, n6 / 2 + 15, n5 / 2 + 185, n6 - 20, (float)scaledResolution.bridge$getScaleFactor() * scale, n6);
             for (AbstractScrollableElement lllIllIllIlIllIlIIllllIIl2 : this.IllIIlIIlllllIllIIIlllIII) {
                 if (lllIllIllIlIllIlIIllllIIl2 != this.lIIIIllIIlIlIllIIIlIllIlI && lllIllIllIlIllIlIIllllIIl2 != this.currentScrollableElement) continue;
                 lllIllIllIlIllIlIIllllIIl2.handleDrawElement(mouseX, mouseY, f);
@@ -369,13 +367,13 @@ public class CBModulesGui extends GuiScreen {
         Ref.modified$drawRect(4, 12, 234, 2.5815217f * 4.8421054f, 0x4FFFFFFF);
         int n = 16;
         this.renderRoundButton("Mouse1", 6, n);
-        FontRegistry.getPlayRegular14px().drawString("| " + EnumChatFormatting.LIGHT_PURPLE + "HOLD" + EnumChatFormatting.LIGHT_PURPLE + " Add mods to selected region", 80, (float)n+3, -1);
+        FontRegistry.getPlayRegular14px().drawString("| " + EnumChatFormattingBridge.LIGHT_PURPLE + "HOLD" + EnumChatFormattingBridge.LIGHT_PURPLE + " Add mods to selected region", 80, (float)n+3, -1);
         this.renderRoundButton("Mouse1", 6, n += 12);
-        FontRegistry.getPlayRegular14px().drawString("| " + EnumChatFormatting.LIGHT_PURPLE + "HOLD" + EnumChatFormatting.LIGHT_PURPLE + " Select & drag mods", 80, (float)n+3, -1);
+        FontRegistry.getPlayRegular14px().drawString("| " + EnumChatFormattingBridge.LIGHT_PURPLE + "HOLD" + EnumChatFormattingBridge.LIGHT_PURPLE + " Select & drag mods", 80, (float)n+3, -1);
         this.renderRoundButton("Mouse2", 6, n += 12);
-        FontRegistry.getPlayRegular14px().drawString("| " + EnumChatFormatting.LIGHT_PURPLE + "CLICK" + EnumChatFormatting.LIGHT_PURPLE + " Reset mod to closest position", 80, (float)n+3, -1);
+        FontRegistry.getPlayRegular14px().drawString("| " + EnumChatFormattingBridge.LIGHT_PURPLE + "CLICK" + EnumChatFormattingBridge.LIGHT_PURPLE + " Reset mod to closest position", 80, (float)n+3, -1);
         this.renderRoundButton("Mouse2", 6, n += 12);
-        FontRegistry.getPlayRegular14px().drawString("| " + EnumChatFormatting.LIGHT_PURPLE + "HOLD" + EnumChatFormatting.LIGHT_PURPLE + " Don't lock mods while dragging", 80, (float)n+3, -1);
+        FontRegistry.getPlayRegular14px().drawString("| " + EnumChatFormattingBridge.LIGHT_PURPLE + "HOLD" + EnumChatFormattingBridge.LIGHT_PURPLE + " Don't lock mods while dragging", 80, (float)n+3, -1);
         this.renderRoundButton("CTRL", 6, n += 12);
         FontRegistry.getPlayRegular14px().drawString("+", 30, (float)n+3, -1);
         this.renderRoundButton("Mouse1", 36, n);
@@ -406,7 +404,7 @@ public class CBModulesGui extends GuiScreen {
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int n3) {
-        ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolutionBridge();
         if (this.lIIIIllIIlIlIllIIIlIllIlI != null && this.lIIIIllIIlIlIllIIIlIllIlI.isMouseInside(mouseX, mouseY)) {
             this.lIIIIllIIlIlIllIIIlIllIlI.handleMouseClick(mouseX, mouseY, n3);
         } else {
@@ -417,12 +415,12 @@ public class CBModulesGui extends GuiScreen {
                 boolean bl2 = !iterator.getSettingsList().isEmpty() && (float)mouseX >= arrf[0] * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseX <= (arrf[0] + (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY >= (arrf[1] + iterator.height - (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY <= (arrf[1] + iterator.height + 2.0f) * ((Float) iterator.scale.getValue()).floatValue();
                 boolean bl3 = bl = (float)mouseX > (arrf[0] + iterator.width - (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseX < (arrf[0] + iterator.width + 2.0f) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY > (arrf[1] + iterator.height - (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY < (arrf[1] + iterator.height + 2.0f) * ((Float) iterator.scale.getValue()).floatValue();
                 if (bl2) {
-                    Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                     ((ModuleListElement)this.IIIIllIIllIIIIllIllIIIlIl).llIlIIIlIIIIlIlllIlIIIIll = false;
                     ((ModuleListElement)this.IIIIllIIllIIIIllIllIIIlIl).module = iterator;
                     this.currentScrollableElement = this.IIIIllIIllIIIIllIllIIIlIl;
                 } else if (bl) {
-                    Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                     iterator.setState(false);
                 }
                 return;
@@ -466,7 +464,7 @@ public class CBModulesGui extends GuiScreen {
             }
             if (draggingModule == null) {
                 if (this.showGuidesButton.isMouseInside(mouseX, mouseY)) {
-                    Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                     this.IlIIIIllIIIIIlllIIlIIlllI = !this.IlIIIIllIIIIIlllIIlIIlllI;
                 }
                 this.IlllIIIlIlllIllIlIIlllIlI(mouseX, mouseY, n3);
@@ -482,7 +480,7 @@ public class CBModulesGui extends GuiScreen {
             }
             if (!this.positions.isEmpty()) {
                 this.positions.clear();
-                Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             }
             this.someMouseX = mouseX;
             this.someMouseY = mouseY;
@@ -501,7 +499,7 @@ public class CBModulesGui extends GuiScreen {
         }
     }
 
-    private void lIIIIlIIllIIlIIlIIIlIIllI(AbstractModule cBModule, CBGuiAnchor cBGuiAnchor, ScaledResolution scaledResolution) {
+    private void lIIIIlIIllIIlIIlIIIlIIllI(AbstractModule cBModule, CBGuiAnchor cBGuiAnchor, ScaledResolutionBridge scaledResolution) {
         if (cBGuiAnchor != cBModule.getGuiAnchor()) {
             float[] scaledPointsWithTranslations = cBModule.getScaledPoints(scaledResolution, true);
             cBModule.setAnchor(cBGuiAnchor);
@@ -515,7 +513,7 @@ public class CBModulesGui extends GuiScreen {
 
     @Override
     public void mouseMovedOrUp(int mouseX, int mouseY, int button) {
-        ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolutionBridge();
         if (this.dataHolder != null && button == 0) {
             this.lIIIIlIIllIIlIIlIIIlIIllI(this.dataHolder.module, this.dataHolder.anchor, scaledResolution);
             this.dataHolder = null;
@@ -534,7 +532,7 @@ public class CBModulesGui extends GuiScreen {
                     float y = (float)mouseY - draggingModule.getYTranslation();
                     this.positions.add(new CBModulePosition(draggingModule, x, y));
                 }
-                Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             }
             System.out.println(draggingModule.getName());
             draggingModule = null;
@@ -625,7 +623,7 @@ public class CBModulesGui extends GuiScreen {
         }
     }
 
-    private void lIIIIlIIllIIlIIlIIIlIIllI(ScaledResolution scaledResolution, int n, int n2, int n3) {
+    private void lIIIIlIIllIIlIIlIIIlIIllI(ScaledResolutionBridge scaledResolution, int n, int n2, int n3) {
         for (AbstractModule cBModule : this.modules) {
             boolean bl;
             float[] arrf;
@@ -668,16 +666,16 @@ public class CBModulesGui extends GuiScreen {
             }
             if (!(n3 != 0 || this.lIIIIllIIlIlIllIIIlIllIlI != null && this.lIIIIllIIlIlIllIIIlIllIlI.isMouseInside(n, n2))) {
                 if (bl3) {
-                    Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                     ((ModuleListElement) this.IIIIllIIllIIIIllIllIIIlIl).llIlIIIlIIIIlIlllIlIIIIll = false;
                     ((ModuleListElement) this.IIIIllIIllIIIIllIllIIIlIl).module = cBModule;
                     this.currentScrollableElement = this.IIIIllIIllIIIIllIllIIIlIl;
                 } else if (bl) {
-                    Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                     cBModule.setState(false);
                 }
             } else if (n3 == 1) {
-                Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                 float[] arrf2 = CBAnchorHelper.getPositions(cBModule.getGuiAnchor());
                 cBModule.setTranslations(arrf2[0], arrf2[1]);
             }
@@ -690,17 +688,17 @@ public class CBModulesGui extends GuiScreen {
         for (ModulesGuiButtonElement llllIIIIIlIlIlIlIllIIIIII2 : this.buttons) {
             if (n3 != 0 || !llllIIIIIlIlIlIlIllIIIIII2.isMouseInside(n, n2) || IlIlllIIIIllIllllIllIIlIl) continue;
             if (llllIIIIIlIlIlIlIllIIIIII2.lIIIIllIIlIlIllIIIlIllIlI != null && this.lIIIIllIIlIlIllIIIlIllIlI != llllIIIIIlIlIlIlIllIIIIII2.lIIIIllIIlIlIllIIIlIllIlI && this.currentScrollableElement == null) {
-                Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                 this.currentScrollableElement = llllIIIIIlIlIlIlIllIIIIII2.lIIIIllIIlIlIllIIIlIllIlI;
                 continue;
             }
             if (llllIIIIIlIlIlIlIllIIIIII2.lIIIIllIIlIlIllIIIlIllIlI == null || this.currentScrollableElement != null) continue;
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             IlIlllIIIIllIllllIllIIlIl = true;
         }
     }
 
-    private AbstractModule lIIIIlIIllIIlIIlIIIlIIllI(ScaledResolution scaledResolution, int n, int n2) {
+    private AbstractModule lIIIIlIIllIIlIIlIIIlIIllI(ScaledResolutionBridge scaledResolution, int n, int n2) {
         for (AbstractModule cBModule : this.modules) {
             if (cBModule.getGuiAnchor() == null) continue;
             float[] arrf = cBModule.getScaledPoints(scaledResolution, true);
@@ -712,7 +710,7 @@ public class CBModulesGui extends GuiScreen {
         return null;
     }
 
-    private boolean lIIIIIIIIIlIllIIllIlIIlIl(ScaledResolution scaledResolution, int mouseX, int mouseY) {
+    private boolean lIIIIIIIIIlIllIIllIlIIlIl(ScaledResolutionBridge scaledResolution, int mouseX, int mouseY) {
         boolean bl = false;
         for (AbstractModule cBModule : this.modules) {
             if (cBModule.getGuiAnchor() == null) continue;
@@ -723,7 +721,7 @@ public class CBModulesGui extends GuiScreen {
         return bl;
     }
 
-    private boolean lIIIIlIIllIIlIIlIIIlIIllI(float f, AbstractModule cBModule, ScaledResolution scaledResolution, int n, int n2, boolean bl) {
+    private boolean lIIIIlIIllIIlIIlIIIlIIllI(float f, AbstractModule cBModule, ScaledResolutionBridge scaledResolution, int n, int n2, boolean bl) {
         int n3;
         int n4;
         int n5;
@@ -824,7 +822,7 @@ public class CBModulesGui extends GuiScreen {
         return !bl3;
     }
 
-    private void lIIIIlIIllIIlIIlIIIlIIllI(ScaledResolution scaledResolution) {
+    private void lIIIIlIIllIIlIIlIIIlIIllI(ScaledResolutionBridge scaledResolution) {
         if (!Mouse.isButtonDown(1) && draggingModule != null) {
             for (CBModulePosition CBModulePosition : this.positions) {
                 if (CBModulePosition.module != draggingModule || !(Boolean) CheatBreaker.getInstance().globalSettings.snapModules.getValue()) continue;
@@ -920,7 +918,7 @@ public class CBModulesGui extends GuiScreen {
         return f2;
     }
 
-    private void lIIIIlIIllIIlIIlIIIlIIllI(CBModulePosition CBModulePosition, int n, int n2, ScaledResolution scaledResolution) {
+    private void lIIIIlIIllIIlIIlIIIlIIllI(CBModulePosition CBModulePosition, int n, int n2, ScaledResolutionBridge scaledResolution) {
         if (CBModulePosition.module.getGuiAnchor() == null || !CBModulePosition.module.isEnabled() || CBModulePosition.module == CheatBreaker.getInstance().moduleManager.minmap || !CBModulePosition.module.isEditable && !CBModulePosition.module.isRenderHud()) {
             return;
         }
@@ -993,7 +991,7 @@ public class CBModulesGui extends GuiScreen {
         return null;
     }
 
-    private void IlllIIIlIlllIllIlIIlllIlI(ScaledResolution scaledResolution, int n, int n2) {
+    private void IlllIIIlIlllIllIlIIlllIlI(ScaledResolutionBridge scaledResolution, int n, int n2) {
         for (CBModulePosition CBModulePosition : this.positions) {
             if (CBModulePosition.module == null || CBModulePosition.module.getGuiAnchor() == null) continue;
             CBModulePosition.x = (float)n - CBModulePosition.module.getXTranslation();

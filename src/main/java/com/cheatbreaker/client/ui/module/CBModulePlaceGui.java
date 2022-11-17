@@ -1,19 +1,15 @@
 package com.cheatbreaker.client.ui.module;
 
+import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-public class CBModulePlaceGui extends GuiScreen {
+public class CBModulePlaceGui extends CBModulesGui {
     private final AbstractModule module;
     private final CBModulesGui modulesGui;
 
@@ -39,18 +35,18 @@ public class CBModulePlaceGui extends GuiScreen {
         if (this.module.height < (float)18) {
             this.module.height = 18;
         }
-        ScaledResolution scaledResolution = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
+        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolutionBridge();
         float[] positions = CBAnchorHelper.getPositions(mouseX, mouseY, scaledResolution);
         CBGuiAnchor cBGuiAnchor = CBAnchorHelper.getAnchor(mouseX, mouseY, scaledResolution);
         if (cBGuiAnchor != CBGuiAnchor.MIDDLE_MIDDLE) {
             if (cBGuiAnchor == CBGuiAnchor.MIDDLE_BOTTOM_LEFT || cBGuiAnchor == CBGuiAnchor.MIDDLE_BOTTOM_RIGHT) {
-                Ref.modified$drawRect(positions[0], positions[1], positions[0] + (float)(scaledResolution.getScaledWidth() / 6), positions[1] + (float)(scaledResolution.getScaledHeight() / 3), 0x2F000000);
+                Ref.modified$drawRect(positions[0], positions[1], positions[0] + (float)(scaledResolution.bridge$getScaledWidth() / 6), positions[1] + (float)(scaledResolution.bridge$getScaledHeight() / 3), 0x2F000000);
             } else {
-                Ref.modified$drawRect(positions[0], positions[1], positions[0] + (float)(scaledResolution.getScaledWidth() / 3), positions[1] + (float)(scaledResolution.getScaledHeight() / 3), 0x2F000000);
+                Ref.modified$drawRect(positions[0], positions[1], positions[0] + (float)(scaledResolution.bridge$getScaledWidth() / 3), positions[1] + (float)(scaledResolution.bridge$getScaledHeight() / 3), 0x2F000000);
             }
         }
-        int n3 = scaledResolution.getScaledWidth();
-        int n4 = scaledResolution.getScaledHeight();
+        int n3 = (int) scaledResolution.bridge$getScaledWidth();
+        int n4 = (int) scaledResolution.bridge$getScaledHeight();
         float[] arrf2 = CBAnchorHelper.getPositions(this.module, mouseX, mouseY, scaledResolution);
         if (cBGuiAnchor != this.module.getGuiAnchor()) {
             this.module.setAnchor(cBGuiAnchor);
@@ -103,13 +99,13 @@ public class CBModulePlaceGui extends GuiScreen {
         if (n3 != 0) {
             return;
         }
-        ScaledResolution scaledResolution = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
+        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolutionBridge();
         CBGuiAnchor cBGuiAnchor = CBAnchorHelper.getAnchor(n, n2, scaledResolution);
         this.module.setAnchor(cBGuiAnchor);
-        Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+        Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
         this.module.setState(true);
         CBModulesGui modulesGui = new CBModulesGui();
-        this.mc.displayGuiScreen(modulesGui);
+        this.mc.bridge$displayGuiScreen(modulesGui);
         modulesGui.currentScrollableElement = modulesGui.modulesElement;
         modulesGui.currentScrollableElement.lIIlIlIllIIlIIIlIIIlllIII = false;
         modulesGui.currentScrollableElement.lIIIIllIIlIlIllIIIlIllIlI = this.modulesGui.modulesElement.lIIIIllIIlIlIllIIIlIllIlI;

@@ -7,14 +7,14 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.dash.DashUtil;
 import com.cheatbreaker.client.util.dash.Station;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 public class RadioStationElement
         extends AbstractElement {
     private final Station station;
-    private final ResourceLocation starIcon = new ResourceLocation("client/icons/star-21.png");
-    private final ResourceLocation startFilledIcon = new ResourceLocation("client/icons/star-filled-21.png");
+    private final ResourceLocationBridge starIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/star-21.png");
+    private final ResourceLocationBridge startFilledIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/star-filled-21.png");
     private final RadioElement parent;
 
     public RadioStationElement(RadioElement parent, Station station) {

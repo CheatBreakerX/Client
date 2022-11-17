@@ -7,7 +7,7 @@ import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -16,8 +16,8 @@ public class WorldTimeElement extends AbstractModulesGuiElement {
     private float time = -1;
     private float lIIIIllIIlIlIllIIIlIllIlI;
     private boolean IlllIllIlIIIIlIIlIIllIIIl = false;
-    private ResourceLocation sunIcon = new ResourceLocation("client/icons/sun-64.png");
-    private ResourceLocation moonIcon = new ResourceLocation("client/icons/moon-64.png");
+    private ResourceLocationBridge sunIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/sun-64.png");
+    private ResourceLocationBridge moonIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/moon-64.png");
 
     public WorldTimeElement(Setting cBSetting, float f) {
         super(f);
@@ -69,7 +69,7 @@ public class WorldTimeElement extends AbstractModulesGuiElement {
             } else if (this.lIIIIllIIlIlIllIIIlIllIlI > f5) {
                 this.lIIIIllIIlIlIllIIIlIllIlI = f5;
             }
-            Minecraft.getMinecraft().theWorld.setWorldTime((long) (Integer) CheatBreaker.getInstance().globalSettings.worldTime.getValue());
+            Ref.getMinecraft().bridge$getTheWorld().setWorldTime((long) (Integer) CheatBreaker.getInstance().globalSettings.worldTime.getValue());
             switch (this.setting.getType()) {
                 case INTEGER: {
                     this.setting.setValue(Integer.parseInt((int)this.lIIIIllIIlIlIllIIIlIllIlI + ""));

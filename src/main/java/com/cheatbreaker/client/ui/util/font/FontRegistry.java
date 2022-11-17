@@ -11,7 +11,7 @@ public class FontRegistry {
 
     private static boolean validFont(CBFontRenderer font, int ogSize) {
         if ((Boolean) CheatBreaker.getInstance().globalSettings.followMinecraftScale.getValue()) {
-            float realSize = (Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor() / 2f) * ogSize;
+            float realSize = (Ref.getInstanceCreator().createScaledResolutionBridge().bridge$getScaleFactor() / 2f) * ogSize;
             return realSize == font.dbg_fontSize;
         } else {
             return ogSize == font.dbg_fontSize;
@@ -19,7 +19,7 @@ public class FontRegistry {
     }
 
     private static CBFontRenderer getFont(String fontName, int ogSize) {
-        float scale = (Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor() / 2f);
+        float scale = (Ref.getInstanceCreator().createScaledResolutionBridge().bridge$getScaleFactor() / 2f);
         if (!(Boolean) CheatBreaker.getInstance().globalSettings.followMinecraftScale.getValue()) {
             scale = 1f;
         }
@@ -103,15 +103,15 @@ public class FontRegistry {
         }
 
         // This should never happen BUT in the off chance it does
-        return new CBFontRenderer(Ref.getInstanceCreator().createResourceLocation("null"), 20);
+        return new CBFontRenderer(Ref.getInstanceCreator().createResourceLocationBridge("null"), 20);
     }
 
     // Textures
-    private static final ResourceLocationBridge playRegular = Ref.getInstanceCreator().createResourceLocation("client/font/Play-Regular.ttf");
-    private static final ResourceLocationBridge playBold = Ref.getInstanceCreator().createResourceLocation("client/font/Play-Bold.ttf");
-    private static final ResourceLocationBridge robotoRegular = Ref.getInstanceCreator().createResourceLocation("client/font/Roboto-Regular.ttf");
-    private static final ResourceLocationBridge robotoBold = Ref.getInstanceCreator().createResourceLocation("client/font/Roboto-Bold.ttf");
-    private static final ResourceLocationBridge ubuntuMedium = Ref.getInstanceCreator().createResourceLocation("client/font/Ubuntu-M.ttf");
+    private static final ResourceLocationBridge playRegular = Ref.getInstanceCreator().createResourceLocationBridge("client/font/Play-Regular.ttf");
+    private static final ResourceLocationBridge playBold = Ref.getInstanceCreator().createResourceLocationBridge("client/font/Play-Bold.ttf");
+    private static final ResourceLocationBridge robotoRegular = Ref.getInstanceCreator().createResourceLocationBridge("client/font/Roboto-Regular.ttf");
+    private static final ResourceLocationBridge robotoBold = Ref.getInstanceCreator().createResourceLocationBridge("client/font/Roboto-Bold.ttf");
+    private static final ResourceLocationBridge ubuntuMedium = Ref.getInstanceCreator().createResourceLocationBridge("client/font/Ubuntu-M.ttf");
 
     // Font objects
     private static CBFontRenderer playRegular12px = createNewFont(playRegular, 12);

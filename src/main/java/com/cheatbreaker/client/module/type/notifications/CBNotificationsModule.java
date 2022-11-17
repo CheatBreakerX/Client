@@ -4,7 +4,7 @@ import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.event.type.KeepAliveEvent;
 import com.cheatbreaker.client.event.type.TickEvent;
 import com.cheatbreaker.client.module.AbstractModule;
-import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.ScaledResolutionBridge;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -55,7 +55,7 @@ public class CBNotificationsModule extends AbstractModule
     }
 
     public void queueNotification(final String type, String content, long duration) {
-        final ScaledResolution scaledResolution = new ScaledResolution(this.minecraft, this.minecraft.displayWidth, this.minecraft.displayHeight);
+        final ScaledResolutionBridge scaledResolution = new ScaledResolutionBridge(this.minecraft, this.minecraft.displayWidth, this.minecraft.displayHeight);
         if (duration < 2000L) duration = 2000L;
         content = content.replaceAll("&([abcdefghijklmrABCDEFGHIJKLMNR0-9])|(&$)", "\u00a7$1");
         final String lowerCase = type.toLowerCase();

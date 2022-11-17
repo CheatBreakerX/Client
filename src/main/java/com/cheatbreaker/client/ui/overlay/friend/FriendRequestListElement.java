@@ -14,7 +14,7 @@ import com.cheatbreaker.client.websocket.shared.WSPacketFriendRequest;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -167,7 +167,7 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
 
     private void lIIlIlIllIIlIIIlIIIlllIII() {
         if (!this.username.getText().isEmpty()) {
-            this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             String string = this.username.getText();
             // sanitizes the name of the friend before sending the packet.
             if (string.matches("([a-zA-Z0-9_]+)") && string.length() <= 16) {

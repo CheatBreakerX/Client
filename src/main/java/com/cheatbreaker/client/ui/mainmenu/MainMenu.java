@@ -1,21 +1,20 @@
 package com.cheatbreaker.client.ui.mainmenu;
 
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.ui.fading.CosineFade;
 import com.cheatbreaker.client.ui.fading.MinMaxFade;
 import com.cheatbreaker.client.ui.util.RenderUtil;
-import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiSelectWorld;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
 public class MainMenu extends MainMenuBase {
-    private final ResourceLocation outerLogo = new ResourceLocation("client/logo_255_outer.png");
-    private final ResourceLocation innerLogo = new ResourceLocation("client/logo_108_inner.png");
+    private final ResourceLocationBridge outerLogo = Ref.getInstanceCreator().createResourceLocationBridge("client/logo_255_outer.png");
+    private final ResourceLocationBridge innerLogo = Ref.getInstanceCreator().createResourceLocationBridge("client/logo_108_inner.png");
     private GradientTextButton singleplayerButton = new GradientTextButton("SINGLEPLAYER");
     private GradientTextButton multiplayerButton = new GradientTextButton("MULTIPLAYER");
     private final MinMaxFade logoPositionFade = new MinMaxFade(750L);
@@ -68,9 +67,9 @@ public class MainMenu extends MainMenuBase {
         //RenderUtil.drawTexturedModalRect(f5, f6, f5 + 160f, f6 + 10f, 8, new Color(218, 66, 83, (int)((float)255 * (1.0f - logoY))).getRGB());
 
         if (CheatBreaker.getInstance().isInDebugMode()) {
-            this.fontRendererObj.drawString("[p] " + RenderUtil.getTimeAccurateFrameRate() + " FPS (" + RenderUtil.getFrameTimeAsMs() + "ms/frame) ", 5, 55, -1);
-            this.fontRendererObj.drawString("[p] Min/Max FPS: " + RenderUtil.minFps + "/" + RenderUtil.maxFps, 5, 65, -1);
-            this.fontRendererObj.drawString("[i] Press \u00a7cF9 \u00a7fto reset the Min/Max values.", 5, 75, -1);
+            this.fontRendererObj.bridge$drawString("[p] " + RenderUtil.getTimeAccurateFrameRate() + " FPS (" + RenderUtil.getFrameTimeAsMs() + "ms/frame) ", 5, 55, -1);
+            this.fontRendererObj.bridge$drawString("[p] Min/Max FPS: " + RenderUtil.minFps + "/" + RenderUtil.maxFps, 5, 65, -1);
+            this.fontRendererObj.bridge$drawString("[i] Press \u00a7cF9 \u00a7fto reset the Min/Max values.", 5, 75, -1);
         }
     }
 
@@ -95,11 +94,11 @@ public class MainMenu extends MainMenuBase {
         this.singleplayerButton.handleElementMouseClicked(mouseX, mouseY, button, true);
         this.multiplayerButton.handleElementMouseClicked(mouseX, mouseY, button, true);
         if (this.singleplayerButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
-            this.mc.displayGuiScreen(new GuiSelectWorld(this));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$displayGuiScreen(new GuiSelectWorld(this));
         } else if (this.multiplayerButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
-            this.mc.displayGuiScreen(new GuiMultiplayer(this));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$displayGuiScreen(new GuiMultiplayer(this));
         }
     }
 

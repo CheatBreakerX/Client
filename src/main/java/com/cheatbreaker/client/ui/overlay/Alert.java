@@ -42,7 +42,7 @@ public class Alert {
                 FontRegistry.getPlayRegular16px().drawString(this.lines[i], this.x + (float)4, f + (float)17 + (float)(i * 10), -1);
             }
         }
-        if (!(Minecraft.getMinecraft().currentScreen instanceof OverlayGui)) {
+        if (!(Ref.getMinecraft().currentScreen instanceof OverlayGui)) {
             FontRegistry.getPlayRegular16px().drawString("Press Shift + Tab", this.x + (float)4, f + (float) Alert.IIIIllIIllIIIIllIllIIIlIl() - (float)12, 0x6FFFFFFF);
         }
     }

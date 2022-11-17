@@ -11,7 +11,7 @@ import com.cheatbreaker.client.util.friend.Friend;
 import com.cheatbreaker.client.websocket.shared.WSPacketMessage;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -76,8 +76,8 @@ public class MessagesElement extends DraggableElement {
         FontRegistry.getPlayRegular16px().drawString(this.friend.getName(), this.x + (float)52, this.y + 2.0f, -1);
         FontRegistry.getPlayRegular16px().drawString(this.friend.getStatusString(), this.x + (float)52, this.y + (float)11, -5460820);
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        ResourceLocation resourceLocation = CheatBreaker.getInstance().getHeadLocation(EnumChatFormatting.getTextWithoutFormattingCodes(this.friend.getName()));
-        RenderUtil.drawIcon(resourceLocation, (float)7, this.x + (float)28, this.y + (float)4);
+        ResourceLocationBridge ResourceLocationBridge = CheatBreaker.getInstance().getHeadLocation(EnumChatFormatting.getTextWithoutFormattingCodes(this.friend.getName()));
+        RenderUtil.drawIcon(ResourceLocationBridge, (float)7, this.x + (float)28, this.y + (float)4);
         Ref.modified$drawRect(this.x + (float) 27, this.y + (float) 22, this.x + this.width - 2.0f, this.y + this.height - (float) 17, -1356783327);
         this.recentsScrollable.drawScrollable(mouseX, mouseY, bl);
         GL11.glPushMatrix();
@@ -92,14 +92,14 @@ public class MessagesElement extends DraggableElement {
             boolean bl2 = mouseX > this.x && mouseX < this.x + (float)25 && mouseY > f3 - this.recentsScrollable.IllIIIIIIIlIlIllllIIllIII() && mouseY < f3 + (float)16 - this.recentsScrollable.IllIIIIIIIlIlIllllIIllIII() && mouseY > this.y && mouseY < this.y + this.height;
             Ref.modified$drawRect(this.x + (float)3, f3, this.x + (float)19, f3 + (float)16, friend.isOnline() ? Friend.getStatusColor(friend.getOnlineStatus()) : -13158601);
             GL11.glColor4f(1.0f, 1.0f, 1.0f, bl2 ? 1.0f : 0.6016854f * 1.4126984f);
-            ResourceLocation location = CheatBreaker.getInstance().getHeadLocation(EnumChatFormatting.getTextWithoutFormattingCodes(friend.getName()));
+            ResourceLocationBridge location = CheatBreaker.getInstance().getHeadLocation(EnumChatFormatting.getTextWithoutFormattingCodes(friend.getName()));
             RenderUtil.drawIcon(location, (float)7, this.x + (float)4, this.y + (float)4 + (float)n2);
             if (bl2) {
                 float f4 = FontRegistry.getPlayRegular16px().getStringWidth(EnumChatFormatting.getTextWithoutFormattingCodes(friend.getName()));
                 RenderUtil.drawRoundedRect(this.x - (float)10 - f4, f3 + 2.0f, this.x - 2.0f, f3 + (float)14, (double)6, -1895825408);
                 FontRegistry.getPlayRegular16px().drawString(friend.getName(), this.x - (float)6 - f4, f3 + (float)4, -1);
                 if (Mouse.isButtonDown(0) && this.friend != friend) {
-                    this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                    this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                     this.friend = friend;
                 }
             }
@@ -197,12 +197,12 @@ public class MessagesElement extends DraggableElement {
             this.updateDraggingPosition(mouseX, mouseY);
         }
         if (this.closeButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             OverlayGui.getInstance().removeElements(this);
             return true;
         }
         if (this.aliasesButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             AbstractElement[] abstractElements = new AbstractElement[1];
             AliasesElement aliasesElement = new AliasesElement(this.friend);
             abstractElements[0] = aliasesElement;
@@ -224,7 +224,7 @@ public class MessagesElement extends DraggableElement {
         CheatBreaker.getInstance().getFriendsManager().addOutgoingMessage(this.friend.getPlayerId(), message);
         CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketMessage(this.friend.getPlayerId(), message));
         this.inputFieldElement.setText("");
-        this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+        this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
     }
 
     @Override

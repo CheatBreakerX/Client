@@ -11,7 +11,7 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Collection;
@@ -27,7 +27,7 @@ public class PotionStatusModule extends AbstractModule {
     private final Setting durationColor;
     private final Setting blink;
     private final Setting blinkDuration;
-    private final ResourceLocation location = new ResourceLocation("textures/gui/container/inventory.png");
+    private final ResourceLocationBridge location = Ref.getInstanceCreator().createResourceLocationBridge("textures/gui/container/inventory.png");
     private int ticks = 0;
 
     public PotionStatusModule() {
@@ -51,7 +51,7 @@ public class PotionStatusModule extends AbstractModule {
             this.durationColor = new Setting(this, "Duration Color").setValue(-1).setMinMax(Integer.MIN_VALUE, Integer.MAX_VALUE);
         }
 
-        this.setPreviewIcon(new ResourceLocation("client/icons/mods/speed_icon.png"), 28, 28);
+        this.setPreviewIcon(Ref.getInstanceCreator().createResourceLocationBridge("client/icons/mods/speed_icon.png"), 28, 28);
 
         this.addEvent(TickEvent.class, this::onTick);
         this.addEvent(RenderPreviewEvent.class, this::renderPreview);
@@ -68,7 +68,7 @@ public class PotionStatusModule extends AbstractModule {
             GL11.glPushMatrix();
             this.scaleAndTranslate(guiDrawEvent.getResolution());
             CBPositionEnum position = this.getPosition();
-            Collection<PotionEffect> collection = this.minecraft.thePlayer.getActivePotionEffects();
+            Collection<PotionEffect> collection = this.minecraft.bridge$getThePlayer().getActivePotionEffects();
             if (collection.isEmpty()) {
                 GL11.glPopMatrix();
                 GL11.glPopMatrix();
@@ -109,7 +109,7 @@ public class PotionStatusModule extends AbstractModule {
                 }
                 if ((potion = Potion.potionTypes[potionEffect.getPotionID()]).hasStatusIcon()) {
                     GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-                    this.minecraft.getTextureManager().bindTexture(this.location);
+                    this.minecraft.bridge$getTextureManager().bridge$bindTexture(this.location);
                     int n6 = potion.getStatusIconIndex();
                     if (position == CBPositionEnum.RIGHT) {
                         RenderUtil.drawTexturedModalRect(width - (float) 20, (float) n, (float) (n6 % 8 * 18), (float) (198 + n6 / 8 * 18), 18, 18);
@@ -135,7 +135,7 @@ public class PotionStatusModule extends AbstractModule {
             return;
         }
         GL11.glPushMatrix();
-        Collection<PotionEffect> collection = this.minecraft.thePlayer.getActivePotionEffects();
+        Collection<PotionEffect> collection = this.minecraft.bridge$getThePlayer().getActivePotionEffects();
         if (collection.isEmpty()) {
             GL11.glPushMatrix();
             this.scaleAndTranslate(renderPreviewEvent.getResolution());
@@ -181,7 +181,7 @@ public class PotionStatusModule extends AbstractModule {
                 }
                 if ((potion = Potion.potionTypes[potionEffect.getPotionID()]).hasStatusIcon()) {
                     GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-                    this.minecraft.getTextureManager().bindTexture(this.location);
+                    this.minecraft.bridge$getTextureManager().bridge$bindTexture(this.location);
                     int n6 = potion.getStatusIconIndex();
                     if (position == CBPositionEnum.RIGHT) {
                         RenderUtil.drawTexturedModalRect(width - (float) 20, (float) n, (float) (n6 % 8 * 18), (float) (198 + n6 / 8 * 18), 18, 18);

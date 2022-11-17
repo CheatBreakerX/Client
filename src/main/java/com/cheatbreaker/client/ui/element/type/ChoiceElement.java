@@ -9,14 +9,14 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 public class ChoiceElement
         extends AbstractModulesGuiElement {
     private final Setting setting;
-    private final ResourceLocation leftIcon = new ResourceLocation("client/icons/left.png");
-    private final ResourceLocation rightIcon = new ResourceLocation("client/icons/right.png");
+    private final ResourceLocationBridge leftIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/left.png");
+    private final ResourceLocationBridge rightIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/right.png");
     private int IlllIllIlIIIIlIIlIIllIIIl = 0;
     private float IlIlllIIIIllIllllIllIIlIl = 0.0f;
     private String llIIlllIIIIlllIllIlIlllIl;
@@ -95,7 +95,7 @@ public class ChoiceElement
         boolean leftHovered = (float) mouseX > (float) (this.x + this.width - 92) * this.scale && (float) mouseX < (float) (this.x + this.width - 48) * this.scale && (float) mouseY > (float) (this.y + this.yOffset) * this.scale && (float) mouseY < (float) (this.y + 14 + this.yOffset) * this.scale;
         boolean rightHovered = (float) mouseX > (float)(this.x + this.width - 48) * this.scale && (float) mouseX < (float)(this.x + this.width - 10) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 14 + this.yOffset) * this.scale;
         if ((leftHovered || rightHovered) && this.IlllIllIlIIIIlIIlIIllIIIl == 0) {
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             for (int i = 0; i < this.setting.getAcceptedValues().length; ++i) {
                 if (!((String[])this.setting.getAcceptedValues())[i].toLowerCase().equalsIgnoreCase((String)this.setting.getValue())) continue;
                 this.llIIlllIIIIlllIllIlIlllIl = (String)this.setting.getValue();
@@ -119,7 +119,7 @@ public class ChoiceElement
                 break;
             }
             if (this.setting == CheatBreaker.getInstance().globalSettings.clearGlass) {
-                Minecraft.getMinecraft().renderGlobal.loadRenderers();
+                Ref.getMinecraft().renderGlobal.loadRenderers();
             }
         }
     }

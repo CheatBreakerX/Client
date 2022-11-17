@@ -1,13 +1,13 @@
 package com.cheatbreaker.client.config;
 
+import com.cheatbreaker.bridge.client.settings.GameSettingsBridge;
+import com.cheatbreaker.bridge.client.settings.KeyBindingBridge;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.ui.element.type.ColorPickerColorElement;
 import com.cheatbreaker.client.util.dash.DashUtil;
 import com.cheatbreaker.client.util.voicechat.VoiceChatManager;
 import lombok.Getter;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.GameSettings;
-import net.minecraft.client.settings.KeyBinding;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
@@ -18,11 +18,11 @@ public class GlobalSettings {
     public Setting miscellaneousOptionsLabel;
     public Setting mainMenuTopGradient;
     public Setting mainMenuLightGradient;
-    public KeyBinding openMenu;
-    public KeyBinding openVoiceMenu;
-    public KeyBinding pushToTalk;
-    public KeyBinding dragLook;
-    public KeyBinding hideNames;
+    public KeyBindingBridge openMenu;
+    public KeyBindingBridge openVoiceMenu;
+    public KeyBindingBridge pushToTalk;
+    public KeyBindingBridge dragLook;
+    public KeyBindingBridge hideNames;
     public final List<Setting> settingsList = new ArrayList<>();
     public List<String[]> pinnedServers;
     public List<String> warnedServers;
@@ -187,13 +187,13 @@ public class GlobalSettings {
         this.warnedServers = new ArrayList<>();
         this.warnedServers.add("xyz.com");
 
-        GameSettings var2 = Minecraft.getMinecraft().gameSettings;
-        this.pushToTalk = new KeyBinding("Voice Chat", 47, "CheatBreaker Client");
-        this.openMenu = new KeyBinding("Open Menu", 54, "CheatBreaker Client");
-        this.openVoiceMenu = new KeyBinding("Open Voice Menu", 25, "CheatBreaker Client");
-        this.dragLook = new KeyBinding("Drag to look", 56, "CheatBreaker Client");
-        this.hideNames = new KeyBinding("Hide name plates", 0, "CheatBreaker Client");
-        var2.keyBindings = ArrayUtils.addAll(var2.keyBindings, this.pushToTalk, this.openMenu, this.openVoiceMenu, this.dragLook, this.hideNames);
+        GameSettingsBridge var2 = Ref.getMinecraft().bridge$getGameSettings();
+        this.pushToTalk = Ref.getInstanceCreator().createKeyBinding("Voice Chat", 47, "CheatBreaker Client");
+        this.openMenu = Ref.getInstanceCreator().createKeyBinding("Open Menu", 54, "CheatBreaker Client");
+        this.openVoiceMenu = Ref.getInstanceCreator().createKeyBinding("Open Voice Menu", 25, "CheatBreaker Client");
+        this.dragLook = Ref.getInstanceCreator().createKeyBinding("Drag to look", 56, "CheatBreaker Client");
+        this.hideNames = Ref.getInstanceCreator().createKeyBinding("Hide name plates", 0, "CheatBreaker Client");
+        var2.bridge$setKeyBindings(ArrayUtils.addAll(var2.bridge$getKeyBindings(), this.pushToTalk, this.openMenu, this.openVoiceMenu, this.dragLook, this.hideNames));
     }
 
     public boolean isDarkMode() {

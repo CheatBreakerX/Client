@@ -1,7 +1,7 @@
 package com.cheatbreaker.client.ui.mainmenu;
 
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.CheatBreaker;
-import net.minecraft.util.ResourceLocation;
 
 public class Account {
     private String clientToken;
@@ -9,7 +9,7 @@ public class Account {
     private String accessToken;
     private String displayName;
     private String uuid;
-    private final ResourceLocation headLocation;
+    private final ResourceLocationBridge headLocation;
 
     public Account(String username, String clientToken, String accessToken, String displayName, String uuid) {
         this.username = username;
@@ -60,7 +60,7 @@ public class Account {
         this.uuid = string;
     }
 
-    public ResourceLocation getHeadLocation() {
+    public ResourceLocationBridge getHeadLocation() {
         return this.headLocation;
     }
 }

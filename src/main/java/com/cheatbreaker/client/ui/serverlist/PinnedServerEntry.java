@@ -17,7 +17,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,8 +30,8 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class PinnedServerEntry implements GuiListExtended.IGuiListEntry {
-    private static final ResourceLocation SERVER_SELECTION_BUTTONS = new ResourceLocation("textures/gui/resource_packs.png");
-    private static final ResourceLocation UNKNOWN_SERVER = new ResourceLocation("textures/misc/unknown_pack.png");
+    private static final ResourceLocationBridge SERVER_SELECTION_BUTTONS = Ref.getInstanceCreator().createResourceLocationBridge("textures/gui/resource_packs.png");
+    private static final ResourceLocationBridge UNKNOWN_SERVER = Ref.getInstanceCreator().createResourceLocationBridge("textures/misc/unknown_pack.png");
     private static final Logger logger = LogManager.getLogger();
     private static final ThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(5, new ThreadFactoryBuilder().setNameFormat("Server Pinger #%d").setDaemon(true).build());
     private final GuiMultiplayer guiMultiplayer;
@@ -40,15 +40,15 @@ public class PinnedServerEntry implements GuiListExtended.IGuiListEntry {
     private long field_148298_f;
     private String lastIconB64;
     private DynamicTexture icon;
-    private ResourceLocation serverIcon;
-    private ResourceLocation starIcon = new ResourceLocation("client/icons/star-64.png");
-    private ResourceLocation cbIcon = new ResourceLocation("client/icons/cb.png");
+    private ResourceLocationBridge serverIcon;
+    private ResourceLocationBridge starIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/star-64.png");
+    private ResourceLocationBridge cbIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/cb.png");
 
     public PinnedServerEntry(GuiMultiplayer p_i45048_1_, ServerData serverIn) {
         this.guiMultiplayer = p_i45048_1_;
         this.server = serverIn;
-        this.mc = Minecraft.getMinecraft();
-        this.serverIcon = new ResourceLocation("servers/" + serverIn.serverIP + "/icon");
+        this.mc = Ref.getMinecraft();
+        this.serverIcon = Ref.getInstanceCreator().createResourceLocationBridge("servers/" + serverIn.serverIP + "/icon");
         this.icon = (DynamicTexture)this.mc.getTextureManager().getTexture(this.serverIcon);
     }
 
@@ -132,7 +132,7 @@ public class PinnedServerEntry implements GuiListExtended.IGuiListEntry {
             float f5 = n2 - 20;
             float f6 = n3 + 20;
             GL11.glEnable(3042);
-            Minecraft.getMinecraft().renderEngine.bindTexture(this.cbIcon);
+            Ref.getMinecraft().renderEngine.bindTexture(this.cbIcon);
             GL11.glBegin(7);
             GL11.glTexCoord2d(f3 / (float)5, f4 / (float)5);
             GL11.glVertex2d(f5, f6);
@@ -179,7 +179,7 @@ public class PinnedServerEntry implements GuiListExtended.IGuiListEntry {
             string = "Pinging...";
         }
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        this.mc.getTextureManager().bindTexture(Gui.icons);
+        this.mc.bridge$getTextureManager().bridge$bindTexture(Gui.icons);
         Gui.func_146110_a(n2 + n4 - 15, n3, n10 * 10, 176 + n8 * 8, 10, 8, 256, 256);
         if (this.server.getBase64EncodedIconData() != null && !this.server.getBase64EncodedIconData().equals(this.lastIconB64)) {
             this.lastIconB64 = this.server.getBase64EncodedIconData();
@@ -187,9 +187,9 @@ public class PinnedServerEntry implements GuiListExtended.IGuiListEntry {
             this.guiMultiplayer.func_146795_p().saveServerList();
         }
         if (this.icon != null) {
-            this.mc.getTextureManager().bindTexture(this.serverIcon);
+            this.mc.bridge$getTextureManager().bridge$bindTexture(this.serverIcon);
         } else {
-            this.mc.getTextureManager().bindTexture(UNKNOWN_SERVER);
+            this.mc.bridge$getTextureManager().bridge$bindTexture(UNKNOWN_SERVER);
         }
         Gui.func_146110_a(n2, n3, 0.0f, 0.0f, 32, 32, 32.0F, 32.0F);
 
@@ -200,9 +200,9 @@ public class PinnedServerEntry implements GuiListExtended.IGuiListEntry {
         } else if (n11 >= n4 - n9 - 15 - 2 && n11 <= n4 - 15 - 2 && n12 >= 0 && n12 <= 8) {
             this.guiMultiplayer.func_146793_a(string3);
         }
-        Minecraft minecraft = Minecraft.getMinecraft();
+        Minecraft minecraft = Ref.getMinecraft();
         if (minecraft.gameSettings.touchscreen || bl) {
-            minecraft.getTextureManager().bindTexture(SERVER_SELECTION_BUTTONS);
+            minecraft.bridge$getTextureManager().bridge$bindTexture(SERVER_SELECTION_BUTTONS);
             Ref.modified$drawRect(n2, n3, n2 + 32, n3 + 32, -1601138544);
             GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
             int n13 = n6 - n2;

@@ -14,7 +14,7 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
@@ -210,7 +210,7 @@ public class ModuleListElement extends AbstractScrollableElement {
                 block12: {
                     if (this.module != null || this.llIlIIIlIIIIlIlllIlIIIIll) break block12;
                     if (this.globalSettingsElement.isMouseInside(mouseX, mouseY) && !this.lIIIIIllllIIIIlIlIIIIlIlI) {
-                        Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                        Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                         this.llIlIIIlIIIIlIlllIlIIIIll = true;
                         this.lIIIIllIIlIlIllIIIlIllIlI = 0;
                         this.IllIIIIIIIlIlIllllIIllIII = 0.0;
@@ -224,7 +224,7 @@ public class ModuleListElement extends AbstractScrollableElement {
                     break block13;
                 }
                 if (!this.backButton.isMouseInside(mouseX, mouseY)) break block14;
-                Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                 this.module = null;
                 this.llIlIIIlIIIIlIlllIlIIIIll = false;
                 if (this.scrollable == null) break block13;
@@ -241,7 +241,7 @@ public class ModuleListElement extends AbstractScrollableElement {
                     for (AbstractModule cBModule : CheatBreaker.getInstance().moduleManager.modules) {
                         for (Setting cBSetting : cBModule.getSettingsList()) {
                             if (cBSetting.getType() != Setting.Type.INTEGER || !cBSetting.getLabel().toLowerCase().contains("color") || cBSetting.getLabel().toLowerCase().contains("background")) continue;
-                            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                             cBSetting.setValue(CheatBreaker.getInstance().globalSettings.defaultColor.getValue());
                         }
                     }
@@ -262,7 +262,7 @@ public class ModuleListElement extends AbstractScrollableElement {
 
     @Override
     public void lIIIIIIIIIlIllIIllIlIIlIl(AbstractModule cBModule) {
-        Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+        Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
         this.lIIIIllIIlIlIllIIIlIllIlI = 0;
         this.IllIIIIIIIlIlIllllIIllIII = 0.0;
         this.yOffset = 0;

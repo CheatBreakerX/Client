@@ -8,7 +8,7 @@ public abstract class AbstractElement {
     protected float y;
     protected float width;
     protected float height;
-    protected final Minecraft mc = Minecraft.getMinecraft();
+    protected final Minecraft mc = Ref.getMinecraft();
     protected final CheatBreaker client = CheatBreaker.getInstance();
 
     public boolean isMouseInside(float mouseX, float mouseY) {

@@ -5,27 +5,27 @@ import com.cheatbreaker.client.ui.AbstractGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.ScaledResolutionBridge;
 import net.minecraft.client.shader.Framebuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
 public class LoadingScreen extends AbstractGui {
 
-    private final ResourceLocation logo = new ResourceLocation("client/logo_108.png");
-    private final Minecraft mc = Minecraft.getMinecraft();
-    private final ScaledResolution res;
+    private final ResourceLocationBridge logo = Ref.getInstanceCreator().createResourceLocationBridge("client/logo_108.png");
+    private final Minecraft mc = Ref.getMinecraft();
+    private final ScaledResolutionBridge res;
     private final Framebuffer frameBuffer;
     private final int amountOfCalls;
     private int amountOfCallsDone;
     private String message;
-    private final CBFontRenderer font = new CBFontRenderer(new ResourceLocation("client/font/Ubuntu-M.ttf"), 16);
+    private final CBFontRenderer font = new CBFontRenderer(Ref.getInstanceCreator().createResourceLocationBridge("client/font/Ubuntu-M.ttf"), 16);
 
     public LoadingScreen(int capacity) {
         this.amountOfCalls = capacity;
-        this.res = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+        this.res = new ScaledResolutionBridge(mc, mc.displayWidth, mc.displayHeight);
         int n2 = this.res.getScaleFactor();
         this.frameBuffer = new Framebuffer(res.getScaledWidth() * n2, res.getScaledHeight() * n2, true);
     }

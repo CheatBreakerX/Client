@@ -28,7 +28,7 @@ public class MotionBlurModule extends AbstractModule {
 //                minecraft.entityRenderer.theShaderGroup.deleteShaderGroup();
 //            }
 //            try {
-//                minecraft.entityRenderer.theShaderGroup = new ShaderGroup(minecraft.getTextureManager(), minecraft.entityRenderer.resourceManager, minecraft.getFramebuffer(), new ResourceLocation("shaders/post/motionblur.json"));
+//                minecraft.entityRenderer.theShaderGroup = new ShaderGroup(minecraft.getTextureManager(), minecraft.entityRenderer.resourceManager, minecraft.getFramebuffer(), Ref.getInstanceCreator().createResourceLocationBridge("shaders/post/motionblur.json"));
 //                minecraft.entityRenderer.theShaderGroup.createBindFramebuffers(minecraft.displayWidth, minecraft.displayHeight);
 //            }
 //            catch (Exception exception) {
@@ -41,7 +41,7 @@ public class MotionBlurModule extends AbstractModule {
 //        bindShader();
 //        ShaderGroup shaderGroup = minecraft.entityRenderer.getShaderGroup();
 //        try {
-//            if (this.minecraft.entityRenderer.isShaderActive() && this.minecraft.thePlayer != null) {
+//            if (this.minecraft.entityRenderer.isShaderActive() && this.minecraft.bridge$getThePlayer() != null) {
 //                for (Shader shader : shaderGroup.listShaders) {
 //                    ShaderUniform uniform = shader.getShaderManager().func_147991_a("Phosphor");
 //                    if (uniform == null) continue;

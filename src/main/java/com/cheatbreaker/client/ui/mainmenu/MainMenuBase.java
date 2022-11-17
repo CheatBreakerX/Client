@@ -1,8 +1,8 @@
 package com.cheatbreaker.client.ui.mainmenu;
 
+import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.client.renderer.texture.DynamicTextureBridge;
 import com.cheatbreaker.bridge.ref.Ref;
-import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.bridge.util.SessionBridge;
 import com.cheatbreaker.client.CheatBreaker;
@@ -23,13 +23,10 @@ import com.mojang.authlib.exceptions.AuthenticationException;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiLanguage;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Session;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Project;
@@ -45,7 +42,7 @@ import java.util.*;
 
 public class MainMenuBase extends AbstractGui {
     private static int panoramaTimer = 4100;
-    private final ResourceLocationBridge logo = Ref.getInstanceCreator().createResourceLocation("client/logo_42.png");
+    private final ResourceLocationBridge logo = Ref.getInstanceCreator().createResourceLocationBridge("client/logo_42.png");
     private final IconButtonElement exitButton;
     private final IconButtonElement languageButton;
     private final AccountList accountList;
@@ -54,12 +51,12 @@ public class MainMenuBase extends AbstractGui {
     private final TextButtonElement cosmeticsButton;
     private final ColorFade cbTextShadowFade;
     private final ResourceLocationBridge[] panoramaImages = new ResourceLocationBridge[] {
-            Ref.getInstanceCreator().createResourceLocation("client/panorama/0.png"),
-            Ref.getInstanceCreator().createResourceLocation("client/panorama/1.png"),
-            Ref.getInstanceCreator().createResourceLocation("client/panorama/2.png"),
-            Ref.getInstanceCreator().createResourceLocation("client/panorama/3.png"),
-            Ref.getInstanceCreator().createResourceLocation("client/panorama/4.png"),
-            Ref.getInstanceCreator().createResourceLocation("client/panorama/5.png")
+            Ref.getInstanceCreator().createResourceLocationBridge("client/panorama/0.png"),
+            Ref.getInstanceCreator().createResourceLocationBridge("client/panorama/1.png"),
+            Ref.getInstanceCreator().createResourceLocationBridge("client/panorama/2.png"),
+            Ref.getInstanceCreator().createResourceLocationBridge("client/panorama/3.png"),
+            Ref.getInstanceCreator().createResourceLocationBridge("client/panorama/4.png"),
+            Ref.getInstanceCreator().createResourceLocationBridge("client/panorama/5.png")
     };
     private ResourceLocationBridge panoramaBackgroundLocation;
     private final File launcherAccounts;
@@ -73,10 +70,10 @@ public class MainMenuBase extends AbstractGui {
         this.cosmeticsButton = new TextButtonElement("COSMETICS");
         this.changelogButton = new TextButtonElement("CHANGELOG");
         this.cbTextShadowFade = new ColorFade(0xF000000, -16777216);
-        this.exitButton = new IconButtonElement(Ref.getInstanceCreator().createResourceLocation("client/icons/delete-64.png"));
-        this.languageButton = new IconButtonElement(6, Ref.getInstanceCreator().createResourceLocation("client/icons/globe-24.png"));
+        this.exitButton = new IconButtonElement(Ref.getInstanceCreator().createResourceLocationBridge("client/icons/delete-64.png"));
+        this.languageButton = new IconButtonElement(6, Ref.getInstanceCreator().createResourceLocationBridge("client/icons/globe-24.png"));
         this.accountButtonWidth = FontRegistry.getRobotoRegular13px().getStringWidth(Ref.getMinecraft().bridge$getSession().bridge$getUsername());
-        this.accountList = new AccountList(this, Minecraft.getMinecraft().getSession().getUsername(), CheatBreaker.getInstance().getHeadLocation(Minecraft.getMinecraft().getSession().getUsername()));
+        this.accountList = new AccountList(this, Ref.getMinecraft().bridge$getSession().bridge$getUsername(), CheatBreaker.getInstance().getHeadLocation(Ref.getMinecraft().bridge$getSession().bridge$getUsername()));
         //this.loadAccounts();
     }
 
@@ -85,9 +82,9 @@ public class MainMenuBase extends AbstractGui {
      */
     private void loadAccounts() {
         // TODO: rewrite this
-        Minecraft minecraft = Minecraft.getMinecraft();
+        Minecraft minecraft = Ref.getMinecraft();
         if (launcherAccounts.exists()) {
-            try (final BufferedReader reader = new BufferedReader(new FileReader(new File(Minecraft.getMinecraft().mcDataDir, "launcher_accounts.json")))) {
+            try (final BufferedReader reader = new BufferedReader(new FileReader(new File(Ref.getMinecraft().mcDataDir, "launcher_accounts.json")))) {
                 final JsonObject object = new JsonParser().parse(reader).getAsJsonObject();
                 final Set<Map.Entry<String, JsonElement>> accounts = object.getAsJsonObject("accounts").entrySet();
                 for (Map.Entry<String, JsonElement> accountElement : accounts) {
@@ -106,7 +103,7 @@ public class MainMenuBase extends AbstractGui {
                         if (f > this.accountButtonWidth) {
                             this.accountButtonWidth = f;
                         }
-                        if (minecraft.getSession() == null || !finalAccount.getUsername().equalsIgnoreCase(minecraft.getSession().getUsername()))
+                        if (minecraft.getSession() == null || !finalAccount.getUsername().equalsIgnoreCase(minecraft.getSession().bridge$getUsername()))
                             continue;
                         this.accountList.setDisplayName(finalAccount.getDisplayName());
                         this.accountList.setHeadLocation(CheatBreaker.getInstance().getHeadLocation(finalAccount.getDisplayName()));
@@ -212,22 +209,22 @@ public class MainMenuBase extends AbstractGui {
         this.exitButton.handleElementMouseClicked(mouseX, mouseY, button, true);
         this.accountList.handleElementMouseClicked(mouseX, mouseY, button, true);
         if (this.exitButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
-            this.mc.shutdown();
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$shutdown();
         } else if (this.optionsButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
-            this.mc.displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
         } else if (this.languageButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
-            this.mc.displayGuiScreen(new GuiLanguage(this, this.mc.gameSettings, this.mc.getLanguageManager()));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$displayGuiScreen(new GuiLanguage(this, this.mc.gameSettings, this.mc.bridge$getLanguageManager()));
         } else if (this.cosmeticsButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
-            this.mc.displayGuiScreen(new GuiCosmetics());
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$displayGuiScreen(new GuiCosmetics());
         } else {
             boolean bl = mouseX < this.optionsButton.getX() && mouseY < (float) 30;
-            if (bl && !(this.mc.currentScreen instanceof MainMenu)) {
-                this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
-                this.mc.displayGuiScreen(new MainMenu());
+            if (bl && !(this.mc.bridge$getCurrentScreen() instanceof MainMenu)) {
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                this.mc.bridge$displayGuiScreen(new MainMenu());
             }
         }
     }
@@ -283,7 +280,7 @@ public class MainMenuBase extends AbstractGui {
                     GL11.glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
                 }
 
-                this.mc.getTextureManager().bindTexture(panoramaImages[var10]);
+                this.mc.bridge$getTextureManager().bridge$bindTexture(panoramaImages[var10]);
                 tessellator.bridge$startDrawingQuads();
                 tessellator.bridge$setColorRGBA_I(16777215, 255 / (var6 + 1));
                 float var11 = 0.0F;
@@ -314,7 +311,7 @@ public class MainMenuBase extends AbstractGui {
      * Rotate and blurs the skybox view in the main menu
      */
     private void rotateAndBlurSkybox() {
-        this.mc.getTextureManager().bindTexture(this.panoramaBackgroundLocation);
+        this.mc.bridge$getTextureManager().bridge$bindTexture(this.panoramaBackgroundLocation);
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
         GL11.glCopyTexSubImage2D(GL11.GL_TEXTURE_2D, 0, 0, 0, 0, 0, 256, 256);
@@ -347,7 +344,7 @@ public class MainMenuBase extends AbstractGui {
      */
     private void renderSkybox() {
         float p_73971_3_ = 1f;
-        this.mc.getFramebuffer().unbindFramebuffer();
+        this.mc.bridge$getFramebuffer().bridge$unbindFramebuffer();
         GL11.glViewport(0, 0, 256, 256);
         this.drawPanorama(p_73971_3_);
         this.rotateAndBlurSkybox();
@@ -357,8 +354,8 @@ public class MainMenuBase extends AbstractGui {
         this.rotateAndBlurSkybox();
         this.rotateAndBlurSkybox();
         this.rotateAndBlurSkybox();
-        this.mc.getFramebuffer().bindFramebuffer(true);
-        GL11.glViewport(0, 0, this.mc.displayWidth, this.mc.displayHeight);
+        this.mc.bridge$getFramebuffer().bridge$bindFramebuffer(true);
+        GL11.glViewport(0, 0, this.mc.bridge$getDisplayWidth(), this.mc.bridge$getDisplayHeight());
         TessellatorBridge tessellator = Ref.getTessellator();
         tessellator.bridge$startDrawingQuads();
         float var5 = this.width > this.height ? 120.0F / (float) this.width : 120.0F / (float) this.height;
@@ -388,11 +385,11 @@ public class MainMenuBase extends AbstractGui {
                 if (selectedAccount.getUUID().equalsIgnoreCase(Ref.getMinecraft().bridge$getSession().bridge$getPlayerID())) {
                     return;
                 }
-                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                 for (SessionBridge object2 : CheatBreaker.getInstance().sessions) {
                     if (!object2.bridge$func_148256_e().getId().toString().replaceAll("-", "").equalsIgnoreCase(selectedAccount.getUUID().replaceAll("-", "")))
                         continue;
-//                    Minecraft.getMinecraft().setSession(object2);
+//                    Ref.getMinecraft().setSession(object2);
                     this.accountList.setDisplayName(selectedAccount.getDisplayName());
                     this.accountList.setHeadLocation(selectedAccount.getHeadLocation());
                     this.updateAccountButtonSize();
@@ -418,7 +415,7 @@ public class MainMenuBase extends AbstractGui {
                 this.accountList.setHeadLocation(selectedAccount.getHeadLocation());
                 this.updateAccountButtonSize();
                 CheatBreaker.getInstance().sessions.add(session);
-//                Minecraft.getMinecraft().setSession(session);
+//                Ref.getMinecraft().setSession(session);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

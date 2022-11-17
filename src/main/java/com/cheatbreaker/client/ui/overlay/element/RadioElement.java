@@ -11,7 +11,7 @@ import com.cheatbreaker.client.util.dash.DashUtil;
 import com.cheatbreaker.client.util.dash.Station;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -20,8 +20,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class RadioElement extends DraggableElement {
-    private final ResourceLocation dashIcon = new ResourceLocation("client/dash-logo-54.png");
-    private final ResourceLocation playIcon = new ResourceLocation("client/icons/play-24.png");
+    private final ResourceLocationBridge dashIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/dash-logo-54.png");
+    private final ResourceLocationBridge playIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/play-24.png");
     private final List<RadioStationElement> radioStationElements;
     private final MinMaxFade fade = new MinMaxFade(300L);
     private float IlIlllIIIIllIllllIllIIlIl;
@@ -86,13 +86,13 @@ public class RadioElement extends DraggableElement {
                     this.mc.getTextureManager().deleteTexture(station.currentResource);
                     station.currentResource = null;
                 }
-                station.currentResource = new ResourceLocation("client/songs/" + station.getName());
+                station.currentResource = Ref.getInstanceCreator().createResourceLocationBridge("client/songs/" + station.getName());
                 ThreadDownloadImageData threadDownloadImageData = new ThreadDownloadImageData(null, station.getCoverURL(), this.dashIcon, null);
-                Minecraft.getMinecraft().getTextureManager().loadTexture(station.currentResource, threadDownloadImageData);
+                Ref.getMinecraft().getTextureManager().loadTexture(station.currentResource, threadDownloadImageData);
             }
             GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-            ResourceLocation resourceLocation = station.currentResource == null ? this.dashIcon : station.currentResource;
-            RenderUtil.drawIcon(resourceLocation, this.IlIlllIIIIllIllllIllIIlIl / 2.0f, this.x, this.y);
+            ResourceLocationBridge ResourceLocationBridge = station.currentResource == null ? this.dashIcon : station.currentResource;
+            RenderUtil.drawIcon(ResourceLocationBridge, this.IlIlllIIIIllIllllIllIIlIl / 2.0f, this.x, this.y);
             float f3 = this.x + (float)50;
             if (this.mc.currentScreen == OverlayGui.getInstance()) {
                 boolean bl2 = this.isMouseInside(f, f2) && f > this.x + (float)34 && f < this.x + (float)44 && f2 < this.y + this.IlIlllIIIIllIllllIllIIlIl;

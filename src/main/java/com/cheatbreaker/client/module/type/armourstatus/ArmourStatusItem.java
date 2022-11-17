@@ -22,7 +22,7 @@ public class ArmourStatusItem {
     private String lIIIIllIIlIlIllIIIlIllIlI = "";
     private int IlllIllIlIIIIlIIlIIllIIIl;
     private final boolean IlIlllIIIIllIllllIllIIlIl;
-    private Minecraft llIIlllIIIIlllIllIlIlllIl = Minecraft.getMinecraft();
+    private Minecraft llIIlllIIIIlllIllIlIlllIl = Ref.getMinecraft();
 
     public static String lIIIIlIIllIIlIIlIIIlIIllI(String string) {
         return string.replaceAll("(?i)§[0-9a-fklmnor]", "");
@@ -46,7 +46,7 @@ public class ArmourStatusItem {
     }
 
     private void IlllIIIlIlllIllIlIIlllIlI() {
-        int n = this.IlIlIIIlllIIIlIlllIlIllIl = (Boolean) ArmourStatusModule.itemName.getValue() ? Math.max(Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT * 2, this.IlllIIIlIlllIllIlIIlllIlI) : Math.max(this.llIIlllIIIIlllIllIlIlllIl.fontRenderer.FONT_HEIGHT, this.IlllIIIlIlllIllIlIIlllIlI);
+        int n = this.IlIlIIIlllIIIlIlllIlIllIl = (Boolean) ArmourStatusModule.itemName.getValue() ? Math.max(Ref.getMinecraft().fontRenderer.FONT_HEIGHT * 2, this.IlllIIIlIlllIllIlIIlllIlI) : Math.max(this.llIIlllIIIIlllIllIlIlllIl.fontRenderer.FONT_HEIGHT, this.IlllIIIlIlllIllIlIIlllIlI);
         if (this.lIIIIlIIllIIlIIlIIIlIIllI != null) {
             int n2 = 1;
             int n3 = 1;

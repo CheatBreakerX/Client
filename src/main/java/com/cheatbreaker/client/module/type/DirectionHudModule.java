@@ -6,9 +6,9 @@ import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
 import com.cheatbreaker.client.ui.util.HudUtil;
 import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.ScaledResolutionBridge;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 public class DirectionHudModule extends AbstractModule {
@@ -16,7 +16,7 @@ public class DirectionHudModule extends AbstractModule {
     private final Setting markerColor;
     private final Setting directionColor;
     private final Setting showWhileTyping;
-    private final ResourceLocation texture = new ResourceLocation("textures/gui/compass.png");
+    private final ResourceLocationBridge texture = Ref.getInstanceCreator().createResourceLocationBridge("textures/gui/compass.png");
 
     public DirectionHudModule() {
         super("Direction HUD");
@@ -25,7 +25,7 @@ public class DirectionHudModule extends AbstractModule {
         this.showWhileTyping = new Setting(this, "Show While Typing").setValue(true);
         this.markerColor = new Setting(this, "Marker Color").setValue(-43691).setMinMax(Integer.MIN_VALUE, Integer.MAX_VALUE);
         this.directionColor = new Setting(this, "Direction Color").setValue(-1).setMinMax(Integer.MIN_VALUE, Integer.MAX_VALUE);
-        this.setPreviewIcon(new ResourceLocation("client/icons/mods/dirhud.png"), 65, 12);
+        this.setPreviewIcon(Ref.getInstanceCreator().createResourceLocationBridge("client/icons/mods/dirhud.png"), 65, 12);
         this.addEvent(GuiDrawEvent.class, this::renderReal);
     }
 
@@ -47,15 +47,15 @@ public class DirectionHudModule extends AbstractModule {
         GL11.glPopMatrix();
     }
 
-    private void render(ScaledResolution scaledResolution) {
-        int n = MathHelper.floor_double((double)(this.minecraft.thePlayer.rotationYaw * (float)256 / (float)360) + 0.5) & 0xFF;
+    private void render(ScaledResolutionBridge scaledResolution) {
+        int n = MathHelper.floor_double((double)(this.minecraft.bridge$getThePlayer().rotationYaw * (float)256 / (float)360) + 0.5) & 0xFF;
         int n2 = 0;
         int n3 = 0;
         int backgroundColor = 0xFF212121;
 
         if ((Integer)this.directionColor.getValue() != 4095) {
             int n4 = this.directionColor.getColorValue();
-            this.minecraft.getTextureManager().bindTexture(this.texture);
+            this.minecraft.bridge$getTextureManager().bridge$bindTexture(this.texture);
             if (n < 128) {
                 GL11.glColor4f((float)(backgroundColor >> 16 & 0xFF) / (float)255, (float)(backgroundColor >> 8 & 0xFF) / (float)255, (float)(backgroundColor & 0xFF) / (float)255, (float)(backgroundColor >> 24 & 255) / (float)255);
                 HudUtil.drawTexturedModalRect(n3, n2, n, 0, 65, 12, -100);
@@ -69,7 +69,7 @@ public class DirectionHudModule extends AbstractModule {
                 HudUtil.drawTexturedModalRect(n3, n2, n - 128, 36, 65, 12, -100);
             }
         } else {
-            this.minecraft.getTextureManager().bindTexture(this.texture);
+            this.minecraft.bridge$getTextureManager().bridge$bindTexture(this.texture);
             if (n < 128) {
                 HudUtil.drawTexturedModalRect(n3, n2, n, 0, 65, 12, -100);
             } else {

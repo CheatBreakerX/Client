@@ -1,20 +1,18 @@
 package com.cheatbreaker.client.ui.mainmenu;
 
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.ui.fading.ColorFade;
 import com.cheatbreaker.client.ui.fading.MinMaxFade;
 import com.cheatbreaker.client.ui.mainmenu.element.ScrollableElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import lombok.Setter;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class AccountList extends AbstractElement {
     @Setter
-    private ResourceLocation headLocation;
+    private ResourceLocationBridge headLocation;
     @Setter
     private String displayName;
     private final ColorFade lIIIIllIIlIlIllIIIlIllIlI;
@@ -27,7 +25,7 @@ public class AccountList extends AbstractElement {
     private final ScrollableElement scrollableElement;
     private float lllIIIIIlIllIlIIIllllllII;
 
-    public AccountList(MainMenuBase base, String displayName, ResourceLocation headLocation) {
+    public AccountList(MainMenuBase base, String displayName, ResourceLocationBridge headLocation) {
         this.mainMenuBase = base;
         this.displayName = displayName;
         this.headLocation = headLocation;
@@ -87,7 +85,7 @@ public class AccountList extends AbstractElement {
                     (int)(this.y + this.height),
                     (int)(this.x + this.elementHeight),
                     (int)(this.y + this.elementHeight + (float)7 + (this.height - this.elementHeight - (float)6) * f4),
-                    (float)((int)((float)this.mainMenuBase.getResolution().getScaleFactor() * this.mainMenuBase.getScaleFactor())),
+                    (float)((int)((float)this.mainMenuBase.getResolution().bridge$getScaleFactor() * this.mainMenuBase.getScaleFactor())),
                     (int)this.mainMenuBase.getScaledHeight()
             );
             this.scrollableElement.drawScrollable(f, f2, bl);
@@ -129,7 +127,7 @@ public class AccountList extends AbstractElement {
                 float f6 = f5 + (float)16;
                 boolean bl3 = bl2 = f > f3 && f < f4 && f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII() > f5 && f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII() < f6 && bl && !this.scrollableElement.isMouseInside(f, f2) && !this.scrollableElement.isDragClick();
                 if (bl2) {
-                    Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                     this.mainMenuBase.login(account.getDisplayName());
                 }
                 ++n2;

@@ -9,14 +9,14 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 public class ToggleElement
         extends AbstractModulesGuiElement {
     private Setting setting;
-    private ResourceLocation IllIIIIIIIlIlIllllIIllIII = new ResourceLocation("client/icons/left.png");
-    private ResourceLocation lIIIIllIIlIlIllIIIlIllIlI = new ResourceLocation("client/icons/right.png");
+    private ResourceLocationBridge IllIIIIIIIlIlIllllIIllIII = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/left.png");
+    private ResourceLocationBridge lIIIIllIIlIlIllIIIlIllIlI = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/right.png");
     private int IlllIllIlIIIIlIIlIIllIIIl = 0;
     private float IlIlllIIIIllIllllIllIIlIl = 0.0f;
     private String displayString;
@@ -69,7 +69,7 @@ public class ToggleElement
             this.IlllIllIlIIIIlIIlIIllIIIl = bl ? 1 : 2;
             this.IlIlllIIIIllIllllIllIIlIl = 0.0f;
             this.displayString = (Boolean) this.setting.getValue() ? "ON" : "OFF";
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             this.setting.setValue(!((Boolean) this.setting.getValue()));
             if (this.setting == CheatBreaker.getInstance().moduleManager.keyStrokes.replaceNamesWithArrows) {
                 CheatBreaker.getInstance().moduleManager.keyStrokes.initialize();

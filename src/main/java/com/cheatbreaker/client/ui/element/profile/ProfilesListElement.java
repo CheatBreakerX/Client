@@ -11,7 +11,7 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.io.File;
@@ -21,7 +21,7 @@ import java.util.List;
 public class ProfilesListElement extends AbstractScrollableElement {
     private final int IIIlllIIIllIllIlIIIIIIlII;
     public final List<ProfileElement> lIIIIlIIllIIlIIlIIIlIIllI;
-    private final ResourceLocation plusIcon = new ResourceLocation("client/icons/plus-64.png");
+    private final ResourceLocationBridge plusIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/plus-64.png");
 
     public ProfilesListElement(float f, int n, int n2, int n3, int n4) {
         super(f, n, n2, n3, n4);
@@ -73,8 +73,8 @@ public class ProfilesListElement extends AbstractScrollableElement {
         }
         boolean bl = (float) mouseX > (float) (this.x + this.width - 92) * this.scale && (float) mouseX < (float) (this.x + this.width - 6) * this.scale && (float) mouseY > (float) (this.y + this.IlllIllIlIIIIlIIlIIllIIIl - 20 + this.lIIIIllIIlIlIllIIIlIllIlI) * this.scale && (float) mouseY < (float) (this.y + this.IlllIllIlIIIIlIIlIIllIIIl - 7 + this.lIIIIllIIlIlIllIIIlIllIlI) * this.scale;
         if (bl) {
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
-            Minecraft.getMinecraft().displayGuiScreen(new CBProfileCreateGui(CBModulesGui.instance, this, this.IIIlllIIIllIllIlIIIIIIlII, this.scale));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            Ref.getMinecraft().displayGuiScreen(new CBProfileCreateGui(CBModulesGui.instance, this, this.IIIlllIIIllIllIlIIIIIIlII, this.scale));
         }
     }
 
@@ -90,7 +90,7 @@ public class ProfilesListElement extends AbstractScrollableElement {
     public void lIIIIIIIIIlIllIIllIlIIlIl() {
         new Thread(() -> {
             this.lIIIIlIIllIIlIIlIIIlIIllI.clear();
-            File file = new File(Minecraft.getMinecraft().mcDataDir + File.separator + "config" + File.separator + "client" + File.separator + "profiles");
+            File file = new File(Ref.getMinecraft().mcDataDir + File.separator + "config" + File.separator + "client" + File.separator + "profiles");
             if (file.exists()) {
                 for (File file2 : file.listFiles()) {
                     if (!file2.getName().endsWith(".cfg")) continue;

@@ -15,7 +15,7 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Objects;
@@ -55,19 +55,19 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
         if (this.module == CheatBreaker.getInstance().moduleManager.armourStatus) {
             n3 = -10;
             object = "329/329";
-            f2 = Minecraft.getMinecraft().fontRenderer.getStringWidth((String)object);
-            Minecraft.getMinecraft().fontRenderer.drawStringWithShadow((String)object, (int)((float)(this.x + 1 + this.width / 2) - f2 / 2.0f), this.y + this.height / 2 - 18, -1);
+            f2 = Ref.getMinecraft().fontRenderer.getStringWidth((String)object);
+            Ref.getMinecraft().fontRenderer.drawStringWithShadow((String)object, (int)((float)(this.x + 1 + this.width / 2) - f2 / 2.0f), this.y + this.height / 2 - 18, -1);
         } else if (this.module == CheatBreaker.getInstance().moduleManager.potionStatus) {
             n4 = -30;
-            Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Speed II", this.x + 8 + this.width / 2 - 20, this.y + this.height / 2 - 36, -1);
-            Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("0:42", this.x + 8 + this.width / 2 - 20, this.y + this.height / 2 - 26, -1);
+            Ref.getMinecraft().fontRenderer.drawStringWithShadow("Speed II", this.x + 8 + this.width / 2 - 20, this.y + this.height / 2 - 36, -1);
+            Ref.getMinecraft().fontRenderer.drawStringWithShadow("0:42", this.x + 8 + this.width / 2 - 20, this.y + this.height / 2 - 26, -1);
         } else if (this.module == CheatBreaker.getInstance().moduleManager.scoreboard) {
             Ref.modified$drawRect(this.x + 20, this.y + this.height / 2f - 44, this.x + this.width - 20, this.y + this.height / 2 - 6, 0x6F000000);
-            Minecraft.getMinecraft().fontRenderer.drawString("Score", this.x + this.width / 2, this.y + this.height / 2 - 40, -1);
-            Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Steve", this.x + 24, this.y + this.height / 2 - 28, -1);
-            Minecraft.getMinecraft().fontRenderer.drawStringWithShadow("Alex", this.x + 24, this.y + this.height / 2 - 18, -1);
-            Minecraft.getMinecraft().fontRenderer.drawString(EnumChatFormatting.RED + "0", this.x + this.width - 26, this.y + this.height / 2 - 18, -1);
-            Minecraft.getMinecraft().fontRenderer.drawString(EnumChatFormatting.RED + "1", this.x + this.width - 26, this.y + this.height / 2 - 28, -1);
+            Ref.getMinecraft().fontRenderer.drawString("Score", this.x + this.width / 2, this.y + this.height / 2 - 40, -1);
+            Ref.getMinecraft().fontRenderer.drawStringWithShadow("Steve", this.x + 24, this.y + this.height / 2 - 28, -1);
+            Ref.getMinecraft().fontRenderer.drawStringWithShadow("Alex", this.x + 24, this.y + this.height / 2 - 18, -1);
+            Ref.getMinecraft().fontRenderer.drawString(EnumChatFormatting.RED + "0", this.x + this.width - 26, this.y + this.height / 2 - 18, -1);
+            Ref.getMinecraft().fontRenderer.drawString(EnumChatFormatting.RED + "1", this.x + this.width - 26, this.y + this.height / 2 - 28, -1);
         }
         if (this.module == CheatBreaker.getInstance().moduleManager.cooldowns) {
             object = new CooldownRenderer("EnderPearl", 368, 9000L);
@@ -85,11 +85,11 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
                 object = this.module.getPreviewLabel();
             }
             GL11.glScalef(f2, f2, f2);
-            float f3 = (float)Minecraft.getMinecraft().fontRenderer.getStringWidth((String)object) * f2;
+            float f3 = (float)Ref.getMinecraft().fontRenderer.getStringWidth((String)object) * f2;
             if (this.module.getPreviewType() == null) {
-                Minecraft.getMinecraft().fontRenderer.drawString((String)object, (int)(((float)(this.x + 1 + this.width / 2) - f3 / 2.0f) / f2), (int)((float)(this.y + this.height / 2 - 32) / f2), -13750738);
+                Ref.getMinecraft().fontRenderer.drawString((String)object, (int)(((float)(this.x + 1 + this.width / 2) - f3 / 2.0f) / f2), (int)((float)(this.y + this.height / 2 - 32) / f2), -13750738);
             } else {
-                Minecraft.getMinecraft().fontRenderer.drawStringWithShadow((String)object, (int)(((float)(this.x + 1 + this.width / 2) - f3 / 2.0f) / f2), (int)((float)(this.y + this.height / 2 - 32) / f2), -1);
+                Ref.getMinecraft().fontRenderer.drawStringWithShadow((String)object, (int)(((float)(this.x + 1 + this.width / 2) - f3 / 2.0f) / f2), (int)((float)(this.y + this.height / 2 - 32) / f2), -1);
             }
         } else if (this.module.getPreviewType() == AbstractModule.PreviewType.ICON) {
             float f4 = this.module.getPreviewIconWidth();
@@ -121,13 +121,13 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
     @Override
     public void handleMouseClick(int mouseX, int mouseY, int button) {
         if (this.optionsButton.isMouseInside(mouseX, mouseY)) {
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             ((ModuleListElement) CBModulesGui.instance.IIIIllIIllIIIIllIllIIIlIl).llIlIIIlIIIIlIlllIlIIIIll = false;
             ((ModuleListElement)CBModulesGui.instance.IIIIllIIllIIIIllIllIIIlIl).scrollable = this.IlIlllIIIIllIllllIllIIlIl;
             ((ModuleListElement)CBModulesGui.instance.IIIIllIIllIIIIllIllIIIlIl).module = this.module;
             CBModulesGui.instance.currentScrollableElement = CBModulesGui.instance.IIIIllIIllIIIIllIllIIIlIl;
         } else if (!this.module.isEditable && this.toggle.isMouseInside(mouseX, mouseY)) {
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             this.module.setState(!this.module.isEnabled());
             this.toggle.displayString = this.module.isEnabled() ? "Disable" : "Enable";
             int n4 = this.toggle.lIIIIlIIllIIlIIlIIIlIIllI = this.module.isEnabled() ? -5756117 : -13916106;
@@ -136,14 +136,14 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
                 this.module.setState(true);
             }
         } else if (this.toggleOrHideFromHud.IlllIllIlIIIIlIIlIIllIIIl && this.toggleOrHideFromHud.isMouseInside(mouseX, mouseY)) {
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             if (!this.module.isEnabled()) {
                 this.module.setRenderHud(true);
                 this.lIIIIIIIIIlIllIIllIlIIlIl();
                 if (this.module.getGuiAnchor() == null) {
                     this.module.setState(true);
                 } else {
-                    Minecraft.getMinecraft().displayGuiScreen(new CBModulePlaceGui(CBModulesGui.instance, this.module));
+                    Ref.getMinecraft().displayGuiScreen(new CBModulePlaceGui(CBModulesGui.instance, this.module));
                 }
             } else {
                 this.module.setRenderHud(!this.module.isRenderHud());
@@ -152,7 +152,7 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
                     if (this.module.getGuiAnchor() == null) {
                         this.module.setState(true);
                     } else {
-                        Minecraft.getMinecraft().displayGuiScreen(new CBModulePlaceGui(CBModulesGui.instance, this.module));
+                        Ref.getMinecraft().displayGuiScreen(new CBModulePlaceGui(CBModulesGui.instance, this.module));
                     }
                 } else if (this.module.isEditable && this.module.isEnabled()) {
                     this.module.setState(false);
@@ -169,7 +169,7 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
         }
         for (Setting cBSetting : this.module.getSettingsList()) {
             if (cBSetting.getType() != Setting.Type.INTEGER || !cBSetting.getLabel().toLowerCase().contains("color") || cBSetting.getLabel().toLowerCase().contains("background") || cBSetting.getLabel().toLowerCase().contains("pressed")) continue;
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             cBSetting.setValue(CheatBreaker.getInstance().globalSettings.defaultColor.getValue());
         }
     }

@@ -24,7 +24,7 @@ public class BossBarModule extends AbstractModule {
         GL11.glPushMatrix();
         this.scaleAndTranslate(renderPreviewEvent.getResolution());
         if (BossStatus.bossName == null || BossStatus.statusBarTime <= 0) {
-            this.minecraft.getTextureManager().bindTexture(Gui.icons);
+            this.minecraft.bridge$getTextureManager().bridge$bindTexture(Gui.icons);
             FontRenderer fontRenderer = this.minecraft.fontRenderer;
             int n2 = 182;
             int n3 = 0;
@@ -39,7 +39,7 @@ public class BossBarModule extends AbstractModule {
             String bossName = "Wither";
             fontRenderer.drawStringWithShadow(bossName, (int) (this.width / 2 - (fontRenderer.getStringWidth(bossName) / 2)), n5 - 10, 0xFFFFFF);
             GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-            this.minecraft.getTextureManager().bindTexture(Gui.icons);
+            this.minecraft.bridge$getTextureManager().bridge$bindTexture(Gui.icons);
             this.setDimensions(182, 20);
         }
         GL11.glPopMatrix();
@@ -49,7 +49,7 @@ public class BossBarModule extends AbstractModule {
         GL11.glPushMatrix();
         this.scaleAndTranslate(guiDrawEvent.getResolution());
         if (BossStatus.bossName != null || BossStatus.statusBarTime > 0) {
-            this.minecraft.getTextureManager().bindTexture(Gui.icons);
+            this.minecraft.bridge$getTextureManager().bridge$bindTexture(Gui.icons);
             FontRenderer fontRenderer = this.minecraft.fontRenderer;
             int n2 = 182;
             int n3 = 0;
@@ -64,7 +64,7 @@ public class BossBarModule extends AbstractModule {
             String bossName = BossStatus.bossName;
             fontRenderer.drawStringWithShadow(bossName, (int) (this.width / 2.0f - (float)(fontRenderer.getStringWidth(bossName) / 2)), n5 - 10, 0xFFFFFF);
             GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-            this.minecraft.getTextureManager().bindTexture(Gui.icons);
+            this.minecraft.bridge$getTextureManager().bridge$bindTexture(Gui.icons);
             this.setDimensions(182, 20);
         }
         GL11.glPopMatrix();

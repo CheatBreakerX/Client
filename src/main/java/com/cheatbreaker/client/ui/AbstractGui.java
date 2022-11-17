@@ -1,10 +1,11 @@
 package com.cheatbreaker.client.ui;
 
+import com.cheatbreaker.bridge.client.MinecraftBridge;
+import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
+import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -12,22 +13,22 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class AbstractGui extends GuiScreen {
+public abstract class AbstractGui extends CBGuiScreen {
 
-    protected ScaledResolution resolution;
+    protected ScaledResolutionBridge resolution;
     protected float scaledWidth;
     protected float scaledHeight;
     protected List<AbstractElement> elements;
     protected int elementListSize = 0;
 
     @Override
-    public void setWorldAndResolution(final Minecraft mc, final int displayWidth, final int displayHeight) {
+    public void setWorldAndResolution(final MinecraftBridge mc, final int displayWidth, final int displayHeight) {
         this.mc = mc;
-        this.fontRendererObj = mc.fontRenderer;
+        this.fontRendererObj = mc.bridge$getFontRenderer();
         this.width = displayWidth;
         this.height = displayHeight;
         this.buttonList.clear();
-        this.resolution = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
+        this.resolution = Ref.getInstanceCreator().createScaledResolutionBridge();
         final float scaleFactor = getScaleFactor();
         this.scaledWidth = width / scaleFactor;
         this.scaledHeight = height / scaleFactor;
@@ -156,7 +157,7 @@ public abstract class AbstractGui extends GuiScreen {
         }
 
         float n;
-        switch (resolution.getScaleFactor()) {
+        switch (resolution.bridge$getScaleFactor()) {
             case 1: {
                 n = 0.5f;
                 break;
@@ -194,7 +195,7 @@ public abstract class AbstractGui extends GuiScreen {
         return scaledHeight;
     }
 
-    public ScaledResolution getResolution() {
+    public ScaledResolutionBridge getResolution() {
         return resolution;
     }
 }

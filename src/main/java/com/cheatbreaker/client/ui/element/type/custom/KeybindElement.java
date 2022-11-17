@@ -6,7 +6,7 @@ import com.cheatbreaker.client.ui.element.module.ModulesGuiButtonElement;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.input.Keyboard;
 
 public class KeybindElement
@@ -28,7 +28,7 @@ public class KeybindElement
         boolean bl2 = (float) mouseX > (float)(this.x + this.width - 92) * this.scale && (float) mouseX < (float)(this.x + this.width - 48) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 10 + this.yOffset) * this.scale;
         FontRegistry.getUbuntuMedium16px().drawString(this.lIIIIlIIllIIlIIlIIIlIIllI.getLabel().toUpperCase(), this.x + 10, (float)(this.y + 4), bl2 || bl ? -1090519040 : -1895825408);
         if (this.lIIIIllIIlIlIllIIIlIllIlI && Keyboard.getEventKeyState()) {
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             this.lIIIIlIIllIIlIIlIIIlIIllI.setValue(Keyboard.getEventKey());
             this.IllIIIIIIIlIlIllllIIllIII.displayString = Keyboard.getKeyName((Integer)this.lIIIIlIIllIIlIIlIIIlIIllI.getValue());
             this.lIIIIllIIlIlIllIIIlIllIlI = false;
@@ -41,7 +41,7 @@ public class KeybindElement
     @Override
     public void handleMouseClick(int mouseX, int mouseY, int button) {
         if (this.IllIIIIIIIlIlIllllIIllIII.isMouseInside(mouseX, mouseY)) {
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             this.lIIIIllIIlIlIllIIIlIllIlI = true;
             this.IllIIIIIIIlIlIllllIIllIII.displayString = "<PRESS ANY KEY>";
         }

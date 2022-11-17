@@ -9,7 +9,7 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.websocket.shared.WSPacketClientFriendRequestUpdate;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 public class FriendRequestElement extends AbstractElement {
@@ -39,8 +39,8 @@ public class FriendRequestElement extends AbstractElement {
             FontRegistry.getPlayRegular16px().drawString("DENY", this.x + (float)56, this.y + (float)11, denyHovered ? -52429 : 0x7FFF3333);
         }
         GL11.glColor4f((float)1.0f, (float)1.0f, (float)1.0f, (float)1.0f);
-        ResourceLocation resourceLocation = CheatBreaker.getInstance().getHeadLocation(EnumChatFormatting.getTextWithoutFormattingCodes(this.friendRequest.getUsername()));
-        RenderUtil.drawIcon(resourceLocation, (float)7, this.x + (float)5, this.y + (float)4);
+        ResourceLocationBridge ResourceLocationBridge = CheatBreaker.getInstance().getHeadLocation(EnumChatFormatting.getTextWithoutFormattingCodes(this.friendRequest.getUsername()));
+        RenderUtil.drawIcon(ResourceLocationBridge, (float)7, this.x + (float)5, this.y + (float)4);
         GL11.glPopMatrix();
     }
 
@@ -52,7 +52,7 @@ public class FriendRequestElement extends AbstractElement {
         if (this.friendRequest.isFriend()) {
             boolean cancelHovered  = f > this.x + (float) 24 && f < this.x + (float) 52 && f2 < this.y + this.height && f2 > this.y + (float) 10;
             if (cancelHovered) {
-                this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                 CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(false, this.friendRequest.getPlayerId()));
                 OverlayGui.getInstance().getFriendRequestsElement().getFrientRequestElementList().add(this);
             }
@@ -60,11 +60,11 @@ public class FriendRequestElement extends AbstractElement {
             boolean acceptHovered = f > this.x + (float)24 && f < this.x + (float)52 && f2 < this.y + this.height && f2 > this.y + (float)10;
             boolean denyHovered = f > this.x + (float) 52 && f < this.x + (float) 84 && f2 < this.y + this.height && f2 > this.y + (float) 10;
             if (acceptHovered) {
-                this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                 CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(true, this.friendRequest.getPlayerId()));
                 OverlayGui.getInstance().getFriendRequestsElement().getFrientRequestElementList().add(this);
             } else if (denyHovered) {
-                this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                 CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(false, this.friendRequest.getPlayerId()));
                 OverlayGui.getInstance().getFriendRequestsElement().getFrientRequestElementList().add(this);
             }

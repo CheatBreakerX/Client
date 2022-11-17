@@ -1,14 +1,15 @@
 package com.cheatbreaker.client.module;
 
+import com.cheatbreaker.bridge.client.MinecraftBridge;
+import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
+import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.EventBus;
 import com.cheatbreaker.client.ui.module.CBAnchorHelper;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
 import com.cheatbreaker.client.ui.module.CBPositionEnum;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public abstract class AbstractModule {
     public float height = 0.0f;
     public boolean isEditable = true;
     public Setting scale;
-    protected Minecraft minecraft;
+    protected MinecraftBridge minecraft;
     private boolean staffModule = false;
     private boolean staffModuleEnabled = false;
     private boolean enabled = false;
@@ -56,7 +57,7 @@ public abstract class AbstractModule {
     private boolean renderHud = true;
     private List<Setting> settingsList;
     private PreviewType previewType;
-    private ResourceLocation previewIconLocation;
+    private ResourceLocationBridge previewIconLocation;
     private float previewIconWidth;
     private float previewIconHeight;
     private float previewLabelSize;
@@ -65,7 +66,7 @@ public abstract class AbstractModule {
     public AbstractModule(String string) {
         this.name = string;
         this.eventMap = new HashMap<>();
-        this.minecraft = Minecraft.getMinecraft();
+        this.minecraft = Ref.getMinecraft();
         this.settingsList = new ArrayList<>();
         this.defaultSettingsValues = new ArrayList<>();
         this.scale = new Setting(this, "Scale").setValue(1.0f).setMinMax(1.0126582f * 0.49375f, 0.55f * 2.7272727f);
@@ -195,11 +196,11 @@ public abstract class AbstractModule {
         return this.defaultSettingsValues;
     }
 
-    public void scaleAndTranslate(ScaledResolution resolution) {
+    public void scaleAndTranslate(ScaledResolutionBridge resolution) {
         this.scaleAndTranslate(resolution, this.width, this.height);
     }
 
-    public void scaleAndTranslate(ScaledResolution resolution, float f, float f2) {
+    public void scaleAndTranslate(ScaledResolutionBridge resolution, float f, float f2) {
         float f3 = 0.0f;
         float f4 = 0.0f;
         float scale = (Float) this.scale.getValue();
@@ -214,54 +215,54 @@ public abstract class AbstractModule {
             }
             case LEFT_MIDDLE: {
                 f3 = 2.0f;
-                f4 = (float) (resolution.getScaledHeight() / 2) - f2 / 2.0f;
+                f4 = (float) (resolution.bridge$getScaledHeight() / 2) - f2 / 2.0f;
                 break;
             }
             case LEFT_BOTTOM: {
-                f4 = (float) resolution.getScaledHeight() - f2 - 2.0f;
+                f4 = (float) resolution.bridge$getScaledHeight() - f2 - 2.0f;
                 f3 = 2.0f;
                 break;
             }
             case MIDDLE_TOP: {
-                f3 = (float) (resolution.getScaledWidth() / 2) - f / 2.0f;
+                f3 = (float) (resolution.bridge$getScaledWidth() / 2) - f / 2.0f;
                 f4 = 2.0f;
                 break;
             }
             case MIDDLE_MIDDLE: {
-                f3 = (float) (resolution.getScaledWidth() / 2) - f / 2.0f;
-                f4 = (float) (resolution.getScaledHeight() / 2) - f2 / 2.0f;
+                f3 = (float) (resolution.bridge$getScaledWidth() / 2) - f / 2.0f;
+                f4 = (float) (resolution.bridge$getScaledHeight() / 2) - f2 / 2.0f;
                 break;
             }
             case MIDDLE_BOTTOM_LEFT: {
-                f3 = (float) (resolution.getScaledWidth() / 2) - f;
-                f4 = (float) resolution.getScaledHeight() - f2 - 2.0f;
+                f3 = (float) (resolution.bridge$getScaledWidth() / 2) - f;
+                f4 = (float) resolution.bridge$getScaledHeight() - f2 - 2.0f;
                 break;
             }
             case MIDDLE_BOTTOM_RIGHT: {
-                f3 = (float) resolution.getScaledWidth() / 2;
-                f4 = (float) resolution.getScaledHeight() - f2 - 2.0f;
+                f3 = (float) resolution.bridge$getScaledWidth() / 2;
+                f4 = (float) resolution.bridge$getScaledHeight() - f2 - 2.0f;
                 break;
             }
             case RIGHT_TOP: {
-                f3 = (float) resolution.getScaledWidth() - f - 2.0f;
+                f3 = (float) resolution.bridge$getScaledWidth() - f - 2.0f;
                 f4 = 2.0f;
                 break;
             }
             case RIGHT_MIDDLE: {
-                f3 = (float) resolution.getScaledWidth() - f;
-                f4 = (float) (resolution.getScaledHeight() / 2) - f2 / 2.0f;
+                f3 = (float) resolution.bridge$getScaledWidth() - f;
+                f4 = (float) (resolution.bridge$getScaledHeight() / 2) - f2 / 2.0f;
                 break;
             }
             case RIGHT_BOTTOM: {
-                f3 = (float) resolution.getScaledWidth() - f;
-                f4 = (float) resolution.getScaledHeight() - f2;
+                f3 = (float) resolution.bridge$getScaledWidth() - f;
+                f4 = (float) resolution.bridge$getScaledHeight() - f2;
             }
         }
         GL11.glTranslatef(f3 / scale, f4 / scale, 0.0f);
         GL11.glTranslatef(this.xTranslation / scale, this.yTranslation / scale, 0.0f);
     }
 
-    public float[] getScaledPoints(ScaledResolution scaledResolution, boolean bl) {
+    public float[] getScaledPoints(ScaledResolutionBridge resolution, boolean bl) {
         float f = 0.0f;
         float f2 = 0.0f;
         float scale = (Float) this.scale.getValue();
@@ -275,47 +276,47 @@ public abstract class AbstractModule {
             }
             case LEFT_MIDDLE: {
                 f = 2.0f;
-                f2 = (float) (scaledResolution.getScaledHeight() / 2) - f4 / 2.0f;
+                f2 = (float) (resolution.bridge$getScaledHeight() / 2) - f4 / 2.0f;
                 break;
             }
             case LEFT_BOTTOM: {
-                f2 = (float) scaledResolution.getScaledHeight() - f4 - 2.0f;
+                f2 = (float) resolution.bridge$getScaledHeight() - f4 - 2.0f;
                 f = 2.0f;
                 break;
             }
             case MIDDLE_TOP: {
-                f = (float) (scaledResolution.getScaledWidth() / 2) - f3 / 2.0f;
+                f = (float) (resolution.bridge$getScaledWidth() / 2) - f3 / 2.0f;
                 f2 = 2.0f;
                 break;
             }
             case MIDDLE_MIDDLE: {
-                f = (float) (scaledResolution.getScaledWidth() / 2) - f3 / 2.0f;
-                f2 = (float) (scaledResolution.getScaledHeight() / 2) - f4 / 2.0f;
+                f = (float) (resolution.bridge$getScaledWidth() / 2) - f3 / 2.0f;
+                f2 = (float) (resolution.bridge$getScaledHeight() / 2) - f4 / 2.0f;
                 break;
             }
             case MIDDLE_BOTTOM_LEFT: {
-                f = (float) (scaledResolution.getScaledWidth() / 2) - f3;
-                f2 = (float) scaledResolution.getScaledHeight() - f4 - 2.0f;
+                f = (float) (resolution.bridge$getScaledWidth() / 2) - f3;
+                f2 = (float) resolution.bridge$getScaledHeight() - f4 - 2.0f;
                 break;
             }
             case MIDDLE_BOTTOM_RIGHT: {
-                f = (float) scaledResolution.getScaledWidth() / 2;
-                f2 = (float) scaledResolution.getScaledHeight() - f4 - 2.0f;
+                f = (float) resolution.bridge$getScaledWidth() / 2;
+                f2 = (float) resolution.bridge$getScaledHeight() - f4 - 2.0f;
                 break;
             }
             case RIGHT_TOP: {
-                f = (float) scaledResolution.getScaledWidth() - f3 - 2.0f;
+                f = (float) resolution.bridge$getScaledWidth() - f3 - 2.0f;
                 f2 = 2.0f;
                 break;
             }
             case RIGHT_MIDDLE: {
-                f = (float) scaledResolution.getScaledWidth() - f3;
-                f2 = (float) (scaledResolution.getScaledHeight() / 2) - f4 / 2.0f;
+                f = (float) resolution.bridge$getScaledWidth() - f3;
+                f2 = (float) (resolution.bridge$getScaledHeight() / 2) - f4 / 2.0f;
                 break;
             }
             case RIGHT_BOTTOM: {
-                f = (float) scaledResolution.getScaledWidth() - f3;
-                f2 = (float) scaledResolution.getScaledHeight() - f4;
+                f = (float) resolution.bridge$getScaledWidth() - f3;
+                f2 = (float) resolution.bridge$getScaledHeight() - f4;
             }
         }
         return new float[]{(f + (bl ? xTranslation : 0.0f)) / scale, (f2 + (bl ? yTranslation : 0.0f)) / scale};
@@ -352,7 +353,7 @@ public abstract class AbstractModule {
         return CBAnchorHelper.getHorizontalPositionEnum(this.guiAnchor);
     }
 
-    protected void setPreviewIcon(ResourceLocation location, int width, int height) {
+    protected void setPreviewIcon(ResourceLocationBridge location, int width, int height) {
         this.previewType = PreviewType.ICON;
         this.previewIconLocation = location;
         this.previewIconWidth = width;
@@ -369,7 +370,7 @@ public abstract class AbstractModule {
         return this.previewType;
     }
 
-    public ResourceLocation getPreviewIcon() {
+    public ResourceLocationBridge getPreviewIcon() {
         return this.previewIconLocation;
     }
 

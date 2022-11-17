@@ -7,7 +7,7 @@ import com.cheatbreaker.client.ui.element.AbstractScrollableElement;
 import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 public class GlobalSettingsElement
@@ -15,7 +15,7 @@ public class GlobalSettingsElement
     private final int lIIIIlIIllIIlIIlIIIlIIllI;
     private final AbstractScrollableElement IllIIIIIIIlIlIllllIIllIII;
     private int lIIIIllIIlIlIllIIIlIllIlI = 0;
-    private ResourceLocation IlllIllIlIIIIlIIlIIllIIIl = new ResourceLocation("client/icons/right.png");
+    private ResourceLocationBridge IlllIllIlIIIIlIIlIIllIIIl = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/right.png");
 
     public GlobalSettingsElement(AbstractScrollableElement lllIllIllIlIllIlIIllllIIl2, int n, float f) {
         super(f);

@@ -29,7 +29,7 @@ public class Key {
     }
 
     public void render(final float n, final float n2, final int n3, final int n4, final int n5, final int n6) {
-        final Minecraft minecraft = Minecraft.getMinecraft();
+        final Minecraft minecraft = Ref.getMinecraft();
         final int n7 = (this.keyCode == -99 || this.keyCode == -100) ? ((this.keyCode == -99) ? 1 : 0) : -1;
         final boolean pressed = (minecraft.currentScreen == null || minecraft.currentScreen instanceof GuiContainer || minecraft.currentScreen instanceof CBModulesGui) && ((n7 != -1) ? Mouse.isButtonDown(n7) : Keyboard.isKeyDown(this.keyCode));
         if (pressed && !this.pressed) {

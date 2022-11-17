@@ -31,7 +31,7 @@ public abstract class AbstractModulesGuiElement {
         boolean maxX = (float)mouseX < (float)(this.x + this.width) * this.scale;
         boolean minY = (float)mouseY > (float)(this.y + this.yOffset) * this.scale;
         boolean maxY = (float)mouseY < (float)(this.y + this.height + this.yOffset) * this.scale;
-        return minX && maxX && minY && maxY && Minecraft.getMinecraft().currentScreen instanceof CBModulesGui;
+        return minX && maxX && minY && maxY && Ref.getMinecraft().currentScreen instanceof CBModulesGui;
     }
 
     public void onScroll(int n) {

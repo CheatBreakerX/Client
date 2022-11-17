@@ -13,7 +13,7 @@ import com.cheatbreaker.client.util.friend.FriendsManager;
 import com.cheatbreaker.client.websocket.client.WSPacketClientFriendRemove;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -23,8 +23,8 @@ public class FriendElement extends AbstractElement {
     private final Friend friend;
     private final CosineFade IllIIIIIIIlIlIllllIIllIII;
     private final FloatFade lIIIIllIIlIlIllIIIlIllIlI;
-    private static final ResourceLocation removeIcon = new ResourceLocation("client/icons/garbage-26.png");
-    private static final ResourceLocation cheatBreakerIcon = new ResourceLocation("client/logo_26.png");
+    private static final ResourceLocationBridge removeIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/garbage-26.png");
+    private static final ResourceLocationBridge cheatBreakerIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/logo_26.png");
 
     public FriendElement(Friend friend) {
         this.friend = friend;
@@ -66,7 +66,7 @@ public class FriendElement extends AbstractElement {
             FontRegistry.getPlayRegular16px().drawString(this.friend.getStatusString(), this.x + (float)24, this.y + (float)11, -5460820);
         }
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        ResourceLocation headLocation = CheatBreaker.getInstance().getHeadLocation(EnumChatFormatting.getTextWithoutFormattingCodes(this.friend.getName()));
+        ResourceLocationBridge headLocation = CheatBreaker.getInstance().getHeadLocation(EnumChatFormatting.getTextWithoutFormattingCodes(this.friend.getName()));
         RenderUtil.drawIcon(headLocation, (float)7, this.x + (float)5, this.y + (float)4);
         boolean bl2 = bl && this.isMouseInside(f, f2) && f > this.x + this.width - (float)20;
         float f3 = this.lIIIIllIIlIlIllIIIlIllIlI.lIIIIlIIllIIlIIlIIIlIIllI(bl2);
@@ -84,14 +84,14 @@ public class FriendElement extends AbstractElement {
         }
         boolean bl2 = this.isMouseInside(f, f2) && f > this.x + this.width - (float) 20;
         if (bl2 && this.lIIIIllIIlIlIllIIIlIllIlI.IIIIllIIllIIIIllIllIIIlIl()) {
-            this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRemove(this.friend.getPlayerId()));
             OverlayGui.getInstance().getFriendsListElement().getFriendElements().add(this);
             CheatBreaker.getInstance().getFriendsManager().getFriends().remove(this.friend.getPlayerId());
             return true;
         }
         if (!bl2 && this.isMouseInside(f, f2)) {
-            this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             OverlayGui.getInstance().lIIIIlIIllIIlIIlIIIlIIllI(this.friend);
             CheatBreaker.getInstance().getFriendsManager().readMessages(this.friend.getPlayerId());
             return true;

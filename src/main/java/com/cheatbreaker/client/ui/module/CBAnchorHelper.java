@@ -1,7 +1,7 @@
 package com.cheatbreaker.client.ui.module;
 
+import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
 import com.cheatbreaker.client.module.AbstractModule;
-import net.minecraft.client.gui.ScaledResolution;
 
 /**
  * Deals with anchoring.
@@ -9,9 +9,9 @@ import net.minecraft.client.gui.ScaledResolution;
  */
 public class CBAnchorHelper {
 
-    public static CBGuiAnchor getAnchor(float x, float y, ScaledResolution scaledResolution) {
-        int scaledWidth = scaledResolution.getScaledWidth();
-        int scaledHeight = scaledResolution.getScaledHeight();
+    public static CBGuiAnchor getAnchor(float x, float y, ScaledResolutionBridge scaledResolution) {
+        int scaledWidth = (int) scaledResolution.bridge$getScaledWidth();
+        int scaledHeight = (int) scaledResolution.bridge$getScaledHeight();
         if (x < (float) (scaledWidth / 3) && y < (float) (scaledHeight / 3)) {
             return CBGuiAnchor.LEFT_TOP;
         }
@@ -42,9 +42,9 @@ public class CBAnchorHelper {
         return CBGuiAnchor.RIGHT_BOTTOM;
     }
 
-    public static float[] getPositions(float x, float y, ScaledResolution scaledResolution) {
-        float scaledWidth = scaledResolution.getScaledWidth();
-        float scaledHeight = scaledResolution.getScaledHeight();
+    public static float[] getPositions(float x, float y, ScaledResolutionBridge scaledResolution) {
+        float scaledWidth = scaledResolution.bridge$getScaledWidth();
+        float scaledHeight = scaledResolution.bridge$getScaledHeight();
         CBGuiAnchor cBGuiAnchor = CBAnchorHelper.getAnchor(x, y, scaledResolution);
         float returnX = 0.0f;
         float returnY = 0.0f;
@@ -102,7 +102,7 @@ public class CBAnchorHelper {
         return new float[]{returnX, returnY};
     }
 
-    public static float[] getPositions(CBGuiAnchor anchor, ScaledResolution resolution, float x, float y, float scale) {
+    public static float[] getPositions(CBGuiAnchor anchor, ScaledResolutionBridge resolution, float x, float y, float scale) {
         float returnX = 0.0f;
         float returnY = 0.0f;
         x *= scale;
@@ -115,55 +115,55 @@ public class CBAnchorHelper {
             }
             case LEFT_MIDDLE: {
                 returnX = 2.0f;
-                returnY = (float) (resolution.getScaledHeight() / 2) - y / 2.0f;
+                returnY = (float) (resolution.bridge$getScaledHeight() / 2) - y / 2.0f;
                 break;
             }
             case LEFT_BOTTOM: {
-                returnY = (float) resolution.getScaledHeight() - y - 2.0f;
+                returnY = (float) resolution.bridge$getScaledHeight() - y - 2.0f;
                 returnX = 2.0f;
                 break;
             }
             case MIDDLE_TOP: {
-                returnX = (float) (resolution.getScaledWidth() / 2) - x / 2.0f;
+                returnX = (float) (resolution.bridge$getScaledWidth() / 2) - x / 2.0f;
                 returnY = 2.0f;
                 break;
             }
             case MIDDLE_MIDDLE: {
-                returnX = (float) (resolution.getScaledWidth() / 2) - x / 2.0f;
-                returnY = (float) (resolution.getScaledHeight() / 2) - y / 2.0f;
+                returnX = (float) (resolution.bridge$getScaledWidth() / 2) - x / 2.0f;
+                returnY = (float) (resolution.bridge$getScaledHeight() / 2) - y / 2.0f;
                 break;
             }
             case MIDDLE_BOTTOM_LEFT: {
-                returnX = (float) (resolution.getScaledWidth() / 2) - x;
-                returnY = (float) resolution.getScaledHeight() - y - 2.0f;
+                returnX = (float) (resolution.bridge$getScaledWidth() / 2) - x;
+                returnY = (float) resolution.bridge$getScaledHeight() - y - 2.0f;
                 break;
             }
             case MIDDLE_BOTTOM_RIGHT: {
-                returnX = (float) resolution.getScaledWidth() / 2;
-                returnY = (float) resolution.getScaledHeight() - y - 2.0f;
+                returnX = (float) resolution.bridge$getScaledWidth() / 2;
+                returnY = (float) resolution.bridge$getScaledHeight() - y - 2.0f;
                 break;
             }
             case RIGHT_TOP: {
-                returnX = (float) resolution.getScaledWidth() - x - 2.0f;
+                returnX = (float) resolution.bridge$getScaledWidth() - x - 2.0f;
                 returnY = 2.0f;
                 break;
             }
             case RIGHT_MIDDLE: {
-                returnX = (float) resolution.getScaledWidth() - x;
-                returnY = (float) (resolution.getScaledHeight() / 2) - y / 2.0f;
+                returnX = (float) resolution.bridge$getScaledWidth() - x;
+                returnY = (float) (resolution.bridge$getScaledHeight() / 2) - y / 2.0f;
                 break;
             }
             case RIGHT_BOTTOM: {
-                returnX = (float) resolution.getScaledWidth() - x;
-                returnY = (float) resolution.getScaledHeight() - y;
+                returnX = (float) resolution.bridge$getScaledWidth() - x;
+                returnY = (float) resolution.bridge$getScaledHeight() - y;
             }
         }
         return new float[]{returnX, returnY};
     }
 
-    public static float[] getPositions(AbstractModule module, float x, float y, ScaledResolution scaledResolution) {
-        float scaledWidth = scaledResolution.getScaledWidth();
-        float scaledHeight = scaledResolution.getScaledHeight();
+    public static float[] getPositions(AbstractModule module, float x, float y, ScaledResolutionBridge scaledResolution) {
+        float scaledWidth = scaledResolution.bridge$getScaledWidth();
+        float scaledHeight = scaledResolution.bridge$getScaledHeight();
         CBGuiAnchor cBGuiAnchor = CBAnchorHelper.getAnchor(x, y, scaledResolution);
         float moduleWidth = module.getWidth() * (Float) module.scale.getValue();
         float moduleHeight = module.getHeight() * (Float) module.scale.getValue();

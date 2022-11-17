@@ -4,7 +4,7 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,9 +13,9 @@ import java.util.Properties;
 public class GitCommitProperties {
     public static void loadProperties() {
         try {
-            final ResourceLocationBridge resourceLocation = Ref.getInstanceCreator().createResourceLocation("client/properties/app.properties");
+            final ResourceLocationBridge ResourceLocationBridge = Ref.getInstanceCreator().createResourceLocationBridge("client/properties/app.properties");
             final Properties properties = new Properties();
-            InputStream inputStream = Ref.getMinecraft().bridge$getResourceManager().bridge$getResource(resourceLocation).bridge$getInputStream();
+            InputStream inputStream = Ref.getMinecraft().bridge$getResourceManager().bridge$getResource(ResourceLocationBridge).bridge$getInputStream();
 
             if (inputStream == null) {
                 gitCommit = "?";

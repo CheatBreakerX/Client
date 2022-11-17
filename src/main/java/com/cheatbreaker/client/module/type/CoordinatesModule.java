@@ -44,9 +44,9 @@ public class CoordinatesModule extends AbstractModule {
 
         GL11.glPushMatrix();
         this.scaleAndTranslate(event.getResolution());
-        int n = MathHelper.floor_double(this.minecraft.thePlayer.posX);
-        int n2 = (int) this.minecraft.thePlayer.boundingBox.minY;
-        int n3 = MathHelper.floor_double(this.minecraft.thePlayer.posZ);
+        int n = MathHelper.floor_double(this.minecraft.bridge$getThePlayer().posX);
+        int n2 = (int) this.minecraft.bridge$getThePlayer().boundingBox.minY;
+        int n3 = MathHelper.floor_double(this.minecraft.bridge$getThePlayer().posZ);
 
         if (!this.minecraft.ingameGUI.getChatGUI().getChatOpen() || ((Boolean) this.showWhileTyping.getValue())) {
             int n4;
@@ -66,7 +66,7 @@ public class CoordinatesModule extends AbstractModule {
             }
             if (((Boolean)this.showDirection.getValue())) {
                 String[] directions = new String[]{"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
-                double d = MathHelper.wrapAngleTo180_double(this.minecraft.thePlayer.rotationYaw) + (double)180;
+                double d = MathHelper.wrapAngleTo180_double(this.minecraft.bridge$getThePlayer().rotationYaw) + (double)180;
                 d += 11.682692039868188 * (double)1.925926f;
                 d %= 360;
                 String string = directions[MathHelper.floor_double(d /= (double)45)];

@@ -40,15 +40,15 @@ public class RenderUtil {
     }
 
     public static void drawIcon(String location, float size, float x, float y) {
-        drawIcon(Ref.getInstanceCreator().createResourceLocation(location), size, x, y);
+        drawIcon(Ref.getInstanceCreator().createResourceLocationBridge(location), size, x, y);
     }
 
-    public static void lIIIIlIIllIIlIIlIIIlIIllI(ResourceLocationBridge resourceLocation, float f, float f2, float f3, float f4) {
+    public static void lIIIIlIIllIIlIIlIIIlIIllI(ResourceLocationBridge ResourceLocationBridge, float f, float f2, float f3, float f4) {
         float f5 = f3 / 2.0f;
         float f6 = 0.0f;
         float f7 = 0.0f;
         GL11.glEnable(3042);
-        Ref.getMinecraft().bridge$getTextureManager().bridge$bindTexture(resourceLocation);
+        Ref.getMinecraft().bridge$getTextureManager().bridge$bindTexture(ResourceLocationBridge);
         GL11.glBegin(7);
         GL11.glTexCoord2d(f6 / f5, f7 / f5);
         GL11.glVertex2d(f, f2);

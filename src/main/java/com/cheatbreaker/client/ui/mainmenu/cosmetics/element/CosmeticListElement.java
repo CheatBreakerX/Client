@@ -8,12 +8,12 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.cosmetic.Cosmetic;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 public class CosmeticListElement extends AbstractModulesGuiElement {
     private final Cosmetic cosmetic;
-    private final ResourceLocation checkmarkIcon = new ResourceLocation("client/icons/checkmark-32.png");
+    private final ResourceLocationBridge checkmarkIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/checkmark-32.png");
 
     public CosmeticListElement(Cosmetic cosmetic, float f) {
         super(f);
@@ -30,7 +30,7 @@ public class CosmeticListElement extends AbstractModulesGuiElement {
         }
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         if (this.cosmetic.getType().equals("cape")) {
-            Minecraft.getMinecraft().getTextureManager().bindTexture(this.cosmetic.getLocation());
+            Ref.getMinecraft().bridge$getTextureManager().bridge$bindTexture(this.cosmetic.getLocation());
             GL11.glPushMatrix();
             GL11.glTranslatef(this.x + 20, this.y + 7, 0.0f);
             GL11.glScalef(0.29591838f * 0.8448276f, 8.571428f * 0.015166666f, 0.22222222f * 1.125f);
@@ -53,7 +53,7 @@ public class CosmeticListElement extends AbstractModulesGuiElement {
         boolean bl;
         boolean bl2 = bl = mouseX > this.x && mouseX < this.x + this.width && mouseY > this.y && mouseY < this.y + this.height;
         if (bl) {
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             if (this.cosmetic.isEquipped()) {
                 this.cosmetic.setEquipped(false);
             } else if (this.cosmetic.getName().equals("cape")) {

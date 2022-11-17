@@ -8,8 +8,6 @@ import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.event.type.TickEvent;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -22,7 +20,7 @@ import java.util.UUID;
 public class VoiceChat {
     MinecraftBridge minecraft = Ref.getMinecraft();
     CheatBreaker cheatbreaker = CheatBreaker.getInstance();
-    private final ResourceLocationBridge microphoneIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/microphone-64.png");
+    private final ResourceLocationBridge microphoneIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/microphone-64.png");
     private final Map<VoiceUser, Long> userLastSpoken = new HashMap<>();
     private boolean isTalking;
     public boolean checkMicVolume;
@@ -64,8 +62,8 @@ public class VoiceChat {
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f, f2, f + (float)110, f2 + (float)18, -1356454362, -1355664846, -1356191190);
         }
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        ResourceLocationBridge resourceLocation = CheatBreaker.getInstance().getHeadLocation(string);
-        RenderUtil.drawIcon(resourceLocation, (float)7, f + 2.0f, f2 + 2.0f);
+        ResourceLocationBridge ResourceLocationBridge = CheatBreaker.getInstance().getHeadLocation(string);
+        RenderUtil.drawIcon(ResourceLocationBridge, (float)7, f + 2.0f, f2 + 2.0f);
         FontRegistry.getPlayRegular16px().drawString(string, f + (float)22, f2 + (float)4, -1);
     }
 
@@ -86,7 +84,7 @@ public class VoiceChat {
             CheatBreaker.getInstance().getVoiceChatManager().setTalking(false);
             CheatBreaker.getInstance().sendSound("voice_up");
         }
-        if (!this.isTalking && this.minecraft.bridge$isInGameHasFocus() && this.isKeyDown(this.cheatbreaker.getGlobalSettings().pushToTalk.getKeyCode())) {
+        if (!this.isTalking && this.minecraft.bridge$isInGameHasFocus() && this.isKeyDown(this.cheatbreaker.getGlobalSettings().pushToTalk.bridge$getKeyCode())) {
             this.isTalking = true;
             if (checkMicVolume && (Integer) CheatBreaker.getInstance().getGlobalSettings().microphoneVolume.getValue() < 10) {
                 CheatBreaker.getInstance().getModuleManager().notifications.queueNotification("info", "Your microphone is muted.", 3000L);
@@ -95,7 +93,7 @@ public class VoiceChat {
                 CheatBreaker.getInstance().getVoiceChatManager().setTalking(true);
                 CheatBreaker.getInstance().sendSound("voice_down");
             }
-        } else if (this.isTalking && this.minecraft.bridge$isInGameHasFocus() && !this.isKeyDown(this.cheatbreaker.getGlobalSettings().pushToTalk.getKeyCode())) {
+        } else if (this.isTalking && this.minecraft.bridge$isInGameHasFocus() && !this.isKeyDown(this.cheatbreaker.getGlobalSettings().pushToTalk.bridge$getKeyCode())) {
             this.isTalking = false;
             CheatBreaker.getInstance().getVoiceChatManager().setTalking(false);
             CheatBreaker.getInstance().sendSound("voice_up");

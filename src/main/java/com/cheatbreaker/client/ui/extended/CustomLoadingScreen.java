@@ -21,7 +21,7 @@ public class CustomLoadingScreen extends GuiScreen {
         Color startColor = new Color(0, 0, 0, 169);
         Color endColor = new Color(43, 43, 43, 97);
 
-        ScaledResolutionBridge sr = Ref.getInstanceCreator().createScaledResolution();
+        ScaledResolutionBridge sr = Ref.getInstanceCreator().createScaledResolutionBridge();
 
         Ref.modified$drawRect(0f, 0f, sr.bridge$getScaledWidth(), sr.bridge$getScaledHeight(), 0xFF000000);
         Ref.modified$drawGradientRect(0f, 0f, sr.bridge$getScaledWidth(), sr.bridge$getScaledHeight(), startColor.getRGB(), endColor.getRGB());

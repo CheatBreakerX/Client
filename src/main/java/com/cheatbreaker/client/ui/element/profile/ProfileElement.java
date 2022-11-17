@@ -11,7 +11,7 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.io.File;
@@ -23,9 +23,9 @@ public class ProfileElement extends AbstractModulesGuiElement {
     public final Profile profile;
     private final AbstractScrollableElement parent;
     private int IlllIllIlIIIIlIIlIIllIIIl = 0;
-    private final ResourceLocation deleteIcon = new ResourceLocation("client/icons/delete-64.png");
-    private final ResourceLocation arrowIcon = new ResourceLocation("client/icons/right.png");
-    private final ResourceLocation pencilIcon = new ResourceLocation("client/icons/pencil-64.png");
+    private final ResourceLocationBridge deleteIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/delete-64.png");
+    private final ResourceLocationBridge arrowIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/right.png");
+    private final ResourceLocationBridge pencilIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/pencil-64.png");
 
     public ProfileElement(AbstractScrollableElement parent, int n, Profile profile, float f) {
         super(f);
@@ -134,13 +134,13 @@ public class ProfileElement extends AbstractModulesGuiElement {
         ProfilesListElement iIlIlIlllIllIIlIllIIlIIlI = (ProfilesListElement)this.parent;
         if (this.profile.isEditable() && (bl3 || bl4)) {
             if (bl3 && ((ProfilesListElement)this.parent).lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this) != 0 && ((ProfilesListElement)this.parent).lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this) > 1) {
-                Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                 this.profile.setIndex(iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this) - 1);
                 iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.get((int)(iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.indexOf((Object)this) - 1)).profile.setIndex(iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this));
                 Collections.swap(iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI, iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this), iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this) - 1);
             }
             if (bl4 && iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this) != iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.size() - 1) {
-                Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
                 this.profile.setIndex(iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this) + 1);
                 iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.get((int)(iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.indexOf((Object)this) + 1)).profile.setIndex(iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this));
                 Collections.swap(iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI, iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this), iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this) + 1);
@@ -148,21 +148,21 @@ public class ProfileElement extends AbstractModulesGuiElement {
         } else if (this.profile.isEditable() && bl) {
             File file;
             File file2;
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             if (CheatBreaker.getInstance().activeProfile == this.profile) {
                 CheatBreaker.getInstance().activeProfile = CheatBreaker.getInstance().profiles.get(0);
                 CheatBreaker.getInstance().configManager.readProfile(CheatBreaker.getInstance().activeProfile.getName());
                 CheatBreaker.getInstance().moduleManager.keyStrokes.initialize();
             }
-            if (this.profile.isEditable() && (file2 = (file = new File(Minecraft.getMinecraft().mcDataDir + File.separator + "config" + File.separator + "client" + File.separator + "profiles")).exists() || file.mkdirs() ? new File(file + File.separator + this.profile.getName().toLowerCase() + ".cfg") : null).exists() && file2.delete()) {
+            if (this.profile.isEditable() && (file2 = (file = new File(Ref.getMinecraft().mcDataDir + File.separator + "config" + File.separator + "client" + File.separator + "profiles")).exists() || file.mkdirs() ? new File(file + File.separator + this.profile.getName().toLowerCase() + ".cfg") : null).exists() && file2.delete()) {
                 CheatBreaker.getInstance().profiles.removeIf(ilIIlIIlIIlllIlIIIlIllIIl -> ilIIlIIlIIlllIlIIIlIllIIl == this.profile);
                 iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.removeIf(iIlIlllllIIIlIIllIllIlIlI -> iIlIlllllIIIlIIllIllIlIlI == this);
             }
         } else if (this.profile.isEditable() && bl2) {
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
-            Minecraft.getMinecraft().displayGuiScreen(new CBProfileCreateGui(this.profile, CBModulesGui.instance, (ProfilesListElement)this.parent, this.IllIIIIIIIlIlIllllIIllIII, this.scale));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            Ref.getMinecraft().displayGuiScreen(new CBProfileCreateGui(this.profile, CBModulesGui.instance, (ProfilesListElement)this.parent, this.IllIIIIIIIlIlIllllIIllIII, this.scale));
         } else if (CheatBreaker.getInstance().activeProfile != this.profile) {
-            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             CheatBreaker.getInstance().configManager.writeProfile(CheatBreaker.getInstance().activeProfile.getName());
             CheatBreaker.getInstance().activeProfile = this.profile;
             CheatBreaker.getInstance().configManager.readProfile(CheatBreaker.getInstance().activeProfile.getName());

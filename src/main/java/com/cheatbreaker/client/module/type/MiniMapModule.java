@@ -1,5 +1,6 @@
 package com.cheatbreaker.client.module.type;
 
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.module.AbstractModule;
@@ -7,7 +8,7 @@ import com.cheatbreaker.client.module.ModuleRule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
 import com.thevoxelbox.voxelmap.VoxelMap;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.ResourceLocationBridge;
 
 public class MiniMapModule extends AbstractModule {
 
@@ -24,7 +25,7 @@ public class MiniMapModule extends AbstractModule {
         this.isEditable = false;
         this.setDefaultAnchor(CBGuiAnchor.RIGHT_TOP);
         this.voxelMap = new VoxelMap(true, true);
-        this.setPreviewIcon(new ResourceLocation("client/icons/mods/zans.png"), 42, 42);
+        this.setPreviewIcon(Ref.getInstanceCreator().createResourceLocationBridge("client/icons/mods/zans.png"), 42, 42);
         this.addEvent(GuiDrawEvent.class, this::onDraw);
     }
 
@@ -75,7 +76,7 @@ public class MiniMapModule extends AbstractModule {
                 this.setDimensions((int)((float)175 * f), (int)((float)175 * f));
             }
         }
-        this.voxelMap.onTickInGame(Minecraft.getMinecraft());
+        this.voxelMap.onTickInGame(Ref.getMinecraft());
     }
 
 

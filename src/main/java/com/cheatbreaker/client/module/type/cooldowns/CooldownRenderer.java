@@ -15,7 +15,7 @@ public class CooldownRenderer {
     private final int itemId;
     private long duration;
     private long time;
-    private final Minecraft IIIIllIIllIIIIllIllIIIlIl = Minecraft.getMinecraft();
+    private final Minecraft IIIIllIIllIIIIllIllIIIlIl = Ref.getMinecraft();
     private final ItemStack item;
 
     public CooldownRenderer(String name, int itemId, long duration) {
