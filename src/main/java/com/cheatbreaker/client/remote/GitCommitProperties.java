@@ -3,8 +3,6 @@ package com.cheatbreaker.client.remote;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import lombok.Getter;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocationBridge;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +13,7 @@ public class GitCommitProperties {
         try {
             final ResourceLocationBridge location = Ref.getInstanceCreator().createResourceLocationBridge("client/properties/app.properties");
             final Properties properties = new Properties();
-            InputStream inputStream = Ref.getMinecraft().bridge$getResourceManager().bridge$getResource(ResourceLocationBridge).bridge$getInputStream();
+            InputStream inputStream = Ref.getMinecraft().bridge$getResourceManager().bridge$getResource(location).bridge$getInputStream();
 
             if (inputStream == null) {
                 gitCommit = "?";
