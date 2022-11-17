@@ -50,7 +50,7 @@ public class ThreadUpdateStream implements Runnable
                             sndSystem.setVolume(source, (Integer) CheatBreaker.getInstance().globalSettings.speakerVolume.getValue() / 100f * stream.volume * 0.01f);
                         }
                     }
-                    mc.func_152344_a(() -> stream.proxy.update(ThreadUpdateStream.this.mc.bridge$getTheWorld()));
+                    mc.bridge$func_152344_a(() -> stream.proxy.update(ThreadUpdateStream.this.mc.bridge$getTheWorld()));
                 }
                 try {
                     synchronized (this) {

@@ -1,16 +1,17 @@
 package com.cheatbreaker.client.util.teammates;
 
-import net.minecraft.util.Vec3;
+import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.Vec3Bridge;
 
 import java.awt.*;
 
 public class Teammate {
     private String lIIIIlIIllIIlIIlIIIlIIllI;
     private boolean lIIIIIIIIIlIllIIllIlIIlIl = false;
-    private Vec3 IlllIIIlIlllIllIlIIlllIlI;
-    private long IIIIllIlIIIllIlllIlllllIl;
+    private Vec3Bridge vector3D;
+    private long lastUpdated;
     private Color IIIIllIIllIIIIllIllIIIlIl;
-    private long IlIlIIIlllIIIlIlllIlIllIl;
+    private long waitTime;
 
     public void lIIIIlIIllIIlIIlIIIlIIllI(Color color) {
         this.IIIIllIIllIIIIllIllIIIlIl = color;
@@ -19,21 +20,21 @@ public class Teammate {
     public Teammate(String string, boolean bl) {
         this.lIIIIlIIllIIlIIlIIIlIIllI = string;
         this.lIIIIIIIIIlIllIIllIlIIlIl = bl;
-        this.IIIIllIlIIIllIlllIlllllIl = System.currentTimeMillis();
+        this.lastUpdated = System.currentTimeMillis();
     }
 
-    public void lIIIIlIIllIIlIIlIIIlIIllI(double d, double d2, double d3, long l) {
-        this.IlllIIIlIlllIllIlIIlllIlI = Vec3.createVectorHelper(d, d2, d3);
-        this.IIIIllIlIIIllIlllIlllllIl = System.currentTimeMillis();
-        this.IlIlIIIlllIIIlIlllIlIllIl = l;
+    public void reset(double x, double y, double z, long waitTime) {
+        this.vector3D = Ref.getInstanceCreator().createVec3(x, y, z);
+        this.lastUpdated = System.currentTimeMillis();
+        this.waitTime = waitTime;
     }
 
-    public Vec3 getVector3D() {
-        return this.IlllIIIlIlllIllIlIIlllIlI;
+    public Vec3Bridge getVector3D() {
+        return this.vector3D;
     }
 
     public long lIIIIIIIIIlIllIIllIlIIlIl() {
-        return this.IIIIllIlIIIllIlllIlllllIl;
+        return this.lastUpdated;
     }
 
     public String IlllIIIlIlllIllIlIIlllIlI() {
@@ -41,7 +42,7 @@ public class Teammate {
     }
 
     public long IIIIllIlIIIllIlllIlllllIl() {
-        return this.IlIlIIIlllIIIlIlllIlIllIl;
+        return this.waitTime;
     }
 
     public boolean IIIIllIIllIIIIllIllIIIlIl() {

@@ -1,8 +1,8 @@
 package com.cheatbreaker.bridge.client.renderer.entity;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocationBridge;
+import com.cheatbreaker.bridge.entity.EntityBridge;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 
 public interface RenderBridge {
-    ResourceLocationBridge bridge$getEntityTexture(Entity entity);
+    ResourceLocationBridge bridge$getEntityTexture(EntityBridge entity);
 }

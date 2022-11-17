@@ -1,5 +1,6 @@
 package com.cheatbreaker.client.nethandler;
 
+import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.event.type.PluginMessageEvent;
 import com.cheatbreaker.client.module.AbstractModule;
@@ -113,7 +114,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
                     ChatComponentText chatComponentText2 = new ChatComponentText("Received: " + packet.getClass().getSimpleName());
                     chatComponentText2.getChatStyle().setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(new Gson().toJson(packet))));
                     chatComponentText.appendSibling(chatComponentText2);
-                    Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(chatComponentText);
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(chatComponentText);
                 }
             }
         }
@@ -216,7 +217,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
                 double d = entry.getValue().get("x");
                 double d2 = entry.getValue().get("y") + (double)2;
                 double d3 = entry.getValue().get("z");
-                teammate.lIIIIlIIllIIlIIlIIIlIIllI(d, d2, d3, l);
+                teammate.reset(d, d2, d3, l);
             }
             catch (Exception exception) {
                 exception.printStackTrace();
@@ -374,10 +375,10 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
                         voiceChannel2.removeListener(packet.getUuid());
                     }
                     ChatComponentText chatComponentText = new ChatComponentText(EnumChatFormatting.AQUA + "Joined " + voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() + " channel. Press '" + Keyboard.getKeyName(CheatBreaker.getInstance().getGlobalSettings().pushToTalk.getKeyCode()) + "' to talk!" + EnumChatFormatting.RESET);
-                    Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(chatComponentText);
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(chatComponentText);
                 } else if (this.voiceChannel == voiceChannel) {
                     ChatComponentText chatComponentText = new ChatComponentText(EnumChatFormatting.AQUA + packet.getName() + EnumChatFormatting.AQUA + " joined " + voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() + " channel. Press '" + Keyboard.getKeyName(CheatBreaker.getInstance().getGlobalSettings().openVoiceMenu.getKeyCode()) + "'!" + EnumChatFormatting.RESET);
-                    Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(chatComponentText);
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(chatComponentText);
                 }
                 voiceChannel.addToListening(packet.getUuid(), packet.getName());
                 break;
@@ -386,7 +387,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
                 // remove listening
                 if (this.voiceChannel == voiceChannel && !packet.getUuid().toString().equals(Ref.getMinecraft().bridge$getSession().getPlayerID())) {
                     ChatComponentText chatComponentText = new ChatComponentText(EnumChatFormatting.AQUA + packet.getName() + EnumChatFormatting.AQUA + " left " + voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() + " channel. Press '" + Keyboard.getKeyName(CheatBreaker.getInstance().getGlobalSettings().openVoiceMenu.getKeyCode()) + "'!" + EnumChatFormatting.RESET);
-                    Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(chatComponentText);
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(chatComponentText);
                 }
                 voiceChannel.removeListener(packet.getUuid());
             }
@@ -470,11 +471,11 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
     public void sendPacketToQueue(Packet packet) {
         Object object;
         if (packet != null && CheatBreaker.getInstance().getGlobalSettings().isDebug) {
-            object = new ChatComponentText(EnumChatFormatting.RED + "[C" + EnumChatFormatting.WHITE + "B" + EnumChatFormatting.RED + "] " + EnumChatFormatting.RESET);
-            ChatComponentText chatComponentText = new ChatComponentText(EnumChatFormatting.GRAY + "Sent: " + EnumChatFormatting.WHITE + packet.getClass().getSimpleName());
+            object = new ChatComponentText(EnumChatFormattingBridge.RED + "[C" + EnumChatFormattingBridge.WHITE + "B" + EnumChatFormattingBridge.RED + "] " + EnumChatFormattingBridge.RESET);
+            ChatComponentText chatComponentText = new ChatComponentText(EnumChatFormattingBridge.GRAY + "Sent: " + EnumChatFormattingBridge.WHITE + packet.getClass().getSimpleName());
             chatComponentText.getChatStyle().setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(new Gson().toJson(packet))));
             ((ChatComponentStyle)object).appendSibling(chatComponentText);
-            Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage((IChatComponent)object);
+            Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage((IChatComponent)object);
         }
         object = new C17PacketCustomPayload(CheatBreaker.getInstance().getPluginMessageChannel(), Packet.getPacketData(packet));
         Ref.getMinecraft().bridge$getThePlayer().sendQueue.addToSendQueue((net.minecraft.network.Packet) object);

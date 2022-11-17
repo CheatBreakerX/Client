@@ -1,11 +1,11 @@
 package com.cheatbreaker.bridge.client.renderer.entity;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.entity.EntityLivingBase;
+import com.cheatbreaker.bridge.client.model.ModelBaseBridge;
+import com.cheatbreaker.bridge.entity.EntityLivingBaseBridge;
 
 public interface RendererLivingEntityBridge {
-    ModelBase bridge$getRenderPassModel();
-    ModelBase bridge$getMainModel();
-    int bridge$shouldRenderPass(EntityLivingBase entity, int i, float v);
-    void bridge$preRenderCallback(EntityLivingBase par1EntityLivingBase, float v);
+    ModelBaseBridge bridge$getRenderPassModel();
+    ModelBaseBridge bridge$getMainModel();
+    int bridge$shouldRenderPass(EntityLivingBaseBridge entity, int i, float v);
+    void bridge$preRenderCallback(EntityLivingBaseBridge par1EntityLivingBase, float v);
 }

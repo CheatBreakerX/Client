@@ -7,4 +7,5 @@ public interface GameSettingsBridge {
     String bridge$getKeyDisplayString(int keyCode);
     KeyBindingBridge[] bridge$getKeyBindings();
     void bridge$setKeyBindings(KeyBindingBridge[] keyBindings);
+    int bridge$getThirdPersonView();
 }

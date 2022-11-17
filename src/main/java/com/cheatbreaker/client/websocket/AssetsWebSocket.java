@@ -1,6 +1,10 @@
 package com.cheatbreaker.client.websocket;
 
+import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.entity.AbstractClientPlayerBridge;
+import com.cheatbreaker.bridge.entity.player.EntityPlayerBridge;
+import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.config.Profile;
 import com.cheatbreaker.client.nethandler.ByteBufWrapper;
@@ -55,7 +59,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class AssetsWebSocket extends WebSocketClient {
-    private final Minecraft minecraft = Ref.getMinecraft();
+    private final MinecraftBridge minecraft = Ref.getMinecraft();
     private final List<String> playersCache = new ArrayList<>();
 
     public AssetsWebSocket(URI uRI, Map<String,String> map) {
@@ -83,7 +87,7 @@ public class AssetsWebSocket extends WebSocketClient {
             packet.read(buf);
             packet.handle(this);
 
-            Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Handling incoming packet from websocket: " + packetClass.getCanonicalName()));
+            Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(new ChatComponentText("Handling incoming packet from websocket: " + packetClass.getCanonicalName()));
         }
         catch (Exception exception) {
             System.out.println("Error from: " + packetClass);
@@ -109,13 +113,13 @@ public class AssetsWebSocket extends WebSocketClient {
 
     }
 
-    public void handleConsoleOutput(WSPacketConsole packetRawConsoleOutput) {
-        CheatBreaker.getInstance().getConsoleLines().add(packetRawConsoleOutput.getOutput());
-        System.out.println(packetRawConsoleOutput.getOutput());
+    public void handleConsoleOutput(WSPacketConsole packet) {
+        CheatBreaker.getInstance().getConsoleLines().add(packet.getOutput());
+        System.out.println(packet.getOutput());
     }
 
-    public void handleFriendRemove(WSPacketClientFriendRemove packetFriendRemove) {
-        String string = packetFriendRemove.getPlayerId();
+    public void handleFriendRemove(WSPacketClientFriendRemove packet) {
+        String string = packet.getPlayerId();
         Friend friend = CheatBreaker.getInstance().getFriendsManager().getFriend(string);
         if (friend != null) {
             CheatBreaker.getInstance().getFriendsManager().getFriends().remove(string);
@@ -123,15 +127,15 @@ public class AssetsWebSocket extends WebSocketClient {
         }
     }
 
-    public void handleMessage(WSPacketMessage packetMessage) {
-        String playerId = packetMessage.getPlayerId();
-        String message = packetMessage.getMessage();
+    public void handleMessage(WSPacketMessage packet) {
+        String playerId = packet.getPlayerId();
+        String message = packet.getMessage();
         Friend friend = CheatBreaker.getInstance().getFriendsManager().getFriends().get(playerId);
         if (friend != null) {
             CheatBreaker.getInstance().getFriendsManager().addUnreadMessage(friend.getPlayerId(), message);
             if (CheatBreaker.getInstance().getStatus() != Status.BUSY) {
                 CheatBreaker.getInstance().sendSound("message");
-                Alert.displayMessage(EnumChatFormatting.GREEN + friend.getName() + EnumChatFormatting.RESET + " says:", message);
+                Alert.displayMessage(EnumChatFormattingBridge.GREEN + friend.getName() + EnumChatFormattingBridge.RESET + " says:", message);
             }
             for (AbstractElement element : OverlayGui.getInstance().getElements()) {
                 if (!(element instanceof MessagesElement) || ((MessagesElement)element).getFriend() != friend) continue;
@@ -153,9 +157,9 @@ public class AssetsWebSocket extends WebSocketClient {
         }
     }
 
-    public void handleBulkFriends(WSPacketBulkFriends packetBulkFriends) {
+    public void handleBulkFriends(WSPacketBulkFriends packet) {
         CheatBreaker.getInstance().getFriendsManager().getFriendRequests().clear();
-        JsonArray bulkArray = packetBulkFriends.getBulkArray();
+        JsonArray bulkArray = packet.getBulkArray();
         for (JsonElement jsonElement : bulkArray) {
             JsonObject jsonObject = jsonElement.getAsJsonObject();
             String playerId = jsonObject.get("uuid").getAsString();
@@ -188,10 +192,10 @@ public class AssetsWebSocket extends WebSocketClient {
         }
     }
 
-    public void handleFriendUpdate(WSPacketFriendUpdate packetFriendUpdate) {
-        String playerId = packetFriendUpdate.getPlayerId();
-        String name = packetFriendUpdate.getName();
-        boolean online = packetFriendUpdate.isOnline();
+    public void handleFriendUpdate(WSPacketFriendUpdate packet) {
+        String playerId = packet.getPlayerId();
+        String name = packet.getName();
+        boolean online = packet.isOnline();
         Friend friend = CheatBreaker.getInstance().getFriendsManager().getFriends().get(playerId);
         if (friend == null) {
             friend = Friend.builder()
@@ -203,8 +207,8 @@ public class AssetsWebSocket extends WebSocketClient {
             CheatBreaker.getInstance().getFriendsManager().getFriends().put(playerId, friend);
             OverlayGui.getInstance().handleFriend(friend, true);
         }
-        if (packetFriendUpdate.getOfflineSince() < 10L) {
-            int n = (int)packetFriendUpdate.getOfflineSince();
+        if (packet.getOfflineSince() < 10L) {
+            int n = (int)packet.getOfflineSince();
             Status cBStatusEnum = Status.ONLINE;
             for (Status cBStatusEnum2 : Status.values()) {
                 if (cBStatusEnum2.ordinal() != n) continue;
@@ -216,18 +220,18 @@ public class AssetsWebSocket extends WebSocketClient {
         friend.setName(name);
         OverlayGui.getInstance().getFriendsListElement().updateSize();
         if (!online) {
-            friend.setOfflineSince(packetFriendUpdate.getOfflineSince());
+            friend.setOfflineSince(packet.getOfflineSince());
         }
     }
 
-    public void handleFriendsUpdate(WSPacketFriendsUpdate packetFriendsUpdate) {
+    public void handleFriendsUpdate(WSPacketFriendsUpdate packet) {
         String name;
         String playerId;
         CheatBreaker.getInstance().getFriendsManager().getFriends().clear();
-        Map<String, List<String>> onlineMap = packetFriendsUpdate.getOnlineMap();
-        Map<String, List<String>> offlineMap = packetFriendsUpdate.getOfflineMap();
-        CheatBreaker.getInstance().setConsoleAllowed(packetFriendsUpdate.isConsoleAllowed());
-        CheatBreaker.getInstance().setAcceptingFriendRequests(packetFriendsUpdate.isAcceptingFriendRequests());
+        Map<String, List<String>> onlineMap = packet.getOnlineMap();
+        Map<String, List<String>> offlineMap = packet.getOfflineMap();
+        CheatBreaker.getInstance().setConsoleAllowed(packet.isConsoleAllowed());
+        CheatBreaker.getInstance().setAcceptingFriendRequests(packet.isAcceptingFriendRequests());
         for (Map.Entry<String, List<String>> online : onlineMap.entrySet()) {
             playerId = online.getKey();
             name = online.getValue().get(0);
@@ -264,11 +268,11 @@ public class AssetsWebSocket extends WebSocketClient {
         }
     }
 
-    public EntityPlayer theWorld$getPlayerFromUUID(String uuid) {
-        for (int i = 0; i < this.minecraft.bridge$getTheWorld().playerEntities.size(); ++i) {
-            EntityPlayer entityplayer = (EntityPlayer)this.minecraft.bridge$getTheWorld().playerEntities.get(i);
+    public EntityPlayerBridge theWorld$getPlayerFromUUID(String uuid) {
+        for (int i = 0; i < this.minecraft.bridge$getTheWorld().bridge$getPlayerEntities().size(); ++i) {
+            EntityPlayerBridge entityplayer = this.minecraft.bridge$getTheWorld().bridge$getPlayerEntities().get(i);
 
-            if (uuid.replaceAll("-", "").equals(entityplayer.getUniqueID().toString().replaceAll("-", ""))) {
+            if (uuid.replaceAll("-", "").equals(entityplayer.bridge$getUniqueID().toString().replaceAll("-", ""))) {
                 return entityplayer;
             }
         }
@@ -276,38 +280,38 @@ public class AssetsWebSocket extends WebSocketClient {
         return null;
     }
 
-    public void handleCosmetics(WSPacketCosmetics packetCosmetics) {
-        String string = packetCosmetics.getPlayerId();
+    public void handleCosmetics(WSPacketCosmetics packet) {
+        String string = packet.getPlayerId();
         CheatBreaker.getInstance().getCosmetics().removeIf(cosmetic -> cosmetic.getPlayerId().equals(string));
         CheatBreaker.getInstance().removeCosmeticsFromPlayer(string);
-        for (Cosmetic cosmetic : packetCosmetics.getCosmetics()) {
+        for (Cosmetic cosmetic : packet.getCosmetics()) {
             try {
                 CheatBreaker.getInstance().getCosmetics().add(cosmetic);
-                EntityPlayer player = theWorld$getPlayerFromUUID(string);
+                EntityPlayerBridge player = theWorld$getPlayerFromUUID(string);
 
 //                if (!cosmetic.isEquipped() || !(player instanceof AbstractClientPlayer))
 //                    continue;
-                if (!(player instanceof AbstractClientPlayer)) {
+                if (!(player instanceof AbstractClientPlayerBridge)) {
                     CheatBreaker.getInstance().cbInfo("Player " + string + " (str) is not instance of AbstractClientPlayer!");
-                    Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Player " + string + " (str) is not instance of AbstractClientPlayer!"));
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(new ChatComponentText("Player " + string + " (str) is not instance of AbstractClientPlayer!"));
                     continue;
                 }
 
                 if (!cosmetic.isEquipped()) {
                     CheatBreaker.getInstance().cbInfo("System tried to apply cape to " + player.getDisplayName() + "\u00a7r using " + cosmetic.getLocation() + " but failed as it is not equipped.");
-                    Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("System tried to apply cape to " + player.getDisplayName() + "\u00a7r using " + cosmetic.getLocation() + " but failed as it is not equipped."));
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(new ChatComponentText("System tried to apply cape to " + player.getDisplayName() + "\u00a7r using " + cosmetic.getLocation() + " but failed as it is not equipped."));
                     continue;
                 }
 
                 CheatBreaker.getInstance().cbInfo("Player " + string + " passed checks!");
-                Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Player " + string + " passed checks!"));
+                Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(new ChatComponentText("Player " + string + " passed checks!"));
 
                 if (cosmetic.getType().equals("cape")) {
-                    ((AbstractClientPlayerBridge) ((AbstractClientPlayer) player)).bridge$setLocationCape(cosmetic.getLocation());
-                    Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Set cape location for " + player.getDisplayName() + "\u00a7r to " + cosmetic.getLocation()));
+                    ((AbstractClientPlayerBridge) player).bridge$setLocationCape(cosmetic.getLocation());
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(new ChatComponentText("Set cape location for " + player.getDisplayName() + "\u00a7r to " + cosmetic.getLocation()));
                 } else {
                     CheatBreaker.getInstance().cbInfo("Type is not cape!");
-                    Ref.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Type is not cape!"));
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(new ChatComponentText("Type is not cape!"));
                 }
             }
             catch (Exception exception) {
@@ -332,20 +336,20 @@ public class AssetsWebSocket extends WebSocketClient {
         exception.printStackTrace();
     }
 
-    public void handleFormattedConsoleOutput(WSPacketFormattedConsoleOutput packetFormattedConsoleOutput) {
-        String string = packetFormattedConsoleOutput.getPrefix();
-        String string2 = packetFormattedConsoleOutput.getContent();
-        CheatBreaker.getInstance().getConsoleLines().add(EnumChatFormatting.DARK_GRAY + "[" + EnumChatFormatting.RESET + packetFormattedConsoleOutput.getPrefix() + EnumChatFormatting.DARK_GRAY + "] " + EnumChatFormatting.RESET + packetFormattedConsoleOutput.getContent());
+    public void handleFormattedConsoleOutput(WSPacketFormattedConsoleOutput packet) {
+        String string = packet.getPrefix();
+        String string2 = packet.getContent();
+        CheatBreaker.getInstance().getConsoleLines().add(EnumChatFormattingBridge.DARK_GRAY + "[" + EnumChatFormattingBridge.RESET + packet.getPrefix() + EnumChatFormattingBridge.DARK_GRAY + "] " + EnumChatFormattingBridge.RESET + packet.getContent());
         Alert.displayMessage(string, string2);
     }
 
     // checks if cracked?? if it's returning before sending a response
-    public void handleJoinServer(WSPacketJoinServer packetJoinServer) {
+    public void handleJoinServer(WSPacketJoinServer packet) {
         SecretKey secretKey = CryptManager.createNewSharedKey();
-        PublicKey publicKey = packetJoinServer.getPublicKey();
+        PublicKey publicKey = packet.getPublicKey();
         String string = new BigInteger(CryptManager.getServerIdHash("", publicKey, secretKey)).toString(16);
         try {
-            this.createSessionService().joinServer(this.minecraft.getSession().func_148256_e(), this.minecraft.getSession().getToken(), string);
+            this.createSessionService().joinServer(this.minecraft.bridge$getSession().bridge$func_148256_e(), this.minecraft.bridge$getSession().bridge$getToken(), string);
         }
         catch (AuthenticationUnavailableException authenticationUnavailableException) {
             Alert.displayMessage("Authentication Unavailable", authenticationUnavailableException.getMessage());
@@ -364,10 +368,10 @@ public class AssetsWebSocket extends WebSocketClient {
         }
         try {
             ByteBufWrapper buf = new ByteBufWrapper(Unpooled.buffer());
-            WSPacketClientJoinServerResponse response = new WSPacketClientJoinServerResponse(secretKey, publicKey, packetJoinServer.getEncryptedPublicKey());
+            WSPacketClientJoinServerResponse response = new WSPacketClientJoinServerResponse(secretKey, publicKey, packet.getEncryptedPublicKey());
             response.write(buf);
             this.sendToServer(response);
-            File file = new File(Ref.getMinecraft().mcDataDir + File.separator + "config" + File.separator + "client" + File.separator + "profiles.txt");
+            File file = new File(Ref.getMinecraft().bridge$getMcDataDir() + File.separator + "config" + File.separator + "client" + File.separator + "profiles.txt");
             if (file.exists()) {
                 this.sendToServer(new WSPacketClientProfilesExist());
             }
@@ -378,7 +382,7 @@ public class AssetsWebSocket extends WebSocketClient {
     }
 
     private MinecraftSessionService createSessionService() {
-        return new YggdrasilAuthenticationService(this.minecraft.getProxy(), UUID.randomUUID().toString()).createMinecraftSessionService();
+        return new YggdrasilAuthenticationService(this.minecraft.bridge$getProxy(), UUID.randomUUID().toString()).createMinecraftSessionService();
     }
 
     @Override
@@ -389,12 +393,12 @@ public class AssetsWebSocket extends WebSocketClient {
         super.send(string);
     }
 
-    public void lIIIIlIIllIIlIIlIIIlIIllI(AbstractClientPlayer abstractClientPlayer) {
-        if (abstractClientPlayer.getGameProfile() == null || this.minecraft.bridge$getThePlayer() == null) {
+    public void lIIIIlIIllIIlIIlIIIlIIllI(AbstractClientPlayerBridge player) {
+        if (player.bridge$getGameProfile() == null || this.minecraft.bridge$getThePlayer() == null) {
             return;
         }
-        String string = abstractClientPlayer.getUniqueID().toString();
-        if (!this.playersCache.contains(string) && !string.equals(this.minecraft.bridge$getThePlayer().getUniqueID().toString())) {
+        String string = player.bridge$getUniqueID().toString();
+        if (!this.playersCache.contains(string) && !string.equals(this.minecraft.bridge$getThePlayer().bridge$getUniqueID().toString())) {
             this.playersCache.add(string);
             this.sendToServer(new WSPacketClientPlayerJoin(string));
         }
@@ -408,12 +412,12 @@ public class AssetsWebSocket extends WebSocketClient {
         this.sendToServer(new WSPacketFriendUpdate("", "", CheatBreaker.getInstance().getStatus().ordinal(), true));
     }
 
-    public void handleFriendRequestUpdate(WSPacketClientFriendRequestUpdate packetFriendRequestUpdate) {
-        if (!packetFriendRequestUpdate.isAdd()) {
-            CheatBreaker.getInstance().getFriendsManager().getFriendRequests().remove(packetFriendRequestUpdate.lIIIIIIIIIlIllIIllIlIIlIl());
+    public void handleFriendRequestUpdate(WSPacketClientFriendRequestUpdate packet) {
+        if (!packet.isAdd()) {
+            CheatBreaker.getInstance().getFriendsManager().getFriendRequests().remove(packet.lIIIIIIIIIlIllIIllIlIIlIl());
             FriendRequestElement requestElement = null;
             for (FriendRequestElement friendRequestElement : OverlayGui.getInstance().getFriendRequestsElement().getElements()) {
-                if (!friendRequestElement.getFriendRequest().getPlayerId().equals(packetFriendRequestUpdate.lIIIIIIIIIlIllIIllIlIIlIl())) continue;
+                if (!friendRequestElement.getFriendRequest().getPlayerId().equals(packet.lIIIIIIIIIlIllIIllIlIIlIl())) continue;
                 requestElement = friendRequestElement;
             }
             if (requestElement != null) {
@@ -423,10 +427,10 @@ public class AssetsWebSocket extends WebSocketClient {
         }
     }
 
-    public void handleKeyRequest(WSPacketKeyRequest packetKeyRequest) {
+    public void handleKeyRequest(WSPacketKeyRequest packet) {
         try {
-            byte[] test = "a".getBytes(); // Message.i()
-            byte[] data = AssetsWebSocket.getKeyResponse(packetKeyRequest.getPublicKey(), test);
+            byte[] test = "a".getBytes();
+            byte[] data = AssetsWebSocket.getKeyResponse(packet.getPublicKey(), test);
             this.sendToServer(new WSPacketClientKeyResponse(data));
         }
         catch (Exception | UnsatisfiedLinkError throwable) {
@@ -441,14 +445,13 @@ public class AssetsWebSocket extends WebSocketClient {
         return cipher.doFinal(privateKey);
     }
 
-    // crashes the client in obnoxious ways.
-    public void handleForceCrash(WSPacketForceCrash packetForceCrash) {
+    public void handleForceCrash(WSPacketForceCrash packet) {
 //        Ref.getMinecraft().forceCrash = true; // NOT TODO: FIX
     }
 
     public void lIIIIlIIllIIlIIlIIIlIIllI(Profile iIlIllllIIlIlIIIlllIIllIl) {
         try {
-            File file = new File(Ref.getMinecraft().mcDataDir + File.separator + "config" + File.separator + "client" + File.separator + "profiles.txt");
+            File file = new File(Ref.getMinecraft().bridge$getMcDataDir() + File.separator + "config" + File.separator + "client" + File.separator + "profiles.txt");
             if (!file.exists()) {
                 file.createNewFile();
             }

@@ -6,4 +6,5 @@ public interface SessionBridge {
     String bridge$getUsername();
     String bridge$getPlayerID();
     GameProfile bridge$func_148256_e();
+    String bridge$getToken();
 }

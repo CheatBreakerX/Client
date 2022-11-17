@@ -1,14 +1,14 @@
 package com.cheatbreaker.bridge.client;
 
-import com.cheatbreaker.bridge.client.audio.ISoundBridge;
 import com.cheatbreaker.bridge.client.audio.SoundHandlerBridge;
+import com.cheatbreaker.bridge.client.entity.EntityClientPlayerMPBridge;
 import com.cheatbreaker.bridge.client.gui.FontRendererBridge;
+import com.cheatbreaker.bridge.client.gui.GuiIngameBridge;
 import com.cheatbreaker.bridge.client.multiplayer.WorldClientBridge;
 import com.cheatbreaker.bridge.client.renderer.EntityRendererBridge;
 import com.cheatbreaker.bridge.client.renderer.texture.TextureManagerBridge;
 import com.cheatbreaker.bridge.client.resources.IResourceManagerBridge;
 import com.cheatbreaker.bridge.client.settings.GameSettingsBridge;
-import com.cheatbreaker.bridge.entity.player.EntityPlayerBridge;
 import com.cheatbreaker.bridge.util.SessionBridge;
 import com.cheatbreaker.bridge.util.TimerBridge;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
@@ -24,7 +24,7 @@ public interface MinecraftBridge {
     void bridge$displayGuiScreen(CBGuiScreen screen);
     WorldClientBridge bridge$getTheWorld();
     GameSettingsBridge bridge$getGameSettings();
-    EntityPlayerBridge bridge$getThePlayer();
+    EntityClientPlayerMPBridge bridge$getThePlayer();
     SessionBridge bridge$getSession();
     File bridge$getMcDataDir();
     long bridge$getSystemTime();
@@ -37,4 +37,6 @@ public interface MinecraftBridge {
     int bridge$getDisplayWidth();
     int bridge$getDisplayHeight();
     void bridge$shutdown();
+    GuiIngameBridge bridge$getIngameGUI();
+    void bridge$func_152344_a(Runnable runnable);
 }

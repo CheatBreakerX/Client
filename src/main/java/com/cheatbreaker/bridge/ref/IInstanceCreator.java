@@ -7,6 +7,7 @@ import com.cheatbreaker.bridge.client.renderer.ThreadDownloadImageDataBridge;
 import com.cheatbreaker.bridge.client.renderer.texture.DynamicTextureBridge;
 import com.cheatbreaker.bridge.client.settings.KeyBindingBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
+import com.cheatbreaker.bridge.util.Vec3Bridge;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -23,4 +24,5 @@ public interface IInstanceCreator {
     DynamicTextureBridge createDynamicTexture(int i, int i1);
     ISoundBridge createSoundFromPSR(ResourceLocationBridge location, float volume);
     KeyBindingBridge createKeyBinding(String description, int keyCode, String category);
+    Vec3Bridge createVec3(double x, double y, double z);
 }

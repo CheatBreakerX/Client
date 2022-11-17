@@ -1,5 +1,7 @@
 package com.cheatbreaker.client.module.type;
 
+import com.cheatbreaker.bridge.potion.PotionBridge;
+import com.cheatbreaker.bridge.potion.PotionEffectBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.config.Setting;
@@ -19,8 +21,6 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class PotionStatusModule extends AbstractModule {
-
-    //public final Setting showInInventory;
     private final Setting showWhileTying;
     private final Setting showEffectName;
     private final Setting colorOptionsLabel;
@@ -65,11 +65,11 @@ public class PotionStatusModule extends AbstractModule {
 
     private void renderReal(GuiDrawEvent guiDrawEvent) {
         GL11.glPushMatrix();
-        if ((Boolean) this.showWhileTying.getValue() || !this.minecraft.ingameGUI.getChatGUI().getChatOpen()) {
+        if ((Boolean) this.showWhileTying.getValue() || !this.minecraft.bridge$getIngameGUI().bridge$getChatGUI().bridge$getChatOpen()) {
             GL11.glPushMatrix();
             this.scaleAndTranslate(guiDrawEvent.getResolution());
             CBPositionEnum position = this.getPosition();
-            Collection<PotionEffect> collection = this.minecraft.bridge$getThePlayer().getActivePotionEffects();
+            Collection<PotionEffectBridge> collection = this.minecraft.bridge$getThePlayer().bridge$getActivePotionEffects();
             if (collection.isEmpty()) {
                 GL11.glPopMatrix();
                 GL11.glPopMatrix();
@@ -78,13 +78,13 @@ public class PotionStatusModule extends AbstractModule {
             int n = 0;
             int n2 = 0;
             int n3 = 22;
-            for (PotionEffect potionEffect : collection) {
-                Potion potion;
+            for (PotionEffectBridge potionEffect : collection) {
+                PotionBridge potion;
                 String string;
-                boolean shouldBlink = this.shouldBlink(potionEffect.getDuration());
+                boolean shouldBlink = this.shouldBlink(potionEffect.bridge$getDuration());
                 int n4 = 0;
                 if ((Boolean) this.showEffectName.getValue()) {
-                    string = I18n.format(potionEffect.getEffectName()) + this.getLevelName(potionEffect.getAmplifier());
+                    string = I18n.format(potionEffect.bridge$getEffectName()) + this.getLevelName(potionEffect.bridge$getAmplifier());
                     n4 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                     if (position == CBPositionEnum.RIGHT) {
                         this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width - n4, n, this.nameColor.getColorValue());
@@ -97,7 +97,7 @@ public class PotionStatusModule extends AbstractModule {
                         n2 = n4;
                     }
                 }
-                string = Potion.getDurationString(potionEffect);
+                string = potionEffect.bridge$getDurationBridge();
                 int n5 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                 if (shouldBlink) {
                     if (position == CBPositionEnum.RIGHT) {
@@ -108,10 +108,10 @@ public class PotionStatusModule extends AbstractModule {
                         this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n5 / 2) + 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
                     }
                 }
-                if ((potion = Potion.potionTypes[potionEffect.getPotionID()]).hasStatusIcon()) {
+                if ((potion = Potion.potionTypes[potionEffect.bridge$getPotionID()]).hasStatusIcon()) {
                     GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
                     this.minecraft.bridge$getTextureManager().bridge$bindTexture(this.location);
-                    int n6 = potion.getStatusIconIndex();
+                    int n6 = potion.bridge$getStatusIconIndex();
                     if (position == CBPositionEnum.RIGHT) {
                         RenderUtil.drawTexturedModalRect(width - (float) 20, (float) n, (float) (n6 % 8 * 18), (float) (198 + n6 / 8 * 18), 18, 18);
                     } else if (position == CBPositionEnum.LEFT) {
@@ -136,27 +136,27 @@ public class PotionStatusModule extends AbstractModule {
             return;
         }
         GL11.glPushMatrix();
-        Collection<PotionEffect> collection = this.minecraft.bridge$getThePlayer().getActivePotionEffects();
+        Collection<PotionEffectBridge> collection = this.minecraft.bridge$getThePlayer().bridge$getActivePotionEffects();
         if (collection.isEmpty()) {
             GL11.glPushMatrix();
             this.scaleAndTranslate(renderPreviewEvent.getResolution());
-            HashMap<Integer, PotionEffect> hashMap = new HashMap<>();
-            PotionEffect fireResistance = new PotionEffect(Potion.fireResistance.id, 1200, 3);
-            PotionEffect speed = new PotionEffect(Potion.moveSpeed.id, 30, 3);
-            hashMap.put(fireResistance.getPotionID(), fireResistance);
-            hashMap.put(speed.getPotionID(), speed);
+            HashMap<Integer, PotionEffectBridge> hashMap = new HashMap<>();
+            PotionEffectBridge fireResistance = new PotionEffect(Potion.fireResistance.id, 1200, 3);
+            PotionEffectBridge speed = new PotionEffect(Potion.moveSpeed.id, 30, 3);
+            hashMap.put(fireResistance.bridge$getPotionID(), fireResistance);
+            hashMap.put(speed.bridge$getPotionID(), speed);
             collection = hashMap.values();
             CBPositionEnum position = this.getPosition();
             int n = 0;
             int n2 = 0;
             int n3 = 22;
-            for (PotionEffect potionEffect : collection) {
-                Potion potion;
+            for (PotionEffectBridge potionEffect : collection) {
+                PotionBridge potion;
                 String string;
-                boolean shouldBlink = this.shouldBlink(potionEffect.getDuration());
+                boolean shouldBlink = this.shouldBlink(potionEffect.bridge$getDuration());
                 int n4 = 0;
                 if ((Boolean) this.showEffectName.getValue()) {
-                    string = I18n.format(potionEffect.getEffectName()) + this.getLevelName(potionEffect.getAmplifier());
+                    string = I18n.format(potionEffect.bridge$getEffectName()) + this.getLevelName(potionEffect.bridge$getAmplifier());
                     n4 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                     if (position == CBPositionEnum.RIGHT) {
                         this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width - n4, n, this.nameColor.getColorValue());
@@ -169,7 +169,7 @@ public class PotionStatusModule extends AbstractModule {
                         n2 = n4;
                     }
                 }
-                string = Potion.getDurationString(potionEffect);
+                string = potionEffect.bridge$getDurationString();
                 int n5 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                 if (shouldBlink) {
                     if (position == CBPositionEnum.RIGHT) {
@@ -180,10 +180,10 @@ public class PotionStatusModule extends AbstractModule {
                         this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n5 / 2) + 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
                     }
                 }
-                if ((potion = Potion.potionTypes[potionEffect.getPotionID()]).hasStatusIcon()) {
+                if ((potion = Potion.potionTypes[potionEffect.bridge$getPotionID()]).hasStatusIcon()) {
                     GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
                     this.minecraft.bridge$getTextureManager().bridge$bindTexture(this.location);
-                    int n6 = potion.getStatusIconIndex();
+                    int n6 = potion.bridge$getStatusIconIndex();
                     if (position == CBPositionEnum.RIGHT) {
                         RenderUtil.drawTexturedModalRect(width - (float) 20, (float) n, (float) (n6 % 8 * 18), (float) (198 + n6 / 8 * 18), 18, 18);
                     } else if (position == CBPositionEnum.LEFT) {
