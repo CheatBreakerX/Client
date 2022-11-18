@@ -5,7 +5,6 @@ import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.config.GlobalSettings;
 import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 public class CrosshairElement extends AbstractModulesGuiElement {

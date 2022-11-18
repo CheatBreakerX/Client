@@ -28,7 +28,7 @@ public abstract class AbstractGui extends CBGuiScreen {
         this.width = displayWidth;
         this.height = displayHeight;
         this.buttonList.clear();
-        this.resolution = Ref.getInstanceCreator().createScaledResolutionBridge();
+        this.resolution = Ref.getInstanceCreator().createScaledResolution();
         final float scaleFactor = getScaleFactor();
         this.scaledWidth = width / scaleFactor;
         this.scaledHeight = height / scaleFactor;

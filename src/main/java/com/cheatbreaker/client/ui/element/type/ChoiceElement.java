@@ -1,15 +1,13 @@
 package com.cheatbreaker.client.ui.element.type;
 
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 public class ChoiceElement
@@ -119,7 +117,7 @@ public class ChoiceElement
                 break;
             }
             if (this.setting == CheatBreaker.getInstance().globalSettings.clearGlass) {
-                Ref.getMinecraft().renderGlobal.loadRenderers();
+                Ref.getMinecraft().bridge$getRenderGlobal().bridge$loadRenderers();
             }
         }
     }

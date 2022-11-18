@@ -169,7 +169,7 @@ import java.io.InputStream;
 		}
 
 		if (followMinecraftScale) {
-			return (int) (((this.fontHeight * (2f / Ref.getInstanceCreator().createScaledResolutionBridge().bridge$getScaleFactor())) - 8) / 2);
+			return (int) (((this.fontHeight * (2f / Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor())) - 8) / 2);
 		}
 
 		return (this.fontHeight - 8) / 2;

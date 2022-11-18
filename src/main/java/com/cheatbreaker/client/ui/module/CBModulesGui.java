@@ -158,7 +158,7 @@ public class CBModulesGui extends CBGuiScreen {
         Rectangle object;
         super.drawScreen(mouseX, mouseY, f);
         ///this.lIIlllIIlIlllllllllIIIIIl(); blur shader
-        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolutionBridge();
+        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();
         float scale = 1.0f / CheatBreaker.getInstance().getScaleFactor();
         if (draggingModule != null) {
             if (!Mouse.isButtonDown(1)) {
@@ -404,7 +404,7 @@ public class CBModulesGui extends CBGuiScreen {
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int n3) {
-        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolutionBridge();
+        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();
         if (this.lIIIIllIIlIlIllIIIlIllIlI != null && this.lIIIIllIIlIlIllIIIlIllIlI.isMouseInside(mouseX, mouseY)) {
             this.lIIIIllIIlIlIllIIIlIllIlI.handleMouseClick(mouseX, mouseY, n3);
         } else {
@@ -513,7 +513,7 @@ public class CBModulesGui extends CBGuiScreen {
 
     @Override
     public void mouseMovedOrUp(int mouseX, int mouseY, int button) {
-        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolutionBridge();
+        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();
         if (this.dataHolder != null && button == 0) {
             this.lIIIIlIIllIIlIIlIIIlIIllI(this.dataHolder.module, this.dataHolder.anchor, scaledResolution);
             this.dataHolder = null;

@@ -1,13 +1,13 @@
 package com.cheatbreaker.client.ui.mainmenu;
 
+import com.cheatbreaker.bridge.client.MinecraftBridge;
+import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
+import com.cheatbreaker.bridge.client.shader.FrameBufferBridge;
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.ui.AbstractGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolutionBridge;
-import net.minecraft.client.shader.Framebuffer;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -15,9 +15,9 @@ import java.awt.*;
 public class LoadingScreen extends AbstractGui {
 
     private final ResourceLocationBridge logo = Ref.getInstanceCreator().createResourceLocationBridge("client/logo_108.png");
-    private final Minecraft mc = Ref.getMinecraft();
+    private final MinecraftBridge mc = Ref.getMinecraft();
     private final ScaledResolutionBridge res;
-    private final Framebuffer frameBuffer;
+    private final FrameBufferBridge frameBuffer;
     private final int amountOfCalls;
     private int amountOfCallsDone;
     private String message;
@@ -25,9 +25,9 @@ public class LoadingScreen extends AbstractGui {
 
     public LoadingScreen(int capacity) {
         this.amountOfCalls = capacity;
-        this.res = new ScaledResolutionBridge(mc, mc.displayWidth, mc.displayHeight);
-        int n2 = this.res.getScaleFactor();
-        this.frameBuffer = new Framebuffer(res.getScaledWidth() * n2, res.getScaledHeight() * n2, true);
+        this.res = Ref.getInstanceCreator().createScaledResolution();
+        int n2 = this.res.bridge$getScaleFactor();
+        this.frameBuffer = Ref.getInstanceCreator().createFrameBuffer(res.bridge$getScaledWidth() * n2, res.bridge$getScaledHeight() * n2, true);
     }
 
     public void newMessage(String string) {
@@ -44,10 +44,10 @@ public class LoadingScreen extends AbstractGui {
     }
 
     private void clearMenu() {
-        this.frameBuffer.bindFramebuffer(false);
+        this.frameBuffer.bridge$bindFramebuffer(false);
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(0.0, res.getScaledWidth(), res.getScaledHeight(), 0.0, 1000.0, 3000.0);
+        GL11.glOrtho(0.0, res.bridge$getScaledWidth(), res.bridge$getScaledHeight(), 0.0, 1000.0, 3000.0);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glLoadIdentity();
         GL11.glTranslatef(0.0f, 0.0f, -2000.0f);
@@ -59,9 +59,9 @@ public class LoadingScreen extends AbstractGui {
     }
 
     private void getMenuReady() {
-        int n = this.res.getScaleFactor();
-        this.frameBuffer.unbindFramebuffer();
-        this.frameBuffer.framebufferRender(this.res.getScaledWidth() * n, this.res.getScaledHeight() * n);
+        int n = this.res.bridge$getScaleFactor();
+        this.frameBuffer.bridge$unbindFramebuffer();
+        this.frameBuffer.bridge$framebufferRender(this.res.bridge$getScaledWidth() * n, this.res.bridge$getScaledHeight() * n);
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
         GL11.glFlush();
     }
@@ -69,8 +69,8 @@ public class LoadingScreen extends AbstractGui {
     @Override
     public void drawMenu(float mouseX, float mouseY) {
         clearMenu();
-        double scaledWidth = res.getScaledWidth_double();
-        double scaledHeight = res.getScaledHeight_double();
+        double scaledWidth = res.bridge$getScaledWidth_double();
+        double scaledHeight = res.bridge$getScaledHeight_double();
         Ref.modified$drawRect(0.0f, 0.0f, (float) scaledWidth, (float) scaledHeight, -1);
         drawLogo(scaledWidth, scaledHeight);
         float width = 160.0f; // width of the progressbar
@@ -84,7 +84,7 @@ public class LoadingScreen extends AbstractGui {
         }
         RenderUtil.drawRoundedRect(x, y, x + loadedWidth, y + height, 8.0, new Color(218, 66, 83, 255).getRGB());
         this.getMenuReady();
-        this.mc.func_147120_f(); // resetSize
+        this.mc.bridge$func_147120_f(); // resetSize
     }
 
     @Override

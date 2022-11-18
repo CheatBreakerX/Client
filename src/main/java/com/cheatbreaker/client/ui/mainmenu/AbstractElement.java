@@ -1,14 +1,15 @@
 package com.cheatbreaker.client.ui.mainmenu;
 
+import com.cheatbreaker.bridge.client.MinecraftBridge;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.CheatBreaker;
-import net.minecraft.client.Minecraft;
 
 public abstract class AbstractElement {
     protected float x;
     protected float y;
     protected float width;
     protected float height;
-    protected final Minecraft mc = Ref.getMinecraft();
+    protected final MinecraftBridge mc = Ref.getMinecraft();
     protected final CheatBreaker client = CheatBreaker.getInstance();
 
     public boolean isMouseInside(float mouseX, float mouseY) {

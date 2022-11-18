@@ -35,7 +35,7 @@ public class CBModulePlaceGui extends CBModulesGui {
         if (this.module.height < (float)18) {
             this.module.height = 18;
         }
-        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolutionBridge();
+        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();
         float[] positions = CBAnchorHelper.getPositions(mouseX, mouseY, scaledResolution);
         CBGuiAnchor cBGuiAnchor = CBAnchorHelper.getAnchor(mouseX, mouseY, scaledResolution);
         if (cBGuiAnchor != CBGuiAnchor.MIDDLE_MIDDLE) {
@@ -99,7 +99,7 @@ public class CBModulePlaceGui extends CBModulesGui {
         if (n3 != 0) {
             return;
         }
-        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolutionBridge();
+        ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();
         CBGuiAnchor cBGuiAnchor = CBAnchorHelper.getAnchor(n, n2, scaledResolution);
         this.module.setAnchor(cBGuiAnchor);
         Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));

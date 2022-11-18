@@ -11,7 +11,7 @@ public class FontRegistry {
 
     private static boolean validFont(CBFontRenderer font, int ogSize) {
         if ((Boolean) CheatBreaker.getInstance().globalSettings.followMinecraftScale.getValue()) {
-            float realSize = (Ref.getInstanceCreator().createScaledResolutionBridge().bridge$getScaleFactor() / 2f) * ogSize;
+            float realSize = (Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor() / 2f) * ogSize;
             return realSize == font.dbg_fontSize;
         } else {
             return ogSize == font.dbg_fontSize;
@@ -19,7 +19,7 @@ public class FontRegistry {
     }
 
     private static CBFontRenderer getFont(String fontName, int ogSize) {
-        float scale = (Ref.getInstanceCreator().createScaledResolutionBridge().bridge$getScaleFactor() / 2f);
+        float scale = (Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor() / 2f);
         if (!(Boolean) CheatBreaker.getInstance().globalSettings.followMinecraftScale.getValue()) {
             scale = 1f;
         }

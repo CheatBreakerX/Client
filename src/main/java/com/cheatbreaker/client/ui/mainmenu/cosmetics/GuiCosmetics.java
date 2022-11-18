@@ -1,17 +1,15 @@
 package com.cheatbreaker.client.ui.mainmenu.cosmetics;
 
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.ui.mainmenu.GradientTextButton;
+import com.cheatbreaker.client.ui.mainmenu.MainMenu;
 import com.cheatbreaker.client.ui.mainmenu.MainMenuBase;
 import com.cheatbreaker.client.ui.mainmenu.cosmetics.element.CosmeticListElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.cosmetic.Cosmetic;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.gui.GuiMainMenu;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -75,7 +73,7 @@ public class GuiCosmetics extends MainMenuBase {
         super.onMouseClicked(f, f2, n);
         if (this.backButton.isMouseInside(f, f2)) {
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
-            this.mc.displayGuiScreen(new GuiMainMenu());
+            this.mc.bridge$displayGuiScreen(new MainMenu());
         } else {
             int n2;
             if (this.IIIIllIlIIIllIlllIlllllIl.size() > 5) {

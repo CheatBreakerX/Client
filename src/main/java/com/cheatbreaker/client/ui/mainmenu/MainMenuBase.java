@@ -1,5 +1,6 @@
 package com.cheatbreaker.client.ui.mainmenu;
 
+import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.client.renderer.texture.DynamicTextureBridge;
 import com.cheatbreaker.bridge.ref.Ref;
@@ -22,14 +23,7 @@ import com.mojang.authlib.Agent;
 import com.mojang.authlib.exceptions.AuthenticationException;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiLanguage;
-import net.minecraft.client.gui.GuiOptions;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Session;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.glu.Project;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -82,9 +76,9 @@ public class MainMenuBase extends AbstractGui {
      */
     private void loadAccounts() {
         // TODO: rewrite this
-        Minecraft minecraft = Ref.getMinecraft();
+        MinecraftBridge minecraft = Ref.getMinecraft();
         if (launcherAccounts.exists()) {
-            try (final BufferedReader reader = new BufferedReader(new FileReader(new File(Ref.getMinecraft().mcDataDir, "launcher_accounts.json")))) {
+            try (final BufferedReader reader = new BufferedReader(new FileReader(new File(Ref.getMinecraft().bridge$getMcDataDir(), "launcher_accounts.json")))) {
                 final JsonObject object = new JsonParser().parse(reader).getAsJsonObject();
                 final Set<Map.Entry<String, JsonElement>> accounts = object.getAsJsonObject("accounts").entrySet();
                 for (Map.Entry<String, JsonElement> accountElement : accounts) {
@@ -103,7 +97,7 @@ public class MainMenuBase extends AbstractGui {
                         if (f > this.accountButtonWidth) {
                             this.accountButtonWidth = f;
                         }
-                        if (minecraft.getSession() == null || !finalAccount.getUsername().equalsIgnoreCase(minecraft.getSession().bridge$getUsername()))
+                        if (minecraft.bridge$getSession() == null || !finalAccount.getUsername().equalsIgnoreCase(minecraft.bridge$getSession().bridge$getUsername()))
                             continue;
                         this.accountList.setDisplayName(finalAccount.getDisplayName());
                         this.accountList.setHeadLocation(CheatBreaker.getInstance().getHeadLocation(finalAccount.getDisplayName()));
@@ -136,7 +130,7 @@ public class MainMenuBase extends AbstractGui {
     public void initGui() {
         super.initGui();
         DynamicTextureBridge texture = Ref.getInstanceCreator().createDynamicTexture(256, 256);
-        this.panoramaBackgroundLocation = this.mc.getTextureManager().getDynamicTextureLocation("background", texture);
+        this.panoramaBackgroundLocation = this.mc.bridge$getTextureManager().bridge$getDynamicTextureLocation("background", texture);
         this.optionsButton.setElementSize((float) 124, (float) 6, (float) 42, 20);
         this.cosmeticsButton.setElementSize((float) 167, (float) 6, (float) 48, 20);
         this.exitButton.setElementSize(this.getScaledWidth() - (float) 30, (float) 7, (float) 23, 17);
@@ -193,7 +187,7 @@ public class MainMenuBase extends AbstractGui {
 
         // Render buttons
         this.exitButton.drawElement(mouseX, mouseY, true);
-        if (!(mc.currentScreen instanceof GuiCosmetics)) this.languageButton.drawElement(mouseX, mouseY, true);
+        if (!(mc.bridge$getCurrentScreen() instanceof GuiCosmetics)) this.languageButton.drawElement(mouseX, mouseY, true);
         this.accountList.drawElement(mouseX, mouseY, true);
         this.optionsButton.drawElement(mouseX, mouseY, true);
         this.cosmeticsButton.drawElement(mouseX, mouseY, true);
@@ -213,10 +207,10 @@ public class MainMenuBase extends AbstractGui {
             this.mc.bridge$shutdown();
         } else if (this.optionsButton.isMouseInside(mouseX, mouseY)) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
-            this.mc.bridge$displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
+            this.mc.bridge$displayGuiScreen(new GuiOptions(this, this.mc.bridge$getGameSettings()));
         } else if (this.languageButton.isMouseInside(mouseX, mouseY)) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
-            this.mc.bridge$displayGuiScreen(new GuiLanguage(this, this.mc.gameSettings, this.mc.bridge$getLanguageManager()));
+            this.mc.bridge$displayGuiScreen(new GuiLanguage(this, this.mc.bridge$getGameSettings(), this.mc.bridge$getLanguageManager()));
         } else if (this.cosmeticsButton.isMouseInside(mouseX, mouseY)) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             this.mc.bridge$displayGuiScreen(new GuiCosmetics());
@@ -405,7 +399,7 @@ public class MainMenuBase extends AbstractGui {
                 object2.loadFromStorage(hashMap);
                 try {
                     object2.logIn();
-                    session = new Session(object2.getSelectedProfile().getName(), object2.getSelectedProfile().getId().toString(), object2.getAuthenticatedToken(), "mojang");
+                    session = Ref.getInstanceCreator().createSession(object2.getSelectedProfile().getName(), object2.getSelectedProfile().getId().toString(), object2.getAuthenticatedToken(), "mojang");
                 } catch (AuthenticationException authenticationException) {
                     authenticationException.printStackTrace();
                     return;

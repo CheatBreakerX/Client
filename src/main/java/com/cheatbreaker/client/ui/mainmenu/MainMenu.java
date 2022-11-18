@@ -6,8 +6,6 @@ import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.ui.fading.CosineFade;
 import com.cheatbreaker.client.ui.fading.MinMaxFade;
 import com.cheatbreaker.client.ui.util.RenderUtil;
-import net.minecraft.client.gui.GuiMultiplayer;
-import net.minecraft.client.gui.GuiSelectWorld;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -67,9 +65,9 @@ public class MainMenu extends MainMenuBase {
         //RenderUtil.drawTexturedModalRect(f5, f6, f5 + 160f, f6 + 10f, 8, new Color(218, 66, 83, (int)((float)255 * (1.0f - logoY))).getRGB());
 
         if (CheatBreaker.getInstance().isInDebugMode()) {
-            this.bridge$getFontRenderer()Obj.bridge$drawString("[p] " + RenderUtil.getTimeAccurateFrameRate() + " FPS (" + RenderUtil.getFrameTimeAsMs() + "ms/frame) ", 5, 55, -1);
-            this.bridge$getFontRenderer()Obj.bridge$drawString("[p] Min/Max FPS: " + RenderUtil.minFps + "/" + RenderUtil.maxFps, 5, 65, -1);
-            this.bridge$getFontRenderer()Obj.bridge$drawString("[i] Press \u00a7cF9 \u00a7fto reset the Min/Max values.", 5, 75, -1);
+            this.fontRendererObj.bridge$drawString("[p] " + RenderUtil.getTimeAccurateFrameRate() + " FPS (" + RenderUtil.getFrameTimeAsMs() + "ms/frame) ", 5, 55, -1);
+            this.fontRendererObj.bridge$drawString("[p] Min/Max FPS: " + RenderUtil.minFps + "/" + RenderUtil.maxFps, 5, 65, -1);
+            this.fontRendererObj.bridge$drawString("[i] Press \u00a7cF9 \u00a7fto reset the Min/Max values.", 5, 75, -1);
         }
     }
 

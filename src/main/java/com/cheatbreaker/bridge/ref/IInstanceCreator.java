@@ -15,6 +15,7 @@ import com.cheatbreaker.bridge.item.ItemBridge;
 import com.cheatbreaker.bridge.item.ItemStackBridge;
 import com.cheatbreaker.bridge.util.ChatComponentTextBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
+import com.cheatbreaker.bridge.util.SessionBridge;
 import com.cheatbreaker.bridge.util.Vec3Bridge;
 
 import java.awt.image.BufferedImage;
@@ -27,7 +28,7 @@ public interface IInstanceCreator {
     }
 
     ThreadDownloadImageDataBridge createThreadDownloadImageData(File p_i1049_1_, String p_i1049_2_, ResourceLocationBridge p_i1049_3_, IImageBufferBridge p_i1049_4_);
-    ScaledResolutionBridge createScaledResolutionBridge();
+    ScaledResolutionBridge createScaledResolution();
     DynamicTextureBridge createDynamicTexture(BufferedImage img);
     DynamicTextureBridge createDynamicTexture(int width, int height);
     ISoundBridge createSoundFromPSR(ResourceLocationBridge location, float volume);
@@ -37,4 +38,6 @@ public interface IInstanceCreator {
     RenderItemBridge createRenderItem();
     ShaderGroupBride createShaderGroup(TextureManagerBridge p_i1050_1_, IResourceManagerBridge p_i1050_2_, FrameBufferBridge p_i1050_3_, ResourceLocationBridge p_i1050_4_);
     ChatComponentTextBridge createChatComponentText(String initialString);
+    FrameBufferBridge createFrameBuffer(float width, float height, boolean b);
+    SessionBridge createSession(String username, String playerId, String token, String type);
 }

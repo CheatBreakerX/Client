@@ -6,4 +6,5 @@ import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 public interface TextureManagerBridge {
     void bridge$loadTexture(ResourceLocationBridge playerSkin, ThreadDownloadImageDataBridge skinData);
     void bridge$bindTexture(ResourceLocationBridge location);
+    ResourceLocationBridge bridge$getDynamicTextureLocation(String background, DynamicTextureBridge texture);
 }

@@ -56,7 +56,7 @@ public class CBNotificationsModule extends AbstractModule
     }
 
     public void queueNotification(final String type, String content, long duration) {
-        final ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolutionBridge();
+        final ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();
         if (duration < 2000L) duration = 2000L;
         content = content.replaceAll("&([abcdefghijklmrABCDEFGHIJKLMNR0-9])|(&$)", "\u00a7$1");
         final String lowerCase = type.toLowerCase();

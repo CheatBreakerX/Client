@@ -152,7 +152,7 @@ public class ProfileElement extends AbstractModulesGuiElement {
                 CheatBreaker.getInstance().configManager.readProfile(CheatBreaker.getInstance().activeProfile.getName());
                 CheatBreaker.getInstance().moduleManager.keyStrokes.initialize();
             }
-            if (this.profile.isEditable() && (file2 = (file = new File(Ref.getMinecraft().mcDataDir + File.separator + "config" + File.separator + "client" + File.separator + "profiles")).exists() || file.mkdirs() ? new File(file + File.separator + this.profile.getName().toLowerCase() + ".cfg") : null).exists() && file2.delete()) {
+            if (this.profile.isEditable() && (file2 = (file = new File(Ref.getMinecraft().bridge$getMcDataDir() + File.separator + "config" + File.separator + "client" + File.separator + "profiles")).exists() || file.mkdirs() ? new File(file + File.separator + this.profile.getName().toLowerCase() + ".cfg") : null).exists() && file2.delete()) {
                 CheatBreaker.getInstance().profiles.removeIf(ilIIlIIlIIlllIlIIIlIllIIl -> ilIIlIIlIIlllIlIIIlIllIIl == this.profile);
                 iIlIlIlllIllIIlIllIIlIIlI.lIIIIlIIllIIlIIlIIIlIIllI.removeIf(iIlIlllllIIIlIIllIllIlIlI -> iIlIlllllIIIlIIllIllIlIlI == this);
             }

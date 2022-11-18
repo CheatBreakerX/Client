@@ -17,14 +17,14 @@ public class IconButtonElement extends AbstractElement {
     private float lIIlIlIllIIlIIIlIIIlllIII = 4;
 
     public IconButtonElement(ResourceLocationBridge location) {
-        this.IIIllIllIlIlllllllIlIlIII = ResourceLocationBridge;
+        this.IIIllIllIlIlllllllIlIlIII = location;
         this.IlllIllIlIIIIlIIlIIllIIIl = new ColorFade(0x4FFFFFFF, -1353670564);
         this.IlIlllIIIIllIllllIllIIlIl = new ColorFade(444958085, 1063565678);
         this.llIIlllIIIIlllIllIlIlllIl = new ColorFade(444958085, 1062577506);
     }
 
     public IconButtonElement(float f, ResourceLocationBridge location) {
-        this.IIIllIllIlIlllllllIlIlIII = ResourceLocationBridge;
+        this.IIIllIllIlIlllllllIlIlIII = location;
         this.lIIlIlIllIIlIIIlIIIlllIII = f;
         this.IlllIllIlIIIIlIIlIIllIIIl = new ColorFade(0x4FFFFFFF, -1353670564);
         this.IlIlllIIIIllIllllIllIIlIl = new ColorFade(444958085, 1063565678);
@@ -61,7 +61,7 @@ public class IconButtonElement extends AbstractElement {
     }
 
     public void lIIIIlIIllIIlIIlIIIlIIllI(ResourceLocationBridge location) {
-        this.IIIllIllIlIlllllllIlIlIII = ResourceLocationBridge;
+        this.IIIllIllIlIlllllllIlIlIII = location;
     }
 
     public void lIIIIlIIllIIlIIlIIIlIIllI(String string) {

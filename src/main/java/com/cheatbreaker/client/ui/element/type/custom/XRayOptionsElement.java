@@ -1,17 +1,12 @@
 package com.cheatbreaker.client.ui.element.type.custom;
 
+import com.cheatbreaker.bridge.client.MinecraftBridge;
+import com.cheatbreaker.bridge.client.renderer.entity.RenderItemBridge;
+import com.cheatbreaker.bridge.item.ItemBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;
@@ -20,7 +15,7 @@ public class XRayOptionsElement
         extends AbstractModulesGuiElement {
     private String lIIIIlIIllIIlIIlIIIlIIllI;
     private List IllIIIIIIIlIlIllllIIllIII;
-    private RenderItem itemRenderer = new RenderItem();
+    private RenderItemBridge itemRenderer = Ref.getInstanceCreator().createRenderItem();
 
     public XRayOptionsElement(List list, String string, float f) {
         super(f);
@@ -32,18 +27,18 @@ public class XRayOptionsElement
     @Override
     public void handleDrawElement(int mouseX, int mouseY, float partialTicks) {
         FontRegistry.getUbuntuMedium16px().drawString(this.lIIIIlIIllIIlIIlIIIlIIllI.toUpperCase(), this.x + 10, (float)(this.y + 2), CheatBreaker.getInstance().globalSettings.isDarkMode() ? 0xFFFFFFFF : -1895825407);
-        Minecraft minecraft = Ref.getMinecraft();
+        MinecraftBridge minecraft = Ref.getMinecraft();
         List<Integer> list = CheatBreaker.getInstance().moduleManager.xray.lIllIllIlIIllIllIlIlIIlIl();
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glEnable(32826);
-        RenderHelper.enableStandardItemLighting();
-        RenderHelper.enableGUIStandardItemLighting();
+        Ref.getRenderHelper().bridge$enableStandardItemLighting();
+        Ref.getRenderHelper().bridge$enableGUIStandardItemLighting();
         int n3 = 0;
         int n4 = 0;
         for (Object obj : Block.blockRegistry) {
             Block block = (Block) obj;
             boolean bl;
-            Item item = Item.getItemFromBlock(block);
+            ItemBridge item = Item.getItemFromBlock(block);
             if (item == null) continue;
             if (n3 >= 15) {
                 n3 = 0;
@@ -57,10 +52,10 @@ public class XRayOptionsElement
             } else if (bl) {
                 Ref.modified$drawRect(n5 - 2, n6 - 2, n5 + 18, n6 + 18, 0x4F0000FF);
             }
-            this.itemRenderer.renderItemIntoGUI(minecraft.bridge$getFontRenderer(), minecraft.getTextureManager(), new ItemStack(item), n5, n6);
+            this.itemRenderer.bridge$renderItemIntoGUI(minecraft.bridge$getFontRenderer(), minecraft.bridge$getTextureManager(), Ref.getInstanceCreator().createItemStack(item), n5, n6);
             ++n3;
         }
-        RenderHelper.disableStandardItemLighting();
+        Ref.getRenderHelper().bridge$disableStandardItemLighting();
         GL11.glDisable(32826);
         GL11.glDisable(3042);
     }

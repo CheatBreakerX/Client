@@ -2,14 +2,14 @@ package com.cheatbreaker.client.ui.extended;
 
 import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import lombok.Setter;
-import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public class CustomLoadingScreen extends GuiScreen {
+public class CustomLoadingScreen extends CBGuiScreen {
     @Setter
     private String message;
 
@@ -21,7 +21,7 @@ public class CustomLoadingScreen extends GuiScreen {
         Color startColor = new Color(0, 0, 0, 169);
         Color endColor = new Color(43, 43, 43, 97);
 
-        ScaledResolutionBridge sr = Ref.getInstanceCreator().createScaledResolutionBridge();
+        ScaledResolutionBridge sr = Ref.getInstanceCreator().createScaledResolution();
 
         Ref.modified$drawRect(0f, 0f, sr.bridge$getScaledWidth(), sr.bridge$getScaledHeight(), 0xFF000000);
         Ref.modified$drawGradientRect(0f, 0f, sr.bridge$getScaledWidth(), sr.bridge$getScaledHeight(), startColor.getRGB(), endColor.getRGB());

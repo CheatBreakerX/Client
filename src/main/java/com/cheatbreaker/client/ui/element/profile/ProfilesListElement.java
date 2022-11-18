@@ -1,5 +1,7 @@
 package com.cheatbreaker.client.ui.element.profile;
 
+import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.config.Profile;
 import com.cheatbreaker.client.module.AbstractModule;
@@ -9,9 +11,6 @@ import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.module.CBProfileCreateGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.io.File;
@@ -74,7 +73,7 @@ public class ProfilesListElement extends AbstractScrollableElement {
         boolean bl = (float) mouseX > (float) (this.x + this.width - 92) * this.scale && (float) mouseX < (float) (this.x + this.width - 6) * this.scale && (float) mouseY > (float) (this.y + this.IlllIllIlIIIIlIIlIIllIIIl - 20 + this.lIIIIllIIlIlIllIIIlIllIlI) * this.scale && (float) mouseY < (float) (this.y + this.IlllIllIlIIIIlIIlIIllIIIl - 7 + this.lIIIIllIIlIlIllIIIlIllIlI) * this.scale;
         if (bl) {
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
-            Ref.getMinecraft().displayGuiScreen(new CBProfileCreateGui(CBModulesGui.instance, this, this.IIIlllIIIllIllIlIIIIIIlII, this.scale));
+            Ref.getMinecraft().bridge$displayGuiScreen(new CBProfileCreateGui(CBModulesGui.instance, this, this.IIIlllIIIllIllIlIIIIIIlII, this.scale));
         }
     }
 
@@ -90,7 +89,7 @@ public class ProfilesListElement extends AbstractScrollableElement {
     public void lIIIIIIIIIlIllIIllIlIIlIl() {
         new Thread(() -> {
             this.lIIIIlIIllIIlIIlIIIlIIllI.clear();
-            File file = new File(Ref.getMinecraft().mcDataDir + File.separator + "config" + File.separator + "client" + File.separator + "profiles");
+            File file = new File(Ref.getMinecraft().bridge$getMcDataDir() + File.separator + "config" + File.separator + "client" + File.separator + "profiles");
             if (file.exists()) {
                 for (File file2 : file.listFiles()) {
                     if (!file2.getName().endsWith(".cfg")) continue;

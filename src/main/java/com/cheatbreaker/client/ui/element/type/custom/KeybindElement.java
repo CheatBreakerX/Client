@@ -1,12 +1,10 @@
 package com.cheatbreaker.client.ui.element.type.custom;
 
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.element.module.ModulesGuiButtonElement;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.input.Keyboard;
 
 public class KeybindElement

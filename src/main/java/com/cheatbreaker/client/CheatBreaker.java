@@ -385,7 +385,7 @@ public class CheatBreaker {
         if (event.type == RenderGameOverlayEvent.ElementType.EXPERIENCE)
         {
             MinecraftBridge mc = Ref.getMinecraft();
-            ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolutionBridge();
+            ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();
 
             if (!mc.bridge$getGameSettings().bridge$getShowDebugInfo()) {
                 CheatBreaker.getInstance().getEventBus().callEvent(new GuiDrawEvent(scaledResolution));

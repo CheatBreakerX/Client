@@ -46,4 +46,5 @@ public interface MinecraftBridge {
     void bridge$scaledTessellator(int p_71392_1_, int p_71392_2_, int p_71392_3_, int p_71392_4_, int p_71392_5_, int p_71392_6_);
     FrameBufferBridge bridge$getFramebuffer();
     Proxy bridge$getProxy();
+    void bridge$func_147120_f(); // resetSize
 }
