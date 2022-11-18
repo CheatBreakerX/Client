@@ -1,14 +1,14 @@
 package com.cheatbreaker.client.module.type;
 
+import com.cheatbreaker.bridge.client.gui.GuiChatBridge;
+import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
+import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
 import com.cheatbreaker.client.ui.util.HudUtil;
-import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.ScaledResolutionBridge;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 public class DirectionHudModule extends AbstractModule {
@@ -38,7 +38,7 @@ public class DirectionHudModule extends AbstractModule {
         GL11.glEnable(GL11.GL_BLEND);
         this.scaleAndTranslate(guiDrawEvent.getResolution());
         this.setDimensions(66, 18);
-        if (!(minecraft.currentScreen instanceof GuiChat) || (Boolean) this.showWhileTyping.getValue()) {
+        if (!(minecraft.bridge$getCurrentScreen() instanceof GuiChatBridge) || (Boolean) this.showWhileTyping.getValue()) {
             GL11.glColor4f((float)(backgroundColor >> 16 & 0xFF) / (float)255, (float)(backgroundColor >> 8 & 0xFF) / (float)255, (float)(backgroundColor & 0xFF) / (float)255, (float)(backgroundColor >> 24 & 255) / (float)255);
             this.render(guiDrawEvent.getResolution());
             GL11.glColor4f((float)(backgroundColor >> 16 & 0xFF) / (float)255, (float)(backgroundColor >> 8 & 0xFF) / (float)255, (float)(backgroundColor & 0xFF) / (float)255, (float)(backgroundColor >> 24 & 255) / (float)255);
@@ -47,8 +47,13 @@ public class DirectionHudModule extends AbstractModule {
         GL11.glPopMatrix();
     }
 
+    private int MathHelper$floor_double(double toFloor) {
+        int asInt = (int)toFloor;
+        return toFloor < (double)asInt ? asInt - 1 : asInt;
+    }
+
     private void render(ScaledResolutionBridge scaledResolution) {
-        int n = MathHelper.floor_double((double)(this.minecraft.bridge$getThePlayer().rotationYaw * (float)256 / (float)360) + 0.5) & 0xFF;
+        int n = MathHelper$floor_double((double)(this.minecraft.bridge$getThePlayer().bridge$getRotationYaw() * (float)256 / (float)360) + 0.5) & 0xFF;
         int n2 = 0;
         int n3 = 0;
         int backgroundColor = 0xFF212121;

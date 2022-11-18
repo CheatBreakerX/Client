@@ -1,7 +1,9 @@
 package com.cheatbreaker.bridge.ref;
 
 import com.cheatbreaker.bridge.client.MinecraftBridge;
+import com.cheatbreaker.bridge.client.renderer.RenderHelperBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
+import com.cheatbreaker.bridge.entity.boss.BossStatusBridge;
 import com.cheatbreaker.bridge.ext.GLBridge;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,9 +15,15 @@ public class Ref {
     @Getter @Setter
     private static MinecraftBridge minecraft = null;
     @Getter @Setter
+    private static BossStatusBridge bossStatus = null;
+    @Getter @Setter
+    private static RenderHelperBridge renderHelper = null;
+    @Getter @Setter
     private static TessellatorBridge tessellator = null;
     @Getter @Setter
     private static IInstanceCreator instanceCreator;
+    @Getter @Setter
+    private static IRefUtils utils;
 
     public static void modified$drawRect(float left, float top, float right, float bottom, int color) {
         float tempVar;

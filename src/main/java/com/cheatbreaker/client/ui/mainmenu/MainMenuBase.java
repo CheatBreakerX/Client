@@ -245,7 +245,7 @@ public class MainMenuBase extends AbstractGui {
         GL11.glDisable(GL11.GL_ALPHA_TEST);
         GL11.glDisable(GL11.GL_CULL_FACE);
         GL11.glDepthMask(false);
-        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        Ref.getGlBridge().bridge$glBlendFunc(770, 771, 1, 0);
         byte var5 = 8;
 
         for (int var6 = 0; var6 < var5 * var5; ++var6) {
@@ -316,7 +316,7 @@ public class MainMenuBase extends AbstractGui {
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
         GL11.glCopyTexSubImage2D(GL11.GL_TEXTURE_2D, 0, 0, 0, 0, 0, 256, 256);
         GL11.glEnable(GL11.GL_BLEND);
-        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        Ref.getGlBridge().bridge$glBlendFunc(770, 771, 1, 0);
         GL11.glColorMask(true, true, true, false);
         TessellatorBridge tessellator = Ref.getTessellator();
         tessellator.bridge$startDrawingQuads();

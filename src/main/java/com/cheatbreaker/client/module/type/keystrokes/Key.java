@@ -1,9 +1,9 @@
 package com.cheatbreaker.client.module.type.keystrokes;
 
+import com.cheatbreaker.bridge.client.MinecraftBridge;
+import com.cheatbreaker.bridge.client.gui.inventory.GuiContainerBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.ui.module.CBModulesGui;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -29,9 +29,9 @@ public class Key {
     }
 
     public void render(final float n, final float n2, final int n3, final int n4, final int n5, final int n6) {
-        final Minecraft minecraft = Ref.getMinecraft();
+        final MinecraftBridge minecraft = Ref.getMinecraft();
         final int n7 = (this.keyCode == -99 || this.keyCode == -100) ? ((this.keyCode == -99) ? 1 : 0) : -1;
-        final boolean pressed = (minecraft.currentScreen == null || minecraft.currentScreen instanceof GuiContainer || minecraft.currentScreen instanceof CBModulesGui) && ((n7 != -1) ? Mouse.isButtonDown(n7) : Keyboard.isKeyDown(this.keyCode));
+        final boolean pressed = (minecraft.bridge$getCurrentScreen() == null || minecraft.bridge$getCurrentScreen() instanceof GuiContainerBridge || minecraft.bridge$getCurrentScreen() instanceof CBModulesGui) && ((n7 != -1) ? Mouse.isButtonDown(n7) : Keyboard.isKeyDown(this.keyCode));
         if (pressed && !this.pressed) {
             this.pressed = true;
             this.lastPressed = System.currentTimeMillis();
@@ -61,14 +61,14 @@ public class Key {
             rgb = (pressed ? n6 : n5);
         }
         Ref.modified$drawRect(n, n2, n + this.width, n2 + this.height, rgb);
-        if (this.keyCode == minecraft.gameSettings.keyBindJump.getKeyCode()) {
+        if (this.keyCode == minecraft.bridge$getGameSettings().bridge$getKeyBindJump().bridge$getKeyCode()) {
             Ref.modified$drawRect(n + this.width / 2 - this.width / 8, n2 + this.height / 2, n + this.width / 2.0f + this.width / 8, n2 + this.height / 2 + 1, 0xFF000000 | (pressed ? n4 : n3));
         }
         else {
             // added pixel perfect aligning
             int width = Ref.getMinecraft().bridge$getFontRenderer().bridge$getStringWidth(displayString);
             int offset = displayString.length() == 1 ? 1 : (displayString.contains("R") ? 2 : 1);
-            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString(this.displayString, (n + this.width / 2.0f) - width / 2f + offset, (n2 + this.height / 2.0f - minecraft.bridge$getFontRenderer().FONT_HEIGHT / 2f + 1.0f), pressed ? n4 : n3);
+            Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString(this.displayString, (n + this.width / 2.0f) - width / 2f + offset, (n2 + this.height / 2.0f - 9 / 2f + 1.0f), pressed ? n4 : n3);
         }
     }
 

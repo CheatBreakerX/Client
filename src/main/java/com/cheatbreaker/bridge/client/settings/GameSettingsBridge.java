@@ -9,4 +9,11 @@ public interface GameSettingsBridge {
     void bridge$setKeyBindings(KeyBindingBridge[] keyBindings);
     int bridge$getThirdPersonView();
     int bridge$getRenderDistanceChunks();
+    KeyBindingBridge bridge$getKeyBindJump();
+    KeyBindingBridge bridge$getKeyBindForward();
+    KeyBindingBridge bridge$getKeyBindLeft();
+    KeyBindingBridge bridge$getKeyBindRight();
+    KeyBindingBridge bridge$getKeyBindBack();
+    KeyBindingBridge bridge$getKeyBindAttack();
+    KeyBindingBridge bridge$getKeyBindUseItem();
 }

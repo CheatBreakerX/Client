@@ -1,10 +1,11 @@
 package com.cheatbreaker.client.module.type.notifications;
 
+import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.event.type.KeepAliveEvent;
 import com.cheatbreaker.client.event.type.TickEvent;
 import com.cheatbreaker.client.module.AbstractModule;
-import net.minecraft.client.gui.ScaledResolutionBridge;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,15 +30,15 @@ public class CBNotificationsModule extends AbstractModule
         this.time = System.currentTimeMillis();
     }
 
-    private void onTick(final TickEvent cbTickEvent) {
+    private void onTick(final TickEvent event) {
         final Iterator<Notification> iterator = this.notifications.iterator();
         while (iterator.hasNext()) {
-            final Notification illlIlIlllIlIlllIIlllIlIl = iterator.next();
-            illlIlIlllIlIlllIIlllIlIl.lIIIIlIIllIIlIIlIIIlIIllI();
-            if (illlIlIlllIlIlllIIlllIlIl.IIIIllIlIIIllIlllIlllllIl + illlIlIlllIlIlllIIlllIlIl.IlllIIIlIlllIllIlIIlllIlI - System.currentTimeMillis() <= 0L) {
-                int ilIlIIIlllIIIlIlllIlIllIl = illlIlIlllIlIlllIIlllIlIl.IIIIllIIllIIIIllIllIIIlIl;
+            final Notification notification = iterator.next();
+            notification.lIIIIlIIllIIlIIlIIIlIIllI();
+            if (notification.IIIIllIlIIIllIlllIlllllIl + notification.IlllIIIlIlllIllIlIIlllIlI - System.currentTimeMillis() <= 0L) {
+                int ilIlIIIlllIIIlIlllIlIllIl = notification.IIIIllIIllIIIIllIllIIIlIl;
                 for (final Notification illlIlIlllIlIlllIIlllIlIl2 : this.notifications) {
-                    if (illlIlIlllIlIlllIIlllIlIl2.IIIIllIIllIIIIllIllIIIlIl < illlIlIlllIlIlllIIlllIlIl.IIIIllIIllIIIIllIllIIIlIl) {
+                    if (illlIlIlllIlIlllIIlllIlIl2.IIIIllIIllIIIIllIllIIIlIl < notification.IIIIllIIllIIIIllIllIIIlIl) {
                         illlIlIlllIlIlllIIlllIlIl2.IllIIIIIIIlIlIllllIIllIII = 0;
                         illlIlIlllIlIlllIIlllIlIl2.IlIlIIIlllIIIlIlllIlIllIl = ilIlIIIlllIIIlIlllIlIllIl;
                         ilIlIIIlllIIIlIlllIlIllIl = illlIlIlllIlIlllIIlllIlIl2.IIIIllIIllIIIIllIllIIIlIl;
@@ -48,14 +49,14 @@ public class CBNotificationsModule extends AbstractModule
         }
     }
 
-    private void onDraw(final GuiDrawEvent lIllIllIlIIllIllIlIlIIlIl) {
+    private void onDraw(final GuiDrawEvent event) {
         for (Notification notification : this.notifications) {
-            notification.lIIIIlIIllIIlIIlIIIlIIllI(lIllIllIlIIllIllIlIlIIlIl.getResolution().getScaledWidth());
+            notification.lIIIIlIIllIIlIIlIIIlIIllI((int) event.getResolution().bridge$getScaledWidth());
         }
     }
 
     public void queueNotification(final String type, String content, long duration) {
-        final ScaledResolutionBridge scaledResolution = new ScaledResolutionBridge(this.minecraft, this.minecraft.displayWidth, this.minecraft.displayHeight);
+        final ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolutionBridge();
         if (duration < 2000L) duration = 2000L;
         content = content.replaceAll("&([abcdefghijklmrABCDEFGHIJKLMNR0-9])|(&$)", "\u00a7$1");
         final String lowerCase = type.toLowerCase();

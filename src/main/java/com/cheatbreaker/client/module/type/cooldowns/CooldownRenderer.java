@@ -1,13 +1,13 @@
 package com.cheatbreaker.client.module.type.cooldowns;
 
+import com.cheatbreaker.bridge.client.MinecraftBridge;
+import com.cheatbreaker.bridge.item.ItemBridge;
+import com.cheatbreaker.bridge.item.ItemStackBridge;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.module.type.armourstatus.ArmourStatusModule;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
 public class CooldownRenderer {
@@ -15,31 +15,31 @@ public class CooldownRenderer {
     private final int itemId;
     private long duration;
     private long time;
-    private final Minecraft IIIIllIIllIIIIllIllIIIlIl = Ref.getMinecraft();
-    private final ItemStack item;
+    private final MinecraftBridge mc = Ref.getMinecraft();
+    private final ItemStackBridge item;
 
     public CooldownRenderer(String name, int itemId, long duration) {
         this.name = name;
         this.itemId = itemId;
         this.duration = duration;
         this.time = System.currentTimeMillis();
-        this.item = new ItemStack(Item.getItemById(itemId));
+        this.item = Ref.getInstanceCreator().createItemStack(Ref.getUtils().getItemFromID(itemId));
     }
 
     public void lIIIIlIIllIIlIIlIIIlIIllI(Setting cBSetting, float f, float f2, int n) {
         float f3;
         int n2 = 17;
         GL11.glPushMatrix();
-        float f4 = ArmourStatusModule.renderItem.zLevel;
-        ArmourStatusModule.renderItem.zLevel = -200;
+        float f4 = ArmourStatusModule.renderItem.bridge$getZLevel();
+        ArmourStatusModule.renderItem.bridge$setZLevel(-200);
         float f5 = 1.35f;
         GL11.glTranslatef(-0.5f, -1, 0.0f);
         GL11.glScalef(f5, f5, f5);
-        RenderHelper.enableStandardItemLighting();
-        ArmourStatusModule.renderItem.renderItemAndEffectIntoGUI(this.IIIIllIIllIIIIllIllIIIlIl.bridge$getFontRenderer(), this.IIIIllIIllIIIIllIllIIIlIl.getTextureManager(), this.item, (int)((f + (float)(n2 / 2)) / f5), (int)((f2 + (float)(n2 / 2)) / f5));
-        RenderHelper.disableStandardItemLighting();
+        Ref.getRenderHelper().bridge$enableStandardItemLighting();
+        ArmourStatusModule.renderItem.bridge$renderItemAndEffectIntoGUI(this.mc.bridge$getFontRenderer(), this.mc.bridge$getTextureManager(), this.item, (int)((f + (float)(n2 / 2)) / f5), (int)((f2 + (float)(n2 / 2)) / f5));
+        Ref.getRenderHelper().bridge$disableStandardItemLighting();
         GL11.glPopMatrix();
-        ArmourStatusModule.renderItem.zLevel = f4;
+        ArmourStatusModule.renderItem.bridge$setZLevel(f4);
         double d = this.duration - (System.currentTimeMillis() - this.time);
         if (d <= 0.0) {
             return;
@@ -82,23 +82,23 @@ public class CooldownRenderer {
         return this.time < System.currentTimeMillis() - this.duration;
     }
 
-    public void lIIIIlIIllIIlIIlIIIlIIllI(long l) {
+    public void setDuration(long l) {
         this.duration = l;
     }
 
-    public void lIIIIIIIIIlIllIIllIlIIlIl() {
+    public void resetTime() {
         this.time = System.currentTimeMillis();
     }
 
-    public String IlllIIIlIlllIllIlIIlllIlI() {
+    public String getName() {
         return this.name;
     }
 
-    public long IIIIllIlIIIllIlllIlllllIl() {
+    public long getDuration() {
         return this.duration;
     }
 
-    public int IIIIllIIllIIIIllIllIIIlIl() {
+    public int getItemId() {
         return this.itemId;
     }
 }

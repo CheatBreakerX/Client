@@ -4,7 +4,6 @@ import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
-import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 public class CoordinatesModule extends AbstractModule {
@@ -37,6 +36,23 @@ public class CoordinatesModule extends AbstractModule {
         this.addEvent(GuiDrawEvent.class, this::onRender);
     }
 
+    private int MathHelper$floor_double(double toFloor) {
+        int asInt = (int)toFloor;
+        return toFloor < (double)asInt ? asInt - 1 : asInt;
+    }
+
+    private double MathHelper$wrapAngleTo180_double(double par0) {
+        par0 %= 360.0D;
+
+        if (par0 >= 180.0D)
+            par0 -= 360.0D;
+
+        if (par0 < -180.0D)
+            par0 += 360.0D;
+
+        return par0;
+    }
+
     public void onRender(GuiDrawEvent event) {
         if (!this.isRenderHud()) {
             return;
@@ -44,11 +60,11 @@ public class CoordinatesModule extends AbstractModule {
 
         GL11.glPushMatrix();
         this.scaleAndTranslate(event.getResolution());
-        int n = MathHelper.floor_double(this.minecraft.bridge$getThePlayer().posX);
-        int n2 = (int) this.minecraft.bridge$getThePlayer().boundingBox.minY;
-        int n3 = MathHelper.floor_double(this.minecraft.bridge$getThePlayer().posZ);
+        int n = MathHelper$floor_double(this.minecraft.bridge$getThePlayer().bridge$getPosX());
+        int n2 = (int) this.minecraft.bridge$getThePlayer().bridge$getBoundingBox().bridge$getMinY();
+        int n3 = MathHelper$floor_double(this.minecraft.bridge$getThePlayer().bridge$getPosZ());
 
-        if (!this.minecraft.ingameGUI.getChatGUI().getChatOpen() || ((Boolean) this.showWhileTyping.getValue())) {
+        if (!this.minecraft.bridge$getIngameGUI().bridge$getChatGUI().bridge$getChatOpen() || ((Boolean) this.showWhileTyping.getValue())) {
             int n4;
             String object;
             float f = 4;
@@ -66,10 +82,10 @@ public class CoordinatesModule extends AbstractModule {
             }
             if (((Boolean)this.showDirection.getValue())) {
                 String[] directions = new String[]{"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
-                double d = MathHelper.wrapAngleTo180_double(this.minecraft.bridge$getThePlayer().rotationYaw) + (double)180;
+                double d = MathHelper$wrapAngleTo180_double(this.minecraft.bridge$getThePlayer().bridge$getRotationYaw()) + (double)180;
                 d += 11.682692039868188 * (double)1.925926f;
                 d %= 360;
-                String string = directions[MathHelper.floor_double(d /= (double)45)];
+                String string = directions[MathHelper$floor_double(d /= (double)45)];
                 this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string, n4, (int) f - 4, this.directionColor.getColorValue());
                 n4 += this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string);
             }
@@ -77,5 +93,4 @@ public class CoordinatesModule extends AbstractModule {
         }
         GL11.glPopMatrix();
     }
-
 }

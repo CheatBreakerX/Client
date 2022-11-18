@@ -37,10 +37,10 @@ public class CooldownsModule extends AbstractModule {
 
     public static void lIIIIlIIllIIlIIlIIIlIIllI(String name, long duration, int itemId) {
         for (CooldownRenderer renderer : real) {
-            if (!renderer.IlllIIIlIlllIllIlIIlllIlI().equalsIgnoreCase(name) || renderer.IIIIllIIllIIIIllIllIIIlIl() != itemId)
+            if (!renderer.getName().equalsIgnoreCase(name) || renderer.getItemId() != itemId)
                 continue;
-            renderer.lIIIIIIIIIlIllIIllIlIIlIl();
-            renderer.lIIIIlIIllIIlIIlIIIlIIllI(duration);
+            renderer.resetTime();
+            renderer.setDuration(duration);
             return;
         }
         real.add(new CooldownRenderer(name, itemId, duration));
@@ -109,7 +109,7 @@ public class CooldownsModule extends AbstractModule {
                 }
                 renderer.lIIIIlIIllIIlIIlIIIlIIllI(this.colorTheme, i * n, 0.0f, this.coloredColor.getColorValue());
             }
-        } else if (!(this.minecraft.currentScreen instanceof CBModulesGui) && !(this.minecraft.currentScreen instanceof CBModulePlaceGui)) {
+        } else if (!(this.minecraft.bridge$getCurrentScreen() instanceof CBModulesGui) && !(this.minecraft.bridge$getCurrentScreen() instanceof CBModulePlaceGui)) {
             this.setDimensions(50, 24);
             this.scaleAndTranslate(guiDrawEvent.getResolution());
         }

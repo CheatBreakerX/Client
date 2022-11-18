@@ -6,14 +6,17 @@ import com.cheatbreaker.bridge.client.gui.FontRendererBridge;
 import com.cheatbreaker.bridge.client.gui.GuiIngameBridge;
 import com.cheatbreaker.bridge.client.multiplayer.WorldClientBridge;
 import com.cheatbreaker.bridge.client.renderer.EntityRendererBridge;
+import com.cheatbreaker.bridge.client.renderer.RenderGlobal;
 import com.cheatbreaker.bridge.client.renderer.texture.TextureManagerBridge;
 import com.cheatbreaker.bridge.client.resources.IResourceManagerBridge;
 import com.cheatbreaker.bridge.client.settings.GameSettingsBridge;
+import com.cheatbreaker.bridge.client.shader.FrameBufferBridge;
 import com.cheatbreaker.bridge.util.SessionBridge;
 import com.cheatbreaker.bridge.util.TimerBridge;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 
 import java.io.File;
+import java.net.Proxy;
 
 public interface MinecraftBridge {
     SoundHandlerBridge bridge$getSoundHandler();
@@ -39,4 +42,8 @@ public interface MinecraftBridge {
     void bridge$shutdown();
     GuiIngameBridge bridge$getIngameGUI();
     void bridge$func_152344_a(Runnable runnable);
+    RenderGlobal bridge$getRenderGlobal();
+    void bridge$scaledTessellator(int p_71392_1_, int p_71392_2_, int p_71392_3_, int p_71392_4_, int p_71392_5_, int p_71392_6_);
+    FrameBufferBridge bridge$getFramebuffer();
+    Proxy bridge$getProxy();
 }

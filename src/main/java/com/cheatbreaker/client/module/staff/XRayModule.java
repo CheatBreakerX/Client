@@ -22,13 +22,13 @@ public class XRayModule extends StaffModule {
     @Override
     public void addAllEvents() {
         super.addAllEvents();
-        Ref.getMinecraft().renderGlobal.loadRenderers();
+        Ref.getMinecraft().bridge$getRenderGlobal().bridge$loadRenderers();
     }
 
     @Override
     public void removeAllEvents() {
         super.removeAllEvents();
-        Ref.getMinecraft().renderGlobal.loadRenderers();
+        Ref.getMinecraft().bridge$getRenderGlobal().bridge$loadRenderers();
     }
 
     public boolean lIIIIlIIllIIlIIlIIIlIIllI(int n, boolean bl) {

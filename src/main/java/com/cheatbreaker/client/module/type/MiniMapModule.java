@@ -78,7 +78,4 @@ public class MiniMapModule extends AbstractModule {
         }
         this.voxelMap.onTickInGame(Ref.getMinecraft());
     }
-
-
-
 }

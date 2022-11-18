@@ -1,16 +1,15 @@
 package com.cheatbreaker.client.module.type.armourstatus;
 
+import com.cheatbreaker.bridge.client.MinecraftBridge;
+import com.cheatbreaker.bridge.client.gui.GuiChatBridge;
+import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
+import com.cheatbreaker.bridge.client.renderer.entity.RenderItemBridge;
+import com.cheatbreaker.bridge.item.ItemStackBridge;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.*;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.ScaledResolutionBridge;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -31,10 +30,10 @@ public class ArmourStatusModule extends AbstractModule {
     private Setting damageDisplay;
     public static Setting damageDisplayType;
     public static Setting damageThreshold;
-    public static RenderItem renderItem;
+    public static RenderItemBridge renderItem;
     public static final List<ArmourStatusDamageComparable> damageColors;
     private static List<ArmourStatusItem> items;
-    private static ScaledResolutionBridge lIIIIIllllIIIIlIlIIIIlIlI;
+    private static ScaledResolutionBridge scaledResolution;
 
     public ArmourStatusModule() {
         super("Armor Status");
@@ -65,46 +64,46 @@ public class ArmourStatusModule extends AbstractModule {
         //this.addEvent(GuiDrawEvent.class, this::renderReal);
     }
 
-    private void renderPreview(GuiDrawEvent lIllIlIlllIIlIIllIIlIIlII2) {
+    private void renderPreview(GuiDrawEvent event) {
         if (!this.isRenderHud()) {
             return;
         }
-        ArrayList<ArmourStatusItem> arrayList = new ArrayList<ArmourStatusItem>();
+        ArrayList<ArmourStatusItem> arrayList = new ArrayList<>();
         for (int i = 3; i >= 0; --i) {
-            ItemStack lIlIlIlIlIllllIlllIIIlIlI2 = this.minecraft.bridge$getThePlayer().inventory.armorInventory[i];
-            arrayList.add(new ArmourStatusItem(lIlIlIlIlIllllIlllIIIlIlI2, 16, 16, 2, true));
+            ItemStackBridge stack = this.minecraft.bridge$getThePlayer().bridge$getInventory().bridge$getArmorInventory()[i];
+            arrayList.add(new ArmourStatusItem(stack, 16, 16, 2, true));
         }
         if (arrayList.isEmpty()) {
-            arrayList.add(new ArmourStatusItem(new ItemStack(Item.getItemById(310)), 16, 16, 2, true));
-            arrayList.add(new ArmourStatusItem(new ItemStack(Item.getItemById(311)), 16, 16, 2, true));
-            arrayList.add(new ArmourStatusItem(new ItemStack(Item.getItemById(312)), 16, 16, 2, true));
-            arrayList.add(new ArmourStatusItem(new ItemStack(Item.getItemById(313)), 16, 16, 2, true));
+            arrayList.add(new ArmourStatusItem(Ref.getInstanceCreator().createItemStack(Ref.getUtils().getMostPowerfulArmourHelmet()), 16, 16, 2, true));
+            arrayList.add(new ArmourStatusItem(Ref.getInstanceCreator().createItemStack(Ref.getUtils().getMostPowerfulArmourChestplate()), 16, 16, 2, true));
+            arrayList.add(new ArmourStatusItem(Ref.getInstanceCreator().createItemStack(Ref.getUtils().getMostPowerfulArmourLeggings()), 16, 16, 2, true));
+            arrayList.add(new ArmourStatusItem(Ref.getInstanceCreator().createItemStack(Ref.getUtils().getMostPowerfulArmourBoots()), 16, 16, 2, true));
         }
-        if ((Boolean) equippedItem.getValue() && this.minecraft.bridge$getThePlayer().getCurrentEquippedItem() != null) {
-            arrayList.add(new ArmourStatusItem(this.minecraft.bridge$getThePlayer().getCurrentEquippedItem(), 16, 16, 2, false));
+        if ((Boolean) equippedItem.getValue() && this.minecraft.bridge$getThePlayer().bridge$getCurrentEquippedItem() != null) {
+            arrayList.add(new ArmourStatusItem(this.minecraft.bridge$getThePlayer().bridge$getCurrentEquippedItem(), 16, 16, 2, false));
         } else if ((Boolean) equippedItem.getValue()) {
-            arrayList.add(new ArmourStatusItem(new ItemStack(Item.getItemById(276)), 16, 16, 2, false));
+            arrayList.add(new ArmourStatusItem(Ref.getInstanceCreator().createItemStack(Ref.getUtils().getMostPowerfulDamageItem()), 16, 16, 2, false));
         }
         GL11.glPushMatrix();
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        lIIIIIllllIIIIlIlIIIIlIlI = lIllIlIlllIIlIIllIIlIIlII2.getResolution();
-        this.scaleAndTranslate(lIIIIIllllIIIIlIlIIIIlIlI);
+        scaledResolution = event.getResolution();
+        this.scaleAndTranslate(scaledResolution);
         this.lIIIIlIIllIIlIIlIIIlIIllI(this.minecraft, arrayList);
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glPopMatrix();
     }
 
-    private void renderReal(GuiDrawEvent lIllIllIlIIllIllIlIlIIlIl2) {
+    private void renderReal(GuiDrawEvent event) {
         if (!this.isRenderHud()) {
             return;
         }
-        if (!(this.minecraft.currentScreen instanceof CBModulesGui || this.minecraft.currentScreen instanceof CBModulePlaceGui || this.minecraft.currentScreen instanceof GuiChat && !(Boolean) showWhileTying.getValue())) {
+        if (!(this.minecraft.bridge$getCurrentScreen() instanceof CBModulesGui || this.minecraft.bridge$getCurrentScreen() instanceof CBModulePlaceGui || this.minecraft.bridge$getCurrentScreen() instanceof GuiChatBridge && !(Boolean) showWhileTying.getValue())) {
             this.updateItems(this.minecraft);
             if (!items.isEmpty()) {
                 GL11.glPushMatrix();
                 GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-                lIIIIIllllIIIIlIlIIIIlIlI = lIllIllIlIIllIllIlIlIIlIl2.getResolution();
-                this.scaleAndTranslate(lIIIIIllllIIIIlIlIIIIlIlI);
+                scaledResolution = event.getResolution();
+                this.scaleAndTranslate(scaledResolution);
                 this.lIIIIlIIllIIlIIlIIIlIIllI(this.minecraft, items);
                 GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
                 GL11.glPopMatrix();
@@ -112,21 +111,21 @@ public class ArmourStatusModule extends AbstractModule {
         }
     }
 
-    private void updateItems(Minecraft minecraft) {
+    private void updateItems(MinecraftBridge minecraft) {
         items.clear();
         for (int i = 3; i >= -1; --i) {
-            ItemStack stack = null;
+            ItemStackBridge stack = null;
             if (i == -1 && (Boolean) equippedItem.getValue()) {
-                stack = minecraft.bridge$getThePlayer().getCurrentEquippedItem();
+                stack = minecraft.bridge$getThePlayer().bridge$getCurrentEquippedItem();
             } else if (i != -1) {
-                stack = minecraft.bridge$getThePlayer().inventory.armorInventory[i];
+                stack = minecraft.bridge$getThePlayer().bridge$getInventory().bridge$getArmorInventory()[i];
             }
             if (stack == null) continue;
             items.add(new ArmourStatusItem(stack, 16, 16, 2, i > -1));
         }
     }
 
-    private void lIIIIlIIllIIlIIlIIIlIIllI(Minecraft minecraft, List<ArmourStatusItem> list) {
+    private void lIIIIlIIllIIlIIlIIIlIIllI(MinecraftBridge minecraft, List<ArmourStatusItem> list) {
         if (list.size() > 0) {
             int n = (Boolean) itemName.getValue() ? 18 : 16;
             if (((String) listMode.getValue()).equalsIgnoreCase("vertical")) {
@@ -164,7 +163,7 @@ public class ArmourStatusModule extends AbstractModule {
     }
 
     static {
-        renderItem = new RenderItem();
+        renderItem = Ref.getInstanceCreator().createRenderItem();
         damageColors = new ArrayList();
         items = new ArrayList();
     }

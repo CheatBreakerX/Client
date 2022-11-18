@@ -10,4 +10,7 @@ public interface GLBridge {
     void bridge$enableAlphaTest();
     void bridge$disableAlphaTest();
     void bridge$setShadeModel(int i);
+
+    boolean bridge$isFramebufferEnabled(); // OpenGlUtils
+    boolean bridge$isShadersSupported(); // OpenGlUtils
 }

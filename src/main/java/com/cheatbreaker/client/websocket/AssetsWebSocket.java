@@ -4,6 +4,8 @@ import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.entity.AbstractClientPlayerBridge;
 import com.cheatbreaker.bridge.entity.player.EntityPlayerBridge;
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ChatComponentTextBridge;
+import com.cheatbreaker.bridge.util.CryptManagerBridge;
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.config.Profile;
@@ -30,12 +32,6 @@ import com.mojang.authlib.exceptions.InvalidCredentialsException;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import io.netty.buffer.Unpooled;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.CryptManager;
-import net.minecraft.util.EnumChatFormatting;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_6455;
 import org.java_websocket.handshake.ServerHandshake;
@@ -87,7 +83,7 @@ public class AssetsWebSocket extends WebSocketClient {
             packet.read(buf);
             packet.handle(this);
 
-            Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(new ChatComponentText("Handling incoming packet from websocket: " + packetClass.getCanonicalName()));
+            Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(Ref.getInstanceCreator().createChatComponentText("Handling incoming packet from websocket: " + packetClass.getCanonicalName()));
         }
         catch (Exception exception) {
             System.out.println("Error from: " + packetClass);
@@ -293,25 +289,25 @@ public class AssetsWebSocket extends WebSocketClient {
 //                    continue;
                 if (!(player instanceof AbstractClientPlayerBridge)) {
                     CheatBreaker.getInstance().cbInfo("Player " + string + " (str) is not instance of AbstractClientPlayer!");
-                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(new ChatComponentText("Player " + string + " (str) is not instance of AbstractClientPlayer!"));
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(Ref.getInstanceCreator().createChatComponentText("Player " + string + " (str) is not instance of AbstractClientPlayer!"));
                     continue;
                 }
 
                 if (!cosmetic.isEquipped()) {
-                    CheatBreaker.getInstance().cbInfo("System tried to apply cape to " + player.getDisplayName() + "\u00a7r using " + cosmetic.getLocation() + " but failed as it is not equipped.");
-                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(new ChatComponentText("System tried to apply cape to " + player.getDisplayName() + "\u00a7r using " + cosmetic.getLocation() + " but failed as it is not equipped."));
+                    CheatBreaker.getInstance().cbInfo("System tried to apply cape to " + player.bridge$func_145748_c_().bridge$getFormattedText() + "\u00a7r using " + cosmetic.getLocation() + " but failed as it is not equipped.");
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(Ref.getInstanceCreator().createChatComponentText("System tried to apply cape to " + player.bridge$func_145748_c_().bridge$getFormattedText() + "\u00a7r using " + cosmetic.getLocation() + " but failed as it is not equipped."));
                     continue;
                 }
 
                 CheatBreaker.getInstance().cbInfo("Player " + string + " passed checks!");
-                Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(new ChatComponentText("Player " + string + " passed checks!"));
+                Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(Ref.getInstanceCreator().createChatComponentText("Player " + string + " passed checks!"));
 
                 if (cosmetic.getType().equals("cape")) {
                     ((AbstractClientPlayerBridge) player).bridge$setLocationCape(cosmetic.getLocation());
-                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(new ChatComponentText("Set cape location for " + player.getDisplayName() + "\u00a7r to " + cosmetic.getLocation()));
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(Ref.getInstanceCreator().createChatComponentText("Set cape location for " + player.bridge$func_145748_c_().bridge$getFormattedText() + "\u00a7r to " + cosmetic.getLocation()));
                 } else {
                     CheatBreaker.getInstance().cbInfo("Type is not cape!");
-                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(new ChatComponentText("Type is not cape!"));
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(Ref.getInstanceCreator().createChatComponentText("Type is not cape!"));
                 }
             }
             catch (Exception exception) {
@@ -345,9 +341,9 @@ public class AssetsWebSocket extends WebSocketClient {
 
     // checks if cracked?? if it's returning before sending a response
     public void handleJoinServer(WSPacketJoinServer packet) {
-        SecretKey secretKey = CryptManager.createNewSharedKey();
+        SecretKey secretKey = CryptManagerBridge.createNewSharedKey();
         PublicKey publicKey = packet.getPublicKey();
-        String string = new BigInteger(CryptManager.getServerIdHash("", publicKey, secretKey)).toString(16);
+        String string = new BigInteger(CryptManagerBridge.getServerIdHash("", publicKey, secretKey)).toString(16);
         try {
             this.createSessionService().joinServer(this.minecraft.bridge$getSession().bridge$func_148256_e(), this.minecraft.bridge$getSession().bridge$getToken(), string);
         }

@@ -1,9 +1,9 @@
 package com.cheatbreaker.client.websocket.server;
 
+import com.cheatbreaker.bridge.util.CryptManagerBridge;
 import com.cheatbreaker.client.nethandler.ByteBufWrapper;
 import com.cheatbreaker.client.websocket.AssetsWebSocket;
 import com.cheatbreaker.client.websocket.WSPacket;
-import net.minecraft.util.CryptManager;
 
 import java.security.PublicKey;
 
@@ -19,7 +19,7 @@ public class WSPacketJoinServer
     @Override
     public void read(ByteBufWrapper buf) {
         this.encryptedPublicKey = this.readKey(buf.buf());
-        this.publicKey = CryptManager.decodePublicKey(this.encryptedPublicKey);
+        this.publicKey = CryptManagerBridge.decodePublicKey(this.encryptedPublicKey);
     }
 
     @Override

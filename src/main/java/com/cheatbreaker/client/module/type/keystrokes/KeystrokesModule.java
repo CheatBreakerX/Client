@@ -1,10 +1,10 @@
 package com.cheatbreaker.client.module.type.keystrokes;
 
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -88,10 +88,10 @@ public class KeystrokesModule
 
     public void initialize() {
 
-        int n = this.minecraft.gameSettings.keyBindForward.getKeyCode();
-        int n2 = this.minecraft.gameSettings.keyBindLeft.getKeyCode();
-        int n3 = this.minecraft.gameSettings.keyBindBack.getKeyCode();
-        int n4 = this.minecraft.gameSettings.keyBindRight.getKeyCode();
+        int n = this.minecraft.bridge$getGameSettings().bridge$getKeyBindForward().bridge$getKeyCode();
+        int n2 = this.minecraft.bridge$getGameSettings().bridge$getKeyBindLeft().bridge$getKeyCode();
+        int n3 = this.minecraft.bridge$getGameSettings().bridge$getKeyBindBack().bridge$getKeyCode();
+        int n4 = this.minecraft.bridge$getGameSettings().bridge$getKeyBindRight().bridge$getKeyCode();
         int boxSize = (Integer)this.boxSize.getValue();
         int gap = (Integer)this.gap.getValue();
         float fadeTime = (Integer) this.fadeTime.getValue();
@@ -103,9 +103,9 @@ public class KeystrokesModule
         float leftKeyWidth = (float)this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(a) * (Float) this.scale.getValue();
         float downKeyWidth = (float)this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(s) * (Float) this.scale.getValue();
         float rightKeyWidth = (float)this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(d) * (Float) this.scale.getValue();
-        int jump = this.minecraft.gameSettings.keyBindJump.getKeyCode();
-        int attack = this.minecraft.gameSettings.keyBindAttack.getKeyCode();
-        int use = this.minecraft.gameSettings.keyBindUseItem.getKeyCode();
+        int jump = this.minecraft.bridge$getGameSettings().bridge$getKeyBindJump().bridge$getKeyCode();
+        int attack = this.minecraft.bridge$getGameSettings().bridge$getKeyBindAttack().bridge$getKeyCode();
+        int use = this.minecraft.bridge$getGameSettings().bridge$getKeyBindUseItem().bridge$getKeyCode();
         boolean bl = (Boolean)this.replaceNamesWithArrows.getValue();
         this.upKey = new Key(bl ? "▲" : (upKeyWidth > (float)boxSize ? w.substring(0, 1) : w), n, boxSize, boxSize, fadeTime);
         this.leftKey = new Key(bl ? "◀" : (leftKeyWidth > (float)boxSize ? a.substring(0, 1) : a), n2, boxSize, boxSize, fadeTime);

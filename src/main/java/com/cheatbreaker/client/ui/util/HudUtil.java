@@ -1,13 +1,12 @@
 package com.cheatbreaker.client.ui.util;
 
-import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.client.gui.FontRendererBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.entity.player.EntityPlayer;
+import com.cheatbreaker.bridge.entity.player.EntityPlayerBridge;
+import com.cheatbreaker.bridge.item.ItemBridge;
+import com.cheatbreaker.bridge.item.ItemStackBridge;
+import com.cheatbreaker.bridge.ref.Ref;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
 public final class HudUtil {
@@ -28,14 +27,13 @@ public final class HudUtil {
      * Renders the item's overlay information. Examples being stack count or damage on top of the item's image at the
      * specified position.
      */
-    public static void renderItemOverlayIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, int x, int y,
-                                                boolean showDamageBar, boolean showCount) {
+    public static void renderItemOverlayIntoGUI(FontRendererBridge fontRenderer, ItemStackBridge itemStack, int x, int y, boolean showDamageBar, boolean showCount) {
         if (itemStack != null && (showDamageBar || showCount)) {
-            if (itemStack.isItemDamaged() && showDamageBar) {
+            if (itemStack.bridge$isItemDamaged() && showDamageBar) {
                 int var11 = (int) Math
-                        .round(13.0D - itemStack.getItemDamageForDisplay() * 13.0D / itemStack.getMaxDamage());
+                        .round(13.0D - itemStack.bridge$getItemDamageForDisplay() * 13.0D / itemStack.bridge$getMaxDamage());
                 int var7 = (int) Math
-                        .round(255.0D - itemStack.getItemDamageForDisplay() * 255.0D / itemStack.getMaxDamage());
+                        .round(255.0D - itemStack.bridge$getItemDamageForDisplay() * 255.0D / itemStack.bridge$getMaxDamage());
                 GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glDisable(GL11.GL_DEPTH_TEST);
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -54,10 +52,10 @@ public final class HudUtil {
             if (showCount) {
                 int count = 0;
 
-                if (itemStack.getMaxStackSize() > 1) {
-                    count = HudUtil.countInInventory(Ref.getMinecraft().bridge$getThePlayer(), itemStack.getItem(),
-                            itemStack.getItemDamage());
-                } else if (itemStack.getItem().equals(Items.bow)) {
+                if (itemStack.bridge$getMaxStackSize() > 1) {
+                    count = HudUtil.countInInventory(Ref.getMinecraft().bridge$getThePlayer(), itemStack.bridge$getItem(),
+                            itemStack.bridge$getItemDamage());
+                } else if (itemStack.bridge$getItem().equals(Items.bow)) {
                     count = HudUtil.countInInventory(Ref.getMinecraft().bridge$getThePlayer(), Items.arrow);
                 }
 
@@ -65,7 +63,7 @@ public final class HudUtil {
                     String var6 = "" + count;
                     GL11.glDisable(GL11.GL_LIGHTING);
                     GL11.glDisable(GL11.GL_DEPTH_TEST);
-                    fontRenderer.drawStringWithShadow(var6, x + 19 - 2 - fontRenderer.getStringWidth(var6), y + 6 + 3,
+                    fontRenderer.bridge$drawStringWithShadow(var6, x + 19 - 2 - fontRenderer.bridge$getStringWidth(var6), y + 6 + 3,
                             16777215);
                     GL11.glEnable(GL11.GL_LIGHTING);
                     GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -89,16 +87,16 @@ public final class HudUtil {
         tessellator.bridge$finish();
     }
 
-    public static int countInInventory(EntityPlayer player, Item item) {
+    public static int countInInventory(EntityPlayerBridge player, ItemBridge item) {
         return countInInventory(player, item, -1);
     }
 
-    public static int countInInventory(EntityPlayer player, Item item, int md) {
+    public static int countInInventory(EntityPlayerBridge player, ItemBridge item, int md) {
         int count = 0;
-        for (int i = 0; i < player.inventory.mainInventory.length; i++) {
-            if (player.inventory.mainInventory[i] != null && item.equals(player.inventory.mainInventory[i].getItem()) &&
-                    (md == -1 || player.inventory.mainInventory[i].getItemDamage() == md)) {
-                count += player.inventory.mainInventory[i].stackSize;
+        for (int i = 0; i < player.bridge$getInventory().bridge$getMainInventory().length; i++) {
+            if (player.bridge$getInventory().bridge$getMainInventory()[i] != null && item.equals(player.bridge$getInventory().bridge$getMainInventory()[i].bridge$getItem()) &&
+                    (md == -1 || player.bridge$getInventory().bridge$getMainInventory()[i].bridge$getItemDamage() == md)) {
+                count += player.bridge$getInventory().bridge$getMainInventory()[i].bridge$getStackSize();
             }
         }
         return count;

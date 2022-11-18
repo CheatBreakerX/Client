@@ -47,7 +47,7 @@ public class CPSModule extends AbstractModule {
             this.minecraft.bridge$getFontRenderer().bridge$drawString(string, (int)(this.width / 2.0f - (float)(this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) / 2)), 3, this.textColor.getColorValue());
         } else {
             String string = "[" + this.clicks.size() + " CPS]";
-            this.minecraft.bridge$getFontRenderer().bridge$drawString(string, (int)(this.width / 2.0f - (float)(this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) / 2)), 3, this.textColor.getColorValue(), true);
+            this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string, (int)(this.width / 2.0f - (float)(this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) / 2)), 3, this.textColor.getColorValue());
             this.setDimensions(this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string), 18);
         }
         GL11.glPopMatrix();

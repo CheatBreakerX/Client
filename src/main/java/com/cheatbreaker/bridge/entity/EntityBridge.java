@@ -1,5 +1,8 @@
 package com.cheatbreaker.bridge.entity;
 
+import com.cheatbreaker.bridge.util.AxisAlignedBBBridge;
+import com.cheatbreaker.bridge.util.IChatComponentBridge;
+
 import java.util.UUID;
 
 public interface EntityBridge {
@@ -15,4 +18,7 @@ public interface EntityBridge {
 
     float bridge$getRotationPitch();
     float bridge$getRotationYaw();
+    AxisAlignedBBBridge bridge$getBoundingBox();
+    float bridge$getHeight();
+    IChatComponentBridge bridge$func_145748_c_();
 }

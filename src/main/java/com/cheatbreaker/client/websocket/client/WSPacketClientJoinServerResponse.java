@@ -1,9 +1,9 @@
 package com.cheatbreaker.client.websocket.client;
 
+import com.cheatbreaker.bridge.util.CryptManagerBridge;
 import com.cheatbreaker.client.nethandler.ByteBufWrapper;
 import com.cheatbreaker.client.websocket.AssetsWebSocket;
 import com.cheatbreaker.client.websocket.WSPacket;
-import net.minecraft.util.CryptManager;
 
 import javax.crypto.SecretKey;
 import java.security.PublicKey;
@@ -14,8 +14,8 @@ public class WSPacketClientJoinServerResponse
     private byte[] IlllIIIlIlllIllIlIIlllIlI;
 
     public WSPacketClientJoinServerResponse(SecretKey secretKey, PublicKey publicKey, byte[] arrby) {
-        this.lIIIIlIIllIIlIIlIIIlIIllI = CryptManager.encryptData(publicKey, secretKey.getEncoded());
-        this.IlllIIIlIlllIllIlIIlllIlI = CryptManager.decryptData(publicKey, arrby);
+        this.lIIIIlIIllIIlIIlIIIlIIllI = CryptManagerBridge.encryptData(publicKey, secretKey.getEncoded());
+        this.IlllIIIlIlllIllIlIIlllIlI = CryptManagerBridge.decryptData(publicKey, arrby);
     }
 
     @Override

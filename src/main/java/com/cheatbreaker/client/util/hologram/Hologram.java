@@ -46,7 +46,7 @@ public class Hologram {
                 GL11.glDepthMask(false);
                 GL11.glDisable(GL11.GL_DEPTH_TEST);
                 GL11.glEnable(GL11.GL_BLEND);
-                OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+                Ref.getGlBridge().bridge$glBlendFunc(770, 771, 1, 0);
                 TessellatorBridge tessellator = Ref.getTessellator();
                 int n = 0;
                 GL11.glDisable(GL11.GL_TEXTURE_2D);

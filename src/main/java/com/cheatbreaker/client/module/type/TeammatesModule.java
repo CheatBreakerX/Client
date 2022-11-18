@@ -77,7 +77,7 @@ public class TeammatesModule {
             }
             if (entityPlayer == this.minecraft.bridge$getThePlayer()) continue;
             float f5 = (float)(entityPlayer.bridge$getLastTickPosX() + (entityPlayer.bridge$getPosX() - entityPlayer.bridge$getLastTickPosX()) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks() - (double)f2);
-            float f6 = (float)(entityPlayer.bridge$getLastTickPosY() + (entityPlayer.bridge$getPosY() - entityPlayer.bridge$getLastTickPosY()) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks() - (double)f3) + entityPlayer.height + 1.0f;
+            float f6 = (float)(entityPlayer.bridge$getLastTickPosY() + (entityPlayer.bridge$getPosY() - entityPlayer.bridge$getLastTickPosY()) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks() - (double)f3) + entityPlayer.bridge$getHeight() + 1.0f;
             float f7 = (float)(entityPlayer.bridge$getLastTickPosZ() + (entityPlayer.bridge$getLastTickPosZ() - entityPlayer.bridge$getLastTickPosZ()) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks() - (double)f4);
             double d8 = this.getDistance(entityPlayer.bridge$getPosX(), entityPlayer.bridge$getPosY(), entityPlayer.bridge$getPosZ());
             this.lIIIIlIIllIIlIIlIIIlIIllI(guiDrawEvent.getResolution(), teammate, f5, f6, f7, intBuffer, (int)d8);
@@ -149,7 +149,7 @@ public class TeammatesModule {
         TessellatorBridge tessellator = Ref.getTessellator();
         GL11.glEnable(3042);
         GL11.glDisable(3553);
-        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        Ref.getGlBridge().bridge$glBlendFunc(770, 771, 1, 0);
         if (ilIlllIlIlIIllllIlllIlIII.IIIIllIIllIIIIllIllIIIlIl()) {
             GL11.glColor4f(0.0f, 0.0f, 1.0f, 3.137931f * 0.21032967f);
         } else {
@@ -206,7 +206,7 @@ public class TeammatesModule {
         TessellatorBridge tessellator = Ref.getTessellator();
         GL11.glEnable(3042);
         GL11.glDisable(3553);
-        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        Ref.getGlBridge().bridge$glBlendFunc(770, 771, 1, 0);
         if (teammate.IIIIllIIllIIIIllIllIIIlIl()) {
             GL11.glColor4f(0.0f, 0.0f, 1.0f, 0.83837837f * 0.78723407f);
         } else {

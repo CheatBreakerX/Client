@@ -1,11 +1,11 @@
 package com.cheatbreaker.client.module.type.togglesprint;
 
+import com.cheatbreaker.bridge.client.gui.GuiChatBridge;
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
-import net.minecraft.MinecraftMovementInputHelper;
-import net.minecraft.client.gui.GuiChat;
 import org.lwjgl.opengl.GL11;
 
 public class ToggleSprintModule extends AbstractModule {
@@ -67,12 +67,12 @@ public class ToggleSprintModule extends AbstractModule {
         if (!this.isRenderHud()) {
             return;
         }
-        if ((Boolean) showHudText.getValue() && ((Boolean) showWhileTyping.getValue() || !(this.minecraft.currentScreen instanceof GuiChat))) {
+        if ((Boolean) showHudText.getValue() && ((Boolean) showWhileTyping.getValue() || !(this.minecraft.bridge$getCurrentScreen() instanceof GuiChatBridge))) {
             GL11.glPushMatrix();
-            int n = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(MinecraftMovementInputHelper.toggleSprintString);
+            int n = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(Ref.getUtils().getToggleSprintInputHelper().getToggleSprintString());
             this.setDimensions(n, 18);
             this.scaleAndTranslate(guiDrawEvent.getResolution());
-            this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(MinecraftMovementInputHelper.toggleSprintString, 0, 0, this.textColor.getColorValue());
+            this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(Ref.getUtils().getToggleSprintInputHelper().getToggleSprintString(), 0, 0, this.textColor.getColorValue());
             GL11.glPopMatrix();
         } else {
             this.setDimensions(50, 18);
