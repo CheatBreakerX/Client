@@ -1,6 +1,7 @@
 package com.cheatbreaker.client.ui.overlay;
 
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.ui.mainmenu.element.ScrollableElement;
 import com.cheatbreaker.client.ui.overlay.element.DraggableElement;
@@ -9,9 +10,6 @@ import com.cheatbreaker.client.ui.overlay.element.InputFieldElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.websocket.shared.WSPacketConsole;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;
@@ -55,7 +53,7 @@ public class ConsoleElement extends DraggableElement {
                 GL11.glPushMatrix();
                 GL11.glEnable((int)3089);
                 OverlayGui overlayGui = OverlayGui.getInstance();
-                RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)(this.x + 2.0f), (int)(this.y + (float)12 + (float)3), (int)(this.x + this.width - 2.0f), (int)(this.y + this.height - (float)17), (float)((int)((float) overlayGui.getResolution().getScaleFactor() * overlayGui.getScaleFactor())), (int) overlayGui.getScaledHeight());
+                RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)(this.x + 2.0f), (int)(this.y + (float)12 + (float)3), (int)(this.x + this.width - 2.0f), (int)(this.y + this.height - (float)17), (float)((int)((float) overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int) overlayGui.getScaledHeight());
                 List<String> list = CheatBreaker.getInstance().getConsoleLines();
                 int n = 0;
                 for (int i = list.size() - 1; i >= 0; --i) {
@@ -133,7 +131,7 @@ public class ConsoleElement extends DraggableElement {
             this.updateDraggingPosition(f, f2);
         }
         if (this.closeButton.isMouseInside(f, f2)) {
-            this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             OverlayGui.getInstance().removeElements(this);
             return true;
         }
@@ -150,11 +148,11 @@ public class ConsoleElement extends DraggableElement {
         if (string.equals("clear") || string.equals("cls")) {
             CheatBreaker.getInstance().getConsoleLines().clear();
         } else {
-            CheatBreaker.getInstance().getConsoleLines().add(EnumChatFormatting.GRAY + "> " + string);
+            CheatBreaker.getInstance().getConsoleLines().add(EnumChatFormattingBridge.GRAY + "> " + string);
             CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketConsole(string));
         }
         this.textInputElement.setText("");
-        this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+        this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
     }
 
     @Override

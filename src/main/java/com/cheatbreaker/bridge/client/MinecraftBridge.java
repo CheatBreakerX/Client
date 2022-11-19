@@ -25,6 +25,10 @@ public interface MinecraftBridge {
     FontRendererBridge bridge$getFontRenderer();
     CBGuiScreen bridge$getCurrentScreen();
     void bridge$displayGuiScreen(CBGuiScreen screen);
+    void bridge$displayInternalGuiScreen(InternalScreen screen, CBGuiScreen parent);
+    default void bridge$displayInternalGuiScreen(InternalScreen screen) {
+        this.bridge$displayInternalGuiScreen(screen, null);
+    }
     WorldClientBridge bridge$getTheWorld();
     GameSettingsBridge bridge$getGameSettings();
     EntityClientPlayerMPBridge bridge$getThePlayer();
@@ -47,4 +51,11 @@ public interface MinecraftBridge {
     FrameBufferBridge bridge$getFramebuffer();
     Proxy bridge$getProxy();
     void bridge$func_147120_f(); // resetSize
+
+    enum InternalScreen {
+        SINGLEPLAYER,
+        MULTIPLAYER,
+        OPTIONS,
+        LANGUAGE
+    }
 }

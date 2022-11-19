@@ -1,6 +1,8 @@
 package com.cheatbreaker.client.ui.overlay.element;
 
+import com.cheatbreaker.bridge.client.renderer.ThreadDownloadImageDataBridge;
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.ui.fading.MinMaxFade;
 import com.cheatbreaker.client.ui.mainmenu.element.ScrollableElement;
@@ -9,9 +11,6 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.dash.DashUtil;
 import com.cheatbreaker.client.util.dash.Station;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ThreadDownloadImageData;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -83,18 +82,18 @@ public class RadioElement extends DraggableElement {
         if (station != null) {
             if (station.currentResource == null && !station.getName().equals("")) {
                 if (station.currentResource != null) {
-                    this.mc.getTextureManager().deleteTexture(station.currentResource);
+                    this.mc.bridge$getTextureManager().bridge$deleteTexture(station.currentResource);
                     station.currentResource = null;
                 }
                 station.currentResource = Ref.getInstanceCreator().createResourceLocationBridge("client/songs/" + station.getName());
-                ThreadDownloadImageData threadDownloadImageData = new ThreadDownloadImageData(null, station.getCoverURL(), this.dashIcon, null);
-                Ref.getMinecraft().getTextureManager().loadTexture(station.currentResource, threadDownloadImageData);
+                ThreadDownloadImageDataBridge threadDownloadImageData = Ref.getInstanceCreator().createThreadDownloadImageData(null, station.getCoverURL(), this.dashIcon, null);
+                Ref.getMinecraft().bridge$getTextureManager().bridge$loadTexture(station.currentResource, threadDownloadImageData);
             }
             GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
             ResourceLocationBridge location = station.currentResource == null ? this.dashIcon : station.currentResource;
-            RenderUtil.drawIcon(ResourceLocationBridge, this.IlIlllIIIIllIllllIllIIlIl / 2.0f, this.x, this.y);
+            RenderUtil.drawIcon(location, this.IlIlllIIIIllIllllIllIIlIl / 2.0f, this.x, this.y);
             float f3 = this.x + (float)50;
-            if (this.mc.currentScreen == OverlayGui.getInstance()) {
+            if (this.mc.bridge$getCurrentScreen() == OverlayGui.getInstance()) {
                 boolean bl2 = this.isMouseInside(f, f2) && f > this.x + (float)34 && f < this.x + (float)44 && f2 < this.y + this.IlIlllIIIIllIllllIllIIlIl;
                 if (!DashUtil.isPlayerNotNull()) {
                     GL11.glColor4f(1.0f, 1.0f, 1.0f, bl2 ? 1.0f : 0.8f);
@@ -121,7 +120,7 @@ public class RadioElement extends DraggableElement {
             GL11.glPushMatrix();
             GL11.glEnable(3089);
             OverlayGui overlayGui = OverlayGui.getInstance();
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)this.x, (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl), (int)(this.x + this.width), (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl + (this.height - this.IlIlllIIIIllIllllIllIIlIl) * f4), (float)((int)((float)overlayGui.getResolution().getScaleFactor() * overlayGui.getScaleFactor())), (int)overlayGui.getScaledHeight());
+            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)this.x, (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl), (int)(this.x + this.width), (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl + (this.height - this.IlIlllIIIIllIllllIllIIlIl) * f4), (float)((int)((float)overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int)overlayGui.getScaledHeight());
             Ref.modified$drawRect(this.x, this.y + this.IlIlllIIIIllIllllIllIIlIl, this.x + this.width, this.y + this.height, -14540254);
             this.scrollableContainer.drawScrollable(f, f2, bl);
             for (RadioStationElement radioStationElement : this.radioStationElements) {

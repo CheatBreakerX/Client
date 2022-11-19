@@ -6,7 +6,6 @@ import com.cheatbreaker.bridge.entity.player.EntityPlayerBridge;
 import com.cheatbreaker.bridge.item.ItemBridge;
 import com.cheatbreaker.bridge.item.ItemStackBridge;
 import com.cheatbreaker.bridge.ref.Ref;
-import net.minecraft.init.Items;
 import org.lwjgl.opengl.GL11;
 
 public final class HudUtil {
@@ -55,8 +54,8 @@ public final class HudUtil {
                 if (itemStack.bridge$getMaxStackSize() > 1) {
                     count = HudUtil.countInInventory(Ref.getMinecraft().bridge$getThePlayer(), itemStack.bridge$getItem(),
                             itemStack.bridge$getItemDamage());
-                } else if (itemStack.bridge$getItem().equals(Items.bow)) {
-                    count = HudUtil.countInInventory(Ref.getMinecraft().bridge$getThePlayer(), Items.arrow);
+                } else if (itemStack.bridge$getItem().equals(Ref.getUtils().getItemFromName("bow"))) {
+                    count = HudUtil.countInInventory(Ref.getMinecraft().bridge$getThePlayer(), Ref.getUtils().getItemFromName("arrow"));
                 }
 
                 if (count > 1) {

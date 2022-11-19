@@ -1,5 +1,6 @@
 package com.cheatbreaker.client.ui.mainmenu;
 
+import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.CheatBreaker;
@@ -93,10 +94,10 @@ public class MainMenu extends MainMenuBase {
         this.multiplayerButton.handleElementMouseClicked(mouseX, mouseY, button, true);
         if (this.singleplayerButton.isMouseInside(mouseX, mouseY)) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
-            this.mc.bridge$displayGuiScreen(new GuiSelectWorld(this));
+            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.SINGLEPLAYER, this);
         } else if (this.multiplayerButton.isMouseInside(mouseX, mouseY)) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
-            this.mc.bridge$displayGuiScreen(new GuiMultiplayer(this));
+            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.MULTIPLAYER, this);
         }
     }
 

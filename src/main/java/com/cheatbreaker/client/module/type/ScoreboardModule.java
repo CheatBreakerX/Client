@@ -1,5 +1,7 @@
 package com.cheatbreaker.client.module.type;
 
+import com.cheatbreaker.bridge.client.gui.FontRendererBridge;
+import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.event.type.RenderPreviewEvent;
@@ -61,44 +63,44 @@ public class ScoreboardModule extends AbstractModule {
         GL11.glPopMatrix();
     }
 
-    private void drawObjective(ScoreObjective objective, FontRenderer fontRenderer) {
-        Scoreboard scoreboard = objective.getScoreboard();
-        Collection<Score> collection = scoreboard.func_96534_i(objective);
+    private void drawObjective(ScoreObjective objective, FontRendererBridge fontRenderer) {
+        Scoreboard scoreboard = objective.bridge$getScoreboard();
+        Collection<Score> collection = scoreboard.bridge$func_96534_i(objective);
         boolean removeNumbers = isRemoveNumbers();
         if (collection.size() <= 15) {
-            int width = fontRenderer.getStringWidth(objective.getDisplayName());
+            int width = fontRenderer.bridge$getStringWidth(objective.bridge$getDisplayName());
             int numbersX = width + 16;
             for (Score score : collection) {
-                ScorePlayerTeam playersTeam = scoreboard.getPlayersTeam(score.getPlayerName());
-                String string = ScorePlayerTeam.formatPlayerName(playersTeam, score.getPlayerName()) + ": " + EnumChatFormatting.RED + score.getScorePoints();
-                width = Math.max(width, fontRenderer.getStringWidth(string));
+                ScorePlayerTeam playersTeam = scoreboard.bridge$getPlayersTeam(score.bridge$getPlayerName());
+                String string = ScorePlayerTeam.formatPlayerName(playersTeam, score.bridge$getPlayerName()) + ": " + EnumChatFormattingBridge.RED + score.bridge$getScorePoints();
+                width = Math.max(width, fontRenderer.bridge$getStringWidth(string));
             }
             int n8 = 0;
             Iterator<Score> iterator = collection.iterator();
             int n9 = 0;
             while (iterator.hasNext()) {
                 Score score = iterator.next();
-                Team team = scoreboard.getPlayersTeam(score.getPlayerName());
-                String string = ScorePlayerTeam.formatPlayerName(team, score.getPlayerName());
-                String string2 = EnumChatFormatting.RED + "" + score.getScorePoints();
-                int lineY = -++n8 * fontRenderer.FONT_HEIGHT;
+                Team team = scoreboard.bridge$getPlayersTeam(score.bridge$getPlayerName());
+                String string = ScorePlayerTeam.formatPlayerName(team, score.bridge$getPlayerName());
+                String string2 = EnumChatFormattingBridge.RED + "" + score.bridge$getScorePoints();
+                int lineY = -++n8 * 9;
                 int lineX = width + 9;
                 if (lineX < numbersX) {
                     lineX = numbersX;
                 }
-                Gui.drawRect(-2 + (removeNumbers ? 14 : 0), lineY, lineX, lineY + fontRenderer.FONT_HEIGHT, 0x50000000);
+                Gui.drawRect(-2 + (removeNumbers ? 14 : 0), lineY, lineX, lineY + 9, 0x50000000);
                 n9 = lineX - (-2 + (removeNumbers ? 14 : 0));
-                fontRenderer.drawString(string, (removeNumbers ? 16 : 0), lineY, 0x20FFFFFF);
+                fontRenderer.bridge$drawString(string, (removeNumbers ? 16 : 0), lineY, 0x20FFFFFF);
                 if (!removeNumbers) {
-                    fontRenderer.drawString(string2, lineX - fontRenderer.getStringWidth(string2) - 2, lineY, 0x20FFFFFF);
+                    fontRenderer.bridge$drawString(string2, lineX - fontRenderer.bridge$getStringWidth(string2) - 2, lineY, 0x20FFFFFF);
                 }
                 if (n8 != collection.size()) continue;
-                String string3 = objective.getDisplayName();
-                Gui.drawRect(-2 + (removeNumbers ? 14 : 0), lineY - fontRenderer.FONT_HEIGHT - 1, lineX, lineY - 1, 0x60000000);
+                String string3 = objective.bridge$getDisplayName();
+                Gui.drawRect(-2 + (removeNumbers ? 14 : 0), lineY - 9 - 1, lineX, lineY - 1, 0x60000000);
                 Gui.drawRect(-2 + (removeNumbers ? 14 : 0), lineY - 1, lineX, lineY, 0x50000000);
-                fontRenderer.drawString(string3, +width / 2 - fontRenderer.getStringWidth(string3) / 2 + (removeNumbers ? 14 : 0), lineY - fontRenderer.FONT_HEIGHT, 0x20FFFFFF);
+                fontRenderer.bridge$drawString(string3, +width / 2 - fontRenderer.bridge$getStringWidth(string3) / 2 + (removeNumbers ? 14 : 0), lineY - 9, 0x20FFFFFF);
             }
-            this.setDimensions(n9, collection.size() * fontRenderer.FONT_HEIGHT + 12);
+            this.setDimensions(n9, collection.size() * 9 + 12);
         }
     }
 

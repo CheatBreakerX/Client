@@ -15,7 +15,7 @@ class ModuleDataHolder {
     protected CBGuiAnchor anchor;
     final CBModulesGui parent;
 
-    public ModuleDataHolder(CBModulesGui parent, AbstractModule module, SomeRandomAssEnum dELETE_ME_D, int mouseX, int mouseY) {
+    public ModuleDataHolder(CBModulesGui parent, AbstractModule module, SomeRandomAssEnum unknown, int mouseX, int mouseY) {
         this.parent = parent;
         this.module = module;
         this.xTranslation = module.getXTranslation();
@@ -24,7 +24,7 @@ class ModuleDataHolder {
         this.scaledHeight = module.height * (Float) module.scale.getValue();
         this.mouseX = mouseX;
         this.mouseY = mouseY;
-        this.unknown = dELETE_ME_D;
+        this.unknown = unknown;
         this.scale = (Float) module.scale.getValue();
         this.anchor = module.getGuiAnchor();
     }

@@ -1,5 +1,6 @@
 package com.cheatbreaker.client.ui.overlay.friend;
 
+import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.ui.mainmenu.element.ScrollableElement;
 import com.cheatbreaker.client.ui.overlay.OverlayGui;
@@ -8,7 +9,6 @@ import com.cheatbreaker.client.ui.overlay.element.InputFieldElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.util.EnumChatFormatting;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -35,8 +35,8 @@ public class FriendsListElement extends ElementListElement<FriendElement> {
         this.filterElement.setElementSize(0.0f, y, width, 13);
         this.scrollableElement.setElementSize(x + width - (float)4, y, (float)4, height);
         this.elements.sort((friendElement, friendElement2) -> {
-            String string = EnumChatFormatting.getTextWithoutFormattingCodes(friendElement.getFriend().getName());
-            String string2 = EnumChatFormatting.getTextWithoutFormattingCodes(friendElement2.getFriend().getName());
+            String string = EnumChatFormattingBridge.getTextWithoutFormattingCodes(friendElement.getFriend().getName());
+            String string2 = EnumChatFormattingBridge.getTextWithoutFormattingCodes(friendElement2.getFriend().getName());
             if (friendElement.getFriend().getPlayerId().equals(friendElement2.getFriend().getPlayerId())) {
                 return string.compareTo(string2);
             }
@@ -53,7 +53,7 @@ public class FriendsListElement extends ElementListElement<FriendElement> {
     }
 
     private boolean isFilterMatch(FriendElement friendElement) {
-        return this.filterElement.getText().equals("") || EnumChatFormatting.getTextWithoutFormattingCodes(friendElement.getFriend().getName()).toLowerCase().startsWith(this.filterElement.getText().toLowerCase());
+        return this.filterElement.getText().equals("") || EnumChatFormattingBridge.getTextWithoutFormattingCodes(friendElement.getFriend().getName()).toLowerCase().startsWith(this.filterElement.getText().toLowerCase());
     }
 
     /*
@@ -73,7 +73,7 @@ public class FriendsListElement extends ElementListElement<FriendElement> {
             GL11.glEnable((int)3089);
             OverlayGui illlllIllIIIllIIIllIllIII = OverlayGui.getInstance();
             this.scrollableElement.drawScrollable(f, f2, bl);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)this.x, (int)this.y, (int)(this.x + this.width), (int)(this.y + this.height), (float)((int)((float)illlllIllIIIllIIIllIllIII.getResolution().getScaleFactor() * illlllIllIIIllIIIllIllIII.getScaleFactor())), (int)illlllIllIIIllIIIllIllIII.getScaledHeight());
+            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)this.x, (int)this.y, (int)(this.x + this.width), (int)(this.y + this.height), (float)((int)((float)illlllIllIIIllIIIllIllIII.getResolution().bridge$getScaleFactor() * illlllIllIIIllIIIllIllIII.getScaleFactor())), (int)illlllIllIIIllIIIllIllIII.getScaledHeight());
             ImmutableList<FriendElement> immutableList = ImmutableList.copyOf(this.elements);
             for (FriendElement friendElement : immutableList) {
                 if (!this.isFilterMatch(friendElement)) continue;

@@ -2,10 +2,10 @@ package com.cheatbreaker.client.ui.overlay.element;
 
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
+import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
 import com.cheatbreaker.client.ui.overlay.StringSanitizer;
 import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
-import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.opengl.GL11;
 
 public class InputFieldElement extends AbstractElement {
@@ -27,7 +27,7 @@ public class InputFieldElement extends AbstractElement {
     private final String text;
 
     public InputFieldElement(CBFontRenderer fontRenderer, String text, int n, int n2) {
-        this.bridge$getFontRenderer() = fontRenderer;
+        this.fontRenderer = fontRenderer;
         this.text = text;
         this.IlIIlIIIIlIIIIllllIIlIllI = n;
     }
@@ -178,17 +178,17 @@ public class InputFieldElement extends AbstractElement {
                 return true;
             }
             case '': {
-                GuiScreen.setClipboardString(this.IlllIllIlIIIIlIIlIIllIIIl());
+                CBGuiScreen.setClipboardString(this.IlllIllIlIIIIlIIlIIllIIIl());
                 return true;
             }
             case '': {
                 if (this.IIIlllIIIllIllIlIIIIIIlII) {
-                    this.lIIIIIIIIIlIllIIllIlIIlIl(GuiScreen.getClipboardString());
+                    this.lIIIIIIIIIlIllIIllIlIIlIl(CBGuiScreen.getClipboardString());
                 }
                 return true;
             }
             case '': {
-                GuiScreen.setClipboardString(this.IlllIllIlIIIIlIIlIIllIIIl());
+                CBGuiScreen.setClipboardString(this.IlllIllIlIIIIlIIlIIllIIIl());
                 if (this.IIIlllIIIllIllIlIIIIIIlII) {
                     this.lIIIIIIIIIlIllIIllIlIIlIl("");
                 }
@@ -197,7 +197,7 @@ public class InputFieldElement extends AbstractElement {
         }
         switch (n) {
             case 14: {
-                if (GuiScreen.isCtrlKeyDown()) {
+                if (CBGuiScreen.isCtrlKeyDown()) {
                     if (this.IIIlllIIIllIllIlIIIIIIlII) {
                         this.lIIIIlIIllIIlIIlIIIlIIllI(-1);
                     }
@@ -207,7 +207,7 @@ public class InputFieldElement extends AbstractElement {
                 return true;
             }
             case 199: {
-                if (GuiScreen.isShiftKeyDown()) {
+                if (CBGuiScreen.isShiftKeyDown()) {
                     this.lIIIIllIIlIlIllIIIlIllIlI(0);
                 } else {
                     this.IlIlllIIIIllIllllIllIIlIl();
@@ -215,13 +215,13 @@ public class InputFieldElement extends AbstractElement {
                 return true;
             }
             case 203: {
-                if (GuiScreen.isShiftKeyDown()) {
-                    if (GuiScreen.isCtrlKeyDown()) {
+                if (CBGuiScreen.isShiftKeyDown()) {
+                    if (CBGuiScreen.isCtrlKeyDown()) {
                         this.lIIIIllIIlIlIllIIIlIllIlI(this.lIIIIlIIllIIlIIlIIIlIIllI(-1, this.lIIIIIllllIIIIlIlIIIIlIlI()));
                     } else {
                         this.lIIIIllIIlIlIllIIIlIllIlI(this.lIIIIIllllIIIIlIlIIIIlIlI() - 1);
                     }
-                } else if (GuiScreen.isCtrlKeyDown()) {
+                } else if (CBGuiScreen.isCtrlKeyDown()) {
                     this.IIIIllIIllIIIIllIllIIIlIl(this.IlllIIIlIlllIllIlIIlllIlI(-1));
                 } else {
                     this.IIIIllIlIIIllIlllIlllllIl(-1);
@@ -229,13 +229,13 @@ public class InputFieldElement extends AbstractElement {
                 return true;
             }
             case 205: {
-                if (GuiScreen.isShiftKeyDown()) {
-                    if (GuiScreen.isCtrlKeyDown()) {
+                if (CBGuiScreen.isShiftKeyDown()) {
+                    if (CBGuiScreen.isCtrlKeyDown()) {
                         this.lIIIIllIIlIlIllIIIlIllIlI(this.lIIIIlIIllIIlIIlIIIlIIllI(1, this.lIIIIIllllIIIIlIlIIIIlIlI()));
                     } else {
                         this.lIIIIllIIlIlIllIIIlIllIlI(this.lIIIIIllllIIIIlIlIIIIlIlI() + 1);
                     }
-                } else if (GuiScreen.isCtrlKeyDown()) {
+                } else if (CBGuiScreen.isCtrlKeyDown()) {
                     this.IIIIllIIllIIIIllIllIIIlIl(this.IlllIIIlIlllIllIlIIlllIlI(1));
                 } else {
                     this.IIIIllIlIIIllIlllIlllllIl(1);
@@ -243,7 +243,7 @@ public class InputFieldElement extends AbstractElement {
                 return true;
             }
             case 207: {
-                if (GuiScreen.isShiftKeyDown()) {
+                if (CBGuiScreen.isShiftKeyDown()) {
                     this.lIIIIllIIlIlIllIIIlIllIlI(this.IllIIIIIIIlIlIllllIIllIII.length());
                 } else {
                     this.llIIlllIIIIlllIllIlIlllIl();
@@ -251,7 +251,7 @@ public class InputFieldElement extends AbstractElement {
                 return true;
             }
             case 211: {
-                if (GuiScreen.isCtrlKeyDown()) {
+                if (CBGuiScreen.isCtrlKeyDown()) {
                     if (this.IIIlllIIIllIllIlIIIIIIlII) {
                         this.lIIIIlIIllIIlIIlIIIlIIllI(1);
                     }
@@ -438,15 +438,15 @@ public class InputFieldElement extends AbstractElement {
             n = 0;
         }
         this.lllIIIIIlIllIlIIIllllllII = n;
-        if (this.bridge$getFontRenderer() != null) {
+        if (this.fontRenderer != null) {
             if (this.llIlIIIlIIIIlIlllIlIIIIll > n2) {
                 this.llIlIIIlIIIIlIlllIlIIIIll = n2;
             }
             float f = this.IIIIIIlIlIlIllllllIlllIlI();
-            String string = this.bridge$getFontRenderer().lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), f);
+            String string = this.fontRenderer.lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), f);
             int n3 = string.length() + this.llIlIIIlIIIIlIlllIlIIIIll;
             if (n == this.llIlIIIlIIIIlIlllIlIIIIll) {
-                this.llIlIIIlIIIIlIlllIlIIIIll -= this.bridge$getFontRenderer().lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII, f, true).length();
+                this.llIlIIIlIIIIlIlllIlIIIIll -= this.fontRenderer.lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII, f, true).length();
             }
             if (n > n3) {
                 this.llIlIIIlIIIIlIlllIlIIIIll += n - n3;

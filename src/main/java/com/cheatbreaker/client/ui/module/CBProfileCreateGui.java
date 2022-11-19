@@ -1,6 +1,7 @@
 package com.cheatbreaker.client.ui.module;
 
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.config.Profile;
@@ -54,7 +55,7 @@ public class CBProfileCreateGui extends CBGuiScreen {
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
         if (!this.IIIllIllIlIlllllllIlIlIII) {
-            this.mc.displayGuiScreen(this.guiScreen);
+            this.mc.bridge$displayGuiScreen(this.guiScreen);
             ((CBModulesGui) this.guiScreen).currentScrollableElement = ((CBModulesGui) this.guiScreen).profilesElement;
         } else {
             this.IIIllIllIlIlllllllIlIlIII = false;
@@ -92,35 +93,35 @@ public class CBProfileCreateGui extends CBGuiScreen {
     public void keyTyped(char c, int n) {
         switch (n) {
             case 1: {
-                this.mc.displayGuiScreen(this.guiScreen);
+                this.mc.bridge$displayGuiScreen(this.guiScreen);
                 ((CBModulesGui) this.guiScreen).currentScrollableElement = ((CBModulesGui) this.guiScreen).profilesElement;
                 break;
             }
             case 28: {
                 if (this.lIIIIIIIIIlIllIIllIlIIlIl.getText().length() < 3) {
-                    this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormatting.RED + "Name must be at least 3 characters long.";
+                    this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormattingBridge.RED + "Name must be at least 3 characters long.";
                     break;
                 }
                 if (this.lIIIIIIIIIlIllIIllIlIIlIl.getText().equalsIgnoreCase("default")) {
-                    this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormatting.RED + "That name is already in use.";
+                    this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormattingBridge.RED + "That name is already in use.";
                     break;
                 }
                 if (!this.lIIIIIIIIIlIllIIllIlIIlIl.getText().matches("([a-zA-Z0-9-_ \\]\\[]+)")) {
-                    this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormatting.RED + "Illegal characters in name.";
+                    this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormattingBridge.RED + "Illegal characters in name.";
                     break;
                 }
                 if (this.profile != null && this.profile.isEditable()) {
-                    File file = new File(Ref.getMinecraft().mcDataDir, "config" + File.separator + "client" + File.separator + "profiles" + File.separator + this.profile.getName() + ".cfg");
-                    File file2 = new File(Ref.getMinecraft().mcDataDir, "config" + File.separator + "client" + File.separator + "profiles" + File.separator + this.lIIIIIIIIIlIllIIllIlIIlIl.getText() + ".cfg");
+                    File file = new File(Ref.getMinecraft().bridge$getMcDataDir(), "config" + File.separator + "client" + File.separator + "profiles" + File.separator + this.profile.getName() + ".cfg");
+                    File file2 = new File(Ref.getMinecraft().bridge$getMcDataDir(), "config" + File.separator + "client" + File.separator + "profiles" + File.separator + this.lIIIIIIIIIlIllIIllIlIIlIl.getText() + ".cfg");
                     if (!file.exists()) break;
                     try {
                         Files.copy(file.toPath(), file2.toPath());
                         Files.delete(file.toPath());
                         this.profile.setName(this.lIIIIIIIIIlIllIIllIlIIlIl.getText());
-                        this.mc.displayGuiScreen(this.guiScreen);
+                        this.mc.bridge$displayGuiScreen(this.guiScreen);
                         ((CBModulesGui) this.guiScreen).currentScrollableElement = ((CBModulesGui) this.guiScreen).profilesElement;
                     } catch (Exception exception) {
-                        this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormatting.RED + "Could not save profile.";
+                        this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormattingBridge.RED + "Could not save profile.";
                         exception.printStackTrace();
                     }
                     break;
@@ -139,11 +140,11 @@ public class CBProfileCreateGui extends CBGuiScreen {
                     CheatBreaker.getInstance().activeProfile = ilIIlIIlIIlllIlIIIlIllIIl3;
                     this.parent.lIIIIlIIllIIlIIlIIIlIIllI.add(new ProfileElement(this.parent, this.IIIIllIlIIIllIlllIlllllIl, ilIIlIIlIIlllIlIIIlIllIIl3, this.IlllIIIlIlllIllIlIIlllIlI));
                     CheatBreaker.getInstance().configManager.writeProfile(CheatBreaker.getInstance().activeProfile.getName());
-                    this.mc.displayGuiScreen(this.guiScreen);
+                    this.mc.bridge$displayGuiScreen(this.guiScreen);
                     ((CBModulesGui) this.guiScreen).currentScrollableElement = ((CBModulesGui) this.guiScreen).profilesElement;
                     break;
                 }
-                this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormatting.RED + "That name is already in use.";
+                this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormattingBridge.RED + "That name is already in use.";
                 break;
             }
             default: {

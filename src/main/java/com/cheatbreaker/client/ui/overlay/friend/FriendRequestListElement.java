@@ -1,5 +1,7 @@
 package com.cheatbreaker.client.ui.overlay.friend;
 
+import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.ui.mainmenu.element.ScrollableElement;
 import com.cheatbreaker.client.ui.overlay.Alert;
@@ -12,9 +14,6 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.websocket.client.WSPacketClientRequestsStatus;
 import com.cheatbreaker.client.websocket.shared.WSPacketFriendRequest;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -64,7 +63,7 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
     }
 
     private boolean isFilterMatch(FriendRequestElement friendRequestElement) {
-        return this.filter.getText().equals("") || EnumChatFormatting.getTextWithoutFormattingCodes(friendRequestElement.getFriendRequest().getUsername()).toLowerCase().startsWith(this.filter.getText().toLowerCase());
+        return this.filter.getText().equals("") || EnumChatFormattingBridge.getTextWithoutFormattingCodes(friendRequestElement.getFriendRequest().getUsername()).toLowerCase().startsWith(this.filter.getText().toLowerCase());
     }
 
     @Override
@@ -82,7 +81,7 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
             GL11.glEnable((int)3089);
             OverlayGui illlllIllIIIllIIIllIllIII = OverlayGui.getInstance();
             this.scrollableElement.drawScrollable(f, f2, bl);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)this.x, (int)this.y, (int)(this.x + this.width), (int)(this.y + this.height), (float)((int)((float)illlllIllIIIllIIIllIllIII.getResolution().getScaleFactor() * illlllIllIIIllIIIllIllIII.getScaleFactor())), (int)illlllIllIIIllIIIllIllIII.getScaledHeight());
+            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)this.x, (int)this.y, (int)(this.x + this.width), (int)(this.y + this.height), (float)((int)((float)illlllIllIIIllIIIllIllIII.getResolution().bridge$getScaleFactor() * illlllIllIIIllIIIllIllIII.getScaleFactor())), (int)illlllIllIIIllIIIllIllIII.getScaledHeight());
             ImmutableList<FriendRequestElement> immutableList = ImmutableList.copyOf(this.elements);
             for (FriendRequestElement friendRequestElement : immutableList) {
                 if (!this.isFilterMatch(friendRequestElement)) continue;
@@ -167,14 +166,14 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
 
     private void lIIlIlIllIIlIIIlIIIlllIII() {
         if (!this.username.getText().isEmpty()) {
-            this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             String string = this.username.getText();
             // sanitizes the name of the friend before sending the packet.
             if (string.matches("([a-zA-Z0-9_]+)") && string.length() <= 16) {
                 CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketFriendRequest("", this.username.getText()));
                 this.username.setText("");
             } else {
-                Alert.displayMessage(EnumChatFormatting.RED + "Error!", "Incorrect username.");
+                Alert.displayMessage(EnumChatFormattingBridge.RED + "Error!", "Incorrect username.");
             }
         }
     }

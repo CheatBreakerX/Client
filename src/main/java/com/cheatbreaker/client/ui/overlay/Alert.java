@@ -4,7 +4,6 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.ui.fading.AbstractFade;
 import com.cheatbreaker.client.ui.fading.FloatFade;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.client.Minecraft;
 
 public class Alert {
     private final AbstractFade fade = new FloatFade(275L);
@@ -42,7 +41,7 @@ public class Alert {
                 FontRegistry.getPlayRegular16px().drawString(this.lines[i], this.x + (float)4, f + (float)17 + (float)(i * 10), -1);
             }
         }
-        if (!(Ref.getMinecraft().currentScreen instanceof OverlayGui)) {
+        if (!(Ref.getMinecraft().bridge$getCurrentScreen() instanceof OverlayGui)) {
             FontRegistry.getPlayRegular16px().drawString("Press Shift + Tab", this.x + (float)4, f + (float) Alert.IIIIllIIllIIIIllIllIIIlIl() - (float)12, 0x6FFFFFFF);
         }
     }

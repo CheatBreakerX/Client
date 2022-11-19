@@ -3,6 +3,7 @@ package com.cheatbreaker.bridge.ref;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.renderer.RenderHelperBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
+import com.cheatbreaker.bridge.client.renderer.entity.RenderManagerBridge;
 import com.cheatbreaker.bridge.entity.boss.BossStatusBridge;
 import com.cheatbreaker.bridge.ext.GLBridge;
 import lombok.Getter;
@@ -18,6 +19,8 @@ public class Ref {
     private static BossStatusBridge bossStatus = null;
     @Getter @Setter
     private static RenderHelperBridge renderHelper = null;
+    @Getter @Setter
+    private static RenderManagerBridge renderManager = null;
     @Getter @Setter
     private static TessellatorBridge tessellator = null;
     @Getter @Setter

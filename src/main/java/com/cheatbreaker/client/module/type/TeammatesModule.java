@@ -11,12 +11,8 @@ import com.cheatbreaker.client.event.type.DisconnectEvent;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.util.teammates.IlIlIIlllIIIIIlIlIlIIIllI;
 import com.cheatbreaker.client.util.teammates.Teammate;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.settings.GameSettings;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.glu.GLU;
 
 import java.awt.*;
 import java.nio.FloatBuffer;
@@ -49,9 +45,9 @@ public class TeammatesModule {
         }
         IntBuffer intBuffer = BufferUtils.createIntBuffer(16);
         GL11.glGetInteger(2978, intBuffer);
-        float f2 = (float)(this.minecraft.bridge$getThePlayer().bridge$getLastTickPosX() + (this.minecraft.bridge$getThePlayer().bridge$getPosX() - this.minecraft.bridge$getThePlayer().bridge$getLastTickPosX()) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) RenderManager.renderPosX;
-        float f3 = (float)(this.minecraft.bridge$getThePlayer().bridge$getLastTickPosY() + (this.minecraft.bridge$getThePlayer().bridge$getPosY() - this.minecraft.bridge$getThePlayer().bridge$getLastTickPosY()) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) RenderManager.renderPosY;
-        float f4 = (float)(this.minecraft.bridge$getThePlayer().bridge$getLastTickPosZ() + (this.minecraft.bridge$getThePlayer().bridge$getPosZ() - this.minecraft.bridge$getThePlayer().bridge$getLastTickPosZ()) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) RenderManager.renderPosZ;
+        float f2 = (float)(this.minecraft.bridge$getThePlayer().bridge$getLastTickPosX() + (this.minecraft.bridge$getThePlayer().bridge$getPosX() - this.minecraft.bridge$getThePlayer().bridge$getLastTickPosX()) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) Ref.getRenderManager().bridge$getRenderPosX();
+        float f3 = (float)(this.minecraft.bridge$getThePlayer().bridge$getLastTickPosY() + (this.minecraft.bridge$getThePlayer().bridge$getPosY() - this.minecraft.bridge$getThePlayer().bridge$getLastTickPosY()) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) Ref.getRenderManager().bridge$getRenderPosY();
+        float f4 = (float)(this.minecraft.bridge$getThePlayer().bridge$getLastTickPosZ() + (this.minecraft.bridge$getThePlayer().bridge$getPosZ() - this.minecraft.bridge$getThePlayer().bridge$getLastTickPosZ()) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) Ref.getRenderManager().bridge$getRenderPosZ();
         double d = (double)(this.minecraft.bridge$getThePlayer().bridge$getRotationPitch() + (float)90) * (0.3249923327873289 * 9.666666984558105) / (double)180;
         double d2 = (double)(this.minecraft.bridge$getThePlayer().bridge$getRotationYaw() + (float)90) * (7.479982742083262 * (double)0.42f) / (double)180;
         Vec3Bridge vec3 = Ref.getInstanceCreator().createVec3(Math.sin(d) * Math.cos(d2), Math.cos(d), Math.sin(d) * Math.sin(d2));
@@ -67,7 +63,7 @@ public class TeammatesModule {
                 double d5 = teammate.getVector3D().bridge$getYCoord() - (double)f3;
                 double d6 = teammate.getVector3D().bridge$getZCoord() - (double)f4;
                 double d7 = this.getDistance(teammate.getVector3D().bridge$getXCoord(), teammate.getVector3D().bridge$getYCoord(), teammate.getVector3D().bridge$getZCoord());
-                if (d7 > (d3 = (this.minecraft.bridge$getGameSettings().bridge$getOptionFloatValue(GameSettings.Options.RENDER_DISTANCE) * (float)16))) {
+                if (d7 > (d3 = (this.minecraft.bridge$getGameSettings().bridge$getRenderDistanceChunks() * (float)16))) {
                     d4 = d4 / d7 * d3;
                     d5 = d5 / d7 * d3;
                     d6 = d6 / d7 * d3;
@@ -108,7 +104,7 @@ public class TeammatesModule {
             f3 = (float)(d * (d14 * vec3.bridge$getXCoord() + d15 * vec3.bridge$getYCoord() + d16 * vec3.bridge$getZCoord()));
         }
         FloatBuffer floatBuffer = BufferUtils.createFloatBuffer(3);
-        GLU.gluProject(f, f2, f3, this.modelViewMatrixBuffer, this.projectionMatrixBuffer, intBuffer, floatBuffer);
+        Ref.getGlBridge().bridge$gluProject(f, f2, f3, this.modelViewMatrixBuffer, this.projectionMatrixBuffer, intBuffer, floatBuffer);
         float f4 = floatBuffer.get(0) / (float)scaledResolution.bridge$getScaleFactor();
         float f5 = floatBuffer.get(1) / (float)scaledResolution.bridge$getScaleFactor();
         IlIlIIlllIIIIIlIlIlIIIllI ilIlIIlllIIIIIlIlIlIIIllI = null;

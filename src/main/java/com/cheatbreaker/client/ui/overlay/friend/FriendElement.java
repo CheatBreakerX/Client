@@ -1,6 +1,8 @@
 package com.cheatbreaker.client.ui.overlay.friend;
 
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.ui.fading.CosineFade;
 import com.cheatbreaker.client.ui.fading.FloatFade;
@@ -11,9 +13,6 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.friend.Friend;
 import com.cheatbreaker.client.util.friend.FriendsManager;
 import com.cheatbreaker.client.websocket.client.WSPacketClientFriendRemove;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -56,7 +55,7 @@ public class FriendElement extends AbstractElement {
         Ref.modified$drawRect(this.x, this.y - 0.5f, this.x + this.width, this.y, -1357572843);
         Ref.modified$drawRect(this.x, this.y + this.height, this.x + this.width, this.y + this.height + 9.9f * 0.050505053f, -1357572843);
         Ref.modified$drawRect(this.x + (float)4, this.y + (float)3, this.x + (float)20, this.y + (float)19, this.friend.isOnline() ? Friend.getStatusColor(this.friend.getOnlineStatus()) : -13158601);
-        if (this.friend.getName().startsWith(EnumChatFormatting.RED.toString())) {
+        if (this.friend.getName().startsWith(EnumChatFormattingBridge.RED.toString())) {
             GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
             RenderUtil.drawIcon(cheatBreakerIcon, 6.5f, this.x + (float)24, this.y + (float)4);
             FontRegistry.getPlayRegular16px().drawString(this.friend.getName(), this.x + (float)40, this.y + 2.0f, -1);
@@ -66,7 +65,7 @@ public class FriendElement extends AbstractElement {
             FontRegistry.getPlayRegular16px().drawString(this.friend.getStatusString(), this.x + (float)24, this.y + (float)11, -5460820);
         }
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        ResourceLocationBridge headLocation = CheatBreaker.getInstance().getHeadLocation(EnumChatFormatting.getTextWithoutFormattingCodes(this.friend.getName()));
+        ResourceLocationBridge headLocation = CheatBreaker.getInstance().getHeadLocation(EnumChatFormattingBridge.getTextWithoutFormattingCodes(this.friend.getName()));
         RenderUtil.drawIcon(headLocation, (float)7, this.x + (float)5, this.y + (float)4);
         boolean bl2 = bl && this.isMouseInside(f, f2) && f > this.x + this.width - (float)20;
         float f3 = this.lIIIIllIIlIlIllIIIlIllIlI.lIIIIlIIllIIlIIlIIIlIIllI(bl2);
@@ -84,14 +83,14 @@ public class FriendElement extends AbstractElement {
         }
         boolean bl2 = this.isMouseInside(f, f2) && f > this.x + this.width - (float) 20;
         if (bl2 && this.lIIIIllIIlIlIllIIIlIllIlI.IIIIllIIllIIIIllIllIIIlIl()) {
-            this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRemove(this.friend.getPlayerId()));
             OverlayGui.getInstance().getFriendsListElement().getFriendElements().add(this);
             CheatBreaker.getInstance().getFriendsManager().getFriends().remove(this.friend.getPlayerId());
             return true;
         }
         if (!bl2 && this.isMouseInside(f, f2)) {
-            this.mc.getSoundHandler().playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             OverlayGui.getInstance().lIIIIlIIllIIlIIlIIIlIIllI(this.friend);
             CheatBreaker.getInstance().getFriendsManager().readMessages(this.friend.getPlayerId());
             return true;

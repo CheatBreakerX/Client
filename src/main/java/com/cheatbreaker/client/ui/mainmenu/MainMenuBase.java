@@ -207,10 +207,10 @@ public class MainMenuBase extends AbstractGui {
             this.mc.bridge$shutdown();
         } else if (this.optionsButton.isMouseInside(mouseX, mouseY)) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
-            this.mc.bridge$displayGuiScreen(new GuiOptions(this, this.mc.bridge$getGameSettings()));
+            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.OPTIONS);
         } else if (this.languageButton.isMouseInside(mouseX, mouseY)) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
-            this.mc.bridge$displayGuiScreen(new GuiLanguage(this, this.mc.bridge$getGameSettings(), this.mc.bridge$getLanguageManager()));
+            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.LANGUAGE);
         } else if (this.cosmeticsButton.isMouseInside(mouseX, mouseY)) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
             this.mc.bridge$displayGuiScreen(new GuiCosmetics());
@@ -228,7 +228,7 @@ public class MainMenuBase extends AbstractGui {
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glPushMatrix();
         GL11.glLoadIdentity();
-        Project.gluPerspective(120.0F, 1.0F, 0.05F, 10.0F);
+        Ref.getGlBridge().bridge$gluPerspective(120.0F, 1.0F, 0.05F, 10.0F);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glPushMatrix();
         GL11.glLoadIdentity();
@@ -248,7 +248,7 @@ public class MainMenuBase extends AbstractGui {
             float var8 = ((float) (var6 / var5) / (float) var5 - 0.5F) / 64.0F;
             float var9 = 0.0F;
             GL11.glTranslatef(var7, var8, var9);
-            GL11.glRotatef(MathHelper.sin(((float) panoramaTimer + speed) / 400.0F) * 25.0F + 20.0F, 1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(Ref.getUtils().bridge$MathHelper$sin(((float) panoramaTimer + speed) / 400.0F) * 25.0F + 20.0F, 1.0F, 0.0F, 0.0F);
             GL11.glRotatef(-((float) panoramaTimer + speed) * 0.1F, 0.0F, 1.0F, 0.0F);
 
             for (int var10 = 0; var10 < 6; ++var10) {
@@ -322,10 +322,10 @@ public class MainMenuBase extends AbstractGui {
             int var5 = this.width;
             int var6 = this.height;
             float var7 = (float) (var4 - var3 / 2) / 256.0F;
-            tessellator.bridge$addVertexWithUV(var5, var6, zLevel, 0.0F + var7, 1.0D);
-            tessellator.bridge$addVertexWithUV(var5, 0.0D, zLevel, 1.0F + var7, 1.0D);
-            tessellator.bridge$addVertexWithUV(0.0D, 0.0D, zLevel, 1.0F + var7, 0.0D);
-            tessellator.bridge$addVertexWithUV(0.0D, var6, zLevel, 0.0F + var7, 0.0D);
+            tessellator.bridge$addVertexWithUV(var5, var6, Ref.getUtils().bridge$Gui$getZLevel(), 0.0F + var7, 1.0D);
+            tessellator.bridge$addVertexWithUV(var5, 0.0D, Ref.getUtils().bridge$Gui$getZLevel(), 1.0F + var7, 1.0D);
+            tessellator.bridge$addVertexWithUV(0.0D, 0.0D, Ref.getUtils().bridge$Gui$getZLevel(), 1.0F + var7, 0.0D);
+            tessellator.bridge$addVertexWithUV(0.0D, var6, Ref.getUtils().bridge$Gui$getZLevel(), 0.0F + var7, 0.0D);
         }
 
         tessellator.bridge$finish();
@@ -358,10 +358,10 @@ public class MainMenuBase extends AbstractGui {
         tessellator.bridge$setColorRGBA_F(1.0F, 1.0F, 1.0F, 1.0F);
         int var8 = this.width;
         int var9 = this.height;
-        tessellator.bridge$addVertexWithUV(0.0D, var9, zLevel, 0.5F - var6, 0.5F + var7);
-        tessellator.bridge$addVertexWithUV(var8, var9, zLevel, 0.5F - var6, 0.5F - var7);
-        tessellator.bridge$addVertexWithUV(var8, 0.0D, zLevel, 0.5F + var6, 0.5F - var7);
-        tessellator.bridge$addVertexWithUV(0.0D, 0.0D, zLevel, 0.5F + var6, 0.5F + var7);
+        tessellator.bridge$addVertexWithUV(0.0D, var9, Ref.getUtils().bridge$Gui$getZLevel(), 0.5F - var6, 0.5F + var7);
+        tessellator.bridge$addVertexWithUV(var8, var9, Ref.getUtils().bridge$Gui$getZLevel(), 0.5F - var6, 0.5F - var7);
+        tessellator.bridge$addVertexWithUV(var8, 0.0D, Ref.getUtils().bridge$Gui$getZLevel(), 0.5F + var6, 0.5F - var7);
+        tessellator.bridge$addVertexWithUV(0.0D, 0.0D, Ref.getUtils().bridge$Gui$getZLevel(), 0.5F + var6, 0.5F + var7);
         tessellator.bridge$finish();
     }
 

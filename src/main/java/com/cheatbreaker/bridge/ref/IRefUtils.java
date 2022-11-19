@@ -11,4 +11,7 @@ public interface IRefUtils {
     ItemBridge getMostPowerfulDamageItem();
     ItemBridge getItemFromID(int itemId);
     CBMovementInputHelper getToggleSprintInputHelper();
+    float bridge$MathHelper$sin(float toSine);
+    float bridge$Gui$getZLevel();
+    ItemBridge getItemFromName(String name);
 }

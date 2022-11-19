@@ -1,13 +1,13 @@
 package com.cheatbreaker.client.ui.overlay.element;
 
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.dash.DashUtil;
 import com.cheatbreaker.client.util.dash.Station;
-import net.minecraft.util.ResourceLocationBridge;
 import org.lwjgl.opengl.GL11;
 
 public class RadioStationElement
