@@ -26,21 +26,20 @@ public class Hologram {
 
     public static void lIIIIlIIllIIlIIlIIIlIIllI() {
         FontRendererBridge fontRenderer = Ref.getMinecraft().bridge$getFontRenderer();
-        RenderManager renderManager = RenderManager.instance;
         for (Hologram hologram : holograms) {
             if (hologram.IlllIIIlIlllIllIlIIlllIlI() == null || hologram.IlllIIIlIlllIllIlIIlllIlI().length <= 0) continue;
             for (int i = hologram.IlllIIIlIlllIllIlIIlllIlI().length - 1; i >= 0; --i) {
                 String string = hologram.IlllIIIlIlllIllIlIIlllIlI()[hologram.IlllIIIlIlllIllIlIIlllIlI().length - i - 1];
-                float f = (float)(hologram.IIIIllIlIIIllIlllIlllllIl() - (double)((float)RenderManager.renderPosX));
-                float f2 = (float)(hologram.IIIIllIIllIIIIllIllIIIlIl() + 1.0 + (double)((float)i * (0.16049382f * 1.5576924f)) - (double)((float)RenderManager.renderPosY));
-                float f3 = (float)(hologram.IlIlIIIlllIIIlIlllIlIllIl() - (double)((float)RenderManager.renderPosZ));
+                float f = (float)(hologram.IIIIllIlIIIllIlllIlllllIl() - (double)((float)Ref.getRenderManager().bridge$getRenderPosX()));
+                float f2 = (float)(hologram.IIIIllIIllIIIIllIllIIIlIl() + 1.0 + (double)((float)i * (0.16049382f * 1.5576924f)) - (double)((float)Ref.getRenderManager().bridge$getRenderPosY()));
+                float f3 = (float)(hologram.IlIlIIIlllIIIlIlllIlIllIl() - (double)((float)Ref.getRenderManager().bridge$getRenderPosZ()));
                 float f4 = 1.7391304f * 0.92f;
                 float f5 = 1.4081633f * 0.011835749f * f4;
                 GL11.glPushMatrix();
                 GL11.glTranslatef(f, f2, f3);
                 GL11.glNormal3f(0.0f, 1.0f, 0.0f);
-                GL11.glRotatef(-renderManager.playerViewY, 0.0f, 1.0f, 0.0f);
-                GL11.glRotatef(renderManager.playerViewX, 1.0f, 0.0f, 0.0f);
+                GL11.glRotatef(-Ref.getRenderManager().bridge$getPlayerViewY(), 0.0f, 1.0f, 0.0f);
+                GL11.glRotatef(Ref.getRenderManager().bridge$getPlayerViewX(), 1.0f, 0.0f, 0.0f);
                 GL11.glScalef(-f5, -f5, f5);
                 GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glDepthMask(false);

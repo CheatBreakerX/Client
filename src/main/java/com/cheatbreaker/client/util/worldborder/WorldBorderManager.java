@@ -32,7 +32,7 @@ public class WorldBorderManager {
     private void onCollision(CollisionEvent cbCollisionEvent) {
         for (WorldBorder border : this.borderList) {
             if (border.lIIIIlIIllIIlIIlIIIlIIllI(cbCollisionEvent.getX(), cbCollisionEvent.getZ())) continue;
-            cbCollisionEvent.getBoundingBoxes().add(AxisAlignedBB.getBoundingBox(cbCollisionEvent.getX(), cbCollisionEvent.getY(), cbCollisionEvent.getZ(), cbCollisionEvent.getX() + 1.0, cbCollisionEvent.getY() + 1.0, cbCollisionEvent.getZ() + 1.0));
+            cbCollisionEvent.getBoundingBoxes().add(Ref.getInstanceCreator().createAxisAlignedBB(cbCollisionEvent.getX(), cbCollisionEvent.getY(), cbCollisionEvent.getZ(), cbCollisionEvent.getX() + 1.0, cbCollisionEvent.getY() + 1.0, cbCollisionEvent.getZ() + 1.0));
         }
     }
 
@@ -73,8 +73,8 @@ public class WorldBorderManager {
                     tessellator.bridge$startDrawingQuads();
                     GL11.glTranslated(-d5, -d6, -d7);
                     tessellator.bridge$setColorRGBA_F(f4, f5, f6, 1.0f);
-                    double d8 = Math.max(MathHelper.floor_double(d7 - d), border.IIIllIllIlIlllllllIlIlIII());
-                    double d9 = Math.min(MathHelper.ceiling_double_int(d7 + d), border.IIIIllIIllIIIIllIllIIIlIl());
+                    double d8 = Math.max(MathHelper$floor_double(d7 - d), border.IIIllIllIlIlllllllIlIlIII());
+                    double d9 = Math.min(MathHelper$ceiling_double_int(d7 + d), border.IIIIllIIllIIIIllIllIIIlIl());
                     if (d5 > border.IIIIllIlIIIllIlllIlllllIl() - d) {
                         f3 = 0.0f;
                         d3 = d8;
@@ -103,8 +103,8 @@ public class WorldBorderManager {
                             f3 += 1.25f * 0.4f;
                         }
                     }
-                    d8 = Math.max(MathHelper.floor_double(d5 - d), border.IlIlIIIlllIIIlIlllIlIllIl());
-                    d9 = Math.min(MathHelper.ceiling_double_int(d5 + d), border.IIIIllIlIIIllIlllIlllllIl());
+                    d8 = Math.max(MathHelper$floor_double(d5 - d), border.IlIlIIIlllIIIlIlllIlIllIl());
+                    d9 = Math.min(MathHelper$ceiling_double_int(d5 + d), border.IIIIllIlIIIllIlllIlllllIl());
                     if (d7 > border.IIIIllIIllIIIIllIllIIIlIl() - d) {
                         f3 = 0.0f;
                         d3 = d8;
@@ -146,6 +146,16 @@ public class WorldBorderManager {
                 }
             });
         }
+    }
+
+    private static int MathHelper$ceiling_double_int(double par0) {
+        int var2 = (int)par0;
+        return par0 > (double)var2 ? var2 + 1 : var2;
+    }
+
+    private static int MathHelper$floor_double(double par0) {
+        int var2 = (int)par0;
+        return par0 < (double)var2 ? var2 - 1 : var2;
     }
 
     public void lIIIIlIIllIIlIIlIIIlIIllI(String string, String string2, int n, double d, double d2, double d3, double d4, boolean bl, boolean bl2) {

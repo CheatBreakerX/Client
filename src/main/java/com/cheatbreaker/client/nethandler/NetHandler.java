@@ -1,6 +1,7 @@
 package com.cheatbreaker.client.nethandler;
 
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ChatComponentTextBridge;
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.client.CheatBreaker;
 import com.cheatbreaker.client.event.type.PluginMessageEvent;
@@ -104,18 +105,18 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
                 this.serverHandlesWaypoints = string.contains(CheatBreaker.getInstance().getPluginBinaryChannel());
                 PacketBuffer lIlIllllllllIlIIIllIIllII2 = new PacketBuffer(Unpooled.buffer());
                 lIlIllllllllIlIIIllIIllII2.writeBytes(CheatBreaker.getInstance().getPluginMessageChannel().getBytes(Charsets.UTF_8));
-                if (Ref.getMinecraft().getNetHandler() != null && this.lIIIIIIIIIlIllIIllIlIIlIl) {
-                    Ref.getMinecraft().getNetHandler().addToSendQueue(new C17PacketCustomPayload("REGISTER", lIlIllllllllIlIIIllIIllII2));
+                if (Ref.getMinecraft().bridge$getNetHandler() != null && this.lIIIIIIIIIlIllIIllIlIIlIl) {
+                    Ref.getMinecraft().bridge$getNetHandler().addToSendQueue(new C17PacketCustomPayload("REGISTER", lIlIllllllllIlIIIllIIllII2));
                 }
                 this.initialize();
             } else if (pluginMessageEvent.getChannel().equals(CheatBreaker.getInstance().getPluginMessageChannel())) {
                 Packet packet = Packet.handle(this, pluginMessageEvent.getPayload());
                 if (CheatBreaker.getInstance().getGlobalSettings().isDebug) {
-                    ChatComponentText chatComponentText = new ChatComponentText( "[CB] ");
-                    ChatComponentText chatComponentText2 = new ChatComponentText("Received: " + packet.getClass().getSimpleName());
-                    chatComponentText2.getChatStyle().setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(new Gson().toJson(packet))));
-                    chatComponentText.appendSibling(chatComponentText2);
-                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().printChatMessage(chatComponentText);
+                    ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator().createChatComponentText( "[CB] ");
+                    ChatComponentTextBridge chatComponentText2 = Ref.getInstanceCreator().createChatComponentText("Received: " + packet.getClass().getSimpleName());
+                    chatComponentText2.bridge$getChatStyle().setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Ref.getInstanceCreator().createChatComponentText(new Gson().toJson(packet))));
+                    chatComponentText.bridge$appendSibling(chatComponentText2);
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(chatComponentText);
                 }
             }
         }

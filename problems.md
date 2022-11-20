@@ -18,23 +18,17 @@ Problematic file (1):
 - [NetHandler](https://github.com/CheatBreakerX/ClientBase/blob/master/src/main/java/com/cheatbreaker/client/nethandler/NetHandler.java)
 
 `com.cheatbreaker.client.remote.*` - 100%\
-`com.cheatbreaker.client.ui.*` - 93.4% (71 unproblematic files)\
-Problematic files (5):
+`com.cheatbreaker.client.ui.*` - 94.6% (71 unproblematic files)\
+Problematic files (4):
 - [.element.module.ModuleListElement](https://github.com/CheatBreakerX/ClientBase/blob/master/src/main/java/com/cheatbreaker/client/ui/element/module/ModuleListElement.java)
 - [.element.type.custom.XRayOptionsElement](https://github.com/CheatBreakerX/ClientBase/blob/master/src/main/java/com/cheatbreaker/client/ui/element/type/custom/XRayOptionsElement.java)
 - [.module.CBModulesGui](https://github.com/CheatBreakerX/ClientBase/blob/master/src/main/java/com/cheatbreaker/client/ui/module/CBModulesGui.java)
 - [.module.CBProfileCreateGui](https://github.com/CheatBreakerX/ClientBase/blob/master/src/main/java/com/cheatbreaker/client/ui/module/CBProfileCreateGui.java)
-- [.serverlist.PinnedServerEntry](https://github.com/CheatBreakerX/ClientBase/blob/master/src/main/java/com/cheatbreaker/client/ui/serverlist/PinnedServerEntry.java)
 
-`com.cheatbreaker.client.util.*` - 90.6% (29 unproblematic files)\
-Problematic files (3):
-- [.hologram.Hologram](https://github.com/CheatBreakerX/ClientBase/blob/master/src/main/java/com/cheatbreaker/client/util/hologram/Hologram.java)
-- [.voicechat.VoiceChatManager](https://github.com/CheatBreakerX/ClientBase/blob/master/src/main/java/com/cheatbreaker/client/util/voicechat/VoiceChatManager.java)
-- [.worldborder.WorldBorderManager](https://github.com/CheatBreakerX/ClientBase/blob/master/src/main/java/com/cheatbreaker/client/util/worldborder/WorldBorderManager.java)
-
+`com.cheatbreaker.client.util.*` - 100%\
 `com.cheatbreaker.client.websocket.*` - 100%
 
-### Overall unproblematic file percentage - 96.9%
+### Overall unproblematic file percentage - 97.99%
 
 # Addressing "`com.cheatbreaker.client.remote`" package
 

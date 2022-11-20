@@ -56,9 +56,11 @@ import java.util.*;
 @Getter
 @Mod(modid = "cheatbreaker", name = "CheatBreaker", version = "3ac10ce")
 public class CheatBreaker {
+    private static CheatBreaker instance;
+    public static CheatBreaker getInstance() {
+        return instance == null ? instance = new CheatBreaker() : instance;
+    }
 
-    @Getter
-    public static CheatBreaker instance;
     public static byte[] processBytesAuth = "Decencies".getBytes(); // originally "Vote Trump 2020!" (jhalt's doing LMAO???)
     public static LoadingScreen cbLoadingScreen;
     public List<Profile> profiles;

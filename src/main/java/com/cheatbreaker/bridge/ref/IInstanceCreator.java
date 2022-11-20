@@ -13,10 +13,7 @@ import com.cheatbreaker.bridge.client.shader.FrameBufferBridge;
 import com.cheatbreaker.bridge.client.shader.ShaderGroupBride;
 import com.cheatbreaker.bridge.item.ItemBridge;
 import com.cheatbreaker.bridge.item.ItemStackBridge;
-import com.cheatbreaker.bridge.util.ChatComponentTextBridge;
-import com.cheatbreaker.bridge.util.ResourceLocationBridge;
-import com.cheatbreaker.bridge.util.SessionBridge;
-import com.cheatbreaker.bridge.util.Vec3Bridge;
+import com.cheatbreaker.bridge.util.*;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -40,4 +37,5 @@ public interface IInstanceCreator {
     ChatComponentTextBridge createChatComponentText(String initialString);
     FrameBufferBridge createFrameBuffer(float width, float height, boolean b);
     SessionBridge createSession(String username, String playerId, String token, String type);
+    AxisAlignedBBBridge createAxisAlignedBB(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
 }

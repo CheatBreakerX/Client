@@ -1,5 +1,6 @@
 package com.cheatbreaker.client.util.voicechat;
 
+import com.cheatbreaker.bridge.client.audio.SoundCategoryBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.entity.player.EntityPlayerBridge;
@@ -191,7 +192,7 @@ public class VoiceChatManager {
         if (isExistent()) {
             PlayerProxy proxy = this.playerData.get(entityId);
             EntityPlayerBridge entity = null;
-            for (Object obj : this.mc.bridge$getTheWorld().playerEntities) {
+            for (Object obj : this.mc.bridge$getTheWorld().bridge$getPlayerEntities()) {
                 EntityPlayerBridge playerEntity = (EntityPlayerBridge) obj;
                 if (playerEntity.bridge$getUniqueID() == entityId) entity = playerEntity;
             }
@@ -263,25 +264,25 @@ public class VoiceChatManager {
         if (isExistent()) {
             if (!this.volumeControlActive) {
                 final float attenuation = (Integer) CheatBreaker.getInstance().getGlobalSettings().attenuation.getValue() / 100f;
-                this.WEATHER = this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategory.WEATHER);
-                this.RECORDS = this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategory.RECORDS);
-                this.BLOCKS = this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategory.BLOCKS);
-                this.MOBS = this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategory.MOBS);
-                this.ANIMALS = this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategory.PLAYERS);
-                if (this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategory.WEATHER) > 1.0f - attenuation) {
-                    this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategory.WEATHER, 1.0f - attenuation);
+                this.WEATHER = this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategoryBridge.WEATHER);
+                this.RECORDS = this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategoryBridge.RECORDS);
+                this.BLOCKS = this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategoryBridge.BLOCKS);
+                this.MOBS = this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategoryBridge.MOBS);
+                this.ANIMALS = this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategoryBridge.PLAYERS);
+                if (this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategoryBridge.WEATHER) > 1.0f - attenuation) {
+                    this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategoryBridge.WEATHER, 1.0f - attenuation);
                 }
-                if (this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategory.RECORDS) > 1.0f - attenuation) {
-                    this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategory.RECORDS, 1.0f - attenuation);
+                if (this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategoryBridge.RECORDS) > 1.0f - attenuation) {
+                    this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategoryBridge.RECORDS, 1.0f - attenuation);
                 }
-                if (this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategory.BLOCKS) > 1.0f - attenuation) {
-                    this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategory.BLOCKS, 1.0f - attenuation);
+                if (this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategoryBridge.BLOCKS) > 1.0f - attenuation) {
+                    this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategoryBridge.BLOCKS, 1.0f - attenuation);
                 }
-                if (this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategory.MOBS) > 1.0f - attenuation) {
-                    this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategory.MOBS, 1.0f - attenuation);
+                if (this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategoryBridge.MOBS) > 1.0f - attenuation) {
+                    this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategoryBridge.MOBS, 1.0f - attenuation);
                 }
-                if (this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategory.ANIMALS) > 1.0f - attenuation) {
-                    this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategory.ANIMALS, 1.0f - attenuation);
+                if (this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategoryBridge.ANIMALS) > 1.0f - attenuation) {
+                    this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategoryBridge.ANIMALS, 1.0f - attenuation);
                 }
                 this.volumeControlActive = true;
             }
@@ -291,11 +292,11 @@ public class VoiceChatManager {
     public void volumeControlStop() {
         if (isExistent()) {
             if (this.volumeControlActive) {
-                this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategory.WEATHER, this.WEATHER);
-                this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategory.RECORDS, this.RECORDS);
-                this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategory.BLOCKS, this.BLOCKS);
-                this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategory.MOBS, this.MOBS);
-                this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategory.ANIMALS, this.ANIMALS);
+                this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategoryBridge.WEATHER, this.WEATHER);
+                this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategoryBridge.RECORDS, this.RECORDS);
+                this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategoryBridge.BLOCKS, this.BLOCKS);
+                this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategoryBridge.MOBS, this.MOBS);
+                this.mc.bridge$getGameSettings().bridge$setSoundLevel(SoundCategoryBridge.ANIMALS, this.ANIMALS);
                 this.volumeControlActive = false;
             }
         }
