@@ -21,5 +21,20 @@
       <option name="name" value="Minecraft" />
       <option name="url" value="https://libraries.minecraft.net/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://repo.spongepowered.org/maven/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="deobfDeps" />
+      <option name="name" value="deobfDeps" />
+      <option name="url" value="file:/$USER_HOME$/.gradle/caches/minecraft/deobfedDeps/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="forge" />
+      <option name="name" value="forge" />
+      <option name="url" value="https://maven.minecraftforge.net" />
+    </remote-repository>
   </component>
 </project>

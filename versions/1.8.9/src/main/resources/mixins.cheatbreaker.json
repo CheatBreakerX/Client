@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "com.cheatbreaker.mixin",
+  "refmap": "mixins.examplemod.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "client.MixinMinecraft",
+    "client.gui.MixinScaledResolution",
+    "client.renderer.texture.MixinDynamicTexture",
+    "client.settings.MixinKeyBinding",
+    "util.MixinResourceLocation"
+  ],
+  "mixins": [
+    "util.MixinVec3"
+  ]
+}
