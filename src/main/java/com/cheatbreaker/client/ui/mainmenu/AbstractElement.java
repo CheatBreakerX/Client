@@ -2,7 +2,7 @@ package com.cheatbreaker.client.ui.mainmenu;
 
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.ref.Ref;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 
 public abstract class AbstractElement {
     protected float x;

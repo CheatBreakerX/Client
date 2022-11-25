@@ -3,7 +3,7 @@ package com.cheatbreaker.client.ui.overlay.element;
 import com.cheatbreaker.bridge.client.renderer.ThreadDownloadImageDataBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.fading.MinMaxFade;
 import com.cheatbreaker.client.ui.mainmenu.element.ScrollableElement;
 import com.cheatbreaker.client.ui.overlay.OverlayGui;

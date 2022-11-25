@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.util.thread;
 
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 
 public class WSReconnectThread extends Thread {
 

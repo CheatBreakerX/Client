@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.audio;
 
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 
 import java.util.UUID;
 

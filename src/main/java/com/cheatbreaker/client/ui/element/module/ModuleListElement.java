@@ -1,7 +1,7 @@
 package com.cheatbreaker.client.ui.element.module;
 
 import com.cheatbreaker.bridge.ref.Ref;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.module.staff.StaffModule;
@@ -46,7 +46,8 @@ public class ModuleListElement extends AbstractScrollableElement {
         this.module = null;
         this.moduleElementListMap = new HashMap<>();
         for (AbstractModule object : list) {
-            if (object.isStaffModule() && !object.isStaffEnabledModule() || object == CheatBreaker.getInstance().moduleManager.minmap) continue;
+            if (object.isStaffModule() && !object.isStaffEnabledModule())
+                continue;
             ArrayList<AbstractModulesGuiElement> object2 = new ArrayList<>();
             for (Setting cBSetting : object.getSettingsList()) {
                 switch (cBSetting.getType()) {
@@ -171,17 +172,7 @@ public class ModuleListElement extends AbstractScrollableElement {
             this.backButton.handleDrawElement(mouseX, mouseY, partialTicks);
             FontRegistry.getUbuntuMedium16px().drawString((this.module.getName() + " Settings").toUpperCase(), this.x + 38, (float)(this.y + 6), CheatBreaker.getInstance().globalSettings.isDarkMode() ? -1 : -1358954495);
             Ref.modified$drawRect(this.x + 38, this.y + 17, this.x + this.width - 12, this.y + 18, CheatBreaker.getInstance().globalSettings.isDarkMode() ? -14211288 : 791621423);
-            if (this.module == CheatBreaker.getInstance().moduleManager.minmap) {
-                try {
-                    String string = Keyboard.getKeyName(CheatBreaker.getInstance().moduleManager.minmap.getVoxelMap().getMapOptions().keyBindMenu.getKeyCode());
-                    FontRegistry.getUbuntuMedium16px().drawString(("PRESS '" + string + "' INGAME FOR ZAN'S MINIMAP OPTIONS.").toUpperCase(), this.x + 38, (float)(this.y + 22), CheatBreaker.getInstance().globalSettings.isDarkMode() ? 0xFFFFFFFF : -1895825407);
-                }
-                catch (Exception exception) {
-                    FontRegistry.getUbuntuMedium16px().drawString("PRESS 'M' INGAME FOR ZAN'S MINIMAP OPTIONS.".toUpperCase(), this.x + 38, (float)(this.y + 22), CheatBreaker.getInstance().globalSettings.isDarkMode() ? 0xFFFFFFFF : -1895825407);
-                }
-                this.postDraw(mouseX, mouseY);
-                return;
-            }
+
             if (this.module.getSettingsList().isEmpty()) {
                 FontRegistry.getUbuntuMedium16px().drawString((this.module.getName().toUpperCase() + " DOES NOT HAVE ANY OPTIONS.").toUpperCase(), this.x + 38, (float)(this.y + 22), CheatBreaker.getInstance().globalSettings.isDarkMode() ? 0xFFFFFFFF : -1895825407);
             }

@@ -4,7 +4,7 @@ import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.gui.FontRendererBridge;
 import com.cheatbreaker.bridge.item.ItemStackBridge;
 import com.cheatbreaker.bridge.ref.Ref;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.overlay.OverlayGui;
 import org.lwjgl.input.Keyboard;
 

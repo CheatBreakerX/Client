@@ -1,9 +1,12 @@
-package com.cheatbreaker.client;
+package com.cheatbreaker.main;
 
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.audio.SoundManagerBridge;
 import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
 import com.cheatbreaker.bridge.client.renderer.ThreadDownloadImageDataBridge;
+import com.cheatbreaker.bridge.forge.BridgedMod;
+import com.cheatbreaker.bridge.forge.BridgedSubscribeEvent;
+import com.cheatbreaker.bridge.forge.RenderGameOverlayEventBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.bridge.util.SessionBridge;
@@ -36,12 +39,8 @@ import com.cheatbreaker.client.util.title.TitleManager;
 import com.cheatbreaker.client.util.voicechat.VoiceChatManager;
 import com.cheatbreaker.client.util.worldborder.WorldBorderManager;
 import com.cheatbreaker.client.websocket.AssetsWebSocket;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Keyboard;
 
 import javax.sound.sampled.*;
@@ -54,7 +53,7 @@ import java.nio.file.Files;
 import java.util.*;
 
 @Getter
-@Mod(modid = "cheatbreaker", name = "CheatBreaker", version = "3ac10ce")
+@BridgedMod(modid = "cheatbreaker", name = "CheatBreaker", version = "3ac10ce")
 public class CheatBreaker {
     private static CheatBreaker instance;
     public static CheatBreaker getInstance() {
@@ -112,7 +111,7 @@ public class CheatBreaker {
     public CheatBreaker() {
         CheatBreaker.instance = this;
 
-        MinecraftForge.EVENT_BUS.register(this);
+        Ref.getForgeEventBus().bridge$register(this);
     }
 
     public <T> void reverse(Queue<T> queue) {
@@ -382,9 +381,9 @@ public class CheatBreaker {
         this.cosmetics.removeIf(cosmetic -> cosmetic.getPlayerId().equals(playerId));
     }
 
-    @SubscribeEvent
-    public void onRenderGameOverlay(RenderGameOverlayEvent.Post event) {
-        if (event.type == RenderGameOverlayEvent.ElementType.EXPERIENCE)
+    @BridgedSubscribeEvent
+    public void onRenderGameOverlay(RenderGameOverlayEventBridge event) {
+        if (event.bridge$isPost() && event.bridge$typeIs("EXPERIENCE"))
         {
             MinecraftBridge mc = Ref.getMinecraft();
             ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();

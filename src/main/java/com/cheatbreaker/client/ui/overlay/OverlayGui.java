@@ -4,7 +4,7 @@ import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.AbstractGui;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
 import com.cheatbreaker.client.ui.overlay.element.ElementListElement;

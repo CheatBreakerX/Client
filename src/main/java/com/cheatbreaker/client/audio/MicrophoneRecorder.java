@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.audio;
 
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.nethandler.client.PacketClientVoice;
 import org.xiph.speex.SpeexEncoder;
 

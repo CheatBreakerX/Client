@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.util.dash;
 
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

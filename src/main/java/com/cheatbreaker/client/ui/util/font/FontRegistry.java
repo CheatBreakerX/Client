@@ -2,7 +2,7 @@ package com.cheatbreaker.client.ui.util.font;
 
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 
 public class FontRegistry {
     private static CBFontRenderer createNewFont(ResourceLocationBridge font, float size) {

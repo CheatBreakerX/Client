@@ -1,7 +1,7 @@
 package com.cheatbreaker.client.util.worldborder;
 
 import com.cheatbreaker.bridge.entity.EntityBridge;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 
 import javax.vecmath.Vector2d;
 import java.awt.*;

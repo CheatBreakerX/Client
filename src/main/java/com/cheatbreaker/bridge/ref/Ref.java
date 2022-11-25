@@ -1,11 +1,14 @@
 package com.cheatbreaker.bridge.ref;
 
+import com.cheatbreaker.bridge.block.BlockBridge;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.renderer.RenderHelperBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.client.renderer.entity.RenderManagerBridge;
+import com.cheatbreaker.bridge.client.resources.I18nBridge;
 import com.cheatbreaker.bridge.entity.boss.BossStatusBridge;
 import com.cheatbreaker.bridge.ext.GLBridge;
+import com.cheatbreaker.bridge.forge.ForgeEventBusBridge;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,11 +19,17 @@ public class Ref {
     @Getter @Setter
     private static MinecraftBridge minecraft = null;
     @Getter @Setter
+    private static I18nBridge i18n = null;
+    @Getter @Setter
+    private static Iterable<BlockBridge> blockRegistry = null;
+    @Getter @Setter
     private static BossStatusBridge bossStatus = null;
     @Getter @Setter
     private static RenderHelperBridge renderHelper = null;
     @Getter @Setter
     private static RenderManagerBridge renderManager = null;
+    @Getter @Setter
+    private static ForgeEventBusBridge forgeEventBus = null;
     @Getter @Setter
     private static TessellatorBridge tessellator = null;
     @Getter @Setter

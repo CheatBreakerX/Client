@@ -1,17 +1,14 @@
 package com.cheatbreaker.client.ui.module;
 
+import com.cheatbreaker.bridge.client.gui.GuiTextFieldBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.config.Profile;
 import com.cheatbreaker.client.ui.element.profile.ProfileElement;
 import com.cheatbreaker.client.ui.element.profile.ProfilesListElement;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.util.EnumChatFormatting;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -23,7 +20,7 @@ public class CBProfileCreateGui extends CBGuiScreen {
     private final float IlllIIIlIlllIllIlIIlllIlI;
     private final int IIIIllIlIIIllIlllIlllllIl;
     private final ProfilesListElement parent;
-    private GuiTextField lIIIIIIIIIlIllIIllIlIIlIl = null;
+    private GuiTextFieldBridge textField = null;
     private String IlIlIIIlllIIIlIlllIlIllIl = "";
     private boolean IIIllIllIlIlllllllIlIlIII = false;
     private Profile profile;
@@ -43,7 +40,7 @@ public class CBProfileCreateGui extends CBGuiScreen {
 
     @Override
     public void updateScreen() {
-        this.lIIIIIIIIIlIllIIllIlIIlIl.updateCursorCounter();
+        this.textField.bridge$updateCursorCounter();
     }
 
     @Override
@@ -59,11 +56,11 @@ public class CBProfileCreateGui extends CBGuiScreen {
             ((CBModulesGui) this.guiScreen).currentScrollableElement = ((CBModulesGui) this.guiScreen).profilesElement;
         } else {
             this.IIIllIllIlIlllllllIlIlIII = false;
-            this.lIIIIIIIIIlIllIIllIlIIlIl = new GuiTextField(this.mc.bridge$getFontRenderer(), this.width / 2 - 70, this.height / 2 - 6, 140, 10);
+            this.textField = Ref.getInstanceCreator().createTextField(this.mc.bridge$getFontRenderer(), this.width / 2 - 70, this.height / 2 - 6, 140, 10);
             if (this.profile != null) {
-                this.lIIIIIIIIIlIllIIllIlIIlIl.setText(this.profile.getName());
+                this.textField.bridge$setText(this.profile.getName());
             }
-            this.lIIIIIIIIIlIllIIllIlIIlIl.setFocused(true);
+            this.textField.bridge$setFocused(true);
         }
     }
 
@@ -80,13 +77,13 @@ public class CBProfileCreateGui extends CBGuiScreen {
         FontRegistry.getUbuntuMedium16px().drawString("Profile Name: ", (float) (n3 / 2) - (float) 70 / this.IlllIIIlIlllIllIlIIlllIlI, (float) (n4 / 2) - (float) 17 / this.IlllIIIlIlllIllIlIIlllIlI, 0x6F000000);
         FontRegistry.getUbuntuMedium16px().drawString(this.IlIlIIIlllIIIlIlllIlIllIl, (float) (n3 / 2) - (float) 72 / this.IlllIIIlIlllIllIlIIlllIlI, (float) (n4 / 2) + (float) 8 / this.IlllIIIlIlllIllIlIIlllIlI, -1358954496);
         GL11.glPopMatrix();
-        this.lIIIIIIIIIlIllIIllIlIIlIl.drawTextBox();
+        this.textField.bridge$drawTextBox();
     }
 
     @Override
     public void mouseClicked(int n, int n2, int n3) {
         super.mouseClicked(n, n2, n3);
-        this.lIIIIIIIIIlIllIIllIlIIlIl.mouseClicked(n, n2, n3);
+        this.textField.bridge$mouseClicked(n, n2, n3);
     }
 
     @Override
@@ -98,26 +95,26 @@ public class CBProfileCreateGui extends CBGuiScreen {
                 break;
             }
             case 28: {
-                if (this.lIIIIIIIIIlIllIIllIlIIlIl.getText().length() < 3) {
+                if (this.textField.bridge$getText().length() < 3) {
                     this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormattingBridge.RED + "Name must be at least 3 characters long.";
                     break;
                 }
-                if (this.lIIIIIIIIIlIllIIllIlIIlIl.getText().equalsIgnoreCase("default")) {
+                if (this.textField.bridge$getText().equalsIgnoreCase("default")) {
                     this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormattingBridge.RED + "That name is already in use.";
                     break;
                 }
-                if (!this.lIIIIIIIIIlIllIIllIlIIlIl.getText().matches("([a-zA-Z0-9-_ \\]\\[]+)")) {
+                if (!this.textField.bridge$getText().matches("([a-zA-Z0-9-_ \\]\\[]+)")) {
                     this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormattingBridge.RED + "Illegal characters in name.";
                     break;
                 }
                 if (this.profile != null && this.profile.isEditable()) {
                     File file = new File(Ref.getMinecraft().bridge$getMcDataDir(), "config" + File.separator + "client" + File.separator + "profiles" + File.separator + this.profile.getName() + ".cfg");
-                    File file2 = new File(Ref.getMinecraft().bridge$getMcDataDir(), "config" + File.separator + "client" + File.separator + "profiles" + File.separator + this.lIIIIIIIIIlIllIIllIlIIlIl.getText() + ".cfg");
+                    File file2 = new File(Ref.getMinecraft().bridge$getMcDataDir(), "config" + File.separator + "client" + File.separator + "profiles" + File.separator + this.textField.bridge$getText() + ".cfg");
                     if (!file.exists()) break;
                     try {
                         Files.copy(file.toPath(), file2.toPath());
                         Files.delete(file.toPath());
-                        this.profile.setName(this.lIIIIIIIIIlIllIIllIlIIlIl.getText());
+                        this.profile.setName(this.textField.bridge$getText());
                         this.mc.bridge$displayGuiScreen(this.guiScreen);
                         ((CBModulesGui) this.guiScreen).currentScrollableElement = ((CBModulesGui) this.guiScreen).profilesElement;
                     } catch (Exception exception) {
@@ -128,14 +125,14 @@ public class CBProfileCreateGui extends CBGuiScreen {
                 }
                 Profile ilIIlIIlIIlllIlIIIlIllIIl = null;
                 for (Profile ilIIlIIlIIlllIlIIIlIllIIl2 : CheatBreaker.getInstance().profiles) {
-                    if (!ilIIlIIlIIlllIlIIIlIllIIl2.getName().toLowerCase().equalsIgnoreCase(this.lIIIIIIIIIlIllIIllIlIIlIl.getText()))
+                    if (!ilIIlIIlIIlllIlIIIlIllIIl2.getName().toLowerCase().equalsIgnoreCase(this.textField.bridge$getText()))
                         continue;
                     ilIIlIIlIIlllIlIIIlIllIIl = ilIIlIIlIIlllIlIIIlIllIIl2;
                     break;
                 }
                 if (ilIIlIIlIIlllIlIIIlIllIIl == null) {
                     CheatBreaker.getInstance().configManager.writeProfile(CheatBreaker.getInstance().activeProfile.getName());
-                    Profile ilIIlIIlIIlllIlIIIlIllIIl3 = new Profile(this.lIIIIIIIIIlIllIIllIlIIlIl.getText(), true);
+                    Profile ilIIlIIlIIlllIlIIIlIllIIl3 = new Profile(this.textField.bridge$getText(), true);
                     CheatBreaker.getInstance().profiles.add(ilIIlIIlIIlllIlIIIlIllIIl3);
                     CheatBreaker.getInstance().activeProfile = ilIIlIIlIIlllIlIIIlIllIIl3;
                     this.parent.lIIIIlIIllIIlIIlIIIlIIllI.add(new ProfileElement(this.parent, this.IIIIllIlIIIllIlllIlllllIl, ilIIlIIlIIlllIlIIIlIllIIl3, this.IlllIIIlIlllIllIlIIlllIlI));
@@ -148,7 +145,7 @@ public class CBProfileCreateGui extends CBGuiScreen {
                 break;
             }
             default: {
-                this.lIIIIIIIIIlIllIIllIlIIlIl.textboxKeyTyped(c, n);
+                this.textField.bridge$textboxKeyTyped(c, n);
             }
         }
     }

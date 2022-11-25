@@ -1,7 +1,7 @@
 package com.cheatbreaker.client.config;
 
 import com.cheatbreaker.bridge.ref.Ref;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.module.AbstractModule;
 
 import java.io.*;

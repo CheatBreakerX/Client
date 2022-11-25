@@ -4,7 +4,7 @@ import com.cheatbreaker.bridge.client.renderer.texture.DynamicTextureBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;

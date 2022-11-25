@@ -20,7 +20,6 @@ public class ModuleManager {
     public AbstractModule llIIlllIIIIlllIllIlIlllIl;
 
     public ToggleSprintModule toggleSprint;
-    public MiniMapModule minmap;
     public CBNotificationsModule notifications;
     public ArmourStatusModule armourStatus;
     public CooldownsModule cooldowns;
@@ -41,7 +40,6 @@ public class ModuleManager {
         staffModules = new ArrayList<>();
 
         modules.add(coordinatesModule = new CoordinatesModule());
-        modules.add(minmap = new MiniMapModule());
         modules.add(toggleSprint = new ToggleSprintModule());
         modules.add(potionStatus = new PotionStatusModule());
         modules.add(armourStatus = new ArmourStatusModule());

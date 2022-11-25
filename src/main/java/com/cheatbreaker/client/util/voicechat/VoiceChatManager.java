@@ -4,7 +4,7 @@ import com.cheatbreaker.bridge.client.audio.SoundCategoryBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.entity.player.EntityPlayerBridge;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.audio.*;
 import com.cheatbreaker.client.nethandler.server.PacketVoice;
 import lombok.Getter;

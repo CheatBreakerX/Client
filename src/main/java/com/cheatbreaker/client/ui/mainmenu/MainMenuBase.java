@@ -6,7 +6,7 @@ import com.cheatbreaker.bridge.client.renderer.texture.DynamicTextureBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.bridge.util.SessionBridge;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.remote.GitCommitProperties;
 import com.cheatbreaker.client.ui.AbstractGui;
 import com.cheatbreaker.client.ui.fading.ColorFade;

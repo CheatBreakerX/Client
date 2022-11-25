@@ -1,14 +1,16 @@
 package com.cheatbreaker.client.nethandler;
 
+import com.cheatbreaker.bridge.network.PacketBufferBridge;
+import com.cheatbreaker.bridge.network.play.client.C17PacketCustomPayloadBridge;
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.bridge.util.ChatComponentStyleBridge;
 import com.cheatbreaker.bridge.util.ChatComponentTextBridge;
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.bridge.util.IChatComponentBridge;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.event.type.PluginMessageEvent;
 import com.cheatbreaker.client.module.AbstractModule;
-import com.cheatbreaker.client.module.ModuleRule;
 import com.cheatbreaker.client.module.staff.StaffModule;
-import com.cheatbreaker.client.module.type.MiniMapModule;
 import com.cheatbreaker.client.module.type.cooldowns.CooldownsModule;
 import com.cheatbreaker.client.nethandler.client.ICBNetHandlerClient;
 import com.cheatbreaker.client.nethandler.client.PacketVoiceChannelSwitch;
@@ -23,19 +25,8 @@ import com.cheatbreaker.client.util.voicechat.VoiceUser;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
-import com.thevoxelbox.voxelmap.MapSettingsManager;
-import com.thevoxelbox.voxelmap.VoxelMap;
-import com.thevoxelbox.voxelmap.WaypointManager;
 import io.netty.buffer.Unpooled;
 import lombok.Getter;
-import net.minecraft.client.Minecraft;
-import net.minecraft.event.HoverEvent;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.client.C17PacketCustomPayload;
-import net.minecraft.util.ChatComponentStyle;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
@@ -52,7 +43,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
     private boolean serverHandlesWaypoints = false;
     public boolean voiceChatEnabled = true;
     private boolean competitiveGamemode = false;
-    private boolean lIIIIIIIIIlIllIIllIlIIlIl = false;
+    private boolean isCheatBreakerChannel = false;
 
     @Getter
     private Map<UUID, List<String>> nametagsMap = new HashMap<>();
@@ -81,32 +72,18 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
     }
     public void lIIIIlIIllIIlIIlIIIlIIllI() {
         CheatBreaker.getInstance().getTitleManager().getTitles().clear();
-//        IIIlllIllIIllIllIlIIIllII.lIIIIlIIllIIlIIlIIIlIIllI(null);
-        MiniMapModule.state = ModuleRule.MINIMAP_NOT_ALLOWED;
-        VoxelMap voxelMap = CheatBreaker.getInstance().getModuleManager().minmap.getVoxelMap();
-        if (Ref.getMinecraft().bridge$getThePlayer() == null || voxelMap.getWaypointManager() == null) {
-            return;
-        }
-        voxelMap.getWaypointManager().getWaypoints().removeIf(lIIllIllIlIllIIIlIlllllIl2 -> lIIllIllIlIllIIIlIlllllIl2.enabled);
-        ((WaypointManager)voxelMap.getWaypointManager()).old2dWayPts.removeIf(lIIllIllIlIllIIIlIlllllIl2 -> lIIllIllIlIllIIIlIlllllIl2.enabled);
-        if (((WaypointManager)voxelMap.getWaypointManager()).entityWaypointContainer == null) {
-            return;
-        }
-        ((WaypointManager)voxelMap.getWaypointManager()).entityWaypointContainer.wayPts.removeIf(lIIllIllIlIllIIIlIlllllIl2 -> lIIllIllIlIllIIIlIlllllIl2.enabled);
-        MapSettingsManager.instance.saveAll();
-        voxelMap.getWaypointManager().check2dWaypoints();
     }
 
     public void onPluginMessage(PluginMessageEvent pluginMessageEvent) {
         try {
             if (pluginMessageEvent.getChannel().equals("REGISTER")) {
                 String string = new String(pluginMessageEvent.getPayload(), Charsets.UTF_8);
-                this.lIIIIIIIIIlIllIIllIlIIlIl = string.contains(CheatBreaker.getInstance().getPluginMessageChannel());
+                this.isCheatBreakerChannel = string.contains(CheatBreaker.getInstance().getPluginMessageChannel());
                 this.serverHandlesWaypoints = string.contains(CheatBreaker.getInstance().getPluginBinaryChannel());
-                PacketBuffer lIlIllllllllIlIIIllIIllII2 = new PacketBuffer(Unpooled.buffer());
-                lIlIllllllllIlIIIllIIllII2.writeBytes(CheatBreaker.getInstance().getPluginMessageChannel().getBytes(Charsets.UTF_8));
-                if (Ref.getMinecraft().bridge$getNetHandler() != null && this.lIIIIIIIIIlIllIIllIlIIlIl) {
-                    Ref.getMinecraft().bridge$getNetHandler().addToSendQueue(new C17PacketCustomPayload("REGISTER", lIlIllllllllIlIIIllIIllII2));
+                PacketBufferBridge buf = Ref.getInstanceCreator().createPacketBuffer(Unpooled.buffer());
+                buf.bridge$writeBytes(CheatBreaker.getInstance().getPluginMessageChannel().getBytes(Charsets.UTF_8));
+                if (Ref.getMinecraft().bridge$getNetHandler() != null && this.isCheatBreakerChannel) {
+                    Ref.getMinecraft().bridge$getNetHandler().bridge$addToSendQueue(Ref.getInstanceCreator().createC17PacketCustomPayload("REGISTER", buf));
                 }
                 this.initialize();
             } else if (pluginMessageEvent.getChannel().equals(CheatBreaker.getInstance().getPluginMessageChannel())) {
@@ -114,7 +91,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
                 if (CheatBreaker.getInstance().getGlobalSettings().isDebug) {
                     ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator().createChatComponentText( "[CB] ");
                     ChatComponentTextBridge chatComponentText2 = Ref.getInstanceCreator().createChatComponentText("Received: " + packet.getClass().getSimpleName());
-                    chatComponentText2.bridge$getChatStyle().setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Ref.getInstanceCreator().createChatComponentText(new Gson().toJson(packet))));
+                    chatComponentText2.bridge$getChatStyle().bridge$setChatHoverEvent(Ref.getInstanceCreator().createHoverEvent("HOW_TEXT", Ref.getInstanceCreator().createChatComponentText(new Gson().toJson(packet))));
                     chatComponentText.bridge$appendSibling(chatComponentText2);
                     Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(chatComponentText);
                 }
@@ -192,7 +169,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
         Map<UUID, Map<String, Double>> map = packet.getPlayers();
         UUID uUID = packet.getLeader();
         long l = packet.getLastMs();
-        if (!((Boolean) CheatBreaker.getInstance().getGlobalSettings().enableTeamView.getValue()) || map == null || map.isEmpty() || map.size() == 1 && map.containsKey(Ref.getMinecraft().bridge$getThePlayer().getUniqueID())) {
+        if (!((Boolean) CheatBreaker.getInstance().getGlobalSettings().enableTeamView.getValue()) || map == null || map.isEmpty() || map.size() == 1 && map.containsKey(Ref.getMinecraft().bridge$getThePlayer().bridge$getUniqueID())) {
             CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIlIIllIIlIIlIIIlIIllI().clear();
             System.out.println("[CB Teammates] Cleared Map..");
             return;
@@ -204,7 +181,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
             if (teammate == null) {
                 teammate = new Teammate((entry.getKey()).toString(), uUID != null && uUID.equals(entry.getKey()));
                 CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIlIIllIIlIIlIIIlIIllI().add(teammate);
-                System.out.println("[CB Teammates] New Teammate Added: " + entry.toString());
+                System.out.println("[CB Teammates] New Teammate Added: " + entry);
                 Random random = new Random();
                 if (n < CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIIIIIIlIllIIllIlIIlIl().length) {
                     teammate.lIIIIlIIllIIlIIlIIIlIIllI(new Color(CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIIIIIIlIllIIllIlIIlIl()[n]));
@@ -268,18 +245,6 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
     @Override
     public void handleServerRule(PacketServerRule packetServerRule) {
         switch (packetServerRule.getRule()) {
-            case MINIMAP_STATUS: {
-                switch (packetServerRule.getRule().getRuleName()) {
-                    case "NEUTRAL": {
-                        MiniMapModule.state = ModuleRule.MINIMAP_ALLOWED;
-                        break;
-                    }
-                    case "FORCED_OFF": {
-                        MiniMapModule.state = ModuleRule.MINIMAP_NOT_ALLOWED;
-                    }
-                }
-                break;
-            }
             case SERVER_HANDLES_WAYPOINTS: {
                 this.serverHandlesWaypoints = packetServerRule.isEnabled();
                 break;
@@ -297,7 +262,8 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
 
     @Override
     public void handleVoice(PacketVoice packet) {
-        if (packet.getUuid().equals(Ref.getMinecraft().bridge$getThePlayer().getUniqueID())) return;
+        if (packet.getUuid().equals(Ref.getMinecraft().bridge$getThePlayer().bridge$getUniqueID()))
+            return;
         //Message.f(packet.getUuid().toString(), packet.getData());
         CheatBreaker.getInstance().getVoiceChatManager().handleIncoming(packet);
         CheatBreaker.getInstance().getModuleManager().voiceChat.addUserToSpoken(packet.getUuid());
@@ -376,10 +342,10 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
                     for (VoiceChannel voiceChannel2 : this.voiceChannels) {
                         voiceChannel2.removeListener(packet.getUuid());
                     }
-                    ChatComponentText chatComponentText = new ChatComponentText(EnumChatFormattingBridge.AQUA + "Joined " + voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() + " channel. Press '" + Keyboard.getKeyName(CheatBreaker.getInstance().getGlobalSettings().pushToTalk.bridge$getKeyCode()) + "' to talk!" + EnumChatFormattingBridge.RESET);
+                    ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator().createChatComponentText(EnumChatFormattingBridge.AQUA + "Joined " + voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() + " channel. Press '" + Keyboard.getKeyName(CheatBreaker.getInstance().getGlobalSettings().pushToTalk.bridge$getKeyCode()) + "' to talk!" + EnumChatFormattingBridge.RESET);
                     Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(chatComponentText);
                 } else if (this.voiceChannel == voiceChannel) {
-                    ChatComponentText chatComponentText = new ChatComponentText(EnumChatFormattingBridge.AQUA + packet.getName() + EnumChatFormattingBridge.AQUA + " joined " + voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() + " channel. Press '" + Keyboard.getKeyName(CheatBreaker.getInstance().getGlobalSettings().openVoiceMenu.bridge$getKeyCode()) + "'!" + EnumChatFormattingBridge.RESET);
+                    ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator().createChatComponentText(EnumChatFormattingBridge.AQUA + packet.getName() + EnumChatFormattingBridge.AQUA + " joined " + voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() + " channel. Press '" + Keyboard.getKeyName(CheatBreaker.getInstance().getGlobalSettings().openVoiceMenu.bridge$getKeyCode()) + "'!" + EnumChatFormattingBridge.RESET);
                     Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(chatComponentText);
                 }
                 voiceChannel.addToListening(packet.getUuid(), packet.getName());
@@ -388,7 +354,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
             case 3: {
                 // remove listening
                 if (this.voiceChannel == voiceChannel && !packet.getUuid().toString().equals(Ref.getMinecraft().bridge$getSession().bridge$getPlayerID())) {
-                    ChatComponentText chatComponentText = new ChatComponentText(EnumChatFormattingBridge.AQUA + packet.getName() + EnumChatFormattingBridge.AQUA + " left " + voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() + " channel. Press '" + Keyboard.getKeyName(CheatBreaker.getInstance().getGlobalSettings().openVoiceMenu.bridge$getKeyCode()) + "'!" + EnumChatFormattingBridge.RESET);
+                    ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator().createChatComponentText(EnumChatFormattingBridge.AQUA + packet.getName() + EnumChatFormattingBridge.AQUA + " left " + voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() + " channel. Press '" + Keyboard.getKeyName(CheatBreaker.getInstance().getGlobalSettings().openVoiceMenu.bridge$getKeyCode()) + "'!" + EnumChatFormattingBridge.RESET);
                     Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(chatComponentText);
                 }
                 voiceChannel.removeListener(packet.getUuid());
@@ -473,13 +439,14 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
     public void sendPacketToQueue(Packet packet) {
         Object object;
         if (packet != null && CheatBreaker.getInstance().getGlobalSettings().isDebug) {
-            object = new ChatComponentText(EnumChatFormattingBridge.RED + "[C" + EnumChatFormattingBridge.WHITE + "B" + EnumChatFormattingBridge.RED + "] " + EnumChatFormattingBridge.RESET);
-            ChatComponentText chatComponentText = new ChatComponentText(EnumChatFormattingBridge.GRAY + "Sent: " + EnumChatFormattingBridge.WHITE + packet.getClass().getSimpleName());
-            chatComponentText.getChatStyle().setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(new Gson().toJson(packet))));
-            ((ChatComponentStyle)object).appendSibling(chatComponentText);
-            Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage((IChatComponent)object);
+            object = Ref.getInstanceCreator().createChatComponentText(EnumChatFormattingBridge.RED + "[C" + EnumChatFormattingBridge.WHITE + "B" + EnumChatFormattingBridge.RED + "] " + EnumChatFormattingBridge.RESET);
+            ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator().createChatComponentText(EnumChatFormattingBridge.GRAY + "Sent: " + EnumChatFormattingBridge.WHITE + packet.getClass().getSimpleName());
+            chatComponentText.bridge$getChatStyle().bridge$setChatHoverEvent(Ref.getInstanceCreator().createHoverEvent("SHOW_TEXT", Ref.getInstanceCreator().createChatComponentText(new Gson().toJson(packet))));
+            ((ChatComponentStyleBridge)object).bridge$appendSibling(chatComponentText);
+            Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage((IChatComponentBridge)object);
         }
-        object = new C17PacketCustomPayload(CheatBreaker.getInstance().getPluginMessageChannel(), Packet.getPacketData(packet));
-        Ref.getMinecraft().bridge$getThePlayer().bridge$getSendQueue().bridge$addToSendQueue((net.minecraft.network.Packet) object);
+
+        C17PacketCustomPayloadBridge payload = Ref.getInstanceCreator().createC17PacketCustomPayload(CheatBreaker.getInstance().getPluginMessageChannel(), Packet.getPacketData(packet));
+        Ref.getMinecraft().bridge$getThePlayer().bridge$getSendQueue().bridge$addToSendQueue(payload);
     }
 }

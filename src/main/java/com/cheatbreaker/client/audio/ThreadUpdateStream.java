@@ -2,7 +2,7 @@ package com.cheatbreaker.client.audio;
 
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.util.voicechat.VoiceChatManager;
 import paulscode.sound.SoundSystem;
 

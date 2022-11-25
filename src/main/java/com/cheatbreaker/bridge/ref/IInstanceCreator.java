@@ -1,6 +1,8 @@
 package com.cheatbreaker.bridge.ref;
 
 import com.cheatbreaker.bridge.client.audio.ISoundBridge;
+import com.cheatbreaker.bridge.client.gui.FontRendererBridge;
+import com.cheatbreaker.bridge.client.gui.GuiTextFieldBridge;
 import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
 import com.cheatbreaker.bridge.client.renderer.IImageBufferBridge;
 import com.cheatbreaker.bridge.client.renderer.ThreadDownloadImageDataBridge;
@@ -11,9 +13,16 @@ import com.cheatbreaker.bridge.client.resources.IResourceManagerBridge;
 import com.cheatbreaker.bridge.client.settings.KeyBindingBridge;
 import com.cheatbreaker.bridge.client.shader.FrameBufferBridge;
 import com.cheatbreaker.bridge.client.shader.ShaderGroupBride;
+import com.cheatbreaker.bridge.event.HoverEventBridge;
 import com.cheatbreaker.bridge.item.ItemBridge;
 import com.cheatbreaker.bridge.item.ItemStackBridge;
+import com.cheatbreaker.bridge.network.PacketBufferBridge;
+import com.cheatbreaker.bridge.network.play.client.C17PacketCustomPayloadBridge;
+import com.cheatbreaker.bridge.potion.PotionEffectBridge;
+import com.cheatbreaker.bridge.scoreboard.ScoreObjectiveBridge;
+import com.cheatbreaker.bridge.scoreboard.ScoreboardBridge;
 import com.cheatbreaker.bridge.util.*;
+import io.netty.buffer.ByteBuf;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -38,4 +47,12 @@ public interface IInstanceCreator {
     FrameBufferBridge createFrameBuffer(float width, float height, boolean b);
     SessionBridge createSession(String username, String playerId, String token, String type);
     AxisAlignedBBBridge createAxisAlignedBB(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
+    GuiTextFieldBridge createTextField(FontRendererBridge fontRenderer, int i, int i1, int i2, int i3);
+    PacketBufferBridge createPacketBuffer(ByteBuf buffer);
+    C17PacketCustomPayloadBridge createC17PacketCustomPayload(String channel, byte[] data);
+    C17PacketCustomPayloadBridge createC17PacketCustomPayload(String channel, PacketBufferBridge data);
+    HoverEventBridge createHoverEvent(String action, IChatComponentBridge component);
+    PotionEffectBridge createPotionEffect(String idName, int duration, int multiplier);
+    ScoreboardBridge createScoreboard();
+    ScoreObjectiveBridge createScoreObjective(ScoreboardBridge scoreboard, String name, String type);
 }

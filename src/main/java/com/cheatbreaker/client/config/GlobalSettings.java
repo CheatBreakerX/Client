@@ -3,7 +3,7 @@ package com.cheatbreaker.client.config;
 import com.cheatbreaker.bridge.client.settings.GameSettingsBridge;
 import com.cheatbreaker.bridge.client.settings.KeyBindingBridge;
 import com.cheatbreaker.bridge.ref.Ref;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.element.type.ColorPickerColorElement;
 import com.cheatbreaker.client.util.dash.DashUtil;
 import com.cheatbreaker.client.util.voicechat.VoiceChatManager;

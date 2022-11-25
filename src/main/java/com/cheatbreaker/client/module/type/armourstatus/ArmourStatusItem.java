@@ -3,7 +3,7 @@ package com.cheatbreaker.client.module.type.armourstatus;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.item.ItemStackBridge;
 import com.cheatbreaker.bridge.ref.Ref;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.module.CBAnchorHelper;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
 import com.cheatbreaker.client.ui.module.CBPositionEnum;

@@ -5,7 +5,7 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.event.type.CollisionEvent;
 import com.cheatbreaker.client.event.type.RenderWorldEvent;
 import com.cheatbreaker.client.event.type.TickEvent;

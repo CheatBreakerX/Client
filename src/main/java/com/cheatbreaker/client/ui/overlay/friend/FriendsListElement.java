@@ -1,7 +1,7 @@
 package com.cheatbreaker.client.ui.overlay.friend;
 
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.mainmenu.element.ScrollableElement;
 import com.cheatbreaker.client.ui.overlay.OverlayGui;
 import com.cheatbreaker.client.ui.overlay.element.ElementListElement;

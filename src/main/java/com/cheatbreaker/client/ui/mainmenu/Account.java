@@ -1,7 +1,7 @@
 package com.cheatbreaker.client.ui.mainmenu;
 
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 
 public class Account {
     private String clientToken;

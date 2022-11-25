@@ -5,7 +5,7 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.element.AbstractScrollableElement;
@@ -196,7 +196,7 @@ public class CBModulesGui extends CBGuiScreen {
                 this.lIIIIlIIllIIlIIlIIIlIIllI(position, mouseX, mouseY, scaledResolution);
                 if (!(Boolean) CheatBreaker.getInstance().globalSettings.snapModules.getValue() || !this.IlIlIIIlllllIIIlIlIlIllII || Mouse.isButtonDown(1) || position.module != draggingModule) continue;
                 for (AbstractModule cBModule3 : this.modules) {
-                    if (this.getModulePosition(cBModule3) != null || cBModule3.getGuiAnchor() == null || !cBModule3.isEnabled() || cBModule3.getName().contains("Zans") && CheatBreaker.getInstance().moduleManager.minmap.getVoxelMap().getMapOptions().hide) continue;
+                    if (this.getModulePosition(cBModule3) != null || cBModule3.getGuiAnchor() == null || !cBModule3.isEnabled()) continue;
                     float f5 = 18;
                     if (cBModule3.width < f5) {
                         cBModule3.width = (int)f5;
@@ -340,7 +340,8 @@ public class CBModulesGui extends CBGuiScreen {
                 for (AbstractModule cBModule4 : this.modules) {
                     int n10;
                     int n11;
-                    if (cBModule4.getGuiAnchor() == null || !cBModule4.isEnabled() || cBModule4.getName().contains("Zans") && CheatBreaker.getInstance().moduleManager.minmap.getVoxelMap().getMapOptions().hide) continue;
+                    if (cBModule4.getGuiAnchor() == null || !cBModule4.isEnabled())
+                        continue;
                     float[] arrf = cBModule4.getScaledPoints(scaledResolution, true);
                     float f14 = scale / (Float) cBModule4.scale.getValue();
                     object = new Rectangle((int)(arrf[0] * (Float) cBModule4.scale.getValue() - 2.0f), (int)(arrf[1] * (Float) cBModule4.scale.getValue() - 2.0f), (int)(cBModule4.width * ((Float)cBModule4.scale.getValue()).floatValue() + (float)4), (int)(cBModule4.height * ((Float)cBModule4.scale.getValue()).floatValue() + (float)4));
@@ -428,7 +429,7 @@ public class CBModulesGui extends CBGuiScreen {
             for (AbstractModule object : this.modules) {
                 CBGuiAnchor cBGuiAnchor;
                 SomeRandomAssEnum dELETE_ME_D;
-                if (object.getGuiAnchor() == null || !object.isEnabled() || object == CheatBreaker.getInstance().moduleManager.minmap) continue;
+                if (object.getGuiAnchor() == null || !object.isEnabled()) continue;
                 float[] scaledPoints = object.getScaledPoints(scaledResolution, true);
                 boolean bl4 = (float)mouseX > scaledPoints[0] * (Float) object.scale.getValue() && (float)mouseX < (scaledPoints[0] + object.width) * (Float) object.scale.getValue() && (float)mouseY > scaledPoints[1] * ((Float) object.scale.getValue()).floatValue() && (float)mouseY < (scaledPoints[1] + object.height) * ((Float) object.scale.getValue()).floatValue();
                 boolean bl5 = this.dataHolder != null && this.dataHolder.module == object && this.dataHolder.unknown == SomeRandomAssEnum.LEFT_BOTTOM || !bl4 && (float)mouseX >= (scaledPoints[0] + object.width - (float)5) * ((Float) object.scale.getValue()).floatValue() && (float)mouseX <= (scaledPoints[0] + object.width + (float)5) * ((Float) object.scale.getValue()).floatValue() && (float)mouseY >= (scaledPoints[1] - (float)5) * ((Float) object.scale.getValue()).floatValue() && (float)mouseY <= (scaledPoints[1] + (float)5) * (Float) object.scale.getValue();
@@ -627,7 +628,7 @@ public class CBModulesGui extends CBGuiScreen {
         for (AbstractModule cBModule : this.modules) {
             boolean bl;
             float[] arrf;
-            if (cBModule.getGuiAnchor() == null || !cBModule.isEnabled() || cBModule.getName().contains("Zans") && CheatBreaker.getInstance().moduleManager.minmap.getVoxelMap().getMapOptions().hide)
+            if (cBModule.getGuiAnchor() == null || !cBModule.isEnabled())
                 continue;
             float f = cBModule.width;
             float f2 = cBModule.height;
@@ -642,7 +643,7 @@ public class CBModulesGui extends CBGuiScreen {
                 continue;
             boolean bl3 = !cBModule.getSettingsList().isEmpty() && (float) n >= arrf[0] * (Float) cBModule.scale.getValue() && (float) n <= (arrf[0] + (float) 10) * ((Float) cBModule.scale.getValue()).floatValue() && (float) n2 >= (arrf[1] + cBModule.height - (float) 10) * ((Float) cBModule.scale.getValue()).floatValue() && (float) n2 <= (arrf[1] + cBModule.height + 2.0f) * ((Float) cBModule.scale.getValue()).floatValue();
             boolean bl4 = bl = (float) n > (arrf[0] + cBModule.width - (float) 10) * (Float) cBModule.scale.getValue() && (float) n < (arrf[0] + cBModule.width + 2.0f) * ((Float) cBModule.scale.getValue()).floatValue() && (float) n2 > (arrf[1] + cBModule.height - (float) 10) * ((Float) cBModule.scale.getValue()).floatValue() && (float) n2 < (arrf[1] + cBModule.height + 2.0f) * ((Float) cBModule.scale.getValue()).floatValue();
-            if (n3 == 0 && !bl3 && !bl && cBModule != CheatBreaker.getInstance().moduleManager.minmap) {
+            if (n3 == 0 && !bl3 && !bl) {
                 boolean bl5 = true;
                 if (this.getModulePosition(cBModule) != null) {
                     this.removePositionForModule(cBModule);
@@ -679,7 +680,6 @@ public class CBModulesGui extends CBGuiScreen {
                 float[] arrf2 = CBAnchorHelper.getPositions(cBModule.getGuiAnchor());
                 cBModule.setTranslations(arrf2[0], arrf2[1]);
             }
-            if (cBModule == CheatBreaker.getInstance().moduleManager.minmap) continue;
             break;
         }
     }
@@ -728,7 +728,7 @@ public class CBModulesGui extends CBGuiScreen {
         int n6;
         float[] object;
         boolean bl2;
-        if (cBModule.getGuiAnchor() == null || !cBModule.isEnabled() || cBModule == CheatBreaker.getInstance().moduleManager.minmap || !cBModule.isEditable && !cBModule.isRenderHud()) {
+        if (cBModule.getGuiAnchor() == null || !cBModule.isEnabled() || !cBModule.isEditable && !cBModule.isRenderHud()) {
             return true;
         }
         boolean bl3 = false;
@@ -828,7 +828,7 @@ public class CBModulesGui extends CBGuiScreen {
                 if (CBModulePosition.module != draggingModule || !(Boolean) CheatBreaker.getInstance().globalSettings.snapModules.getValue()) continue;
                 Object var5_5 = null;
                 for (AbstractModule cBModule : this.modules) {
-                    if (this.getModulePosition(cBModule) != null || cBModule.getGuiAnchor() == null || !cBModule.isEnabled() || cBModule == CheatBreaker.getInstance().moduleManager.minmap || !cBModule.isEditable && !cBModule.isRenderHud()) continue;
+                    if (this.getModulePosition(cBModule) != null || cBModule.getGuiAnchor() == null || !cBModule.isEnabled() || !cBModule.isEditable && !cBModule.isRenderHud()) continue;
                     float f = 18;
                     if (cBModule.width < f) {
                         cBModule.width = (int)f;
@@ -919,7 +919,7 @@ public class CBModulesGui extends CBGuiScreen {
     }
 
     private void lIIIIlIIllIIlIIlIIIlIIllI(CBModulePosition CBModulePosition, int n, int n2, ScaledResolutionBridge scaledResolution) {
-        if (CBModulePosition.module.getGuiAnchor() == null || !CBModulePosition.module.isEnabled() || CBModulePosition.module == CheatBreaker.getInstance().moduleManager.minmap || !CBModulePosition.module.isEditable && !CBModulePosition.module.isRenderHud()) {
+        if (CBModulePosition.module.getGuiAnchor() == null || !CBModulePosition.module.isEnabled() || !CBModulePosition.module.isEditable && !CBModulePosition.module.isRenderHud()) {
             return;
         }
         float f = (float)n - CBModulePosition.x;

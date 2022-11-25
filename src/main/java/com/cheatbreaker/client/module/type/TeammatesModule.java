@@ -6,7 +6,7 @@ import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.entity.player.EntityPlayerBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.Vec3Bridge;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.event.type.DisconnectEvent;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.util.teammates.IlIlIIlllIIIIIlIlIlIIIllI;

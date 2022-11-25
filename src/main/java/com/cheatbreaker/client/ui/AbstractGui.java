@@ -4,7 +4,7 @@ import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
 import org.lwjgl.opengl.GL11;
 
@@ -24,7 +24,7 @@ public abstract class AbstractGui extends CBGuiScreen {
     @Override
     public void setWorldAndResolution(final MinecraftBridge mc, final int displayWidth, final int displayHeight) {
         this.mc = mc;
-        this.bridge$getFontRenderer()Obj = mc.bridge$getFontRenderer();
+        this.fontRendererObj = mc.bridge$getFontRenderer();
         this.width = displayWidth;
         this.height = displayHeight;
         this.buttonList.clear();

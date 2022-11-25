@@ -12,9 +12,6 @@ import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
 import com.cheatbreaker.client.ui.module.CBPositionEnum;
 import com.cheatbreaker.client.ui.util.RenderUtil;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Collection;
@@ -84,7 +81,7 @@ public class PotionStatusModule extends AbstractModule {
                 boolean shouldBlink = this.shouldBlink(potionEffect.bridge$getDuration());
                 int n4 = 0;
                 if ((Boolean) this.showEffectName.getValue()) {
-                    string = I18n.format(potionEffect.bridge$getEffectName()) + this.getLevelName(potionEffect.bridge$getAmplifier());
+                    string = Ref.getI18n().bridge$format(potionEffect.bridge$getEffectName()) + this.getLevelName(potionEffect.bridge$getAmplifier());
                     n4 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                     if (position == CBPositionEnum.RIGHT) {
                         this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width - n4, n, this.nameColor.getColorValue());
@@ -108,7 +105,7 @@ public class PotionStatusModule extends AbstractModule {
                         this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n5 / 2) + 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
                     }
                 }
-                if ((potion = Potion.potionTypes[potionEffect.bridge$getPotionID()]).hasStatusIcon()) {
+                if ((potion = potionEffect.bridge$toPotionType()).bridge$hasStatusIcon()) {
                     GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
                     this.minecraft.bridge$getTextureManager().bridge$bindTexture(this.location);
                     int n6 = potion.bridge$getStatusIconIndex();
@@ -141,8 +138,8 @@ public class PotionStatusModule extends AbstractModule {
             GL11.glPushMatrix();
             this.scaleAndTranslate(renderPreviewEvent.getResolution());
             HashMap<Integer, PotionEffectBridge> hashMap = new HashMap<>();
-            PotionEffectBridge fireResistance = new PotionEffect(Potion.fireResistance.id, 1200, 3);
-            PotionEffectBridge speed = new PotionEffect(Potion.moveSpeed.id, 30, 3);
+            PotionEffectBridge fireResistance = Ref.getInstanceCreator().createPotionEffect("FIRE_RESISTANCE", 1200, 3);
+            PotionEffectBridge speed = Ref.getInstanceCreator().createPotionEffect("MOVE_SPEED", 30, 3);
             hashMap.put(fireResistance.bridge$getPotionID(), fireResistance);
             hashMap.put(speed.bridge$getPotionID(), speed);
             collection = hashMap.values();
@@ -156,7 +153,7 @@ public class PotionStatusModule extends AbstractModule {
                 boolean shouldBlink = this.shouldBlink(potionEffect.bridge$getDuration());
                 int n4 = 0;
                 if ((Boolean) this.showEffectName.getValue()) {
-                    string = I18n.format(potionEffect.bridge$getEffectName()) + this.getLevelName(potionEffect.bridge$getAmplifier());
+                    string = Ref.getI18n().bridge$format(potionEffect.bridge$getEffectName()) + this.getLevelName(potionEffect.bridge$getAmplifier());
                     n4 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                     if (position == CBPositionEnum.RIGHT) {
                         this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width - n4, n, this.nameColor.getColorValue());
@@ -180,7 +177,7 @@ public class PotionStatusModule extends AbstractModule {
                         this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n5 / 2) + 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
                     }
                 }
-                if ((potion = Potion.potionTypes[potionEffect.bridge$getPotionID()]).hasStatusIcon()) {
+                if ((potion = potionEffect.bridge$toPotionType()).bridge$hasStatusIcon()) {
                     GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
                     this.minecraft.bridge$getTextureManager().bridge$bindTexture(this.location);
                     int n6 = potion.bridge$getStatusIconIndex();

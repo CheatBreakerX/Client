@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.audio;
 
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import org.xiph.speex.SpeexDecoder;
 
 import javax.sound.sampled.AudioFormat;

@@ -1,6 +1,6 @@
 package com.cheatbreaker.client.module.type.cooldowns;
 
-import com.cheatbreaker.client.CheatBreaker;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.event.type.RenderPreviewEvent;
