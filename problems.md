@@ -1,4 +1,4 @@
-# [CheatBreakerX/ClientBase](https://github.com/CheatBreakerX/ClientBase)/problems.md
+# [CheatBreakerX/Client](https://github.com/CheatBreakerX/Client)/problems.md
 
 `com.cheatbreaker.bridge.*` - 100% compilable code - There is no errors and the code is fine.
 
@@ -18,4 +18,4 @@
 
 # Addressing "`com.cheatbreaker.client.remote`" package
 
-To the five people who genuinely think that this package contains a RAT, please read the [source code of the file inside](https://github.com/CheatBreakerX/ClientBase/blob/master/src/main/java/com/cheatbreaker/client/remote/GitCommitProperties.java) and have some common sense.
+To the five people who genuinely think that this package contains a RAT, please read the [source code of the file inside](https://github.com/CheatBreakerX/Client/blob/master/src/main/java/com/cheatbreaker/client/remote/GitCommitProperties.java) and have some common sense.
