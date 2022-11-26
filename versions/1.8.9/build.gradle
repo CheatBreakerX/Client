@@ -33,6 +33,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 compileJava.options.encoding = "UTF-8"
 
 minecraft {
+    accessTransformer("src/main/resources/cheatbreaker_at.cfg")
     version = "1.8.9-11.15.1.2318-1.8.9"
     runDir = "run"
     mappings = "stable_22"
@@ -98,6 +99,7 @@ jar {
     manifest {
         attributes "FMLCorePlugin": "com.cheatbreaker.mixin.MixinLoader",
                 "FMLCorePluginContainsFMLMod": true,
+                "FMLAT": "cheatbreaker_at.cfg",
                 "ForceLoadAsMod": true,
                 "ModSide": "CLIENT",
                 "TweakClass": 'org.spongepowered.asm.launch.MixinTweaker',

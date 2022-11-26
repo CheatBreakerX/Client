@@ -9,10 +9,11 @@ import java.util.Map;
 
 public class MixinLoader implements IFMLLoadingPlugin {
     public MixinLoader() {
-        System.out.println("[ExampleMod] Injecting with IFMLLoadingPlugin.");
+        System.out.println("[CB] Injecting with IFMLLoadingPlugin...");
         MixinBootstrap.init();
         Mixins.addConfiguration("mixins.cheatbreaker.json");
         MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
+        System.out.println("[CB] Injected.");
     }
 
     @Override

@@ -1,16 +1,36 @@
 {
-  "required": true,
-  "package": "com.cheatbreaker.mixin",
-  "refmap": "mixins.examplemod.refmap.json",
-  "compatibilityLevel": "JAVA_8",
-  "client": [
-    "client.MixinMinecraft",
-    "client.gui.MixinScaledResolution",
-    "client.renderer.texture.MixinDynamicTexture",
-    "client.settings.MixinKeyBinding",
-    "util.MixinResourceLocation"
-  ],
-  "mixins": [
-    "util.MixinVec3"
-  ]
+    "required": true,
+    "package": "com.cheatbreaker.mixin",
+    "refmap": "mixins.examplemod.refmap.json",
+    "compatibilityLevel": "JAVA_8",
+    "client": [
+        "client.MixinMinecraft",
+        "client.audio.MixinISound",
+        "client.gui.MixinScaledResolution",
+        "client.renderer.MixinIImageBuffer",
+        "client.renderer.MixinThreadDownloadImageData",
+        "client.renderer.entity.MixinRenderItem",
+        "client.renderer.texture.MixinDynamicTexture",
+        "client.renderer.texture.MixinTextureManager",
+        "client.settings.MixinKeyBinding",
+        "client.shader.MixinFrameBuffer",
+        "client.shader.MixinShader",
+        "client.shader.MixinShaderGroup",
+        "client.shader.MixinShaderUniform",
+        "util.MixinResourceLocation",
+        "util.MixinSession"
+    ],
+    "mixins": [
+        "block.MixinBlock",
+        "client.gui.MixinFontRenderer",
+        "client.gui.MixinGuiTextField",
+        "client.shader.MixinShaderManager",
+        "item.MixinItem",
+        "network.MixinPacketBuffer",
+        "network.play.client.MixinC17PacketCustomPayload",
+        "scoreboard.MixinScoreboard",
+        "scoreboard.MixinScoreObjective",
+        "util.MixinAxisAlignedBB",
+        "util.MixinVec3"
+    ]
 }

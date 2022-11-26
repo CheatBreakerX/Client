@@ -1,16 +1,23 @@
 [
-{
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["ExampleDude", "dxxxxy"],
-  "credits": "The Forge and FML guys, for making this example. dxxxxy for fixing it.",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
+    {
+        "modid": "cheatbreaker",
+        "name": "CheatBreaker",
+        "description": "The free FPS boosting modpack for Minecraft 1.7.10.",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "url": "",
+        "updateUrl": "",
+        "authorList": [
+            "Telecode/Lifix",
+            "JHalt",
+            "Decencies",
+            "tuzeynah",
+            "Freddie",
+            "Noxiuam"
+        ],
+        "credits": "Decencies, tuzeynah, Noxiuam, Freddie: CheatBreaker Source (https://github.com/Decencies/CheatBreaker), \nJHalt: Creator of CheatBreaker, \nTelecode/Lifix: CheatBreaker Forge",
+        "logoFile": "assets/minecraft/client/logo_red_circle.png",
+        "screenshots": [],
+        "dependencies": []
+    }
 ]

@@ -1,7 +1,7 @@
 package com.cheatbreaker.client.module.type;
 
 import com.cheatbreaker.bridge.client.shader.ShaderBridge;
-import com.cheatbreaker.bridge.client.shader.ShaderGroupBride;
+import com.cheatbreaker.bridge.client.shader.ShaderGroupBridge;
 import com.cheatbreaker.bridge.client.shader.ShaderUniformBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.config.Setting;
@@ -30,11 +30,11 @@ public class MotionBlurModule extends AbstractModule {
     public void bindShader() {
         if (Ref.getGlBridge().bridge$isFramebufferEnabled() && Ref.getGlBridge().bridge$isShadersSupported()) {
             if (minecraft.bridge$getEntityRenderer().bridge$getShaderGroup() != null) {
-                minecraft.bridge$getEntityRenderer().bridge$getShaderGroup().deleteShaderGroup();
+                minecraft.bridge$getEntityRenderer().bridge$getShaderGroup().bridge$deleteShaderGroup();
             }
             try {
                 minecraft.bridge$getEntityRenderer().bridge$setShaderGroup(Ref.getInstanceCreator().createShaderGroup(minecraft.bridge$getTextureManager(), minecraft.bridge$getEntityRenderer().bridge$getResourceManager(), minecraft.bridge$getFramebuffer(), Ref.getInstanceCreator().createResourceLocationBridge("shaders/post/motionblur.json")));
-                minecraft.bridge$getEntityRenderer().bridge$getShaderGroup().createBindFramebuffers(minecraft.bridge$getDisplayWidth(), minecraft.bridge$getDisplayHeight());
+                minecraft.bridge$getEntityRenderer().bridge$getShaderGroup().bridge$createBindFramebuffers(minecraft.bridge$getDisplayWidth(), minecraft.bridge$getDisplayHeight());
             }
             catch (Exception exception) {
                 // empty catch block
@@ -44,7 +44,7 @@ public class MotionBlurModule extends AbstractModule {
 
     private void drawShader() {
         bindShader();
-        ShaderGroupBride shaderGroup = minecraft.bridge$getEntityRenderer().bridge$getShaderGroup();
+        ShaderGroupBridge shaderGroup = minecraft.bridge$getEntityRenderer().bridge$getShaderGroup();
         try {
             if (this.minecraft.bridge$getEntityRenderer().bridge$isShaderActive() && this.minecraft.bridge$getThePlayer() != null) {
                 for (ShaderBridge shader : shaderGroup.bridge$getListShaders()) {
