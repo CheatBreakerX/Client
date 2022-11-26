@@ -1,0 +1,29 @@
+package com.cheatbreaker.mixin.client.gui;
+
+import com.cheatbreaker.bridge.client.gui.GuiScreenBridge;
+import com.cheatbreaker.client.ui.overlay.OverlayGui;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiScreen;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.awt.*;
+
+@Mixin(GuiScreen.class)
+public class MixinGuiScreen extends Gui implements GuiScreenBridge {
+    @Shadow public Minecraft mc;
+    @Shadow public int width;
+    @Shadow public int height;
+
+    @Inject(method = "drawWorldBackground", at = @At("HEAD"), cancellable = true)
+    public void drawWorldBackground(int p_146270_1_, CallbackInfo callbackInfo) {
+        if (this.mc.theWorld != null || OverlayGui.getInstance() != null) {
+            drawGradientRect(0, 0, this.width, this.height, new Color(0xA6101010, true).getRGB(), new Color(0x32101010, true).getRGB());
+            callbackInfo.cancel();
+        }
+    }
+}

@@ -24,10 +24,10 @@ public class VoiceChatGui extends AbstractGui {
     private GradientTextButton joinChannelButton;
     private GradientTextButton undeafenButton;
     private VoiceChannel voiceChannel = null;
-    private ResourceLocationBridge headphonesImage = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/headphones.png");
-    private ResourceLocationBridge speakerImage = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/speaker.png");
-    private ResourceLocationBridge mutedSpeakerImage = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/speaker-mute.png");
-    private ResourceLocationBridge microphoneImage = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/microphone-64.png");
+    private ResourceLocationBridge headphonesImage = Ref.getInstanceCreator().createResourceLocation("client/icons/headphones.png");
+    private ResourceLocationBridge speakerImage = Ref.getInstanceCreator().createResourceLocation("client/icons/speaker.png");
+    private ResourceLocationBridge mutedSpeakerImage = Ref.getInstanceCreator().createResourceLocation("client/icons/speaker-mute.png");
+    private ResourceLocationBridge microphoneImage = Ref.getInstanceCreator().createResourceLocation("client/icons/microphone-64.png");
 
     @Override
     public void initGui() {
@@ -74,7 +74,7 @@ public class VoiceChatGui extends AbstractGui {
                     randomAssButton.IIIIllIlIIIllIlllIlllllIl(f, f2, true);
                     float xPos = randomAssButton.getX();
                     float yPos = randomAssButton.getY();
-                    RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(Ref.getInstanceCreator().createResourceLocationBridge("client/icons/microphone-64.png"), xPos + (float)4, yPos + 2.0f, (float)8, 8);
+                    RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(Ref.getInstanceCreator().createResourceLocation("client/icons/microphone-64.png"), xPos + (float)4, yPos + 2.0f, (float)8, 8);
                 } else if (this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() == randomAssButton.IlIlllIIIIllIllllIllIIlIl()) {
                     randomAssButton.IlllIIIlIlllIllIlIIlllIlI(f, f2, true);
                 } else {
@@ -102,14 +102,14 @@ public class VoiceChatGui extends AbstractGui {
                 if (this.voiceChannel == cheatBreaker.getNetHandler().getVoiceChannel() || !lIIIllIIIIlIIllIIIIIIIlll3.IlIlllIIIIllIllllIllIIlIl().equals(this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl())) continue;
                 lIIIllIIIIlIIllIIIIIIIlll3.IlllIllIlIIIIlIIlIIllIIIl();
             }
-            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.voiceChannel = voiceChannel;
             if (this.voiceChannel == cheatBreaker.getNetHandler().getVoiceChannel()) continue;
             randomAssButton.IllIIIIIIIlIlIllllIIllIII();
         }
         if (this.voiceChannel != null) {
             if (this.joinChannelButton.isMouseInside(f, f2)) {
-                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 cheatBreaker.getNetHandler().sendPacketToQueue(new PacketVoiceMute(this.voiceChannel.getUUID()));
                 for (GradientTextButton lIIIllIIIIlIIllIIIIIIIlll2 : this.someRandomAssButtons) {
                     lIIIllIIIIlIIllIIIIIIIlll2.IlllIllIlIIIIlIIlIIllIIIl();
@@ -122,7 +122,7 @@ public class VoiceChatGui extends AbstractGui {
             if (this.undeafenButton.isMouseInside(f, f2)) {
                 boolean bl;
                 UUID iterator = this.mc.bridge$getThePlayer().bridge$getGameProfile().getId();
-                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 cheatBreaker.getNetHandler().sendPacketToQueue(new PacketVoiceMute(iterator));
                 if (!cheatBreaker.getNetHandler().getUuidList().removeIf(uUID2 -> uUID2.equals(iterator))) {
                     cheatBreaker.getNetHandler().getUuidList().add(iterator);
@@ -197,7 +197,7 @@ public class VoiceChatGui extends AbstractGui {
             float f7 = f4 + (float)n * f5;
             boolean bl2 = bl = f > f3 + (float)158 && f < f3 + (float)184 && f2 > f7 && f2 < f7 + f5;
             if (!voiceUser.getUUID().equals(this.mc.bridge$getThePlayer().bridge$getUniqueID()) && bl) {
-                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 cheatBreaker.getNetHandler().sendPacketToQueue(new PacketVoiceMute(voiceUser.getUUID()));
                 if (!cheatBreaker.getNetHandler().getUuidList().removeIf(uUID -> uUID.equals(voiceUser.getUUID()))) {
                     cheatBreaker.getNetHandler().getUuidList().add(voiceUser.getUUID());

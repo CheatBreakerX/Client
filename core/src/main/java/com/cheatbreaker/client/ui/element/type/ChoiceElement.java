@@ -13,8 +13,8 @@ import org.lwjgl.opengl.GL11;
 public class ChoiceElement
         extends AbstractModulesGuiElement {
     private final Setting setting;
-    private final ResourceLocationBridge leftIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/left.png");
-    private final ResourceLocationBridge rightIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/right.png");
+    private final ResourceLocationBridge leftIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/left.png");
+    private final ResourceLocationBridge rightIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/right.png");
     private int IlllIllIlIIIIlIIlIIllIIIl = 0;
     private float IlIlllIIIIllIllllIllIIlIl = 0.0f;
     private String llIIlllIIIIlllIllIlIlllIl;
@@ -93,7 +93,7 @@ public class ChoiceElement
         boolean leftHovered = (float) mouseX > (float) (this.x + this.width - 92) * this.scale && (float) mouseX < (float) (this.x + this.width - 48) * this.scale && (float) mouseY > (float) (this.y + this.yOffset) * this.scale && (float) mouseY < (float) (this.y + 14 + this.yOffset) * this.scale;
         boolean rightHovered = (float) mouseX > (float)(this.x + this.width - 48) * this.scale && (float) mouseX < (float)(this.x + this.width - 10) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 14 + this.yOffset) * this.scale;
         if ((leftHovered || rightHovered) && this.IlllIllIlIIIIlIIlIIllIIIl == 0) {
-            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             for (int i = 0; i < this.setting.getAcceptedValues().length; ++i) {
                 if (!((String[])this.setting.getAcceptedValues())[i].toLowerCase().equalsIgnoreCase((String)this.setting.getValue())) continue;
                 this.llIIlllIIIIlllIllIlIlllIl = (String)this.setting.getValue();

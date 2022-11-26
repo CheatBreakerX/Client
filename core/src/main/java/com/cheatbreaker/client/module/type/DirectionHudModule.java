@@ -16,7 +16,7 @@ public class DirectionHudModule extends AbstractModule {
     private final Setting markerColor;
     private final Setting directionColor;
     private final Setting showWhileTyping;
-    private final ResourceLocationBridge texture = Ref.getInstanceCreator().createResourceLocationBridge("textures/gui/compass.png");
+    private final ResourceLocationBridge texture = Ref.getInstanceCreator().createResourceLocation("textures/gui/compass.png");
 
     public DirectionHudModule() {
         super("Direction HUD");
@@ -25,7 +25,7 @@ public class DirectionHudModule extends AbstractModule {
         this.showWhileTyping = new Setting(this, "Show While Typing").setValue(true);
         this.markerColor = new Setting(this, "Marker Color").setValue(-43691).setMinMax(Integer.MIN_VALUE, Integer.MAX_VALUE);
         this.directionColor = new Setting(this, "Direction Color").setValue(-1).setMinMax(Integer.MIN_VALUE, Integer.MAX_VALUE);
-        this.setPreviewIcon(Ref.getInstanceCreator().createResourceLocationBridge("client/icons/mods/dirhud.png"), 65, 12);
+        this.setPreviewIcon(Ref.getInstanceCreator().createResourceLocation("client/icons/mods/dirhud.png"), 65, 12);
         this.addEvent(GuiDrawEvent.class, this::renderReal);
     }
 

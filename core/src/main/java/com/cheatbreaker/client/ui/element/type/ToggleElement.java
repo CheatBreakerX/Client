@@ -13,8 +13,8 @@ import org.lwjgl.opengl.GL11;
 public class ToggleElement
         extends AbstractModulesGuiElement {
     private Setting setting;
-    private ResourceLocationBridge IllIIIIIIIlIlIllllIIllIII = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/left.png");
-    private ResourceLocationBridge lIIIIllIIlIlIllIIIlIllIlI = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/right.png");
+    private ResourceLocationBridge IllIIIIIIIlIlIllllIIllIII = Ref.getInstanceCreator().createResourceLocation("client/icons/left.png");
+    private ResourceLocationBridge lIIIIllIIlIlIllIIIlIllIlI = Ref.getInstanceCreator().createResourceLocation("client/icons/right.png");
     private int IlllIllIlIIIIlIIlIIllIIIl = 0;
     private float IlIlllIIIIllIllllIllIIlIl = 0.0f;
     private String displayString;
@@ -67,7 +67,7 @@ public class ToggleElement
             this.IlllIllIlIIIIlIIlIIllIIIl = bl ? 1 : 2;
             this.IlIlllIIIIllIllllIllIIlIl = 0.0f;
             this.displayString = (Boolean) this.setting.getValue() ? "ON" : "OFF";
-            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.setting.setValue(!((Boolean) this.setting.getValue()));
             if (this.setting == CheatBreaker.getInstance().moduleManager.keyStrokes.replaceNamesWithArrows) {
                 CheatBreaker.getInstance().moduleManager.keyStrokes.initialize();

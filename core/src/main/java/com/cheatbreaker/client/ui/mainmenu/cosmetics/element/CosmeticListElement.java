@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 public class CosmeticListElement extends AbstractModulesGuiElement {
     private final Cosmetic cosmetic;
-    private final ResourceLocationBridge checkmarkIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/checkmark-32.png");
+    private final ResourceLocationBridge checkmarkIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/checkmark-32.png");
 
     public CosmeticListElement(Cosmetic cosmetic, float f) {
         super(f);
@@ -51,7 +51,7 @@ public class CosmeticListElement extends AbstractModulesGuiElement {
         boolean bl;
         boolean bl2 = bl = mouseX > this.x && mouseX < this.x + this.width && mouseY > this.y && mouseY < this.y + this.height;
         if (bl) {
-            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             if (this.cosmetic.isEquipped()) {
                 this.cosmetic.setEquipped(false);
             } else if (this.cosmetic.getName().equals("cape")) {

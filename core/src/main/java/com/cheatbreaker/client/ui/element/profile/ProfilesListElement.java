@@ -20,7 +20,7 @@ import java.util.List;
 public class ProfilesListElement extends AbstractScrollableElement {
     private final int IIIlllIIIllIllIlIIIIIIlII;
     public final List<ProfileElement> lIIIIlIIllIIlIIlIIIlIIllI;
-    private final ResourceLocationBridge plusIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/plus-64.png");
+    private final ResourceLocationBridge plusIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/plus-64.png");
 
     public ProfilesListElement(float f, int n, int n2, int n3, int n4) {
         super(f, n, n2, n3, n4);
@@ -72,7 +72,7 @@ public class ProfilesListElement extends AbstractScrollableElement {
         }
         boolean bl = (float) mouseX > (float) (this.x + this.width - 92) * this.scale && (float) mouseX < (float) (this.x + this.width - 6) * this.scale && (float) mouseY > (float) (this.y + this.IlllIllIlIIIIlIIlIIllIIIl - 20 + this.lIIIIllIIlIlIllIIIlIllIlI) * this.scale && (float) mouseY < (float) (this.y + this.IlllIllIlIIIIlIIlIIllIIIl - 7 + this.lIIIIllIIlIlIllIIIlIllIlI) * this.scale;
         if (bl) {
-            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             Ref.getMinecraft().bridge$displayGuiScreen(new CBProfileCreateGui(CBModulesGui.instance, this, this.IIIlllIIIllIllIlIIIIIIlII, this.scale));
         }
     }

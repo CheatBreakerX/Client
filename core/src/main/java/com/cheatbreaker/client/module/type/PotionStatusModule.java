@@ -25,7 +25,7 @@ public class PotionStatusModule extends AbstractModule {
     private final Setting durationColor;
     private final Setting blink;
     private final Setting blinkDuration;
-    private final ResourceLocationBridge location = Ref.getInstanceCreator().createResourceLocationBridge("textures/gui/container/inventory.png");
+    private final ResourceLocationBridge location = Ref.getInstanceCreator().createResourceLocation("textures/gui/container/inventory.png");
     private int ticks = 0;
 
     public PotionStatusModule() {
@@ -49,7 +49,7 @@ public class PotionStatusModule extends AbstractModule {
             this.durationColor = new Setting(this, "Duration Color").setValue(-1).setMinMax(Integer.MIN_VALUE, Integer.MAX_VALUE);
         }
 
-        this.setPreviewIcon(Ref.getInstanceCreator().createResourceLocationBridge("client/icons/mods/speed_icon.png"), 28, 28);
+        this.setPreviewIcon(Ref.getInstanceCreator().createResourceLocation("client/icons/mods/speed_icon.png"), 28, 28);
 
         this.addEvent(TickEvent.class, this::onTick);
         this.addEvent(RenderPreviewEvent.class, this::renderPreview);

@@ -55,7 +55,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class InstanceCreator implements IInstanceCreator {
-    public ResourceLocationBridge createResourceLocationBridge(String domain, String path) {
+    public ResourceLocationBridge createResourceLocation(String domain, String path) {
         return (ResourceLocationBridge) new ResourceLocation(domain, path);
     }
 

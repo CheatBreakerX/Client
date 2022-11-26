@@ -89,7 +89,7 @@ public class XRayOptionsElement
                     if (CheatBreaker.getInstance().moduleManager.xray.isEnabled()) {
                         Ref.getMinecraft().bridge$getRenderGlobal().bridge$loadRenderers();
                     }
-                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 }
                 ++n5;
             }

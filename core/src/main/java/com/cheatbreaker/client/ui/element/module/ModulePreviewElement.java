@@ -118,13 +118,13 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
     @Override
     public void handleMouseClick(int mouseX, int mouseY, int button) {
         if (this.optionsButton.isMouseInside(mouseX, mouseY)) {
-            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             ((ModuleListElement) CBModulesGui.instance.IIIIllIIllIIIIllIllIIIlIl).llIlIIIlIIIIlIlllIlIIIIll = false;
             ((ModuleListElement)CBModulesGui.instance.IIIIllIIllIIIIllIllIIIlIl).scrollable = this.IlIlllIIIIllIllllIllIIlIl;
             ((ModuleListElement)CBModulesGui.instance.IIIIllIIllIIIIllIllIIIlIl).module = this.module;
             CBModulesGui.instance.currentScrollableElement = CBModulesGui.instance.IIIIllIIllIIIIllIllIIIlIl;
         } else if (!this.module.isEditable && this.toggle.isMouseInside(mouseX, mouseY)) {
-            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.module.setState(!this.module.isEnabled());
             this.toggle.displayString = this.module.isEnabled() ? "Disable" : "Enable";
             int n4 = this.toggle.lIIIIlIIllIIlIIlIIIlIIllI = this.module.isEnabled() ? -5756117 : -13916106;
@@ -133,7 +133,7 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
                 this.module.setState(true);
             }
         } else if (this.toggleOrHideFromHud.IlllIllIlIIIIlIIlIIllIIIl && this.toggleOrHideFromHud.isMouseInside(mouseX, mouseY)) {
-            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             if (!this.module.isEnabled()) {
                 this.module.setRenderHud(true);
                 this.lIIIIIIIIIlIllIIllIlIIlIl();
@@ -166,7 +166,7 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
         }
         for (Setting cBSetting : this.module.getSettingsList()) {
             if (cBSetting.getType() != Setting.Type.INTEGER || !cBSetting.getLabel().toLowerCase().contains("color") || cBSetting.getLabel().toLowerCase().contains("background") || cBSetting.getLabel().toLowerCase().contains("pressed")) continue;
-            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             cBSetting.setValue(CheatBreaker.getInstance().globalSettings.defaultColor.getValue());
         }
     }

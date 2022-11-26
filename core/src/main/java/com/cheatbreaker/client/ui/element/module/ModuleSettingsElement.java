@@ -16,7 +16,7 @@ public class ModuleSettingsElement extends AbstractModulesGuiElement {
     public final AbstractModule module;
     private final AbstractScrollableElement parent;
     private int IlllIllIlIIIIlIIlIIllIIIl = 0;
-    private ResourceLocationBridge rightIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/right.png");
+    private ResourceLocationBridge rightIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/right.png");
 
     public ModuleSettingsElement(AbstractScrollableElement parent, int n, AbstractModule module, float f) {
         super(f);

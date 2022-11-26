@@ -19,8 +19,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class RadioElement extends DraggableElement {
-    private final ResourceLocationBridge dashIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/dash-logo-54.png");
-    private final ResourceLocationBridge playIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/play-24.png");
+    private final ResourceLocationBridge dashIcon = Ref.getInstanceCreator().createResourceLocation("client/dash-logo-54.png");
+    private final ResourceLocationBridge playIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/play-24.png");
     private final List<RadioStationElement> radioStationElements;
     private final MinMaxFade fade = new MinMaxFade(300L);
     private float IlIlllIIIIllIllllIllIIlIl;
@@ -85,7 +85,7 @@ public class RadioElement extends DraggableElement {
                     this.mc.bridge$getTextureManager().bridge$deleteTexture(station.currentResource);
                     station.currentResource = null;
                 }
-                station.currentResource = Ref.getInstanceCreator().createResourceLocationBridge("client/songs/" + station.getName());
+                station.currentResource = Ref.getInstanceCreator().createResourceLocation("client/songs/" + station.getName());
                 ThreadDownloadImageDataBridge threadDownloadImageData = Ref.getInstanceCreator().createThreadDownloadImageData(null, station.getCoverURL(), this.dashIcon, null);
                 Ref.getMinecraft().bridge$getTextureManager().bridge$loadTexture(station.currentResource, threadDownloadImageData);
             }

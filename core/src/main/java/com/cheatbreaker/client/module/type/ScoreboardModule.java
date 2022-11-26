@@ -69,7 +69,7 @@ public class ScoreboardModule extends AbstractModule {
             int width = fontRenderer.bridge$getStringWidth(objective.bridge$getDisplayName());
             int numbersX = width + 16;
             for (ScoreBridge score : collection) {
-                ScorePlayerTeam playersTeam = (ScorePlayerTeam) scoreboard.bridge$getPlayersTeam(score.bridge$getPlayerName());
+                ScorePlayerTeamBridge playersTeam = (ScorePlayerTeamBridge) scoreboard.bridge$getPlayersTeam(score.bridge$getPlayerName());
                 String string = playersTeam.bridge$formatPlayerName(score.bridge$getPlayerName()) + ": " + EnumChatFormattingBridge.RED + score.bridge$getScorePoints();
                 width = Math.max(width, fontRenderer.bridge$getStringWidth(string));
             }

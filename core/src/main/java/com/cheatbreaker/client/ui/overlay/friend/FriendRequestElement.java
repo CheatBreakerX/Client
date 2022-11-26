@@ -51,7 +51,7 @@ public class FriendRequestElement extends AbstractElement {
         if (this.friendRequest.isFriend()) {
             boolean cancelHovered  = f > this.x + (float) 24 && f < this.x + (float) 52 && f2 < this.y + this.height && f2 > this.y + (float) 10;
             if (cancelHovered) {
-                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(false, this.friendRequest.getPlayerId()));
                 OverlayGui.getInstance().getFriendRequestsElement().getFrientRequestElementList().add(this);
             }
@@ -59,11 +59,11 @@ public class FriendRequestElement extends AbstractElement {
             boolean acceptHovered = f > this.x + (float)24 && f < this.x + (float)52 && f2 < this.y + this.height && f2 > this.y + (float)10;
             boolean denyHovered = f > this.x + (float) 52 && f < this.x + (float) 84 && f2 < this.y + this.height && f2 > this.y + (float) 10;
             if (acceptHovered) {
-                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(true, this.friendRequest.getPlayerId()));
                 OverlayGui.getInstance().getFriendRequestsElement().getFrientRequestElementList().add(this);
             } else if (denyHovered) {
-                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(false, this.friendRequest.getPlayerId()));
                 OverlayGui.getInstance().getFriendRequestsElement().getFrientRequestElementList().add(this);
             }

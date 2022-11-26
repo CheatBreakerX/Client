@@ -98,7 +98,7 @@ public class MessagesElement extends DraggableElement {
                 RenderUtil.drawRoundedRect(this.x - (float)10 - f4, f3 + 2.0f, this.x - 2.0f, f3 + (float)14, (double)6, -1895825408);
                 FontRegistry.getPlayRegular16px().drawString(friend.getName(), this.x - (float)6 - f4, f3 + (float)4, -1);
                 if (Mouse.isButtonDown(0) && this.friend != friend) {
-                    this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                    this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                     this.friend = friend;
                 }
             }
@@ -196,12 +196,12 @@ public class MessagesElement extends DraggableElement {
             this.updateDraggingPosition(mouseX, mouseY);
         }
         if (this.closeButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             OverlayGui.getInstance().removeElements(this);
             return true;
         }
         if (this.aliasesButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             AbstractElement[] abstractElements = new AbstractElement[1];
             AliasesElement aliasesElement = new AliasesElement(this.friend);
             abstractElements[0] = aliasesElement;
@@ -223,7 +223,7 @@ public class MessagesElement extends DraggableElement {
         CheatBreaker.getInstance().getFriendsManager().addOutgoingMessage(this.friend.getPlayerId(), message);
         CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketMessage(this.friend.getPlayerId(), message));
         this.inputFieldElement.setText("");
-        this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+        this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
     }
 
     @Override

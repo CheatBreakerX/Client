@@ -17,8 +17,8 @@ import java.util.List;
 
 public class GuiCosmetics extends MainMenuBase {
     private final List<CosmeticListElement> IIIIllIlIIIllIlllIlllllIl = new ArrayList<>();
-    private ResourceLocationBridge leftIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/left.png");
-    private ResourceLocationBridge rightIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/right.png");
+    private ResourceLocationBridge leftIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/left.png");
+    private ResourceLocationBridge rightIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/right.png");
     private final GradientTextButton backButton = new GradientTextButton("BACK");
     private int IllIIIIIIIlIlIllllIIllIII = 0;
 
@@ -72,7 +72,7 @@ public class GuiCosmetics extends MainMenuBase {
     public void onMouseClicked(float f, float f2, int n) {
         super.onMouseClicked(f, f2, n);
         if (this.backButton.isMouseInside(f, f2)) {
-            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.mc.bridge$displayGuiScreen(new MainMenu());
         } else {
             int n2;
@@ -82,10 +82,10 @@ public class GuiCosmetics extends MainMenuBase {
                 boolean bl2 = bl = f > this.getScaledWidth() / 2.0f + 1.0f && f < this.getScaledWidth() / 2.0f + (float)40 && f2 > this.getScaledHeight() / 2.0f + (float)80 && f2 < this.getScaledHeight() / 2.0f + (float)100;
                 if (this.IllIIIIIIIlIlIllllIIllIII > 0 && n2 != 0) {
                     --this.IllIIIIIIIlIlIllllIIllIII;
-                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 } else if (bl && (float)(this.IllIIIIIIIlIlIllllIIllIII + 1) < (float)this.IIIIllIlIIIllIlllIlllllIl.size() / (float)5) {
                     ++this.IllIIIIIIIlIlIllllIIllIII;
-                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 }
             }
             n2 = 0;

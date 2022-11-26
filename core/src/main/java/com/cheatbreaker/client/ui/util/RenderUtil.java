@@ -40,7 +40,7 @@ public class RenderUtil {
     }
 
     public static void drawIcon(String location, float size, float x, float y) {
-        drawIcon(Ref.getInstanceCreator().createResourceLocationBridge(location), size, x, y);
+        drawIcon(Ref.getInstanceCreator().createResourceLocation(location), size, x, y);
     }
 
     public static void lIIIIlIIllIIlIIlIIIlIIllI(ResourceLocationBridge location, float f, float f2, float f3, float f4) {

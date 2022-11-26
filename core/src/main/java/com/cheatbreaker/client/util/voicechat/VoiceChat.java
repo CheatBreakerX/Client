@@ -20,7 +20,7 @@ import java.util.UUID;
 public class VoiceChat {
     MinecraftBridge minecraft = Ref.getMinecraft();
     CheatBreaker cheatbreaker = CheatBreaker.getInstance();
-    private final ResourceLocationBridge microphoneIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/microphone-64.png");
+    private final ResourceLocationBridge microphoneIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/microphone-64.png");
     private final Map<VoiceUser, Long> userLastSpoken = new HashMap<>();
     private boolean isTalking;
     public boolean checkMicVolume;

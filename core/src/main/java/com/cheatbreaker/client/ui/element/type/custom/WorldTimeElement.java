@@ -15,8 +15,8 @@ public class WorldTimeElement extends AbstractModulesGuiElement {
     private float time = -1;
     private float lIIIIllIIlIlIllIIIlIllIlI;
     private boolean IlllIllIlIIIIlIIlIIllIIIl = false;
-    private ResourceLocationBridge sunIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/sun-64.png");
-    private ResourceLocationBridge moonIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/moon-64.png");
+    private ResourceLocationBridge sunIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/sun-64.png");
+    private ResourceLocationBridge moonIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/moon-64.png");
 
     public WorldTimeElement(Setting cBSetting, float f) {
         super(f);

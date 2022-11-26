@@ -59,7 +59,7 @@ public class ArmourStatusModule extends AbstractModule {
         damageColors.add(new ArmourStatusDamageComparable(60, "e"));
         damageColors.add(new ArmourStatusDamageComparable(80, "7"));
         damageColors.add(new ArmourStatusDamageComparable(100, "f"));
-        this.setPreviewIcon(Ref.getInstanceCreator().createResourceLocationBridge("client/icons/mods/diamond_chestplate.png"), 34, 34);
+        this.setPreviewIcon(Ref.getInstanceCreator().createResourceLocation("client/icons/mods/diamond_chestplate.png"), 34, 34);
        // this.addEvent(RenderPreviewEvent.class, this::renderPreview);
         //this.addEvent(GuiDrawEvent.class, this::renderReal);
     }

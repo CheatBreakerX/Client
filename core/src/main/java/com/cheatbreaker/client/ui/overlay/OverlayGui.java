@@ -168,10 +168,10 @@ public class OverlayGui extends AbstractGui {
         this.onMouseClicked(f, f2, n, this.friendsListElement, this.friendRequestsElement);
         boolean bl2 = this.isMouseHovered(this.friendsButton, f, f2);
         if (bl2 && this.friendsButton.isMouseInside(f, f2) && this.selectedElement != this.friendsListElement) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.selectedElement = this.friendsListElement;
         } else if (bl2 && this.requestsButton.isMouseInside(f, f2) && this.selectedElement != this.friendRequestsElement) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.selectedElement = this.friendRequestsElement;
         }
         boolean bl = f > 6f && f < 134f && f2 > 6f && f2 < 22f;
@@ -182,16 +182,16 @@ public class OverlayGui extends AbstractGui {
             boolean offlineHovered = f > 78f && f < 94f;
             if (onlineHovered) {
                 CheatBreaker.getInstance().setStatus(Status.ONLINE);
-                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             } else if (awayHovered) {
                 CheatBreaker.getInstance().setStatus(Status.AWAY);
-                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             } else if (busyHovered) {
                 CheatBreaker.getInstance().setStatus(Status.BUSY);
-                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             } else if (offlineHovered) {
                 CheatBreaker.getInstance().setStatus(Status.HIDDEN);
-                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             }
             CheatBreaker.getInstance().getAssetsWebSocket().updateClientStatus();
         }

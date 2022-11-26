@@ -22,8 +22,8 @@ public class FriendElement extends AbstractElement {
     private final Friend friend;
     private final CosineFade IllIIIIIIIlIlIllllIIllIII;
     private final FloatFade lIIIIllIIlIlIllIIIlIllIlI;
-    private static final ResourceLocationBridge removeIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/garbage-26.png");
-    private static final ResourceLocationBridge cheatBreakerIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/logo_26.png");
+    private static final ResourceLocationBridge removeIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/garbage-26.png");
+    private static final ResourceLocationBridge cheatBreakerIcon = Ref.getInstanceCreator().createResourceLocation("client/logo_26.png");
 
     public FriendElement(Friend friend) {
         this.friend = friend;
@@ -83,14 +83,14 @@ public class FriendElement extends AbstractElement {
         }
         boolean bl2 = this.isMouseInside(f, f2) && f > this.x + this.width - (float) 20;
         if (bl2 && this.lIIIIllIIlIlIllIIIlIllIlI.IIIIllIIllIIIIllIllIIIlIl()) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRemove(this.friend.getPlayerId()));
             OverlayGui.getInstance().getFriendsListElement().getFriendElements().add(this);
             CheatBreaker.getInstance().getFriendsManager().getFriends().remove(this.friend.getPlayerId());
             return true;
         }
         if (!bl2 && this.isMouseInside(f, f2)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             OverlayGui.getInstance().lIIIIlIIllIIlIIlIIIlIIllI(this.friend);
             CheatBreaker.getInstance().getFriendsManager().readMessages(this.friend.getPlayerId());
             return true;

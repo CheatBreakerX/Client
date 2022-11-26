@@ -14,14 +14,14 @@ import java.awt.*;
 
 public class LoadingScreen extends AbstractGui {
 
-    private final ResourceLocationBridge logo = Ref.getInstanceCreator().createResourceLocationBridge("client/logo_108.png");
+    private final ResourceLocationBridge logo = Ref.getInstanceCreator().createResourceLocation("client/logo_108.png");
     private final MinecraftBridge mc = Ref.getMinecraft();
     private final ScaledResolutionBridge res;
     private final FrameBufferBridge frameBuffer;
     private final int amountOfCalls;
     private int amountOfCallsDone;
     private String message;
-    private final CBFontRenderer font = new CBFontRenderer(Ref.getInstanceCreator().createResourceLocationBridge("client/font/Ubuntu-M.ttf"), 16);
+    private final CBFontRenderer font = new CBFontRenderer(Ref.getInstanceCreator().createResourceLocation("client/font/Ubuntu-M.ttf"), 16);
 
     public LoadingScreen(int capacity) {
         this.amountOfCalls = capacity;

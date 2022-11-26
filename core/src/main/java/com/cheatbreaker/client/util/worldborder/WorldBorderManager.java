@@ -20,7 +20,7 @@ public class WorldBorderManager {
 
     private final MinecraftBridge minecraft = Ref.getMinecraft();
     private final CheatBreaker cheatbreaker = CheatBreaker.getInstance();
-    private static final ResourceLocationBridge forceFieldTexture = Ref.getInstanceCreator().createResourceLocationBridge("textures/misc/forcefield.png");
+    private static final ResourceLocationBridge forceFieldTexture = Ref.getInstanceCreator().createResourceLocation("textures/misc/forcefield.png");
     private final List<WorldBorder> borderList = new ArrayList<>();
 
     public WorldBorderManager() {

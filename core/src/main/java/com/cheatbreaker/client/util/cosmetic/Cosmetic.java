@@ -22,8 +22,8 @@ public class Cosmetic {
         this.type = type;
         this.scale = scale;
         this.equipped = equipped;
-        this.location = Ref.getInstanceCreator().createResourceLocationBridge(location);
-        this.previewLocation = Ref.getInstanceCreator().createResourceLocationBridge("preview/" + (location.equals("") ? "unknown.png" : location));
+        this.location = Ref.getInstanceCreator().createResourceLocation(location);
+        this.previewLocation = Ref.getInstanceCreator().createResourceLocation("preview/" + (location.equals("") ? "unknown.png" : location));
     }
 
     public String getName() {

@@ -320,9 +320,9 @@ public class CheatBreaker {
     }
 
     public ResourceLocationBridge getHeadLocation(String displayName) {
-        ResourceLocationBridge playerSkin = this.playerSkins.getOrDefault(displayName, Ref.getInstanceCreator().createResourceLocationBridge("client/heads/" + displayName + ".png"));
+        ResourceLocationBridge playerSkin = this.playerSkins.getOrDefault(displayName, Ref.getInstanceCreator().createResourceLocation("client/heads/" + displayName + ".png"));
         if (!this.playerSkins.containsKey(displayName)) {
-            ThreadDownloadImageDataBridge skinData = Ref.getInstanceCreator().createThreadDownloadImageData(null, "https://minotar.net/helm/" + displayName + "/32.png", Ref.getInstanceCreator().createResourceLocationBridge("client/defaults/steve.png"), null);
+            ThreadDownloadImageDataBridge skinData = Ref.getInstanceCreator().createThreadDownloadImageData(null, "https://minotar.net/helm/" + displayName + "/32.png", Ref.getInstanceCreator().createResourceLocation("client/defaults/steve.png"), null);
             Ref.getMinecraft().bridge$getTextureManager().bridge$loadTexture(playerSkin, skinData);
             this.playerSkins.put(displayName, playerSkin);
         }

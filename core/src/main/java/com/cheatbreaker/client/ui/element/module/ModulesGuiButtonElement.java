@@ -58,7 +58,7 @@ public class ModulesGuiButtonElement
             GL11.glPushMatrix();
             float var1 = CheatBreaker.getInstance().globalSettings.isDarkMode() ? 1.0f : 0.0f;
             GL11.glColor4f(var1, var1, var1, CheatBreaker.getInstance().globalSettings.isDarkMode() ? 1.0f : 0.45f);
-            RenderUtil.drawIcon(Ref.getInstanceCreator().createResourceLocationBridge("client/icons/" + this.displayString), 8f, (float)(this.x + 6), (float)(this.y + 6));
+            RenderUtil.drawIcon(Ref.getInstanceCreator().createResourceLocation("client/icons/" + this.displayString), 8f, (float)(this.x + 6), (float)(this.y + 6));
             GL11.glPopMatrix();
         } else {
             f2 = this.fontRenderer == FontRegistry.getPlayBold22px() ? 2.0f : 0.5f;

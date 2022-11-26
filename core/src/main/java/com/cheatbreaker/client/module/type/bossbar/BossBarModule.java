@@ -10,7 +10,7 @@ import com.cheatbreaker.client.ui.module.CBGuiAnchor;
 import org.lwjgl.opengl.GL11;
 
 public class BossBarModule extends AbstractModule {
-    private final ResourceLocationBridge icons = Ref.getInstanceCreator().createResourceLocationBridge("textures/gui/icons.png");
+    private final ResourceLocationBridge icons = Ref.getInstanceCreator().createResourceLocation("textures/gui/icons.png");
 
     public BossBarModule() {
         super("Boss bar");

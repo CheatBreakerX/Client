@@ -33,7 +33,7 @@ public class MotionBlurModule extends AbstractModule {
                 minecraft.bridge$getEntityRenderer().bridge$getShaderGroup().bridge$deleteShaderGroup();
             }
             try {
-                minecraft.bridge$getEntityRenderer().bridge$setShaderGroup(Ref.getInstanceCreator().createShaderGroup(minecraft.bridge$getTextureManager(), minecraft.bridge$getEntityRenderer().bridge$getResourceManager(), minecraft.bridge$getFramebuffer(), Ref.getInstanceCreator().createResourceLocationBridge("shaders/post/motionblur.json")));
+                minecraft.bridge$getEntityRenderer().bridge$setShaderGroup(Ref.getInstanceCreator().createShaderGroup(minecraft.bridge$getTextureManager(), minecraft.bridge$getEntityRenderer().bridge$getResourceManager(), minecraft.bridge$getFramebuffer(), Ref.getInstanceCreator().createResourceLocation("shaders/post/motionblur.json")));
                 minecraft.bridge$getEntityRenderer().bridge$getShaderGroup().bridge$createBindFramebuffers(minecraft.bridge$getDisplayWidth(), minecraft.bridge$getDisplayHeight());
             }
             catch (Exception exception) {

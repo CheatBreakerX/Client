@@ -166,7 +166,7 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
 
     private void lIIlIlIllIIlIIIlIIIlllIII() {
         if (!this.username.getText().isEmpty()) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             String string = this.username.getText();
             // sanitizes the name of the friend before sending the packet.
             if (string.matches("([a-zA-Z0-9_]+)") && string.length() <= 16) {

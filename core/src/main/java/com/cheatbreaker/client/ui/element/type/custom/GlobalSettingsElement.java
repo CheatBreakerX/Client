@@ -15,7 +15,7 @@ public class GlobalSettingsElement
     private final int lIIIIlIIllIIlIIlIIIlIIllI;
     private final AbstractScrollableElement IllIIIIIIIlIlIllllIIllIII;
     private int lIIIIllIIlIlIllIIIlIllIlI = 0;
-    private ResourceLocationBridge IlllIllIlIIIIlIIlIIllIIIl = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/right.png");
+    private ResourceLocationBridge IlllIllIlIIIIlIIlIIllIIIl = Ref.getInstanceCreator().createResourceLocation("client/icons/right.png");
 
     public GlobalSettingsElement(AbstractScrollableElement lllIllIllIlIllIlIIllllIIl2, int n, float f) {
         super(f);

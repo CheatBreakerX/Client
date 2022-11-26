@@ -12,8 +12,8 @@ import org.lwjgl.opengl.GL11;
 import java.awt.*;
 
 public class MainMenu extends MainMenuBase {
-    private final ResourceLocationBridge outerLogo = Ref.getInstanceCreator().createResourceLocationBridge("client/logo_255_outer.png");
-    private final ResourceLocationBridge innerLogo = Ref.getInstanceCreator().createResourceLocationBridge("client/logo_108_inner.png");
+    private final ResourceLocationBridge outerLogo = Ref.getInstanceCreator().createResourceLocation("client/logo_255_outer.png");
+    private final ResourceLocationBridge innerLogo = Ref.getInstanceCreator().createResourceLocation("client/logo_108_inner.png");
     private GradientTextButton singleplayerButton = new GradientTextButton("SINGLEPLAYER");
     private GradientTextButton multiplayerButton = new GradientTextButton("MULTIPLAYER");
     private final MinMaxFade logoPositionFade = new MinMaxFade(750L);
@@ -93,10 +93,10 @@ public class MainMenu extends MainMenuBase {
         this.singleplayerButton.handleElementMouseClicked(mouseX, mouseY, button, true);
         this.multiplayerButton.handleElementMouseClicked(mouseX, mouseY, button, true);
         if (this.singleplayerButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.SINGLEPLAYER, this);
         } else if (this.multiplayerButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.MULTIPLAYER, this);
         }
     }

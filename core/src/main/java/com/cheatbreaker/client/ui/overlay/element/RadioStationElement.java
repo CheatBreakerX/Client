@@ -13,8 +13,8 @@ import org.lwjgl.opengl.GL11;
 public class RadioStationElement
         extends AbstractElement {
     private final Station station;
-    private final ResourceLocationBridge starIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/star-21.png");
-    private final ResourceLocationBridge startFilledIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/star-filled-21.png");
+    private final ResourceLocationBridge starIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/star-21.png");
+    private final ResourceLocationBridge startFilledIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/star-filled-21.png");
     private final RadioElement parent;
 
     public RadioStationElement(RadioElement parent, Station station) {

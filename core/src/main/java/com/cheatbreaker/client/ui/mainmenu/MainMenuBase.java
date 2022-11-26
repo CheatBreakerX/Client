@@ -36,7 +36,7 @@ import java.util.*;
 
 public class MainMenuBase extends AbstractGui {
     private static int panoramaTimer = 4100;
-    private final ResourceLocationBridge logo = Ref.getInstanceCreator().createResourceLocationBridge("client/logo_42.png");
+    private final ResourceLocationBridge logo = Ref.getInstanceCreator().createResourceLocation("client/logo_42.png");
     private final IconButtonElement exitButton;
     private final IconButtonElement languageButton;
     private final AccountList accountList;
@@ -45,12 +45,12 @@ public class MainMenuBase extends AbstractGui {
     private final TextButtonElement cosmeticsButton;
     private final ColorFade cbTextShadowFade;
     private final ResourceLocationBridge[] panoramaImages = new ResourceLocationBridge[] {
-            Ref.getInstanceCreator().createResourceLocationBridge("client/panorama/0.png"),
-            Ref.getInstanceCreator().createResourceLocationBridge("client/panorama/1.png"),
-            Ref.getInstanceCreator().createResourceLocationBridge("client/panorama/2.png"),
-            Ref.getInstanceCreator().createResourceLocationBridge("client/panorama/3.png"),
-            Ref.getInstanceCreator().createResourceLocationBridge("client/panorama/4.png"),
-            Ref.getInstanceCreator().createResourceLocationBridge("client/panorama/5.png")
+            Ref.getInstanceCreator().createResourceLocation("client/panorama/0.png"),
+            Ref.getInstanceCreator().createResourceLocation("client/panorama/1.png"),
+            Ref.getInstanceCreator().createResourceLocation("client/panorama/2.png"),
+            Ref.getInstanceCreator().createResourceLocation("client/panorama/3.png"),
+            Ref.getInstanceCreator().createResourceLocation("client/panorama/4.png"),
+            Ref.getInstanceCreator().createResourceLocation("client/panorama/5.png")
     };
     private ResourceLocationBridge panoramaBackgroundLocation;
     private final File launcherAccounts;
@@ -64,8 +64,8 @@ public class MainMenuBase extends AbstractGui {
         this.cosmeticsButton = new TextButtonElement("COSMETICS");
         this.changelogButton = new TextButtonElement("CHANGELOG");
         this.cbTextShadowFade = new ColorFade(0xF000000, -16777216);
-        this.exitButton = new IconButtonElement(Ref.getInstanceCreator().createResourceLocationBridge("client/icons/delete-64.png"));
-        this.languageButton = new IconButtonElement(6, Ref.getInstanceCreator().createResourceLocationBridge("client/icons/globe-24.png"));
+        this.exitButton = new IconButtonElement(Ref.getInstanceCreator().createResourceLocation("client/icons/delete-64.png"));
+        this.languageButton = new IconButtonElement(6, Ref.getInstanceCreator().createResourceLocation("client/icons/globe-24.png"));
         this.accountButtonWidth = FontRegistry.getRobotoRegular13px().getStringWidth(Ref.getMinecraft().bridge$getSession().bridge$getUsername());
         this.accountList = new AccountList(this, Ref.getMinecraft().bridge$getSession().bridge$getUsername(), CheatBreaker.getInstance().getHeadLocation(Ref.getMinecraft().bridge$getSession().bridge$getUsername()));
         //this.loadAccounts();
@@ -203,21 +203,21 @@ public class MainMenuBase extends AbstractGui {
         this.exitButton.handleElementMouseClicked(mouseX, mouseY, button, true);
         this.accountList.handleElementMouseClicked(mouseX, mouseY, button, true);
         if (this.exitButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.mc.bridge$shutdown();
         } else if (this.optionsButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.OPTIONS);
         } else if (this.languageButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.LANGUAGE);
         } else if (this.cosmeticsButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.mc.bridge$displayGuiScreen(new GuiCosmetics());
         } else {
             boolean bl = mouseX < this.optionsButton.getX() && mouseY < (float) 30;
             if (bl && !(this.mc.bridge$getCurrentScreen() instanceof MainMenu)) {
-                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 this.mc.bridge$displayGuiScreen(new MainMenu());
             }
         }
@@ -379,7 +379,7 @@ public class MainMenuBase extends AbstractGui {
                 if (selectedAccount.getUUID().equalsIgnoreCase(Ref.getMinecraft().bridge$getSession().bridge$getPlayerID())) {
                     return;
                 }
-                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 for (SessionBridge object2 : CheatBreaker.getInstance().sessions) {
                     if (!object2.bridge$func_148256_e().getId().toString().replaceAll("-", "").equalsIgnoreCase(selectedAccount.getUUID().replaceAll("-", "")))
                         continue;

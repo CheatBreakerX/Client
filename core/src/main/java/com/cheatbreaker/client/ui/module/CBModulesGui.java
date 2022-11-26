@@ -27,8 +27,8 @@ import java.util.List;
 public class CBModulesGui extends CBGuiScreen {
 
     public static CBModulesGui instance;
-    private final ResourceLocationBridge cogIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/cog-64.png");
-    private final ResourceLocationBridge deleteIcon = Ref.getInstanceCreator().createResourceLocationBridge("client/icons/delete-64.png");
+    private final ResourceLocationBridge cogIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/cog-64.png");
+    private final ResourceLocationBridge deleteIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/delete-64.png");
     private final List<CBModulePosition> positions = new ArrayList<>();
     private final List<AbstractScrollableElement> IllIIlIIlllllIllIIIlllIII = new ArrayList();
     private final List<ModulesGuiButtonElement> buttons = new ArrayList<>();
@@ -305,7 +305,7 @@ public class CBModulesGui extends CBGuiScreen {
         if (f13 > 1.0f) {
             GL11.glTranslatef(-((float)(this.IIllIlIllIlIllIIlIllIlIII * 2) - (float)32) / (float)12 - 1.0f, 0.0f, 0.0f);
         }
-        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(Ref.getInstanceCreator().createResourceLocationBridge("client/logo_white.png"), (float)(n5 / 2 - 14), (float)(n6 / 2 - 47 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), (float)28, 15);
+        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(Ref.getInstanceCreator().createResourceLocation("client/logo_white.png"), (float)(n5 / 2 - 14), (float)(n6 / 2 - 47 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), (float)28, 15);
         if (f13 > 2.0f) {
             FontRegistry.getPlayBold18px().drawString("| CHEAT", n5 / 2 + 18, (float)(n6 / 2 - 42 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), n7);
             FontRegistry.getPlayRegular18px().drawString("BREAKER", n5 / 2 + 53, (float)(n6 / 2 - 42 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), n7);
@@ -416,12 +416,12 @@ public class CBModulesGui extends CBGuiScreen {
                 boolean bl2 = !iterator.getSettingsList().isEmpty() && (float)mouseX >= arrf[0] * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseX <= (arrf[0] + (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY >= (arrf[1] + iterator.height - (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY <= (arrf[1] + iterator.height + 2.0f) * ((Float) iterator.scale.getValue()).floatValue();
                 boolean bl3 = bl = (float)mouseX > (arrf[0] + iterator.width - (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseX < (arrf[0] + iterator.width + 2.0f) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY > (arrf[1] + iterator.height - (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY < (arrf[1] + iterator.height + 2.0f) * ((Float) iterator.scale.getValue()).floatValue();
                 if (bl2) {
-                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                     ((ModuleListElement)this.IIIIllIIllIIIIllIllIIIlIl).llIlIIIlIIIIlIlllIlIIIIll = false;
                     ((ModuleListElement)this.IIIIllIIllIIIIllIllIIIlIl).module = iterator;
                     this.currentScrollableElement = this.IIIIllIIllIIIIllIllIIIlIl;
                 } else if (bl) {
-                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                     iterator.setState(false);
                 }
                 return;
@@ -465,7 +465,7 @@ public class CBModulesGui extends CBGuiScreen {
             }
             if (draggingModule == null) {
                 if (this.showGuidesButton.isMouseInside(mouseX, mouseY)) {
-                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                     this.IlIIIIllIIIIIlllIIlIIlllI = !this.IlIIIIllIIIIIlllIIlIIlllI;
                 }
                 this.IlllIIIlIlllIllIlIIlllIlI(mouseX, mouseY, n3);
@@ -481,7 +481,7 @@ public class CBModulesGui extends CBGuiScreen {
             }
             if (!this.positions.isEmpty()) {
                 this.positions.clear();
-                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             }
             this.someMouseX = mouseX;
             this.someMouseY = mouseY;
@@ -533,7 +533,7 @@ public class CBModulesGui extends CBGuiScreen {
                     float y = (float)mouseY - draggingModule.getYTranslation();
                     this.positions.add(new CBModulePosition(draggingModule, x, y));
                 }
-                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             }
             System.out.println(draggingModule.getName());
             draggingModule = null;
@@ -667,16 +667,16 @@ public class CBModulesGui extends CBGuiScreen {
             }
             if (!(n3 != 0 || this.lIIIIllIIlIlIllIIIlIllIlI != null && this.lIIIIllIIlIlIllIIIlIllIlI.isMouseInside(n, n2))) {
                 if (bl3) {
-                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                     ((ModuleListElement) this.IIIIllIIllIIIIllIllIIIlIl).llIlIIIlIIIIlIlllIlIIIIll = false;
                     ((ModuleListElement) this.IIIIllIIllIIIIllIllIIIlIl).module = cBModule;
                     this.currentScrollableElement = this.IIIIllIIllIIIIllIllIIIlIl;
                 } else if (bl) {
-                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                     cBModule.setState(false);
                 }
             } else if (n3 == 1) {
-                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 float[] arrf2 = CBAnchorHelper.getPositions(cBModule.getGuiAnchor());
                 cBModule.setTranslations(arrf2[0], arrf2[1]);
             }
@@ -688,12 +688,12 @@ public class CBModulesGui extends CBGuiScreen {
         for (ModulesGuiButtonElement llllIIIIIlIlIlIlIllIIIIII2 : this.buttons) {
             if (n3 != 0 || !llllIIIIIlIlIlIlIllIIIIII2.isMouseInside(n, n2) || IlIlllIIIIllIllllIllIIlIl) continue;
             if (llllIIIIIlIlIlIlIllIIIIII2.lIIIIllIIlIlIllIIIlIllIlI != null && this.lIIIIllIIlIlIllIIIlIllIlI != llllIIIIIlIlIlIlIllIIIIII2.lIIIIllIIlIlIllIIIlIllIlI && this.currentScrollableElement == null) {
-                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+                Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 this.currentScrollableElement = llllIIIIIlIlIlIlIllIIIIII2.lIIIIllIIlIlIllIIIlIllIlI;
                 continue;
             }
             if (llllIIIIIlIlIlIlIllIIIIII2.lIIIIllIIlIlIllIIIlIllIlI == null || this.currentScrollableElement != null) continue;
-            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             IlIlllIIIIllIllllIllIIlIl = true;
         }
     }

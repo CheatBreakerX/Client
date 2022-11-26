@@ -7,7 +7,7 @@ import com.cheatbreaker.bridge.client.gui.GuiIngameBridge;
 import com.cheatbreaker.bridge.client.multiplayer.WorldClientBridge;
 import com.cheatbreaker.bridge.client.network.NetHandlerPlayClientBridge;
 import com.cheatbreaker.bridge.client.renderer.EntityRendererBridge;
-import com.cheatbreaker.bridge.client.renderer.RenderGlobal;
+import com.cheatbreaker.bridge.client.renderer.RenderGlobalBridge;
 import com.cheatbreaker.bridge.client.renderer.texture.TextureManagerBridge;
 import com.cheatbreaker.bridge.client.resources.IResourceManagerBridge;
 import com.cheatbreaker.bridge.client.settings.GameSettingsBridge;
@@ -47,7 +47,7 @@ public interface MinecraftBridge {
     void bridge$shutdown();
     GuiIngameBridge bridge$getIngameGUI();
     void bridge$func_152344_a(Runnable runnable);
-    RenderGlobal bridge$getRenderGlobal();
+    RenderGlobalBridge bridge$getRenderGlobal();
     void bridge$scaledTessellator(int p_71392_1_, int p_71392_2_, int p_71392_3_, int p_71392_4_, int p_71392_5_, int p_71392_6_);
     FrameBufferBridge bridge$getFramebuffer();
     Proxy bridge$getProxy();

@@ -102,7 +102,7 @@ public class CBModulePlaceGui extends CBModulesGui {
         ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();
         CBGuiAnchor cBGuiAnchor = CBAnchorHelper.getAnchor(n, n2, scaledResolution);
         this.module.setAnchor(cBGuiAnchor);
-        Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocationBridge("gui.button.press"), 1.0f));
+        Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
         this.module.setState(true);
         CBModulesGui modulesGui = new CBModulesGui();
         this.mc.bridge$displayGuiScreen(modulesGui);
