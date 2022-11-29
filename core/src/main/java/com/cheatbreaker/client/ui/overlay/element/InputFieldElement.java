@@ -178,17 +178,17 @@ public class InputFieldElement extends AbstractElement {
                 return true;
             }
             case '': {
-                CBGuiScreen.setClipboardString(this.IlllIllIlIIIIlIIlIIllIIIl());
+                CBGuiScreen.wrapped$setClipboardString(this.IlllIllIlIIIIlIIlIIllIIIl());
                 return true;
             }
             case '': {
                 if (this.IIIlllIIIllIllIlIIIIIIlII) {
-                    this.lIIIIIIIIIlIllIIllIlIIlIl(CBGuiScreen.getClipboardString());
+                    this.lIIIIIIIIIlIllIIllIlIIlIl(CBGuiScreen.wrapped$getClipboardString());
                 }
                 return true;
             }
             case '': {
-                CBGuiScreen.setClipboardString(this.IlllIllIlIIIIlIIlIIllIIIl());
+                CBGuiScreen.wrapped$setClipboardString(this.IlllIllIlIIIIlIIlIIllIIIl());
                 if (this.IIIlllIIIllIllIlIIIIIIlII) {
                     this.lIIIIIIIIIlIllIIllIlIIlIl("");
                 }
@@ -197,7 +197,7 @@ public class InputFieldElement extends AbstractElement {
         }
         switch (n) {
             case 14: {
-                if (CBGuiScreen.isCtrlKeyDown()) {
+                if (CBGuiScreen.wrapped$isCtrlKeyDown()) {
                     if (this.IIIlllIIIllIllIlIIIIIIlII) {
                         this.lIIIIlIIllIIlIIlIIIlIIllI(-1);
                     }
@@ -207,7 +207,7 @@ public class InputFieldElement extends AbstractElement {
                 return true;
             }
             case 199: {
-                if (CBGuiScreen.isShiftKeyDown()) {
+                if (CBGuiScreen.wrapped$isShiftKeyDown()) {
                     this.lIIIIllIIlIlIllIIIlIllIlI(0);
                 } else {
                     this.IlIlllIIIIllIllllIllIIlIl();
@@ -215,13 +215,13 @@ public class InputFieldElement extends AbstractElement {
                 return true;
             }
             case 203: {
-                if (CBGuiScreen.isShiftKeyDown()) {
-                    if (CBGuiScreen.isCtrlKeyDown()) {
+                if (CBGuiScreen.wrapped$isShiftKeyDown()) {
+                    if (CBGuiScreen.wrapped$isCtrlKeyDown()) {
                         this.lIIIIllIIlIlIllIIIlIllIlI(this.lIIIIlIIllIIlIIlIIIlIIllI(-1, this.lIIIIIllllIIIIlIlIIIIlIlI()));
                     } else {
                         this.lIIIIllIIlIlIllIIIlIllIlI(this.lIIIIIllllIIIIlIlIIIIlIlI() - 1);
                     }
-                } else if (CBGuiScreen.isCtrlKeyDown()) {
+                } else if (CBGuiScreen.wrapped$isCtrlKeyDown()) {
                     this.IIIIllIIllIIIIllIllIIIlIl(this.IlllIIIlIlllIllIlIIlllIlI(-1));
                 } else {
                     this.IIIIllIlIIIllIlllIlllllIl(-1);
@@ -229,13 +229,13 @@ public class InputFieldElement extends AbstractElement {
                 return true;
             }
             case 205: {
-                if (CBGuiScreen.isShiftKeyDown()) {
-                    if (CBGuiScreen.isCtrlKeyDown()) {
+                if (CBGuiScreen.wrapped$isShiftKeyDown()) {
+                    if (CBGuiScreen.wrapped$isCtrlKeyDown()) {
                         this.lIIIIllIIlIlIllIIIlIllIlI(this.lIIIIlIIllIIlIIlIIIlIIllI(1, this.lIIIIIllllIIIIlIlIIIIlIlI()));
                     } else {
                         this.lIIIIllIIlIlIllIIIlIllIlI(this.lIIIIIllllIIIIlIlIIIIlIlI() + 1);
                     }
-                } else if (CBGuiScreen.isCtrlKeyDown()) {
+                } else if (CBGuiScreen.wrapped$isCtrlKeyDown()) {
                     this.IIIIllIIllIIIIllIllIIIlIl(this.IlllIIIlIlllIllIlIIlllIlI(1));
                 } else {
                     this.IIIIllIlIIIllIlllIlllllIl(1);
@@ -243,7 +243,7 @@ public class InputFieldElement extends AbstractElement {
                 return true;
             }
             case 207: {
-                if (CBGuiScreen.isShiftKeyDown()) {
+                if (CBGuiScreen.wrapped$isShiftKeyDown()) {
                     this.lIIIIllIIlIlIllIIIlIllIlI(this.IllIIIIIIIlIlIllllIIllIII.length());
                 } else {
                     this.llIIlllIIIIlllIllIlIlllIl();
@@ -251,7 +251,7 @@ public class InputFieldElement extends AbstractElement {
                 return true;
             }
             case 211: {
-                if (CBGuiScreen.isCtrlKeyDown()) {
+                if (CBGuiScreen.wrapped$isCtrlKeyDown()) {
                     if (this.IIIlllIIIllIllIlIIIIIIlII) {
                         this.lIIIIlIIllIIlIIlIIIlIIllI(1);
                     }

@@ -52,11 +52,11 @@ public class CBProfileCreateGui extends CBGuiScreen {
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
         if (!this.IIIllIllIlIlllllllIlIlIII) {
-            this.mc.bridge$displayGuiScreen(this.guiScreen);
+            this.wrapped$mc.bridge$displayGuiScreen(this.guiScreen);
             ((CBModulesGui) this.guiScreen).currentScrollableElement = ((CBModulesGui) this.guiScreen).profilesElement;
         } else {
             this.IIIllIllIlIlllllllIlIlIII = false;
-            this.textField = Ref.getInstanceCreator().createTextField(this.mc.bridge$getFontRenderer(), this.width / 2 - 70, this.height / 2 - 6, 140, 10);
+            this.textField = Ref.getInstanceCreator().createTextField(this.wrapped$mc.bridge$getFontRenderer(), this.wrapped$width / 2 - 70, this.wrapped$height / 2 - 6, 140, 10);
             if (this.profile != null) {
                 this.textField.bridge$setText(this.profile.getName());
             }
@@ -65,15 +65,15 @@ public class CBProfileCreateGui extends CBGuiScreen {
     }
 
     @Override
-    public void drawScreen(int n, int n2, float f) {
-        this.guiScreen.drawScreen(n, n2, f);
+    public void drawScreen(int mouseX, int mouseY, float delta) {
+        this.guiScreen.drawScreen(mouseX, mouseY, delta);
         this.drawDefaultBackground();
-        Ref.modified$drawRect(this.width / 2f - 73, this.height / 2f - 19, this.width / 2f + 73, this.height / 2f + 8, -11250604);
-        Ref.modified$drawRect(this.width / 2f - 72, this.height / 2f - 18, this.width / 2f + 72, this.height / 2f + 7, -3881788);
+        Ref.modified$drawRect(this.wrapped$width / 2f - 73, this.wrapped$height / 2f - 19, this.wrapped$width / 2f + 73, this.wrapped$height / 2f + 8, -11250604);
+        Ref.modified$drawRect(this.wrapped$width / 2f - 72, this.wrapped$height / 2f - 18, this.wrapped$width / 2f + 72, this.wrapped$height / 2f + 7, -3881788);
         GL11.glPushMatrix();
         GL11.glScalef(this.IlllIIIlIlllIllIlIIlllIlI, this.IlllIIIlIlllIllIlIIlllIlI, this.IlllIIIlIlllIllIlIIlllIlI);
-        int n3 = (int) ((float) this.width / this.IlllIIIlIlllIllIlIIlllIlI);
-        int n4 = (int) ((float) this.height / this.IlllIIIlIlllIllIlIIlllIlI);
+        int n3 = (int) ((float) this.wrapped$width / this.IlllIIIlIlllIllIlIIlllIlI);
+        int n4 = (int) ((float) this.wrapped$height / this.IlllIIIlIlllIllIlIIlllIlI);
         FontRegistry.getUbuntuMedium16px().drawString("Profile Name: ", (float) (n3 / 2) - (float) 70 / this.IlllIIIlIlllIllIlIIlllIlI, (float) (n4 / 2) - (float) 17 / this.IlllIIIlIlllIllIlIIlllIlI, 0x6F000000);
         FontRegistry.getUbuntuMedium16px().drawString(this.IlIlIIIlllIIIlIlllIlIllIl, (float) (n3 / 2) - (float) 72 / this.IlllIIIlIlllIllIlIIlllIlI, (float) (n4 / 2) + (float) 8 / this.IlllIIIlIlllIllIlIIlllIlI, -1358954496);
         GL11.glPopMatrix();
@@ -81,16 +81,16 @@ public class CBProfileCreateGui extends CBGuiScreen {
     }
 
     @Override
-    public void mouseClicked(int n, int n2, int n3) {
-        super.mouseClicked(n, n2, n3);
-        this.textField.bridge$mouseClicked(n, n2, n3);
+    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+        this.textField.bridge$mouseClicked(mouseX, mouseY, mouseButton);
     }
 
     @Override
     public void keyTyped(char c, int n) {
         switch (n) {
             case 1: {
-                this.mc.bridge$displayGuiScreen(this.guiScreen);
+                this.wrapped$mc.bridge$displayGuiScreen(this.guiScreen);
                 ((CBModulesGui) this.guiScreen).currentScrollableElement = ((CBModulesGui) this.guiScreen).profilesElement;
                 break;
             }
@@ -115,7 +115,7 @@ public class CBProfileCreateGui extends CBGuiScreen {
                         Files.copy(file.toPath(), file2.toPath());
                         Files.delete(file.toPath());
                         this.profile.setName(this.textField.bridge$getText());
-                        this.mc.bridge$displayGuiScreen(this.guiScreen);
+                        this.wrapped$mc.bridge$displayGuiScreen(this.guiScreen);
                         ((CBModulesGui) this.guiScreen).currentScrollableElement = ((CBModulesGui) this.guiScreen).profilesElement;
                     } catch (Exception exception) {
                         this.IlIlIIIlllIIIlIlllIlIllIl = EnumChatFormattingBridge.RED + "Could not save profile.";
@@ -137,7 +137,7 @@ public class CBProfileCreateGui extends CBGuiScreen {
                     CheatBreaker.getInstance().activeProfile = ilIIlIIlIIlllIlIIIlIllIIl3;
                     this.parent.lIIIIlIIllIIlIIlIIIlIIllI.add(new ProfileElement(this.parent, this.IIIIllIlIIIllIlllIlllllIl, ilIIlIIlIIlllIlIIIlIllIIl3, this.IlllIIIlIlllIllIlIIlllIlI));
                     CheatBreaker.getInstance().configManager.writeProfile(CheatBreaker.getInstance().activeProfile.getName());
-                    this.mc.bridge$displayGuiScreen(this.guiScreen);
+                    this.wrapped$mc.bridge$displayGuiScreen(this.guiScreen);
                     ((CBModulesGui) this.guiScreen).currentScrollableElement = ((CBModulesGui) this.guiScreen).profilesElement;
                     break;
                 }

@@ -17,7 +17,7 @@ public class CustomLoadingScreen extends CBGuiScreen {
         this.message = message;
     }
 
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(int mouseX, int mouseY, float delta) {
         Color startColor = new Color(0, 0, 0, 169);
         Color endColor = new Color(43, 43, 43, 97);
 

@@ -1,10 +1,12 @@
 package com.cheatbreaker;
 
 import com.cheatbreaker.bridge.client.MinecraftBridge;
+import com.cheatbreaker.bridge.client.resources.I18nBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.impl.ref.BridgedBossStatus;
 import com.cheatbreaker.impl.ref.InstanceCreator;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
@@ -18,5 +20,6 @@ public class CheatBreakerMod {
         Ref.setInstanceCreator(new InstanceCreator());
         Ref.setBossStatus(new BridgedBossStatus());
         Ref.setMinecraft((MinecraftBridge) Minecraft.getMinecraft());
+        Ref.setI18n(I18n::format);
     }
 }

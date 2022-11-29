@@ -80,8 +80,8 @@ public class CBModulesGui extends CBGuiScreen {
         this.dataHolder = null;
         IlIlllIIIIllIllllIllIIlIl = false;
         float f = 1.0f / CheatBreaker.getInstance().getScaleFactor();
-        int n = (int)((float)this.width / f);
-        int n2 = (int)((float)this.height / f);
+        int n = (int)((float)this.wrapped$width / f);
+        int n2 = (int)((float)this.wrapped$height / f);
         this.IllIIlIIlllllIllIIIlllIII.clear();
         this.buttons.clear();
         List<AbstractModule> modules = CheatBreaker.getInstance().moduleManager.modules;
@@ -110,8 +110,8 @@ public class CBModulesGui extends CBGuiScreen {
     @Override
     public void updateScreen() {
         float f = 1.0f / CheatBreaker.getInstance().getScaleFactor();
-        int n = (int)((float)this.width / f);
-        int n2 = (int)((float)this.height / f);
+        int n = (int)((float)this.wrapped$width / f);
+        int n2 = (int)((float)this.wrapped$height / f);
         this.lIIIIlIIllIIlIIlIIIlIIllI(n);
         if (!this.positions.isEmpty()) {
             boolean leftKey = Keyboard.isKeyDown(Keyboard.KEY_LEFT);
@@ -152,20 +152,20 @@ public class CBModulesGui extends CBGuiScreen {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float f) {
+    public void drawScreen(int mouseX, int mouseY, float delta) {
         float f2;
         float f3;
         Rectangle object;
-        super.drawScreen(mouseX, mouseY, f);
+        super.drawScreen(mouseX, mouseY, delta);
         ///this.lIIlllIIlIlllllllllIIIIIl(); blur shader
         ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();
         float scale = 1.0f / CheatBreaker.getInstance().getScaleFactor();
         if (draggingModule != null) {
             if (!Mouse.isButtonDown(1)) {
-                RenderUtil.drawRoundedRect(2, 0.0, 2.916666637692187 * 0.8571428656578064, this.height, 0.0, -15599126);
-                RenderUtil.drawRoundedRect((float)this.width - 5.0f * 0.5f, 0.0, this.width - 2, this.height, 0.0, -15599126);
-                RenderUtil.drawRoundedRect(0.0, 2, this.width, 1.1547619104385376 * 2.164948442965692, 0.0, -15599126);
-                RenderUtil.drawRoundedRect(0.0, (float)this.height - 1.3529412f * 2.5869565f, this.width, this.height - 3, 0.0, -15599126);
+                RenderUtil.drawRoundedRect(2, 0.0, 2.916666637692187 * 0.8571428656578064, this.wrapped$height, 0.0, -15599126);
+                RenderUtil.drawRoundedRect((float)this.wrapped$width - 5.0f * 0.5f, 0.0, this.wrapped$width - 2, this.wrapped$height, 0.0, -15599126);
+                RenderUtil.drawRoundedRect(0.0, 2, this.wrapped$width, 1.1547619104385376 * 2.164948442965692, 0.0, -15599126);
+                RenderUtil.drawRoundedRect(0.0, (float)this.wrapped$height - 1.3529412f * 2.5869565f, this.wrapped$width, this.wrapped$height - 3, 0.0, -15599126);
             }
             this.modules.sort((cBModule, cBModule2) -> {
                 if (cBModule == draggingModule || cBModule2 == draggingModule || cBModule.getGuiAnchor() == null || cBModule2.getGuiAnchor() == null) {
@@ -290,10 +290,10 @@ public class CBModulesGui extends CBGuiScreen {
         }
         GL11.glPushMatrix();
         GL11.glScalef(scale, scale, scale);
-        int n5 = (int)((float)this.width / scale);
-        int n6 = (int)((float)this.height / scale);
-        this.showGuidesButton.handleDrawElement(mouseX, mouseY, f);
-        this.helpButton.handleDrawElement(mouseX, mouseY, f);
+        int n5 = (int)((float)this.wrapped$width / scale);
+        int n6 = (int)((float)this.wrapped$height / scale);
+        this.showGuidesButton.handleDrawElement(mouseX, mouseY, delta);
+        this.helpButton.handleDrawElement(mouseX, mouseY, delta);
         float f13 = (float)(this.IIllIlIllIlIllIIlIllIlIII * 8) / (float)255;
         GL11.glPushMatrix();
         GL11.glColor4f(1.0f, 1.0f, 1.0f, f13);
@@ -312,7 +312,7 @@ public class CBModulesGui extends CBGuiScreen {
         }
         GL11.glPopMatrix();
         for (ModulesGuiButtonElement llllIIIIIlIlIlIlIllIIIIII2 : this.buttons) {
-            llllIIIIIlIlIlIlIllIIIIII2.handleDrawElement(mouseX, mouseY, f);
+            llllIIIIIlIlIlIlIllIIIIII2.handleDrawElement(mouseX, mouseY, delta);
         }
         if (draggingModule == null) {
             GL11.glPushMatrix();
@@ -320,7 +320,7 @@ public class CBModulesGui extends CBGuiScreen {
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(n5 / 2 - 185, n6 / 2 + 15, n5 / 2 + 185, n6 - 20, (float)scaledResolution.bridge$getScaleFactor() * scale, n6);
             for (AbstractScrollableElement lllIllIllIlIllIlIIllllIIl2 : this.IllIIlIIlllllIllIIIlllIII) {
                 if (lllIllIllIlIllIlIIllllIIl2 != this.lIIIIllIIlIlIllIIIlIllIlI && lllIllIllIlIllIlIIllllIIl2 != this.currentScrollableElement) continue;
-                lllIllIllIlIllIlIIllllIIl2.handleDrawElement(mouseX, mouseY, f);
+                lllIllIllIlIllIlIIllllIIl2.handleDrawElement(mouseX, mouseY, delta);
             }
             GL11.glDisable(3089);
             GL11.glPopMatrix();
@@ -361,7 +361,7 @@ public class CBModulesGui extends CBGuiScreen {
 
     private void drawHelpMenu(float f) {
         GL11.glPushMatrix();
-        GL11.glTranslatef(4, (float)this.height - (float)185 * f, 0.0f);
+        GL11.glTranslatef(4, (float)this.wrapped$height - (float)185 * f, 0.0f);
         GL11.glScalef(f, f, f);
         Ref.modified$drawRect(0.0f, 0.0f, 240, 140, -1895825408);
         FontRegistry.getUbuntuMedium16px().drawString("Shortcuts & Movement", 4, 2.0f, -1);
@@ -404,10 +404,10 @@ public class CBModulesGui extends CBGuiScreen {
     }
 
     @Override
-    public void mouseClicked(int mouseX, int mouseY, int n3) {
+    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();
         if (this.lIIIIllIIlIlIllIIIlIllIlI != null && this.lIIIIllIIlIlIllIIIlIllIlI.isMouseInside(mouseX, mouseY)) {
-            this.lIIIIllIIlIlIllIIIlIllIlI.handleMouseClick(mouseX, mouseY, n3);
+            this.lIIIIllIIlIlIllIIIlIllIlI.handleMouseClick(mouseX, mouseY, mouseButton);
         } else {
             AbstractModule iterator;
             if (!(draggingModule != null && this.IlIlIIIlllllIIIlIlIlIllII || (iterator = this.lIIIIlIIllIIlIIlIIIlIIllI(scaledResolution, mouseX, mouseY)) == null)) {
@@ -451,11 +451,11 @@ public class CBModulesGui extends CBGuiScreen {
                     cBGuiAnchor = CBGuiAnchor.LEFT_TOP;
                 }
                 if (this.lIIIIIIIIIlIllIIllIlIIlIl(scaledResolution, mouseX, mouseY)) continue;
-                if (n3 == 0) {
+                if (mouseButton == 0) {
                     this.undoList.add(new ModuleActionData(this, this.positions));
                     this.dataHolder = new ModuleDataHolder(this, object, dELETE_ME_D, mouseX, mouseY);
                     this.lIIIIlIIllIIlIIlIIIlIIllI(object, cBGuiAnchor, scaledResolution);
-                } else if (n3 == 1) {
+                } else if (mouseButton == 1) {
                     CBGuiAnchor cBGuiAnchor2 = object.getGuiAnchor();
                     this.lIIIIlIIllIIlIIlIIIlIIllI(object, cBGuiAnchor, scaledResolution);
                     object.scale.setValue(1.0f);
@@ -468,8 +468,8 @@ public class CBModulesGui extends CBGuiScreen {
                     Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                     this.IlIIIIllIIIIIlllIIlIIlllI = !this.IlIIIIllIIIIIlllIIlIIlllI;
                 }
-                this.IlllIIIlIlllIllIlIIlllIlI(mouseX, mouseY, n3);
-                this.lIIIIlIIllIIlIIlIIIlIIllI(scaledResolution, mouseX, mouseY, n3);
+                this.IlllIIIlIlllIllIlIIlllIlI(mouseX, mouseY, mouseButton);
+                this.lIIIIlIIllIIlIIlIIIlIIllI(scaledResolution, mouseX, mouseY, mouseButton);
             }
             for (Object object : this.buttons) {
                 if (!((AbstractModulesGuiElement)object).isMouseInside(mouseX, mouseY)) continue;
@@ -546,7 +546,7 @@ public class CBModulesGui extends CBGuiScreen {
             CheatBreaker.getInstance().configManager.write();
         }
         super.keyTyped(c, n);
-        if (n == Keyboard.KEY_Z && isCtrlKeyDown()) {
+        if (n == Keyboard.KEY_Z && wrapped$isCtrlKeyDown()) {
             if (!this.undoList.isEmpty()) {
                 int n2 = this.undoList.size() - 1;
                 ModuleActionData moduleActionData = this.undoList.get(this.undoList.size() - 1);
@@ -566,7 +566,7 @@ public class CBModulesGui extends CBGuiScreen {
                 this.redo.add(moduleActionData);
                 this.undoList.remove(n2);
             }
-        } else if (n == Keyboard.KEY_Y && isCtrlKeyDown()) {
+        } else if (n == Keyboard.KEY_Y && wrapped$isCtrlKeyDown()) {
             if (!this.redo.isEmpty()) {
                 int n3 = this.redo.size() - 1;
                 ModuleActionData moduleActionData = this.redo.get(this.redo.size() - 1);
@@ -656,10 +656,10 @@ public class CBModulesGui extends CBGuiScreen {
                 this.IlIlIIIlllllIIIlIlIlIllII = false;
                 draggingModule = cBModule;
                 if (this.getModulePosition(cBModule) == null) {
-                    if (!isCtrlKeyDown() && bl5) {
+                    if (!wrapped$isCtrlKeyDown() && bl5) {
                         this.positions.clear();
                     }
-                    if (bl5 || !isCtrlKeyDown()) {
+                    if (bl5 || !wrapped$isCtrlKeyDown()) {
                         this.positions.add(new CBModulePosition(cBModule, f4, f5));
                     }
                 }
@@ -856,35 +856,35 @@ public class CBModulesGui extends CBGuiScreen {
                     int n = 2;
                     if (f2 >= (float)(-n) && f2 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect(arrf[0] * (Float) cBModule.scale.getValue() - 0.6666667f * 0.75f, 0.0, arrf[0] * (Float) cBModule.scale.getValue(), this.height, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect(arrf[0] * (Float) cBModule.scale.getValue() - 0.6666667f * 0.75f, 0.0, arrf[0] * (Float) cBModule.scale.getValue(), this.wrapped$height, 0.0, -3596854);
                     }
                     if (f3 >= (float)(-n) && f3 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect((arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue(), 0.0, (arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue() + 1.7272727f * 0.28947368f, this.height, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect((arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue(), 0.0, (arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue() + 1.7272727f * 0.28947368f, this.wrapped$height, 0.0, -3596854);
                     }
                     if (f5 >= (float)(-n) && f5 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect(arrf[0] * (Float) cBModule.scale.getValue(), 0.0, arrf[0] * (Float) cBModule.scale.getValue() + 0.29775283f * 1.6792452f, this.height, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect(arrf[0] * (Float) cBModule.scale.getValue(), 0.0, arrf[0] * (Float) cBModule.scale.getValue() + 0.29775283f * 1.6792452f, this.wrapped$height, 0.0, -3596854);
                     }
                     if (f4 >= (float)(-n) && f4 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect((arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue(), 0.0, (arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue() + 1.5238096f * 0.328125f, this.height, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect((arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue(), 0.0, (arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue() + 1.5238096f * 0.328125f, this.wrapped$height, 0.0, -3596854);
                     }
                     if (f6 >= (float)(-n) && f6 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect(0.0, arrf[1] * (Float) cBModule.scale.getValue(), this.width, arrf[1] * (Float) cBModule.scale.getValue() + 0.3888889f * 1.2857143f, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect(0.0, arrf[1] * (Float) cBModule.scale.getValue(), this.wrapped$width, arrf[1] * (Float) cBModule.scale.getValue() + 0.3888889f * 1.2857143f, 0.0, -3596854);
                     }
                     if (f7 >= (float)(-n) && f7 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect(0.0, (arrf[1] + cBModule.height) * (Float) cBModule.scale.getValue(), this.width, (arrf[1] + cBModule.height) * (Float) cBModule.scale.getValue() + 0.51724136f * 0.9666667f, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect(0.0, (arrf[1] + cBModule.height) * (Float) cBModule.scale.getValue(), this.wrapped$width, (arrf[1] + cBModule.height) * (Float) cBModule.scale.getValue() + 0.51724136f * 0.9666667f, 0.0, -3596854);
                     }
                     if (f9 >= (float)(-n) && f9 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect(0.0, arrf[1] * (Float) cBModule.scale.getValue(), this.width, arrf[1] * (Float) cBModule.scale.getValue() + 0.16666667f * 3.0f, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect(0.0, arrf[1] * (Float) cBModule.scale.getValue(), this.wrapped$width, arrf[1] * (Float) cBModule.scale.getValue() + 0.16666667f * 3.0f, 0.0, -3596854);
                     }
                     if (f8 >= (float)(-n) && f8 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect(0.0, (arrf[1] + cBModule.height) * ((Float)cBModule.scale.getValue()).floatValue() - 0.5810811f * 0.8604651f, this.width, (arrf[1] + cBModule.height) * ((Float)cBModule.scale.getValue()).floatValue(), 0.0, -3596854);
+                        RenderUtil.drawRoundedRect(0.0, (arrf[1] + cBModule.height) * ((Float)cBModule.scale.getValue()).floatValue() - 0.5810811f * 0.8604651f, this.wrapped$width, (arrf[1] + cBModule.height) * ((Float)cBModule.scale.getValue()).floatValue(), 0.0, -3596854);
                     }
                     if (!bl) continue;
                     GL11.glPushMatrix();
@@ -901,8 +901,8 @@ public class CBModulesGui extends CBGuiScreen {
         float padding = 2.0f;
         if (f2 + arrf[0] * (Float) cBModule.scale.getValue() < padding) {
             f2 = -arrf[0] * (Float) cBModule.scale.getValue() + padding;
-        } else if (f2 + arrf[0] * (Float) cBModule.scale.getValue() + (float)n > (float)this.width - padding) {
-            f2 = (float)this.width - arrf[0] * (Float) cBModule.scale.getValue() - (float)n - padding;
+        } else if (f2 + arrf[0] * (Float) cBModule.scale.getValue() + (float)n > (float)this.wrapped$width - padding) {
+            f2 = (float)this.wrapped$width - arrf[0] * (Float) cBModule.scale.getValue() - (float)n - padding;
         }
         return f2;
     }
@@ -912,8 +912,8 @@ public class CBModulesGui extends CBGuiScreen {
         float padding = 2.0f;
         if (f2 + arrf[1] * (Float) cBModule.scale.getValue() < padding) {
             f2 = -arrf[1] * (Float) cBModule.scale.getValue() + padding;
-        } else if (f2 + arrf[1] * (Float) cBModule.scale.getValue() + (float)n > (float)this.height - padding) {
-            f2 = (float)this.height - arrf[1] * (Float) cBModule.scale.getValue() - (float)n - padding;
+        } else if (f2 + arrf[1] * (Float) cBModule.scale.getValue() + (float)n > (float)this.wrapped$height - padding) {
+            f2 = (float)this.wrapped$height - arrf[1] * (Float) cBModule.scale.getValue() - (float)n - padding;
         }
         return f2;
     }

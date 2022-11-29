@@ -20,13 +20,13 @@ public class CBModulePlaceGui extends CBModulesGui {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(int mouseX, int mouseY, float delta) {
         this.drawDefaultBackground();
-        RenderUtil.drawRoundedRect(0.0, this.height / 3f, this.width, (float)(this.height / 3) + 2.1086957f * 0.23711339f, 0.0, 0x6F000000);
-        RenderUtil.drawRoundedRect(0.0, this.height / 3f * 2, this.width, (float)(this.height / 3 * 2) + 1.1388888f * 0.43902442f, 0.0, 0x6F000000);
-        RenderUtil.drawRoundedRect(this.width / 3f, 0.0, (float)(this.width / 3) + 0.42073172f * 1.1884058f, this.height, 0.0, 0x6F000000);
-        RenderUtil.drawRoundedRect(this.width / 3f * 2, 0.0, (float)(this.width / 3 * 2) + 0.28070176f * 1.78125f, this.height, 0.0, 0x6F000000);
-        RenderUtil.drawRoundedRect(this.width / 3f + this.width / 6f, this.height / 3f * 2, (float)(this.width / 3 + this.width / 6) + 6.7000003f * 0.07462686f, this.height, 0.0, 0x6F000000);
+        RenderUtil.drawRoundedRect(0.0, this.wrapped$height / 3f, this.wrapped$width, (float)(this.wrapped$height / 3) + 2.1086957f * 0.23711339f, 0.0, 0x6F000000);
+        RenderUtil.drawRoundedRect(0.0, this.wrapped$height / 3f * 2, this.wrapped$width, (float)(this.wrapped$height / 3 * 2) + 1.1388888f * 0.43902442f, 0.0, 0x6F000000);
+        RenderUtil.drawRoundedRect(this.wrapped$width / 3f, 0.0, (float)(this.wrapped$width / 3) + 0.42073172f * 1.1884058f, this.wrapped$height, 0.0, 0x6F000000);
+        RenderUtil.drawRoundedRect(this.wrapped$width / 3f * 2, 0.0, (float)(this.wrapped$width / 3 * 2) + 0.28070176f * 1.78125f, this.wrapped$height, 0.0, 0x6F000000);
+        RenderUtil.drawRoundedRect(this.wrapped$width / 3f + this.wrapped$width / 6f, this.wrapped$height / 3f * 2, (float)(this.wrapped$width / 3 + this.wrapped$width / 6) + 6.7000003f * 0.07462686f, this.wrapped$height, 0.0, 0x6F000000);
         float f2 = 1.0f / CheatBreaker.getInstance().getScaleFactor();
         float f3 = (float)(FontRegistry.getUbuntuMedium16px().getStringWidth(this.module.getName()) + 6) * f2;
         if (this.module.width < f3) {
@@ -79,8 +79,8 @@ public class CBModulePlaceGui extends CBModulesGui {
     private float getXTranslation(AbstractModule cBModule, float f, float[] arrf, float f2) {
         if (f + arrf[0] < 3f) {
             f = -arrf[0] + 3f;
-        } else if (f + arrf[0] * (Float) cBModule.scale.getValue() + f2 > (this.width - 3f)) {
-            f = (int)((float)this.width - arrf[0] * (Float) cBModule.scale.getValue() - f2 - 3f);
+        } else if (f + arrf[0] * (Float) cBModule.scale.getValue() + f2 > (this.wrapped$width - 3f)) {
+            f = (int)((float)this.wrapped$width - arrf[0] * (Float) cBModule.scale.getValue() - f2 - 3f);
         }
         return f;
     }
@@ -88,24 +88,24 @@ public class CBModulePlaceGui extends CBModulesGui {
     private float getYTranslation(AbstractModule cBModule, float f, float[] arrf, float f2) {
         if (f + arrf[1] < 2f) {
             f = -arrf[1] + 2f;
-        } else if (f + arrf[1] * (Float) cBModule.scale.getValue() + f2 > (this.height - 2f)) {
-            f = (int)((float)this.height - arrf[1] * (Float) cBModule.scale.getValue() - f2 - 2f);
+        } else if (f + arrf[1] * (Float) cBModule.scale.getValue() + f2 > (this.wrapped$height - 2f)) {
+            f = (int)((float)this.wrapped$height - arrf[1] * (Float) cBModule.scale.getValue() - f2 - 2f);
         }
         return f;
     }
 
     @Override
-    public void mouseClicked(int n, int n2, int n3) {
-        if (n3 != 0) {
+    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+        if (mouseButton != 0) {
             return;
         }
         ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();
-        CBGuiAnchor cBGuiAnchor = CBAnchorHelper.getAnchor(n, n2, scaledResolution);
+        CBGuiAnchor cBGuiAnchor = CBAnchorHelper.getAnchor(mouseX, mouseY, scaledResolution);
         this.module.setAnchor(cBGuiAnchor);
         Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
         this.module.setState(true);
         CBModulesGui modulesGui = new CBModulesGui();
-        this.mc.bridge$displayGuiScreen(modulesGui);
+        this.wrapped$mc.bridge$displayGuiScreen(modulesGui);
         modulesGui.currentScrollableElement = modulesGui.modulesElement;
         modulesGui.currentScrollableElement.lIIlIlIllIIlIIIlIIIlllIII = false;
         modulesGui.currentScrollableElement.lIIIIllIIlIlIllIIIlIllIlI = this.modulesGui.modulesElement.lIIIIllIIlIlIllIIIlIllIlI;

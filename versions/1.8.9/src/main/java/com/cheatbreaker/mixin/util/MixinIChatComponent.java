@@ -8,20 +8,20 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(IChatComponent.class)
-public abstract class MixinIChatComponent implements IChatComponentBridge {
-    @Shadow public abstract String getFormattedText();
-    @Shadow public abstract IChatComponent appendSibling(IChatComponent component);
-    @Shadow public abstract ChatStyle getChatStyle();
+public interface MixinIChatComponent extends IChatComponentBridge {
+    @Shadow String getFormattedText();
+    @Shadow IChatComponent appendSibling(IChatComponent component);
+    @Shadow ChatStyle getChatStyle();
 
-    public String bridge$getFormattedText() {
+    default String bridge$getFormattedText() {
         return this.getFormattedText();
     }
 
-    public void bridge$appendSibling(IChatComponentBridge component) {
+    default void bridge$appendSibling(IChatComponentBridge component) {
         this.appendSibling((IChatComponent) component);
     }
 
-    public ChatStyleBridge bridge$getChatStyle() {
+    default ChatStyleBridge bridge$getChatStyle() {
         return (ChatStyleBridge) this.getChatStyle();
     }
 }

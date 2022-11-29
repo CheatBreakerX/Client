@@ -23,20 +23,20 @@ public abstract class AbstractGui extends CBGuiScreen {
 
     @Override
     public void setWorldAndResolution(final MinecraftBridge mc, final int displayWidth, final int displayHeight) {
-        this.mc = mc;
-        this.fontRendererObj = mc.bridge$getFontRenderer();
-        this.width = displayWidth;
-        this.height = displayHeight;
-        this.buttonList.clear();
+        this.wrapped$mc = mc;
+        this.wrapped$fontRendererObj = mc.bridge$getFontRenderer();
+        this.wrapped$width = displayWidth;
+        this.wrapped$height = displayHeight;
+        this.wrapped$buttonList.clear();
         this.resolution = Ref.getInstanceCreator().createScaledResolution();
         final float scaleFactor = getScaleFactor();
-        this.scaledWidth = width / scaleFactor;
-        this.scaledHeight = height / scaleFactor;
+        this.scaledWidth = wrapped$width / scaleFactor;
+        this.scaledHeight = wrapped$height / scaleFactor;
         this.initGui();
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    public void drawScreen(int mouseX, int mouseY, float delta) {
         final float scaleFactor = getScaleFactor();
         GL11.glPushMatrix();
         GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
@@ -47,7 +47,7 @@ public abstract class AbstractGui extends CBGuiScreen {
     protected abstract void drawMenu(float mouseX, float mouseY);
 
     @Override
-    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         final float scaleFactor = getScaleFactor();
         onMouseClicked(mouseX / scaleFactor, mouseY / scaleFactor, mouseButton);
     }
@@ -55,7 +55,7 @@ public abstract class AbstractGui extends CBGuiScreen {
     protected abstract void onMouseClicked(float mouseX, float mouseY, int mouseButton);
 
     @Override
-    protected void mouseMovedOrUp(int mouseX, int mouseY, int mouseButton) {
+    public void mouseMovedOrUp(int mouseX, int mouseY, int mouseButton) {
         final float scaleFactor = getScaleFactor();
         onMouseMovedOrUp(mouseX / scaleFactor, mouseY / scaleFactor, mouseButton);
     }

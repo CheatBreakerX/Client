@@ -34,7 +34,7 @@ public class VoiceChatGui extends AbstractGui {
         super.initGui();
         if (cheatBreaker.getNetHandler().voiceChatEnabled && cheatBreaker.getNetHandler().getVoiceChannels() != null) {
             this.voiceChannel = cheatBreaker.getNetHandler().getVoiceChannel();
-            boolean bl = cheatBreaker.getNetHandler().getUuidList().contains(this.mc.bridge$getThePlayer().bridge$getGameProfile().getId());
+            boolean bl = cheatBreaker.getNetHandler().getUuidList().contains(this.wrapped$mc.bridge$getThePlayer().bridge$getGameProfile().getId());
             this.joinChannelButton = new GradientTextButton("Join Channel");
             this.undeafenButton = new GradientTextButton(bl ? "Un-deafen" : "Deafen");
             this.someRandomAssButtons = new ArrayList<>();
@@ -121,13 +121,13 @@ public class VoiceChatGui extends AbstractGui {
             }
             if (this.undeafenButton.isMouseInside(f, f2)) {
                 boolean bl;
-                UUID iterator = this.mc.bridge$getThePlayer().bridge$getGameProfile().getId();
+                UUID iterator = this.wrapped$mc.bridge$getThePlayer().bridge$getGameProfile().getId();
                 Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 cheatBreaker.getNetHandler().sendPacketToQueue(new PacketVoiceMute(iterator));
                 if (!cheatBreaker.getNetHandler().getUuidList().removeIf(uUID2 -> uUID2.equals(iterator))) {
                     cheatBreaker.getNetHandler().getUuidList().add(iterator);
                 }
-                this.undeafenButton.lIIIIlIIllIIlIIlIIIlIIllI((bl = cheatBreaker.getNetHandler().getUuidList().contains(this.mc.bridge$getThePlayer().bridge$getGameProfile().getId())) ? "Un-deafen" : "Deafen");
+                this.undeafenButton.lIIIIlIIllIIlIIlIIIlIIllI((bl = cheatBreaker.getNetHandler().getUuidList().contains(this.wrapped$mc.bridge$getThePlayer().bridge$getGameProfile().getId())) ? "Un-deafen" : "Deafen");
             }
             this.lIIIIIIIIIlIllIIllIlIIlIl(f, f2, this.getResolution().bridge$getScaledWidth() / (float)8 + (float)130, this.getScaleFactor() / 2.0f);
         }
@@ -173,7 +173,7 @@ public class VoiceChatGui extends AbstractGui {
                 RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.microphoneImage, f8 + (float)4, f7 + (float)3, (float)8, 8);
             }
             f8 = f3 + (float)10;
-            if (!voiceUser3.getUUID().equals(this.mc.bridge$getThePlayer().bridge$getUniqueID())) {
+            if (!voiceUser3.getUUID().equals(this.wrapped$mc.bridge$getThePlayer().bridge$getUniqueID())) {
                 if (bl2) {
                     GL11.glColor4f(1.0f, 1.4848485f * 0.06734694f, 4.9f * 0.020408163f, bl3 ? 1.0f : 0.8117647f * 0.73913044f);
                     RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.mutedSpeakerImage, f3 + (float)162, f7 + (float)3, (float)8, 8);
@@ -196,7 +196,7 @@ public class VoiceChatGui extends AbstractGui {
             boolean bl;
             float f7 = f4 + (float)n * f5;
             boolean bl2 = bl = f > f3 + (float)158 && f < f3 + (float)184 && f2 > f7 && f2 < f7 + f5;
-            if (!voiceUser.getUUID().equals(this.mc.bridge$getThePlayer().bridge$getUniqueID()) && bl) {
+            if (!voiceUser.getUUID().equals(this.wrapped$mc.bridge$getThePlayer().bridge$getUniqueID()) && bl) {
                 Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 cheatBreaker.getNetHandler().sendPacketToQueue(new PacketVoiceMute(voiceUser.getUUID()));
                 if (!cheatBreaker.getNetHandler().getUuidList().removeIf(uUID -> uUID.equals(voiceUser.getUUID()))) {
@@ -212,8 +212,8 @@ public class VoiceChatGui extends AbstractGui {
         super.handleKeyTyped(c, n);
         // && lIllIllIlIIllIllIlIlIIlIl.IIIIllIIllIIIIllIllIIIlIl() ???????
         if (n == 25) {
-            this.mc.bridge$displayGuiScreen(null);
-            this.mc.bridge$setIngameFocus();
+            this.wrapped$mc.bridge$displayGuiScreen(null);
+            this.wrapped$mc.bridge$setIngameFocus();
         }
     }
 

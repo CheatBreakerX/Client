@@ -5,6 +5,9 @@ import com.cheatbreaker.bridge.item.ItemStackBridge;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Utils {
     public static ItemStack itemStackBridgeToItemStack(ItemStackBridge in) {
         ItemStack stack = new ItemStack((Item) in.bridge$getItem());
@@ -48,5 +51,15 @@ public class Utils {
                 return in.getDisplayName();
             }
         };
+    }
+
+    public static <A, B> List<B> convertListType(List<A> toConvert) {
+        List<B> toReturn = new ArrayList<>();
+
+        for (A item : toConvert) {
+            toReturn.add((B) item);
+        }
+
+        return toReturn;
     }
 }

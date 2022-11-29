@@ -43,13 +43,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.client.C17PacketCustomPayload;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.scoreboard.IScoreObjectiveCriteria;
 import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Session;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -105,7 +103,7 @@ public class InstanceCreator implements IInstanceCreator {
     }
 
     public ChatComponentTextBridge createChatComponentText(String initialString) {
-        return null;
+        return (ChatComponentTextBridge) new ChatComponentText(initialString);
     }
 
     public FrameBufferBridge createFrameBuffer(float width, float height, boolean b) {
@@ -141,6 +139,7 @@ public class InstanceCreator implements IInstanceCreator {
     }
 
     public PotionEffectBridge createPotionEffect(String idName, int duration, int multiplier) {
+//        return (PotionEffectBridge) new PotionEffect(idName, duration, multiplier);
         return null;
     }
 

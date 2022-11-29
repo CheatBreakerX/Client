@@ -5,5 +5,5 @@ import net.minecraft.client.audio.ISound;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(ISound.class)
-public class MixinISound implements ISoundBridge {
+public interface MixinISound extends ISoundBridge {
 }

@@ -27,9 +27,6 @@ public interface MinecraftBridge {
     CBGuiScreen bridge$getCurrentScreen();
     void bridge$displayGuiScreen(CBGuiScreen screen);
     void bridge$displayInternalGuiScreen(InternalScreen screen, CBGuiScreen parent);
-    default void bridge$displayInternalGuiScreen(InternalScreen screen) {
-        this.bridge$displayInternalGuiScreen(screen, null);
-    }
     WorldClientBridge bridge$getTheWorld();
     GameSettingsBridge bridge$getGameSettings();
     EntityClientPlayerMPBridge bridge$getThePlayer();

@@ -5,5 +5,5 @@ import net.minecraft.inventory.IInventory;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(IInventory.class)
-public class MixinIInventory implements IInventoryBridge {
+public interface MixinIInventory extends IInventoryBridge {
 }
