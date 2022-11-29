@@ -10,6 +10,7 @@ import com.cheatbreaker.bridge.client.network.NetHandlerPlayClientBridge;
 import com.cheatbreaker.bridge.client.renderer.EntityRendererBridge;
 import com.cheatbreaker.bridge.client.renderer.RenderGlobalBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
+import com.cheatbreaker.bridge.client.renderer.entity.RenderManagerBridge;
 import com.cheatbreaker.bridge.client.renderer.texture.TextureManagerBridge;
 import com.cheatbreaker.bridge.client.resources.IResourceManagerBridge;
 import com.cheatbreaker.bridge.client.settings.GameSettingsBridge;
@@ -22,13 +23,12 @@ import com.cheatbreaker.util.WrappedGuiScreen;
 import com.google.common.util.concurrent.ListenableFuture;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderGlobal;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.LanguageManager;
@@ -67,12 +67,13 @@ public abstract class MixinMinecraft implements MinecraftBridge {
     @Shadow public WorldClient theWorld;
     @Shadow public abstract void displayGuiScreen(GuiScreen guiScreenIn);
     @Shadow public abstract LanguageManager getLanguageManager();
-    @Shadow public EntityPlayerSP thePlayer;
     @Shadow public abstract TextureManager getTextureManager();
     @Shadow public GuiIngame ingameGUI;
     @Shadow public abstract void updateDisplay();
     @Shadow public abstract NetHandlerPlayClient getNetHandler();
     @Shadow public abstract SoundHandler getSoundHandler();
+
+    @Shadow public abstract RenderManager getRenderManager();
 
     public SoundHandlerBridge bridge$getSoundHandler() {
         return (SoundHandlerBridge) this.getSoundHandler();
@@ -215,6 +216,10 @@ public abstract class MixinMinecraft implements MinecraftBridge {
 
     public NetHandlerPlayClientBridge bridge$getNetHandler() {
         return (NetHandlerPlayClientBridge) this.getNetHandler();
+    }
+
+    public RenderManagerBridge bridge$getRenderManager() {
+        return (RenderManagerBridge) this.getRenderManager();
     }
 /*    @ModifyArg(method = "createDisplay", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;setTitle(Ljava/lang/String;)V"))
     public String createDisplay(String newTitle) {

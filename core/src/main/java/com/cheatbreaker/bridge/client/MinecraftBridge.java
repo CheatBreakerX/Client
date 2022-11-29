@@ -8,6 +8,7 @@ import com.cheatbreaker.bridge.client.multiplayer.WorldClientBridge;
 import com.cheatbreaker.bridge.client.network.NetHandlerPlayClientBridge;
 import com.cheatbreaker.bridge.client.renderer.EntityRendererBridge;
 import com.cheatbreaker.bridge.client.renderer.RenderGlobalBridge;
+import com.cheatbreaker.bridge.client.renderer.entity.RenderManagerBridge;
 import com.cheatbreaker.bridge.client.renderer.texture.TextureManagerBridge;
 import com.cheatbreaker.bridge.client.resources.IResourceManagerBridge;
 import com.cheatbreaker.bridge.client.settings.GameSettingsBridge;
@@ -50,6 +51,7 @@ public interface MinecraftBridge {
     Proxy bridge$getProxy();
     void bridge$func_147120_f(); // resetSize
     NetHandlerPlayClientBridge bridge$getNetHandler();
+    RenderManagerBridge bridge$getRenderManager();
 
     enum InternalScreen {
         SINGLEPLAYER,
