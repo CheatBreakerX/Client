@@ -66,9 +66,9 @@ public class MainMenu extends MainMenuBase {
         //RenderUtil.drawTexturedModalRect(f5, f6, f5 + 160f, f6 + 10f, 8, new Color(218, 66, 83, (int)((float)255 * (1.0f - logoY))).getRGB());
 
         if (CheatBreaker.getInstance().isInDebugMode()) {
-            this.wrapped$fontRendererObj.bridge$drawString("[p] " + RenderUtil.getTimeAccurateFrameRate() + " FPS (" + RenderUtil.getFrameTimeAsMs() + "ms/frame) ", 5, 55, -1);
-            this.wrapped$fontRendererObj.bridge$drawString("[p] Min/Max FPS: " + RenderUtil.minFps + "/" + RenderUtil.maxFps, 5, 65, -1);
-            this.wrapped$fontRendererObj.bridge$drawString("[i] Press \u00a7cF9 \u00a7fto reset the Min/Max values.", 5, 75, -1);
+            this.fontRendererObj.bridge$drawString("[p] " + RenderUtil.getTimeAccurateFrameRate() + " FPS (" + RenderUtil.getFrameTimeAsMs() + "ms/frame) ", 5, 55, -1);
+            this.fontRendererObj.bridge$drawString("[p] Min/Max FPS: " + RenderUtil.minFps + "/" + RenderUtil.maxFps, 5, 65, -1);
+            this.fontRendererObj.bridge$drawString("[i] Press \u00a7cF9 \u00a7fto reset the Min/Max values.", 5, 75, -1);
         }
     }
 
@@ -93,11 +93,11 @@ public class MainMenu extends MainMenuBase {
         this.singleplayerButton.handleElementMouseClicked(mouseX, mouseY, button, true);
         this.multiplayerButton.handleElementMouseClicked(mouseX, mouseY, button, true);
         if (this.singleplayerButton.isMouseInside(mouseX, mouseY)) {
-            this.wrapped$mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.wrapped$mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.SINGLEPLAYER, this);
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.SINGLEPLAYER, this);
         } else if (this.multiplayerButton.isMouseInside(mouseX, mouseY)) {
-            this.wrapped$mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.wrapped$mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.MULTIPLAYER, this);
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.MULTIPLAYER, this);
         }
     }
 

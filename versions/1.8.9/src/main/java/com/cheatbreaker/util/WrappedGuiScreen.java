@@ -3,6 +3,7 @@ package com.cheatbreaker.util;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 
 import java.io.IOException;
@@ -11,6 +12,13 @@ public class WrappedGuiScreen extends GuiScreen {
     private final CBGuiScreen cbScreen;
     public WrappedGuiScreen(CBGuiScreen cbScreen) {
         this.cbScreen = cbScreen;
+
+        this.cbScreen.externalValues$execute = () -> {
+            this.mc = Minecraft.getMinecraft();
+            this.fontRendererObj = (FontRenderer) this.cbScreen.fontRendererObj;
+            this.width = this.cbScreen.width;
+            this.height = this.cbScreen.height;
+        };
     }
 
     private boolean setDrawScreen = false;
@@ -66,7 +74,9 @@ public class WrappedGuiScreen extends GuiScreen {
     private boolean setSetWorldAndResolution = false;
     public void setWorldAndResolution(Minecraft mc, int width, int height) {
         if (!this.setSetWorldAndResolution) {
-            this.cbScreen.super$setWorldAndResolution = () -> super.setWorldAndResolution(mc, width, height);
+            this.cbScreen.super$setWorldAndResolution = () -> {
+                super.setWorldAndResolution(mc, width, height);
+            };
             this.setSetWorldAndResolution = true;
         }
         this.cbScreen.setWorldAndResolution((MinecraftBridge) mc, width, height);

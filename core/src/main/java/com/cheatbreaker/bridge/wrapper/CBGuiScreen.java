@@ -13,16 +13,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CBGuiScreen {
-    protected MinecraftBridge wrapped$mc;
-    public int wrapped$width;
-    public int wrapped$height;
-    protected List wrapped$buttonList = new ArrayList();
-    protected List wrapped$labelList = new ArrayList();
-    public boolean wrapped$field_146291_p;
-    protected FontRendererBridge wrapped$fontRendererObj;
-    private int wrapped$eventButton;
-    private long wrapped$lastMouseEvent;
-    private int wrapped$field_146298_h;
+    protected MinecraftBridge mc;
+    public int width;
+    public int height;
+    protected List buttonList = new ArrayList();
+    protected List labelList = new ArrayList();
+    public boolean field_146291_p;
+    public FontRendererBridge fontRendererObj;
+    private int eventButton;
+    private long lastMouseEvent;
+    private int field_146298_h;
+
+    public Runnable externalValues$execute = () -> {};
+    public void setExternalValues() {
+        this.externalValues$execute.run();
+    }
 
     public Runnable super$drawScreen = () -> {};
     public void drawScreen(int mouseX, int mouseY, float delta) {

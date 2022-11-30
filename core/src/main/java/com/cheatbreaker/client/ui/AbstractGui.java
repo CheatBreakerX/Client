@@ -23,16 +23,17 @@ public abstract class AbstractGui extends CBGuiScreen {
 
     @Override
     public void setWorldAndResolution(final MinecraftBridge mc, final int displayWidth, final int displayHeight) {
-        this.wrapped$mc = mc;
-        this.wrapped$fontRendererObj = mc.bridge$getFontRenderer();
-        this.wrapped$width = displayWidth;
-        this.wrapped$height = displayHeight;
-        this.wrapped$buttonList.clear();
+        this.mc = mc;
+        this.fontRendererObj = mc.bridge$getFontRenderer();
+        this.width = displayWidth;
+        this.height = displayHeight;
+        this.buttonList.clear();
         this.resolution = Ref.getInstanceCreator().createScaledResolution();
         final float scaleFactor = getScaleFactor();
-        this.scaledWidth = wrapped$width / scaleFactor;
-        this.scaledHeight = wrapped$height / scaleFactor;
+        this.scaledWidth = width / scaleFactor;
+        this.scaledHeight = height / scaleFactor;
         this.initGui();
+        this.setExternalValues();
     }
 
     @Override

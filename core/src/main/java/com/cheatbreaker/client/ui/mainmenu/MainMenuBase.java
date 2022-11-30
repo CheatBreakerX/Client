@@ -130,7 +130,7 @@ public class MainMenuBase extends AbstractGui {
     public void initGui() {
         super.initGui();
         DynamicTextureBridge texture = Ref.getInstanceCreator().createDynamicTexture(256, 256);
-        this.panoramaBackgroundLocation = this.wrapped$mc.bridge$getTextureManager().bridge$getDynamicTextureLocation("background", texture);
+        this.panoramaBackgroundLocation = this.mc.bridge$getTextureManager().bridge$getDynamicTextureLocation("background", texture);
         this.optionsButton.setElementSize((float) 124, (float) 6, (float) 42, 20);
         this.cosmeticsButton.setElementSize((float) 167, (float) 6, (float) 48, 20);
         this.exitButton.setElementSize(this.getScaledWidth() - (float) 30, (float) 7, (float) 23, 17);
@@ -187,7 +187,7 @@ public class MainMenuBase extends AbstractGui {
 
         // Render buttons
         this.exitButton.drawElement(mouseX, mouseY, true);
-        if (!(wrapped$mc.bridge$getCurrentScreen() instanceof GuiCosmetics)) this.languageButton.drawElement(mouseX, mouseY, true);
+        if (!(mc.bridge$getCurrentScreen() instanceof GuiCosmetics)) this.languageButton.drawElement(mouseX, mouseY, true);
         this.accountList.drawElement(mouseX, mouseY, true);
         this.optionsButton.drawElement(mouseX, mouseY, true);
         this.cosmeticsButton.drawElement(mouseX, mouseY, true);
@@ -203,22 +203,22 @@ public class MainMenuBase extends AbstractGui {
         this.exitButton.handleElementMouseClicked(mouseX, mouseY, button, true);
         this.accountList.handleElementMouseClicked(mouseX, mouseY, button, true);
         if (this.exitButton.isMouseInside(mouseX, mouseY)) {
-            this.wrapped$mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.wrapped$mc.bridge$shutdown();
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+            this.mc.bridge$shutdown();
         } else if (this.optionsButton.isMouseInside(mouseX, mouseY)) {
-            this.wrapped$mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.wrapped$mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.OPTIONS, new MainMenu());
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.OPTIONS, new MainMenu());
         } else if (this.languageButton.isMouseInside(mouseX, mouseY)) {
-            this.wrapped$mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.wrapped$mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.LANGUAGE, new MainMenu());
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.LANGUAGE, new MainMenu());
         } else if (this.cosmeticsButton.isMouseInside(mouseX, mouseY)) {
-            this.wrapped$mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.wrapped$mc.bridge$displayGuiScreen(new GuiCosmetics());
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+            this.mc.bridge$displayGuiScreen(new GuiCosmetics());
         } else {
             boolean bl = mouseX < this.optionsButton.getX() && mouseY < (float) 30;
-            if (bl && !(this.wrapped$mc.bridge$getCurrentScreen() instanceof MainMenu)) {
-                this.wrapped$mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-                this.wrapped$mc.bridge$displayGuiScreen(new MainMenu());
+            if (bl && !(this.mc.bridge$getCurrentScreen() instanceof MainMenu)) {
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                this.mc.bridge$displayGuiScreen(new MainMenu());
             }
         }
     }
@@ -274,7 +274,7 @@ public class MainMenuBase extends AbstractGui {
                     GL11.glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
                 }
 
-                this.wrapped$mc.bridge$getTextureManager().bridge$bindTexture(panoramaImages[var10]);
+                this.mc.bridge$getTextureManager().bridge$bindTexture(panoramaImages[var10]);
                 tessellator.bridge$startDrawingQuads();
                 tessellator.bridge$setColorRGBA_I(16777215, 255 / (var6 + 1));
                 float var11 = 0.0F;
@@ -305,7 +305,7 @@ public class MainMenuBase extends AbstractGui {
      * Rotate and blurs the skybox view in the main menu
      */
     private void rotateAndBlurSkybox() {
-        this.wrapped$mc.bridge$getTextureManager().bridge$bindTexture(this.panoramaBackgroundLocation);
+        this.mc.bridge$getTextureManager().bridge$bindTexture(this.panoramaBackgroundLocation);
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
         GL11.glCopyTexSubImage2D(GL11.GL_TEXTURE_2D, 0, 0, 0, 0, 0, 256, 256);
@@ -319,8 +319,8 @@ public class MainMenuBase extends AbstractGui {
 
         for (int var4 = 0; var4 < var3; ++var4) {
             tessellator.bridge$setColorRGBA_F(1.0F, 1.0F, 1.0F, 1.0F / (float) (var4 + 1));
-            int var5 = this.wrapped$width;
-            int var6 = this.wrapped$height;
+            int var5 = this.width;
+            int var6 = this.height;
             float var7 = (float) (var4 - var3 / 2) / 256.0F;
             tessellator.bridge$addVertexWithUV(var5, var6, Ref.getUtils().bridge$Gui$getZLevel(), 0.0F + var7, 1.0D);
             tessellator.bridge$addVertexWithUV(var5, 0.0D, Ref.getUtils().bridge$Gui$getZLevel(), 1.0F + var7, 1.0D);
@@ -338,7 +338,7 @@ public class MainMenuBase extends AbstractGui {
      */
     private void renderSkybox() {
         float p_73971_3_ = 1f;
-        this.wrapped$mc.bridge$getFramebuffer().bridge$unbindFramebuffer();
+        this.mc.bridge$getFramebuffer().bridge$unbindFramebuffer();
         GL11.glViewport(0, 0, 256, 256);
         this.drawPanorama(p_73971_3_);
         this.rotateAndBlurSkybox();
@@ -348,16 +348,16 @@ public class MainMenuBase extends AbstractGui {
         this.rotateAndBlurSkybox();
         this.rotateAndBlurSkybox();
         this.rotateAndBlurSkybox();
-        this.wrapped$mc.bridge$getFramebuffer().bridge$bindFramebuffer(true);
-        GL11.glViewport(0, 0, this.wrapped$mc.bridge$getDisplayWidth(), this.wrapped$mc.bridge$getDisplayHeight());
+        this.mc.bridge$getFramebuffer().bridge$bindFramebuffer(true);
+        GL11.glViewport(0, 0, this.mc.bridge$getDisplayWidth(), this.mc.bridge$getDisplayHeight());
         TessellatorBridge tessellator = Ref.getTessellator();
         tessellator.bridge$startDrawingQuads();
-        float var5 = this.wrapped$width > this.wrapped$height ? 120.0F / (float) this.wrapped$width : 120.0F / (float) this.wrapped$height;
-        float var6 = (float) this.wrapped$height * var5 / 256.0F;
-        float var7 = (float) this.wrapped$width * var5 / 256.0F;
+        float var5 = this.width > this.height ? 120.0F / (float) this.width : 120.0F / (float) this.height;
+        float var6 = (float) this.height * var5 / 256.0F;
+        float var7 = (float) this.width * var5 / 256.0F;
         tessellator.bridge$setColorRGBA_F(1.0F, 1.0F, 1.0F, 1.0F);
-        int var8 = this.wrapped$width;
-        int var9 = this.wrapped$height;
+        int var8 = this.width;
+        int var9 = this.height;
         tessellator.bridge$addVertexWithUV(0.0D, var9, Ref.getUtils().bridge$Gui$getZLevel(), 0.5F - var6, 0.5F + var7);
         tessellator.bridge$addVertexWithUV(var8, var9, Ref.getUtils().bridge$Gui$getZLevel(), 0.5F - var6, 0.5F - var7);
         tessellator.bridge$addVertexWithUV(var8, 0.0D, Ref.getUtils().bridge$Gui$getZLevel(), 0.5F + var6, 0.5F - var7);

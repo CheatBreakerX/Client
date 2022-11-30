@@ -108,9 +108,9 @@ public class OverlayGui extends AbstractGui {
         Ref.modified$drawRect(0.0f, 0.0f, 140, 28, -15395563);
         Ref.modified$drawRect(6, 6, 22, 22, Friend.getStatusColor(CheatBreaker.getInstance().getStatus()));
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        ResourceLocationBridge headLocation = CheatBreaker.getInstance().getHeadLocation(this.wrapped$mc.bridge$getSession().bridge$getUsername());
+        ResourceLocationBridge headLocation = CheatBreaker.getInstance().getHeadLocation(this.mc.bridge$getSession().bridge$getUsername());
         RenderUtil.drawIcon(headLocation, 7f, 7f, 7f);
-        String username = this.wrapped$mc.bridge$getSession().bridge$getUsername();
+        String username = this.mc.bridge$getSession().bridge$getUsername();
         FontRegistry.getPlayRegular16px().drawString(username, 28, 6f, -1);
         FontRegistry.getPlayRegular16px().drawString(CheatBreaker.getInstance().getStatusString(), 28, (float)15, -5460820);
         boolean statusHovered = f > 6f && f < 94f && f2 > 6f && f2 < 22f;
@@ -143,7 +143,7 @@ public class OverlayGui extends AbstractGui {
     public void keyTyped(char c, int n) {
         if (n == 15 && Keyboard.isKeyDown(42) && System.currentTimeMillis() - this.initGuiMillis > 200L || n == 1) {
             this.revertToContextTime = System.currentTimeMillis();
-            this.wrapped$mc.bridge$displayGuiScreen(this.context);
+            this.mc.bridge$displayGuiScreen(this.context);
         }
         super.handleKeyTyped(c, n);
         if (n == Keyboard.KEY_GRAVE && CheatBreaker.getInstance().isConsoleAllowed()) {
@@ -168,10 +168,10 @@ public class OverlayGui extends AbstractGui {
         this.onMouseClicked(f, f2, n, this.friendsListElement, this.friendRequestsElement);
         boolean bl2 = this.isMouseHovered(this.friendsButton, f, f2);
         if (bl2 && this.friendsButton.isMouseInside(f, f2) && this.selectedElement != this.friendsListElement) {
-            this.wrapped$mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.selectedElement = this.friendsListElement;
         } else if (bl2 && this.requestsButton.isMouseInside(f, f2) && this.selectedElement != this.friendRequestsElement) {
-            this.wrapped$mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.selectedElement = this.friendRequestsElement;
         }
         boolean bl = f > 6f && f < 134f && f2 > 6f && f2 < 22f;
@@ -182,16 +182,16 @@ public class OverlayGui extends AbstractGui {
             boolean offlineHovered = f > 78f && f < 94f;
             if (onlineHovered) {
                 CheatBreaker.getInstance().setStatus(Status.ONLINE);
-                this.wrapped$mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             } else if (awayHovered) {
                 CheatBreaker.getInstance().setStatus(Status.AWAY);
-                this.wrapped$mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             } else if (busyHovered) {
                 CheatBreaker.getInstance().setStatus(Status.BUSY);
-                this.wrapped$mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             } else if (offlineHovered) {
                 CheatBreaker.getInstance().setStatus(Status.HIDDEN);
-                this.wrapped$mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             }
             CheatBreaker.getInstance().getAssetsWebSocket().updateClientStatus();
         }
@@ -241,7 +241,7 @@ public class OverlayGui extends AbstractGui {
 
     public void renderGameOverlay() {
         this.alertList.forEach(Alert::drawAlert);
-        if (this.wrapped$mc != null && this.wrapped$mc.bridge$getCurrentScreen() == null && (Boolean) CheatBreaker.getInstance().getGlobalSettings().pinRadio.getValue() && DashUtil.isPlayerNotNull()) {
+        if (this.mc != null && this.mc.bridge$getCurrentScreen() == null && (Boolean) CheatBreaker.getInstance().getGlobalSettings().pinRadio.getValue() && DashUtil.isPlayerNotNull()) {
             this.radioElement.drawElement(0.0f, 0.0f, false);
         }
     }

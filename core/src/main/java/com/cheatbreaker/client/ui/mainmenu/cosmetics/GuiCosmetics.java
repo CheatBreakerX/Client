@@ -73,7 +73,7 @@ public class GuiCosmetics extends MainMenuBase {
         super.onMouseClicked(f, f2, n);
         if (this.backButton.isMouseInside(f, f2)) {
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.wrapped$mc.bridge$displayGuiScreen(new MainMenu());
+            this.mc.bridge$displayGuiScreen(new MainMenu());
         } else {
             int n2;
             if (this.IIIIllIlIIIllIlllIlllllIl.size() > 5) {
