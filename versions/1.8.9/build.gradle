@@ -23,9 +23,12 @@ plugins {
 apply plugin: "net.minecraftforge.gradle.forge"
 apply plugin: "org.spongepowered.mixin"
 
+apply from: "$rootDir/project.gradle"
+System.out.println("Root project directory: $rootDir")
+
 // Jar file will appear as CheatBreaker-0.0.1.jar
 archivesBaseName = "CheatBreaker"
-version = "0.0.1"
+version = getShortCommitVersion()
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8

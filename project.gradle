@@ -1,0 +1,80 @@
+ext.publishDir = "$rootDir" + File.separator + "publish"
+
+def getShortCommitVersion() {
+    try {
+        def commitHashProc = "git rev-parse --short HEAD".execute()
+        commitHashProc.waitFor()
+        if (commitHashProc.exitValue() == 0) {
+            def commitHash = commitHashProc.text.trim()
+            return commitHash
+        } else {
+            println commitHashProc.err.text
+            throw new Exception("git exited with non-zero return value")
+        }
+    } catch (Exception e) {
+        println "Failed to run git: " + e.getMessage()
+    }
+    return "0000000"
+}
+
+def getCommitVersion() {
+    try {
+        def commitHashProc = "git rev-parse HEAD".execute()
+        commitHashProc.waitFor()
+        if (commitHashProc.exitValue() == 0) {
+            def commitHash = commitHashProc.text.trim()
+            return commitHash
+        } else {
+            println commitHashProc.err.text
+            throw new Exception("git exited with non-zero return value")
+        }
+    } catch (Exception e) {
+        println "Failed to run git: " + e.getMessage()
+    }
+    return "0000000000000000000000000000000000000000"
+}
+
+/*
+
+git.commit.id.abbrev=6486553
+git.commit.id=6486553666593853780ab78089d3748150d86827
+git.branch=master
+
+ */
+
+def updateClientCommitProperties() {
+    String filePath = "$rootDir" + File.separator + "core" + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "assets" + File.separator + "minecraft" + File.separator + "client" + File.separator + "properties" + File.separator + "app.properties"
+
+    try {
+        File propertiesFile = new File(filePath)
+        if (propertiesFile.createNewFile()) {
+            System.out.println("File created: " + propertiesFile.getName())
+        } else {
+            System.out.println("Recreating " + filePath + "...")
+            propertiesFile.delete()
+            propertiesFile.createNewFile()
+        }
+
+        FileWriter writer = new FileWriter(filePath)
+        writer.write(
+                "git.commit.id.abbrev=" + getShortCommitVersion() + "\n" +
+                "git.commit.id=" + getCommitVersion() + "\n" +
+                "git.branch=master")
+        writer.close()
+        System.out.println("Successfully wrote to properties file.")
+
+        // shush I know I'm forcing "master"
+        System.out.println("Commit: " + getCommitVersion())
+        System.out.println("Commit abbreviation: " + getShortCommitVersion())
+        System.out.println("Commit branch: master")
+    } catch (IOException e) {
+        System.out.println("An error occurred.")
+        e.printStackTrace()
+    }
+}
+
+updateClientCommitProperties()
+
+ext {
+    getShortCommitVersion = this.&getShortCommitVersion
+}
