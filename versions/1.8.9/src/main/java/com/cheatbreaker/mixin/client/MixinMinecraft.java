@@ -20,7 +20,10 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.SessionBridge;
 import com.cheatbreaker.bridge.util.TimerBridge;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
+import com.cheatbreaker.client.event.type.KeyboardEvent;
 import com.cheatbreaker.client.ui.mainmenu.MainMenu;
+import com.cheatbreaker.client.ui.overlay.OverlayGui;
+import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.impl.ref.InstanceCreator;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.main.utils.Utility;
@@ -45,6 +48,7 @@ import net.minecraft.util.Timer;
 import net.minecraft.util.Util;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -55,6 +59,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -121,7 +126,7 @@ public abstract class MixinMinecraft implements MinecraftBridge {
     private CBGuiScreen currentCBScreen = null;
     public void bridge$displayGuiScreen(CBGuiScreen screen) {
         this.currentCBScreen = screen;
-        this.displayGuiScreen(new WrappedGuiScreen(screen));
+        this.displayGuiScreen(screen == null ? null : new WrappedGuiScreen(screen));
     }
     public void bridge$displayInternalGuiScreen(InternalScreen screen, CBGuiScreen parent) {
         // Creating "new WrappedGuiScreen(null)" will produce a NullPointerException for
@@ -266,17 +271,11 @@ public abstract class MixinMinecraft implements MinecraftBridge {
         }
     }
 
-    @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/FontRenderer;<init>(Lnet/minecraft/client/settings/GameSettings;Lnet/minecraft/util/ResourceLocation;Lnet/minecraft/client/renderer/texture/TextureManager;Z)V"))
-    public void impl$startGame$fontRendererInit(CallbackInfo callbackInfo) {
-        Ref.setMinecraft((MinecraftBridge) Minecraft.getMinecraft());
-        Ref.setInstanceCreator(new InstanceCreator());
-        Display.setTitle(Utility.getFullTitle());
-    }
-
     @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/client/GuiIngameForge;<init>(Lnet/minecraft/client/Minecraft;)V"))
     public void impl$startGame$guiIngameInit(CallbackInfo callbackInfo) {
         CheatBreakerMod.CheatBreaker$preInitialize();
         CheatBreaker.getInstance().initialize();
+        Display.setTitle(Utility.getFullTitle());
     }
 
     /**
@@ -306,6 +305,35 @@ public abstract class MixinMinecraft implements MinecraftBridge {
             finally {
                 IOUtils.closeQuietly(icon_x16);
                 IOUtils.closeQuietly(icon_x32);
+            }
+        }
+    }
+
+    private long previousFrameOccurringTime = 0L;
+
+    @Inject(method = "runGameLoop", at = @At(value = "INVOKE_STRING", target = "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V", args = "ldc=Post render"))
+    public void impl$runGameLoop(CallbackInfo callbackInfo) {
+        RenderUtil.updateFrameTime(previousFrameOccurringTime);
+        previousFrameOccurringTime = System.nanoTime();
+    }
+
+    @Inject(method = "runTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiScreen;handleInput()V", shift = At.Shift.AFTER))
+    public void impl$runTick$handleInput(CallbackInfo callbackInfo) {
+        OverlayGui.getInstance().pollNotifications();
+    }
+
+    @Inject(method = "runTick", at = @At(value = "INVOKE_STRING", target = "Lnet/minecraft/profiler/Profiler;endStartSection(Ljava/lang/String;)V", args = "ldc=mouse", shift = At.Shift.BEFORE))
+    public void impl$runTick$endStartSection(CallbackInfo callbackInfo) {
+        OverlayGui.getInstance().pollNotifications();
+    }
+
+    @Inject(method = "runTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;dispatchKeypresses()V", shift = At.Shift.AFTER))
+    public void impl$runTick$getEventKeyState(CallbackInfo callbackInfo) {
+        if (Keyboard.getEventKeyState()) {
+            CheatBreaker.getInstance().getEventBus().callEvent(new KeyboardEvent(Keyboard.getEventKey()));
+
+            if (Keyboard.isKeyDown(42) && Keyboard.getEventKey() == 15) {
+                this.bridge$displayGuiScreen(OverlayGui.getInstance());
             }
         }
     }

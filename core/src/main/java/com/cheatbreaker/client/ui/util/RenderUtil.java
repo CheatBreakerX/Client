@@ -112,9 +112,9 @@ public class RenderUtil {
     }
 
     public static void lIIIIlIIllIIlIIlIIIlIIllI(double d, double d2, double d3) {
-        GL11.glEnable(3042);
-        GL11.glDisable(3553);
-        GL11.glBlendFunc(770, 771);
+        Ref.getGlBridge().bridge$enableBlend();
+        Ref.getGlBridge().bridge$disableTexture2D();
+        Ref.getGlBridge().bridge$blendFunc(770, 771);
         TessellatorBridge tessellator = Ref.getTessellator();
         tessellator.bridge$startDrawing(6);
         tessellator.bridge$addVertex(d, d2, zLevel);

@@ -1,5 +1,6 @@
 package com.cheatbreaker.main.utils;
 
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.remote.GitCommitProperties;
 
 import java.io.ByteArrayInputStream;
@@ -14,6 +15,6 @@ public class Utility {
 
     public static String getFullTitle() {
         GitCommitProperties.loadProperties();
-        return "CheatBreaker 1.7.10 (" + GitCommitProperties.getGitCommit() + "/" + GitCommitProperties.getGitBranch() + ")";
+        return "CheatBreaker " + Ref.getMinecraftVersion() + " (" + GitCommitProperties.getGitCommit() + "/" + GitCommitProperties.getGitBranch() + ")";
     }
 }

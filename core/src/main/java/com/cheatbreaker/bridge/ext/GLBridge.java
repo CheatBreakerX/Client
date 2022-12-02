@@ -13,9 +13,11 @@ public interface GLBridge {
     void bridge$enableAlphaTest();
     void bridge$disableAlphaTest();
     void bridge$setShadeModel(int i);
-
     boolean bridge$isFramebufferEnabled(); // OpenGlUtils
     boolean bridge$isShadersSupported(); // OpenGlUtils
     void bridge$gluProject(float objx, float objy, float objz, FloatBuffer modelMatrix, FloatBuffer projMatrix, IntBuffer viewport, FloatBuffer win_pos); // GLU
     void bridge$gluPerspective(float v, float v1, float v2, float v3);
+    void bridge$blendFunc(int i, int i1);
+    void bridge$pushMatrix();
+    void bridge$popMatrix();
 }

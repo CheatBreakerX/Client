@@ -5,14 +5,14 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 
 public class GradientTextButton extends AbstractElement {
-    private String IIIllIllIlIlllllllIlIlIII;
+    private String text;
     private final ColorFade IllIIIIIIIlIlIllllIIllIII;
     private final ColorFade lIIIIllIIlIlIllIIIlIllIlI;
     private final ColorFade IlllIllIlIIIIlIIlIIllIIIl;
     private int[] IlIlllIIIIllIllllIllIIlIl;
 
     public GradientTextButton(String string) {
-        this.IIIllIllIlIlllllllIlIlIII = string;
+        this.text = string;
         this.IllIIIIIIIlIlIllllIIllIII = new ColorFade(-14277082, -11493284);
         this.lIIIIllIIlIlIllIIIlIllIlI = new ColorFade(-13487566, -10176146);
         this.IlllIllIlIIIIlIIlIIllIIIl = new ColorFade(-14013910, -11164318);
@@ -48,7 +48,7 @@ public class GradientTextButton extends AbstractElement {
             this.IlIlllIIIIllIllllIllIIlIl = null;
         }
         RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.x, this.y, this.x + this.width, this.y + this.height, this.IllIIIIIIIlIlIllllIIllIII.get(bl2).getRGB(), this.lIIIIllIIlIlIllIIIlIllIlI.get(bl2).getRGB(), this.IlllIllIlIIIIlIIlIIllIIIl.get(bl2).getRGB());
-        FontRegistry.getRobotoRegular13px().drawCenteredString(this.IIIllIllIlIlllllllIlIlIII, this.x + this.width / 2.0f, this.y + 2.0f, -1);
+        FontRegistry.getRobotoRegular13px().drawCenteredString(this.text, this.x + this.width / 2.0f, this.y + 2.0f, -1);
     }
 
     public void IlllIIIlIlllIllIlIIlllIlI(float f, float f2, boolean bl) {
@@ -68,10 +68,10 @@ public class GradientTextButton extends AbstractElement {
     }
 
     public String IlIlllIIIIllIllllIllIIlIl() {
-        return this.IIIllIllIlIlllllllIlIlIII;
+        return this.text;
     }
 
     public void lIIIIlIIllIIlIIlIIIlIIllI(String string) {
-        this.IIIllIllIlIlllllllIlIlIII = string;
+        this.text = string;
     }
 }

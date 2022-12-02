@@ -31,9 +31,9 @@ public class RadioStationElement
         }
         boolean bl2 = this.station.isPlay();
         if (bl2) {
-            GL11.glColor4f(0.95f, 0.72f, 0.15f, 1.0f);
+            Ref.getGlBridge().bridge$color(0.95f, 0.72f, 0.15f, 1.0f);
         } else {
-            GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         }
         boolean bl3 = CheatBreaker.getInstance().getRadioManager().getCurrentStation() == this.station;
         RenderUtil.drawIcon(bl2 ? this.startFilledIcon : this.starIcon, (float)5, this.width + (float)6, this.height + (float)5);

@@ -89,14 +89,14 @@ public class RadioElement extends DraggableElement {
                 ThreadDownloadImageDataBridge threadDownloadImageData = Ref.getInstanceCreator().createThreadDownloadImageData(null, station.getCoverURL(), this.dashIcon, null);
                 Ref.getMinecraft().bridge$getTextureManager().bridge$loadTexture(station.currentResource, threadDownloadImageData);
             }
-            GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
             ResourceLocationBridge location = station.currentResource == null ? this.dashIcon : station.currentResource;
             RenderUtil.drawIcon(location, this.IlIlllIIIIllIllllIllIIlIl / 2.0f, this.x, this.y);
             float f3 = this.x + (float)50;
             if (this.mc.bridge$getCurrentScreen() == OverlayGui.getInstance()) {
                 boolean bl2 = this.isMouseInside(f, f2) && f > this.x + (float)34 && f < this.x + (float)44 && f2 < this.y + this.IlIlllIIIIllIllllIllIIlIl;
                 if (!DashUtil.isPlayerNotNull()) {
-                    GL11.glColor4f(1.0f, 1.0f, 1.0f, bl2 ? 1.0f : 0.8f);
+                    Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, bl2 ? 1.0f : 0.8f);
                     RenderUtil.drawIcon(this.playIcon, (float)6, this.x + (float)34, this.y + 7.5f);
                 } else {
                     Ref.modified$drawRect(this.x + (float)36, this.y + (float)9, this.x + (float)38, this.y + this.IlIlllIIIIllIllllIllIIlIl - (float)11, bl2 ? -1 : -1342177281);
@@ -117,8 +117,8 @@ public class RadioElement extends DraggableElement {
             this.hovered = false;
         }
         if (this.hovered) {
-            GL11.glPushMatrix();
-            GL11.glEnable(3089);
+            Ref.getGlBridge().bridge$pushMatrix();
+            GL11.glEnable(3089); // GL_SCISSOR_TEST
             OverlayGui overlayGui = OverlayGui.getInstance();
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)this.x, (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl), (int)(this.x + this.width), (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl + (this.height - this.IlIlllIIIIllIllllIllIIlIl) * f4), (float)((int)((float)overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int)overlayGui.getScaledHeight());
             Ref.modified$drawRect(this.x, this.y + this.IlIlllIIIIllIllllIllIIlIl, this.x + this.width, this.y + this.height, -14540254);
@@ -131,8 +131,8 @@ public class RadioElement extends DraggableElement {
             this.slider.drawElement(f, f2, bl);
             this.filter.handleElementDraw(f, f2, bl);
             this.pin.handleElementDraw(f, f2, bl);
-            GL11.glDisable(3089);
-            GL11.glPopMatrix();
+            GL11.glDisable(3089); // GL_SCISSOR_TEST
+            Ref.getGlBridge().bridge$popMatrix();
         }
     }
 

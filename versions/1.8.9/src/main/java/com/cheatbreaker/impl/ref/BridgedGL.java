@@ -3,6 +3,9 @@ package com.cheatbreaker.impl.ref;
 import com.cheatbreaker.bridge.ext.GLBridge;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.lwjgl.util.glu.GLU;
 
 import java.nio.FloatBuffer;
@@ -59,5 +62,17 @@ public class BridgedGL implements GLBridge {
 
     public void bridge$gluPerspective(float v, float v1, float v2, float v3) {
         GLU.gluPerspective(v, v1, v2, v3);
+    }
+
+    public void bridge$blendFunc(int i, int i1) {
+        GlStateManager.blendFunc(i, i1);
+    }
+
+    public void bridge$pushMatrix() {
+        GlStateManager.pushMatrix();
+    }
+
+    public void bridge$popMatrix() {
+        GlStateManager.popMatrix();
     }
 }

@@ -100,14 +100,15 @@ public class OverlayGui extends AbstractGui {
 
     @Override
     public void drawMenu(float f, float f2) {
-        GL11.glClear(256);
+        GL11.glClear(0x100);
+        Ref.getGlBridge().bridge$enableAlphaTest();
         drawDefaultBackground();
         //this.lIIIIIIIIIlIllIIllIlIIlIl(this.getScaledWidth(), this.getScaledHeight()); gui blur
         Ref.modified$drawRect(0.0f, 0.0f, 140, this.getScaledHeight(), -14671840);
         Ref.modified$drawRect(140, 0.0f, 141, this.getScaledHeight(), -15395563);
         Ref.modified$drawRect(0.0f, 0.0f, 140, 28, -15395563);
         Ref.modified$drawRect(6, 6, 22, 22, Friend.getStatusColor(CheatBreaker.getInstance().getStatus()));
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         ResourceLocationBridge headLocation = CheatBreaker.getInstance().getHeadLocation(this.mc.bridge$getSession().bridge$getUsername());
         RenderUtil.drawIcon(headLocation, 7f, 7f, 7f);
         String username = this.mc.bridge$getSession().bridge$getUsername();
@@ -124,19 +125,20 @@ public class OverlayGui extends AbstractGui {
             boolean awayHovered = f > 42f && f < 58f;
             boolean busyHovered = f > 60f && f < 76f;
             boolean offlineHovered = f > 78f && f < 94f;
-            GL11.glColor4f(onlineHovered ? 0.35f : 0.15f, onlineHovered ? 0.35f :0.15f, onlineHovered ?0.35f :0.15f, 1.0f);
+            Ref.getGlBridge().bridge$color(onlineHovered ? 0.35f : 0.15f, onlineHovered ? 0.35f :0.15f, onlineHovered ?0.35f :0.15f, 1.0f);
             RenderUtil.drawIcon(headLocation, (float)7, (float)25, (float)7);
-            GL11.glColor4f(awayHovered ? 0.35f : 0.15f, awayHovered ? 0.35f :0.15f, awayHovered ? 0.35f :0.15f, 1.0f);
+            Ref.getGlBridge().bridge$color(awayHovered ? 0.35f : 0.15f, awayHovered ? 0.35f :0.15f, awayHovered ? 0.35f :0.15f, 1.0f);
             RenderUtil.drawIcon(headLocation, (float)7, (float)43, (float)7);
-            GL11.glColor4f(busyHovered ? 0.35f : 0.15f, busyHovered ? 0.35f :0.15f, busyHovered ? 0.35f :0.15f, 1.0f);
+            Ref.getGlBridge().bridge$color(busyHovered ? 0.35f : 0.15f, busyHovered ? 0.35f :0.15f, busyHovered ? 0.35f :0.15f, 1.0f);
             RenderUtil.drawIcon(headLocation, (float)7, (float)61, (float)7);
-            GL11.glColor4f(offlineHovered ? 0.35f : 0.15f, offlineHovered ? 0.35f :0.15f, offlineHovered ? 0.35f :0.15f, 1.0f);
+            Ref.getGlBridge().bridge$color(offlineHovered ? 0.35f : 0.15f, offlineHovered ? 0.35f :0.15f, offlineHovered ? 0.35f :0.15f, 1.0f);
             RenderUtil.drawIcon(headLocation, (float)7, (float)79, (float)7);
         }
         this.selectedElement.drawElement(f, f2, this.isMouseHovered(this.requestsButton, f, f2));
         Ref.modified$drawRect(69.5f, 28, 70.5f, (float)28 + this.friendsButton.getHeight(), -14869219);
         Ref.modified$drawRect(0.0f, (float)28 + this.friendsButton.getHeight(), 140, (float)28 + this.friendsButton.getHeight() + 1.0f, -15395563);
         this.drawElements(f, f2, this.friendsListElement, this.friendRequestsElement);
+        Ref.getGlBridge().bridge$disableAlphaTest();
     }
 
     @Override

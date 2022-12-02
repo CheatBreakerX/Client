@@ -1,12 +1,10 @@
 package com.cheatbreaker.client.ui.mainmenu;
 
 import com.cheatbreaker.bridge.client.MinecraftBridge;
-import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.client.renderer.texture.DynamicTextureBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.bridge.util.SessionBridge;
-import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.remote.GitCommitProperties;
 import com.cheatbreaker.client.ui.AbstractGui;
 import com.cheatbreaker.client.ui.fading.ColorFade;
@@ -16,6 +14,7 @@ import com.cheatbreaker.client.ui.mainmenu.element.TextButtonElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
+import com.cheatbreaker.main.CheatBreaker;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -144,9 +143,9 @@ public class MainMenuBase extends AbstractGui {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float delta) {
-        GL11.glDisable(3008);
-        this.renderSkybox();
-        GL11.glEnable(3008);
+        Ref.getGlBridge().bridge$disableAlphaTest();
+        Ref.getDrawingUtils().renderSkybox(this.panoramaImages, delta, this.width, this.height, panoramaTimer, this.panoramaBackgroundLocation);
+        Ref.getGlBridge().bridge$enableAlphaTest();
         super.drawScreen(mouseX, mouseY, delta);
     }
 
@@ -221,148 +220,6 @@ public class MainMenuBase extends AbstractGui {
                 this.mc.bridge$displayGuiScreen(new MainMenu());
             }
         }
-    }
-
-    private void drawPanorama(float speed) {
-        TessellatorBridge tessellator = Ref.getTessellator();
-        GL11.glMatrixMode(GL11.GL_PROJECTION);
-        GL11.glPushMatrix();
-        GL11.glLoadIdentity();
-        Ref.getGlBridge().bridge$gluPerspective(120.0F, 1.0F, 0.05F, 10.0F);
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
-        GL11.glPushMatrix();
-        GL11.glLoadIdentity();
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
-        GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glDisable(GL11.GL_ALPHA_TEST);
-        GL11.glDisable(GL11.GL_CULL_FACE);
-        GL11.glDepthMask(false);
-        Ref.getGlBridge().bridge$glBlendFunc(770, 771, 1, 0);
-        byte var5 = 8;
-
-        for (int var6 = 0; var6 < var5 * var5; ++var6) {
-            GL11.glPushMatrix();
-            float var7 = ((float) (var6 % var5) / (float) var5 - 0.5F) / 64.0F;
-            float var8 = ((float) (var6 / var5) / (float) var5 - 0.5F) / 64.0F;
-            float var9 = 0.0F;
-            GL11.glTranslatef(var7, var8, var9);
-            GL11.glRotatef(Ref.getUtils().bridge$MathHelper$sin(((float) panoramaTimer + speed) / 400.0F) * 25.0F + 20.0F, 1.0F, 0.0F, 0.0F);
-            GL11.glRotatef(-((float) panoramaTimer + speed) * 0.1F, 0.0F, 1.0F, 0.0F);
-
-            for (int var10 = 0; var10 < 6; ++var10) {
-                GL11.glPushMatrix();
-
-                if (var10 == 1) {
-                    GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-                }
-
-                if (var10 == 2) {
-                    GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-                }
-
-                if (var10 == 3) {
-                    GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
-                }
-
-                if (var10 == 4) {
-                    GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
-                }
-
-                if (var10 == 5) {
-                    GL11.glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
-                }
-
-                this.mc.bridge$getTextureManager().bridge$bindTexture(panoramaImages[var10]);
-                tessellator.bridge$startDrawingQuads();
-                tessellator.bridge$setColorRGBA_I(16777215, 255 / (var6 + 1));
-                float var11 = 0.0F;
-                tessellator.bridge$addVertexWithUV(-1.0D, -1.0D, 1.0D, 0.0F + var11, 0.0F + var11);
-                tessellator.bridge$addVertexWithUV(1.0D, -1.0D, 1.0D, 1.0F - var11, 0.0F + var11);
-                tessellator.bridge$addVertexWithUV(1.0D, 1.0D, 1.0D, 1.0F - var11, 1.0F - var11);
-                tessellator.bridge$addVertexWithUV(-1.0D, 1.0D, 1.0D, 0.0F + var11, 1.0F - var11);
-                tessellator.bridge$finish();
-                GL11.glPopMatrix();
-            }
-
-            GL11.glPopMatrix();
-            GL11.glColorMask(true, true, true, false);
-        }
-
-        tessellator.bridge$setTranslation(0.0D, 0.0D, 0.0D);
-        GL11.glColorMask(true, true, true, true);
-        GL11.glMatrixMode(GL11.GL_PROJECTION);
-        GL11.glPopMatrix();
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
-        GL11.glPopMatrix();
-        GL11.glDepthMask(true);
-        GL11.glEnable(GL11.GL_CULL_FACE);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-    }
-
-    /**
-     * Rotate and blurs the skybox view in the main menu
-     */
-    private void rotateAndBlurSkybox() {
-        this.mc.bridge$getTextureManager().bridge$bindTexture(this.panoramaBackgroundLocation);
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
-        GL11.glCopyTexSubImage2D(GL11.GL_TEXTURE_2D, 0, 0, 0, 0, 0, 256, 256);
-        GL11.glEnable(GL11.GL_BLEND);
-        Ref.getGlBridge().bridge$glBlendFunc(770, 771, 1, 0);
-        GL11.glColorMask(true, true, true, false);
-        TessellatorBridge tessellator = Ref.getTessellator();
-        tessellator.bridge$startDrawingQuads();
-        GL11.glDisable(GL11.GL_ALPHA_TEST);
-        byte var3 = 3;
-
-        for (int var4 = 0; var4 < var3; ++var4) {
-            tessellator.bridge$setColorRGBA_F(1.0F, 1.0F, 1.0F, 1.0F / (float) (var4 + 1));
-            int var5 = this.width;
-            int var6 = this.height;
-            float var7 = (float) (var4 - var3 / 2) / 256.0F;
-            tessellator.bridge$addVertexWithUV(var5, var6, Ref.getUtils().bridge$Gui$getZLevel(), 0.0F + var7, 1.0D);
-            tessellator.bridge$addVertexWithUV(var5, 0.0D, Ref.getUtils().bridge$Gui$getZLevel(), 1.0F + var7, 1.0D);
-            tessellator.bridge$addVertexWithUV(0.0D, 0.0D, Ref.getUtils().bridge$Gui$getZLevel(), 1.0F + var7, 0.0D);
-            tessellator.bridge$addVertexWithUV(0.0D, var6, Ref.getUtils().bridge$Gui$getZLevel(), 0.0F + var7, 0.0D);
-        }
-
-        tessellator.bridge$finish();
-        GL11.glEnable(GL11.GL_ALPHA_TEST);
-        GL11.glColorMask(true, true, true, true);
-    }
-
-    /**
-     * Renders the skybox in the main menu
-     */
-    private void renderSkybox() {
-        float p_73971_3_ = 1f;
-        this.mc.bridge$getFramebuffer().bridge$unbindFramebuffer();
-        GL11.glViewport(0, 0, 256, 256);
-        this.drawPanorama(p_73971_3_);
-        this.rotateAndBlurSkybox();
-        this.rotateAndBlurSkybox();
-        this.rotateAndBlurSkybox();
-        this.rotateAndBlurSkybox();
-        this.rotateAndBlurSkybox();
-        this.rotateAndBlurSkybox();
-        this.rotateAndBlurSkybox();
-        this.mc.bridge$getFramebuffer().bridge$bindFramebuffer(true);
-        GL11.glViewport(0, 0, this.mc.bridge$getDisplayWidth(), this.mc.bridge$getDisplayHeight());
-        TessellatorBridge tessellator = Ref.getTessellator();
-        tessellator.bridge$startDrawingQuads();
-        float var5 = this.width > this.height ? 120.0F / (float) this.width : 120.0F / (float) this.height;
-        float var6 = (float) this.height * var5 / 256.0F;
-        float var7 = (float) this.width * var5 / 256.0F;
-        tessellator.bridge$setColorRGBA_F(1.0F, 1.0F, 1.0F, 1.0F);
-        int var8 = this.width;
-        int var9 = this.height;
-        tessellator.bridge$addVertexWithUV(0.0D, var9, Ref.getUtils().bridge$Gui$getZLevel(), 0.5F - var6, 0.5F + var7);
-        tessellator.bridge$addVertexWithUV(var8, var9, Ref.getUtils().bridge$Gui$getZLevel(), 0.5F - var6, 0.5F - var7);
-        tessellator.bridge$addVertexWithUV(var8, 0.0D, Ref.getUtils().bridge$Gui$getZLevel(), 0.5F + var6, 0.5F - var7);
-        tessellator.bridge$addVertexWithUV(0.0D, 0.0D, Ref.getUtils().bridge$Gui$getZLevel(), 0.5F + var6, 0.5F + var7);
-        tessellator.bridge$finish();
     }
 
     public void login(String string) {

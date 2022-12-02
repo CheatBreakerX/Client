@@ -30,7 +30,7 @@ public class CBModulesGui extends CBGuiScreen {
     private final ResourceLocationBridge cogIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/cog-64.png");
     private final ResourceLocationBridge deleteIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/delete-64.png");
     private final List<CBModulePosition> positions = new ArrayList<>();
-    private final List<AbstractScrollableElement> IllIIlIIlllllIllIIIlllIII = new ArrayList();
+    private final List<AbstractScrollableElement> IllIIlIIlllllIllIIIlllIII = new ArrayList<>();
     private final List<ModulesGuiButtonElement> buttons = new ArrayList<>();
     private List<AbstractModule> modules;
     private ModulesGuiButtonElement showGuidesButton;
@@ -74,7 +74,6 @@ public class CBModulesGui extends CBGuiScreen {
         this.arrowKeyMoves = 0;
         instance = this;
         draggingModule = null;
-        IlIlllIIIIllIllllIllIIlIl = false;
         this.lIIIIllIIlIlIllIIIlIllIlI = null;
         this.currentScrollableElement = null;
         this.dataHolder = null;
@@ -111,7 +110,6 @@ public class CBModulesGui extends CBGuiScreen {
     public void updateScreen() {
         float f = 1.0f / CheatBreaker.getInstance().getScaleFactor();
         int n = (int)((float)this.width / f);
-        int n2 = (int)((float)this.height / f);
         this.lIIIIlIIllIIlIIlIIIlIIllI(n);
         if (!this.positions.isEmpty()) {
             boolean leftKey = Keyboard.isKeyDown(Keyboard.KEY_LEFT);
@@ -174,8 +172,8 @@ public class CBModulesGui extends CBGuiScreen {
                 float[] modulePoints = cBModule.getScaledPoints(scaledResolution, true);
                 float[] modulePoints2 = cBModule2.getScaledPoints(scaledResolution, true);
                 float[] selectedPoints = draggingModule.getScaledPoints(scaledResolution, true);
-                Rectangle rectangle = new Rectangle((int)(modulePoints[0] * (Float) cBModule.scale.getValue()), (int)(modulePoints[1] * ((Float)cBModule.scale.getValue()).floatValue()), (int)(cBModule.width * ((Float)cBModule.scale.getValue()).floatValue()), (int)(cBModule.height * ((Float)cBModule.scale.getValue()).floatValue()));
-                Rectangle rectangle2 = new Rectangle((int)(modulePoints2[0] * (Float) cBModule2.scale.getValue()), (int)(modulePoints2[1] * ((Float)cBModule2.scale.getValue()).floatValue()), (int)(cBModule2.width * ((Float)cBModule2.scale.getValue()).floatValue()), (int)(cBModule2.height * ((Float)cBModule2.scale.getValue()).floatValue()));
+                Rectangle rectangle = new Rectangle((int)(modulePoints[0] * (Float) cBModule.scale.getValue()), (int)(modulePoints[1] * (Float) cBModule.scale.getValue()), (int)(cBModule.width * (Float) cBModule.scale.getValue()), (int)(cBModule.height * (Float) cBModule.scale.getValue()));
+                Rectangle rectangle2 = new Rectangle((int)(modulePoints2[0] * (Float) cBModule2.scale.getValue()), (int)(modulePoints2[1] * (Float) cBModule2.scale.getValue()), (int)(cBModule2.width * (Float) cBModule2.scale.getValue()), (int)(cBModule2.height * (Float) cBModule2.scale.getValue()));
                 Rectangle rectangle3 = new Rectangle((int)(selectedPoints[0] * (Float) draggingModule.scale.getValue()), (int)(selectedPoints[1] * (Float) CBModulesGui.draggingModule.scale.getValue()), (int)(CBModulesGui.draggingModule.width * (Float) CBModulesGui.draggingModule.scale.getValue()), (int)(CBModulesGui.draggingModule.height * (Float) CBModulesGui.draggingModule.scale.getValue()));
                 try {
                     if (this.getIntersectionFloat(rectangle, rectangle3) > this.getIntersectionFloat(rectangle2, rectangle3)) {
@@ -283,8 +281,8 @@ public class CBModulesGui extends CBGuiScreen {
         }
         this.lIIIIlIIllIIlIIlIIIlIIllI(scaledResolution);
         boolean bl = true;
-        for (Object object2 : this.modules) {
-            boolean bl3 = this.lIIIIlIIllIIlIIlIIIlIIllI(scale, (AbstractModule)object2, scaledResolution, mouseX, mouseY, bl);
+        for (AbstractModule module : this.modules) {
+            boolean bl3 = this.lIIIIlIIllIIlIIlIIIlIIllI(scale, module, scaledResolution, mouseX, mouseY, bl);
             if (bl3) continue;
             bl = false;
         }

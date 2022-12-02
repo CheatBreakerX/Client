@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Utils {
@@ -61,5 +62,9 @@ public class Utils {
         }
 
         return toReturn;
+    }
+
+    public static <A> List<A> toList(A[] images) {
+        return new ArrayList<>(Arrays.asList(images));
     }
 }
