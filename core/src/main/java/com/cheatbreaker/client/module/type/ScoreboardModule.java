@@ -10,7 +10,6 @@ import com.cheatbreaker.client.event.type.RenderPreviewEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.module.ModuleRule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -35,30 +34,30 @@ public class ScoreboardModule extends AbstractModule {
         if (this.minecraft.bridge$getTheWorld().bridge$getScoreboard().bridge$func_96539_a(1) != null) {
             return;
         }
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         this.scaleAndTranslate(renderPreviewEvent.getResolution());
-        GL11.glTranslatef(this.isRemoveNumbers() ? (float) -12 : 2.0f, this.height, 0.0f);
+        Ref.getGlBridge().bridge$translate(this.isRemoveNumbers() ? (float) -12 : 2.0f, this.height, 0.0f);
         ScoreboardBridge scoreboard = Ref.getInstanceCreator().createScoreboard();
         ScoreObjectiveBridge objective = Ref.getInstanceCreator().createScoreObjective(scoreboard, "CheatBreaker", "DUMMY");
         objective.bridge$setDisplayName(EnumChatFormattingBridge.RED + "" + EnumChatFormattingBridge.BOLD + "Cheat" + EnumChatFormattingBridge.RESET + "" + EnumChatFormattingBridge.WHITE + "Breaker");
         scoreboard.bridge$func_96529_a("Steve", objective);
         scoreboard.bridge$func_96529_a("Alex", objective);
         this.drawObjective(objective, this.minecraft.bridge$getFontRenderer());
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
     private void renderReal(GuiDrawEvent guiDrawEvent) {
         if (!this.isRenderHud()) {
             return;
         }
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         this.scaleAndTranslate(guiDrawEvent.getResolution());
-        GL11.glTranslatef(this.isRemoveNumbers() ? (float) -12 : 2.0f, this.height, 0.0f);
+        Ref.getGlBridge().bridge$translate(this.isRemoveNumbers() ? (float) -12 : 2.0f, this.height, 0.0f);
         ScoreObjectiveBridge objective = this.minecraft.bridge$getTheWorld().bridge$getScoreboard().bridge$func_96539_a(1);
         if (objective != null) {
             this.drawObjective(objective, this.minecraft.bridge$getFontRenderer());
         }
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
     private void drawObjective(ScoreObjectiveBridge objective, FontRendererBridge fontRenderer) {

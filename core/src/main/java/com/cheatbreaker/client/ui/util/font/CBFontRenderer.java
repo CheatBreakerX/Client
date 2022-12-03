@@ -5,7 +5,6 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.main.CheatBreaker;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +69,7 @@ import java.util.List;
 		}
 
 		if (followMinecraftScale) {
-			GL11.glScalef(scale, scale, scale);
+			Ref.getGlBridge().bridge$scale(scale, scale, scale);
 			x *= (scaleFactor / 2.0f);
 			y *= (scaleFactor / 2.0f);
 		}
@@ -109,22 +108,22 @@ import java.util.List;
 		y = (y - 3.0D) * 2.0D;
 
 		if (render) {
-			GL11.glPushMatrix();
+			Ref.getGlBridge().bridge$pushMatrix();
 
-			GL11.glColor4f(1.0F,  1.0F, 1.0F, 1.0F);
+			Ref.getGlBridge().bridge$color(1.0F,  1.0F, 1.0F, 1.0F);
 
-			GL11.glScaled(0.5D, 0.5D, 0.5D);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(770, 771);
+			Ref.getGlBridge().bridge$scale(0.5f, 0.5f, 0.5f);
+			Ref.getGlBridge().bridge$enableBlend();
+			Ref.getGlBridge().bridge$blendFunc(770, 771);
 
-			GL11.glColor4f((color >> 16 & 0xFF) / 255.0F, (color >> 8 & 0xFF) / 255.0F,
+			Ref.getGlBridge().bridge$color((color >> 16 & 0xFF) / 255.0F, (color >> 8 & 0xFF) / 255.0F,
 					(color & 0xFF) / 255.0F, alpha);
 
 			int size = text.length();
 
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			Ref.getGlBridge().bridge$enableTexture2D();
 
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, tex.bridge$getGlTextureId());
+			Ref.getGlBridge().bridge$bindTexture(tex.bridge$getGlTextureId());
 
 			for (int i = 0; i < size; i++) {
 				char character = text.charAt(i);
@@ -144,7 +143,7 @@ import java.util.List;
 						underline = false;
 						strike = false;
 
-						GL11.glBindTexture(GL11.GL_TEXTURE_2D, tex.bridge$getGlTextureId());
+						Ref.getGlBridge().bridge$bindTexture(tex.bridge$getGlTextureId());
 
 						currentData = this.charData;
 
@@ -157,17 +156,17 @@ import java.util.List;
 						}
 
 						int cc = this.colorCode[colorIndex];
-						GL11.glColor4f((cc >> 16 & 0xFF) / 255.0F, (cc >> 8 & 0xFF) / 255.0F,
+						Ref.getGlBridge().bridge$color((cc >> 16 & 0xFF) / 255.0F, (cc >> 8 & 0xFF) / 255.0F,
 								(cc & 0xFF) / 255.0F, alpha);
 					} else if (colorIndex == 16) {
 					} else if (colorIndex == 17) {
 						bold = true;
 
 						if (italic) {
-							GL11.glBindTexture(GL11.GL_TEXTURE_2D, texItalicBold.bridge$getGlTextureId());
+							Ref.getGlBridge().bridge$bindTexture(texItalicBold.bridge$getGlTextureId());
 							currentData = this.boldItalicChars;
 						} else {
-							GL11.glBindTexture(GL11.GL_TEXTURE_2D, texBold.bridge$getGlTextureId());
+							Ref.getGlBridge().bridge$bindTexture(texBold.bridge$getGlTextureId());
 							currentData = this.boldChars;
 						}
 					} else if (colorIndex == 18) {
@@ -178,10 +177,10 @@ import java.util.List;
 						italic = true;
 
 						if (bold) {
-							GL11.glBindTexture(GL11.GL_TEXTURE_2D, texItalicBold.bridge$getGlTextureId());
+							Ref.getGlBridge().bridge$bindTexture(texItalicBold.bridge$getGlTextureId());
 							currentData = this.boldItalicChars;
 						} else {
-							GL11.glBindTexture(GL11.GL_TEXTURE_2D, texItalic.bridge$getGlTextureId());
+							Ref.getGlBridge().bridge$bindTexture(texItalic.bridge$getGlTextureId());
 							currentData = this.italicChars;
 						}
 					} else if (colorIndex == 21) {
@@ -189,17 +188,17 @@ import java.util.List;
 						italic = false;
 						underline = false;
 						strike = false;
-						GL11.glColor4f((color >> 16 & 0xFF) / 255.0F, (color >> 8 & 0xFF) / 255.0F,
+						Ref.getGlBridge().bridge$color((color >> 16 & 0xFF) / 255.0F, (color >> 8 & 0xFF) / 255.0F,
 								(color & 0xFF) / 255.0F, alpha);
-						GL11.glBindTexture(GL11.GL_TEXTURE_2D, tex.bridge$getGlTextureId());
+						Ref.getGlBridge().bridge$bindTexture(tex.bridge$getGlTextureId());
 						currentData = this.charData;
 					}
 
 					i++;
 				} else if ((character < currentData.length) && (character >= 0)) {
-					GL11.glBegin(GL11.GL_TRIANGLES);
+					Ref.getGlBridge().bridge$begin(4); // GL_TRIANGLES
 					drawChar(currentData, character, (float) x, (float) y + 6F);
-					GL11.glEnd();
+					Ref.getGlBridge().bridge$end();
 
 					if (strike) {
 						drawLine(x, y + currentData[character].height / 2, x + currentData[character].width - 8.0D,
@@ -215,13 +214,13 @@ import java.util.List;
 				}
 			}
 
-			GL11.glHint(GL11.GL_POLYGON_SMOOTH_HINT, GL11.GL_DONT_CARE);
-			GL11.glPopMatrix();
+			Ref.getGlBridge().bridge$hint(0xC53 /* GL_POLYGON_SMOOTH_HINT */, 0x1100 /* GL_DONT_CARE */);
+			Ref.getGlBridge().bridge$popMatrix();
 		}
 
 		// START SCALE FIX
 		if (followMinecraftScale) {
-			GL11.glScalef(scaleFactor / 2.0f, scaleFactor / 2.0f, scaleFactor / 2.0f);
+			Ref.getGlBridge().bridge$scale(scaleFactor / 2.0f, scaleFactor / 2.0f, scaleFactor / 2.0f);
 		}
 		// END SCALE FIX
 
@@ -357,13 +356,13 @@ import java.util.List;
 	}
 
 	private void drawLine(double x, double y, double x1, double y1) {
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glLineWidth(1.0f);
-		GL11.glBegin(GL11.GL_LINES);
-		GL11.glVertex2d(x, y);
-		GL11.glVertex2d(x1, y1);
-		GL11.glEnd();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		Ref.getGlBridge().bridge$disableTexture2D();
+		Ref.getGlBridge().bridge$lineWidth(1.0f);
+		Ref.getGlBridge().bridge$begin(1); // GL_LINES
+		Ref.getGlBridge().bridge$vertex2d(x, y);
+		Ref.getGlBridge().bridge$vertex2d(x1, y1);
+		Ref.getGlBridge().bridge$end();
+		Ref.getGlBridge().bridge$enableTexture2D();
 	}
 
 	public String lIIIIIIIIIlIllIIllIlIIlIl(String string, double width) {

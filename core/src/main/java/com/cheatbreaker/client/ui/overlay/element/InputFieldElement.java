@@ -6,7 +6,6 @@ import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
 import com.cheatbreaker.client.ui.overlay.StringSanitizer;
 import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
-import org.lwjgl.opengl.GL11;
 
 public class InputFieldElement extends AbstractElement {
     private final CBFontRenderer fontRenderer;
@@ -361,18 +360,18 @@ public class InputFieldElement extends AbstractElement {
             f = this.x + this.width;
         }
         TessellatorBridge tessellator = Ref.getTessellator();
-        GL11.glColor4f(0.0f, 0.0f, (float)255, (float)255);
-        GL11.glDisable(3553);
-        GL11.glEnable(3058);
-        GL11.glLogicOp(5387);
+        Ref.getGlBridge().bridge$color(0.0f, 0.0f, (float)255, (float)255);
+        Ref.getGlBridge().bridge$disableTexture2D();
+        Ref.getGlBridge().bridge$enableColorLogic();
+        Ref.getGlBridge().bridge$colorLogicOp(5387);
         tessellator.bridge$startDrawingQuads();
         tessellator.bridge$addVertex(f, f4, 0.0);
         tessellator.bridge$addVertex(f3, f4, 0.0);
         tessellator.bridge$addVertex(f3, f2, 0.0);
         tessellator.bridge$addVertex(f, f2, 0.0);
         tessellator.bridge$finish();
-        GL11.glDisable(3058);
-        GL11.glEnable(3553);
+        Ref.getGlBridge().bridge$disableColorLogic();
+        Ref.getGlBridge().bridge$enableTexture2D();
     }
 
     public void trimToLength(int n) {

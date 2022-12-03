@@ -4,7 +4,6 @@ import com.cheatbreaker.bridge.client.renderer.texture.DynamicTextureBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.main.CheatBreaker;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -140,23 +139,23 @@ import java.io.InputStream;
 		float renderSRCWidth = srcWidth / imgSize;
 		float renderSRCHeight = srcHeight / imgSize;
 
-		GL11.glTexCoord2f(renderSRCX + renderSRCWidth, renderSRCY);
-		GL11.glVertex2d(x + width, y);
+		Ref.getGlBridge().bridge$texCoord2f(renderSRCX + renderSRCWidth, renderSRCY);
+		Ref.getGlBridge().bridge$vertex2d(x + width, y);
 
-		GL11.glTexCoord2f(renderSRCX, renderSRCY);
-		GL11.glVertex2d(x, y);
+		Ref.getGlBridge().bridge$texCoord2f(renderSRCX, renderSRCY);
+		Ref.getGlBridge().bridge$vertex2d(x, y);
 
-		GL11.glTexCoord2f(renderSRCX, renderSRCY + renderSRCHeight);
-		GL11.glVertex2d(x, y + height);
+		Ref.getGlBridge().bridge$texCoord2f(renderSRCX, renderSRCY + renderSRCHeight);
+		Ref.getGlBridge().bridge$vertex2d(x, y + height);
 
-		GL11.glTexCoord2f(renderSRCX, renderSRCY + renderSRCHeight);
-		GL11.glVertex2d(x, y + height);
+		Ref.getGlBridge().bridge$texCoord2f(renderSRCX, renderSRCY + renderSRCHeight);
+		Ref.getGlBridge().bridge$vertex2d(x, y + height);
 
-		GL11.glTexCoord2f(renderSRCX + renderSRCWidth, renderSRCY + renderSRCHeight);
-		GL11.glVertex2d(x + width, y + height);
+		Ref.getGlBridge().bridge$texCoord2f(renderSRCX + renderSRCWidth, renderSRCY + renderSRCHeight);
+		Ref.getGlBridge().bridge$vertex2d(x + width, y + height);
 
-		GL11.glTexCoord2f(renderSRCX + renderSRCWidth, renderSRCY);
-		GL11.glVertex2d(x + width, y);
+		Ref.getGlBridge().bridge$texCoord2f(renderSRCX + renderSRCWidth, renderSRCY);
+		Ref.getGlBridge().bridge$vertex2d(x + width, y);
 	}
 
 	public int getHeight() {

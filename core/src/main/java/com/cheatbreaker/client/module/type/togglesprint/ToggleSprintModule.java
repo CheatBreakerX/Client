@@ -6,7 +6,6 @@ import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
-import org.lwjgl.opengl.GL11;
 
 public class ToggleSprintModule extends AbstractModule {
 
@@ -68,12 +67,12 @@ public class ToggleSprintModule extends AbstractModule {
             return;
         }
         if ((Boolean) showHudText.getValue() && ((Boolean) showWhileTyping.getValue() || !(this.minecraft.bridge$getCurrentScreen() instanceof GuiChatBridge))) {
-            GL11.glPushMatrix();
+            Ref.getGlBridge().bridge$pushMatrix();
             int n = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(Ref.getUtils().getToggleSprintInputHelper().getToggleSprintString());
             this.setDimensions(n, 18);
             this.scaleAndTranslate(guiDrawEvent.getResolution());
             this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(Ref.getUtils().getToggleSprintInputHelper().getToggleSprintString(), 0, 0, this.textColor.getColorValue());
-            GL11.glPopMatrix();
+            Ref.getGlBridge().bridge$popMatrix();
         } else {
             this.setDimensions(50, 18);
         }

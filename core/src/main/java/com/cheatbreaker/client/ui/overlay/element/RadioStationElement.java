@@ -8,7 +8,6 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.dash.DashUtil;
 import com.cheatbreaker.client.util.dash.Station;
-import org.lwjgl.opengl.GL11;
 
 public class RadioStationElement
         extends AbstractElement {

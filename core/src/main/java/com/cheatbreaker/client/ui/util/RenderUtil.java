@@ -3,7 +3,6 @@ package com.cheatbreaker.client.ui.util;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
-import org.lwjgl.opengl.GL11;
 
 public class RenderUtil {
     protected static float zLevel = 0.0f;
@@ -24,19 +23,19 @@ public class RenderUtil {
         float height = size * 2.0f;
         float f6 = 0.0f;
         float f7 = 0.0f;
-        GL11.glEnable(3042);
+        Ref.getGlBridge().bridge$enableBlend();
         Ref.getMinecraft().bridge$getTextureManager().bridge$bindTexture(location);
-        GL11.glBegin(7);
-        GL11.glTexCoord2d(f6 / size, f7 / size);
-        GL11.glVertex2d(x, y);
-        GL11.glTexCoord2d(f6 / size, (f7 + size) / size);
-        GL11.glVertex2d(x, y + height);
-        GL11.glTexCoord2d((f6 + size) / size, (f7 + size) / size);
-        GL11.glVertex2d(x + width, y + height);
-        GL11.glTexCoord2d((f6 + size) / size, f7 / size);
-        GL11.glVertex2d(x + width, y);
-        GL11.glEnd();
-        GL11.glDisable(3042);
+        Ref.getGlBridge().bridge$begin(7);
+        Ref.getGlBridge().bridge$texCoord2d(f6 / size, f7 / size);
+        Ref.getGlBridge().bridge$vertex2d(x, y);
+        Ref.getGlBridge().bridge$texCoord2d(f6 / size, (f7 + size) / size);
+        Ref.getGlBridge().bridge$vertex2d(x, y + height);
+        Ref.getGlBridge().bridge$texCoord2d((f6 + size) / size, (f7 + size) / size);
+        Ref.getGlBridge().bridge$vertex2d(x + width, y + height);
+        Ref.getGlBridge().bridge$texCoord2d((f6 + size) / size, f7 / size);
+        Ref.getGlBridge().bridge$vertex2d(x + width, y);
+        Ref.getGlBridge().bridge$end();
+        Ref.getGlBridge().bridge$disableBlend();
     }
 
     public static void drawIcon(String location, float size, float x, float y) {
@@ -47,26 +46,26 @@ public class RenderUtil {
         float f5 = f3 / 2.0f;
         float f6 = 0.0f;
         float f7 = 0.0f;
-        GL11.glEnable(3042);
+        Ref.getGlBridge().bridge$enableBlend();
         Ref.getMinecraft().bridge$getTextureManager().bridge$bindTexture(location);
-        GL11.glBegin(7);
-        GL11.glTexCoord2d(f6 / f5, f7 / f5);
-        GL11.glVertex2d(f, f2);
-        GL11.glTexCoord2d(f6 / f5, (f7 + f5) / f5);
-        GL11.glVertex2d(f, f2 + f4);
-        GL11.glTexCoord2d((f6 + f5) / f5, (f7 + f5) / f5);
-        GL11.glVertex2d(f + f3, f2 + f4);
-        GL11.glTexCoord2d((f6 + f5) / f5, f7 / f5);
-        GL11.glVertex2d(f + f3, f2);
-        GL11.glEnd();
-        GL11.glDisable(3042);
+        Ref.getGlBridge().bridge$begin(7);
+        Ref.getGlBridge().bridge$texCoord2d(f6 / f5, f7 / f5);
+        Ref.getGlBridge().bridge$vertex2d(f, f2);
+        Ref.getGlBridge().bridge$texCoord2d(f6 / f5, (f7 + f5) / f5);
+        Ref.getGlBridge().bridge$vertex2d(f, f2 + f4);
+        Ref.getGlBridge().bridge$texCoord2d((f6 + f5) / f5, (f7 + f5) / f5);
+        Ref.getGlBridge().bridge$vertex2d(f + f3, f2 + f4);
+        Ref.getGlBridge().bridge$texCoord2d((f6 + f5) / f5, f7 / f5);
+        Ref.getGlBridge().bridge$vertex2d(f + f3, f2);
+        Ref.getGlBridge().bridge$end();
+        Ref.getGlBridge().bridge$disableBlend();
     }
 
     public static void lIIIIlIIllIIlIIlIIIlIIllI(int x, int y, int width, int height, float f, int n5) {
         int n6 = height - y;
         int n7 = width - x;
         int n8 = n5 - height;
-        GL11.glScissor((int)((float)x * f), (int)((float)n8 * f), (int)((float)n7 * f), (int)((float)n6 * f));
+        Ref.getGlBridge().bridge$scissor((int)((float)x * f), (int)((float)n8 * f), (int)((float)n7 * f), (int)((float)n6 * f));
     }
 
     public static void drawRoundedRect(double left, double top, double right, double bottom, double rounding, int color) {
@@ -76,39 +75,39 @@ public class RenderUtil {
         float g = (float)(color >> 8 & 0xFF) / (float)255;
         float b = (float)(color & 0xFF) / (float)255;
 
-        GL11.glPushAttrib(0);
-        GL11.glScaled(0.5, 0.5, 0.5);
+        Ref.getGlBridge().bridge$pushAttrib(0);
+        Ref.getGlBridge().bridge$scale(0.5f, 0.5f, 0.5f);
 
         left *= 2;
         top *= 2;
         right *= 2;
         bottom *= 2;
 
-        GL11.glEnable(3042);
-        GL11.glDisable(3553);
-        GL11.glColor4f(r, g, b, a);
-        GL11.glEnable(2848);
-        GL11.glBegin(9);
+        Ref.getGlBridge().bridge$enableBlend();
+        Ref.getGlBridge().bridge$disableTexture2D();
+        Ref.getGlBridge().bridge$color(r, g, b, a);
+        Ref.getGlBridge().bridge$enableLineSmooth();
+        Ref.getGlBridge().bridge$begin(9);
         for (i = 0; i <= 90; i += 3) {
-            GL11.glVertex2d(left + rounding + Math.sin((double)i * (Math.PI) / 180) * (rounding * -1), top + rounding + Math.cos((double)i * (Math.PI) / 180) * (rounding * -1));
+            Ref.getGlBridge().bridge$vertex2d(left + rounding + Math.sin((double)i * (Math.PI) / 180) * (rounding * -1), top + rounding + Math.cos((double)i * (Math.PI) / 180) * (rounding * -1));
         }
         for (i = 90; i <= 180; i += 3) {
-            GL11.glVertex2d(left + rounding + Math.sin((double)i * (Math.PI) / 180) * (rounding * -1), bottom - rounding + Math.cos((double)i * (Math.PI) / 180) * (rounding * -1));
+            Ref.getGlBridge().bridge$vertex2d(left + rounding + Math.sin((double)i * (Math.PI) / 180) * (rounding * -1), bottom - rounding + Math.cos((double)i * (Math.PI) / 180) * (rounding * -1));
         }
         for (i = 0; i <= 90; i += 3) {
-            GL11.glVertex2d(right - rounding + Math.sin((double)i * (Math.PI) / 180) * rounding, bottom - rounding + Math.cos((double)i * (Math.PI) / 180) * rounding);
+            Ref.getGlBridge().bridge$vertex2d(right - rounding + Math.sin((double)i * (Math.PI) / 180) * rounding, bottom - rounding + Math.cos((double)i * (Math.PI) / 180) * rounding);
         }
         for (i = 90; i <= 180; i += 3) {
-            GL11.glVertex2d(right - rounding + Math.sin((double)i * (Math.PI) / 180) * rounding, top + rounding + Math.cos((double)i * (Math.PI) / 180) * rounding);
+            Ref.getGlBridge().bridge$vertex2d(right - rounding + Math.sin((double)i * (Math.PI) / 180) * rounding, top + rounding + Math.cos((double)i * (Math.PI) / 180) * rounding);
         }
-        GL11.glEnd();
-        GL11.glEnable(3553);
-        GL11.glDisable(3042);
-        GL11.glDisable(2848);
-        GL11.glDisable(3042);
-        GL11.glEnable(3553);
-        GL11.glScaled(2, 2, 2);
-        GL11.glPopAttrib();
+        Ref.getGlBridge().bridge$end();
+        Ref.getGlBridge().bridge$enableTexture2D();
+        Ref.getGlBridge().bridge$disableBlend();
+        Ref.getGlBridge().bridge$disableLineSmooth();
+        Ref.getGlBridge().bridge$disableBlend();
+        Ref.getGlBridge().bridge$enableTexture2D();
+        Ref.getGlBridge().bridge$scale(2, 2, 2);
+        Ref.getGlBridge().bridge$popAttrib();
     }
 
     public static void lIIIIlIIllIIlIIlIIIlIIllI(double d, double d2, double d3) {
@@ -124,14 +123,14 @@ public class RenderUtil {
             tessellator.bridge$addVertex(d + d3 * Math.cos(-d6), d2 + d3 * Math.sin(-d6), zLevel);
         }
         tessellator.bridge$finish();
-        GL11.glEnable(3553);
-        GL11.glDisable(3042);
+        Ref.getGlBridge().bridge$enableTexture2D();
+        Ref.getGlBridge().bridge$disableBlend();
     }
 
     public static void lIIIIlIIllIIlIIlIIIlIIllI(double d, double d2, double d3, double d4, double d5, int n, double d6) {
-        GL11.glEnable(3042);
-        GL11.glDisable(3553);
-        GL11.glEnable(2848);
+        Ref.getGlBridge().bridge$enableBlend();
+        Ref.getGlBridge().bridge$disableTexture2D();
+        Ref.getGlBridge().bridge$enableLineSmooth();
         d5 = (d5 + (double)n) % (double)n;
         TessellatorBridge tessellator = Ref.getTessellator();
         for (double d7 = (double)360 / (double)n * d5; d7 < (double)360 / (double)n * (d5 + d6); d7 += 1.0) {
@@ -146,11 +145,11 @@ public class RenderUtil {
             tessellator.bridge$addVertex(d + arrd[0], d2 + arrd[1], 0.0);
             tessellator.bridge$finish();
         }
-        GL11.glEnable(3553);
-        GL11.glDisable(3042);
-        GL11.glDisable(2848);
-        GL11.glDisable(3042);
-        GL11.glEnable(3553);
+        Ref.getGlBridge().bridge$enableTexture2D();
+        Ref.getGlBridge().bridge$disableBlend();
+        Ref.getGlBridge().bridge$disableLineSmooth();
+        Ref.getGlBridge().bridge$disableBlend();
+        Ref.getGlBridge().bridge$enableTexture2D();
     }
 
     public static void drawHorizontalLine(float left, float right, float top, int color) {
@@ -172,7 +171,7 @@ public class RenderUtil {
     }
 
     public static void lIIIIlIIllIIlIIlIIIlIIllI(float f, float f2, float f3, float f4, int n, int n2, int n3) {
-        GL11.glScalef(0.5f, 0.5f, 0.5f);
+        Ref.getGlBridge().bridge$scale(0.5f, 0.5f, 0.5f);
         Ref.modified$drawGradientRect((f *= 2.0f) + 1.0f, (f2 *= 2.0f) + 1.0f, (f3 *= 2.0f) - 1.0f, (f4 *= 2.0f) - 1.0f, n2, n3);
         RenderUtil.drawVerticalLine(f, f2 + 1.0f, f4 - 2.0f, n);
         RenderUtil.drawVerticalLine(f3 - 1.0f, f2 + 1.0f, f4 - 2.0f, n);
@@ -182,7 +181,7 @@ public class RenderUtil {
         RenderUtil.drawHorizontalLine(f3 - 2.0f, f3 - 2.0f, f2 + 1.0f, n);
         RenderUtil.drawHorizontalLine(f3 - 2.0f, f3 - 2.0f, f4 - 2.0f, n);
         RenderUtil.drawHorizontalLine(f + 1.0f, f + 1.0f, f4 - 2.0f, n);
-        GL11.glScalef(2.0f, 2.0f, 2.0f);
+        Ref.getGlBridge().bridge$scale(2.0f, 2.0f, 2.0f);
     }
 
     public static long timeOfPreviousFrame = 0L;

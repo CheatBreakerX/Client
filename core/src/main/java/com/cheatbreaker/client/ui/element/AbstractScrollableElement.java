@@ -1,9 +1,9 @@
 package com.cheatbreaker.client.ui.element;
 
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 
 public abstract class AbstractScrollableElement extends AbstractModulesGuiElement {
     public int lIIIIllIIlIlIllIIIlIllIlI = 0;
@@ -53,14 +53,14 @@ public abstract class AbstractScrollableElement extends AbstractModulesGuiElemen
                 this.IllIIIIIIIlIlIllllIIllIII = 0.0;
             }
         }
-        GL11.glPushMatrix();
-        GL11.glTranslatef(0.0f, this.lIIIIllIIlIlIllIIIlIllIlI, 0.0f);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$translate(0.0f, this.lIIIIllIIlIlIllIIIlIllIlI, 0.0f);
     }
 
     public void postDraw(int n, int n2) {
         boolean bl;
         this.lIIlIlIllIIlIIIlIIIlllIII = true;
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
         boolean bl2 = bl = this.IlllIllIlIIIIlIIlIIllIIIl > this.height;
         if (!(!this.hovered || Mouse.isButtonDown(0) && this.isMouseInside(n, n2))) {
             this.hovered = false;

@@ -5,7 +5,6 @@ import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
-import org.lwjgl.opengl.GL11;
 
 public class FPSModule extends AbstractModule {
 
@@ -28,7 +27,7 @@ public class FPSModule extends AbstractModule {
         if (!this.isRenderHud()) {
             return;
         }
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         this.scaleAndTranslate(drawEvent.getResolution());
         if ((Boolean) this.showBackground.getValue()) {
             this.setDimensions(56, 18);
@@ -40,6 +39,6 @@ public class FPSModule extends AbstractModule {
             this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string, (int)(this.width / 2.0f - (float)(this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) / 2)), 3, this.textColor.getColorValue());
             this.setDimensions(this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string), 18);
         }
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 }

@@ -13,7 +13,6 @@ import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.achievement.GuiAchievements;
 import net.minecraft.client.gui.achievement.GuiStats;
 import net.minecraft.client.resources.I18n;
-import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -139,14 +138,14 @@ public class MixinGuiIngameMenu extends GuiScreen {
             float f = 18;
             double d3 = d / (double)2 - (double)f;
             double d4 = this.buttonList.size() > 2 ? (double)(((GuiButton)this.buttonList.get(1)).yPosition - f - (float)32) : (double)-100;
-            GL11.glPushMatrix();
-            GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-            GL11.glTranslatef((float)d3, (float)d4, 1.0f);
-            GL11.glTranslatef(f, f, f);
-            GL11.glRotatef((float)180 * this.rotatingFade.getCurrentValue(), 0.0f, 0.0f, 1.0f);
-            GL11.glTranslatef(-f, -f, -f);
+            Ref.getGlBridge().bridge$pushMatrix();
+            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
+            Ref.getGlBridge().bridge$translate((float)d3, (float)d4, 1.0f);
+            Ref.getGlBridge().bridge$translate(f, f, f);
+            Ref.getGlBridge().bridge$rotate((float)180 * this.rotatingFade.getCurrentValue(), 0.0f, 0.0f, 1.0f);
+            Ref.getGlBridge().bridge$translate(-f, -f, -f);
             RenderUtil.drawIcon(this.outerLogo, f, 0.0f, 0.0f);
-            GL11.glPopMatrix();
+            Ref.getGlBridge().bridge$popMatrix();
             RenderUtil.drawIcon(this.innerLogo, f, (float)d3, (float)d4);
         }
         catch (Exception exception) {

@@ -10,7 +10,6 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,7 +60,7 @@ public class VoiceChat {
         } else {
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f, f2, f + (float)110, f2 + (float)18, -1356454362, -1355664846, -1356191190);
         }
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         ResourceLocationBridge location = CheatBreaker.getInstance().getHeadLocation(string);
         RenderUtil.drawIcon(location, (float)7, f + 2.0f, f2 + 2.0f);
         FontRegistry.getPlayRegular16px().drawString(string, f + (float)22, f2 + (float)4, -1);

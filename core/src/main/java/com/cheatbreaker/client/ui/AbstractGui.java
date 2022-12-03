@@ -6,7 +6,6 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,10 +38,10 @@ public abstract class AbstractGui extends CBGuiScreen {
     @Override
     public void drawScreen(int mouseX, int mouseY, float delta) {
         final float scaleFactor = getScaleFactor();
-        GL11.glPushMatrix();
-        GL11.glScalef(scaleFactor, scaleFactor, scaleFactor);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$scale(scaleFactor, scaleFactor, scaleFactor);
         drawMenu(mouseX / scaleFactor, mouseY / scaleFactor);
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
     protected abstract void drawMenu(float mouseX, float mouseY);

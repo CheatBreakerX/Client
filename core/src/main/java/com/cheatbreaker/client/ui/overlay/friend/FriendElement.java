@@ -13,7 +13,6 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.friend.Friend;
 import com.cheatbreaker.client.util.friend.FriendsManager;
 import com.cheatbreaker.client.websocket.client.WSPacketClientFriendRemove;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.List;
@@ -38,7 +37,7 @@ public class FriendElement extends AbstractElement {
         if (bl && this.isMouseInside(f, f2)) {
             Ref.modified$drawRect(this.x, this.y, this.x + this.width, this.y + this.height, -13750738);
         }
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         FriendsManager friendsManager = CheatBreaker.getInstance().getFriendsManager();
         if (friendsManager.getUnreadMessages().containsKey(this.friend.getPlayerId())) {
             object = friendsManager.getUnreadMessages().get(this.friend.getPlayerId());
@@ -56,7 +55,7 @@ public class FriendElement extends AbstractElement {
         Ref.modified$drawRect(this.x, this.y + this.height, this.x + this.width, this.y + this.height + 9.9f * 0.050505053f, -1357572843);
         Ref.modified$drawRect(this.x + (float)4, this.y + (float)3, this.x + (float)20, this.y + (float)19, this.friend.isOnline() ? Friend.getStatusColor(this.friend.getOnlineStatus()) : -13158601);
         if (this.friend.getName().startsWith(EnumChatFormattingBridge.RED.toString())) {
-            GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
             RenderUtil.drawIcon(cheatBreakerIcon, 6.5f, this.x + (float)24, this.y + (float)4);
             FontRegistry.getPlayRegular16px().drawString(this.friend.getName(), this.x + (float)40, this.y + 2.0f, -1);
             FontRegistry.getPlayRegular16px().drawString(this.friend.getStatusString(), this.x + (float)40, this.y + (float)11, -5460820);
@@ -64,16 +63,16 @@ public class FriendElement extends AbstractElement {
             FontRegistry.getPlayRegular16px().drawString(this.friend.getName(), this.x + (float)24, this.y + 2.0f, -1);
             FontRegistry.getPlayRegular16px().drawString(this.friend.getStatusString(), this.x + (float)24, this.y + (float)11, -5460820);
         }
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         ResourceLocationBridge headLocation = CheatBreaker.getInstance().getHeadLocation(EnumChatFormattingBridge.getTextWithoutFormattingCodes(this.friend.getName()));
         RenderUtil.drawIcon(headLocation, (float)7, this.x + (float)5, this.y + (float)4);
         boolean bl2 = bl && this.isMouseInside(f, f2) && f > this.x + this.width - (float)20;
         float f3 = this.lIIIIllIIlIlIllIIIlIllIlI.lIIIIlIIllIIlIIlIIIlIIllI(bl2);
         float f4 = this.x + this.width - 20.5f * f3;
         Ref.modified$drawRect(f4, this.y, this.x + this.width, this.y + this.height, -52429);
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.4470588f * 0.6219512f);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.4470588f * 0.6219512f);
         RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(removeIcon, f4 + (float)4, this.y + (float)5, (float)12, 12);
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
     @Override

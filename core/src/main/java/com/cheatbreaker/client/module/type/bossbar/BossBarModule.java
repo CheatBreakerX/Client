@@ -7,7 +7,6 @@ import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.event.type.RenderPreviewEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
-import org.lwjgl.opengl.GL11;
 
 public class BossBarModule extends AbstractModule {
     private final ResourceLocationBridge icons = Ref.getInstanceCreator().createResourceLocation("textures/gui/icons.png");
@@ -22,7 +21,7 @@ public class BossBarModule extends AbstractModule {
     }
 
     public void renderPreview(RenderPreviewEvent renderPreviewEvent) {
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         this.scaleAndTranslate(renderPreviewEvent.getResolution());
         if (Ref.getBossStatus().bridge$getBossName() == null || Ref.getBossStatus().bridge$getStatusBarTime() <= 0) {
             this.minecraft.bridge$getTextureManager().bridge$bindTexture(this.icons);
@@ -39,15 +38,15 @@ public class BossBarModule extends AbstractModule {
             }
             String bossName = "Wither";
             fontRenderer.bridge$drawStringWithShadow(bossName, (int) (this.width / 2 - (fontRenderer.bridge$getStringWidth(bossName) / 2)), n5 - 10, 0xFFFFFF);
-            GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
             this.minecraft.bridge$getTextureManager().bridge$bindTexture(this.icons);
             this.setDimensions(182, 20);
         }
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
     public void renderReal(GuiDrawEvent guiDrawEvent) {
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         this.scaleAndTranslate(guiDrawEvent.getResolution());
         if (Ref.getBossStatus().bridge$getBossName() != null || Ref.getBossStatus().bridge$getStatusBarTime() > 0) {
             this.minecraft.bridge$getTextureManager().bridge$bindTexture(this.icons);
@@ -64,11 +63,11 @@ public class BossBarModule extends AbstractModule {
             }
             String bossName = Ref.getBossStatus().bridge$getBossName();
             fontRenderer.bridge$drawStringWithShadow(bossName, (int) (this.width / 2.0f - (float)(fontRenderer.bridge$getStringWidth(bossName) / 2)), n5 - 10, 0xFFFFFF);
-            GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
             this.minecraft.bridge$getTextureManager().bridge$bindTexture(this.icons);
             this.setDimensions(182, 20);
         }
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
 

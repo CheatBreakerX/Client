@@ -1,5 +1,6 @@
 package com.cheatbreaker.client.ui.overlay.friend;
 
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.mainmenu.element.ScrollableElement;
@@ -9,7 +10,6 @@ import com.cheatbreaker.client.ui.overlay.element.InputFieldElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.google.common.collect.ImmutableList;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +69,8 @@ public class FriendsListElement extends ElementListElement<FriendElement> {
             FontRegistry.getPlayRegular16px().drawCenteredString("Connection lost", this.x + this.width / 2.0f, this.y + (float)10, -1);
             FontRegistry.getPlayRegular16px().drawCenteredString("Please try again later.", this.x + this.width / 2.0f, this.y + (float)22, -1);
         } else {
-            GL11.glPushMatrix();
-            GL11.glEnable((int)3089);
+            Ref.getGlBridge().bridge$pushMatrix();
+            Ref.getGlBridge().bridge$enableScissoring();
             OverlayGui illlllIllIIIllIIIllIllIII = OverlayGui.getInstance();
             this.scrollableElement.drawScrollable(f, f2, bl);
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)this.x, (int)this.y, (int)(this.x + this.width), (int)(this.y + this.height), (float)((int)((float)illlllIllIIIllIIIllIllIII.getResolution().bridge$getScaleFactor() * illlllIllIIIllIIIllIllIII.getScaleFactor())), (int)illlllIllIIIllIIIllIllIII.getScaledHeight());
@@ -83,8 +83,8 @@ public class FriendsListElement extends ElementListElement<FriendElement> {
                 FontRegistry.getPlayRegular16px().drawCenteredString("No friends", this.x + this.width / 2.0f, this.y + (float)30, -1);
             }
             this.filterElement.drawElement(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), bl);
-            GL11.glDisable((int)3089);
-            GL11.glPopMatrix();
+            Ref.getGlBridge().bridge$disableScissoring();
+            Ref.getGlBridge().bridge$popMatrix();
             this.scrollableElement.handleElementDraw(f, f2, bl);
         }
     }

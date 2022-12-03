@@ -1,5 +1,6 @@
 package com.cheatbreaker.client.module.type.cooldowns;
 
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
@@ -9,7 +10,6 @@ import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
 import com.cheatbreaker.client.ui.module.CBModulePlaceGui;
 import com.cheatbreaker.client.ui.module.CBModulesGui;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,14 +60,14 @@ public class CooldownsModule extends AbstractModule {
             return;
         }
         if (real.isEmpty()) {
-            GL11.glPushMatrix();
+            Ref.getGlBridge().bridge$pushMatrix();
             if (this.fake.isEmpty()) {
                 fake.add(new CooldownRenderer("CombatTag", 283, 30000L));
                 fake.add(new CooldownRenderer("EnderPearl", 368, 12000L));
             }
             this.scaleAndTranslate(guiDrawEvent.getResolution());
             float f = 1.0f / CheatBreaker.getInstance().getScaleFactor();
-            GL11.glScalef(f, f, f);
+            Ref.getGlBridge().bridge$scale(f, f, f);
             boolean bl = ((String) listMode.getValue()).equalsIgnoreCase("vertical");
             int n = 36;
             int n2 = 36;
@@ -82,7 +82,7 @@ public class CooldownsModule extends AbstractModule {
                 }
                 cooldownRenderer2.lIIIIlIIllIIlIIlIIIlIIllI(this.colorTheme, i * n, 0.0f, this.coloredColor.getColorValue());
             }
-            GL11.glPopMatrix();
+            Ref.getGlBridge().bridge$popMatrix();
         }
     }
 
@@ -90,11 +90,11 @@ public class CooldownsModule extends AbstractModule {
         if (!this.isRenderHud()) {
             return;
         }
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         if (real.size() > 0) {
             this.scaleAndTranslate(guiDrawEvent.getResolution());
             float f = 1.0f / CheatBreaker.getInstance().getScaleFactor();
-            GL11.glScalef(f, f, f);
+            Ref.getGlBridge().bridge$scale(f, f, f);
             boolean bl = ((String) this.listMode.getValue()).equalsIgnoreCase("vertical");
             int n = 36;
             int n2 = 36;
@@ -113,7 +113,7 @@ public class CooldownsModule extends AbstractModule {
             this.setDimensions(50, 24);
             this.scaleAndTranslate(guiDrawEvent.getResolution());
         }
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
 }

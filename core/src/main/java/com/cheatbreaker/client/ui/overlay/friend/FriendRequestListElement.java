@@ -14,7 +14,6 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.websocket.client.WSPacketClientRequestsStatus;
 import com.cheatbreaker.client.websocket.shared.WSPacketFriendRequest;
 import com.google.common.collect.ImmutableList;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,8 +76,8 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
             FontRegistry.getPlayRegular16px().drawCenteredString("Connection lost", this.x + this.width / 2.0f, this.y + (float)10, -1);
             FontRegistry.getPlayRegular16px().drawCenteredString("Please try again later.", this.x + this.width / 2.0f, this.y + (float)22, -1);
         } else {
-            GL11.glPushMatrix();
-            GL11.glEnable((int)3089);
+            Ref.getGlBridge().bridge$pushMatrix();
+            Ref.getGlBridge().bridge$enableScissoring();
             OverlayGui illlllIllIIIllIIIllIllIII = OverlayGui.getInstance();
             this.scrollableElement.drawScrollable(f, f2, bl);
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)this.x, (int)this.y, (int)(this.x + this.width), (int)(this.y + this.height), (float)((int)((float)illlllIllIIIllIIIllIllIII.getResolution().bridge$getScaleFactor() * illlllIllIIIllIIIllIllIII.getScaleFactor())), (int)illlllIllIIIllIIIllIllIII.getScaledHeight());
@@ -94,8 +93,8 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
             this.username.drawElement(f, f2, true);
             this.addButton.drawElement(f, f2, true);
             this.toggleRequests.lIIIIlIIllIIlIIlIIIlIIllI((CheatBreaker.getInstance().isAcceptingFriendRequests() ? "Disable" : "Enable") + " incoming friend requests", f, f2, true);
-            GL11.glDisable((int)3089);
-            GL11.glPopMatrix();
+            Ref.getGlBridge().bridge$disableScissoring();
+            Ref.getGlBridge().bridge$popMatrix();
             this.scrollableElement.handleElementDraw(f, f2, bl);
         }
     }

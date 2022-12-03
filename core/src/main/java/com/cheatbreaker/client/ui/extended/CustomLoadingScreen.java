@@ -5,7 +5,6 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import lombok.Setter;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
@@ -26,15 +25,11 @@ public class CustomLoadingScreen extends CBGuiScreen {
         Ref.modified$drawRect(0f, 0f, sr.bridge$getScaledWidth(), sr.bridge$getScaledHeight(), 0xFF000000);
         Ref.modified$drawGradientRect(0f, 0f, sr.bridge$getScaledWidth(), sr.bridge$getScaledHeight(), startColor.getRGB(), endColor.getRGB());
 
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         float scale = 2f / sr.bridge$getScaleFactor();
-        float sWidth = sr.bridge$getScaledWidth() / scale;
-        float sHeight = sr.bridge$getScaledHeight() / scale;
-        GL11.glScalef(scale, scale, scale);
-
-        GL11.glPopMatrix();
-
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$scale(scale, scale, scale);
+        Ref.getGlBridge().bridge$popMatrix();
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         RenderUtil.drawIcon("client/logo_108.png", 27f, sr.bridge$getScaledWidth() / 2f - 27f, sr.bridge$getScaledHeight() / 2f - 112f);
 
         Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString(

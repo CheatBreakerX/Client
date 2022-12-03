@@ -3,7 +3,6 @@ package com.cheatbreaker.client.util.hologram;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.gui.FontRendererBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,20 +34,20 @@ public class Hologram {
                 float f3 = (float)(hologram.IlIlIIIlllIIIlIlllIlIllIl() - (double)((float)Ref.getRenderManager().bridge$getRenderPosZ()));
                 float f4 = 1.7391304f * 0.92f;
                 float f5 = 1.4081633f * 0.011835749f * f4;
-                GL11.glPushMatrix();
-                GL11.glTranslatef(f, f2, f3);
-                GL11.glNormal3f(0.0f, 1.0f, 0.0f);
-                GL11.glRotatef(-Ref.getRenderManager().bridge$getPlayerViewY(), 0.0f, 1.0f, 0.0f);
-                GL11.glRotatef(Ref.getRenderManager().bridge$getPlayerViewX(), 1.0f, 0.0f, 0.0f);
-                GL11.glScalef(-f5, -f5, f5);
-                GL11.glDisable(GL11.GL_LIGHTING);
-                GL11.glDepthMask(false);
-                GL11.glDisable(GL11.GL_DEPTH_TEST);
-                GL11.glEnable(GL11.GL_BLEND);
+                Ref.getGlBridge().bridge$pushMatrix();
+                Ref.getGlBridge().bridge$translate(f, f2, f3);
+                Ref.getGlBridge().bridge$normal3f(0f, 1f, 0f);
+                Ref.getGlBridge().bridge$rotate(-Ref.getRenderManager().bridge$getPlayerViewY(), 0.0f, 1.0f, 0.0f);
+                Ref.getGlBridge().bridge$rotate(Ref.getRenderManager().bridge$getPlayerViewX(), 1.0f, 0.0f, 0.0f);
+                Ref.getGlBridge().bridge$scale(-f5, -f5, f5);
+                Ref.getGlBridge().bridge$disableLighting();
+                Ref.getGlBridge().bridge$depthMask(false);
+                Ref.getGlBridge().bridge$disableDepthTest();
+                Ref.getGlBridge().bridge$enableBlend();
                 Ref.getGlBridge().bridge$glBlendFunc(770, 771, 1, 0);
                 TessellatorBridge tessellator = Ref.getTessellator();
                 int n = 0;
-                GL11.glDisable(GL11.GL_TEXTURE_2D);
+                Ref.getGlBridge().bridge$disableTexture2D();
                 tessellator.bridge$startDrawingQuads();
                 int n2 = fontRenderer.bridge$getStringWidth(string) / 2;
                 tessellator.bridge$setColorRGBA_F(0.0f, 0.0f, 0.0f, 0.6875f * 0.36363637f);
@@ -57,16 +56,16 @@ public class Hologram {
                 tessellator.bridge$addVertex(n2 + 1, 8 + n, 0.0);
                 tessellator.bridge$addVertex(n2 + 1, -1 + n, 0.0);
                 tessellator.bridge$finish();
-                GL11.glEnable(GL11.GL_TEXTURE_2D);
+                Ref.getGlBridge().bridge$enableTexture2D();
                 // lIIIIIIIIIlIllIIllIlIIlIl = drawString
                 fontRenderer.bridge$drawString(string, -fontRenderer.bridge$getStringWidth(string) / 2, n, 0x20FFFFFF);
-                GL11.glEnable(GL11.GL_DEPTH_TEST);
-                GL11.glDepthMask(true);
+                Ref.getGlBridge().bridge$enableDepthTest();
+                Ref.getGlBridge().bridge$depthMask(true);
                 fontRenderer.bridge$drawString(string, -fontRenderer.bridge$getStringWidth(string) / 2, n, -1);
-                GL11.glEnable(GL11.GL_LIGHTING);
-                GL11.glDisable(GL11.GL_BLEND);
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-                GL11.glPopMatrix();
+                Ref.getGlBridge().bridge$enableLighting();
+                Ref.getGlBridge().bridge$disableBlend();
+                Ref.getGlBridge().bridge$color(1.0F, 1.0F, 1.0F, 1.0F);
+                Ref.getGlBridge().bridge$popMatrix();
             }
         }
     }

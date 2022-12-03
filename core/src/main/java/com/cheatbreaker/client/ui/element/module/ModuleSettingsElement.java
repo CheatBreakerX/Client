@@ -9,7 +9,6 @@ import com.cheatbreaker.client.ui.element.AbstractScrollableElement;
 import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import org.lwjgl.opengl.GL11;
 
 public class ModuleSettingsElement extends AbstractModulesGuiElement {
     private final int IllIIIIIIIlIlIllllIIllIII;
@@ -49,7 +48,7 @@ public class ModuleSettingsElement extends AbstractModulesGuiElement {
                 Ref.modified$drawRect(this.x, (int)((float)this.y + ((float)this.height - (float)this.height * f2 / (float)100)), this.x + this.width, this.y + this.height, this.IllIIIIIIIlIlIllllIIllIII);
             }
         }
-        GL11.glColor4f(0.0f, 0.0f, 0.0f, 1.4385965f * 0.24329267f);
+        Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, 1.4385965f * 0.24329267f);
         RenderUtil.drawIcon(this.rightIcon, 1.9411765f * 1.2878788f, (float)(this.x + 6), (float)this.y + (float)6);
         FontRegistry.getPlayBold18px().drawString(this.module.getName().toUpperCase(), (float)this.x + (float)14, (float)this.y + (float)3, this.parent.lIIIIlIIllIIlIIlIIIlIIllI(this.module) ? (CheatBreaker.getInstance().globalSettings.isDarkMode() ? -1 : -818991313) : 0x2F2F2F2F);
     }

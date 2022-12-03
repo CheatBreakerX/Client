@@ -44,7 +44,7 @@ public class TeammatesModule {
             return;
         }
         IntBuffer intBuffer = BufferUtils.createIntBuffer(16);
-        GL11.glGetInteger(2978, intBuffer);
+        GL11.glGetInteger(2978, intBuffer); // VIEWPORT
         float f2 = (float)(this.minecraft.bridge$getThePlayer().bridge$getLastTickPosX() + (this.minecraft.bridge$getThePlayer().bridge$getPosX() - this.minecraft.bridge$getThePlayer().bridge$getLastTickPosX()) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) Ref.getRenderManager().bridge$getRenderPosX();
         float f3 = (float)(this.minecraft.bridge$getThePlayer().bridge$getLastTickPosY() + (this.minecraft.bridge$getThePlayer().bridge$getPosY() - this.minecraft.bridge$getThePlayer().bridge$getLastTickPosY()) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) Ref.getRenderManager().bridge$getRenderPosY();
         float f4 = (float)(this.minecraft.bridge$getThePlayer().bridge$getLastTickPosZ() + (this.minecraft.bridge$getThePlayer().bridge$getPosZ() - this.minecraft.bridge$getThePlayer().bridge$getLastTickPosZ()) * Ref.getMinecraft().bridge$getTimer().bridge$getRenderPartialTicks()) - (float) Ref.getRenderManager().bridge$getRenderPosZ();
@@ -126,8 +126,8 @@ public class TeammatesModule {
             ilIlIIlllIIIIIlIlIlIIIllI = IlIlIIlllIIIIIlIlIlIIIllI.IIIIllIlIIIllIlllIlllllIl;
             f4 = scaledResolution.bridge$getScaledWidth() - 6;
         }
-        GL11.glPushMatrix();
-        GL11.glTranslatef(f4, (float)scaledResolution.bridge$getScaledHeight() - f5, 0.0f);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$translate(f4, (float)scaledResolution.bridge$getScaledHeight() - f5, 0.0f);
         if (ilIlIIlllIIIIIlIlIlIIIllI != null) {
             if (((Boolean) CheatBreaker.getInstance().getGlobalSettings().showOffScreenMarker.getValue())) {
                 this.drawOffscreenMarker(ilIlllIlIlIIllllIlllIlIII, ilIlIIlllIIIIIlIlIlIIIllI, 0.0f, 0.0f);
@@ -138,24 +138,24 @@ public class TeammatesModule {
                 this.minecraft.bridge$getFontRenderer().bridge$drawString("(" + n + "m)", 0, 10, -1);
             }
         }
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
     private void drawOffscreenMarker(Teammate ilIlllIlIlIIllllIlllIlIII, IlIlIIlllIIIIIlIlIlIIIllI ilIlIIlllIIIIIlIlIlIIIllI, float translateX, float translateY) {
         TessellatorBridge tessellator = Ref.getTessellator();
-        GL11.glEnable(3042);
-        GL11.glDisable(3553);
+        Ref.getGlBridge().bridge$enableBlend();
+        Ref.getGlBridge().bridge$disableTexture2D();
         Ref.getGlBridge().bridge$glBlendFunc(770, 771, 1, 0);
         if (ilIlllIlIlIIllllIlllIlIII.IIIIllIIllIIIIllIllIIIlIl()) {
-            GL11.glColor4f(0.0f, 0.0f, 1.0f, 3.137931f * 0.21032967f);
+            Ref.getGlBridge().bridge$color(0.0f, 0.0f, 1.0f, 3.137931f * 0.21032967f);
         } else {
             Color color = ilIlllIlIlIIllllIlllIlIII.IlIlIIIlllIIIlIlllIlIllIl();
-            GL11.glColor4f((float)color.getRed() / (float)255, (float)color.getGreen() / (float)255, (float)color.getBlue() / (float)255, 0.61285716f * 1.0769231f);
+            Ref.getGlBridge().bridge$color((float)color.getRed() / (float)255, (float)color.getGreen() / (float)255, (float)color.getBlue() / (float)255, 0.61285716f * 1.0769231f);
         }
         float f3 = 8;
         float f4 = 10;
-        GL11.glPushMatrix();
-        GL11.glTranslatef(translateX, translateY, 0.0f);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$translate(translateX, translateY, 0.0f);
         switch (ilIlIIlllIIIIIlIlIlIIIllI) {
             case lIIIIIIIIIlIllIIllIlIIlIl: {
                 tessellator.bridge$startDrawingQuads();
@@ -193,44 +193,44 @@ public class TeammatesModule {
                 tessellator.bridge$finish();
             }
         }
-        GL11.glPopMatrix();
-        GL11.glEnable(3553);
-        GL11.glDisable(3042);
+        Ref.getGlBridge().bridge$popMatrix();
+        Ref.getGlBridge().bridge$enableTexture2D();
+        Ref.getGlBridge().bridge$disableBlend();
     }
 
     private void drawMarker(Teammate teammate, float f, float f2, float f3) {
         TessellatorBridge tessellator = Ref.getTessellator();
-        GL11.glEnable(3042);
-        GL11.glDisable(3553);
+        Ref.getGlBridge().bridge$enableBlend();
+        Ref.getGlBridge().bridge$disableTexture2D();
         Ref.getGlBridge().bridge$glBlendFunc(770, 771, 1, 0);
         if (teammate.IIIIllIIllIIIIllIllIIIlIl()) {
-            GL11.glColor4f(0.0f, 0.0f, 1.0f, 0.83837837f * 0.78723407f);
+            Ref.getGlBridge().bridge$color(0.0f, 0.0f, 1.0f, 0.83837837f * 0.78723407f);
         } else {
             Color color = teammate.IlIlIIIlllIIIlIlllIlIllIl();
-            GL11.glColor4f((float)color.getRed() / (float)255, (float)color.getGreen() / (float)255, (float)color.getBlue() / (float)255, 1.755102f * 0.37604654f);
+            Ref.getGlBridge().bridge$color((float)color.getRed() / (float)255, (float)color.getGreen() / (float)255, (float)color.getBlue() / (float)255, 1.755102f * 0.37604654f);
         }
-        GL11.glPushMatrix();
-        GL11.glScalef(0.9692308f * 0.61904764f, 1.1333333f * 0.5294118f, 1.2666667f * 0.47368422f);
-        GL11.glRotatef(45, 0.0f, 0.0f, 1.0f);
-        GL11.glTranslatef(f * 2.0f, 0.0f, 0.0f);
-        GL11.glRotatef(90, 0.0f, 0.0f, -1);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$scale(0.9692308f * 0.61904764f, 1.1333333f * 0.5294118f, 1.2666667f * 0.47368422f);
+        Ref.getGlBridge().bridge$rotate(45, 0.0f, 0.0f, 1.0f);
+        Ref.getGlBridge().bridge$translate(f * 2.0f, 0.0f, 0.0f);
+        Ref.getGlBridge().bridge$rotate(90, 0.0f, 0.0f, -1);
         tessellator.bridge$startDrawingQuads();
         tessellator.bridge$addVertex(-f, f2, 0.0);
         tessellator.bridge$addVertex(-f, f2 + f3 / 2.0f, 0.0);
         tessellator.bridge$addVertex(f, f2 + f3 / 2.0f, 0.0);
         tessellator.bridge$addVertex(f, f2, 0.0);
         tessellator.bridge$finish();
-        GL11.glRotatef(90, 0.0f, 0.0f, -1);
-        GL11.glTranslatef(f * 2.0f + 1.0f, f3 / 2.0f + 1.0f, 0.0f);
+        Ref.getGlBridge().bridge$rotate(90, 0.0f, 0.0f, -1);
+        Ref.getGlBridge().bridge$translate(f * 2.0f + 1.0f, f3 / 2.0f + 1.0f, 0.0f);
         tessellator.bridge$startDrawingQuads();
         tessellator.bridge$addVertex(-f / 2.0f + 1.0f, f2, 0.0);
         tessellator.bridge$addVertex(-f / 2.0f + 1.0f, f2 + f3 / 2.0f, 0.0);
         tessellator.bridge$addVertex(f, f2 + f3 / 2.0f, 0.0);
         tessellator.bridge$addVertex(f, f2, 0.0);
         tessellator.bridge$finish();
-        GL11.glPopMatrix();
-        GL11.glEnable(3553);
-        GL11.glDisable(3042);
+        Ref.getGlBridge().bridge$popMatrix();
+        Ref.getGlBridge().bridge$enableTexture2D();
+        Ref.getGlBridge().bridge$disableBlend();
     }
 
     public List<Teammate> lIIIIlIIllIIlIIlIIIlIIllI() {

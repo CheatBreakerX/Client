@@ -8,7 +8,6 @@ import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import org.lwjgl.opengl.GL11;
 
 public class ModulesGuiButtonElement
         extends AbstractModulesGuiElement {
@@ -55,11 +54,11 @@ public class ModulesGuiButtonElement
             Ref.modified$drawRect(this.x, (int)((float)this.y + ((float)this.height - (float)this.height * f2 / (float)100)), this.x + this.width, this.y + this.height, this.lIIIIlIIllIIlIIlIIIlIIllI);
         }
         if (this.displayString.contains(".png")) {
-            GL11.glPushMatrix();
+            Ref.getGlBridge().bridge$pushMatrix();
             float var1 = CheatBreaker.getInstance().globalSettings.isDarkMode() ? 1.0f : 0.0f;
-            GL11.glColor4f(var1, var1, var1, CheatBreaker.getInstance().globalSettings.isDarkMode() ? 1.0f : 0.45f);
+            Ref.getGlBridge().bridge$color(var1, var1, var1, CheatBreaker.getInstance().globalSettings.isDarkMode() ? 1.0f : 0.45f);
             RenderUtil.drawIcon(Ref.getInstanceCreator().createResourceLocation("client/icons/" + this.displayString), 8f, (float)(this.x + 6), (float)(this.y + 6));
-            GL11.glPopMatrix();
+            Ref.getGlBridge().bridge$popMatrix();
         } else {
             f2 = this.fontRenderer == FontRegistry.getPlayBold22px() ? 2.0f : 0.5f;
             this.fontRenderer.drawCenteredString(this.displayString.toUpperCase(), this.x + this.width / 2, (float)(this.y + this.height / 2 - this.fontRenderer.getHeight()) + f2, CheatBreaker.getInstance().globalSettings.isDarkMode() ? -1 : 1862270976);

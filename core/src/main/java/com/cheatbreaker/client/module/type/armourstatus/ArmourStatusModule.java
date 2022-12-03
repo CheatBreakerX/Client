@@ -10,7 +10,6 @@ import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.*;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,13 +83,13 @@ public class ArmourStatusModule extends AbstractModule {
         } else if ((Boolean) equippedItem.getValue()) {
             arrayList.add(new ArmourStatusItem(Ref.getInstanceCreator().createItemStack(Ref.getUtils().getMostPowerfulDamageItem()), 16, 16, 2, false));
         }
-        GL11.glPushMatrix();
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         scaledResolution = event.getResolution();
         this.scaleAndTranslate(scaledResolution);
         this.lIIIIlIIllIIlIIlIIIlIIllI(this.minecraft, arrayList);
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
     private void renderReal(GuiDrawEvent event) {
@@ -100,13 +99,13 @@ public class ArmourStatusModule extends AbstractModule {
         if (!(this.minecraft.bridge$getCurrentScreen() instanceof CBModulesGui || this.minecraft.bridge$getCurrentScreen() instanceof CBModulePlaceGui || this.minecraft.bridge$getCurrentScreen() instanceof GuiChatBridge && !(Boolean) showWhileTying.getValue())) {
             this.updateItems(this.minecraft);
             if (!items.isEmpty()) {
-                GL11.glPushMatrix();
-                GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+                Ref.getGlBridge().bridge$pushMatrix();
+                Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
                 scaledResolution = event.getResolution();
                 this.scaleAndTranslate(scaledResolution);
                 this.lIIIIlIIllIIlIIlIIIlIIllI(this.minecraft, items);
-                GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-                GL11.glPopMatrix();
+                Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
+                Ref.getGlBridge().bridge$popMatrix();
             }
         }
     }

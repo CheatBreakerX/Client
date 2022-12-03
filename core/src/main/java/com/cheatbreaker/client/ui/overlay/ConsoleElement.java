@@ -10,7 +10,6 @@ import com.cheatbreaker.client.ui.overlay.element.InputFieldElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.websocket.shared.WSPacketConsole;
-import org.lwjgl.opengl.GL11;
 
 import java.util.List;
 
@@ -41,17 +40,17 @@ public class ConsoleElement extends DraggableElement {
     public void handleElementDraw(float mouseX, float mouseY, boolean bl) {
         this.drag(mouseX, mouseY);
         Ref.modified$drawBoxWithOutLine(this.x, this.y, this.x + this.width, this.y + this.height, 0.2972973f * 1.6818181f, -16777216, -15395563);
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         Ref.modified$drawRect(this.x, this.y - 0.25f * 2.0f, this.x + this.width, this.y, -1357572843);
         Ref.modified$drawRect(this.x, this.y + this.height, this.x + this.height, this.y + this.height + 0.8961039f * 0.557971f, -1357572843);
         FontRegistry.getPlayRegular16px().drawString("Console", this.x + (float)4, this.y + (float)3, -1);
-        GL11.glColor4f((float)1.0f, (float)1.0f, (float)1.0f, (float)1.0f);
+        Ref.getGlBridge().bridge$color((float)1.0f, (float)1.0f, (float)1.0f, (float)1.0f);
         Ref.modified$drawRect(this.x + 2.0f, this.y + (float)12 + (float)3, this.x + this.width - 2.0f, this.y + this.height - (float)17, -1356783327);
         this.scrollableElement.handleScrollableMouseClicked(mouseX, mouseY, bl);
         try {
             if (CheatBreaker.getInstance().isConsoleAllowed()) {
-                GL11.glPushMatrix();
-                GL11.glEnable((int)3089);
+                Ref.getGlBridge().bridge$pushMatrix();
+                Ref.getGlBridge().bridge$enableScissoring();
                 OverlayGui overlayGui = OverlayGui.getInstance();
                 RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)(this.x + 2.0f), (int)(this.y + (float)12 + (float)3), (int)(this.x + this.width - 2.0f), (int)(this.y + this.height - (float)17), (float)((int)((float) overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int) overlayGui.getScaledHeight());
                 List<String> list = CheatBreaker.getInstance().getConsoleLines();
@@ -67,15 +66,15 @@ public class ConsoleElement extends DraggableElement {
                     }
                 }
                 this.scrollableElement.setScrollAmount(n + 4);
-                GL11.glDisable((int)3089);
-                GL11.glPopMatrix();
+                Ref.getGlBridge().bridge$disableScissoring();
+                Ref.getGlBridge().bridge$popMatrix();
             }
         }
         catch (Exception exception) {
             exception.printStackTrace();
         }
         this.scrollableElement.scrollableOnMouseClick(mouseX, mouseY, bl);
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
         this.textInputElement.drawElement(mouseX, mouseY, bl);
         this.sentButton.drawElement(mouseX, mouseY, bl);
         this.closeButton.drawElement(mouseX, mouseY, bl);

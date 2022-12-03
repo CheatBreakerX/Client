@@ -9,7 +9,6 @@ import com.cheatbreaker.client.ui.overlay.OverlayGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.websocket.shared.WSPacketClientFriendRequestUpdate;
-import org.lwjgl.opengl.GL11;
 
 public class FriendRequestElement extends AbstractElement {
     private final FriendRequest friendRequest;
@@ -23,7 +22,7 @@ public class FriendRequestElement extends AbstractElement {
         if (bl && this.isMouseInside(mouseX, mouseY)) {
             Ref.modified$drawRect(this.x, this.y, this.x + this.width, this.y + this.height, -13750738);
         }
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         Ref.modified$drawRect(this.x, this.y - 1.2982457f * 0.3851351f, this.x + this.width, this.y, -1357572843);
         Ref.modified$drawRect(this.x, this.y + this.height, this.x + this.width, this.y + this.height + 0.5f, -1357572843);
         Ref.modified$drawRect(this.x + (float)4, this.y + (float)3, this.x + (float)20, this.y + (float)19, -16747106);
@@ -37,10 +36,10 @@ public class FriendRequestElement extends AbstractElement {
             FontRegistry.getPlayRegular16px().drawString("ACCEPT", this.x + (float)24, this.y + (float)11, acceptHovered ? -13369549 : 0x7F33FF33);
             FontRegistry.getPlayRegular16px().drawString("DENY", this.x + (float)56, this.y + (float)11, denyHovered ? -52429 : 0x7FFF3333);
         }
-        GL11.glColor4f((float)1.0f, (float)1.0f, (float)1.0f, (float)1.0f);
+        Ref.getGlBridge().bridge$color((float)1.0f, (float)1.0f, (float)1.0f, (float)1.0f);
         ResourceLocationBridge location = CheatBreaker.getInstance().getHeadLocation(EnumChatFormattingBridge.getTextWithoutFormattingCodes(this.friendRequest.getUsername()));
         RenderUtil.drawIcon(location, (float)7, this.x + (float)5, this.y + (float)4);
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
     @Override

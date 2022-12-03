@@ -7,7 +7,6 @@ import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 
 public class SliderElement extends AbstractModulesGuiElement {
     private Setting setting;
@@ -85,9 +84,9 @@ public class SliderElement extends AbstractModulesGuiElement {
         }
         double d2 = (float)100 * ((this.IllIIIIIIIlIlIllllIIllIII - minVal) / (maxVal - minVal));
         RenderUtil.drawRoundedRect((double)(this.x + 174), (double)(this.y + 6), (double)(this.x + 180) + d * d2 / (double)100, (double)(this.y + 8), (double)4, -12418828);
-        GL11.glColor4f(0.5714286f * 0.4375f, 0.45849055f * 0.9814815f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$color(0.5714286f * 0.4375f, 0.45849055f * 0.9814815f, 1.0f, 1.0f);
         RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((double)((float)this.x + 543.75f * 0.33333334f) + d * d2 / (double)100, (float)this.y + 0.6666667f * 10.875f, 2.531249981140718 * 1.7777777910232544);
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((double)((float)this.x + 0.8804348f * 205.8642f) + d * d2 / (double)100, (float)this.y + 0.13043478f * 55.583332f, 2.639325754971479 * 1.0229885578155518);
     }
 }

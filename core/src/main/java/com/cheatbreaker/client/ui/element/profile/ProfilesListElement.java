@@ -11,7 +11,6 @@ import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.module.CBProfileCreateGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import org.lwjgl.opengl.GL11;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,9 +46,9 @@ public class ProfilesListElement extends AbstractScrollableElement {
         n3 = (float) mouseX > (float)(this.x + this.width - 92) * this.scale && (float) mouseX < (float)(this.x + this.width - 6) * this.scale && (float) mouseY > (float)(this.y + this.IlllIllIlIIIIlIIlIIllIIIl - 10 + this.lIIIIllIIlIlIllIIIlIllIlI) * this.scale && (float) mouseY < (float)(this.y + this.IlllIllIlIIIIlIIlIIllIIIl + 3 + this.lIIIIllIIlIlIllIIIlIllIlI) * this.scale ? 1 : 0;
 
         if (CheatBreaker.getInstance().globalSettings.isDarkMode()) {
-            GL11.glColor4f(n3 != 0 ? 0.0f : 1.0f, n3 != 0 ? 0.8f : 1.0f, n3 != 0 ? 0.0f : 1.0f, 1.0f);
+            Ref.getGlBridge().bridge$color(n3 != 0 ? 0.0f : 1.0f, n3 != 0 ? 0.8f : 1.0f, n3 != 0 ? 0.0f : 1.0f, 1.0f);
         } else {
-            GL11.glColor4f(n3 != 0 ? 0.0f : 0.25f, n3 != 0 ? 0.8f : 0.25f, n3 != 0 ? 0.0f : 0.25f, 0.65f);
+            Ref.getGlBridge().bridge$color(n3 != 0 ? 0.0f : 0.25f, n3 != 0 ? 0.8f : 0.25f, n3 != 0 ? 0.0f : 0.25f, 0.65f);
         }
 
         RenderUtil.drawIcon(this.plusIcon, 3.4435484f * 1.0163934f, (float)(this.x + this.width - 15), (float)(this.y + this.IlllIllIlIIIIlIIlIIllIIIl) - 0.6506024f * 9.990741f);

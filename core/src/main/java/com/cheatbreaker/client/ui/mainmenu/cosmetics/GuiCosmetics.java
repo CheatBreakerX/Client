@@ -10,7 +10,6 @@ import com.cheatbreaker.client.ui.mainmenu.cosmetics.element.CosmeticListElement
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.cosmetic.Cosmetic;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,10 +57,10 @@ public class GuiCosmetics extends MainMenuBase {
                 }
                 if (this.IIIIllIlIIIllIlllIlllllIl.size() > 5) {
                     boolean bl = mouseX > this.getScaledWidth() / 2.0f - (float)40 && mouseX < this.getScaledWidth() / 2.0f - 1.0f && mouseY > this.getScaledHeight() / 2.0f + (float)80 && mouseY < this.getScaledHeight() / 2.0f + (float)100;
-                    GL11.glColor4f(0.0f, 0.0f, 0.0f, bl ? 0.37499997f * 1.2f : 0.8958333f * 0.27906978f);
+                    Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, bl ? 0.37499997f * 1.2f : 0.8958333f * 0.27906978f);
                     RenderUtil.drawIcon(this.leftIcon, (float)4, this.getScaledWidth() / 2.0f - (float)10, this.getScaledHeight() / 2.0f + (float)84);
                     boolean bl2 = mouseX > this.getScaledWidth() / 2.0f + 1.0f && mouseX < this.getScaledWidth() / 2.0f + (float)40 && mouseY > this.getScaledHeight() / 2.0f + (float)80 && mouseY < this.getScaledHeight() / 2.0f + (float)100;
-                    GL11.glColor4f(0.0f, 0.0f, 0.0f, bl2 ? 0.012658228f * 35.55f : 0.7083333f * 0.3529412f);
+                    Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, bl2 ? 0.012658228f * 35.55f : 0.7083333f * 0.3529412f);
                     RenderUtil.drawIcon(this.rightIcon, (float)4, this.getScaledWidth() / 2.0f + (float)10, this.getScaledHeight() / 2.0f + (float)84);
                 }
             }

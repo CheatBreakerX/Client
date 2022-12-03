@@ -22,7 +22,6 @@ import com.mojang.authlib.Agent;
 import com.mojang.authlib.exceptions.AuthenticationException;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -170,7 +169,7 @@ public class MainMenuBase extends AbstractGui {
         font.drawString("CheatBreaker", 36, 8, -1);
 
         // CheatBreaker icon in top corner
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         RenderUtil.drawIcon(this.logo, 10, 8, 6);
 
         // Render text at bottom

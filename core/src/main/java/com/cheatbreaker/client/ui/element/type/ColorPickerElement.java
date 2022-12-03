@@ -8,7 +8,6 @@ import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -83,9 +82,9 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
             }
             Ref.modified$drawRect(this.x + 55, this.y + 24, this.x + 177, this.y + 120, -822083584);
             TessellatorBridge tessellator = Ref.getTessellator();
-            GL11.glDisable(3553);
+            Ref.getGlBridge().bridge$disableTexture2D();
             tessellator.bridge$startDrawingQuads();
-            GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
             tessellator.bridge$addVertex(this.pickerX, IIIIIIlIlIlIllllllIlllIlI, 0.0);
             tessellator.bridge$addVertex(lIIIIIllllIIIIlIlIIIIlIlI, IIIIIIlIlIlIllllllIlllIlI, 0.0);
             tessellator.bridge$addVertex(lIIIIIllllIIIIlIlIIIIlIlI, this.pickerY, 0.0);
@@ -117,7 +116,7 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
                         arrn = new int[]{n3, n4};
                     }
                     tessellator.bridge$startDrawingQuads();
-                    GL11.glColor4f((float)(n5 >> 16 & 0xFF) / (float)255, (float)(n5 >> 8 & 0xFF) / (float)255, (float)(n5 & 0xFF) / (float)255, 1.0f);
+                    Ref.getGlBridge().bridge$color((float)(n5 >> 16 & 0xFF) / (float)255, (float)(n5 >> 8 & 0xFF) / (float)255, (float)(n5 & 0xFF) / (float)255, 1.0f);
                     tessellator.bridge$addVertex(this.pickerX + (float)n3, this.pickerY + (float)n4 + 1.0f, 0.0);
                     tessellator.bridge$addVertex(this.pickerX + (float)n3 + 1.0f, this.pickerY + (float)n4 + 1.0f, 0.0);
                     tessellator.bridge$addVertex(this.pickerX + (float)n3 + 1.0f, this.pickerY + (float)n4, 0.0);
@@ -128,12 +127,12 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
                 ++n3;
             }
             if (arrn != null) {
-                GL11.glPushMatrix();
-                GL11.glColor4f(0.0f, 0.0f, 0.0f, 3.0f * 0.25f);
+                Ref.getGlBridge().bridge$pushMatrix();
+                Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, 3.0f * 0.25f);
                 RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.pickerX + (float)arrn[0] + 1.2205882f * 0.913494f, this.pickerY + (float)arrn[1] + 0.097222224f * 11.468572f, 4);
-                GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+                Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
                 RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.pickerX + (float)arrn[0] + 0.24193548f * 4.608667f, this.pickerY + (float)arrn[1] + 0.23157895f * 4.8147726f, 2.7f);
-                GL11.glPopMatrix();
+                Ref.getGlBridge().bridge$popMatrix();
             }
             Ref.modified$drawRect(this.pickerX - (float) 51, this.pickerY + 1.0f, this.pickerX - (float) 43, this.pickerY + (float) 9, -16777216);
             Ref.modified$drawRect(this.pickerX - (float)50, this.pickerY + 2.0f, this.pickerX - (float)44, this.pickerY + (float)8, this.setting.rainbow ? -13369549 : -1);

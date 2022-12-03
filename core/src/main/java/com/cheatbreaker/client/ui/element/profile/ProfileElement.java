@@ -10,7 +10,6 @@ import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.module.CBProfileCreateGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import org.lwjgl.opengl.GL11;
 
 import java.io.File;
 import java.util.Collections;
@@ -58,7 +57,7 @@ public class ProfileElement extends AbstractModulesGuiElement {
         }
         boolean bl4 = (float) mouseX > (float)this.x * this.scale && (float) mouseX < (float)(this.x + 12) * this.scale && (float) mouseY >= (float)(this.y + this.yOffset) * this.scale && (float) mouseY <= (float)(this.y + this.height / 2 + this.yOffset) * this.scale;
         boolean bl5 = (float) mouseX > (float)this.x * this.scale && (float) mouseX < (float)(this.x + 12) * this.scale && (float) mouseY > (float)(this.y + this.height / 2 + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + this.height + this.yOffset) * this.scale;
-        GL11.glColor4f(0.0f, 0.0f, 0.0f, 0.1919192f * 1.8236842f);
+        Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, 0.1919192f * 1.8236842f);
         float f3 = 6.571429f * 0.38043478f;
         if (this.profile.isEditable()) {
             bl2 = false;
@@ -66,26 +65,26 @@ public class ProfileElement extends AbstractModulesGuiElement {
             ProfilesListElement parent = (ProfilesListElement)this.parent;
             if (parent.lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this) != 0 && parent.lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this) > 1) {
                 bl2 = true;
-                GL11.glPushMatrix();
+                Ref.getGlBridge().bridge$pushMatrix();
                 if (bl4) {
-                    GL11.glColor4f(0.0f, 0.0f, 0.0f, 0.14444444f * 4.5f);
+                    Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, 0.14444444f * 4.5f);
                 }
-                GL11.glTranslatef((float)(this.x + 6) - f3, (float)this.y + (float)5, 0.0f);
-                GL11.glRotatef(-90, 0.0f, 0.0f, 1.0f);
+                Ref.getGlBridge().bridge$translate((float)(this.x + 6) - f3, (float)this.y + (float)5, 0.0f);
+                Ref.getGlBridge().bridge$rotate(-90, 0.0f, 0.0f, 1.0f);
                 RenderUtil.drawIcon(this.arrowIcon, f3, (float)-1, 0.0f);
-                GL11.glPopMatrix();
-                GL11.glColor4f(0.0f, 0.0f, 0.0f, 1.0952381f * 0.3195652f);
+                Ref.getGlBridge().bridge$popMatrix();
+                Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, 1.0952381f * 0.3195652f);
             }
             if (parent.lIIIIlIIllIIlIIlIIIlIIllI.indexOf(this) != parent.lIIIIlIIllIIlIIlIIIlIIllI.size() - 1) {
                 bl = true;
-                GL11.glPushMatrix();
+                Ref.getGlBridge().bridge$pushMatrix();
                 if (bl5) {
-                    GL11.glColor4f(0.0f, 0.0f, 0.0f, 1.2112676f * 0.5366279f);
+                    Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, 1.2112676f * 0.5366279f);
                 }
-                GL11.glTranslatef((float)(this.x + 6) + f3, (float)this.y + (float)7, 0.0f);
-                GL11.glRotatef(90, 0.0f, 0.0f, 1.0f);
+                Ref.getGlBridge().bridge$translate((float)(this.x + 6) + f3, (float)this.y + (float)7, 0.0f);
+                Ref.getGlBridge().bridge$rotate(90, 0.0f, 0.0f, 1.0f);
                 RenderUtil.drawIcon(this.arrowIcon, f3, 2.0f, 0.0f);
-                GL11.glPopMatrix();
+                Ref.getGlBridge().bridge$popMatrix();
             }
             if (!bl2 && !bl) {
                 RenderUtil.drawIcon(this.arrowIcon, 1.173913f * 2.1296296f, (float)(this.x + 4), (float)this.y + (float)6);
@@ -103,20 +102,20 @@ public class ProfileElement extends AbstractModulesGuiElement {
         }
         if (this.profile.isEditable()) {
             bl2 = (float) mouseX > (float)(this.x + this.width - 30) * this.scale && (float) mouseX < (float)(this.x + this.width - 13) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + this.height + this.yOffset) * this.scale;
-            //GL11.glColor4f(bl2 ? 0.0f : 1.1707317f * 0.21354167f, bl2 ? 0.0f : 0.101648346f * 2.4594595f, bl2 ? 0.48876402f * 1.0229886f : 0.5647059f * 0.4427083f, 0.5675676f * 1.145238f);
+            //Ref.getGlBridge().bridge$color(bl2 ? 0.0f : 1.1707317f * 0.21354167f, bl2 ? 0.0f : 0.101648346f * 2.4594595f, bl2 ? 0.48876402f * 1.0229886f : 0.5647059f * 0.4427083f, 0.5675676f * 1.145238f);
             if (CheatBreaker.getInstance().globalSettings.isDarkMode()) {
-                GL11.glColor4f(bl2 ? 0.0f : 1.0f, bl2 ? 0.0f : 1.0f, bl2 ? 0.5f : 1.0f, 1.0f);
+                Ref.getGlBridge().bridge$color(bl2 ? 0.0f : 1.0f, bl2 ? 0.0f : 1.0f, bl2 ? 0.5f : 1.0f, 1.0f);
             } else {
-                GL11.glColor4f(bl2 ? 0.0f : 0.25f, bl2 ? 0.0f : 0.25f, bl2 ? 0.5f : 0.25f, 0.65f);
+                Ref.getGlBridge().bridge$color(bl2 ? 0.0f : 0.25f, bl2 ? 0.0f : 0.25f, bl2 ? 0.5f : 0.25f, 0.65f);
             }
             RenderUtil.drawIcon(this.pencilIcon, (float)5, (float)(this.x + this.width - 26), (float)this.y + 5.1916666f * 0.6741573f);
             bl = (float) mouseX > (float)(this.x + this.width - 17) * this.scale && (float) mouseX < (float)(this.x + this.width - 2) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + this.height + this.yOffset) * this.scale;
-            //GL11.glColor4f(bl ? 0.8f : 0.96875f * 0.2580645f, bl ? 0.0f : 0.17553192f * 1.4242424f, bl ? 0.0f : 15.250001f * 0.016393442f, 0.44444445f * 1.4625f);
+            //Ref.getGlBridge().bridge$color(bl ? 0.8f : 0.96875f * 0.2580645f, bl ? 0.0f : 0.17553192f * 1.4242424f, bl ? 0.0f : 15.250001f * 0.016393442f, 0.44444445f * 1.4625f);
 
             if (CheatBreaker.getInstance().globalSettings.isDarkMode()) {
-                GL11.glColor4f(bl ? 0.8f : 1.0f, bl ? 0.0f : 1.0f, bl ? 0.0f : 1.0f, 1.0f);
+                Ref.getGlBridge().bridge$color(bl ? 0.8f : 1.0f, bl ? 0.0f : 1.0f, bl ? 0.0f : 1.0f, 1.0f);
             } else {
-                GL11.glColor4f(bl ? 0.8f : 0.25f, bl ? 0.0f : 0.25f, bl ? 0.0f : 0.25f, 0.65f);
+                Ref.getGlBridge().bridge$color(bl ? 0.8f : 0.25f, bl ? 0.0f : 0.25f, bl ? 0.0f : 0.25f, 0.65f);
             }
 
             RenderUtil.drawIcon(this.deleteIcon, (float)5, (float)(this.x + this.width - 13), (float)this.y + 0.7653061f * 4.5733333f);

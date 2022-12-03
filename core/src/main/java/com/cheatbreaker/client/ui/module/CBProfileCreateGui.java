@@ -10,7 +10,6 @@ import com.cheatbreaker.client.ui.element.profile.ProfileElement;
 import com.cheatbreaker.client.ui.element.profile.ProfilesListElement;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -70,13 +69,13 @@ public class CBProfileCreateGui extends CBGuiScreen {
         this.drawDefaultBackground();
         Ref.modified$drawRect(this.width / 2f - 73, this.height / 2f - 19, this.width / 2f + 73, this.height / 2f + 8, -11250604);
         Ref.modified$drawRect(this.width / 2f - 72, this.height / 2f - 18, this.width / 2f + 72, this.height / 2f + 7, -3881788);
-        GL11.glPushMatrix();
-        GL11.glScalef(this.IlllIIIlIlllIllIlIIlllIlI, this.IlllIIIlIlllIllIlIIlllIlI, this.IlllIIIlIlllIllIlIIlllIlI);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$scale(this.IlllIIIlIlllIllIlIIlllIlI, this.IlllIIIlIlllIllIlIIlllIlI, this.IlllIIIlIlllIllIlIIlllIlI);
         int n3 = (int) ((float) this.width / this.IlllIIIlIlllIllIlIIlllIlI);
         int n4 = (int) ((float) this.height / this.IlllIIIlIlllIllIlIIlllIlI);
         FontRegistry.getUbuntuMedium16px().drawString("Profile Name: ", (float) (n3 / 2) - (float) 70 / this.IlllIIIlIlllIllIlIIlllIlI, (float) (n4 / 2) - (float) 17 / this.IlllIIIlIlllIllIlIIlllIlI, 0x6F000000);
         FontRegistry.getUbuntuMedium16px().drawString(this.IlIlIIIlllIIIlIlllIlIllIl, (float) (n3 / 2) - (float) 72 / this.IlllIIIlIlllIllIlIIlllIlI, (float) (n4 / 2) + (float) 8 / this.IlllIIIlIlllIllIlIIlllIlI, -1358954496);
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
         this.textField.bridge$drawTextBox();
     }
 

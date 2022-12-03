@@ -8,7 +8,6 @@ import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import org.lwjgl.opengl.GL11;
 
 public class ToggleElement
         extends AbstractModulesGuiElement {
@@ -52,9 +51,9 @@ public class ToggleElement
             Ref.modified$drawRect(this.x + this.width - 22, this.y + 2, this.x + this.width + 4, this.y + 12, dark ? -13619151 : -723724);
         }
         float alpha = dark ? (bl2 ? 0.7174193f : 1.0f) : (bl2 ? 0.74000007f * 1.081081f : 0.288f * 1.5625f);
-        GL11.glColor4f(dark ? 1f : 0f, dark ? 1f : 0f, dark ? 1f : 0f, alpha);
+        Ref.getGlBridge().bridge$color(dark ? 1f : 0f, dark ? 1f : 0f, dark ? 1f : 0f, alpha);
         RenderUtil.drawIcon(this.IllIIIIIIIlIlIllllIIllIII, (float) 4, (float) (this.x + this.width - 82), (float) (this.y + 3));
-        GL11.glColor4f(dark ? 1f : 0f, dark ? 1f : 0f, dark ? 1f : 0f, alpha);
+        Ref.getGlBridge().bridge$color(dark ? 1f : 0f, dark ? 1f : 0f, dark ? 1f : 0f, alpha);
         RenderUtil.drawIcon(this.lIIIIllIIlIlIllIIIlIllIlI, (float) 4, (float) (this.x + this.width - 22), (float) (this.y + 3));
     }
 

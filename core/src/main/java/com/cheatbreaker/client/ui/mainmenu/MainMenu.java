@@ -7,7 +7,6 @@ import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.fading.CosineFade;
 import com.cheatbreaker.client.ui.fading.MinMaxFade;
 import com.cheatbreaker.client.ui.util.RenderUtil;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
@@ -50,7 +49,7 @@ public class MainMenu extends MainMenuBase {
     public void drawMenu(float mouseX, float mouseY) {
         float logoY = this.isFirstOpened() ? this.logoPositionFade.getCurrentValue() : 1.0f;
         super.drawMenu(mouseX, mouseY);
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         this.singleplayerButton.drawElement(mouseX, mouseY, true);
         this.multiplayerButton.drawElement(mouseX, mouseY, true);
 
@@ -76,14 +75,14 @@ public class MainMenu extends MainMenuBase {
         float halfSize = 27;
         double x = dispWidth / (double)2 - (double)halfSize;
         double y = dispHeight / (double)2 - (double)halfSize - (double)((float)35 * f);
-        GL11.glPushMatrix();
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        GL11.glTranslatef((float)x, (float)y, 1.0f);
-        GL11.glTranslatef(halfSize, halfSize, halfSize);
-        GL11.glRotatef((float)180 * this.logoTurnAmount.getCurrentValue(), 0.0f, 0.0f, 1.0f);
-        GL11.glTranslatef(-halfSize, -halfSize, -halfSize);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$translate((float)x, (float)y, 1.0f);
+        Ref.getGlBridge().bridge$translate(halfSize, halfSize, halfSize);
+        Ref.getGlBridge().bridge$rotate((float)180 * this.logoTurnAmount.getCurrentValue(), 0.0f, 0.0f, 1.0f);
+        Ref.getGlBridge().bridge$translate(-halfSize, -halfSize, -halfSize);
         RenderUtil.drawIcon(this.outerLogo, halfSize, 0.0f, 0.0f);
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
         RenderUtil.drawIcon(this.innerLogo, halfSize, (float)x, (float)y);
     }
 

@@ -11,7 +11,6 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.dash.DashUtil;
 import com.cheatbreaker.client.util.dash.Station;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -118,7 +117,7 @@ public class RadioElement extends DraggableElement {
         }
         if (this.hovered) {
             Ref.getGlBridge().bridge$pushMatrix();
-            GL11.glEnable(3089); // GL_SCISSOR_TEST
+            Ref.getGlBridge().bridge$enableScissoring(); // GL_SCISSOR_TEST
             OverlayGui overlayGui = OverlayGui.getInstance();
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)this.x, (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl), (int)(this.x + this.width), (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl + (this.height - this.IlIlllIIIIllIllllIllIIlIl) * f4), (float)((int)((float)overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int)overlayGui.getScaledHeight());
             Ref.modified$drawRect(this.x, this.y + this.IlIlllIIIIllIllllIllIIlIl, this.x + this.width, this.y + this.height, -14540254);
@@ -131,7 +130,7 @@ public class RadioElement extends DraggableElement {
             this.slider.drawElement(f, f2, bl);
             this.filter.handleElementDraw(f, f2, bl);
             this.pin.handleElementDraw(f, f2, bl);
-            GL11.glDisable(3089); // GL_SCISSOR_TEST
+            Ref.getGlBridge().bridge$disableScissoring(); // GL_SCISSOR_TEST
             Ref.getGlBridge().bridge$popMatrix();
         }
     }

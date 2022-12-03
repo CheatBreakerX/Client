@@ -8,7 +8,6 @@ import com.cheatbreaker.client.ui.module.CBAnchorHelper;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
 import com.cheatbreaker.client.ui.module.CBPositionEnum;
 import com.cheatbreaker.client.ui.util.HudUtil;
-import org.lwjgl.opengl.GL11;
 
 public class ArmourStatusItem {
     public final ItemStackBridge lIIIIlIIllIIlIIlIIIlIIllI;
@@ -70,8 +69,8 @@ public class ArmourStatusItem {
     }
 
     public void lIIIIlIIllIIlIIlIIIlIIllI(float f, float f2) {
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        GL11.glEnable(32826);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$enableRescaleNormal();
         Ref.getRenderHelper().bridge$enableStandardItemLighting();
         Ref.getRenderHelper().bridge$enableGUIStandardItemLighting();
         ArmourStatusModule.renderItem.bridge$setZLevel(-10);
@@ -81,19 +80,19 @@ public class ArmourStatusItem {
             ArmourStatusModule.renderItem.bridge$renderItemIntoGUI(this.mc.bridge$getFontRenderer(), this.mc.bridge$getTextureManager(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)(f - (float)(this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl)), (int)f2);
             HudUtil.renderItemOverlayIntoGUI(this.mc.bridge$getFontRenderer(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)(f - (float)(this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl)), (int)f2, (Boolean)ArmourStatusModule.damageOverlay.getValue(), (Boolean)ArmourStatusModule.itemCount.getValue());
             Ref.getRenderHelper().bridge$disableStandardItemLighting();
-            GL11.glDisable(32826);
-            GL11.glDisable(3042);
+            Ref.getGlBridge().bridge$disableRescaleNormal();
+            Ref.getGlBridge().bridge$disableBlend();
             this.mc.bridge$getFontRenderer().bridge$drawStringWithShadow(this.IIIllIllIlIlllllllIlIlIII + "§r", (int)f - (this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl) - this.IllIIIIIIIlIlIllllIIllIII, (int)f2, 0xFFFFFF);
             this.mc.bridge$getFontRenderer().bridge$drawStringWithShadow(this.lIIIIllIIlIlIllIIIlIllIlI + "§r", (int)f - (this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl) - this.IlllIllIlIIIIlIIlIIllIIIl, (int)f2 + ((Boolean) ArmourStatusModule.itemName.getValue() ? this.IlIlIIIlllIIIlIlllIlIllIl / 2 : this.IlIlIIIlllIIIlIlllIlIllIl / 4), 0xFFFFFF);
         } else {
             ArmourStatusModule.renderItem.bridge$renderItemIntoGUI(this.mc.bridge$getFontRenderer(), this.mc.bridge$getTextureManager(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)f, (int)f2);
             HudUtil.renderItemOverlayIntoGUI(this.mc.bridge$getFontRenderer(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)f, (int)f2, (Boolean)ArmourStatusModule.damageOverlay.getValue(), (Boolean)ArmourStatusModule.itemCount.getValue());
             Ref.getRenderHelper().bridge$disableStandardItemLighting();
-            GL11.glDisable(32826);
-            GL11.glDisable(3042);
+            Ref.getGlBridge().bridge$disableRescaleNormal();
+            Ref.getGlBridge().bridge$disableBlend();
             this.mc.bridge$getFontRenderer().bridge$drawStringWithShadow(this.IIIllIllIlIlllllllIlIlIII + "§r", (int)f + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl, (int)f2, 0xFFFFFF);
             this.mc.bridge$getFontRenderer().bridge$drawStringWithShadow(this.lIIIIllIIlIlIllIIIlIllIlI + "§r", (int)f + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl, (int)f2 + ((Boolean) ArmourStatusModule.itemName.getValue() ? this.IlIlIIIlllIIIlIlllIlIllIl / 2 : this.IlIlIIIlllIIIlIlllIlIllIl / 4), 0xFFFFFF);
         }
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
     }
 }

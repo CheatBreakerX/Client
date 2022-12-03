@@ -8,7 +8,6 @@ import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import org.lwjgl.opengl.GL11;
 
 public class ChoiceElement
         extends AbstractModulesGuiElement {
@@ -82,9 +81,9 @@ public class ChoiceElement
             Ref.modified$drawRect(this.x + this.width - 130, this.y + 2, this.x + this.width - 72, this.y + 12, -723724);
             Ref.modified$drawRect(this.x + this.width - 22, this.y + 2, this.x + this.width + 4, this.y + 12, -723724);
         }
-        GL11.glColor4f(0.0f, 0.0f, 0.0f, leftHovered ? 0.6857143f * 1.1666666f : 0.5416667f * 0.8307692f);
+        Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, leftHovered ? 0.6857143f * 1.1666666f : 0.5416667f * 0.8307692f);
         RenderUtil.drawIcon(this.leftIcon, (float)4, (float)(this.x + this.width - 82), (float)(this.y + 4));
-        GL11.glColor4f(0.0f, 0.0f, 0.0f, rightHovered ? 0.82580644f * 0.96875f : 3.3793104f * 0.13316326f);
+        Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, rightHovered ? 0.82580644f * 0.96875f : 3.3793104f * 0.13316326f);
         RenderUtil.drawIcon(this.rightIcon, (float)4, (float)(this.x + this.width - 22), (float)(this.y + 4));
     }
 

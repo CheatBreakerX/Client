@@ -12,7 +12,6 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.friend.Friend;
 import com.cheatbreaker.client.websocket.shared.WSPacketMessage;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -68,19 +67,19 @@ public class MessagesElement extends DraggableElement {
         this.drag(mouseX, mouseY);
         Ref.modified$drawBoxWithOutLine(this.x, this.y, this.x + (float)23, this.y + this.height, 0.074324325f * 6.7272725f, -16777216, -14869219);
         Ref.modified$drawBoxWithOutLine(this.x + (float)23, this.y, this.x + this.width, this.y + this.height, 0.7132353f * 0.7010309f, -16777216, -15395563);
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         Ref.modified$drawRect(this.x + (float)25, this.y - 1.9285715f * 0.25925925f, this.x + this.width, this.y, -1357572843);
         Ref.modified$drawRect(this.x + (float)25, this.y + this.height, this.x + this.width, this.y + this.height + 0.25f * 2.0f, -1357572843);
         Ref.modified$drawRect(this.x + (float)27, this.y + (float)3, this.x + (float)43, this.y + (float)19, this.friend.isOnline() ? Friend.getStatusColor(this.friend.getOnlineStatus()) : -13158601);
         FontRegistry.getPlayRegular16px().drawString(this.friend.getName(), this.x + (float)52, this.y + 2.0f, -1);
         FontRegistry.getPlayRegular16px().drawString(this.friend.getStatusString(), this.x + (float)52, this.y + (float)11, -5460820);
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         ResourceLocationBridge location = CheatBreaker.getInstance().getHeadLocation(EnumChatFormattingBridge.getTextWithoutFormattingCodes(this.friend.getName()));
         RenderUtil.drawIcon(location, (float)7, this.x + (float)28, this.y + (float)4);
         Ref.modified$drawRect(this.x + (float) 27, this.y + (float) 22, this.x + this.width - 2.0f, this.y + this.height - (float) 17, -1356783327);
         this.recentsScrollable.drawScrollable(mouseX, mouseY, bl);
-        GL11.glPushMatrix();
-        GL11.glEnable(3089);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$enableScissoring();
         OverlayGui overlayGui = OverlayGui.getInstance();
         RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(0, (int)(this.y + 2.0f), (int) overlayGui.getScaledWidth(), (int)(this.y + this.height - 2.0f), (float)((int)((float) overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int) overlayGui.getScaledHeight());
         int n = 18;
@@ -90,7 +89,7 @@ public class MessagesElement extends DraggableElement {
             float f3 = this.y + (float)3 + (float)n2;
             boolean bl2 = mouseX > this.x && mouseX < this.x + (float)25 && mouseY > f3 - this.recentsScrollable.IllIIIIIIIlIlIllllIIllIII() && mouseY < f3 + (float)16 - this.recentsScrollable.IllIIIIIIIlIlIllllIIllIII() && mouseY > this.y && mouseY < this.y + this.height;
             Ref.modified$drawRect(this.x + (float)3, f3, this.x + (float)19, f3 + (float)16, friend.isOnline() ? Friend.getStatusColor(friend.getOnlineStatus()) : -13158601);
-            GL11.glColor4f(1.0f, 1.0f, 1.0f, bl2 ? 1.0f : 0.6016854f * 1.4126984f);
+            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, bl2 ? 1.0f : 0.6016854f * 1.4126984f);
             ResourceLocationBridge location1 = CheatBreaker.getInstance().getHeadLocation(EnumChatFormattingBridge.getTextWithoutFormattingCodes(friend.getName()));
             RenderUtil.drawIcon(location1, (float)7, this.x + (float)4, this.y + (float)4 + (float)n2);
             if (bl2) {
@@ -105,14 +104,14 @@ public class MessagesElement extends DraggableElement {
             n2 += 18;
         }
         this.recentsScrollable.setScrollAmount(n2);
-        GL11.glDisable(3089);
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$disableScissoring();
+        Ref.getGlBridge().bridge$popMatrix();
         this.recentsScrollable.handleElementDraw(mouseX, mouseY, bl);
         this.messageListScrollable.handleScrollableMouseClicked(mouseX, mouseY, bl);
         try {
             if (CheatBreaker.getInstance().getFriendsManager().getMessages().containsKey(this.friend.getPlayerId())) {
-                GL11.glPushMatrix();
-                GL11.glEnable(3089);
+                Ref.getGlBridge().bridge$pushMatrix();
+                Ref.getGlBridge().bridge$enableScissoring();
                 RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)(this.x + 2.0f), (int)(this.y + (float)22), (int)(this.x + this.width - 2.0f), (int)(this.y + this.height - (float)17), (float)((int)((float) overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int) overlayGui.getScaledHeight());
                 List<String> messages = CheatBreaker.getInstance().getFriendsManager().getMessages().get(this.friend.getPlayerId());
                 int n3 = 0;
@@ -127,15 +126,15 @@ public class MessagesElement extends DraggableElement {
                     }
                 }
                 this.messageListScrollable.setScrollAmount(n3 + 4);
-                GL11.glDisable(3089);
-                GL11.glPopMatrix();
+                Ref.getGlBridge().bridge$disableScissoring();
+                Ref.getGlBridge().bridge$popMatrix();
             }
         }
         catch (Exception exception) {
             exception.printStackTrace();
         }
         this.messageListScrollable.scrollableOnMouseClick(mouseX, mouseY, bl);
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
         this.inputFieldElement.drawElement(mouseX, mouseY, bl);
         this.sendButton.drawElement(mouseX, mouseY, bl);
         this.aliasesButton.drawElement(mouseX, mouseY, bl);

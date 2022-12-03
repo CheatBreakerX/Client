@@ -6,7 +6,6 @@ import com.cheatbreaker.bridge.entity.player.EntityPlayerBridge;
 import com.cheatbreaker.bridge.item.ItemBridge;
 import com.cheatbreaker.bridge.item.ItemStackBridge;
 import com.cheatbreaker.bridge.ref.Ref;
-import org.lwjgl.opengl.GL11;
 
 public final class HudUtil {
 
@@ -33,19 +32,19 @@ public final class HudUtil {
                         .round(13.0D - itemStack.bridge$getItemDamageForDisplay() * 13.0D / itemStack.bridge$getMaxDamage());
                 int var7 = (int) Math
                         .round(255.0D - itemStack.bridge$getItemDamageForDisplay() * 255.0D / itemStack.bridge$getMaxDamage());
-                GL11.glDisable(GL11.GL_LIGHTING);
-                GL11.glDisable(GL11.GL_DEPTH_TEST);
-                GL11.glDisable(GL11.GL_TEXTURE_2D);
+                Ref.getGlBridge().bridge$disableLighting();
+                Ref.getGlBridge().bridge$disableDepthTest();
+                Ref.getGlBridge().bridge$disableTexture2D();
                 TessellatorBridge tessellator = Ref.getTessellator();
                 int var9 = 255 - var7 << 16 | var7 << 8;
                 int var10 = (255 - var7) / 4 << 16 | 16128;
                 renderQuad(tessellator, x + 2, y + 13, 13, 2, 0);
                 renderQuad(tessellator, x + 2, y + 13, 12, 1, var10);
                 renderQuad(tessellator, x + 2, y + 13, var11, 1, var9);
-                GL11.glEnable(GL11.GL_TEXTURE_2D);
-                GL11.glEnable(GL11.GL_LIGHTING);
-                GL11.glEnable(GL11.GL_DEPTH_TEST);
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                Ref.getGlBridge().bridge$enableTexture2D();
+                Ref.getGlBridge().bridge$enableLighting();
+                Ref.getGlBridge().bridge$enableDepthTest();
+                Ref.getGlBridge().bridge$color(1.0F, 1.0F, 1.0F, 1.0F);
             }
 
             if (showCount) {
@@ -60,12 +59,12 @@ public final class HudUtil {
 
                 if (count > 1) {
                     String var6 = "" + count;
-                    GL11.glDisable(GL11.GL_LIGHTING);
-                    GL11.glDisable(GL11.GL_DEPTH_TEST);
+                    Ref.getGlBridge().bridge$disableLighting();
+                    Ref.getGlBridge().bridge$disableDepthTest();
                     fontRenderer.bridge$drawStringWithShadow(var6, x + 19 - 2 - fontRenderer.bridge$getStringWidth(var6), y + 6 + 3,
                             16777215);
-                    GL11.glEnable(GL11.GL_LIGHTING);
-                    GL11.glEnable(GL11.GL_DEPTH_TEST);
+                    Ref.getGlBridge().bridge$enableLighting();
+                    Ref.getGlBridge().bridge$enableDepthTest();
                 }
             }
         }

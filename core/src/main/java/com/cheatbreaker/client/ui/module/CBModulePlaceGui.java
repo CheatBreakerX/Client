@@ -7,7 +7,6 @@ import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 
 public class CBModulePlaceGui extends CBModulesGui {
     private final AbstractModule module;
@@ -66,14 +65,14 @@ public class CBModulePlaceGui extends CBModulesGui {
             f5 = this.getYTranslation(this.module, f5, scaledPoints, (float)((int)(this.module.height * (Float) this.module.scale.getValue())));
         }
         this.module.setTranslations(f4, f5);
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         this.module.scaleAndTranslate(scaledResolution);
         RenderUtil.drawRoundedRect(-2, -2, this.module.width + 2.0f, this.module.height + 2.0f, (double)4, 551805923);
-        GL11.glPushMatrix();
-        GL11.glScalef(f2, f2, f2);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$scale(f2, f2, f2);
         FontRegistry.getUbuntuMedium16px().drawString(this.module.getName(), 0.0f, -1f, 0x6F000000); // 0x6F000000
-        GL11.glPopMatrix();
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
     private float getXTranslation(AbstractModule cBModule, float f, float[] arrf, float f2) {

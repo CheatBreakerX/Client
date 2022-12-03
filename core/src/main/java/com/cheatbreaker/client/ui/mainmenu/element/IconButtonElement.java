@@ -1,11 +1,11 @@
 package com.cheatbreaker.client.ui.mainmenu.element;
 
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.ui.fading.ColorFade;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import org.lwjgl.opengl.GL11;
 
 public class IconButtonElement extends AbstractElement {
     private ResourceLocationBridge IIIllIllIlIlllllllIlIlIII;
@@ -46,7 +46,7 @@ public class IconButtonElement extends AbstractElement {
         if (this.lIIIIllIIlIlIllIIIlIllIlI) {
             FontRegistry.getRobotoRegular13px().drawString(this.IllIIIIIIIlIlIllllIIllIII, this.x + this.width / 2.0f, this.y + 2.0f, -1);
         } else {
-            GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.4444444f * 0.5538462f);
+            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.4444444f * 0.5538462f);
             RenderUtil.drawIcon(this.IIIllIllIlIlllllllIlIlIII, this.lIIlIlIllIIlIIIlIIIlllIII, this.x + this.width / 2.0f - this.lIIlIlIllIIlIIIlIIIlllIII, this.y + this.height / 2.0f - this.lIIlIlIllIIlIIIlIIIlllIII);
         }
     }

@@ -8,7 +8,6 @@ import com.cheatbreaker.client.ui.mainmenu.element.ScrollableElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import lombok.Setter;
-import org.lwjgl.opengl.GL11;
 
 public class AccountList extends AbstractElement {
     @Setter
@@ -61,7 +60,7 @@ public class AccountList extends AbstractElement {
         boolean bl2 = bl && this.isMouseInside(f, f2);
         RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.x, this.y, this.x + this.width, this.y + this.elementHeight, this.lIIIIllIIlIlIllIIIlIllIlI.get(bl2).getRGB(), this.IlllIllIlIIIIlIIlIIllIIIl.get(bl2).getRGB(), this.IlIlllIIIIllIllllIllIIlIl.get(bl2).getRGB());
         float f3 = 6;
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         RenderUtil.drawIcon(this.headLocation, f3, this.x + (float)4, this.y + this.elementHeight / 2.0f - f3);
         FontRegistry.getRobotoRegular13px().drawString(this.displayName, this.x + (float)22, this.y + 1.56f * 2.8846154f, -1342177281);
         float f4 = this.llIIlllIIIIlllIllIlIlllIl.lIIIIlIIllIIlIIlIIIlIIllI(this.isMouseInside(f, f2) && bl);
@@ -78,8 +77,8 @@ public class AccountList extends AbstractElement {
             if (f6 > f7) {
                 Ref.modified$drawBoxWithOutLine(this.x + 1.0f, f7, this.x + this.width - 1.0f, f6, f5, 0x4FFFFFFF, 444958085);
             }
-            GL11.glPushMatrix();
-            GL11.glEnable(0xc11);
+            Ref.getGlBridge().bridge$pushMatrix();
+            Ref.getGlBridge().bridge$enableScissoring();
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(
                     (int)this.x,
                     (int)(this.y + this.height),
@@ -96,14 +95,14 @@ public class AccountList extends AbstractElement {
                 float f10 = this.y + this.elementHeight + (float)(n * 16) - (float)8;
                 float f11 = f10 + (float)16;
                 boolean hovered = f > left && f < right && f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII() > f10 && f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII() < f11 && bl && !this.scrollableElement.isMouseInside(f, f2) && !this.scrollableElement.isDragClick();
-                GL11.glColor4f(1.0f, 1.0f, 1.0f, hovered ? 1.0f : 0.8148148f * 0.8590909f);
+                Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, hovered ? 1.0f : 0.8148148f * 0.8590909f);
                 RenderUtil.drawIcon(account.getHeadLocation(), f3, this.x + (float)4, f10 + (float)8 - f3);
                 FontRegistry.getRobotoRegular13px().drawString(account.getDisplayName(), this.x + (float)22, f10 + (float)4, hovered ? -1 : -1342177281);
                 ++n;
             }
             this.scrollableElement.handleElementDraw(f, f2, bl);
-            GL11.glDisable(0xc11);
-            GL11.glPopMatrix();
+            Ref.getGlBridge().bridge$disableScissoring();
+            Ref.getGlBridge().bridge$popMatrix();
         }
     }
 

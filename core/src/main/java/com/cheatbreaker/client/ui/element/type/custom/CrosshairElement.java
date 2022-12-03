@@ -5,7 +5,6 @@ import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.config.GlobalSettings;
 import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
-import org.lwjgl.opengl.GL11;
 
 public class CrosshairElement extends AbstractModulesGuiElement {
     public CrosshairElement(float f) {
@@ -16,12 +15,12 @@ public class CrosshairElement extends AbstractModulesGuiElement {
     @Override
     public void handleDrawElement(int mouseX, int mouseY, float partialTicks) {
         Ref.modified$drawRect(this.x + (this.width / 2 - 15) - 41, this.y + 4, this.x + (this.width / 2 - 15) + 41, this.y + 51, -16777216);
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(Ref.getInstanceCreator().createResourceLocation("client/defaults/crosshair.png"), (float)(this.x + (this.width / 2 - 15) - 40), (float)(this.y + 5), (float)80, 45);
         GlobalSettings globalSettings = CheatBreaker.getInstance().globalSettings;
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         float f2 = 1.0f / CheatBreaker.getInstance().getScaleFactor();
-        GL11.glScalef(f2, f2, f2);
+        Ref.getGlBridge().bridge$scale(f2, f2, f2);
         float f3 = (Float) globalSettings.crosshairSize.getValue();
         float f4 = (Float) globalSettings.crosshairGap.getValue();
         float f5 = (Float) globalSettings.crosshairThickness.getValue();
@@ -40,8 +39,8 @@ public class CrosshairElement extends AbstractModulesGuiElement {
             Ref.modified$drawRect((float)n4 - f5 / 2.0f, (float)n5 - f4 - f3, (float)n4 + f5 / 2.0f, (float)n5 - f4, n3);
             Ref.modified$drawRect((float)n4 - f5 / 2.0f, (float)n5 + f4, (float)n4 + f5 / 2.0f, (float)n5 + f4 + f3, n3);
         }
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
     @Override

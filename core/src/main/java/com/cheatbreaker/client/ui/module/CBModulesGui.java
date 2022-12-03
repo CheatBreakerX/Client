@@ -18,7 +18,6 @@ import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -286,44 +285,44 @@ public class CBModulesGui extends CBGuiScreen {
             if (bl3) continue;
             bl = false;
         }
-        GL11.glPushMatrix();
-        GL11.glScalef(scale, scale, scale);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$scale(scale, scale, scale);
         int n5 = (int)((float)this.width / scale);
         int n6 = (int)((float)this.height / scale);
         this.showGuidesButton.handleDrawElement(mouseX, mouseY, delta);
         this.helpButton.handleDrawElement(mouseX, mouseY, delta);
         float f13 = (float)(this.IIllIlIllIlIllIIlIllIlIII * 8) / (float)255;
-        GL11.glPushMatrix();
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, f13);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, f13);
         int n7 = 0xFFFFFF;
         if (f13 / (float)4 > 0.0f && f13 / (float)4 < 1.0f) {
             n7 = new Color(1.0f, 1.0f, 1.0f, f13 / (float)4).getRGB();
         }
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, f13);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, f13);
         if (f13 > 1.0f) {
-            GL11.glTranslatef(-((float)(this.IIllIlIllIlIllIIlIllIlIII * 2) - (float)32) / (float)12 - 1.0f, 0.0f, 0.0f);
+            Ref.getGlBridge().bridge$translate(-((float)(this.IIllIlIllIlIllIIlIllIlIII * 2) - (float)32) / (float)12 - 1.0f, 0.0f, 0.0f);
         }
         RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(Ref.getInstanceCreator().createResourceLocation("client/logo_white.png"), (float)(n5 / 2 - 14), (float)(n6 / 2 - 47 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), (float)28, 15);
         if (f13 > 2.0f) {
             FontRegistry.getPlayBold18px().drawString("| CHEAT", n5 / 2 + 18, (float)(n6 / 2 - 42 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), n7);
             FontRegistry.getPlayRegular18px().drawString("BREAKER", n5 / 2 + 53, (float)(n6 / 2 - 42 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), n7);
         }
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
         for (ModulesGuiButtonElement llllIIIIIlIlIlIlIllIIIIII2 : this.buttons) {
             llllIIIIIlIlIlIlIllIIIIII2.handleDrawElement(mouseX, mouseY, delta);
         }
         if (draggingModule == null) {
-            GL11.glPushMatrix();
-            GL11.glEnable(3089);
+            Ref.getGlBridge().bridge$pushMatrix();
+            Ref.getGlBridge().bridge$enableScissoring();
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(n5 / 2 - 185, n6 / 2 + 15, n5 / 2 + 185, n6 - 20, (float)scaledResolution.bridge$getScaleFactor() * scale, n6);
             for (AbstractScrollableElement lllIllIllIlIllIlIIllllIIl2 : this.IllIIlIIlllllIllIIIlllIII) {
                 if (lllIllIllIlIllIlIIllllIIl2 != this.lIIIIllIIlIlIllIIIlIllIlI && lllIllIllIlIllIlIIllllIIl2 != this.currentScrollableElement) continue;
                 lllIllIllIlIllIlIIllllIIl2.handleDrawElement(mouseX, mouseY, delta);
             }
-            GL11.glDisable(3089);
-            GL11.glPopMatrix();
+            Ref.getGlBridge().bridge$disableScissoring();
+            Ref.getGlBridge().bridge$popMatrix();
         }
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
         if (this.someMouseX != -1) {
             if (Mouse.isButtonDown(0)) {
                 if (this.someMouseX != mouseX && this.someMouseY != mouseY) {
@@ -358,9 +357,9 @@ public class CBModulesGui extends CBGuiScreen {
     }
 
     private void drawHelpMenu(float f) {
-        GL11.glPushMatrix();
-        GL11.glTranslatef(4, (float)this.height - (float)185 * f, 0.0f);
-        GL11.glScalef(f, f, f);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$translate(4, (float)this.height - (float)185 * f, 0.0f);
+        Ref.getGlBridge().bridge$scale(f, f, f);
         Ref.modified$drawRect(0.0f, 0.0f, 240, 140, -1895825408);
         FontRegistry.getUbuntuMedium16px().drawString("Shortcuts & Movement", 4, 2.0f, -1);
         Ref.modified$drawRect(4, 12, 234, 2.5815217f * 4.8421054f, 0x4FFFFFFF);
@@ -391,7 +390,7 @@ public class CBModulesGui extends CBGuiScreen {
         this.renderRoundButton("Down", 26, n);
         this.renderRoundButton("Right", 51, n);
         FontRegistry.getPlayRegular14px().drawString("| Move selected mod with precision", 80, (float)n, -1);
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
     private void renderRoundButton(String string, int n, int n2) {
@@ -737,7 +736,7 @@ public class CBModulesGui extends CBGuiScreen {
         if (cBModule.height < (float)18) {
             cBModule.height = 18;
         }
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         float[] arrf = cBModule.getScaledPoints(scaledResolution, true);
         cBModule.scaleAndTranslate(scaledResolution);
         bl2 = this.someMouseX != -1;
@@ -762,39 +761,39 @@ public class CBModulesGui extends CBGuiScreen {
             n5 = !cBModule.getSettingsList().isEmpty() && (float)n >= (object[0] + 2.0f) * (Float) cBModule.scale.getValue() && (float)n <= (object[0] + (float)10) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 >= (object[1] + cBModule.height - (float)8) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 <= (object[1] + cBModule.height - 2.0f) * ((Float)cBModule.scale.getValue()).floatValue() ? 1 : 0;
             n4 = (float)n > (object[0] + cBModule.width - (float)10) * (Float) cBModule.scale.getValue() && (float)n < (object[0] + cBModule.width - 2.0f) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 > (object[1] + cBModule.height - (float)8) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 < (object[1] + cBModule.height - 2.0f) * ((Float)cBModule.scale.getValue()).floatValue() ? 1 : 0;
             if (!cBModule.getSettingsList().isEmpty()) {
-                GL11.glColor4f(1.0f, 1.0f, 1.0f, n5 != 0 ? 1.0f : 0.20895523f * 2.8714287f);
+                Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, n5 != 0 ? 1.0f : 0.20895523f * 2.8714287f);
                 RenderUtil.drawIcon(this.cogIcon, (float)3, 2.0f, cBModule.height - 2.162162f * 3.4687502f);
             }
-            GL11.glColor4f(0.8f, 0.2f, 0.2f, n4 != 0 ? 1.0f : 0.6f);
+            Ref.getGlBridge().bridge$color(0.8f, 0.2f, 0.2f, n4 != 0 ? 1.0f : 0.6f);
             RenderUtil.drawIcon(this.deleteIcon, (float)3, cBModule.width - (float)8, cBModule.height - 0.2972973f * 25.227272f);
         }
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         float f3 = f / (Float) cBModule.scale.getValue();
-        GL11.glScalef(f3, f3, f3);
+        Ref.getGlBridge().bridge$scale(f3, f3, f3);
         if (bl) {
             n4 = this.dataHolder != null && this.dataHolder.module == cBModule && this.dataHolder.unknown == SomeRandomAssEnum.LEFT_BOTTOM || n6 == 0 && (float)n >= (object[0] + cBModule.width - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n <= (object[0] + cBModule.width + (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 >= (object[1] - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 <= (object[1] + (float)5) * ((Float)cBModule.scale.getValue()).floatValue() ? 1 : 0;
             n3 = this.dataHolder != null && this.dataHolder.module == cBModule && this.dataHolder.unknown == SomeRandomAssEnum.RIGHT_TOP || n6 == 0 && (float)n >= (object[0] - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n <= (object[0] + (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 >= (object[1] + cBModule.height - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 <= (object[1] + cBModule.height + (float)5) * ((Float)cBModule.scale.getValue()).floatValue() ? 1 : 0;
             boolean bl5 = this.dataHolder != null && this.dataHolder.module == cBModule && this.dataHolder.unknown == SomeRandomAssEnum.RIGHT_BOTTOM || n6 == 0 && (float)n >= (object[0] - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n <= (object[0] + (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 >= (object[1] - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 <= (object[1] + (float)5) * ((Float)cBModule.scale.getValue()).floatValue();
             boolean bl6 = this.dataHolder != null && this.dataHolder.module == cBModule && this.dataHolder.unknown == SomeRandomAssEnum.LEFT_TOP || n6 == 0 && (float)n >= (object[0] + cBModule.width - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n <= (object[0] + cBModule.width + (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 >= (object[1] + cBModule.height - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 <= (object[1] + cBModule.height + (float)5) * ((Float)cBModule.scale.getValue()).floatValue();
-            GL11.glPushMatrix();
+            Ref.getGlBridge().bridge$pushMatrix();
             float f4 = 4;
             if (this.someMouseX == -1 && bl5) {
-                GL11.glTranslatef(0.0f, 0.0f, 0.0f);
+                Ref.getGlBridge().bridge$translate(0.0f, 0.0f, 0.0f);
                 Ref.modified$drawRect(-f4 / 2.0f, -f4 / 2.0f, f4 / 2.0f, f4 / 2.0f, -16711936);
             }
             if (this.someMouseX == -1 && n4 != 0) {
-                GL11.glTranslatef(cBModule.width / f3, 0.0f, 0.0f);
+                Ref.getGlBridge().bridge$translate(cBModule.width / f3, 0.0f, 0.0f);
                 Ref.modified$drawRect(-f4 / 2.0f, -f4 / 2.0f, f4 / 2.0f, f4 / 2.0f, -16711936);
             }
             if (this.someMouseX == -1 && bl6) {
-                GL11.glTranslatef(cBModule.width / f3, cBModule.height / f3, 0.0f);
+                Ref.getGlBridge().bridge$translate(cBModule.width / f3, cBModule.height / f3, 0.0f);
                 Ref.modified$drawRect(-f4 / 2.0f, -f4 / 2.0f, f4 / 2.0f, f4 / 2.0f, -16711936);
             }
             if (this.someMouseX == -1 && n3 != 0) {
-                GL11.glTranslatef(0.0f, cBModule.height / f3, 0.0f);
+                Ref.getGlBridge().bridge$translate(0.0f, cBModule.height / f3, 0.0f);
                 Ref.modified$drawRect(-f4 / 2.0f, -f4 / 2.0f, f4 / 2.0f, f4 / 2.0f, -16711936);
             }
-            GL11.glPopMatrix();
+            Ref.getGlBridge().bridge$popMatrix();
             bl3 = this.someMouseX == -1 && (bl5 || n4 != 0 || n3 != 0 || bl6);
         }
         n4 = arrf[1] - FontRegistry.getUbuntuMedium16px().getHeight() - (float)6 < 0.0f ? 1 : 0;
@@ -815,8 +814,8 @@ public class CBModulesGui extends CBGuiScreen {
                 FontRegistry.getUbuntuMedium16px().drawString(cBModule.getName(), f8, f5, -1);
             }
         }
-        GL11.glPopMatrix();
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
         return !bl3;
     }
 
@@ -885,10 +884,10 @@ public class CBModulesGui extends CBGuiScreen {
                         RenderUtil.drawRoundedRect(0.0, (arrf[1] + cBModule.height) * ((Float)cBModule.scale.getValue()).floatValue() - 0.5810811f * 0.8604651f, this.width, (arrf[1] + cBModule.height) * ((Float)cBModule.scale.getValue()).floatValue(), 0.0, -3596854);
                     }
                     if (!bl) continue;
-                    GL11.glPushMatrix();
+                    Ref.getGlBridge().bridge$pushMatrix();
                     cBModule.scaleAndTranslate(scaledResolution);
                     Ref.modified$drawRectWithOutline(0.0f, 0.0f, cBModule.width, cBModule.height, 0.01923077f * 26.0f, 0, 449387978);
-                    GL11.glPopMatrix();
+                    Ref.getGlBridge().bridge$popMatrix();
                 }
             }
         }

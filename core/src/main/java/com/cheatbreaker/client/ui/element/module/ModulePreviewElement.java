@@ -13,7 +13,6 @@ import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Objects;
 
@@ -46,7 +45,7 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
             Ref.modified$drawRect(this.x, this.y, this.x + this.width, this.y + this.height, CheatBreaker.getInstance().globalSettings.isDarkMode() ? -14211289 : -1347374928);
         }
         CBFontRenderer playBold18px = FontRegistry.getPlayBold18px();
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         int n3 = 0;
         int n4 = 0;
         if (this.module == CheatBreaker.getInstance().moduleManager.armourStatus) {
@@ -81,7 +80,7 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
                 f2 = this.module.getPreviewLabelSize();
                 object = this.module.getPreviewLabel();
             }
-            GL11.glScalef(f2, f2, f2);
+            Ref.getGlBridge().bridge$scale(f2, f2, f2);
             float f3 = (float)Ref.getMinecraft().bridge$getFontRenderer().bridge$getStringWidth((String)object) * f2;
             if (this.module.getPreviewType() == null) {
                 Ref.getMinecraft().bridge$getFontRenderer().bridge$drawString((String)object, (int)(((float)(this.x + 1 + this.width / 2) - f3 / 2.0f) / f2), (int)((float)(this.y + this.height / 2 - 32) / f2), -13750738);
@@ -91,10 +90,10 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
         } else if (this.module.getPreviewType() == AbstractModule.PreviewType.ICON) {
             float f4 = this.module.getPreviewIconWidth();
             f2 = this.module.getPreviewIconHeight();
-            GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.module.getPreviewIcon(), (float)(this.x + this.width / 2) - f4 / 2.0f + (float)n4, (float)(this.y + n3 + this.height / 2 - 26) - f2 / 2.0f, f4, f2);
         }
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
         float moduleNameOffset = this.y + this.height / 2f;
         playBold18px.drawCenteredString(this.module.getName(), (float)(this.x + this.width / 2) - 1.0681819f * 0.46808508f, moduleNameOffset + 1, 0x5F000000);
         playBold18px.drawCenteredString(this.module.getName(), (float)(this.x + this.width / 2) - 1.125f * 1.3333334f, moduleNameOffset, -1);

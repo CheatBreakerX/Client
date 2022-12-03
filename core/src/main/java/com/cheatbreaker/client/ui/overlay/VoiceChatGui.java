@@ -11,7 +11,6 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.voicechat.VoiceChannel;
 import com.cheatbreaker.client.util.voicechat.VoiceUser;
 import com.google.common.collect.Lists;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -166,7 +165,7 @@ public class VoiceChatGui extends AbstractGui {
             float f7 = f4 + (float)n * f5;
             float f8 = f3;
             boolean bl3 = f > f3 + (float)158 && f < f3 + (float)184 && f2 > f7 && f2 < f7 + f5;
-            GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
             if (!bl) {
                 RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.headphonesImage, f8 + (float)4, f7 + (float)3, (float)8, 8);
             } else {
@@ -175,10 +174,10 @@ public class VoiceChatGui extends AbstractGui {
             f8 = f3 + (float)10;
             if (!voiceUser3.getUUID().equals(this.mc.bridge$getThePlayer().bridge$getUniqueID())) {
                 if (bl2) {
-                    GL11.glColor4f(1.0f, 1.4848485f * 0.06734694f, 4.9f * 0.020408163f, bl3 ? 1.0f : 0.8117647f * 0.73913044f);
+                    Ref.getGlBridge().bridge$color(1.0f, 1.4848485f * 0.06734694f, 4.9f * 0.020408163f, bl3 ? 1.0f : 0.8117647f * 0.73913044f);
                     RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.mutedSpeakerImage, f3 + (float)162, f7 + (float)3, (float)8, 8);
                 } else {
-                    GL11.glColor4f(1.0f, 1.0f, 1.0f, bl3 ? 1.0f : 0.11904762f * 5.04f);
+                    Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, bl3 ? 1.0f : 0.11904762f * 5.04f);
                     RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.speakerImage, f3 + (float)162, f7 + (float)3, (float)8, 8);
                 }
             }

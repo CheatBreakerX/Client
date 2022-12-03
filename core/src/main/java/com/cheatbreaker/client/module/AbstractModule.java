@@ -10,7 +10,6 @@ import com.cheatbreaker.client.event.EventBus;
 import com.cheatbreaker.client.ui.module.CBAnchorHelper;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
 import com.cheatbreaker.client.ui.module.CBPositionEnum;
-import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -204,7 +203,7 @@ public abstract class AbstractModule {
         float f3 = 0.0f;
         float f4 = 0.0f;
         float scale = (Float) this.scale.getValue();
-        GL11.glScalef(scale, scale, scale);
+        Ref.getGlBridge().bridge$scale(scale, scale, scale);
         f *= scale;
         f2 *= scale;
         switch (this.guiAnchor) {
@@ -258,8 +257,8 @@ public abstract class AbstractModule {
                 f4 = (float) resolution.bridge$getScaledHeight() - f2;
             }
         }
-        GL11.glTranslatef(f3 / scale, f4 / scale, 0.0f);
-        GL11.glTranslatef(this.xTranslation / scale, this.yTranslation / scale, 0.0f);
+        Ref.getGlBridge().bridge$translate(f3 / scale, f4 / scale, 0.0f);
+        Ref.getGlBridge().bridge$translate(this.xTranslation / scale, this.yTranslation / scale, 0.0f);
     }
 
     public float[] getScaledPoints(ScaledResolutionBridge resolution, boolean bl) {

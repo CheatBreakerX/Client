@@ -3,7 +3,6 @@ package com.cheatbreaker.impl.ref;
 import com.cheatbreaker.bridge.ref.IDrawingUtils;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.util.Utils;
-import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

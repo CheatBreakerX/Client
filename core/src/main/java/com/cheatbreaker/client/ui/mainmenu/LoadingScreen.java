@@ -8,7 +8,6 @@ import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.ui.AbstractGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
@@ -45,25 +44,25 @@ public class LoadingScreen extends AbstractGui {
 
     private void clearMenu() {
         this.frameBuffer.bridge$bindFramebuffer(false);
-        GL11.glMatrixMode(GL11.GL_PROJECTION);
-        GL11.glLoadIdentity();
-        GL11.glOrtho(0.0, res.bridge$getScaledWidth(), res.bridge$getScaledHeight(), 0.0, 1000.0, 3000.0);
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
-        GL11.glLoadIdentity();
-        GL11.glTranslatef(0.0f, 0.0f, -2000.0f);
-        GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glDisable(GL11.GL_FOG);
-        GL11.glDisable(GL11.GL_DEPTH_TEST);
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glEnable(GL11.GL_ALPHA_TEST);
+        Ref.getGlBridge().bridge$matrixMode(5889);
+        Ref.getGlBridge().bridge$loadIdentity();
+        Ref.getGlBridge().bridge$ortho(0, res.bridge$getScaledWidth(), res.bridge$getScaledHeight(), 0, 1000, 3000);
+        Ref.getGlBridge().bridge$matrixMode(5888);
+        Ref.getGlBridge().bridge$loadIdentity();
+        Ref.getGlBridge().bridge$translate(0f, 0f, -2000f);
+        Ref.getGlBridge().bridge$disableLighting();
+        Ref.getGlBridge().bridge$disableFog();
+        Ref.getGlBridge().bridge$enableDepthTest();
+        Ref.getGlBridge().bridge$enableTexture2D();
+        Ref.getGlBridge().bridge$enableAlphaTest();
     }
 
     private void getMenuReady() {
         int n = this.res.bridge$getScaleFactor();
         this.frameBuffer.bridge$unbindFramebuffer();
         this.frameBuffer.bridge$framebufferRender(this.res.bridge$getScaledWidth() * n, this.res.bridge$getScaledHeight() * n);
-        GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-        GL11.glFlush();
+        Ref.getGlBridge().bridge$alphaFunc(516, 0.1F);
+        Ref.getGlBridge().bridge$flush();
     }
 
     @Override

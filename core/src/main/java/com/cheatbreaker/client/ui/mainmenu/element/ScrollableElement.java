@@ -3,7 +3,6 @@ package com.cheatbreaker.client.ui.mainmenu.element;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 
 public class ScrollableElement extends AbstractElement {
     protected final AbstractElement parent;
@@ -29,7 +28,7 @@ public class ScrollableElement extends AbstractElement {
     public void handleElementDraw(float f, float f2, boolean bl) {
         float f3;
         this.alwaysTrueApparently = true;
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
         boolean bl2 = this.lIIIIllIIlIlIllIIIlIllIlI();
         if (!(!this.hovered || Mouse.isButtonDown(0) && this.isMouseInside(f, f2) && bl)) {
             this.hovered = false;
@@ -98,14 +97,14 @@ public class ScrollableElement extends AbstractElement {
                 this.internalScrollAmount = 0.0;
             }
         }
-        GL11.glPushMatrix();
-        GL11.glTranslatef(0.0f, this.translateY, 0.0f);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$translate(0.0f, this.translateY, 0.0f);
     }
 
     public void scrollableOnMouseClick(float mouseX, float mouseY, boolean bl) {
         float f3;
         this.alwaysTrueApparently = true;
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
         boolean bl2 = this.lIIIIllIIlIlIllIIIlIllIlI();
         if (!(!this.hovered || Mouse.isButtonDown(0) && this.isMouseInside(mouseX, mouseY) && bl)) {
             this.hovered = false;
@@ -174,8 +173,8 @@ public class ScrollableElement extends AbstractElement {
                 this.internalScrollAmount = 0.0;
             }
         }
-        GL11.glPushMatrix();
-        GL11.glTranslatef(0.0f, -this.translateY, 0.0f);
+        Ref.getGlBridge().bridge$pushMatrix();
+        Ref.getGlBridge().bridge$translate(0.0f, -this.translateY, 0.0f);
     }
 
     public float IllIIIIIIIlIlIllllIIllIII() {

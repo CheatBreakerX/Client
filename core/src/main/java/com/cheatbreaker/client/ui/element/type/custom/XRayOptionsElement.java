@@ -8,7 +8,6 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
-import org.lwjgl.opengl.GL11;
 
 import java.util.List;
 
@@ -30,8 +29,8 @@ public class XRayOptionsElement
         FontRegistry.getUbuntuMedium16px().drawString(this.lIIIIlIIllIIlIIlIIIlIIllI.toUpperCase(), this.x + 10, (float)(this.y + 2), CheatBreaker.getInstance().globalSettings.isDarkMode() ? 0xFFFFFFFF : -1895825407);
         MinecraftBridge minecraft = Ref.getMinecraft();
         List<Integer> list = CheatBreaker.getInstance().moduleManager.xray.lIllIllIlIIllIllIlIlIIlIl();
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        GL11.glEnable(32826);
+        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
+        Ref.getGlBridge().bridge$enableRescaleNormal();
         Ref.getRenderHelper().bridge$enableStandardItemLighting();
         Ref.getRenderHelper().bridge$enableGUIStandardItemLighting();
         int n3 = 0;
@@ -57,8 +56,8 @@ public class XRayOptionsElement
             ++n3;
         }
         Ref.getRenderHelper().bridge$disableStandardItemLighting();
-        GL11.glDisable(32826);
-        GL11.glDisable(3042);
+        Ref.getGlBridge().bridge$disableRescaleNormal();
+        Ref.getGlBridge().bridge$disableBlend();
     }
 
     @Override

@@ -1,10 +1,10 @@
 package com.cheatbreaker.client.module.type;
 
+import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
-import org.lwjgl.opengl.GL11;
 
 public class CoordinatesModule extends AbstractModule {
 
@@ -58,7 +58,7 @@ public class CoordinatesModule extends AbstractModule {
             return;
         }
 
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         this.scaleAndTranslate(event.getResolution());
         int n = MathHelper$floor_double(this.minecraft.bridge$getThePlayer().bridge$getPosX());
         int n2 = (int) this.minecraft.bridge$getThePlayer().bridge$getBoundingBox().bridge$getMinY();
@@ -91,6 +91,6 @@ public class CoordinatesModule extends AbstractModule {
             }
             this.setDimensions(n4, (float) 18 + f);
         }
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 }

@@ -9,7 +9,6 @@ import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.event.type.CollisionEvent;
 import com.cheatbreaker.client.event.type.RenderWorldEvent;
 import com.cheatbreaker.client.event.type.TickEvent;
-import org.lwjgl.opengl.GL11;
 
 import javax.vecmath.Vector2d;
 import java.util.ArrayList;
@@ -56,22 +55,22 @@ public class WorldBorderManager {
                     double d5 = playerMP.bridge$getLastTickPosX() + (playerMP.bridge$getPosX() - playerMP.bridge$getLastTickPosX()) * (double)f;
                     double d6 = playerMP.bridge$getLastTickPosY() + (playerMP.bridge$getPosY() - playerMP.bridge$getLastTickPosY()) * (double)f;
                     double d7 = playerMP.bridge$getLastTickPosZ() + (playerMP.bridge$getPosZ() - playerMP.bridge$getLastTickPosZ()) * (double)f;
-                    GL11.glEnable(3042);
-                    GL11.glBlendFunc(770, 1);
+                    Ref.getGlBridge().bridge$enableBlend();
+                    Ref.getGlBridge().bridge$blendFunc(770, 1);
                     this.minecraft.bridge$getTextureManager().bridge$bindTexture(forceFieldTexture);
-                    GL11.glDepthMask(false);
-                    GL11.glPushMatrix();
+                    Ref.getGlBridge().bridge$depthMask(false);
+                    Ref.getGlBridge().bridge$pushMatrix();
                     float f4 = (float)(WorldBorder.IlllIIIlIlllIllIlIIlllIlI(border).getRed() & 0xFF) / (float)255;
                     float f5 = (float)(WorldBorder.IlllIIIlIlllIllIlIIlllIlI(border).getGreen() & 0xFF) / (float)255;
                     float f6 = (float)(WorldBorder.IlllIIIlIlllIllIlIIlllIlI(border).getBlue() & 0xFF) / (float)255;
-                    GL11.glPolygonOffset(-3, -3);
-                    GL11.glEnable(32823);
-                    GL11.glAlphaFunc(516, 0.097260274f * 1.028169f);
-                    GL11.glEnable(3008);
-                    GL11.glDisable(2884);
+                    Ref.getGlBridge().bridge$polygonOffset(-3, -3);
+                    Ref.getGlBridge().bridge$enablePolygonOffset();
+                    Ref.getGlBridge().bridge$alphaFunc(516, 0.097260274f * 1.028169f);
+                    Ref.getGlBridge().bridge$enableAlphaTest();
+                    Ref.getGlBridge().bridge$disableCullFace();
                     float f7 = (float)(Ref.getMinecraft().bridge$getSystemTime() % 3000L) / (float)3000;
                     tessellator.bridge$startDrawingQuads();
-                    GL11.glTranslated(-d5, -d6, -d7);
+                    Ref.getGlBridge().bridge$translate(-d5, -d6, -d7);
                     tessellator.bridge$setColorRGBA_F(f4, f5, f6, 1.0f);
                     double d8 = Math.max(MathHelper$floor_double(d7 - d), border.IIIllIllIlIlllllllIlIlIII());
                     double d9 = Math.min(MathHelper$ceiling_double_int(d7 + d), border.IIIIllIIllIIIIllIllIIIlIl());
@@ -134,15 +133,15 @@ public class WorldBorderManager {
                         }
                     }
                     tessellator.bridge$finish();
-                    GL11.glTranslated(0.0, 0.0, 0.0);
-                    GL11.glEnable(2884);
-                    GL11.glDisable(3008);
-                    GL11.glPolygonOffset(0.0f, 0.0f);
-                    GL11.glDisable(32823);
-                    GL11.glEnable(3008);
-                    GL11.glDisable(3042);
-                    GL11.glPopMatrix();
-                    GL11.glDepthMask(true);
+                    Ref.getGlBridge().bridge$translate(0f, 0f, 0f);
+                    Ref.getGlBridge().bridge$enableCullFace();
+                    Ref.getGlBridge().bridge$disableAlphaTest();
+                    Ref.getGlBridge().bridge$polygonOffset(0.0f, 0.0f);
+                    Ref.getGlBridge().bridge$disablePolygonOffset();
+                    Ref.getGlBridge().bridge$enableAlphaTest();
+                    Ref.getGlBridge().bridge$disableBlend();
+                    Ref.getGlBridge().bridge$popMatrix();
+                    Ref.getGlBridge().bridge$depthMask(true);
                 }
             });
         }

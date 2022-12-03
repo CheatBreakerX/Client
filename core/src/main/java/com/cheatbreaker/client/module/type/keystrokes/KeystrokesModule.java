@@ -6,7 +6,6 @@ import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
 
 public class KeystrokesModule
         extends AbstractModule {
@@ -54,7 +53,7 @@ public class KeystrokesModule
         if (!this.isRenderHud()) {
             return;
         }
-        GL11.glPushMatrix();
+        Ref.getGlBridge().bridge$pushMatrix();
         this.scaleAndTranslate(drawEvent.getResolution());
         float f = 0.0f;
         float f2 = 0.0f;
@@ -83,7 +82,7 @@ public class KeystrokesModule
             f2 += this.spaceBarKey.getHeight() + gap;
         }
         this.setDimensions(f, f2 < (float)18 ? (float)18 : f2 + 2.0f);
-        GL11.glPopMatrix();
+        Ref.getGlBridge().bridge$popMatrix();
     }
 
     public void initialize() {
