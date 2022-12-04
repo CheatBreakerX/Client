@@ -8,13 +8,21 @@ import com.cheatbreaker.bridge.potion.PotionEffectBridge;
 import com.cheatbreaker.bridge.util.AxisAlignedBBBridge;
 import com.cheatbreaker.bridge.util.IChatComponentBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
+import com.cheatbreaker.impl.extra.CBMovementInputHelperImpl;
 import com.cheatbreaker.util.Utils;
 import com.mojang.authlib.GameProfile;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.stats.StatFileWriter;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,8 +31,16 @@ import java.util.UUID;
 
 @Mixin(EntityPlayerSP.class)
 public class MixinEntityPlayerSP extends AbstractClientPlayer implements EntityPlayerSPBridge {
+    @Shadow protected Minecraft mc;
+
     public MixinEntityPlayerSP(World worldIn, GameProfile playerProfile) {
         super(worldIn, playerProfile);
+    }
+
+    private CBMovementInputHelperImpl minecraftMovementInputHelper;
+    @Inject(method = "<init>", at = @At("RETURN"))
+    public void init(Minecraft mcIn, World worldIn, NetHandlerPlayClient netHandler, StatFileWriter statFile, CallbackInfo ca) {
+        this.minecraftMovementInputHelper = new CBMovementInputHelperImpl(this.mc.gameSettings);
     }
 
     public void bridge$setLocationCape(ResourceLocationBridge location) {

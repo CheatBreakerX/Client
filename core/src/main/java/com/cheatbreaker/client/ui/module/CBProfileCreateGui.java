@@ -50,12 +50,13 @@ public class CBProfileCreateGui extends CBGuiScreen {
     @Override
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
+        this.setWorldAndResolution(Ref.getMinecraft(), (int) Ref.getInstanceCreator().createScaledResolution().bridge$getScaledWidth(), (int) Ref.getInstanceCreator().createScaledResolution().bridge$getScaledHeight());
         if (!this.IIIllIllIlIlllllllIlIlIII) {
             this.mc.bridge$displayGuiScreen(this.guiScreen);
             ((CBModulesGui) this.guiScreen).currentScrollableElement = ((CBModulesGui) this.guiScreen).profilesElement;
         } else {
             this.IIIllIllIlIlllllllIlIlIII = false;
-            this.textField = Ref.getInstanceCreator().createTextField(this.mc.bridge$getFontRenderer(), this.width / 2 - 70, this.height / 2 - 6, 140, 10);
+            this.textField = Ref.getInstanceCreator().createTextField(this.width / 2 - 70, this.height / 2 - 6, 140, 10);
             if (this.profile != null) {
                 this.textField.bridge$setText(this.profile.getName());
             }

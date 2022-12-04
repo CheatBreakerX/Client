@@ -1,24 +1,22 @@
 package com.cheatbreaker;
 
-import com.cheatbreaker.bridge.block.BlockBridge;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
-import com.cheatbreaker.bridge.item.ItemBridge;
-import com.cheatbreaker.bridge.ref.IRefUtils;
+import com.cheatbreaker.bridge.forge.RenderGameOverlayEventBridge;
 import com.cheatbreaker.bridge.ref.Ref;
-import com.cheatbreaker.bridge.ref.extra.CBMovementInputHelper;
 import com.cheatbreaker.impl.ref.*;
+import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.main.identification.MinecraftVersion;
 import com.cheatbreaker.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.util.MathHelper;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod(modid = CheatBreakerMod.MODID, version = CheatBreakerMod.VERSION)
 public class CheatBreakerMod {
@@ -38,46 +36,26 @@ public class CheatBreakerMod {
         Ref.setForgeEventBus(MinecraftForge.EVENT_BUS::register);
         Ref.setTessellator((TessellatorBridge) Tessellator.getInstance());
         Ref.setInstanceCreator(new InstanceCreator());
-        Ref.setUtils(new IRefUtils() {
-            public ItemBridge getMostPowerfulArmourHelmet() {
-                return (ItemBridge) Items.diamond_helmet;
-            }
+        Ref.setUtils(new RefUtils());
+    }
 
-            public ItemBridge getMostPowerfulArmourChestplate() {
-                return (ItemBridge) Items.diamond_chestplate;
-            }
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
+    }
 
-            public ItemBridge getMostPowerfulArmourLeggings() {
-                return (ItemBridge) Items.diamond_leggings;
-            }
+    @SubscribeEvent
+    public void onRenderGameOverlay(RenderGameOverlayEvent.Post event) {
+        if (event.type == RenderGameOverlayEvent.ElementType.EXPERIENCE) {
+            CheatBreaker.getInstance().onRenderGameOverlay(new RenderGameOverlayEventBridge() {
+                public boolean bridge$isPost() {
+                    return true;
+                }
 
-            public ItemBridge getMostPowerfulArmourBoots() {
-                return (ItemBridge) Items.diamond_boots;
-            }
-
-            public ItemBridge getMostPowerfulDamageItem() {
-                return (ItemBridge) Items.diamond_sword;
-            }
-
-            public ItemBridge getItemFromID(int itemId) {
-                return (ItemBridge) Item.getItemById(itemId);
-            }
-
-            public CBMovementInputHelper getToggleSprintInputHelper() {
-                return null;
-            }
-
-            public float bridge$MathHelper$sin(float toSine) {
-                return MathHelper.sin(toSine);
-            }
-
-            public float bridge$Gui$getZLevel() {
-                return 0;
-            }
-
-            public ItemBridge getItemFromName(String name) {
-                return (ItemBridge) Item.getByNameOrId(name);
-            }
-        });
+                public boolean bridge$typeIs(String type) {
+                    return type.equals("EXPERIENCE");
+                }
+            });
+        }
     }
 }

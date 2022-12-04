@@ -1,0 +1,30 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+# Every version supported by CheatBreakerX will be added here once added in the full project.
+# As of currently, the only supported version is 1.8.9 Forge
+
+name: Java CI with Gradle
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Make 'gradlew' executable
+        run: chmod +x gradlew
+      - name: Compile CheatBreakerX 1.8.9
+        run: ./gradlew :versions:1.8.9:setupCiWorkspace :versions:1.8.9:build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: CheatBreakerX-1.8.9
+          path: versions/1.8.9/build/libs

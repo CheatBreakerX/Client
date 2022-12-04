@@ -36,29 +36,28 @@ public class ModuleManager {
     public TeammatesModule teammatesModule;
 
     public ModuleManager() {
-        modules = new ArrayList<>();
-        staffModules = new ArrayList<>();
+        this.modules = new ArrayList<>();
+        this.staffModules = new ArrayList<>();
 
-        modules.add(coordinatesModule = new CoordinatesModule());
-        modules.add(toggleSprint = new ToggleSprintModule());
-        modules.add(potionStatus = new PotionStatusModule());
-        modules.add(armourStatus = new ArmourStatusModule());
-        modules.add(keyStrokes = new KeystrokesModule());
-        modules.add(scoreboard = new ScoreboardModule());
-        modules.add(cooldowns = new CooldownsModule());
-        modules.add(notifications = new CBNotificationsModule());
-        modules.add(directionHud = new DirectionHudModule());
-        modules.add(bossBar = new BossBarModule());
-        modules.add(cpsModule = new CPSModule());
-        modules.add(fpsModule = new FPSModule());
+        this.modules.add(this.coordinatesModule = new CoordinatesModule());
+        this.modules.add(this.toggleSprint = new ToggleSprintModule());
+        this.modules.add(this.potionStatus = new PotionStatusModule());
+        this.modules.add(this.armourStatus = new ArmourStatusModule());
+        this.modules.add(this.keyStrokes = new KeystrokesModule());
+        this.modules.add(this.scoreboard = new ScoreboardModule());
+        this.modules.add(this.cooldowns = new CooldownsModule());
+        this.modules.add(this.notifications = new CBNotificationsModule());
+        this.modules.add(this.directionHud = new DirectionHudModule());
+        this.modules.add(this.bossBar = new BossBarModule());
+        this.modules.add(this.cpsModule = new CPSModule());
+        this.modules.add(this.fpsModule = new FPSModule());
         this.voiceChat = new VoiceChat();
         this.teammatesModule = new TeammatesModule();
         this.teammatesModule.lIIIIlIIllIIlIIlIIIlIIllI(true);
 
-        staffModules.add(xray = new XRayModule());
-        for (AbstractModule staffModule : staffModules) {
+        this.staffModules.add(this.xray = new XRayModule());
+        for (AbstractModule staffModule : this.staffModules) {
             staffModule.setStaffModuleEnabled(true);
         }
     }
-
 }

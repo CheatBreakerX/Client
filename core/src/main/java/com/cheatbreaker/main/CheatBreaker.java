@@ -383,8 +383,7 @@ public class CheatBreaker {
 
     @BridgedSubscribeEvent
     public void onRenderGameOverlay(RenderGameOverlayEventBridge event) {
-        if (event.bridge$isPost() && event.bridge$typeIs("EXPERIENCE"))
-        {
+        if (event.bridge$isPost() && event.bridge$typeIs("EXPERIENCE")) {
             MinecraftBridge mc = Ref.getMinecraft();
             ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();
 
@@ -396,7 +395,7 @@ public class CheatBreaker {
                 CheatBreaker.getInstance().getEventBus().callEvent(new RenderPreviewEvent(scaledResolution));
             }
 
-            if (mc.bridge$getCurrentScreen() == null) {
+            if (mc.bridge$isIngame()) {
                 OverlayGui.getInstance().renderGameOverlay();
             }
         }

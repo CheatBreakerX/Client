@@ -47,7 +47,7 @@ public interface IInstanceCreator {
     FrameBufferBridge createFrameBuffer(float width, float height, boolean b);
     SessionBridge createSession(String username, String playerId, String token, String type);
     AxisAlignedBBBridge createAxisAlignedBB(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
-    GuiTextFieldBridge createTextField(FontRendererBridge fontRenderer, int x, int y, int width, int height);
+    GuiTextFieldBridge createTextField(int x, int y, int width, int height);
     PacketBufferBridge createPacketBuffer(ByteBuf buffer);
     C17PacketCustomPayloadBridge createC17PacketCustomPayload(String channel, byte[] data);
     C17PacketCustomPayloadBridge createC17PacketCustomPayload(String channel, PacketBufferBridge data);
@@ -55,4 +55,5 @@ public interface IInstanceCreator {
     PotionEffectBridge createPotionEffect(String idName, int duration, int multiplier);
     ScoreboardBridge createScoreboard();
     ScoreObjectiveBridge createScoreObjective(ScoreboardBridge scoreboard, String name, String type);
+    ScoreObjectiveBridge createScoreObjective(String name, String type);
 }

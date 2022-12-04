@@ -3,14 +3,13 @@ package com.cheatbreaker.util;
 import com.cheatbreaker.bridge.block.BlockBridge;
 import com.cheatbreaker.bridge.item.ItemBridge;
 import com.cheatbreaker.bridge.item.ItemStackBridge;
+import com.cheatbreaker.bridge.potion.PotionEffectBridge;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Utils {
     public static ItemStack itemStackBridgeToItemStack(ItemStackBridge in) {
@@ -81,5 +80,15 @@ public class Utils {
 
     public static <A> Iterable<A> iteratorToIterable(Iterator<A> iterator) {
         return () -> iterator;
+    }
+
+    public static <A, B> Collection<B> convertCollectionType(Collection<A> collection) {
+        List<B> toReturn = new ArrayList<>();
+
+        for (A item : collection) {
+            toReturn.add((B) item);
+        }
+
+        return toReturn;
     }
 }

@@ -5,6 +5,7 @@ import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.element.AbstractScrollableElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,8 @@ public class ModulePreviewContainer
     public ModulePreviewContainer(float f, int n, int n2, int n3, int n4) {
         super(f, n, n2, n3, n4);
         for (AbstractModule module : CheatBreaker.getInstance().moduleManager.modules) {
-            if (module == CheatBreaker.getInstance().moduleManager.notifications) continue;
+            if (module == CheatBreaker.getInstance().moduleManager.notifications)
+                continue;
             ModulePreviewElement element = new ModulePreviewElement(this, module, f);
             this.elements.add(element);
         }

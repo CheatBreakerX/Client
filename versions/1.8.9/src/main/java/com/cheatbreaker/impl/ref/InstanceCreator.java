@@ -120,8 +120,8 @@ public class InstanceCreator implements IInstanceCreator {
         return (AxisAlignedBBBridge) AxisAlignedBB.fromBounds(minX, minY, minZ, maxX, maxY, maxZ);
     }
 
-    public GuiTextFieldBridge createTextField(FontRendererBridge fontRenderer, int x, int y, int width, int height) {
-        return (GuiTextFieldBridge) new GuiTextField(0x530, (FontRenderer) fontRenderer, x, y, width, height);
+    public GuiTextFieldBridge createTextField(int x, int y, int width, int height) {
+        return (GuiTextFieldBridge) new GuiTextField(0x530, Minecraft.getMinecraft().fontRendererObj, x, y, width, height);
     }
 
     public PacketBufferBridge createPacketBuffer(ByteBuf buffer) {
@@ -164,5 +164,10 @@ public class InstanceCreator implements IInstanceCreator {
     public ScoreObjectiveBridge createScoreObjective(ScoreboardBridge scoreboard, String name, String type) {
         IScoreObjectiveCriteria criteria = type.equalsIgnoreCase("dummy") ? IScoreObjectiveCriteria.DUMMY : IScoreObjectiveCriteria.TRIGGER;
         return (ScoreObjectiveBridge) new ScoreObjective((Scoreboard) scoreboard, name, criteria);
+    }
+
+    public ScoreObjectiveBridge createScoreObjective(String name, String type) {
+        IScoreObjectiveCriteria criteria = type.equalsIgnoreCase("dummy") ? IScoreObjectiveCriteria.DUMMY : IScoreObjectiveCriteria.TRIGGER;
+        return (ScoreObjectiveBridge) new ScoreObjective(new Scoreboard(), name, criteria);
     }
 }

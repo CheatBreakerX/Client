@@ -1,9 +1,6 @@
 package com.cheatbreaker.mixin.scoreboard;
 
-import com.cheatbreaker.bridge.scoreboard.ScoreBridge;
-import com.cheatbreaker.bridge.scoreboard.ScoreObjectiveBridge;
-import com.cheatbreaker.bridge.scoreboard.ScoreboardBridge;
-import com.cheatbreaker.bridge.scoreboard.TeamBridge;
+import com.cheatbreaker.bridge.scoreboard.*;
 import com.cheatbreaker.main.CheatBreaker;
 import com.google.common.collect.Lists;
 import net.minecraft.scoreboard.Score;
@@ -25,12 +22,14 @@ public abstract class MixinScoreboard implements ScoreboardBridge {
     @Shadow @Final private Map<String, ScorePlayerTeam> teamMemberships;
     @Shadow public abstract Score getValueFromObjective(String name, ScoreObjective objective);
 
+    @Shadow public abstract Collection<String> getObjectiveNames();
+
     public void bridge$func_96529_a(String name, ScoreObjectiveBridge objective) {
         this.getValueFromObjective(name, (ScoreObjective) objective);
     }
 
-    public TeamBridge bridge$getPlayersTeam(String name) {
-        return (TeamBridge) this.getPlayersTeam(name);
+    public ScorePlayerTeamBridge bridge$getPlayersTeam(String name) {
+        return (ScorePlayerTeamBridge) this.getPlayersTeam(name);
     }
 
     private static final Comparator<ScoreBridge> patchedScoreComparator = (first, second) -> first.bridge$getScorePoints() > second.bridge$getScorePoints() ? 1 : (first.bridge$getScorePoints() < second.bridge$getScorePoints() ? -1 : second.bridge$getPlayerName().compareToIgnoreCase(first.bridge$getPlayerName()));
@@ -51,6 +50,10 @@ public abstract class MixinScoreboard implements ScoreboardBridge {
 
     public ScoreObjectiveBridge bridge$func_96539_a(int i) {
         return (ScoreObjectiveBridge) this.getObjectiveInDisplaySlot(i);
+    }
+
+    public Collection<String> bridge$getObjectiveNames() {
+        return this.getObjectiveNames();
     }
 
     /**

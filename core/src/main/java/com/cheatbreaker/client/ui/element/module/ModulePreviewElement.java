@@ -17,7 +17,7 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import java.util.Objects;
 
 public class ModulePreviewElement extends AbstractModulesGuiElement {
-    private final AbstractModule module;
+    public final AbstractModule module;
     private final ModulesGuiButtonElement optionsButton;
     private final ModulesGuiButtonElement toggleOrHideFromHud;
     private final ModulesGuiButtonElement toggle;

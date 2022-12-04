@@ -16,9 +16,11 @@ import com.cheatbreaker.bridge.client.renderer.texture.TextureManagerBridge;
 import com.cheatbreaker.bridge.client.resources.IResourceManagerBridge;
 import com.cheatbreaker.bridge.client.settings.GameSettingsBridge;
 import com.cheatbreaker.bridge.client.shader.FrameBufferBridge;
+import com.cheatbreaker.bridge.entity.player.InventoryPlayerBridge;
+import com.cheatbreaker.bridge.item.ItemStackBridge;
+import com.cheatbreaker.bridge.potion.PotionEffectBridge;
 import com.cheatbreaker.bridge.ref.Ref;
-import com.cheatbreaker.bridge.util.SessionBridge;
-import com.cheatbreaker.bridge.util.TimerBridge;
+import com.cheatbreaker.bridge.util.*;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 import com.cheatbreaker.client.event.type.KeyboardEvent;
 import com.cheatbreaker.client.ui.mainmenu.MainMenu;
@@ -27,8 +29,10 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.impl.ref.InstanceCreator;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.main.utils.Utility;
+import com.cheatbreaker.util.Utils;
 import com.cheatbreaker.util.WrappedGuiScreen;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.mojang.authlib.GameProfile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.*;
@@ -66,6 +70,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Proxy;
 import java.nio.ByteBuffer;
+import java.util.Collection;
+import java.util.UUID;
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft implements MinecraftBridge {
@@ -165,7 +171,87 @@ public abstract class MixinMinecraft implements MinecraftBridge {
     }
 
     public EntityClientPlayerMPBridge bridge$getThePlayer() {
-        return null;
+        return new EntityClientPlayerMPBridge() {
+            public NetHandlerPlayClientBridge bridge$getSendQueue() {
+                return (NetHandlerPlayClientBridge) Minecraft.getMinecraft().thePlayer.sendQueue;
+            }
+
+            public void bridge$setLocationCape(ResourceLocationBridge location) {
+
+            }
+
+            public String bridge$getDisplayName() {
+                return Minecraft.getMinecraft().thePlayer.getDisplayName().getFormattedText();
+            }
+
+            public String bridge$getCommandSenderName() {
+                return Minecraft.getMinecraft().thePlayer.getCommandSenderEntity().getName();
+            }
+
+            public GameProfile bridge$getGameProfile() {
+                return Minecraft.getMinecraft().thePlayer.getGameProfile();
+            }
+
+            public InventoryPlayerBridge bridge$getInventory() {
+                return (InventoryPlayerBridge) Minecraft.getMinecraft().thePlayer.inventory;
+            }
+
+            public ItemStackBridge bridge$getCurrentEquippedItem() {
+                return Utils.itemStackToItemStackBridge(Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem());
+            }
+
+            public Collection<PotionEffectBridge> bridge$getActivePotionEffects() {
+                return Utils.convertCollectionType(Minecraft.getMinecraft().thePlayer.getActivePotionEffects());
+            }
+
+            public double bridge$getPosX() {
+                return Minecraft.getMinecraft().thePlayer.posX;
+            }
+
+            public double bridge$getPosY() {
+                return Minecraft.getMinecraft().thePlayer.posY;
+            }
+
+            public double bridge$getPosZ() {
+                return Minecraft.getMinecraft().thePlayer.posZ;
+            }
+
+            public UUID bridge$getUniqueID() {
+                return Minecraft.getMinecraft().thePlayer.getUniqueID();
+            }
+
+            public double bridge$getLastTickPosX() {
+                return Minecraft.getMinecraft().thePlayer.lastTickPosX;
+            }
+
+            public double bridge$getLastTickPosY() {
+                return Minecraft.getMinecraft().thePlayer.lastTickPosY;
+            }
+
+            public double bridge$getLastTickPosZ() {
+                return Minecraft.getMinecraft().thePlayer.lastTickPosZ;
+            }
+
+            public float bridge$getRotationPitch() {
+                return Minecraft.getMinecraft().thePlayer.rotationPitch;
+            }
+
+            public float bridge$getRotationYaw() {
+                return Minecraft.getMinecraft().thePlayer.rotationYaw;
+            }
+
+            public AxisAlignedBBBridge bridge$getBoundingBox() {
+                return (AxisAlignedBBBridge) Minecraft.getMinecraft().thePlayer.getEntityBoundingBox();
+            }
+
+            public float bridge$getHeight() {
+                return Minecraft.getMinecraft().thePlayer.height;
+            }
+
+            public IChatComponentBridge bridge$func_145748_c_() {
+                return (IChatComponentBridge) Minecraft.getMinecraft().thePlayer.getDisplayName();
+            }
+        };
     }
 
     public SessionBridge bridge$getSession() {
@@ -351,5 +437,14 @@ public abstract class MixinMinecraft implements MinecraftBridge {
                 this.bridge$displayGuiScreen(OverlayGui.getInstance());
             }
         }
+    }
+
+    /**
+     * @author iAmSpace
+     * @reason big hz
+     */
+    @Overwrite
+    public int getLimitFramerate() {
+        return this.gameSettings.limitFramerate;
     }
 }
