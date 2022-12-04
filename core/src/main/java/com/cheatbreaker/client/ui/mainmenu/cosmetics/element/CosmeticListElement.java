@@ -42,7 +42,7 @@ public class CosmeticListElement extends AbstractModulesGuiElement {
         } else {
             Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, 0.07462687f * 3.35f);
         }
-        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.x + 8, this.y + this.height / 2, 3);
+        RenderUtil.renderCircle(this.x + 8, this.y + this.height / 2, 3);
     }
 
     @Override

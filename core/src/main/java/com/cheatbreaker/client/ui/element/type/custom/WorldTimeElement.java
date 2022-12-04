@@ -95,12 +95,12 @@ public class WorldTimeElement extends AbstractModulesGuiElement {
         double d2 = (float)100 * ((this.time - f4) / (f5 - f4));
         RenderUtil.drawRoundedRect((double)(this.x + 174), (double)(this.y + 16), (double)(this.x + 180) + d * d2 / (double)100, (double)(this.y + 18), (double)4, -12418828);
         Ref.getGlBridge().bridge$color(0.6666667f * 0.375f, 0.45f, 1.0f, 1.0f);
-        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((double)((float)this.x + 1359.3749f * 0.13333334f) + d * d2 / (double)100, (float)this.y + 18.818182f * 0.9166667f, 31.125001159496648 * 0.14457830786705017);
+        RenderUtil.renderCircle((double)((float)this.x + 1359.3749f * 0.13333334f) + d * d2 / (double)100, (float)this.y + 18.818182f * 0.9166667f, 31.125001159496648 * 0.14457830786705017);
         if (this.time == (float)-14490) {
             Ref.getGlBridge().bridge$color(0.7738095f * 0.32307693f, 0.037499998f * 12.0f, 1.0f, 1.0f);
         } else {
             Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         }
-        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((double)((float)this.x + 39.5f * 4.588608f) + d * d2 / (double)100, (float)this.y + 1.2763158f * 13.515464f, 1.6875000046566129 * (double)1.6f);
+        RenderUtil.renderCircle((double)((float)this.x + 39.5f * 4.588608f) + d * d2 / (double)100, (float)this.y + 1.2763158f * 13.515464f, 1.6875000046566129 * (double)1.6f);
     }
 }

@@ -10,4 +10,5 @@ public interface TessellatorBridge {
     void bridge$setColorRGBA_F(float r, float g, float b, float a);
     void bridge$setTranslation(double x, double y, double z);
     void bridge$setColorRGBA_I(int color, int alpha);
+    void bridge$addAndEndVertex(double x, double y, double z);
 }

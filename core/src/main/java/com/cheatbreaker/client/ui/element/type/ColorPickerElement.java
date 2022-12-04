@@ -129,9 +129,9 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
             if (arrn != null) {
                 Ref.getGlBridge().bridge$pushMatrix();
                 Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, 3.0f * 0.25f);
-                RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.pickerX + (float)arrn[0] + 1.2205882f * 0.913494f, this.pickerY + (float)arrn[1] + 0.097222224f * 11.468572f, 4);
+                RenderUtil.renderCircle(this.pickerX + (float)arrn[0] + 1.2205882f * 0.913494f, this.pickerY + (float)arrn[1] + 0.097222224f * 11.468572f, 4);
                 Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
-                RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.pickerX + (float)arrn[0] + 0.24193548f * 4.608667f, this.pickerY + (float)arrn[1] + 0.23157895f * 4.8147726f, 2.7f);
+                RenderUtil.renderCircle(this.pickerX + (float)arrn[0] + 0.24193548f * 4.608667f, this.pickerY + (float)arrn[1] + 0.23157895f * 4.8147726f, 2.7f);
                 Ref.getGlBridge().bridge$popMatrix();
             }
             Ref.modified$drawRect(this.pickerX - (float) 51, this.pickerY + 1.0f, this.pickerX - (float) 43, this.pickerY + (float) 9, -16777216);

@@ -34,7 +34,7 @@ public abstract class MixinPotionEffect implements PotionEffectBridge {
     }
 
     public String bridge$getDurationString() {
-        return this.bridge$getDurationBridge();
+        return Potion.getDurationString((PotionEffect) ((PotionEffectBridge) this));
     }
 
     public PotionBridge bridge$toPotionType() {

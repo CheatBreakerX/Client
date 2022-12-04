@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(Tessellator.class)
 public abstract class MixinTessellator implements TessellatorBridge {
     @Shadow private WorldRenderer worldRenderer;
+    @Shadow public abstract void draw();
 
     public void bridge$startDrawingQuads() {
         this.worldRenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
@@ -21,7 +22,7 @@ public abstract class MixinTessellator implements TessellatorBridge {
     }
 
     public void bridge$finish() {
-        this.worldRenderer.finishDrawing();
+        this.draw();
     }
 
     public void bridge$addVertex(double x, double y, double z) {
@@ -52,5 +53,9 @@ public abstract class MixinTessellator implements TessellatorBridge {
         int green = color >> 8 & 255;
         int blue = color & 255;
         this.worldRenderer.color(red, green, blue, alpha);
+    }
+
+    public void bridge$addAndEndVertex(double x, double y, double z) {
+        this.worldRenderer.pos(x, y, z).endVertex();
     }
 }

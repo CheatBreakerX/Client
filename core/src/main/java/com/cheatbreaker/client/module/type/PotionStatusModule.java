@@ -93,7 +93,7 @@ public class PotionStatusModule extends AbstractModule {
                         n2 = n4;
                     }
                 }
-                string = potionEffect.bridge$getDurationBridge();
+                string = potionEffect.bridge$getDurationString();
                 int n5 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                 if (shouldBlink) {
                     if (position == CBPositionEnum.RIGHT) {

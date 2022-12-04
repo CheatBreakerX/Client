@@ -110,17 +110,17 @@ public class RenderUtil {
         Ref.getGlBridge().bridge$popAttrib();
     }
 
-    public static void lIIIIlIIllIIlIIlIIIlIIllI(double d, double d2, double d3) {
+    public static void renderCircle(double x, double y, double size) {
         Ref.getGlBridge().bridge$enableBlend();
         Ref.getGlBridge().bridge$disableTexture2D();
         Ref.getGlBridge().bridge$blendFunc(770, 771);
         TessellatorBridge tessellator = Ref.getTessellator();
         tessellator.bridge$startDrawing(6);
-        tessellator.bridge$addVertex(d, d2, zLevel);
+        tessellator.bridge$addAndEndVertex(x, y, zLevel);
         double d4 = 3.0 * 2.0943951023931953;
         double d5 = d4 / (double)30;
         for (double d6 = -d5; d6 < d4; d6 += d5) {
-            tessellator.bridge$addVertex(d + d3 * Math.cos(-d6), d2 + d3 * Math.sin(-d6), zLevel);
+            tessellator.bridge$addAndEndVertex(x + size * Math.cos(-d6), y + size * Math.sin(-d6), zLevel);
         }
         tessellator.bridge$finish();
         Ref.getGlBridge().bridge$enableTexture2D();

@@ -51,7 +51,7 @@ public class CooldownRenderer {
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, (float)n2 + 0.886076f * 0.11285714f, n2 - 2, (float)this.duration / (2.5510418f * 1.548387f), (int)this.duration, d);
         } else if (((String)cBSetting.getValue()).equalsIgnoreCase("Dark")) {
             Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, 0.4f * 0.5f);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, n2);
+            RenderUtil.renderCircle(f + (float)n2, f2 + (float)n2, n2);
             Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, 0.25773194f * 0.7760001f);
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, n2, 0.0, (float)this.duration / (31.161114f * 0.12676056f), (int)this.duration, d);
             Ref.getGlBridge().bridge$color(0.0f, 1.031746f * 0.87230766f, 0.0f, 1.0f);
@@ -63,7 +63,7 @@ public class CooldownRenderer {
             float f7 = (float)(n >> 8 & 0xFF) / (float)255;
             float f8 = (float)(n & 0xFF) / (float)255;
             Ref.getGlBridge().bridge$color(f3, f7, f8, 0.26086956f * 0.57500005f);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, n2);
+            RenderUtil.renderCircle(f + (float)n2, f2 + (float)n2, n2);
             Ref.getGlBridge().bridge$color(f3, f7, f8, 0.060606062f * 4.125f);
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, n2, 0.0, (float)this.duration / (7.0413046f * 0.5609756f), (int)this.duration, d);
             Ref.getGlBridge().bridge$color(f3, f7, f8, 1.0f);
