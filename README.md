@@ -1,9 +1,16 @@
-# [CheatBreakerX/Client](https://github.com/CheatBreakerX/Client)
+<!-- markdownlint-disable-file MD001 MD033 -->
+<h1 align="center"><a href="https://github.com/CheatBreakerX">CheatBreakerX</a>/<a href="https://github.com/CheatBreakerX/Client">Client</a></h1>
+<p align="center">The #1 modpack to use for all common versions of Minecraft Java Edition (1.7.10 - 1.19.2)</p>
 
-The base of the CheatBreaker Forge client.
+I lied, a bit. Right now, CheatBreakerX is in development. The main version being worked on right now is 1.8.9 - though new versions will come soon. To preview these 1.8.9 versions, you can download them from the latest successful workflow package found in the [Actions tab](https://github.com/CheatBreakerX/Client/actions).
 
-This is to hold main code for the client without having to recode everything for each upcoming or current version supported by the client. This can be changed easily and implemented easily into all versions of the client with minimal effort. This also makes it easy to import, as it uses _no_ Minecraft libraries (AuthLib, Forge libraries, etc.) and therefore cannot be (or is hard to be) unimportable. The same can unfortunately not be said for the actual versions of the mod (RIP 1.7.10) but we have a good idea that Forge or some other person will keep these old versions up at any cost, that's what people for some reason do.
+This repository contains the source code of the base of the client (in the `core` folder) and all the supported versions (e.g. `versions/1.8.9/`). It works by implementation in Mixin, which you can dive into yourself by looking at the decompilation of [Lunar Client](https://github.com/Decencies/LunarClient), whom of which we are not associated with. The original base of this can be found [here](https://github.com/iAmSpace/CheatBreaker) for the former Forge port, or [here](https://github.com/Decencies/CheatBreaker) for the original source; both of which are only on 1.7.10.
 
-# The Problems
+*Why though? There are many CheatBreaker remakes/remasters/revives out there so it doesn't stand out...*
 
-As this is ported straight from a Forge mod to implementation code, it does have some code errors. After these are fixed, I can then look to the conversion errors (e.g. a wrapper not classifying instanceof as an instance of for example, CBModulesGui but instead WrappedGuiScreen) and then bingo. You can view code errors, and maybe some other errors, at [this file](https://github.com/CheatBreakerX/Client/blob/master/problems.md) in the repository.
+CheatBreakerX is an open source, community driven project, unlike many other CheatBreaker remakes/remasters/revives. We do not obfuscate our code to make it clear to everyone that this is not some "rat to get SkyBlock coins quick" scheme. This is purely a hobby that turned into a project - bringing CheatBreaker to every Minecraft version, which again, all other CheatBreaker remakes/remasters/revives do not have, only supporting 1.7.10 and 1.8.9. Another point for us; native support for mod loaders. We (will) support Tweaker (a sole installation), Forge, Fabric, and possibly Quilt, catering to everyone using all different configurations that want to use our mod.
+
+---
+
+> *This repository and organization is currently maintained fully by [iAmSpace](https://github.com/iAmSpace) aka. Lifix.  
+> Any inquiries should go to Discord direct messages with [Lifix#9999](https://discord.com/users/201022516506918912/)*
