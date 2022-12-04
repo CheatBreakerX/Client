@@ -40,4 +40,8 @@ public enum MinecraftVersion {
     public boolean isForge() {
         return !this.isFabric();
     }
+
+    public boolean isLatestVersion() {
+        return this.asString.split("-")[0].equals(MinecraftVersion.values()[MinecraftVersion.values().length - 1].asString.split("-")[0]);
+    }
 }

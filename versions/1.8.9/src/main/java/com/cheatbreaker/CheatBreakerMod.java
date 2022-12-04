@@ -1,5 +1,6 @@
 package com.cheatbreaker;
 
+import com.cheatbreaker.bridge.block.BlockBridge;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.item.ItemBridge;
@@ -8,6 +9,8 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.ref.extra.CBMovementInputHelper;
 import com.cheatbreaker.impl.ref.*;
 import com.cheatbreaker.main.identification.MinecraftVersion;
+import com.cheatbreaker.util.Utils;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
@@ -28,7 +31,7 @@ public class CheatBreakerMod {
         Ref.setDrawingUtils(new DrawingUtils());
         Ref.setMinecraft((MinecraftBridge) Minecraft.getMinecraft());
         Ref.setI18n(I18n::format);
-        // block registry goes here
+        Ref.setBlockRegistry(Utils.iteratorToIterable(Utils.convertIterationType(Block.blockRegistry.iterator())));
         Ref.setBossStatus(new BridgedBossStatus());
         Ref.setRenderHelper(new BridgedRenderHelper());
         Ref.setRenderManager(Ref.getMinecraft().bridge$getRenderManager());

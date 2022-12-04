@@ -29,12 +29,12 @@ public class CBModulesGui extends CBGuiScreen {
     private final ResourceLocationBridge cogIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/cog-64.png");
     private final ResourceLocationBridge deleteIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/delete-64.png");
     private final List<CBModulePosition> positions = new ArrayList<>();
-    private final List<AbstractScrollableElement> IllIIlIIlllllIllIIIlllIII = new ArrayList<>();
+    private final List<AbstractScrollableElement> elementList = new ArrayList<>();
     private final List<ModulesGuiButtonElement> buttons = new ArrayList<>();
     private List<AbstractModule> modules;
     private ModulesGuiButtonElement showGuidesButton;
     public ModulesGuiButtonElement helpButton;
-    public AbstractScrollableElement IIIIllIIllIIIIllIllIIIlIl;
+    public AbstractScrollableElement settingsElement;
     public AbstractScrollableElement profilesElement;
     protected AbstractScrollableElement modulesElement;
     protected AbstractScrollableElement staffModulesElement;
@@ -78,27 +78,37 @@ public class CBModulesGui extends CBGuiScreen {
         this.dataHolder = null;
         IlIlllIIIIllIllllIllIIlIl = false;
         float f = 1.0f / CheatBreaker.getInstance().getScaleFactor();
+
+        if (this.mc == null) {
+            this.mc = Ref.getMinecraft();
+        }
+
+        ScaledResolutionBridge resolution = Ref.getInstanceCreator().createScaledResolution();
+
+        this.width = (int) resolution.bridge$getScaledWidth();
+        this.height = (int) resolution.bridge$getScaledHeight();
+
         int n = (int)((float)this.width / f);
         int n2 = (int)((float)this.height / f);
-        this.IllIIlIIlllllIllIIIlllIII.clear();
+        this.elementList.clear();
         this.buttons.clear();
         List<AbstractModule> modules = CheatBreaker.getInstance().moduleManager.modules;
         List<AbstractModule> staffModules = CheatBreaker.getInstance().moduleManager.staffModules;
         this.modulesElement = new ModulePreviewContainer(f, n / 2 - 565, n2 / 2 + 14, 370, n2 / 2 - 35);
-        this.IllIIlIIlllllIllIIIlllIII.add(this.modulesElement);
+        this.elementList.add(this.modulesElement);
         this.staffModulesElement = new ModuleListElement(staffModules, f, n / 2 + 195, n2 / 2 + 14, 370, n2 / 2 - 35);
-        this.IllIIlIIlllllIllIIIlllIII.add(this.staffModulesElement);
-        this.IIIIllIIllIIIIllIllIIIlIl = new ModuleListElement(modules, f, n / 2 + 195, n2 / 2 + 14, 370, n2 / 2 - 35);
-        this.IllIIlIIlllllIllIIIlllIII.add(this.IIIIllIIllIIIIllIllIIIlIl);
+        this.elementList.add(this.staffModulesElement);
+        this.settingsElement = new ModuleListElement(modules, f, n / 2 + 195, n2 / 2 + 14, 370, n2 / 2 - 35);
+        this.elementList.add(this.settingsElement);
         this.profilesElement = new ProfilesListElement(f, n / 2 - 565, n2 / 2 + 14, 370, n2 / 2 - 35);
-        this.IllIIlIIlllllIllIIIlllIII.add(this.profilesElement);
+        this.elementList.add(this.profilesElement);
         this.showGuidesButton = new ModulesGuiButtonElement(null, "eye-64.png", 4, n2 - 32, 28, 28, -12418828, f);
         this.helpButton = new ModulesGuiButtonElement(null, "?", 36, n2 - 32, 28, 28, -12418828, f);
         if (CheatBreaker.getInstance().isUsingStaffModules()) {
             this.buttons.add(new ModulesGuiButtonElement(this.staffModulesElement, "Staff Mods", n / 2 - 50, n2 / 2 - 44, 100, 20, -9442858, f));
         }
         this.buttons.add(new ModulesGuiButtonElement(this.modulesElement, "Mods", n / 2 - 50, n2 / 2 - 19, 100, 28, -13916106, f));
-        this.buttons.add(new ModulesGuiButtonElement(this.IIIIllIIllIIIIllIllIIIlIl, "cog-64.png", n / 2 + 54, n2 / 2 - 19, 28, 28, -12418828, f));
+        this.buttons.add(new ModulesGuiButtonElement(this.settingsElement, "cog-64.png", n / 2 + 54, n2 / 2 - 19, 28, 28, -12418828, f));
         this.buttons.add(new ModulesGuiButtonElement(this.profilesElement, "profiles-64.png", n / 2 - 82, n2 / 2 - 19, 28, 28, -12418828, f));
         IlIlllIIIIllIllllIllIIlIl = false;
         this.lIIIIllIIlIlIllIIIlIllIlI = null;
@@ -315,7 +325,7 @@ public class CBModulesGui extends CBGuiScreen {
             Ref.getGlBridge().bridge$pushMatrix();
             Ref.getGlBridge().bridge$enableScissoring();
             RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(n5 / 2 - 185, n6 / 2 + 15, n5 / 2 + 185, n6 - 20, (float)scaledResolution.bridge$getScaleFactor() * scale, n6);
-            for (AbstractScrollableElement lllIllIllIlIllIlIIllllIIl2 : this.IllIIlIIlllllIllIIIlllIII) {
+            for (AbstractScrollableElement lllIllIllIlIllIlIIllllIIl2 : this.elementList) {
                 if (lllIllIllIlIllIlIIllllIIl2 != this.lIIIIllIIlIlIllIIIlIllIlI && lllIllIllIlIllIlIIllllIIl2 != this.currentScrollableElement) continue;
                 lllIllIllIlIllIlIIllllIIl2.handleDrawElement(mouseX, mouseY, delta);
             }
@@ -393,11 +403,11 @@ public class CBModulesGui extends CBGuiScreen {
         Ref.getGlBridge().bridge$popMatrix();
     }
 
-    private void renderRoundButton(String string, int n, int n2) {
-        CBFontRenderer lIlIllIlIlIIIllllIlIllIll2 = FontRegistry.getPlayRegular14px();
-        float f = lIlIllIlIlIIIllllIlIllIll2.getStringWidth(string);
-        RenderUtil.drawRoundedRect(n, n2, (float)n + f + (float)4, n2 + 10, (double)2, -1073741825);
-        lIlIllIlIlIIIllllIlIllIll2.drawString(string, n + 2, (float)n2+ 3, -16777216);
+    private void renderRoundButton(String string, int x, int y) {
+        CBFontRenderer font = FontRegistry.getPlayRegular14px();
+        float width = font.getStringWidth(string);
+        RenderUtil.drawRoundedRect(x, y, (float)x + width + (float)4, y + 10, (double)2, -1073741825);
+        font.drawString(string, x + 2, (float)y, -16777216);
     }
 
     @Override
@@ -414,9 +424,9 @@ public class CBModulesGui extends CBGuiScreen {
                 boolean bl3 = bl = (float)mouseX > (arrf[0] + iterator.width - (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseX < (arrf[0] + iterator.width + 2.0f) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY > (arrf[1] + iterator.height - (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY < (arrf[1] + iterator.height + 2.0f) * ((Float) iterator.scale.getValue()).floatValue();
                 if (bl2) {
                     Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-                    ((ModuleListElement)this.IIIIllIIllIIIIllIllIIIlIl).llIlIIIlIIIIlIlllIlIIIIll = false;
-                    ((ModuleListElement)this.IIIIllIIllIIIIllIllIIIlIl).module = iterator;
-                    this.currentScrollableElement = this.IIIIllIIllIIIIllIllIIIlIl;
+                    ((ModuleListElement)this.settingsElement).llIlIIIlIIIIlIlllIlIIIIll = false;
+                    ((ModuleListElement)this.settingsElement).module = iterator;
+                    this.currentScrollableElement = this.settingsElement;
                 } else if (bl) {
                     Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                     iterator.setState(false);
@@ -541,8 +551,14 @@ public class CBModulesGui extends CBGuiScreen {
     public void keyTyped(char c, int n) {
         if (n == 1) {
             CheatBreaker.getInstance().configManager.write();
+
+            this.mc.bridge$goIngame();
+
+            if (this.mc.bridge$isIngame()) {
+                this.mc.bridge$setIngameFocus();
+            }
         }
-        super.keyTyped(c, n);
+//        super.keyTyped(c, n);
         if (n == Keyboard.KEY_Z && wrapped$isCtrlKeyDown()) {
             if (!this.undoList.isEmpty()) {
                 int n2 = this.undoList.size() - 1;
@@ -665,9 +681,9 @@ public class CBModulesGui extends CBGuiScreen {
             if (!(n3 != 0 || this.lIIIIllIIlIlIllIIIlIllIlI != null && this.lIIIIllIIlIlIllIIIlIllIlI.isMouseInside(n, n2))) {
                 if (bl3) {
                     Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-                    ((ModuleListElement) this.IIIIllIIllIIIIllIllIIIlIl).llIlIIIlIIIIlIlllIlIIIIll = false;
-                    ((ModuleListElement) this.IIIIllIIllIIIIllIllIIIlIl).module = cBModule;
-                    this.currentScrollableElement = this.IIIIllIIllIIIIllIllIIIlIl;
+                    ((ModuleListElement) this.settingsElement).llIlIIIlIIIIlIlllIlIIIIll = false;
+                    ((ModuleListElement) this.settingsElement).module = cBModule;
+                    this.currentScrollableElement = this.settingsElement;
                 } else if (bl) {
                     Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                     cBModule.setState(false);

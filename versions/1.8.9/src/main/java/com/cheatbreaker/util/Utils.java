@@ -1,12 +1,15 @@
 package com.cheatbreaker.util;
 
+import com.cheatbreaker.bridge.block.BlockBridge;
 import com.cheatbreaker.bridge.item.ItemBridge;
 import com.cheatbreaker.bridge.item.ItemStackBridge;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class Utils {
@@ -66,5 +69,17 @@ public class Utils {
 
     public static <A> List<A> toList(A[] images) {
         return new ArrayList<>(Arrays.asList(images));
+    }
+
+    public static <A, B> Iterator<B> convertIterationType(Iterator<A> iterator) {
+        List<B> toReturn = new ArrayList<>();
+        while (iterator.hasNext()) {
+            toReturn.add((B) iterator.next());
+        }
+        return toReturn.iterator();
+    }
+
+    public static <A> Iterable<A> iteratorToIterable(Iterator<A> iterator) {
+        return () -> iterator;
     }
 }

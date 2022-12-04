@@ -69,13 +69,13 @@ public class VoiceChatGui extends AbstractGui {
             this.undeafenButton.setElementSize(f3 + (float)60, f5 - (float)4, (float)50, 12);
             this.undeafenButton.drawElement(f, f2, true);
             this.someRandomAssButtons.forEach(randomAssButton -> {
-                if (this.lIIIIlIIllIIlIIlIIIlIIllI(randomAssButton.IlIlllIIIIllIllllIllIIlIl()) == cheatBreaker.getNetHandler().getVoiceChannel()) {
-                    randomAssButton.IIIIllIlIIIllIlllIlllllIl(f, f2, true);
+                if (this.lIIIIlIIllIIlIIlIIIlIIllI(randomAssButton.getText()) == cheatBreaker.getNetHandler().getVoiceChannel()) {
+                    randomAssButton.publicDraw(f, f2, true);
                     float xPos = randomAssButton.getX();
                     float yPos = randomAssButton.getY();
                     RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(Ref.getInstanceCreator().createResourceLocation("client/icons/microphone-64.png"), xPos + (float)4, yPos + 2.0f, (float)8, 8);
-                } else if (this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() == randomAssButton.IlIlllIIIIllIllllIllIIlIl()) {
-                    randomAssButton.IlllIIIlIlllIllIlIIlllIlI(f, f2, true);
+                } else if (this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() == randomAssButton.getText()) {
+                    randomAssButton.publicDraw(f, f2, true);
                 } else {
                     randomAssButton.drawElement(f, f2, true);
                 }
@@ -96,10 +96,10 @@ public class VoiceChatGui extends AbstractGui {
         }
         for (GradientTextButton randomAssButton : this.someRandomAssButtons) {
             VoiceChannel voiceChannel;
-            if (!randomAssButton.isMouseInside(f, f2) || this.voiceChannel == (voiceChannel = this.lIIIIlIIllIIlIIlIIIlIIllI(randomAssButton.IlIlllIIIIllIllllIllIIlIl()))) continue;
+            if (!randomAssButton.isMouseInside(f, f2) || this.voiceChannel == (voiceChannel = this.lIIIIlIIllIIlIIlIIIlIIllI(randomAssButton.getText()))) continue;
             for (GradientTextButton lIIIllIIIIlIIllIIIIIIIlll3 : this.someRandomAssButtons) {
-                if (this.voiceChannel == cheatBreaker.getNetHandler().getVoiceChannel() || !lIIIllIIIIlIIllIIIIIIIlll3.IlIlllIIIIllIllllIllIIlIl().equals(this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl())) continue;
-                lIIIllIIIIlIIllIIIIIIIlll3.IlllIllIlIIIIlIIlIIllIIIl();
+                if (this.voiceChannel == cheatBreaker.getNetHandler().getVoiceChannel() || !lIIIllIIIIlIIllIIIIIIIlll3.getText().equals(this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl())) continue;
+                lIIIllIIIIlIIllIIIIIIIlll3.setDefaultColors();
             }
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.voiceChannel = voiceChannel;
@@ -111,10 +111,10 @@ public class VoiceChatGui extends AbstractGui {
                 Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 cheatBreaker.getNetHandler().sendPacketToQueue(new PacketVoiceMute(this.voiceChannel.getUUID()));
                 for (GradientTextButton lIIIllIIIIlIIllIIIIIIIlll2 : this.someRandomAssButtons) {
-                    lIIIllIIIIlIIllIIIIIIIlll2.IlllIllIlIIIIlIIlIIllIIIl();
+                    lIIIllIIIIlIIllIIIIIIIlll2.setDefaultColors();
                 }
                 for (GradientTextButton lIIIllIIIIlIIllIIIIIIIlll2 : this.someRandomAssButtons) {
-                    if (!lIIIllIIIIlIIllIIIIIIIlll2.IlIlllIIIIllIllllIllIIlIl().equals(this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl())) continue;
+                    if (!lIIIllIIIIlIIllIIIIIIIlll2.getText().equals(this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl())) continue;
                     lIIIllIIIIlIIllIIIIIIIlll2.lIIIIllIIlIlIllIIIlIllIlI();
                 }
             }
@@ -126,7 +126,7 @@ public class VoiceChatGui extends AbstractGui {
                 if (!cheatBreaker.getNetHandler().getUuidList().removeIf(uUID2 -> uUID2.equals(iterator))) {
                     cheatBreaker.getNetHandler().getUuidList().add(iterator);
                 }
-                this.undeafenButton.lIIIIlIIllIIlIIlIIIlIIllI((bl = cheatBreaker.getNetHandler().getUuidList().contains(this.mc.bridge$getThePlayer().bridge$getGameProfile().getId())) ? "Un-deafen" : "Deafen");
+                this.undeafenButton.setText((bl = cheatBreaker.getNetHandler().getUuidList().contains(this.mc.bridge$getThePlayer().bridge$getGameProfile().getId())) ? "Un-deafen" : "Deafen");
             }
             this.lIIIIIIIIIlIllIIllIlIIlIl(f, f2, this.getResolution().bridge$getScaledWidth() / (float)8 + (float)130, this.getScaleFactor() / 2.0f);
         }

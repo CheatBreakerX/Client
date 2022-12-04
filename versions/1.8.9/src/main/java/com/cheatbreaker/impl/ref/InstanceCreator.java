@@ -39,10 +39,12 @@ import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.client.shader.ShaderGroup;
+import net.minecraft.event.HoverEvent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.client.C17PacketCustomPayload;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.scoreboard.IScoreObjectiveCriteria;
 import net.minecraft.scoreboard.ScoreObjective;
@@ -135,12 +137,24 @@ public class InstanceCreator implements IInstanceCreator {
     }
 
     public HoverEventBridge createHoverEvent(String action, IChatComponentBridge component) {
-        return null;
+        // will change if needed to - right now there is no other use than "show_text"
+        HoverEvent.Action nativeAction = HoverEvent.Action.SHOW_TEXT;
+        return (HoverEventBridge) new HoverEvent(nativeAction, (IChatComponent) component);
     }
 
     public PotionEffectBridge createPotionEffect(String idName, int duration, int multiplier) {
-//        return (PotionEffectBridge) new PotionEffect(idName, duration, multiplier);
-        return null;
+        int id = -1337;
+
+        switch (idName) {
+            case "FIRE_RESISTANCE":
+                id = Potion.fireResistance.getId();
+                break;
+            case "MOVE_SPEED":
+                id = Potion.moveSpeed.getId();
+                break;
+        }
+
+        return (PotionEffectBridge) new PotionEffect(id, duration, multiplier);
     }
 
     public ScoreboardBridge createScoreboard() {

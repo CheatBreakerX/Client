@@ -118,10 +118,10 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
     public void handleMouseClick(int mouseX, int mouseY, int button) {
         if (this.optionsButton.isMouseInside(mouseX, mouseY)) {
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            ((ModuleListElement) CBModulesGui.instance.IIIIllIIllIIIIllIllIIIlIl).llIlIIIlIIIIlIlllIlIIIIll = false;
-            ((ModuleListElement)CBModulesGui.instance.IIIIllIIllIIIIllIllIIIlIl).scrollable = this.IlIlllIIIIllIllllIllIIlIl;
-            ((ModuleListElement)CBModulesGui.instance.IIIIllIIllIIIIllIllIIIlIl).module = this.module;
-            CBModulesGui.instance.currentScrollableElement = CBModulesGui.instance.IIIIllIIllIIIIllIllIIIlIl;
+            ((ModuleListElement) CBModulesGui.instance.settingsElement).llIlIIIlIIIIlIlllIlIIIIll = false;
+            ((ModuleListElement)CBModulesGui.instance.settingsElement).scrollable = this.IlIlllIIIIllIllllIllIIlIl;
+            ((ModuleListElement)CBModulesGui.instance.settingsElement).module = this.module;
+            CBModulesGui.instance.currentScrollableElement = CBModulesGui.instance.settingsElement;
         } else if (!this.module.isEditable && this.toggle.isMouseInside(mouseX, mouseY)) {
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.module.setState(!this.module.isEnabled());

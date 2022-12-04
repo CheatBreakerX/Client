@@ -13,10 +13,10 @@ public abstract class AbstractElement {
     protected final CheatBreaker client = CheatBreaker.getInstance();
 
     public boolean isMouseInside(float mouseX, float mouseY) {
-        boolean minX = mouseX > this.x;
-        boolean maxX = mouseX < this.x + this.width;
-        boolean minY = mouseY > this.y;
-        boolean maxY = mouseY < this.y + this.height;
+        boolean minX = mouseX >= this.x;
+        boolean maxX = mouseX <= this.x + this.width;
+        boolean minY = mouseY >= this.y;
+        boolean maxY = mouseY <= this.y + this.height;
         return minX && maxX && minY && maxY;
     }
 
@@ -48,6 +48,11 @@ public abstract class AbstractElement {
 
     public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
         return false;
+    }
+
+    protected Runnable clickAction = () -> {};
+    public void setClickAction(Runnable clickAction) {
+        this.clickAction = clickAction;
     }
 
     public boolean handleElementMouseRelease(float f, float f2, int n, boolean bl) {

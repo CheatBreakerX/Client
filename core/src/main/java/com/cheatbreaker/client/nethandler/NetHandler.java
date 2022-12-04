@@ -66,7 +66,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
             ((StaffModule)cBModule).disableStaffModule();
         }
         CheatBreaker.getInstance().getBorderManager().lIIIIlIIllIIlIIlIIIlIIllI();
-        Hologram.IIIllIllIlIlllllllIlIlIII().clear();
+        Hologram.getHolograms().clear();
         CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIlIIllIIlIIlIIIlIIllI().clear();
         this.lIIIIlIIllIIlIIlIIIlIIllI();
     }
@@ -91,7 +91,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
                 if (CheatBreaker.getInstance().getGlobalSettings().isDebug) {
                     ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator().createChatComponentText( "[CB] ");
                     ChatComponentTextBridge chatComponentText2 = Ref.getInstanceCreator().createChatComponentText("Received: " + packet.getClass().getSimpleName());
-                    chatComponentText2.bridge$getChatStyle().bridge$setChatHoverEvent(Ref.getInstanceCreator().createHoverEvent("HOW_TEXT", Ref.getInstanceCreator().createChatComponentText(new Gson().toJson(packet))));
+                    chatComponentText2.bridge$getChatStyle().bridge$setChatHoverEvent(Ref.getInstanceCreator().createHoverEvent("SHOW_TEXT", Ref.getInstanceCreator().createChatComponentText(new Gson().toJson(packet))));
                     chatComponentText.bridge$appendSibling(chatComponentText2);
                     Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(chatComponentText);
                 }
@@ -219,18 +219,18 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
     @Override
     public void handleAddHologram(PacketAddHologram var1) {
         Hologram iIIlIllIIllllIIIllllIllll = new Hologram(var1.getUuid(), var1.getX(), var1.getY(), var1.getZ());
-        Hologram.IIIllIllIlIlllllllIlIlIII().add(iIIlIllIIllllIIIllllIllll);
-        iIIlIllIIllllIIIllllIllll.lIIIIlIIllIIlIIlIIIlIIllI(var1.getLines().toArray(new String[0]));
+        Hologram.getHolograms().add(iIIlIllIIllllIIIllllIllll);
+        iIIlIllIIllllIIIllllIllll.setTexts(var1.getLines().toArray(new String[0]));
     }
 
     @Override
     public void handleUpdateHologram(PacketUpdateHologram var1) {
-        Hologram.IIIllIllIlIlllllllIlIlIII().stream().filter(hologram -> hologram.lIIIIIIIIIlIllIIllIlIIlIl().equals(var1.getUuid())).forEach(hologram -> hologram.lIIIIlIIllIIlIIlIIIlIIllI(var1.getLines().toArray(new String[0])));
+        Hologram.getHolograms().stream().filter(hologram -> hologram.getUuid().equals(var1.getUuid())).forEach(hologram -> hologram.setTexts(var1.getLines().toArray(new String[0])));
     }
 
     @Override
     public void handleRemoveHologram(PacketRemoveHologram var1) {
-        Hologram.IIIllIllIlIlllllllIlIlIII().removeIf(hologram -> hologram.lIIIIIIIIIlIllIIllIlIIlIl().equals(var1.getUuid()));
+        Hologram.getHolograms().removeIf(hologram -> hologram.getUuid().equals(var1.getUuid()));
     }
 
     @Override

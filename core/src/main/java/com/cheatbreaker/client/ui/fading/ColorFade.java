@@ -19,6 +19,10 @@ public class ColorFade extends ExponentialFade {
         this(175L, startColor, endColor);
     }
 
+    public ColorFade(java.awt.Color startColor, java.awt.Color endColor) {
+        this(175L, startColor.getRGB(), endColor.getRGB());
+    }
+
     public Color get(boolean shouldSwitch) {
         Color color = new Color(shouldSwitch ? this.endColor : this.startColor, true);
         if (shouldSwitch && !this.switched) {

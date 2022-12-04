@@ -52,11 +52,14 @@ public interface MinecraftBridge {
     void bridge$func_147120_f(); // resetSize
     NetHandlerPlayClientBridge bridge$getNetHandler();
     RenderManagerBridge bridge$getRenderManager();
+    boolean bridge$isIngame();
+    void bridge$goIngame();
 
     enum InternalScreen {
         SINGLEPLAYER,
         MULTIPLAYER,
         OPTIONS,
-        LANGUAGE
+        LANGUAGE,
+        REALMS
     }
 }

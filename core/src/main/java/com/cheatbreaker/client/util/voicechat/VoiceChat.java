@@ -56,9 +56,9 @@ public class VoiceChat {
 
     private void renderHeadAndName(String string, float f, float f2, boolean isSelf) {
         if (isSelf) {
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f, f2, f + (float)110, f2 + (float)18, -11493284, -10176146, -11164318);
+            RenderUtil.drawCorneredGradientRectWithOutline(f, f2, f + (float)110, f2 + (float)18, -11493284, -10176146, -11164318);
         } else {
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f, f2, f + (float)110, f2 + (float)18, -1356454362, -1355664846, -1356191190);
+            RenderUtil.drawCorneredGradientRectWithOutline(f, f2, f + (float)110, f2 + (float)18, -1356454362, -1355664846, -1356191190);
         }
         Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         ResourceLocationBridge location = CheatBreaker.getInstance().getHeadLocation(string);

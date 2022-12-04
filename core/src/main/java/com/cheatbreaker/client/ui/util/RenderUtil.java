@@ -170,7 +170,7 @@ public class RenderUtil {
         Ref.modified$drawRect(left, top + 1.0f, left + 1.0f, bottom, color);
     }
 
-    public static void lIIIIlIIllIIlIIlIIIlIIllI(float f, float f2, float f3, float f4, int n, int n2, int n3) {
+    public static void drawCorneredGradientRectWithOutline(float f, float f2, float f3, float f4, int n, int n2, int n3) {
         Ref.getGlBridge().bridge$scale(0.5f, 0.5f, 0.5f);
         Ref.modified$drawGradientRect((f *= 2.0f) + 1.0f, (f2 *= 2.0f) + 1.0f, (f3 *= 2.0f) - 1.0f, (f4 *= 2.0f) - 1.0f, n2, n3);
         RenderUtil.drawVerticalLine(f, f2 + 1.0f, f4 - 2.0f, n);

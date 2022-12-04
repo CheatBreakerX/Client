@@ -13,8 +13,9 @@ import java.awt.*;
 public class MainMenu extends MainMenuBase {
     private final ResourceLocationBridge outerLogo = Ref.getInstanceCreator().createResourceLocation("client/logo_255_outer.png");
     private final ResourceLocationBridge innerLogo = Ref.getInstanceCreator().createResourceLocation("client/logo_108_inner.png");
-    private GradientTextButton singleplayerButton = new GradientTextButton("SINGLEPLAYER");
-    private GradientTextButton multiplayerButton = new GradientTextButton("MULTIPLAYER");
+    private final GradientTextButton singleplayerButton = new GradientTextButton("SINGLEPLAYER");
+    private final GradientTextButton multiplayerButton = new GradientTextButton("MULTIPLAYER");
+    private final GradientTextButton realmsButton = new GradientTextButton("REALMS");
     private final MinMaxFade logoPositionFade = new MinMaxFade(750L);
     private final CosineFade logoTurnAmount;
     private final MinMaxFade loadingScreenBackgroundFade = new MinMaxFade(400L);
@@ -40,8 +41,25 @@ public class MainMenu extends MainMenuBase {
     @Override
     public void initGui() {
         super.initGui();
-        this.singleplayerButton.setElementSize(this.getScaledWidth() / 2.0f - (float)50, this.getScaledHeight() / 2.0f + (float)5, (float)100, 12);
-        this.multiplayerButton.setElementSize(this.getScaledWidth() / 2.0f - (float)50, this.getScaledHeight() / 2.0f + (float)24, (float)100, 12);
+        this.singleplayerButton.setElementSize(this.getScaledWidth() / 2f - 50f, this.getScaledHeight() / 2f + 5f, 100f, 12f);
+        this.singleplayerButton.setClickAction(() -> {
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.SINGLEPLAYER, this);
+        });
+
+        this.multiplayerButton.setElementSize(this.getScaledWidth() / 2f - 50f, this.getScaledHeight() / 2f + 24f, 100f, 12f);
+        this.multiplayerButton.setClickAction(() -> {
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.MULTIPLAYER, this);
+        });
+
+        if (Ref.getMinecraftVersion().isLatestVersion()) {
+            this.realmsButton.setElementSize(this.getScaledWidth() / 2f - 50f, this.getScaledHeight() / 2f + 43f, 100f, 12f);
+            this.realmsButton.setClickAction(() -> {
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.REALMS, this);
+            });
+        }
         ++loadCount;
     }
 
@@ -52,16 +70,24 @@ public class MainMenu extends MainMenuBase {
         Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         this.singleplayerButton.drawElement(mouseX, mouseY, true);
         this.multiplayerButton.drawElement(mouseX, mouseY, true);
+        if (Ref.getMinecraftVersion().isLatestVersion()) {
+            this.realmsButton.drawElement(mouseX, mouseY, true);
+        }
 
-        Ref.modified$drawRect(this.singleplayerButton.getX() - (float) 20, this.getScaledHeight() / 2.0f - (float) 80, this.singleplayerButton.getX() + this.singleplayerButton.getWidth() + (float) 20, this.multiplayerButton.getY() + this.multiplayerButton.getHeight() + (float) 14, 0x2F000000);
+        GradientTextButton topButton = this.singleplayerButton;
+        GradientTextButton bottomButton = Ref.getMinecraftVersion().isLatestVersion() ? this.realmsButton : this.multiplayerButton;
+        Ref.modified$drawRect(topButton.getX() - (float) 20, this.getScaledHeight() / 2.0f - (float) 80, topButton.getX() + topButton.getWidth() + (float) 20, bottomButton.getY() + bottomButton.getHeight() + (float) 14, 0x2F000000);
+
         if (this.isFirstOpened() && this.loadingScreenBackgroundFade.getCurrentValue() != 1f) {
-            Ref.modified$drawRect(0.0f, 0.0f, this.getScaledWidth(), this.getScaledHeight(), new Color(1f, 1f, 1f, 1f - this.loadingScreenBackgroundFade.getCurrentValue()).getRGB());
+            Ref.modified$drawRect(0f, 0f, this.getScaledWidth(), this.getScaledHeight(), new Color(1f, 1f, 1f, 1f - this.loadingScreenBackgroundFade.getCurrentValue()).getRGB());
         }
 
         this.drawCheatBreakerLogo(this.getScaledWidth(), this.getScaledHeight(), logoY);
 
-        float f5 = this.getScaledWidth() / 2.0f - (float)80;
-        float f6 = this.getScaledHeight() - (float)40;
+        // For some reason this is a thing - don't ask me why
+
+        //float f5 = this.getScaledWidth() / 2.0f - (float)80;
+        //float f6 = this.getScaledHeight() - (float)40;
         //RenderUtil.drawTexturedModalRect(f5, f6, f5 + 160f, f6 + 10f, 8, new Color(218, 66, 83, (int)((float)255 * (1.0f - logoY))).getRGB());
 
         if (CheatBreaker.getInstance().isInDebugMode()) {
@@ -81,7 +107,7 @@ public class MainMenu extends MainMenuBase {
         Ref.getGlBridge().bridge$translate(halfSize, halfSize, halfSize);
         Ref.getGlBridge().bridge$rotate((float)180 * this.logoTurnAmount.getCurrentValue(), 0.0f, 0.0f, 1.0f);
         Ref.getGlBridge().bridge$translate(-halfSize, -halfSize, -halfSize);
-        RenderUtil.drawIcon(this.outerLogo, halfSize, 0.0f, 0.0f);
+        RenderUtil.drawIcon(this.outerLogo, halfSize, 0f, 0f);
         Ref.getGlBridge().bridge$popMatrix();
         RenderUtil.drawIcon(this.innerLogo, halfSize, (float)x, (float)y);
     }
@@ -91,13 +117,16 @@ public class MainMenu extends MainMenuBase {
         super.onMouseClicked(mouseX, mouseY, button);
         this.singleplayerButton.handleElementMouseClicked(mouseX, mouseY, button, true);
         this.multiplayerButton.handleElementMouseClicked(mouseX, mouseY, button, true);
-        if (this.singleplayerButton.isMouseInside(mouseX, mouseY)) {
+        if (Ref.getMinecraftVersion().isLatestVersion()) {
+            this.realmsButton.handleElementMouseClicked(mouseX, mouseY, button, true);
+        }
+/*        if (this.singleplayerButton.isMouseInside(mouseX, mouseY)) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.SINGLEPLAYER, this);
         } else if (this.multiplayerButton.isMouseInside(mouseX, mouseY)) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.MULTIPLAYER, this);
-        }
+        }*/
     }
 
     public boolean isFirstOpened() {

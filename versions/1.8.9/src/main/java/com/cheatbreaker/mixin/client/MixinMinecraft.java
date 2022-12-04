@@ -42,6 +42,7 @@ import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.LanguageManager;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.shader.Framebuffer;
+import net.minecraft.realms.RealmsBridge;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Session;
 import net.minecraft.util.Timer;
@@ -101,6 +102,8 @@ public abstract class MixinMinecraft implements MinecraftBridge {
 
     @Shadow @Final private static Logger logger;
 
+    @Shadow public GuiScreen currentScreen;
+
     public SoundHandlerBridge bridge$getSoundHandler() {
         return (SoundHandlerBridge) this.getSoundHandler();
     }
@@ -128,6 +131,7 @@ public abstract class MixinMinecraft implements MinecraftBridge {
         this.currentCBScreen = screen;
         this.displayGuiScreen(screen == null ? null : new WrappedGuiScreen(screen));
     }
+
     public void bridge$displayInternalGuiScreen(InternalScreen screen, CBGuiScreen parent) {
         // Creating "new WrappedGuiScreen(null)" will produce a NullPointerException for
         //    each method.
@@ -145,6 +149,9 @@ public abstract class MixinMinecraft implements MinecraftBridge {
             break;
             case LANGUAGE:
                 this.displayGuiScreen(new GuiLanguage(nativeParent, this.gameSettings, this.getLanguageManager()));
+            break;
+            case REALMS:
+                new RealmsBridge().switchToRealms(nativeParent);
             break;
         }
     }
@@ -253,6 +260,14 @@ public abstract class MixinMinecraft implements MinecraftBridge {
         return (RenderManagerBridge) this.getRenderManager();
     }
 
+    public boolean bridge$isIngame() {
+        return this.currentScreen == null;
+    }
+
+    public void bridge$goIngame() {
+        this.currentCBScreen = null;
+        this.displayGuiScreen(null);
+    }
 
     @ModifyArg(method = "createDisplay", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;setTitle(Ljava/lang/String;)V"))
     public String mod$createDisplay(String newTitle) {
