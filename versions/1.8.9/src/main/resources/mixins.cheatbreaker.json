@@ -10,6 +10,7 @@
         "client.audio.MixinSoundManager",
         "client.entity.MixinAbstractClientPlayer",
         "client.entity.MixinEntityPlayerSP",
+        "client.gui.MixinGui",
         "client.gui.MixinGuiIngame",
         "client.gui.MixinGuiIngameMenu",
         "client.gui.MixinGuiNewChat",
