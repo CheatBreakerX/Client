@@ -91,7 +91,7 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
             float f4 = this.module.getPreviewIconWidth();
             f2 = this.module.getPreviewIconHeight();
             Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.module.getPreviewIcon(), (float)(this.x + this.width / 2) - f4 / 2.0f + (float)n4, (float)(this.y + n3 + this.height / 2 - 26) - f2 / 2.0f, f4, f2);
+            RenderUtil.renderIcon(this.module.getPreviewIcon(), (float)(this.x + this.width / 2) - f4 / 2.0f + (float)n4, (float)(this.y + n3 + this.height / 2 - 26) - f2 / 2.0f, f4, f2);
         }
         Ref.getGlBridge().bridge$popMatrix();
         float moduleNameOffset = this.y + this.height / 2f;

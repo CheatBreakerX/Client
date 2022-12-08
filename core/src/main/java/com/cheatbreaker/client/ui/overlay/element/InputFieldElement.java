@@ -365,10 +365,10 @@ public class InputFieldElement extends AbstractElement {
         Ref.getGlBridge().bridge$enableColorLogic();
         Ref.getGlBridge().bridge$colorLogicOp(5387);
         tessellator.bridge$startDrawingQuads();
-        tessellator.bridge$addVertex(f, f4, 0.0);
-        tessellator.bridge$addVertex(f3, f4, 0.0);
-        tessellator.bridge$addVertex(f3, f2, 0.0);
-        tessellator.bridge$addVertex(f, f2, 0.0);
+        tessellator.bridge$pos(f, f4, 0.0).bridge$endVertex();
+        tessellator.bridge$pos(f3, f4, 0.0).bridge$endVertex();
+        tessellator.bridge$pos(f3, f2, 0.0).bridge$endVertex();
+        tessellator.bridge$pos(f, f2, 0.0).bridge$endVertex();
         tessellator.bridge$finish();
         Ref.getGlBridge().bridge$disableColorLogic();
         Ref.getGlBridge().bridge$enableTexture2D();

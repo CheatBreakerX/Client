@@ -16,7 +16,7 @@ public class CrosshairElement extends AbstractModulesGuiElement {
     public void handleDrawElement(int mouseX, int mouseY, float partialTicks) {
         Ref.modified$drawRect(this.x + (this.width / 2 - 15) - 41, this.y + 4, this.x + (this.width / 2 - 15) + 41, this.y + 51, -16777216);
         Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
-        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(Ref.getInstanceCreator().createResourceLocation("client/defaults/crosshair.png"), (float)(this.x + (this.width / 2 - 15) - 40), (float)(this.y + 5), (float)80, 45);
+        RenderUtil.renderIcon(Ref.getInstanceCreator().createResourceLocation("client/defaults/crosshair.png"), (float)(this.x + (this.width / 2 - 15) - 40), (float)(this.y + 5), (float)80, 45);
         GlobalSettings globalSettings = CheatBreaker.getInstance().globalSettings;
         Ref.getGlBridge().bridge$pushMatrix();
         float f2 = 1.0f / CheatBreaker.getInstance().getScaleFactor();

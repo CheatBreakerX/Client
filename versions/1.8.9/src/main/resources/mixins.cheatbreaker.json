@@ -18,6 +18,7 @@
         "client.multiplayer.MixinWorldClient",
         "client.network.MixinNetHandlerPlayClient",
         "client.network.MixinNetworkPlayerInfo",
+        "client.renderer.MixinGlStateManager",
         "client.renderer.MixinIImageBuffer",
         "client.renderer.MixinRenderHelper",
         "client.renderer.MixinTessellator",

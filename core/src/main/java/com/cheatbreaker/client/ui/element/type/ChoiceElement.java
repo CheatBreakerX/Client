@@ -28,7 +28,7 @@ public class ChoiceElement
     public void handleDrawElement(int mouseX, int mouseY, float partialTicks) {
         boolean leftHovered = (float) mouseX > (float)(this.x + this.width - 92) * this.scale && (float) mouseX < (float)(this.x + this.width - 48) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 14 + this.yOffset) * this.scale;
         boolean rightHovered = (float) mouseX > (float)(this.x + this.width - 48) * this.scale && (float) mouseX < (float)(this.x + this.width - 10) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 14 + this.yOffset) * this.scale;
-        FontRegistry.getUbuntuMedium16px().drawString(this.setting.getLabel().toUpperCase(), this.x + 10, (float)(this.y + 4), leftHovered || rightHovered ? -1090519040 : -1895825408);
+        FontRegistry.getUbuntuMedium16px().drawString(this.setting.getLabel().toUpperCase(), this.x + 10, (float)(this.y + 4), CheatBreaker.getInstance().globalSettings.isDarkMode() ? -1 : (leftHovered || rightHovered ? -1090519040 : -1895825408));
         boolean bl3 = this.setting.getLabel().toLowerCase().endsWith("color");
         String value = this.setting.getValue().toString();
         String[] split;
@@ -53,8 +53,9 @@ public class ChoiceElement
                     float f2 = CBModulesGui.getSmoothFloat((float)50 + this.IlIlllIIIIllIllllIllIIlIl * (float)15);
                     this.IlIlllIIIIllIllllIllIIlIl = this.IlIlllIIIIllIllllIllIIlIl + f2 >= (float)50 ? (float)50 : (this.IlIlllIIIIllIllllIllIIlIl += f2);
                 }
-                Ref.modified$drawRect(this.x + this.width - 130, this.y + 2, this.x + this.width - 72, this.y + 12, -723724); // -723724
-                Ref.modified$drawRect(this.x + this.width - 22, this.y + 2, this.x + this.width + 4, this.y + 12, -723724); // -723724
+                int thisRectColor = CheatBreaker.getInstance().globalSettings.isDarkMode() ? -13619151 : -723724;
+                Ref.modified$drawRect(this.x + this.width - 130, this.y + 2, this.x + this.width - 72, this.y + 12, thisRectColor); // -723724
+                Ref.modified$drawRect(this.x + this.width - 22, this.y + 2, this.x + this.width + 4, this.y + 12, thisRectColor); // -723724
             }
         } else if (this.IlllIllIlIIIIlIIlIIllIIIl == 0) {
             float f3 = FontRegistry.getUbuntuMedium16px().getStringWidth(value);
@@ -78,12 +79,16 @@ public class ChoiceElement
                 float f5 = CBModulesGui.getSmoothFloat((float)50 + this.IlIlllIIIIllIllllIllIIlIl * (float)15);
                 this.IlIlllIIIIllIllllIllIIlIl = this.IlIlllIIIIllIllllIllIIlIl + f5 >= (float)50 ? (float)50 : (this.IlIlllIIIIllIllllIllIIlIl += f5);
             }
-            Ref.modified$drawRect(this.x + this.width - 130, this.y + 2, this.x + this.width - 72, this.y + 12, -723724);
-            Ref.modified$drawRect(this.x + this.width - 22, this.y + 2, this.x + this.width + 4, this.y + 12, -723724);
+            int thisRectColor = CheatBreaker.getInstance().globalSettings.isDarkMode() ? -13619151 : -723724;
+            Ref.modified$drawRect(this.x + this.width - 130, this.y + 2, this.x + this.width - 72, this.y + 12, thisRectColor);
+            Ref.modified$drawRect(this.x + this.width - 22, this.y + 2, this.x + this.width + 4, this.y + 12, thisRectColor);
         }
-        Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, leftHovered ? 0.6857143f * 1.1666666f : 0.5416667f * 0.8307692f);
+        boolean dark = CheatBreaker.getInstance().getGlobalSettings().isDarkMode();
+        float alphaLeft = dark ? (leftHovered ? 0.7174193f : 1.0f) : (leftHovered ? 0.74000007f * 1.081081f : 0.288f * 1.5625f);
+        float alphaRight = dark ? (rightHovered ? 0.7174193f : 1.0f) : (rightHovered ? 0.74000007f * 1.081081f : 0.288f * 1.5625f);
+        Ref.getGlBridge().bridge$color(dark ? 1f : 0f, dark ? 1f : 0f, dark ? 1f : 0f, alphaLeft);
         RenderUtil.drawIcon(this.leftIcon, (float)4, (float)(this.x + this.width - 82), (float)(this.y + 4));
-        Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, rightHovered ? 0.82580644f * 0.96875f : 3.3793104f * 0.13316326f);
+        Ref.getGlBridge().bridge$color(dark ? 1f : 0f, dark ? 1f : 0f, dark ? 1f : 0f, alphaRight);
         RenderUtil.drawIcon(this.rightIcon, (float)4, (float)(this.x + this.width - 22), (float)(this.y + 4));
     }
 

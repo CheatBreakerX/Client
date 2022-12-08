@@ -39,19 +39,26 @@ public class WorldTimeElement extends AbstractModulesGuiElement {
         float f2;
         float f3;
         int n3 = 148;
-        FontRegistry.getUbuntuMedium16px().drawString(this.setting.getLabel().toUpperCase(), this.x + 8, (float)(this.y + 8), -1895825408);
+
+        int foregroundColor = CheatBreaker.getInstance().getGlobalSettings().isDarkMode() ? -1 : -1895825408;
+        int overlayColor = CheatBreaker.getInstance().getGlobalSettings().isDarkMode() ? 0x6FFFFFFF : 0x6F000000;
+
+        FontRegistry.getUbuntuMedium16px().drawString(this.setting.getLabel().toUpperCase(), this.x + 10, (float)(this.y + 8), foregroundColor);
         if (this.IlllIllIlIIIIlIIlIIllIIIl && !Mouse.isButtonDown(0)) {
             this.IlllIllIlIIIIlIIlIIllIIIl = false;
         }
-        FontRegistry.getUbuntuMedium16px().drawString("SERVER", this.x + 172 + n3 / 2f, this.y - 2, -1895825408);
-        Ref.modified$drawRect((float) (this.x + 172 + n3 / 2) - 1.2580645f * 0.3974359f, this.y + 8, (float) (this.x + 172 + n3 / 2) + 0.33333334f * 1.5f, this.y + 14, 0x6F000000);
-        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.moonIcon, (float)(this.x + 180) - 1.3170732f * 2.4675925f, (float)(this.y + 3), 6.346154f * 1.1818181f, 47.307693f * 0.15853658f);
-        Ref.modified$drawRect((float)(this.x + 180) - 0.4509804f * 1.1086956f, this.y + 12, (float)(this.x + 180) + 0.45652175f * 1.0952381f, this.y + 14, 0x6F000000);
-        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.sunIcon, (float)(this.x + 170 + n3 - 10) - (float)5, (float)(this.y + 2), (float)10, 10);
-        Ref.modified$drawRect((float)(this.x + 170 + n3 - 10) - 1.1875f * 0.42105263f, this.y + 12, (float)(this.x + 170 + n3 - 10) + 0.4673913f * 1.0697675f, this.y + 14, 0x6F000000);
+        FontRegistry.getUbuntuMedium16px().drawCenteredString("SERVER", this.x + 172 + n3 / 2f, this.y - 2, foregroundColor);
+        Ref.modified$drawRect((float) (this.x + 172 + n3 / 2) - 1.2580645f * 0.3974359f, this.y + 8, (float) (this.x + 172 + n3 / 2) + 0.33333334f * 1.5f, this.y + 14, overlayColor);
+        RenderUtil.renderIcon(this.moonIcon, (float)(this.x + 180) - 1.3170732f * 2.4675925f, (float)(this.y + 3), 6.346154f * 1.1818181f, 47.307693f * 0.15853658f);
+        Ref.modified$drawRect((float)(this.x + 180) - 0.4509804f * 1.1086956f, this.y + 12, (float)(this.x + 180) + 0.45652175f * 1.0952381f, this.y + 14, overlayColor);
+        RenderUtil.renderIcon(this.sunIcon, (float)(this.x + 170 + n3 - 10) - (float)5, (float)(this.y + 2), (float)10, 10);
+        Ref.modified$drawRect((float)(this.x + 170 + n3 - 10) - 1.1875f * 0.42105263f, this.y + 12, (float)(this.x + 170 + n3 - 10) + 0.4673913f * 1.0697675f, this.y + 14, overlayColor);
         boolean bl = (float) mouseX > (float)(this.x + 170) * this.scale && (float) mouseX < (float)(this.x + 170 + n3 - 2) * this.scale && (float) mouseY > (float)(this.y + 4 + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 20 + this.yOffset) * this.scale;
-        RenderUtil.drawRoundedRect((double)(this.x + 174), (double)(this.y + 16), (double)(this.x + 170 + n3 - 4), (double)(this.y + 18), 1.0, bl ? -1895825408 : 0x6F000000);
+        RenderUtil.drawRoundedRect((double)(this.x + 174), (double)(this.y + 16), (double)(this.x + 170 + n3 - 4), (double)(this.y + 18), 1.0, bl ?
+                (CheatBreaker.getInstance().getGlobalSettings().isDarkMode() ? 0x8FFFFFFF : 0x8F000000) : overlayColor);
         double d = n3 - 18;
+
+        //
         float f4 = Float.parseFloat("" + this.setting.getMinimumValue());
         float f5 = Float.parseFloat("" + this.setting.getMaximumValue());
         if (this.IlllIllIlIIIIlIIlIIllIIIl) {

@@ -2,13 +2,17 @@ package com.cheatbreaker.bridge.client.renderer;
 
 public interface TessellatorBridge {
     void bridge$startDrawingQuads();
-    void bridge$addVertexWithUV(double x, double y, double z, double u, double v);
     void bridge$finish();
-    void bridge$addVertex(double x, double y, double z);
     void bridge$startDrawing(int mode);
-    void bridge$setColorOpaque_I(int color);
+    TessellatorBridge bridge$setColorOpaque_I(int color);
     void bridge$setColorRGBA_F(float r, float g, float b, float a);
     void bridge$setTranslation(double x, double y, double z);
     void bridge$setColorRGBA_I(int color, int alpha);
-    void bridge$addAndEndVertex(double x, double y, double z);
+
+    TessellatorBridge bridge$pos(double x, double y, double z);
+    TessellatorBridge bridge$tex(double u, double v);
+    TessellatorBridge bridge$color(float r, float g, float b, float a);
+    TessellatorBridge bridge$color(int r, int g, int b, int a);
+    TessellatorBridge bridge$inheritGLSMColor();
+    void bridge$endVertex();
 }

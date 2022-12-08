@@ -71,7 +71,7 @@ public class FriendElement extends AbstractElement {
         float f4 = this.x + this.width - 20.5f * f3;
         Ref.modified$drawRect(f4, this.y, this.x + this.width, this.y + this.height, -52429);
         Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.4470588f * 0.6219512f);
-        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(removeIcon, f4 + (float)4, this.y + (float)5, (float)12, 12);
+        RenderUtil.renderIcon(removeIcon, f4 + (float)4, this.y + (float)5, (float)12, 12);
         Ref.getGlBridge().bridge$popMatrix();
     }
 

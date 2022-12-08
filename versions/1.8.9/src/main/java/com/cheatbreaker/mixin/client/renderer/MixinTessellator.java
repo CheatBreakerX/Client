@@ -1,6 +1,7 @@
 package com.cheatbreaker.mixin.client.renderer;
 
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
+import com.cheatbreaker.bridge.ext.GLColor;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -17,8 +18,7 @@ public abstract class MixinTessellator implements TessellatorBridge {
     }
 
     public void bridge$addVertexWithUV(double x, double y, double z, double u, double v) {
-        this.worldRenderer.tex(u, v);
-        this.bridge$addVertex(x, y, z);
+        this.worldRenderer.pos(x, y, z).tex(u, v).endVertex();
     }
 
     public void bridge$finish() {
@@ -33,11 +33,12 @@ public abstract class MixinTessellator implements TessellatorBridge {
         this.worldRenderer.begin(mode, DefaultVertexFormats.POSITION_TEX);
     }
 
-    public void bridge$setColorOpaque_I(int color) {
+    public TessellatorBridge bridge$setColorOpaque_I(int color) {
         int red = color >> 16 & 255;
         int green = color >> 8 & 255;
         int blue = color & 255;
         this.worldRenderer.color(red, green, blue, 255);
+        return this;
     }
 
     public void bridge$setColorRGBA_F(float r, float g, float b, float a) {
@@ -57,5 +58,34 @@ public abstract class MixinTessellator implements TessellatorBridge {
 
     public void bridge$addAndEndVertex(double x, double y, double z) {
         this.worldRenderer.pos(x, y, z).endVertex();
+    }
+
+    public TessellatorBridge bridge$pos(double x, double y, double z) {
+        this.worldRenderer.pos(x, y, z);
+        return this;
+    }
+
+    public TessellatorBridge bridge$tex(double u, double v) {
+        this.worldRenderer.tex(u, v);
+        return this;
+    }
+
+    public TessellatorBridge bridge$color(float r, float g, float b, float a) {
+        this.worldRenderer.color(r, g, b, a);
+        return this;
+    }
+
+    public TessellatorBridge bridge$color(int r, int g, int b, int a) {
+        this.worldRenderer.color(r, g, b, a);
+        return this;
+    }
+
+    public TessellatorBridge bridge$inheritGLSMColor() {
+        this.worldRenderer.color(GLColor.glsmCurrentColor.getRed(), GLColor.glsmCurrentColor.getGreen(), GLColor.glsmCurrentColor.getBlue(), GLColor.glsmCurrentColor.getAlpha());
+        return this;
+    }
+
+    public void bridge$endVertex() {
+        this.worldRenderer.endVertex();
     }
 }

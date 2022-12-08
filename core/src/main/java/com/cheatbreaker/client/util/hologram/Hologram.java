@@ -37,8 +37,7 @@ public class Hologram {
                 float f = (float)(hologram.getX() - Ref.getRenderManager().bridge$getRenderPosX());
                 float f2 = (float)(hologram.getY() + 1.0 + (double)((float)i * (0.25f)) - Ref.getRenderManager().bridge$getRenderPosY());
                 float f3 = (float)(hologram.getZ() - Ref.getRenderManager().bridge$getRenderPosZ());
-                float f4 = 1.6f;
-                float f5 = 1.4081633f * 0.011835749f * f4;
+                float f5 = 0.02666667f;
                 Ref.getGlBridge().bridge$pushMatrix();
                 Ref.getGlBridge().bridge$translate(f, f2, f3);
                 Ref.getGlBridge().bridge$normal3f(0f, 1f, 0f);
@@ -55,11 +54,10 @@ public class Hologram {
                 Ref.getGlBridge().bridge$disableTexture2D();
                 tessellator.bridge$startDrawingQuads();
                 int n2 = fontRenderer.bridge$getStringWidth(string) / 2;
-                tessellator.bridge$setColorRGBA_F(0.0f, 0.0f, 0.0f, 0.6875f * 0.36363637f);
-                tessellator.bridge$addVertex(-n2 - 1, -1 + n, 0.0);
-                tessellator.bridge$addVertex(-n2 - 1, 8 + n, 0.0);
-                tessellator.bridge$addVertex(n2 + 1, 8 + n, 0.0);
-                tessellator.bridge$addVertex(n2 + 1, -1 + n, 0.0);
+                tessellator.bridge$pos(-n2 - 1, -1 + n, 0.0).bridge$color(0f, 0f, 0f, 0.25f).bridge$endVertex();
+                tessellator.bridge$pos(-n2 - 1, 8 + n, 0.0).bridge$color(0f, 0f, 0f, 0.25f).bridge$endVertex();
+                tessellator.bridge$pos(n2 + 1, 8 + n, 0.0).bridge$color(0f, 0f, 0f, 0.25f).bridge$endVertex();
+                tessellator.bridge$pos(n2 + 1, -1 + n, 0.0).bridge$color(0f, 0f, 0f, 0.25f).bridge$endVertex();
                 tessellator.bridge$finish();
                 Ref.getGlBridge().bridge$enableTexture2D();
                 fontRenderer.bridge$drawString(string, -fontRenderer.bridge$getStringWidth(string) / 2, n, 0x20FFFFFF);

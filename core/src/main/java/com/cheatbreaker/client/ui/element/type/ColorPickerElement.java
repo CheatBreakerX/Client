@@ -59,14 +59,17 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
         this.colorPickerColorElement.yOffset = this.yOffset;
         this.colorPickerColorElement.handleDrawElement(mouseX, mouseY, partialTicks);
         Ref.modified$drawRect(this.x + 186, this.y + 16, this.x + this.width - 16, this.y + 17, 0x7F000000);
-        FontRegistry.getPlayBold18px().drawString("#", this.x + 188, (float)(this.y + 4), -1358954496);
-        FontRegistry.getPlayBold18px().drawString(Integer.toHexString(this.setting.getColorValue()), this.x + 194, (float)(this.y + 4), -1358954496);
+        FontRegistry.getPlayBold18px().drawString("#", this.x + 188, (float)(this.y + 4),
+                CheatBreaker.getInstance().getGlobalSettings().isDarkMode() ? 0xAFFFFFFF : 0xAF000000);
+        FontRegistry.getPlayBold18px().drawString(Integer.toHexString(this.setting.getColorValue()), this.x + 194, (float)(this.y + 4),
+                CheatBreaker.getInstance().getGlobalSettings().isDarkMode() ? 0xAFFFFFFF : 0xAF000000);
         boolean bl = (float) mouseX > (float)(this.x + this.width - 40) * this.scale && (float) mouseX < (float)(this.x + this.width - 12) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 18 + this.yOffset) * this.scale;
         string = bl ? "(Favorite)" : "(+)";
         if (CheatBreaker.getInstance().globalSettings.isFavouriteColor((Integer)this.setting.getValue())) {
             string = bl ? "(Un-favorite)" : "(-)";
         }
-        FontRegistry.getPlayBold18px().drawString(string, this.x + this.width - 16 - FontRegistry.getPlayBold18px().getStringWidth(string), (float)(this.y + 4), bl ? -822083584 : -1358954496);
+        FontRegistry.getPlayBold18px().drawString(string, this.x + this.width - 16 - FontRegistry.getPlayBold18px().getStringWidth(string), (float)(this.y + 4),
+                CheatBreaker.getInstance().getGlobalSettings().isDarkMode() ? (bl ? 0xCFFFFFFF : 0xAFFFFFFF) : (bl ? 0xCF000000 : 0xAF000000));
         if (this.lIIIIllIIlIlIllIIIlIllIlI) {
             if (this.IlllIllIlIIIIlIIlIIllIIIl && !Mouse.isButtonDown(0)) {
                 this.IlllIllIlIIIIlIIlIIllIIIl = false;
@@ -85,10 +88,10 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
             Ref.getGlBridge().bridge$disableTexture2D();
             tessellator.bridge$startDrawingQuads();
             Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
-            tessellator.bridge$addVertex(this.pickerX, IIIIIIlIlIlIllllllIlllIlI, 0.0);
-            tessellator.bridge$addVertex(lIIIIIllllIIIIlIlIIIIlIlI, IIIIIIlIlIlIllllllIlllIlI, 0.0);
-            tessellator.bridge$addVertex(lIIIIIllllIIIIlIlIIIIlIlI, this.pickerY, 0.0);
-            tessellator.bridge$addVertex(this.pickerX, this.pickerY, 0.0);
+            tessellator.bridge$pos(this.pickerX, IIIIIIlIlIlIllllllIlllIlI, 0.0).bridge$endVertex();
+            tessellator.bridge$pos(lIIIIIllllIIIIlIlIIIIlIlI, IIIIIIlIlIlIllllllIlllIlI, 0.0).bridge$endVertex();
+            tessellator.bridge$pos(lIIIIIllllIIIIlIlIIIIlIlI, this.pickerY, 0.0).bridge$endVertex();
+            tessellator.bridge$pos(this.pickerX, this.pickerY, 0.0).bridge$endVertex();
             tessellator.bridge$finish();
             int[] arrn = null;
             int n3 = 0;
@@ -117,10 +120,10 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
                     }
                     tessellator.bridge$startDrawingQuads();
                     Ref.getGlBridge().bridge$color((float)(n5 >> 16 & 0xFF) / (float)255, (float)(n5 >> 8 & 0xFF) / (float)255, (float)(n5 & 0xFF) / (float)255, 1.0f);
-                    tessellator.bridge$addVertex(this.pickerX + (float)n3, this.pickerY + (float)n4 + 1.0f, 0.0);
-                    tessellator.bridge$addVertex(this.pickerX + (float)n3 + 1.0f, this.pickerY + (float)n4 + 1.0f, 0.0);
-                    tessellator.bridge$addVertex(this.pickerX + (float)n3 + 1.0f, this.pickerY + (float)n4, 0.0);
-                    tessellator.bridge$addVertex(this.pickerX + (float)n3, this.pickerY + (float)n4, 0.0);
+                    tessellator.bridge$pos(this.pickerX + (float)n3, this.pickerY + (float)n4 + 1.0f, 0.0).bridge$endVertex();
+                    tessellator.bridge$pos(this.pickerX + (float)n3 + 1.0f, this.pickerY + (float)n4 + 1.0f, 0.0).bridge$endVertex();
+                    tessellator.bridge$pos(this.pickerX + (float)n3 + 1.0f, this.pickerY + (float)n4, 0.0).bridge$endVertex();
+                    tessellator.bridge$pos(this.pickerX + (float)n3, this.pickerY + (float)n4, 0.0).bridge$endVertex();
                     tessellator.bridge$finish();
                     ++n4;
                 }
@@ -136,7 +139,7 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
             }
             Ref.modified$drawRect(this.pickerX - (float) 51, this.pickerY + 1.0f, this.pickerX - (float) 43, this.pickerY + (float) 9, -16777216);
             Ref.modified$drawRect(this.pickerX - (float)50, this.pickerY + 2.0f, this.pickerX - (float)44, this.pickerY + (float)8, this.setting.rainbow ? -13369549 : -1);
-            FontRegistry.getPlayRegular16px().drawString("CHROMA", this.pickerX - (float)40, this.pickerY, -1358954496);
+            FontRegistry.getPlayRegular16px().drawString("CHROMA", this.pickerX - (float)40, this.pickerY, CheatBreaker.getInstance().getGlobalSettings().isDarkMode() ? -1 : -1358954496);
             this.IlllIIIlIlllIllIlIIlllIlI(mouseY);
             this.lIIIIIIIIIlIllIIllIlIIlIl(mouseY);
             this.lIIlIIllIIIIIlIllIIIIllII = (int)(this.pickerX + this.pickerWidth + (float)64);

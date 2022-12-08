@@ -159,37 +159,37 @@ public class TeammatesModule {
         switch (ilIlIIlllIIIIIlIlIlIIIllI) {
             case lIIIIIIIIIlIllIIllIlIIlIl: {
                 tessellator.bridge$startDrawingQuads();
-                tessellator.bridge$addVertex(f3 / 2.0f, f4 / 2.0f, 0.0);
-                tessellator.bridge$addVertex(-f3 / 2.0f, 0.0, 0.0);
-                tessellator.bridge$addVertex(f3 / 2.0f, -f4 / 2.0f, 0.0);
-                tessellator.bridge$addVertex(-f3 / 2.0f, 0.0, 0.0);
+                tessellator.bridge$pos(f3 / 2.0f, f4 / 2.0f, 0.0).bridge$endVertex();
+                tessellator.bridge$pos(-f3 / 2.0f, 0.0, 0.0).bridge$endVertex();
+                tessellator.bridge$pos(f3 / 2.0f, -f4 / 2.0f, 0.0).bridge$endVertex();
+                tessellator.bridge$pos(-f3 / 2.0f, 0.0, 0.0).bridge$endVertex();
                 tessellator.bridge$finish();
                 break;
             }
             case IIIIllIlIIIllIlllIlllllIl: {
                 tessellator.bridge$startDrawingQuads();
-                tessellator.bridge$addVertex(-f3 / 2.0f, f4 / 2.0f, 0.0);
-                tessellator.bridge$addVertex(f3 / 2.0f, 0.0, 0.0);
-                tessellator.bridge$addVertex(-f3 / 2.0f, -f4 / 2.0f, 0.0);
-                tessellator.bridge$addVertex(f3 / 2.0f, 0.0, 0.0);
+                tessellator.bridge$pos(-f3 / 2.0f, f4 / 2.0f, 0.0).bridge$endVertex();
+                tessellator.bridge$pos(f3 / 2.0f, 0.0, 0.0).bridge$endVertex();
+                tessellator.bridge$pos(-f3 / 2.0f, -f4 / 2.0f, 0.0).bridge$endVertex();
+                tessellator.bridge$pos(f3 / 2.0f, 0.0, 0.0).bridge$endVertex();
                 tessellator.bridge$finish();
                 break;
             }
             case IlllIIIlIlllIllIlIIlllIlI: {
                 tessellator.bridge$startDrawingQuads();
-                tessellator.bridge$addVertex(-f3 / 2.0f, -f4 / 2.0f, 0.0);
-                tessellator.bridge$addVertex(0.0, f4 / 2.0f, 0.0);
-                tessellator.bridge$addVertex(f3 / 2.0f, -f4 / 2.0f, 0.0);
-                tessellator.bridge$addVertex(0.0, f4 / 2.0f, 0.0);
+                tessellator.bridge$pos(-f3 / 2.0f, -f4 / 2.0f, 0.0).bridge$endVertex();
+                tessellator.bridge$pos(0.0, f4 / 2.0f, 0.0).bridge$endVertex();
+                tessellator.bridge$pos(f3 / 2.0f, -f4 / 2.0f, 0.0).bridge$endVertex();
+                tessellator.bridge$pos(0.0, f4 / 2.0f, 0.0).bridge$endVertex();
                 tessellator.bridge$finish();
                 break;
             }
             case lIIIIlIIllIIlIIlIIIlIIllI: {
                 tessellator.bridge$startDrawingQuads();
-                tessellator.bridge$addVertex(-f3 / 2.0f, f4 / 2.0f, 0.0);
-                tessellator.bridge$addVertex(0.0, -f4 / 2.0f, 0.0);
-                tessellator.bridge$addVertex(f3 / 2.0f, f4 / 2.0f, 0.0);
-                tessellator.bridge$addVertex(0.0, -f4 / 2.0f, 0.0);
+                tessellator.bridge$pos(-f3 / 2.0f, f4 / 2.0f, 0.0).bridge$endVertex();
+                tessellator.bridge$pos(0.0, -f4 / 2.0f, 0.0).bridge$endVertex();
+                tessellator.bridge$pos(f3 / 2.0f, f4 / 2.0f, 0.0).bridge$endVertex();
+                tessellator.bridge$pos(0.0, -f4 / 2.0f, 0.0).bridge$endVertex();
                 tessellator.bridge$finish();
             }
         }
@@ -215,18 +215,18 @@ public class TeammatesModule {
         Ref.getGlBridge().bridge$translate(f * 2.0f, 0.0f, 0.0f);
         Ref.getGlBridge().bridge$rotate(90, 0.0f, 0.0f, -1);
         tessellator.bridge$startDrawingQuads();
-        tessellator.bridge$addVertex(-f, f2, 0.0);
-        tessellator.bridge$addVertex(-f, f2 + f3 / 2.0f, 0.0);
-        tessellator.bridge$addVertex(f, f2 + f3 / 2.0f, 0.0);
-        tessellator.bridge$addVertex(f, f2, 0.0);
+        tessellator.bridge$pos(-f, f2, 0.0).bridge$endVertex();
+        tessellator.bridge$pos(-f, f2 + f3 / 2.0f, 0.0).bridge$endVertex();
+        tessellator.bridge$pos(f, f2 + f3 / 2.0f, 0.0).bridge$endVertex();
+        tessellator.bridge$pos(f, f2, 0.0).bridge$endVertex();
         tessellator.bridge$finish();
         Ref.getGlBridge().bridge$rotate(90, 0.0f, 0.0f, -1);
         Ref.getGlBridge().bridge$translate(f * 2.0f + 1.0f, f3 / 2.0f + 1.0f, 0.0f);
         tessellator.bridge$startDrawingQuads();
-        tessellator.bridge$addVertex(-f / 2.0f + 1.0f, f2, 0.0);
-        tessellator.bridge$addVertex(-f / 2.0f + 1.0f, f2 + f3 / 2.0f, 0.0);
-        tessellator.bridge$addVertex(f, f2 + f3 / 2.0f, 0.0);
-        tessellator.bridge$addVertex(f, f2, 0.0);
+        tessellator.bridge$pos(-f / 2.0f + 1.0f, f2, 0.0).bridge$endVertex();
+        tessellator.bridge$pos(-f / 2.0f + 1.0f, f2 + f3 / 2.0f, 0.0).bridge$endVertex();
+        tessellator.bridge$pos(f, f2 + f3 / 2.0f, 0.0).bridge$endVertex();
+        tessellator.bridge$pos(f, f2, 0.0).bridge$endVertex();
         tessellator.bridge$finish();
         Ref.getGlBridge().bridge$popMatrix();
         Ref.getGlBridge().bridge$enableTexture2D();

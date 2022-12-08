@@ -319,10 +319,10 @@ public abstract class MixinMinecraft implements MinecraftBridge {
         float var8 = 0.00390625F;
         TessellatorBridge var9 = Ref.getTessellator();
         var9.bridge$startDrawingQuads();
-        var9.bridge$addVertexWithUV(x, y + height, 0.0D, (float)(u) * var7, (float)(v + height) * var8);
-        var9.bridge$addVertexWithUV(x + width, y + height, 0.0D, (float)(u + width) * var7, (float)(v + height) * var8);
-        var9.bridge$addVertexWithUV(x + width, y, 0.0D, (float)(u + width) * var7, (float)(v) * var8);
-        var9.bridge$addVertexWithUV(x, y, 0.0D, (float)(u) * var7, (float)(v) * var8);
+        var9.bridge$pos(x, y + height, 0.0D).bridge$tex((float)(u) * var7, (float)(v + height) * var8).bridge$endVertex();
+        var9.bridge$pos(x + width, y + height, 0.0D).bridge$tex((float)(u + width) * var7, (float)(v + height) * var8).bridge$endVertex();
+        var9.bridge$pos(x + width, y, 0.0D).bridge$tex((float)(u + width) * var7, (float)(v) * var8).bridge$endVertex();
+        var9.bridge$pos(x, y, 0.0D).bridge$tex((float)(u) * var7, (float)(v) * var8).bridge$endVertex();
         var9.bridge$finish();
     }
 

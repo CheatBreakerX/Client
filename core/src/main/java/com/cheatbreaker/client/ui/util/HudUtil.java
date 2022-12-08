@@ -14,10 +14,10 @@ public final class HudUtil {
         float var8 = 0.00390625F;
         TessellatorBridge tessellator = Ref.getTessellator();
         tessellator.bridge$startDrawingQuads();
-        tessellator.bridge$addVertexWithUV(x, y + height, zLevel, u * var7, v + height * var8);
-        tessellator.bridge$addVertexWithUV(x + width, y + height, zLevel, u + width * var7, v + height * var8);
-        tessellator.bridge$addVertexWithUV(x + width, y, zLevel, u + width * var7, v * var8);
-        tessellator.bridge$addVertexWithUV(x, y, zLevel, u * var7, v * var8);
+        tessellator.bridge$pos(x, y + height, zLevel).bridge$tex(u * var7, v + height * var8).bridge$endVertex();
+        tessellator.bridge$pos(x + width, y + height, zLevel).bridge$tex(u + width * var7, v + height * var8).bridge$endVertex();
+        tessellator.bridge$pos(x + width, y, zLevel).bridge$tex(u + width * var7, v * var8).bridge$endVertex();
+        tessellator.bridge$pos(x, y, zLevel).bridge$tex(u * var7, v * var8).bridge$endVertex();
         tessellator.bridge$finish();
     }
 
@@ -77,11 +77,10 @@ public final class HudUtil {
      */
     public static void renderQuad(TessellatorBridge tessellator, int x, int y, int width, int height, int color) {
         tessellator.bridge$startDrawingQuads();
-        tessellator.bridge$setColorOpaque_I(color);
-        tessellator.bridge$addVertex((x), (y), 0.0D);
-        tessellator.bridge$addVertex((x), (y + height), 0.0D);
-        tessellator.bridge$addVertex((x + width), (y + height), 0.0D);
-        tessellator.bridge$addVertex((x + width), (y), 0.0D);
+        tessellator.bridge$pos((x), (y), 0.0D).bridge$setColorOpaque_I(color).bridge$endVertex();
+        tessellator.bridge$pos((x), (y + height), 0.0D).bridge$setColorOpaque_I(color).bridge$endVertex();
+        tessellator.bridge$pos((x + width), (y + height), 0.0D).bridge$setColorOpaque_I(color).bridge$endVertex();
+        tessellator.bridge$pos((x + width), (y), 0.0D).bridge$setColorOpaque_I(color).bridge$endVertex();
         tessellator.bridge$finish();
     }
 

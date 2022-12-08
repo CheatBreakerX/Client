@@ -42,7 +42,11 @@ public class GlobalSettingsElement
             float f3 = (float)this.lIIIIllIIlIlIllIIIlIllIlI / (float)n3 * (float)100;
             Ref.modified$drawRect(this.x, (int)((float)this.y + ((float)this.height - (float)this.height * f3 / (float)100)), this.x + this.width, this.y + this.height, this.lIIIIlIIllIIlIIlIIIlIIllI);
         }
-        Ref.getGlBridge().bridge$color(0.0f, 0.0f, 0.0f, 1.4666667f * 0.23863636f);
+        if (CheatBreaker.getInstance().globalSettings.isDarkMode()) {
+            Ref.getGlBridge().bridge$color(1f, 1f, 1f, 0.35f);
+        } else {
+            Ref.getGlBridge().bridge$color(0f, 0f, 0f, 0.35f);
+        }
         RenderUtil.drawIcon(this.IlllIllIlIIIIlIIlIIllIIIl, 2.2f * 1.1363636f, (float)(this.x + 6), (float)this.y + (float)6);
         FontRegistry.getPlayBold18px().drawString("CheatBreaker Settings".toUpperCase(), (float)this.x + 14f, (float)this.y + 3f, CheatBreaker.getInstance().globalSettings.isDarkMode() ? -1 : -818991313);
     }

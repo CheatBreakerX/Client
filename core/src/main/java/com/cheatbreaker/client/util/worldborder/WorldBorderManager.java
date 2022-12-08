@@ -80,10 +80,10 @@ public class WorldBorderManager {
                         while (d3 < d9) {
                             d2 = Math.min(1.0, d9 - d3);
                             f2 = (float)d2 * (0.04054054f * 12.333334f);
-                            tessellator.bridge$addVertexWithUV(border.IIIIllIlIIIllIlllIlllllIl(), 256, d3, f7 + f3, f7 + 0.0f);
-                            tessellator.bridge$addVertexWithUV(border.IIIIllIlIIIllIlllIlllllIl(), 256, d3 + d2, f7 + f2 + f3, f7 + 0.0f);
-                            tessellator.bridge$addVertexWithUV(border.IIIIllIlIIIllIlllIlllllIl(), 0.0, d3 + d2, f7 + f2 + f3, f7 + (float)128);
-                            tessellator.bridge$addVertexWithUV(border.IIIIllIlIIIllIlllIlllllIl(), 0.0, d3, f7 + f3, f7 + (float)128);
+                            tessellator.bridge$pos(border.IIIIllIlIIIllIlllIlllllIl(), 256, d3).bridge$tex(f7 + f3, f7 + 0.0f).bridge$endVertex();
+                            tessellator.bridge$pos(border.IIIIllIlIIIllIlllIlllllIl(), 256, d3 + d2).bridge$tex(f7 + f2 + f3, f7 + 0.0f).bridge$endVertex();
+                            tessellator.bridge$pos(border.IIIIllIlIIIllIlllIlllllIl(), 0.0, d3 + d2).bridge$tex(f7 + f2 + f3, f7 + (float)128).bridge$endVertex();
+                            tessellator.bridge$pos(border.IIIIllIlIIIllIlllIlllllIl(), 0.0, d3).bridge$tex(f7 + f3, f7 + (float)128).bridge$endVertex();
                             d3 += 1.0;
                             f3 += 0.16463414f * 3.0370371f;
                         }
@@ -94,10 +94,10 @@ public class WorldBorderManager {
                         while (d3 < d9) {
                             d2 = Math.min(1.0, d9 - d3);
                             f2 = (float)d2 * (0.3611111f * 1.3846154f);
-                            tessellator.bridge$addVertexWithUV(border.IlIlIIIlllIIIlIlllIlIllIl(), 256, d3, f7 + f3, f7 + 0.0f);
-                            tessellator.bridge$addVertexWithUV(border.IlIlIIIlllIIIlIlllIlIllIl(), 256, d3 + d2, f7 + f2 + f3, f7 + 0.0f);
-                            tessellator.bridge$addVertexWithUV(border.IlIlIIIlllIIIlIlllIlIllIl(), 0.0, d3 + d2, f7 + f2 + f3, f7 + (float)128);
-                            tessellator.bridge$addVertexWithUV(border.IlIlIIIlllIIIlIlllIlIllIl(), 0.0, d3, f7 + f3, f7 + (float)128);
+                            tessellator.bridge$pos(border.IlIlIIIlllIIIlIlllIlIllIl(), 256, d3).bridge$tex(f7 + f3, f7 + 0.0f).bridge$endVertex();
+                            tessellator.bridge$pos(border.IlIlIIIlllIIIlIlllIlIllIl(), 256, d3 + d2).bridge$tex(f7 + f2 + f3, f7 + 0.0f).bridge$endVertex();
+                            tessellator.bridge$pos(border.IlIlIIIlllIIIlIlllIlIllIl(), 0.0, d3 + d2).bridge$tex(f7 + f2 + f3, f7 + (float)128).bridge$endVertex();
+                            tessellator.bridge$pos(border.IlIlIIIlllIIIlIlllIlIllIl(), 0.0, d3).bridge$tex(f7 + f3, f7 + (float)128).bridge$endVertex();
                             d3 += 1.0;
                             f3 += 1.25f * 0.4f;
                         }
@@ -110,10 +110,10 @@ public class WorldBorderManager {
                         while (d3 < d9) {
                             d2 = Math.min(1.0, d9 - d3);
                             f2 = (float)d2 * (0.3115942f * 1.6046512f);
-                            tessellator.bridge$addVertexWithUV(d3, 256, border.IIIIllIIllIIIIllIllIIIlIl(), f7 + f3, f7 + 0.0f);
-                            tessellator.bridge$addVertexWithUV(d3 + d2, 256, border.IIIIllIIllIIIIllIllIIIlIl(), f7 + f2 + f3, f7 + 0.0f);
-                            tessellator.bridge$addVertexWithUV(d3 + d2, 0.0, border.IIIIllIIllIIIIllIllIIIlIl(), f7 + f2 + f3, f7 + (float)128);
-                            tessellator.bridge$addVertexWithUV(d3, 0.0, border.IIIIllIIllIIIIllIllIIIlIl(), f7 + f3, f7 + (float)128);
+                            tessellator.bridge$pos(d3, 256, border.IIIIllIIllIIIIllIllIIIlIl()).bridge$tex(f7 + f3, f7 + 0.0f).bridge$endVertex();
+                            tessellator.bridge$pos(d3 + d2, 256, border.IIIIllIIllIIIIllIllIIIlIl()).bridge$tex(f7 + f2 + f3, f7 + 0.0f).bridge$endVertex();
+                            tessellator.bridge$pos(d3 + d2, 0.0, border.IIIIllIIllIIIIllIllIIIlIl()).bridge$tex(f7 + f2 + f3, f7 + (float)128).bridge$endVertex();
+                            tessellator.bridge$pos(d3, 0.0, border.IIIIllIIllIIIIllIllIIIlIl()).bridge$tex(f7 + f3, f7 + (float)128).bridge$endVertex();
                             d3 += 1.0;
                             f3 += 1.5882353f * 0.31481484f;
                         }
@@ -124,10 +124,10 @@ public class WorldBorderManager {
                         while (d3 < d9) {
                             d2 = Math.min(1.0, d9 - d3);
                             f2 = (float)d2 * (1.6071428f * 0.31111112f);
-                            tessellator.bridge$addVertexWithUV(d3, 256, border.IIIllIllIlIlllllllIlIlIII(), f7 + f3, f7 + 0.0f);
-                            tessellator.bridge$addVertexWithUV(d3 + d2, 256, border.IIIllIllIlIlllllllIlIlIII(), f7 + f2 + f3, f7 + 0.0f);
-                            tessellator.bridge$addVertexWithUV(d3 + d2, 0.0, border.IIIllIllIlIlllllllIlIlIII(), f7 + f2 + f3, f7 + (float)128);
-                            tessellator.bridge$addVertexWithUV(d3, 0.0, border.IIIllIllIlIlllllllIlIlIII(), f7 + f3, f7 + (float)128);
+                            tessellator.bridge$pos(d3, 256, border.IIIllIllIlIlllllllIlIlIII()).bridge$tex(f7 + f3, f7 + 0.0f).bridge$endVertex();
+                            tessellator.bridge$pos(d3 + d2, 256, border.IIIllIllIlIlllllllIlIlIII()).bridge$tex(f7 + f2 + f3, f7 + 0.0f).bridge$endVertex();
+                            tessellator.bridge$pos(d3 + d2, 0.0, border.IIIllIllIlIlllllllIlIlIII()).bridge$tex(f7 + f2 + f3, f7 + (float)128).bridge$endVertex();
+                            tessellator.bridge$pos(d3, 0.0, border.IIIllIllIlIlllllllIlIlIII()).bridge$tex(f7 + f3, f7 + (float)128).bridge$endVertex();
                             d3 += 1.0;
                             f3 += 2.2820513f * 0.21910112f;
                         }

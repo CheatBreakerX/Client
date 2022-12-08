@@ -312,7 +312,7 @@ public class CBModulesGui extends CBGuiScreen {
         if (f13 > 1.0f) {
             Ref.getGlBridge().bridge$translate(-((float)(this.IIllIlIllIlIllIIlIllIlIII * 2) - (float)32) / (float)12 - 1.0f, 0.0f, 0.0f);
         }
-        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(Ref.getInstanceCreator().createResourceLocation("client/logo_white.png"), (float)(n5 / 2 - 14), (float)(n6 / 2 - 47 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), (float)28, 15);
+        RenderUtil.renderIcon(Ref.getInstanceCreator().createResourceLocation("client/logo_white.png"), (float)(n5 / 2 - 14), (float)(n6 / 2 - 47 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), (float)28, 15);
         if (f13 > 2.0f) {
             FontRegistry.getPlayBold18px().drawString("| CHEAT", n5 / 2 + 18, (float)(n6 / 2 - 42 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), n7);
             FontRegistry.getPlayRegular18px().drawString("BREAKER", n5 / 2 + 53, (float)(n6 / 2 - 42 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), n7);

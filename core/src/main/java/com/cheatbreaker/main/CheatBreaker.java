@@ -190,7 +190,7 @@ public class CheatBreaker {
                 Alert.displayMessage("Hello", "Hello, World\nNew Line");
             }
             if (e.getKeyboardKey() == Keyboard.KEY_RSHIFT) {
-                if (Ref.getMinecraft().bridge$getCurrentScreen() == null) {
+                if (Ref.getMinecraft().bridge$isIngame()) {
                     Ref.getMinecraft().bridge$displayGuiScreen(new CBModulesGui());
                 }
             }

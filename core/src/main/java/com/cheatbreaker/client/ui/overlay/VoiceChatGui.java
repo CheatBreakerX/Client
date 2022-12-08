@@ -73,7 +73,7 @@ public class VoiceChatGui extends AbstractGui {
                     randomAssButton.publicDraw(f, f2, true);
                     float xPos = randomAssButton.getX();
                     float yPos = randomAssButton.getY();
-                    RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(Ref.getInstanceCreator().createResourceLocation("client/icons/microphone-64.png"), xPos + (float)4, yPos + 2.0f, (float)8, 8);
+                    RenderUtil.renderIcon(Ref.getInstanceCreator().createResourceLocation("client/icons/microphone-64.png"), xPos + (float)4, yPos + 2.0f, (float)8, 8);
                 } else if (this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() == randomAssButton.getText()) {
                     randomAssButton.publicDraw(f, f2, true);
                 } else {
@@ -167,18 +167,18 @@ public class VoiceChatGui extends AbstractGui {
             boolean bl3 = f > f3 + (float)158 && f < f3 + (float)184 && f2 > f7 && f2 < f7 + f5;
             Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
             if (!bl) {
-                RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.headphonesImage, f8 + (float)4, f7 + (float)3, (float)8, 8);
+                RenderUtil.renderIcon(this.headphonesImage, f8 + (float)4, f7 + (float)3, (float)8, 8);
             } else {
-                RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.microphoneImage, f8 + (float)4, f7 + (float)3, (float)8, 8);
+                RenderUtil.renderIcon(this.microphoneImage, f8 + (float)4, f7 + (float)3, (float)8, 8);
             }
             f8 = f3 + (float)10;
             if (!voiceUser3.getUUID().equals(this.mc.bridge$getThePlayer().bridge$getUniqueID())) {
                 if (bl2) {
                     Ref.getGlBridge().bridge$color(1.0f, 1.4848485f * 0.06734694f, 4.9f * 0.020408163f, bl3 ? 1.0f : 0.8117647f * 0.73913044f);
-                    RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.mutedSpeakerImage, f3 + (float)162, f7 + (float)3, (float)8, 8);
+                    RenderUtil.renderIcon(this.mutedSpeakerImage, f3 + (float)162, f7 + (float)3, (float)8, 8);
                 } else {
                     Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, bl3 ? 1.0f : 0.11904762f * 5.04f);
-                    RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(this.speakerImage, f3 + (float)162, f7 + (float)3, (float)8, 8);
+                    RenderUtil.renderIcon(this.speakerImage, f3 + (float)162, f7 + (float)3, (float)8, 8);
                 }
             }
             FontRegistry.getPlayBold18px().drawCenteredString(voiceUser3.getUsername().toUpperCase(), f8 + (float)6, f7 + 2.0f, bl ? -1 : 0x6FFFFFFF);

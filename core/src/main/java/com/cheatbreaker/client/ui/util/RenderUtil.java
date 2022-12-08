@@ -11,10 +11,10 @@ public class RenderUtil {
         float multiplier = 0.00390625f;
         TessellatorBridge tessellator = Ref.getTessellator();
         tessellator.bridge$startDrawingQuads();
-        tessellator.bridge$addVertexWithUV(left, top + (float)v, zLevel, right * multiplier, (bottom + (float)v) * multiplier);
-        tessellator.bridge$addVertexWithUV(left + (float)u, top + (float)v, zLevel, (right + (float)u) * multiplier, (bottom + (float)v) * multiplier);
-        tessellator.bridge$addVertexWithUV(left + (float)u, top, zLevel, (right + (float)u) * multiplier, bottom * multiplier);
-        tessellator.bridge$addVertexWithUV(left, top, zLevel, right * multiplier, bottom * multiplier);
+        tessellator.bridge$pos(left, top + (float)v, zLevel).bridge$tex(right * multiplier, (bottom + (float)v) * multiplier).bridge$endVertex();
+        tessellator.bridge$pos(left + (float)u, top + (float)v, zLevel).bridge$tex((right + (float)u) * multiplier, (bottom + (float)v) * multiplier).bridge$endVertex();
+        tessellator.bridge$pos(left + (float)u, top, zLevel).bridge$tex((right + (float)u) * multiplier, bottom * multiplier).bridge$endVertex();
+        tessellator.bridge$pos(left, top, zLevel).bridge$tex(right * multiplier, bottom * multiplier).bridge$endVertex();
         tessellator.bridge$finish();
     }
 
@@ -42,21 +42,21 @@ public class RenderUtil {
         drawIcon(Ref.getInstanceCreator().createResourceLocation(location), size, x, y);
     }
 
-    public static void lIIIIlIIllIIlIIlIIIlIIllI(ResourceLocationBridge location, float f, float f2, float f3, float f4) {
-        float f5 = f3 / 2.0f;
-        float f6 = 0.0f;
-        float f7 = 0.0f;
+    public static void renderIcon(ResourceLocationBridge location, float x, float y, float width, float height) {
+        float midWidth = width / 2.0f;
+        float u = 0.0f;
+        float v = 0.0f;
         Ref.getGlBridge().bridge$enableBlend();
         Ref.getMinecraft().bridge$getTextureManager().bridge$bindTexture(location);
         Ref.getGlBridge().bridge$begin(7);
-        Ref.getGlBridge().bridge$texCoord2d(f6 / f5, f7 / f5);
-        Ref.getGlBridge().bridge$vertex2d(f, f2);
-        Ref.getGlBridge().bridge$texCoord2d(f6 / f5, (f7 + f5) / f5);
-        Ref.getGlBridge().bridge$vertex2d(f, f2 + f4);
-        Ref.getGlBridge().bridge$texCoord2d((f6 + f5) / f5, (f7 + f5) / f5);
-        Ref.getGlBridge().bridge$vertex2d(f + f3, f2 + f4);
-        Ref.getGlBridge().bridge$texCoord2d((f6 + f5) / f5, f7 / f5);
-        Ref.getGlBridge().bridge$vertex2d(f + f3, f2);
+        Ref.getGlBridge().bridge$texCoord2d(u / midWidth, v / midWidth);
+        Ref.getGlBridge().bridge$vertex2d(x, y);
+        Ref.getGlBridge().bridge$texCoord2d(u / midWidth, (v + midWidth) / midWidth);
+        Ref.getGlBridge().bridge$vertex2d(x, y + height);
+        Ref.getGlBridge().bridge$texCoord2d((u + midWidth) / midWidth, (v + midWidth) / midWidth);
+        Ref.getGlBridge().bridge$vertex2d(x + width, y + height);
+        Ref.getGlBridge().bridge$texCoord2d((u + midWidth) / midWidth, v / midWidth);
+        Ref.getGlBridge().bridge$vertex2d(x + width, y);
         Ref.getGlBridge().bridge$end();
         Ref.getGlBridge().bridge$disableBlend();
     }
@@ -116,11 +116,11 @@ public class RenderUtil {
         Ref.getGlBridge().bridge$blendFunc(770, 771);
         TessellatorBridge tessellator = Ref.getTessellator();
         tessellator.bridge$startDrawing(6);
-        tessellator.bridge$addAndEndVertex(x, y, zLevel);
+        tessellator.bridge$pos(x, y, zLevel).bridge$endVertex();
         double d4 = 3.0 * 2.0943951023931953;
         double d5 = d4 / (double)30;
         for (double d6 = -d5; d6 < d4; d6 += d5) {
-            tessellator.bridge$addAndEndVertex(x + size * Math.cos(-d6), y + size * Math.sin(-d6), zLevel);
+            tessellator.bridge$pos(x + size * Math.cos(-d6), y + size * Math.sin(-d6), zLevel).bridge$endVertex();
         }
         tessellator.bridge$finish();
         Ref.getGlBridge().bridge$enableTexture2D();
@@ -134,15 +134,15 @@ public class RenderUtil {
         d5 = (d5 + (double)n) % (double)n;
         TessellatorBridge tessellator = Ref.getTessellator();
         for (double d7 = (double)360 / (double)n * d5; d7 < (double)360 / (double)n * (d5 + d6); d7 += 1.0) {
-            double d8 = d7 * (0.6976743936538696 * 4.502949631183398) / (double)180;
+            double d8 = d7 * Math.PI / (double)180;
             double d9 = (d7 - 1.0) * (1.9384295391612096 * 1.6206896305084229) / (double)180;
             double[] arrd = new double[]{Math.cos(d8) * d3, -Math.sin(d8) * d3, Math.cos(d9) * d3, -Math.sin(d9) * d3};
             double[] arrd2 = new double[]{Math.cos(d8) * d4, -Math.sin(d8) * d4, Math.cos(d9) * d4, -Math.sin(d9) * d4};
             tessellator.bridge$startDrawing(7);
-            tessellator.bridge$addVertex(d + arrd2[0], d2 + arrd2[1], 0.0);
-            tessellator.bridge$addVertex(d + arrd2[2], d2 + arrd2[3], 0.0);
-            tessellator.bridge$addVertex(d + arrd[2], d2 + arrd[3], 0.0);
-            tessellator.bridge$addVertex(d + arrd[0], d2 + arrd[1], 0.0);
+            tessellator.bridge$pos(d + arrd2[0], d2 + arrd2[1], 0.0).bridge$inheritGLSMColor().bridge$endVertex();
+            tessellator.bridge$pos(d + arrd2[2], d2 + arrd2[3], 0.0).bridge$inheritGLSMColor().bridge$endVertex();
+            tessellator.bridge$pos(d + arrd[2], d2 + arrd[3], 0.0).bridge$inheritGLSMColor().bridge$endVertex();
+            tessellator.bridge$pos(d + arrd[0], d2 + arrd[1], 0.0).bridge$inheritGLSMColor().bridge$endVertex();
             tessellator.bridge$finish();
         }
         Ref.getGlBridge().bridge$enableTexture2D();
