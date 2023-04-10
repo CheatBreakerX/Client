@@ -26,7 +26,7 @@ apply plugin: "org.spongepowered.mixin"
 apply from: "$rootDir/project.gradle"
 System.out.println("Root project directory: $rootDir")
 
-// Jar file will appear as CheatBreaker-0.0.1.jar
+// Jar file will appear as CheatBreaker-[commit].jar
 archivesBaseName = "CheatBreaker"
 version = getShortCommitVersion()
 
