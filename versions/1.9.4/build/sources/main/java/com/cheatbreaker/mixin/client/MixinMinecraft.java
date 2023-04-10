@@ -356,12 +356,12 @@ public abstract class MixinMinecraft implements MinecraftBridge {
 
     @ModifyArg(method = "createDisplay", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;setTitle(Ljava/lang/String;)V"))
     public String mod$createDisplay(String newTitle) {
-        return "CheatBreaker 1.8.9";
+        return "CheatBreaker " + CheatBreakerMod.MINECRAFT_VERSION;
     }
 
     @Inject(method = "displayGuiScreen", at = @At("HEAD"), cancellable = true)
     public void impl$displayGuiScreen(GuiScreen screen, CallbackInfo callbackInfo) {
-        if (screen instanceof GuiMainMenu) {
+        if (screen instanceof GuiMainMenu || (screen == null && this.theWorld == null)) {
             this.bridge$displayGuiScreen(new MainMenu());
             callbackInfo.cancel();
         }

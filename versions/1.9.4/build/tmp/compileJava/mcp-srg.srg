@@ -34,7 +34,6 @@ FD: com/cheatbreaker/mixin/client/MixinMinecraft/ingameGUI com/cheatbreaker/mixi
 FD: com/cheatbreaker/mixin/client/MixinMinecraft/LOGGER com/cheatbreaker/mixin/client/MixinMinecraft/field_147123_G
 FD: com/cheatbreaker/mixin/client/MixinMinecraft/currentScreen com/cheatbreaker/mixin/client/MixinMinecraft/field_71462_r
 FD: com/cheatbreaker/mixin/client/network/MixinNetworkPlayerInfo/playerTextures com/cheatbreaker/mixin/client/network/MixinNetworkPlayerInfo/field_187107_a
-FD: com/cheatbreaker/mixin/client/renderer/entity/MixinRenderItem/zLevel com/cheatbreaker/mixin/client/renderer/entity/MixinRenderItem/field_77023_b
 FD: com/cheatbreaker/mixin/client/renderer/entity/MixinRenderManager/renderPosX com/cheatbreaker/mixin/client/renderer/entity/MixinRenderManager/field_78725_b
 FD: com/cheatbreaker/mixin/client/renderer/entity/MixinRenderManager/renderPosY com/cheatbreaker/mixin/client/renderer/entity/MixinRenderManager/field_78726_c
 FD: com/cheatbreaker/mixin/client/renderer/entity/MixinRenderManager/renderPosZ com/cheatbreaker/mixin/client/renderer/entity/MixinRenderManager/field_78723_d
@@ -42,6 +41,7 @@ FD: com/cheatbreaker/mixin/client/renderer/entity/MixinRenderManager/playerViewX
 FD: com/cheatbreaker/mixin/client/renderer/entity/MixinRenderManager/playerViewY com/cheatbreaker/mixin/client/renderer/entity/MixinRenderManager/field_78735_i
 FD: com/cheatbreaker/mixin/client/renderer/MixinEntityRenderer/theShaderGroup com/cheatbreaker/mixin/client/renderer/MixinEntityRenderer/field_147707_d
 FD: com/cheatbreaker/mixin/client/renderer/MixinEntityRenderer/resourceManager com/cheatbreaker/mixin/client/renderer/MixinEntityRenderer/field_147711_ac
+FD: com/cheatbreaker/mixin/client/renderer/MixinRenderItem/zLevel com/cheatbreaker/mixin/client/renderer/MixinRenderItem/field_77023_b
 FD: com/cheatbreaker/mixin/client/renderer/MixinTessellator/worldRenderer com/cheatbreaker/mixin/client/renderer/MixinTessellator/field_178183_a
 FD: com/cheatbreaker/mixin/client/settings/MixinGameSettings/showDebugInfo com/cheatbreaker/mixin/client/settings/MixinGameSettings/field_74330_P
 FD: com/cheatbreaker/mixin/client/settings/MixinGameSettings/guiScale com/cheatbreaker/mixin/client/settings/MixinGameSettings/field_74335_Z
@@ -75,18 +75,18 @@ FD: com/cheatbreaker/mixin/potion/MixinPotionEffect/potion com/cheatbreaker/mixi
 FD: com/cheatbreaker/mixin/scoreboard/MixinScore/scorePoints com/cheatbreaker/mixin/scoreboard/MixinScore/field_96655_e
 FD: com/cheatbreaker/mixin/scoreboard/MixinScoreboard/entitiesScoreObjectives com/cheatbreaker/mixin/scoreboard/MixinScoreboard/field_96544_c
 FD: com/cheatbreaker/mixin/scoreboard/MixinScoreboard/teamMemberships com/cheatbreaker/mixin/scoreboard/MixinScoreboard/field_96540_f
-FD: com/cheatbreaker/mixin/util/MixinAxisAlignedBB/minX com/cheatbreaker/mixin/util/MixinAxisAlignedBB/field_72340_a
-FD: com/cheatbreaker/mixin/util/MixinAxisAlignedBB/minY com/cheatbreaker/mixin/util/MixinAxisAlignedBB/field_72338_b
-FD: com/cheatbreaker/mixin/util/MixinAxisAlignedBB/minZ com/cheatbreaker/mixin/util/MixinAxisAlignedBB/field_72339_c
-FD: com/cheatbreaker/mixin/util/MixinAxisAlignedBB/maxX com/cheatbreaker/mixin/util/MixinAxisAlignedBB/field_72336_d
-FD: com/cheatbreaker/mixin/util/MixinAxisAlignedBB/maxY com/cheatbreaker/mixin/util/MixinAxisAlignedBB/field_72337_e
-FD: com/cheatbreaker/mixin/util/MixinAxisAlignedBB/maxZ com/cheatbreaker/mixin/util/MixinAxisAlignedBB/field_72334_f
+FD: com/cheatbreaker/mixin/util/math/MixinAxisAlignedBB/minX com/cheatbreaker/mixin/util/math/MixinAxisAlignedBB/field_72340_a
+FD: com/cheatbreaker/mixin/util/math/MixinAxisAlignedBB/minY com/cheatbreaker/mixin/util/math/MixinAxisAlignedBB/field_72338_b
+FD: com/cheatbreaker/mixin/util/math/MixinAxisAlignedBB/minZ com/cheatbreaker/mixin/util/math/MixinAxisAlignedBB/field_72339_c
+FD: com/cheatbreaker/mixin/util/math/MixinAxisAlignedBB/maxX com/cheatbreaker/mixin/util/math/MixinAxisAlignedBB/field_72336_d
+FD: com/cheatbreaker/mixin/util/math/MixinAxisAlignedBB/maxY com/cheatbreaker/mixin/util/math/MixinAxisAlignedBB/field_72337_e
+FD: com/cheatbreaker/mixin/util/math/MixinAxisAlignedBB/maxZ com/cheatbreaker/mixin/util/math/MixinAxisAlignedBB/field_72334_f
+FD: com/cheatbreaker/mixin/util/math/MixinVec3d/xCoord com/cheatbreaker/mixin/util/math/MixinVec3d/field_72450_a
+FD: com/cheatbreaker/mixin/util/math/MixinVec3d/yCoord com/cheatbreaker/mixin/util/math/MixinVec3d/field_72448_b
+FD: com/cheatbreaker/mixin/util/math/MixinVec3d/zCoord com/cheatbreaker/mixin/util/math/MixinVec3d/field_72449_c
 FD: com/cheatbreaker/mixin/util/MixinResourceLocation/resourceDomain com/cheatbreaker/mixin/util/MixinResourceLocation/field_110626_a
 FD: com/cheatbreaker/mixin/util/MixinResourceLocation/resourcePath com/cheatbreaker/mixin/util/MixinResourceLocation/field_110625_b
 FD: com/cheatbreaker/mixin/util/MixinTimer/renderPartialTicks com/cheatbreaker/mixin/util/MixinTimer/field_74281_c
-FD: com/cheatbreaker/mixin/util/MixinVec3/xCoord com/cheatbreaker/mixin/util/MixinVec3/field_72450_a
-FD: com/cheatbreaker/mixin/util/MixinVec3/yCoord com/cheatbreaker/mixin/util/MixinVec3/field_72448_b
-FD: com/cheatbreaker/mixin/util/MixinVec3/zCoord com/cheatbreaker/mixin/util/MixinVec3/field_72449_c
 MD: com/cheatbreaker/mixin/client/audio/MixinSoundHandler/playSound (Lnet/minecraft/client/audio/ISound;)V com/cheatbreaker/mixin/client/audio/MixinSoundHandler/func_147682_a (Lnet/minecraft/client/audio/ISound;)V
 MD: com/cheatbreaker/mixin/client/audio/MixinSoundManager/getURLForSoundResource (Lnet/minecraft/util/ResourceLocation;)Ljava/net/URL; com/cheatbreaker/mixin/client/audio/MixinSoundManager/func_148612_a (Lnet/minecraft/util/ResourceLocation;)Ljava/net/URL;
 MD: com/cheatbreaker/mixin/client/audio/MixinSoundManager/loadSoundSystem ()V com/cheatbreaker/mixin/client/audio/MixinSoundManager/func_148608_i ()V
@@ -132,8 +132,6 @@ MD: com/cheatbreaker/mixin/client/MixinMinecraft/getLimitFramerate ()I com/cheat
 MD: com/cheatbreaker/mixin/client/multiplayer/MixinWorldClient/setWorldTime (J)V com/cheatbreaker/mixin/client/multiplayer/MixinWorldClient/func_72877_b (J)V
 MD: com/cheatbreaker/mixin/client/network/MixinNetHandlerPlayClient/sendPacket (Lnet/minecraft/network/Packet;)V com/cheatbreaker/mixin/client/network/MixinNetHandlerPlayClient/func_147297_a (Lnet/minecraft/network/Packet;)V
 MD: com/cheatbreaker/mixin/client/renderer/entity/MixinRender/getEntityTexture (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation; com/cheatbreaker/mixin/client/renderer/entity/MixinRender/func_110775_a (Lnet/minecraft/entity/Entity;)Lnet/minecraft/util/ResourceLocation;
-MD: com/cheatbreaker/mixin/client/renderer/entity/MixinRenderItem/renderItemAndEffectIntoGUI (Lnet/minecraft/item/ItemStack;II)V com/cheatbreaker/mixin/client/renderer/entity/MixinRenderItem/func_180450_b (Lnet/minecraft/item/ItemStack;II)V
-MD: com/cheatbreaker/mixin/client/renderer/entity/MixinRenderItem/renderItemIntoGUI (Lnet/minecraft/item/ItemStack;II)V com/cheatbreaker/mixin/client/renderer/entity/MixinRenderItem/func_175042_a (Lnet/minecraft/item/ItemStack;II)V
 MD: com/cheatbreaker/mixin/client/renderer/MixinEntityRenderer/stopUseShader ()V com/cheatbreaker/mixin/client/renderer/MixinEntityRenderer/func_181022_b ()V
 MD: com/cheatbreaker/mixin/client/renderer/MixinEntityRenderer/getShaderGroup ()Lnet/minecraft/client/shader/ShaderGroup; com/cheatbreaker/mixin/client/renderer/MixinEntityRenderer/func_147706_e ()Lnet/minecraft/client/shader/ShaderGroup;
 MD: com/cheatbreaker/mixin/client/renderer/MixinEntityRenderer/isShaderActive ()Z com/cheatbreaker/mixin/client/renderer/MixinEntityRenderer/func_147702_a ()Z
@@ -143,6 +141,8 @@ MD: com/cheatbreaker/mixin/client/renderer/MixinRenderGlobal/loadRenderers ()V c
 MD: com/cheatbreaker/mixin/client/renderer/MixinRenderHelper/enableStandardItemLighting ()V com/cheatbreaker/mixin/client/renderer/MixinRenderHelper/func_74519_b ()V
 MD: com/cheatbreaker/mixin/client/renderer/MixinRenderHelper/disableStandardItemLighting ()V com/cheatbreaker/mixin/client/renderer/MixinRenderHelper/func_74518_a ()V
 MD: com/cheatbreaker/mixin/client/renderer/MixinRenderHelper/enableGUIStandardItemLighting ()V com/cheatbreaker/mixin/client/renderer/MixinRenderHelper/func_74520_c ()V
+MD: com/cheatbreaker/mixin/client/renderer/MixinRenderItem/renderItemAndEffectIntoGUI (Lnet/minecraft/item/ItemStack;II)V com/cheatbreaker/mixin/client/renderer/MixinRenderItem/func_180450_b (Lnet/minecraft/item/ItemStack;II)V
+MD: com/cheatbreaker/mixin/client/renderer/MixinRenderItem/renderItemIntoGUI (Lnet/minecraft/item/ItemStack;II)V com/cheatbreaker/mixin/client/renderer/MixinRenderItem/func_175042_a (Lnet/minecraft/item/ItemStack;II)V
 MD: com/cheatbreaker/mixin/client/renderer/MixinTessellator/draw ()V com/cheatbreaker/mixin/client/renderer/MixinTessellator/func_78381_a ()V
 MD: com/cheatbreaker/mixin/client/renderer/texture/MixinTextureManager/loadTexture (Lnet/minecraft/util/ResourceLocation;Lnet/minecraft/client/renderer/texture/ITextureObject;)Z com/cheatbreaker/mixin/client/renderer/texture/MixinTextureManager/func_110579_a (Lnet/minecraft/util/ResourceLocation;Lnet/minecraft/client/renderer/texture/ITextureObject;)Z
 MD: com/cheatbreaker/mixin/client/renderer/texture/MixinTextureManager/bindTexture (Lnet/minecraft/util/ResourceLocation;)V com/cheatbreaker/mixin/client/renderer/texture/MixinTextureManager/func_110577_a (Lnet/minecraft/util/ResourceLocation;)V
@@ -183,18 +183,18 @@ MD: com/cheatbreaker/mixin/scoreboard/MixinScoreObjective/getDisplayName ()Ljava
 MD: com/cheatbreaker/mixin/scoreboard/MixinScoreObjective/getScoreboard ()Lnet/minecraft/scoreboard/Scoreboard; com/cheatbreaker/mixin/scoreboard/MixinScoreObjective/func_96682_a ()Lnet/minecraft/scoreboard/Scoreboard;
 MD: com/cheatbreaker/mixin/scoreboard/MixinScorePlayerTeam/formatString (Ljava/lang/String;)Ljava/lang/String; com/cheatbreaker/mixin/scoreboard/MixinScorePlayerTeam/func_142053_d (Ljava/lang/String;)Ljava/lang/String;
 MD: com/cheatbreaker/mixin/scoreboard/MixinTeam/formatString (Ljava/lang/String;)Ljava/lang/String; com/cheatbreaker/mixin/scoreboard/MixinTeam/func_142053_d (Ljava/lang/String;)Ljava/lang/String;
-MD: com/cheatbreaker/mixin/util/MixinChatComponentStyle/getFormattedText ()Ljava/lang/String; com/cheatbreaker/mixin/util/MixinChatComponentStyle/func_150254_d ()Ljava/lang/String;
-MD: com/cheatbreaker/mixin/util/MixinChatComponentStyle/appendSibling (Lnet/minecraft/util/text/ITextComponent;)Lnet/minecraft/util/text/ITextComponent; com/cheatbreaker/mixin/util/MixinChatComponentStyle/func_150257_a (Lnet/minecraft/util/text/ITextComponent;)Lnet/minecraft/util/text/ITextComponent;
-MD: com/cheatbreaker/mixin/util/MixinChatComponentStyle/getStyle ()Lnet/minecraft/util/text/Style; com/cheatbreaker/mixin/util/MixinChatComponentStyle/func_150256_b ()Lnet/minecraft/util/text/Style;
-MD: com/cheatbreaker/mixin/util/MixinChatStyle/setHoverEvent (Lnet/minecraft/util/text/event/HoverEvent;)Lnet/minecraft/util/text/Style; com/cheatbreaker/mixin/util/MixinChatStyle/func_150209_a (Lnet/minecraft/util/text/event/HoverEvent;)Lnet/minecraft/util/text/Style;
-MD: com/cheatbreaker/mixin/util/MixinIChatComponent/getFormattedText ()Ljava/lang/String; com/cheatbreaker/mixin/util/MixinIChatComponent/func_150254_d ()Ljava/lang/String;
-MD: com/cheatbreaker/mixin/util/MixinIChatComponent/appendSibling (Lnet/minecraft/util/text/ITextComponent;)Lnet/minecraft/util/text/ITextComponent; com/cheatbreaker/mixin/util/MixinIChatComponent/func_150257_a (Lnet/minecraft/util/text/ITextComponent;)Lnet/minecraft/util/text/ITextComponent;
-MD: com/cheatbreaker/mixin/util/MixinIChatComponent/getStyle ()Lnet/minecraft/util/text/Style; com/cheatbreaker/mixin/util/MixinIChatComponent/func_150256_b ()Lnet/minecraft/util/text/Style;
+MD: com/cheatbreaker/mixin/util/math/MixinVec3d/lengthVector ()D com/cheatbreaker/mixin/util/math/MixinVec3d/func_72433_c ()D
+MD: com/cheatbreaker/mixin/util/math/MixinVec3d/crossProduct (Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d; com/cheatbreaker/mixin/util/math/MixinVec3d/func_72431_c (Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;
+MD: com/cheatbreaker/mixin/util/math/MixinVec3d/normalize ()Lnet/minecraft/util/math/Vec3d; com/cheatbreaker/mixin/util/math/MixinVec3d/func_72432_b ()Lnet/minecraft/util/math/Vec3d;
+MD: com/cheatbreaker/mixin/util/math/MixinVec3d/dotProduct (Lnet/minecraft/util/math/Vec3d;)D com/cheatbreaker/mixin/util/math/MixinVec3d/func_72430_b (Lnet/minecraft/util/math/Vec3d;)D
 MD: com/cheatbreaker/mixin/util/MixinSession/getUsername ()Ljava/lang/String; com/cheatbreaker/mixin/util/MixinSession/func_111285_a ()Ljava/lang/String;
 MD: com/cheatbreaker/mixin/util/MixinSession/getPlayerID ()Ljava/lang/String; com/cheatbreaker/mixin/util/MixinSession/func_148255_b ()Ljava/lang/String;
 MD: com/cheatbreaker/mixin/util/MixinSession/getProfile ()Lcom/mojang/authlib/GameProfile; com/cheatbreaker/mixin/util/MixinSession/func_148256_e ()Lcom/mojang/authlib/GameProfile;
 MD: com/cheatbreaker/mixin/util/MixinSession/getToken ()Ljava/lang/String; com/cheatbreaker/mixin/util/MixinSession/func_148254_d ()Ljava/lang/String;
-MD: com/cheatbreaker/mixin/util/MixinVec3/lengthVector ()D com/cheatbreaker/mixin/util/MixinVec3/func_72433_c ()D
-MD: com/cheatbreaker/mixin/util/MixinVec3/crossProduct (Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d; com/cheatbreaker/mixin/util/MixinVec3/func_72431_c (Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;
-MD: com/cheatbreaker/mixin/util/MixinVec3/normalize ()Lnet/minecraft/util/math/Vec3d; com/cheatbreaker/mixin/util/MixinVec3/func_72432_b ()Lnet/minecraft/util/math/Vec3d;
-MD: com/cheatbreaker/mixin/util/MixinVec3/dotProduct (Lnet/minecraft/util/math/Vec3d;)D com/cheatbreaker/mixin/util/MixinVec3/func_72430_b (Lnet/minecraft/util/math/Vec3d;)D
+MD: com/cheatbreaker/mixin/util/text/MixinITextComponent/getFormattedText ()Ljava/lang/String; com/cheatbreaker/mixin/util/text/MixinITextComponent/func_150254_d ()Ljava/lang/String;
+MD: com/cheatbreaker/mixin/util/text/MixinITextComponent/appendSibling (Lnet/minecraft/util/text/ITextComponent;)Lnet/minecraft/util/text/ITextComponent; com/cheatbreaker/mixin/util/text/MixinITextComponent/func_150257_a (Lnet/minecraft/util/text/ITextComponent;)Lnet/minecraft/util/text/ITextComponent;
+MD: com/cheatbreaker/mixin/util/text/MixinITextComponent/getStyle ()Lnet/minecraft/util/text/Style; com/cheatbreaker/mixin/util/text/MixinITextComponent/func_150256_b ()Lnet/minecraft/util/text/Style;
+MD: com/cheatbreaker/mixin/util/text/MixinStyle/setHoverEvent (Lnet/minecraft/util/text/event/HoverEvent;)Lnet/minecraft/util/text/Style; com/cheatbreaker/mixin/util/text/MixinStyle/func_150209_a (Lnet/minecraft/util/text/event/HoverEvent;)Lnet/minecraft/util/text/Style;
+MD: com/cheatbreaker/mixin/util/text/MixinTextComponentBase/getFormattedText ()Ljava/lang/String; com/cheatbreaker/mixin/util/text/MixinTextComponentBase/func_150254_d ()Ljava/lang/String;
+MD: com/cheatbreaker/mixin/util/text/MixinTextComponentBase/appendSibling (Lnet/minecraft/util/text/ITextComponent;)Lnet/minecraft/util/text/ITextComponent; com/cheatbreaker/mixin/util/text/MixinTextComponentBase/func_150257_a (Lnet/minecraft/util/text/ITextComponent;)Lnet/minecraft/util/text/ITextComponent;
+MD: com/cheatbreaker/mixin/util/text/MixinTextComponentBase/getStyle ()Lnet/minecraft/util/text/Style; com/cheatbreaker/mixin/util/text/MixinTextComponentBase/func_150256_b ()Lnet/minecraft/util/text/Style;

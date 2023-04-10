@@ -4,14 +4,17 @@
     <facet type="minecraft" name="Minecraft">
       <configuration>
         <autoDetectTypes>
-          <platformType>MIXIN</platformType>
           <platformType>FORGE</platformType>
+          <platformType>MIXIN</platformType>
           <platformType>MCP</platformType>
         </autoDetectTypes>
       </configuration>
     </facet>
   </component>
   <component name="McpModuleSettings">
+    <option name="mappingFile" value="C:\Users\Administrator\.gradle\caches\minecraft\de\oceanlabs\mcp\mcp_stable\22\srgs\mcp-srg.srg" />
+    <option name="mcpVersion" value="stable_22" />
+    <option name="minecraftVersion" value="1.8.9" />
     <option name="srgType" value="SRG" />
   </component>
 </module>

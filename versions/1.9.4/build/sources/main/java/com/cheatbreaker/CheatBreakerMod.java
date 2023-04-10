@@ -22,9 +22,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class CheatBreakerMod {
     public static final String MODID = "cheatbreaker";
     public static final String VERSION = "0.0.1";
+    public static final MinecraftVersion MINECRAFT_VERSION = MinecraftVersion.v1_9_4;
 
     public static void CheatBreaker$preInitialize() {
-        Ref.setMinecraftVersion(MinecraftVersion.v1_9_4);
+        Ref.setMinecraftVersion(MINECRAFT_VERSION);
         Ref.setGlBridge(new BridgedGL());
         Ref.setDrawingUtils(new DrawingUtils());
         Ref.setMinecraft((MinecraftBridge) Minecraft.getMinecraft());

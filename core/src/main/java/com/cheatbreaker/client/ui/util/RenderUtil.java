@@ -198,7 +198,10 @@ public class RenderUtil {
     }
 
     public static int getTimeAccurateFrameRate() {
-        float frameRateAsFloat = 1000000000f / (frameTimeNs < 1 ? 1 : frameTimeNs);
+        float frameRateAsFloat = 1000000000f / (frameTimeNs == 0 ? 1 : frameTimeNs);
+        if (frameTimeNs == 0) {
+            frameRateAsFloat = 0f;
+        }
         int frameRateAsInt = (int) frameRateAsFloat;
         if (frameRateAsInt > maxFps) {
             maxFps = frameRateAsInt;
@@ -210,6 +213,6 @@ public class RenderUtil {
     }
 
     public static float getFrameTimeAsMs() {
-        return (frameTimeNs < 1 ? 1 : frameTimeNs) / 1000000f;
+        return frameTimeNs == 0 ? 0f : frameTimeNs / 1000000f;
     }
 }

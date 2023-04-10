@@ -28,14 +28,11 @@ public class BossBarModule extends AbstractModule {
             FontRendererBridge fontRenderer = this.minecraft.bridge$getFontRenderer();
             int n2 = 182;
             int n3 = 0;
-            float f = 1.0f;
-            int n4 = (int)(f * (float)(n2 + 1));
+            int n4 = n2 + 1;
             int n5 = 13;
             this.minecraft.bridge$scaledTessellator(n3, n5, 0, 74, n2, 5);
             this.minecraft.bridge$scaledTessellator(n3, n5, 0, 74, n2, 5);
-            if (n4 > 0) {
-                this.minecraft.bridge$scaledTessellator(n3, n5, 0, 79, n4, 5);
-            }
+            this.minecraft.bridge$scaledTessellator(n3, n5, 0, 79, n4, 5);
             String bossName = "Wither";
             fontRenderer.bridge$drawStringWithShadow(bossName, (int) (this.width / 2 - (fontRenderer.bridge$getStringWidth(bossName) / 2)), n5 - 10, 0xFFFFFF);
             Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -53,14 +50,11 @@ public class BossBarModule extends AbstractModule {
             FontRendererBridge fontRenderer = this.minecraft.bridge$getFontRenderer();
             int n2 = 182;
             int n3 = 0;
-            float f = 1.0f;
-            int n4 = (int)(f * (float)(n2 + 1));
+            int n4 = n2 + 1;
             int n5 = 13;
             this.minecraft.bridge$scaledTessellator(n3, n5, 0, 74, n2, 5);
             this.minecraft.bridge$scaledTessellator(n3, n5, 0, 74, n2, 5);
-            if (n4 > 0) {
-                this.minecraft.bridge$scaledTessellator(n3, n5, 0, 79, n4, 5);
-            }
+            this.minecraft.bridge$scaledTessellator(n3, n5, 0, 79, n4, 5);
             String bossName = Ref.getBossStatus().bridge$getBossName();
             fontRenderer.bridge$drawStringWithShadow(bossName, (int) (this.width / 2.0f - (float)(fontRenderer.bridge$getStringWidth(bossName) / 2)), n5 - 10, 0xFFFFFF);
             Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
