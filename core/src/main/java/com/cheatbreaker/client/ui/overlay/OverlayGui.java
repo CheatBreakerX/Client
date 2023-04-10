@@ -65,7 +65,7 @@ public class OverlayGui extends AbstractGui {
             if (messagesElement2 == null) {
                 MessagesElement messagesElement = new MessagesElement(friend);
                 this.elements.add(messagesElement);
-                messagesElement.setElementSize(170f, 30f, 245f, 150f);
+                messagesElement.setElementDimensions(170f, 30f, 245f, 150f);
             } else {
                 this.elements.add(this.elements.remove(this.elements.indexOf(messagesElement2)));
                 messagesElement2.setFriend(friend);
@@ -83,13 +83,13 @@ public class OverlayGui extends AbstractGui {
 //        if (this.mc.previousGuiScreen != this) {
 //            this.IllIllIIIlIIlllIIIllIllII(); // gui blur
 //        }
-        this.friendsButton.setElementSize(0.0f, 28f, 96.976746f * 0.71666664f, 20);
-        this.requestsButton.setElementSize(55.315384f * 1.2745098f, (float)28, 0.5588235f * 124.36842f, 20);
+        this.friendsButton.setElementDimensions(0.0f, 28f, 96.976746f * 0.71666664f, 20);
+        this.requestsButton.setElementDimensions(55.315384f * 1.2745098f, (float)28, 0.5588235f * 124.36842f, 20);
         float f = (float)28 + this.friendsButton.getHeight() + 1.0f;
-        this.friendsListElement.setElementSize(0.0f, f, 140f, this.getScaledHeight() - f);
-        this.friendRequestsElement.setElementSize(0.0f, f, 140f, this.getScaledHeight() - f);
+        this.friendsListElement.setElementDimensions(0.0f, f, 140f, this.getScaledHeight() - f);
+        this.friendRequestsElement.setElementDimensions(0.0f, f, 140f, this.getScaledHeight() - f);
         float f2 = 190;
-        this.radioElement.setElementSize(this.getScaledWidth() - f2 - (float)20, (float)20, f2, 28);
+        this.radioElement.setElementDimensions(this.getScaledWidth() - f2 - (float)20, (float)20, f2, 28);
     }
 
     @Override
@@ -159,7 +159,7 @@ public class OverlayGui extends AbstractGui {
                 ConsoleElement consoleGui = new ConsoleElement();
                 cbAbstractElements[0] = consoleGui;
                 this.addElements(cbAbstractElements);
-                consoleGui.setElementSize((float)60, (float)30, (float)300, 145);
+                consoleGui.setElementDimensions((float)60, (float)30, (float)300, 145);
             }
         }
     }

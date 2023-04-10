@@ -36,28 +36,28 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
     }
 
     public void resetSize() {
-        this.setElementSize(this.x, this.y, this.width, this.height);
+        this.setElementDimensions(this.x, this.y, this.width, this.height);
     }
 
     @Override
-    public void setElementSize(float x, float y, float width, float height) {
-        super.setElementSize(x, y, width, height);
-        this.scrollableElement.setElementSize(x + width - (float)4, y, (float)4, height);
+    public void setElementDimensions(float x, float y, float width, float height) {
+        super.setElementDimensions(x, y, width, height);
+        this.scrollableElement.setElementDimensions(x + width - (float)4, y, (float)4, height);
         int n = 22;
         int n2 = 0;
         for (FriendRequestElement friendRequestElement : this.elements) {
             if (!this.isFilterMatch(friendRequestElement)) continue;
-            friendRequestElement.setElementSize(x, y + (float)14 + (float)(n2 * 22), width, 22);
+            friendRequestElement.setElementDimensions(x, y + (float)14 + (float)(n2 * 22), width, 22);
             ++n2;
         }
         float f5 = 14 + this.elements.size() * 22 + 30;
         if (f5 < height) {
             f5 = height;
         }
-        this.filter.setElementSize(0.0f, y, width, 13);
-        this.username.setElementSize(0.0f, y + f5 - (float)13, width - (float)35, 13);
-        this.addButton.setElementSize(width - (float)35, y + f5 - (float)13, (float)35, 13);
-        this.toggleRequests.setElementSize(0.0f, y + f5 - (float)26, width, 13);
+        this.filter.setElementDimensions(0.0f, y, width, 13);
+        this.username.setElementDimensions(0.0f, y + f5 - (float)13, width - (float)35, 13);
+        this.addButton.setElementDimensions(width - (float)35, y + f5 - (float)13, (float)35, 13);
+        this.toggleRequests.setElementDimensions(0.0f, y + f5 - (float)26, width, 13);
         this.scrollableElement.setScrollAmount(f5);
     }
 
@@ -80,7 +80,7 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
             Ref.getGlBridge().bridge$enableScissoring();
             OverlayGui illlllIllIIIllIIIllIllIII = OverlayGui.getInstance();
             this.scrollableElement.drawScrollable(f, f2, bl);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)this.x, (int)this.y, (int)(this.x + this.width), (int)(this.y + this.height), (float)((int)((float)illlllIllIIIllIIIllIllIII.getResolution().bridge$getScaleFactor() * illlllIllIIIllIIIllIllIII.getScaleFactor())), (int)illlllIllIIIllIIIllIllIII.getScaledHeight());
+            RenderUtil.scissorArea((int)this.x, (int)this.y, (int)(this.x + this.width), (int)(this.y + this.height), (float)((int)((float)illlllIllIIIllIIIllIllIII.getResolution().bridge$getScaleFactor() * illlllIllIIIllIIIllIllIII.getScaleFactor())), (int)illlllIllIIIllIIIllIllIII.getScaledHeight());
             ImmutableList<FriendRequestElement> immutableList = ImmutableList.copyOf(this.elements);
             for (FriendRequestElement friendRequestElement : immutableList) {
                 if (!this.isFilterMatch(friendRequestElement)) continue;
@@ -130,7 +130,7 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
         if (this.username.lllIIIIIlIllIlIIIllllllII() && n == 28) {
             this.lIIlIlIllIIlIIIlIIIlllIII();
         }
-        this.setElementSize(this.x, this.y, this.width, this.height);
+        this.setElementDimensions(this.x, this.y, this.width, this.height);
     }
 
     @Override

@@ -41,7 +41,7 @@ public class RadioElement extends DraggableElement {
     }
 
     public void lIIIIllIIlIlIllIIIlIllIlI() {
-        this.setElementSize(this.x, this.y, this.width, this.height);
+        this.setElementDimensions(this.x, this.y, this.width, this.height);
     }
 
     private boolean isFilterMatch(RadioStationElement radioStationElement) {
@@ -49,21 +49,21 @@ public class RadioElement extends DraggableElement {
     }
 
     @Override
-    public void setElementSize(float x, float y, float width, float height) {
-        super.setElementSize(x, y, width, height);
+    public void setElementDimensions(float x, float y, float width, float height) {
+        super.setElementDimensions(x, y, width, height);
         if (this.IlIlllIIIIllIllllIllIIlIl == 0.0f) {
             this.IlIlllIIIIllIllllIllIIlIl = height;
         }
         this.radioStationElements.sort(Comparator.comparing(llllIllIIIlIIIlIllIlIlIlI2 -> llllIllIIIlIIIlIllIlIlIlI2.getStation().getName()));
-        this.slider.setElementSize(x, y + this.IlIlllIIIIllIllllIllIIlIl, width, 8);
-        this.filter.setElementSize(x, y + this.IlIlllIIIIllIllllIllIIlIl + (float)8, width - (float)30, 13);
-        this.pin.setElementSize(x + width - (float)30, y + this.IlIlllIIIIllIllllIllIIlIl + (float)8, (float)30, 13);
-        this.scrollableContainer.setElementSize(x + width - (float)5, y + this.IlIlllIIIIllIllllIllIIlIl + (float)21, (float)5, 99);
+        this.slider.setElementDimensions(x, y + this.IlIlllIIIIllIllllIllIIlIl, width, 8);
+        this.filter.setElementDimensions(x, y + this.IlIlllIIIIllIllllIllIIlIl + (float)8, width - (float)30, 13);
+        this.pin.setElementDimensions(x + width - (float)30, y + this.IlIlllIIIIllIllllIllIIlIl + (float)8, (float)30, 13);
+        this.scrollableContainer.setElementDimensions(x + width - (float)5, y + this.IlIlllIIIIllIllllIllIIlIl + (float)21, (float)5, 99);
         int n = 0;
         for (RadioStationElement radioStationElement : this.radioStationElements) {
             if (!this.isFilterMatch(radioStationElement)) continue;
             float f5 = y + (float)20 + this.IlIlllIIIIllIllllIllIIlIl + (float)n;
-            radioStationElement.setElementSize(x, f5, width - (float)5, 20);
+            radioStationElement.setElementDimensions(x, f5, width - (float)5, 20);
             n += 20;
         }
         this.scrollableContainer.setScrollAmount(n);
@@ -110,7 +110,7 @@ public class RadioElement extends DraggableElement {
         }
         float f4 = this.fade.lIIIIlIIllIIlIIlIIIlIIllI(this.isMouseInside(f, f2) && bl);
         if (this.fade.IIIllIllIlIlllllllIlIlIII()) {
-            this.setElementSize(this.x, this.y, this.width, this.IlIlllIIIIllIllllIllIIlIl + (float)120 * f4);
+            this.setElementDimensions(this.x, this.y, this.width, this.IlIlllIIIIllIllllIllIIlIl + (float)120 * f4);
             this.hovered = true;
         } else if (!this.fade.IIIllIllIlIlllllllIlIlIII() && !this.isMouseInside(f, f2)) {
             this.hovered = false;
@@ -119,7 +119,7 @@ public class RadioElement extends DraggableElement {
             Ref.getGlBridge().bridge$pushMatrix();
             Ref.getGlBridge().bridge$enableScissoring(); // GL_SCISSOR_TEST
             OverlayGui overlayGui = OverlayGui.getInstance();
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)this.x, (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl), (int)(this.x + this.width), (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl + (this.height - this.IlIlllIIIIllIllllIllIIlIl) * f4), (float)((int)((float)overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int)overlayGui.getScaledHeight());
+            RenderUtil.scissorArea((int)this.x, (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl), (int)(this.x + this.width), (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl + (this.height - this.IlIlllIIIIllIllllIllIIlIl) * f4), (float)((int)((float)overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int)overlayGui.getScaledHeight());
             Ref.modified$drawRect(this.x, this.y + this.IlIlllIIIIllIllllIllIIlIl, this.x + this.width, this.y + this.height, -14540254);
             this.scrollableContainer.drawScrollable(f, f2, bl);
             for (RadioStationElement radioStationElement : this.radioStationElements) {
@@ -188,7 +188,7 @@ public class RadioElement extends DraggableElement {
             }
         }
         float f3 = this.fade.lIIIIlIIllIIlIIlIIIlIIllI(this.isMouseInside(f, f2));
-        if (this.fade.IllIllIIIlIIlllIIIllIllII()) {
+        if (this.fade.isCurrentlyInverted()) {
             boolean bl4;
             this.slider.handleElementMouseClicked(f, f2, n, true);
             this.scrollableContainer.handleElementMouseClicked(f, f2, n, true);

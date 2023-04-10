@@ -129,15 +129,15 @@ public class MainMenuBase extends AbstractGui {
         super.initGui();
         DynamicTextureBridge texture = Ref.getInstanceCreator().createDynamicTexture(256, 256);
         this.panoramaBackgroundLocation = this.mc.bridge$getTextureManager().bridge$getDynamicTextureLocation("background", texture);
-        this.optionsButton.setElementSize((float) 124, (float) 6, (float) 42, 20);
-        this.cosmeticsButton.setElementSize((float) 167, (float) 6, (float) 48, 20);
-        this.exitButton.setElementSize(this.getScaledWidth() - (float) 30, (float) 7, (float) 23, 17);
-        this.languageButton.setElementSize(this.getScaledWidth() / 2.0f - (float) 13, this.getScaledHeight() - (float) 17, (float) 26, 18);
+        this.optionsButton.setElementDimensions(124f, 6f, 42f, 20f);
+        this.cosmeticsButton.setElementDimensions(167f, 6f, 48f, 20f);
+        this.exitButton.setElementDimensions(this.getScaledWidth() - 30f, 7f, 23f, 17f);
+        this.languageButton.setElementDimensions(this.getScaledWidth() / 2f - 13f, this.getScaledHeight() - 17f, 26f, 18f);
         this.updateAccountButtonSize();
     }
 
     public void updateAccountButtonSize() {
-        this.accountList.setElementSize(this.getScaledWidth() - 35f - this.accountList.getMaxWidthFor(this.accountButtonWidth), 7f, this.accountList.getMaxWidthFor(this.accountButtonWidth), 17);
+        this.accountList.setElementDimensions(this.getScaledWidth() - 35f - this.accountList.getMaxWidthFor(this.accountButtonWidth), 7f, this.accountList.getMaxWidthFor(this.accountButtonWidth), 17);
     }
 
     @Override
@@ -177,7 +177,7 @@ public class MainMenuBase extends AbstractGui {
 
         int textColor = new Color(255, 255, 255, 143).getRGB();
 
-        String version = "CheatBreakerX (" + GitCommitProperties.getGitCommit() + "/" + GitCommitProperties.getGitBranch() + ")";
+        String version = "CheatBreakerX " + Ref.getMinecraftVersion() + " (" + GitCommitProperties.getGitCommit() + "/" + GitCommitProperties.getGitBranch() + ")";
         String copyright = "Copyright Mojang AB. Do not distribute!";
 
         font.drawStringWithShadow(version, 5f, this.getScaledHeight() - 14f, textColor);

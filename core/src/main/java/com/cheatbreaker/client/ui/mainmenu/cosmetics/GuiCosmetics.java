@@ -33,11 +33,11 @@ public class GuiCosmetics extends MainMenuBase {
         if (false) {
             FontRegistry.getPlayRegular16px().drawCenteredString("Unable to connect to the server.", this.getScaledWidth() / 2.0f, this.getScaledHeight() / 2.0f - (float)10, -1);
             FontRegistry.getPlayRegular16px().drawCenteredString("Please try again later.", this.getScaledWidth() / 2.0f, this.getScaledHeight() / 2.0f + (float)4, -1);
-            this.backButton.setElementSize(this.getScaledWidth() / 2.0f - (float)30, this.getScaledHeight() / 2.0f + (float)28, (float)60, 12);
+            this.backButton.setElementDimensions(this.getScaledWidth() / 2.0f - (float)30, this.getScaledHeight() / 2.0f + (float)28, (float)60, 12);
             this.backButton.drawElement(mouseX, mouseY, true);
         } else {
             Ref.modified$drawRect(this.getScaledWidth() / 2.0f - (float)80, this.getScaledHeight() / 2.0f - (float)78, this.getScaledWidth() / 2.0f + (float)80, this.getScaledHeight() / 2.0f + (float)100, 0x2F000000);
-            this.backButton.setElementSize(this.getScaledWidth() / 2.0f - (float)30, this.getScaledHeight() / 2.0f + (float)105, (float)60, 12);
+            this.backButton.setElementDimensions(this.getScaledWidth() / 2.0f - (float)30, this.getScaledHeight() / 2.0f + (float)105, (float)60, 12);
             this.backButton.drawElement(mouseX, mouseY, true);
             if (this.IIIIllIlIIIllIlllIlllllIl.isEmpty()) {
                 FontRegistry.getPlayRegular16px().drawCenteredString("You don't own any cosmetics.", this.getScaledWidth() / 2.0f, this.getScaledHeight() / 2.0f + (float)4, -6381922);

@@ -44,7 +44,7 @@ public class VoiceChatGui extends AbstractGui {
             for (VoiceChannel llIIIlllllIIllIlllIlIlIll2 : cheatBreaker.getNetHandler().getVoiceChannels()) {
                 GradientTextButton lIIIllIIIIlIIllIIIIIIIlll2 = new GradientTextButton(llIIIlllllIIllIlllIlIlIll2.lIIIIIIIIIlIllIIllIlIIlIl());
                 this.someRandomAssButtons.add(lIIIllIIIIlIIllIIIIIIIlll2);
-                lIIIllIIIIlIIllIIIIIIIlll2.setElementSize(f2, f3 + (float)12 + f * (float)n, (float)110, 12);
+                lIIIllIIIIlIIllIIIIIIIlll2.setElementDimensions(f2, f3 + (float)12 + f * (float)n, (float)110, 12);
                 if (this.voiceChannel == llIIIlllllIIllIlllIlIlIll2) {
                     lIIIllIIIIlIIllIIIIIIIlll2.lIIIIllIIlIlIllIIIlIllIlI();
                 }
@@ -66,7 +66,7 @@ public class VoiceChatGui extends AbstractGui {
             float f4 = 16;
             float f5 = this.getScaleFactor() / 2.0f - (float)8 - f4 * (float)cheatBreaker.getNetHandler().getVoiceChannels().size() / 2.0f;
             FontRegistry.getPlayBold18px().drawCenteredString("VOICE CHAT", f3, f5 - (float)4, -1);
-            this.undeafenButton.setElementSize(f3 + (float)60, f5 - (float)4, (float)50, 12);
+            this.undeafenButton.setElementDimensions(f3 + (float)60, f5 - (float)4, (float)50, 12);
             this.undeafenButton.drawElement(f, f2, true);
             this.someRandomAssButtons.forEach(randomAssButton -> {
                 if (this.lIIIIlIIllIIlIIlIIIlIIllI(randomAssButton.getText()) == cheatBreaker.getNetHandler().getVoiceChannel()) {
@@ -144,7 +144,7 @@ public class VoiceChatGui extends AbstractGui {
         float f6 = (float)this.voiceChannel.getUsers().size() * f5;
         FontRegistry.getPlayBold18px().drawCenteredString(this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl(), f3, (f4 -= f6 / 2.0f) - (float)14, -1);
         if (!this.lIIlIlIllIIlIIIlIIIlllIII()) {
-            this.joinChannelButton.setElementSize(f3 + (float)125, f4 - (float)14, (float)50, 12);
+            this.joinChannelButton.setElementDimensions(f3 + (float)125, f4 - (float)14, (float)50, 12);
             this.joinChannelButton.drawElement(f, f2, true);
         }
         Ref.modified$drawRect(f3, f4, f3 + (float)175, f4 + f6, -1626337264);

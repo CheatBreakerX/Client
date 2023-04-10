@@ -41,20 +41,20 @@ public class MainMenu extends MainMenuBase {
     @Override
     public void initGui() {
         super.initGui();
-        this.singleplayerButton.setElementSize(this.getScaledWidth() / 2f - 50f, this.getScaledHeight() / 2f + 5f, 100f, 12f);
+        this.singleplayerButton.setElementDimensions(this.getScaledWidth() / 2f - 50f, this.getScaledHeight() / 2f + 5f, 100f, 12f);
         this.singleplayerButton.setClickAction(() -> {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.SINGLEPLAYER, this);
         });
 
-        this.multiplayerButton.setElementSize(this.getScaledWidth() / 2f - 50f, this.getScaledHeight() / 2f + 24f, 100f, 12f);
+        this.multiplayerButton.setElementDimensions(this.getScaledWidth() / 2f - 50f, this.getScaledHeight() / 2f + 24f, 100f, 12f);
         this.multiplayerButton.setClickAction(() -> {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.MULTIPLAYER, this);
         });
 
         if (Ref.getMinecraftVersion().isLatestVersion()) {
-            this.realmsButton.setElementSize(this.getScaledWidth() / 2f - 50f, this.getScaledHeight() / 2f + 43f, 100f, 12f);
+            this.realmsButton.setElementDimensions(this.getScaledWidth() / 2f - 50f, this.getScaledHeight() / 2f + 43f, 100f, 12f);
             this.realmsButton.setClickAction(() -> {
                 this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.REALMS, this);

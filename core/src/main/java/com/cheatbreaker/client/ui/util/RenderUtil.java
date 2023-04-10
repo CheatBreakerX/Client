@@ -61,11 +61,11 @@ public class RenderUtil {
         Ref.getGlBridge().bridge$disableBlend();
     }
 
-    public static void lIIIIlIIllIIlIIlIIIlIIllI(int x, int y, int width, int height, float f, int n5) {
-        int n6 = height - y;
-        int n7 = width - x;
-        int n8 = n5 - height;
-        Ref.getGlBridge().bridge$scissor((int)((float)x * f), (int)((float)n8 * f), (int)((float)n7 * f), (int)((float)n6 * f));
+    public static void scissorArea(int left, int top, int right, int bottom, float scale, int scaledHeight) {
+        int width = right - left;
+        int height = bottom - top;
+        int invertedBottomPos = scaledHeight - bottom;
+        Ref.getGlBridge().bridge$scissor((int)((float)left * scale), (int)((float)invertedBottomPos * scale), (int)((float)width * scale), (int)((float)height * scale));
     }
 
     public static void drawRoundedRect(double left, double top, double right, double bottom, double rounding, int color) {
@@ -170,17 +170,17 @@ public class RenderUtil {
         Ref.modified$drawRect(left, top + 1.0f, left + 1.0f, bottom, color);
     }
 
-    public static void drawCorneredGradientRectWithOutline(float f, float f2, float f3, float f4, int n, int n2, int n3) {
+    public static void drawCorneredGradientRectWithOutline(float left, float top, float right, float bottom, int outlineColour, int gradientStart, int gradientEnd) {
         Ref.getGlBridge().bridge$scale(0.5f, 0.5f, 0.5f);
-        Ref.modified$drawGradientRect((f *= 2.0f) + 1.0f, (f2 *= 2.0f) + 1.0f, (f3 *= 2.0f) - 1.0f, (f4 *= 2.0f) - 1.0f, n2, n3);
-        RenderUtil.drawVerticalLine(f, f2 + 1.0f, f4 - 2.0f, n);
-        RenderUtil.drawVerticalLine(f3 - 1.0f, f2 + 1.0f, f4 - 2.0f, n);
-        RenderUtil.drawHorizontalLine(f + 2.0f, f3 - (float)3, f2, n);
-        RenderUtil.drawHorizontalLine(f + 2.0f, f3 - (float)3, f4 - 1.0f, n);
-        RenderUtil.drawHorizontalLine(f + 1.0f, f + 1.0f, f2 + 1.0f, n);
-        RenderUtil.drawHorizontalLine(f3 - 2.0f, f3 - 2.0f, f2 + 1.0f, n);
-        RenderUtil.drawHorizontalLine(f3 - 2.0f, f3 - 2.0f, f4 - 2.0f, n);
-        RenderUtil.drawHorizontalLine(f + 1.0f, f + 1.0f, f4 - 2.0f, n);
+        Ref.modified$drawGradientRect((left *= 2.0f) + 1.0f, (top *= 2.0f) + 1.0f, (right *= 2.0f) - 1.0f, (bottom *= 2.0f) - 1.0f, gradientStart, gradientEnd);
+        RenderUtil.drawVerticalLine(left, top + 1.0f, bottom - 2.0f, outlineColour);
+        RenderUtil.drawVerticalLine(right - 1.0f, top + 1.0f, bottom - 2.0f, outlineColour);
+        RenderUtil.drawHorizontalLine(left + 2.0f, right - (float)3, top, outlineColour);
+        RenderUtil.drawHorizontalLine(left + 2.0f, right - (float)3, bottom - 1.0f, outlineColour);
+        RenderUtil.drawHorizontalLine(left + 1.0f, left + 1.0f, top + 1.0f, outlineColour);
+        RenderUtil.drawHorizontalLine(right - 2.0f, right - 2.0f, top + 1.0f, outlineColour);
+        RenderUtil.drawHorizontalLine(right - 2.0f, right - 2.0f, bottom - 2.0f, outlineColour);
+        RenderUtil.drawHorizontalLine(left + 1.0f, left + 1.0f, bottom - 2.0f, outlineColour);
         Ref.getGlBridge().bridge$scale(2.0f, 2.0f, 2.0f);
     }
 

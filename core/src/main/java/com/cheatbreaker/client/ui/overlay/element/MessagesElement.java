@@ -44,14 +44,14 @@ public class MessagesElement extends DraggableElement {
     }
 
     @Override
-    public void setElementSize(float x, float y, float width, float height) {
-        super.setElementSize(x, y, width, height);
-        this.inputFieldElement.setElementSize(x + 26f, y + height - 15f, width - 62f, 13);
-        this.sendButton.setElementSize(x + width - 37f, y + height - 15f, 35f, 13);
-        this.messageListScrollable.setElementSize(x + width - 6f, y + 22f, 4f, height - 39f);
-        this.recentsScrollable.setElementSize(x + 2.0f, y + 2.0f, 2.0f, height - 4f);
-        this.aliasesButton.setElementSize(x + width - 54f, y + 2.0f, 40f, 16);
-        this.closeButton.setElementSize(x + width - 12f, y + 2.0f, 10f, 16);
+    public void setElementDimensions(float x, float y, float width, float height) {
+        super.setElementDimensions(x, y, width, height);
+        this.inputFieldElement.setElementDimensions(x + 26f, y + height - 15f, width - 62f, 13);
+        this.sendButton.setElementDimensions(x + width - 37f, y + height - 15f, 35f, 13);
+        this.messageListScrollable.setElementDimensions(x + width - 6f, y + 22f, 4f, height - 39f);
+        this.recentsScrollable.setElementDimensions(x + 2.0f, y + 2.0f, 2.0f, height - 4f);
+        this.aliasesButton.setElementDimensions(x + width - 54f, y + 2.0f, 40f, 16);
+        this.closeButton.setElementDimensions(x + width - 12f, y + 2.0f, 10f, 16);
     }
 
     public static String lIIIIlIIllIIlIIlIIIlIIllI(byte[] arrby) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException {
@@ -81,7 +81,7 @@ public class MessagesElement extends DraggableElement {
         Ref.getGlBridge().bridge$pushMatrix();
         Ref.getGlBridge().bridge$enableScissoring();
         OverlayGui overlayGui = OverlayGui.getInstance();
-        RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(0, (int)(this.y + 2.0f), (int) overlayGui.getScaledWidth(), (int)(this.y + this.height - 2.0f), (float)((int)((float) overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int) overlayGui.getScaledHeight());
+        RenderUtil.scissorArea(0, (int)(this.y + 2.0f), (int) overlayGui.getScaledWidth(), (int)(this.y + this.height - 2.0f), (float)((int)((float) overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int) overlayGui.getScaledHeight());
         int n = 18;
         int n2 = 0;
         for (Friend friend : this.client.getFriendsManager().getFriends().values()) {
@@ -112,7 +112,7 @@ public class MessagesElement extends DraggableElement {
             if (CheatBreaker.getInstance().getFriendsManager().getMessages().containsKey(this.friend.getPlayerId())) {
                 Ref.getGlBridge().bridge$pushMatrix();
                 Ref.getGlBridge().bridge$enableScissoring();
-                RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)(this.x + 2.0f), (int)(this.y + (float)22), (int)(this.x + this.width - 2.0f), (int)(this.y + this.height - (float)17), (float)((int)((float) overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int) overlayGui.getScaledHeight());
+                RenderUtil.scissorArea((int)(this.x + 2.0f), (int)(this.y + (float)22), (int)(this.x + this.width - 2.0f), (int)(this.y + this.height - (float)17), (float)((int)((float) overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int) overlayGui.getScaledHeight());
                 List<String> messages = CheatBreaker.getInstance().getFriendsManager().getMessages().get(this.friend.getPlayerId());
                 int n3 = 0;
                 for (int messageIndex = messages.size() - 1; messageIndex >= 0; --messageIndex) {
@@ -205,7 +205,7 @@ public class MessagesElement extends DraggableElement {
             AliasesElement aliasesElement = new AliasesElement(this.friend);
             abstractElements[0] = aliasesElement;
             OverlayGui.getInstance().addElements(abstractElements);
-            aliasesElement.setElementSize((float)60, (float)30, (float)140, 30);
+            aliasesElement.setElementDimensions((float)60, (float)30, (float)140, 30);
             return true;
         }
         return false;

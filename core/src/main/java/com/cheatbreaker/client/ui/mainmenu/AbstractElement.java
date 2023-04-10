@@ -25,7 +25,7 @@ public abstract class AbstractElement {
         return this.isMouseInside(f, f2);
     }
 
-    public void setElementSize(float x, float y, float width, float height) {
+    public void setElementDimensions(float x, float y, float width, float height) {
         this.x = x;
         this.y = y;
         this.width = width;

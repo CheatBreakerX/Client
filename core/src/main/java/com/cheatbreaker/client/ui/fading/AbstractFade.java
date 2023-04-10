@@ -12,7 +12,7 @@ public abstract class AbstractFade {
     private int lIIIIllIIlIlIllIIIlIllIlI = 1;
     private int IlllIllIlIIIIlIIlIIllIIIl = 1;
     private long IlIlllIIIIllIllllIllIIlIl;
-    private boolean llIIlllIIIIlllIllIlIlllIl;
+    private boolean currentlyInverted;
 
     public AbstractFade(long duration, float f) {
         this.duration = duration;
@@ -51,18 +51,18 @@ public abstract class AbstractFade {
     }
 
     public float lIIIIlIIllIIlIIlIIIlIIllI(boolean bl) {
-        if (bl && !this.llIIlllIIIIlllIllIlIlllIl) {
-            this.llIIlllIIIIlllIllIlIlllIl = true;
+        if (bl && !this.currentlyInverted) {
+            this.currentlyInverted = true;
             this.lIIIIlIIllIIlIIlIIIlIIllI(this.IlIIlIIIIlIIIIllllIIlIllI());
-        } else if (this.llIIlllIIIIlllIllIlIlllIl && !bl) {
-            this.llIIlllIIIIlllIllIlIlllIl = false;
+        } else if (this.currentlyInverted && !bl) {
+            this.currentlyInverted = false;
             this.lIIIIlIIllIIlIIlIIIlIIllI(this.IlIIlIIIIlIIIIllllIIlIllI());
         }
         if (this.startTime == 0L) {
             return 0.0f;
         }
         float f = this.IlIIlIIIIlIIIIllllIIlIllI();
-        return this.llIIlllIIIIlllIllIlIlllIl ? f : 1.0f - f;
+        return this.currentlyInverted ? f : 1.0f - f;
     }
 
     public boolean IIIllIllIlIlllllllIlIlIII() {
@@ -116,7 +116,7 @@ public abstract class AbstractFade {
         return this.startTime + this.duration - this.IlIlllIIIIllIllllIllIIlIl - System.currentTimeMillis();
     }
 
-    public long lIIlIlIllIIlIIIlIIIlllIII() {
+    public long getStartTime() {
         return this.startTime;
     }
 
@@ -124,7 +124,7 @@ public abstract class AbstractFade {
         return this.lIIIIIIIIIlIllIIllIlIIlIl;
     }
 
-    public long llIlIIIlIIIIlIlllIlIIIIll() {
+    public long getDuration() {
         return this.duration;
     }
 
@@ -136,7 +136,7 @@ public abstract class AbstractFade {
         return this.IIIIllIIllIIIIllIllIIIlIl;
     }
 
-    public long lIIIIIllllIIIIlIlIIIIlIlI() {
+    public long getTimeElapsed() {
         return this.timeElapsed;
     }
 
@@ -148,7 +148,7 @@ public abstract class AbstractFade {
         this.IlllIllIlIIIIlIIlIIllIIIl = n;
     }
 
-    public boolean IllIllIIIlIIlllIIIllIllII() {
-        return this.llIIlllIIIIlllIllIlIlllIl;
+    public boolean isCurrentlyInverted() {
+        return this.currentlyInverted;
     }
 }

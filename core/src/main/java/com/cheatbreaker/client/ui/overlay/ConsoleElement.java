@@ -28,12 +28,12 @@ public class ConsoleElement extends DraggableElement {
     }
 
     @Override
-    public void setElementSize(float x, float y, float width, float height) {
-        super.setElementSize(x, y, width, height);
-        this.textInputElement.setElementSize(x + 2.0f, y + height - (float)15, width - (float)40, 13);
-        this.sentButton.setElementSize(x + width - (float)37, y + height - (float)15, (float)35, 13);
-        this.scrollableElement.setElementSize(x + width - (float)6, y + (float)12 + (float)3, (float)4, height - (float)32);
-        this.closeButton.setElementSize(x + width - (float)12, y + 2.0f, (float)10, 10);
+    public void setElementDimensions(float x, float y, float width, float height) {
+        super.setElementDimensions(x, y, width, height);
+        this.textInputElement.setElementDimensions(x + 2.0f, y + height - (float)15, width - (float)40, 13);
+        this.sentButton.setElementDimensions(x + width - (float)37, y + height - (float)15, (float)35, 13);
+        this.scrollableElement.setElementDimensions(x + width - (float)6, y + (float)12 + (float)3, (float)4, height - (float)32);
+        this.closeButton.setElementDimensions(x + width - (float)12, y + 2.0f, (float)10, 10);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ConsoleElement extends DraggableElement {
                 Ref.getGlBridge().bridge$pushMatrix();
                 Ref.getGlBridge().bridge$enableScissoring();
                 OverlayGui overlayGui = OverlayGui.getInstance();
-                RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)(this.x + 2.0f), (int)(this.y + (float)12 + (float)3), (int)(this.x + this.width - 2.0f), (int)(this.y + this.height - (float)17), (float)((int)((float) overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int) overlayGui.getScaledHeight());
+                RenderUtil.scissorArea((int)(this.x + 2.0f), (int)(this.y + (float)12 + (float)3), (int)(this.x + this.width - 2.0f), (int)(this.y + this.height - (float)17), (float)((int)((float) overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int) overlayGui.getScaledHeight());
                 List<String> list = CheatBreaker.getInstance().getConsoleLines();
                 int n = 0;
                 for (int i = list.size() - 1; i >= 0; --i) {

@@ -18,7 +18,7 @@ public abstract class DraggableElement extends AbstractElement {
             }
             double newX = (double)mouseX - this.position.x;
             double newY = (double)mouseY - this.position.y;
-            this.setElementSize((float)newX, (float)newY, this.width, this.height);
+            this.setElementDimensions((float)newX, (float)newY, this.width, this.height);
         }
     }
 

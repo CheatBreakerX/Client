@@ -26,14 +26,14 @@ public class FriendsListElement extends ElementListElement<FriendElement> {
     }
 
     public void updateSize() {
-        this.setElementSize(this.x, this.y, this.width, this.height);
+        this.setElementDimensions(this.x, this.y, this.width, this.height);
     }
 
     @Override
-    public void setElementSize(float x, float y, float width, float height) {
-        super.setElementSize(x, y, width, height);
-        this.filterElement.setElementSize(0.0f, y, width, 13);
-        this.scrollableElement.setElementSize(x + width - (float)4, y, (float)4, height);
+    public void setElementDimensions(float x, float y, float width, float height) {
+        super.setElementDimensions(x, y, width, height);
+        this.filterElement.setElementDimensions(0.0f, y, width, 13);
+        this.scrollableElement.setElementDimensions(x + width - (float)4, y, (float)4, height);
         this.elements.sort((friendElement, friendElement2) -> {
             String string = EnumChatFormattingBridge.getTextWithoutFormattingCodes(friendElement.getFriend().getName());
             String string2 = EnumChatFormattingBridge.getTextWithoutFormattingCodes(friendElement2.getFriend().getName());
@@ -46,7 +46,7 @@ public class FriendsListElement extends ElementListElement<FriendElement> {
         int n2 = 0;
         for (FriendElement friendElement : this.elements) {
             if (!this.isFilterMatch(friendElement)) continue;
-            friendElement.setElementSize(x, y + (float)14 + (float)(n2 * 22), width, 22);
+            friendElement.setElementDimensions(x, y + (float)14 + (float)(n2 * 22), width, 22);
             ++n2;
         }
         this.scrollableElement.setScrollAmount(14 + this.elements.size() * 22);
@@ -73,7 +73,7 @@ public class FriendsListElement extends ElementListElement<FriendElement> {
             Ref.getGlBridge().bridge$enableScissoring();
             OverlayGui illlllIllIIIllIIIllIllIII = OverlayGui.getInstance();
             this.scrollableElement.drawScrollable(f, f2, bl);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI((int)this.x, (int)this.y, (int)(this.x + this.width), (int)(this.y + this.height), (float)((int)((float)illlllIllIIIllIIIllIllIII.getResolution().bridge$getScaleFactor() * illlllIllIIIllIIIllIllIII.getScaleFactor())), (int)illlllIllIIIllIIIllIllIII.getScaledHeight());
+            RenderUtil.scissorArea((int)this.x, (int)this.y, (int)(this.x + this.width), (int)(this.y + this.height), (float)((int)((float)illlllIllIIIllIIIllIllIII.getResolution().bridge$getScaleFactor() * illlllIllIIIllIIIllIllIII.getScaleFactor())), (int)illlllIllIIIllIIIllIllIII.getScaledHeight());
             ImmutableList<FriendElement> immutableList = ImmutableList.copyOf(this.elements);
             for (FriendElement friendElement : immutableList) {
                 if (!this.isFilterMatch(friendElement)) continue;
@@ -111,7 +111,7 @@ public class FriendsListElement extends ElementListElement<FriendElement> {
         super.handleElementKeyTyped(c, n);
         this.filterElement.handleElementKeyTyped(c, n);
         this.scrollableElement.handleElementKeyTyped(c, n);
-        this.setElementSize(this.x, this.y, this.width, this.height);
+        this.setElementDimensions(this.x, this.y, this.width, this.height);
     }
 
     @Override

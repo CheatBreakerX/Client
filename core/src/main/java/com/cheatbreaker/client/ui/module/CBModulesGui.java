@@ -324,7 +324,7 @@ public class CBModulesGui extends CBGuiScreen {
         if (draggingModule == null) {
             Ref.getGlBridge().bridge$pushMatrix();
             Ref.getGlBridge().bridge$enableScissoring();
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(n5 / 2 - 185, n6 / 2 + 15, n5 / 2 + 185, n6 - 20, (float)scaledResolution.bridge$getScaleFactor() * scale, n6);
+            RenderUtil.scissorArea(n5 / 2 - 185, n6 / 2 + 15, n5 / 2 + 185, n6 - 20, (float)scaledResolution.bridge$getScaleFactor() * scale, n6);
             for (AbstractScrollableElement lllIllIllIlIllIlIIllllIIl2 : this.elementList) {
                 if (lllIllIllIlIllIlIIllllIIl2 != this.lIIIIllIIlIlIllIIIlIllIlI && lllIllIllIlIllIlIIllllIIl2 != this.currentScrollableElement) continue;
                 lllIllIllIlIllIlIIllllIIl2.handleDrawElement(mouseX, mouseY, delta);

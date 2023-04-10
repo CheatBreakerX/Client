@@ -33,11 +33,11 @@ public class AliasesElement
     }
 
     @Override
-    public void setElementSize(float x, float y, float width, float height) {
-        super.setElementSize(x, y, width, height);
-        this.scrollContainer.setElementSize(x + width - (float)4, y, (float)4, height);
+    public void setElementDimensions(float x, float y, float width, float height) {
+        super.setElementDimensions(x, y, width, height);
+        this.scrollContainer.setElementDimensions(x + width - (float)4, y, (float)4, height);
         this.scrollContainer.setScrollAmount(height);
-        this.closeButton.setElementSize(x + width - (float)12, y + 2.0f, (float)10, 10);
+        this.closeButton.setElementDimensions(x + width - (float)12, y + 2.0f, (float)10, 10);
     }
 
     @Override

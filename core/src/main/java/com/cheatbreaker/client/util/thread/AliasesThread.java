@@ -49,7 +49,7 @@ public class AliasesThread extends Thread {
                 }
             }
             Collections.reverse(this.parent.getAliases());
-            this.parent.setElementSize(
+            this.parent.setElementDimensions(
                     this.parent.getX(),
                     this.parent.getY(),
                     this.parent.getWidth(),
