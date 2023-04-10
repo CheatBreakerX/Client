@@ -1,0 +1,118 @@
+buildscript {
+    repositories {
+        maven {
+            name = "Minecraft Forge"
+            url = "https://maven.minecraftforge.net"
+        }
+        maven {
+            name = "SpongePowered Repo"
+            url = "https://repo.spongepowered.org/maven"
+        }
+    }
+    dependencies {
+        classpath "net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT"
+        classpath "org.spongepowered:mixingradle:0.6-SNAPSHOT"
+    }
+}
+
+plugins {
+    id "java"
+    id "com.github.johnrengelman.shadow" version "2.0.4"
+}
+
+apply plugin: "net.minecraftforge.gradle.forge"
+apply plugin: "org.spongepowered.mixin"
+
+apply from: "$rootDir/project.gradle"
+System.out.println("Root project directory: $rootDir")
+
+// Jar file will appear as CheatBreaker-0.0.1.jar
+archivesBaseName = "CheatBreaker"
+version = getShortCommitVersion()
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+compileJava.options.encoding = "UTF-8"
+
+minecraft {
+    accessTransformer("src/main/resources/cheatbreaker_at.cfg")
+    version = "1.9.4-12.17.0.2317-1.9.4"
+    runDir = "run"
+    mappings = "snapshot_20160518"
+    makeObfSourceJar = false
+}
+
+configurations {
+    shade
+    compile.extendsFrom(shade)
+}
+
+repositories {
+    maven {
+        name = "SpongePowered Repo"
+        url = "https://repo.spongepowered.org/maven/"
+    }
+}
+
+dependencies {
+    shade("org.spongepowered:mixin:0.7.10-SNAPSHOT") {
+        exclude module: "launchwrapper"
+        exclude module: "guava"
+        exclude module: "gson"
+        exclude module: "commons-io"
+        exclude module: "log4j-core"
+    }
+
+    // Need our core, of course
+    shade project(':core')
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include "mcmod.info"
+        expand  "version": project.version,
+                "mcversion": project.minecraft.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude "mcmod.info"
+    }
+
+    rename '(.+_at.cfg)', 'META-INF/$1'
+}
+
+shadowJar {
+    dependencies {
+
+    }
+    configurations = [project.configurations.shade]
+    duplicatesStrategy DuplicatesStrategy.EXCLUDE
+    classifier ""
+}
+
+reobf {
+    shadowJar {}
+}
+
+jar {
+    manifest {
+        attributes "FMLCorePlugin": "com.cheatbreaker.mixin.MixinLoader",
+                "FMLCorePluginContainsFMLMod": true,
+                "FMLAT": "cheatbreaker_at.cfg",
+                "ForceLoadAsMod": true,
+                "ModSide": "CLIENT",
+                "TweakClass": 'org.spongepowered.asm.launch.MixinTweaker',
+                "TweakOrder": 0,
+                "MixinConfigs": 'mixins.cheatbreaker.json'
+    }
+}
+
+sourceSets {
+    main {
+        ext.refMap = "mixins.cheatbreaker.refmap.json"
+    }
+}

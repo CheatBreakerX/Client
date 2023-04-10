@@ -83,6 +83,4 @@ public class DirectionHudModule extends AbstractModule {
         this.minecraft.bridge$getFontRenderer().bridge$drawString("|", n3 + 32, n2 + 1, this.markerColor.getColorValue());
         this.minecraft.bridge$getFontRenderer().bridge$drawString("|\u00a7r", n3 + 32, n2 + 5, this.markerColor.getColorValue());
     }
-
-
 }

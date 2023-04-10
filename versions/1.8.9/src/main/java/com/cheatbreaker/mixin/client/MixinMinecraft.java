@@ -357,7 +357,7 @@ public abstract class MixinMinecraft implements MinecraftBridge {
 
     @ModifyArg(method = "createDisplay", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;setTitle(Ljava/lang/String;)V"))
     public String mod$createDisplay(String newTitle) {
-        return "CheatBreaker 1.8.9";
+        return "CheatBreaker 1.9.4";
     }
 
     @Inject(method = "displayGuiScreen", at = @At("HEAD"), cancellable = true)
