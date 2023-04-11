@@ -1,3 +1,4 @@
 include ":core",
-    ":versions:1.8.9",
-    ":versions:1.9.4"
+        ":versions:1.8.9",
+        ":versions:1.9.4",
+        ":versions:1.10.2"

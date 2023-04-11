@@ -57,7 +57,7 @@ import java.util.*;
 public class CheatBreaker {
     private static CheatBreaker instance;
     public static CheatBreaker getInstance() {
-        return instance == null ? instance = new CheatBreaker() : instance;
+        return instance == null ? new CheatBreaker() : instance;
     }
 
     public static byte[] processBytesAuth = "Decencies".getBytes(); // originally "Vote Trump 2020!" (jhalt's doing LMAO???)
