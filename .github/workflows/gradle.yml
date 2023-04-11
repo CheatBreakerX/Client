@@ -41,3 +41,9 @@ jobs:
         with:
           name: CheatBreakerX-1.10.2
           path: versions/1.10.2/build/libs
+      - name: Compile CheatBreakerX 1.11.2
+        run: ./gradlew :versions:1.11.2:setupCiWorkspace :versions:1.11.2:build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: CheatBreakerX-1.11.2
+          path: versions/1.11.2/build/libs
