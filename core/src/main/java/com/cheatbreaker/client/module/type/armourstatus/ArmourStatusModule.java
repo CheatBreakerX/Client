@@ -8,6 +8,7 @@ import com.cheatbreaker.bridge.item.ItemStackBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
+import com.cheatbreaker.client.event.type.RenderPreviewEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.*;
 
@@ -59,8 +60,8 @@ public class ArmourStatusModule extends AbstractModule {
         damageColors.add(new ArmourStatusDamageComparable(80, "7"));
         damageColors.add(new ArmourStatusDamageComparable(100, "f"));
         this.setPreviewIcon(Ref.getInstanceCreator().createResourceLocation("client/icons/mods/diamond_chestplate.png"), 34, 34);
-       // this.addEvent(RenderPreviewEvent.class, this::renderPreview);
-        //this.addEvent(GuiDrawEvent.class, this::renderReal);
+        this.addEvent(RenderPreviewEvent.class, this::renderPreview);
+        this.addEvent(GuiDrawEvent.class, this::renderReal);
     }
 
     private void renderPreview(GuiDrawEvent event) {

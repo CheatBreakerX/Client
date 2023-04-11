@@ -1,10 +1,10 @@
-INFO:  Adding File to context from classpath: C:\Users\Administrator\.gradle\wrapper\dists\gradle-4.4.1-bin\46gopw3g8i1v3zqqx4q949t2x\gradle-4.4.1\lib\gradle-launcher-4.4.1.jar
-INFO:  Adding File to context from classpath: C:\Program Files\BellSoft\LibericaJDK-8-Full\jre\lib\resources.jar
-INFO:  Adding File to context from classpath: C:\Program Files\BellSoft\LibericaJDK-8-Full\jre\lib\rt.jar
-INFO:  Adding File to context from classpath: C:\Program Files\BellSoft\LibericaJDK-8-Full\jre\lib\jsse.jar
-INFO:  Adding File to context from classpath: C:\Program Files\BellSoft\LibericaJDK-8-Full\jre\lib\jce.jar
-INFO:  Adding File to context from classpath: C:\Program Files\BellSoft\LibericaJDK-8-Full\jre\lib\charsets.jar
-INFO:  Adding File to context from classpath: C:\Program Files\BellSoft\LibericaJDK-8-Full\jre\lib\jfr.jar
+INFO:  Adding File to context from classpath: C:\Users\lifix\.gradle\wrapper\dists\gradle-4.4.1-bin\46gopw3g8i1v3zqqx4q949t2x\gradle-4.4.1\lib\gradle-launcher-4.4.1.jar
+INFO:  Adding File to context from classpath: C:\Users\lifix\.jdks\liberica-1.8.0_352\jre\lib\resources.jar
+INFO:  Adding File to context from classpath: C:\Users\lifix\.jdks\liberica-1.8.0_352\jre\lib\rt.jar
+INFO:  Adding File to context from classpath: C:\Users\lifix\.jdks\liberica-1.8.0_352\jre\lib\jsse.jar
+INFO:  Adding File to context from classpath: C:\Users\lifix\.jdks\liberica-1.8.0_352\jre\lib\jce.jar
+INFO:  Adding File to context from classpath: C:\Users\lifix\.jdks\liberica-1.8.0_352\jre\lib\charsets.jar
+INFO:  Adding File to context from classpath: C:\Users\lifix\.jdks\liberica-1.8.0_352\jre\lib\jfr.jar
 WARN:  Inconsistent inner class entries for net/minecraft/block/BlockSilverfish$EnumType!
 WARN:  Inconsistent inner class entries for net/minecraft/block/BlockSilverfish$EnumType!
 WARN:  Inconsistent inner class entries for net/minecraft/block/BlockSilverfish$EnumType!

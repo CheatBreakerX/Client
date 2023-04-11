@@ -12,6 +12,9 @@
       "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V": "Lnet/minecraft/client/Minecraft;func_71361_d(Ljava/lang/String;)V",
       "displayGuiScreen": "Lnet/minecraft/client/Minecraft;func_147108_a(Lnet/minecraft/client/gui/GuiScreen;)V"
     },
+    "com/cheatbreaker/mixin/client/gui/MixinGuiBossOverlay": {
+      "renderBossHealth": "Lnet/minecraft/client/gui/GuiBossOverlay;func_184051_a()V"
+    },
     "com/cheatbreaker/mixin/client/gui/MixinGuiScreen": {
       "drawWorldBackground": "Lnet/minecraft/client/gui/GuiScreen;func_146270_b(I)V",
       "keyTyped": "Lnet/minecraft/client/gui/GuiScreen;func_73869_a(CI)V"
@@ -38,6 +41,9 @@
         "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V": "Lbcd;a(Ljava/lang/String;)V",
         "displayGuiScreen": "Lbcd;a(Lbez;)V"
       },
+      "com/cheatbreaker/mixin/client/gui/MixinGuiBossOverlay": {
+        "renderBossHealth": "Lbcw;a()V"
+      },
       "com/cheatbreaker/mixin/client/gui/MixinGuiScreen": {
         "drawWorldBackground": "Lbez;d_(I)V",
         "keyTyped": "Lbez;a(CI)V"
@@ -61,6 +67,9 @@
         "runTick": "Lnet/minecraft/client/Minecraft;func_71407_l()V",
         "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V": "Lnet/minecraft/client/Minecraft;func_71361_d(Ljava/lang/String;)V",
         "displayGuiScreen": "Lnet/minecraft/client/Minecraft;func_147108_a(Lnet/minecraft/client/gui/GuiScreen;)V"
+      },
+      "com/cheatbreaker/mixin/client/gui/MixinGuiBossOverlay": {
+        "renderBossHealth": "Lnet/minecraft/client/gui/GuiBossOverlay;func_184051_a()V"
       },
       "com/cheatbreaker/mixin/client/gui/MixinGuiScreen": {
         "drawWorldBackground": "Lnet/minecraft/client/gui/GuiScreen;func_146270_b(I)V",
