@@ -57,7 +57,7 @@ public class ConsoleElement extends DraggableElement {
                 int n = 0;
                 for (int i = list.size() - 1; i >= 0; --i) {
                     String string = list.get(i);
-                    String[] arrstring = FontRegistry.getPlayRegular16px().lIIIIIIIIIlIllIIllIlIIlIl(string, this.width - (float)10).split("\n");
+                    String[] arrstring = FontRegistry.getPlayRegular16px().setWrapWords(string, this.width - (float)10).split("\n");
                     n += arrstring.length * 10;
                     int n2 = 0;
                     for (String string2 : arrstring) {

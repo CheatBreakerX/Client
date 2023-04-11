@@ -10,6 +10,7 @@ import com.cheatbreaker.bridge.client.renderer.EntityRendererBridge;
 import com.cheatbreaker.bridge.client.renderer.RenderGlobalBridge;
 import com.cheatbreaker.bridge.client.renderer.entity.RenderManagerBridge;
 import com.cheatbreaker.bridge.client.renderer.texture.TextureManagerBridge;
+import com.cheatbreaker.bridge.client.resources.DefaultResourcePackBridge;
 import com.cheatbreaker.bridge.client.resources.IResourceManagerBridge;
 import com.cheatbreaker.bridge.client.settings.GameSettingsBridge;
 import com.cheatbreaker.bridge.client.shader.FrameBufferBridge;
@@ -37,6 +38,7 @@ public interface MinecraftBridge {
     boolean bridge$isInGameHasFocus();
     TextureManagerBridge bridge$getTextureManager();
     IResourceManagerBridge bridge$getResourceManager();
+    DefaultResourcePackBridge bridge$getDefaultResourcePack();
     boolean bridge$isRunningOnMac();
     void bridge$setIngameFocus();
     EntityRendererBridge bridge$getEntityRenderer();

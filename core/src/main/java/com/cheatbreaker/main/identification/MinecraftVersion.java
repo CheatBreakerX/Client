@@ -44,4 +44,8 @@ public enum MinecraftVersion {
     public boolean isLatestVersion() {
         return this.asString.split("-")[0].equals(MinecraftVersion.values()[MinecraftVersion.values().length - 1].asString.split("-")[0]);
     }
+
+    public boolean isNewerThan(MinecraftVersion version) {
+        return this.ordinal() > version.ordinal();
+    }
 }

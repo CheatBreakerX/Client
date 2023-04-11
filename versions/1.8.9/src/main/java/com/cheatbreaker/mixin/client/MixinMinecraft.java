@@ -4,6 +4,7 @@ import com.cheatbreaker.CheatBreakerMod;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.client.audio.SoundHandlerBridge;
 import com.cheatbreaker.bridge.client.entity.EntityClientPlayerMPBridge;
+import com.cheatbreaker.bridge.client.entity.EntityPlayerSPBridge;
 import com.cheatbreaker.bridge.client.gui.FontRendererBridge;
 import com.cheatbreaker.bridge.client.gui.GuiIngameBridge;
 import com.cheatbreaker.bridge.client.multiplayer.WorldClientBridge;
@@ -13,6 +14,7 @@ import com.cheatbreaker.bridge.client.renderer.RenderGlobalBridge;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.client.renderer.entity.RenderManagerBridge;
 import com.cheatbreaker.bridge.client.renderer.texture.TextureManagerBridge;
+import com.cheatbreaker.bridge.client.resources.DefaultResourcePackBridge;
 import com.cheatbreaker.bridge.client.resources.IResourceManagerBridge;
 import com.cheatbreaker.bridge.client.settings.GameSettingsBridge;
 import com.cheatbreaker.bridge.client.shader.FrameBufferBridge;
@@ -42,6 +44,7 @@ import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.resources.DefaultResourcePack;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.LanguageManager;
 import net.minecraft.client.settings.GameSettings;
@@ -110,6 +113,8 @@ public abstract class MixinMinecraft implements MinecraftBridge {
 
     @Shadow public GuiScreen currentScreen;
 
+    @Shadow @Final public DefaultResourcePack mcDefaultResourcePack;
+
     public SoundHandlerBridge bridge$getSoundHandler() {
         return (SoundHandlerBridge) this.getSoundHandler();
     }
@@ -177,7 +182,7 @@ public abstract class MixinMinecraft implements MinecraftBridge {
             }
 
             public void bridge$setLocationCape(ResourceLocationBridge location) {
-
+                ((EntityPlayerSPBridge) Minecraft.getMinecraft().thePlayer).bridge$setLocationCape(location);
             }
 
             public String bridge$getDisplayName() {
@@ -276,6 +281,10 @@ public abstract class MixinMinecraft implements MinecraftBridge {
 
     public IResourceManagerBridge bridge$getResourceManager() {
         return (IResourceManagerBridge) this.mcResourceManager;
+    }
+
+    public DefaultResourcePackBridge bridge$getDefaultResourcePack() {
+        return (DefaultResourcePackBridge) this.mcDefaultResourcePack;
     }
 
     public boolean bridge$isRunningOnMac() {

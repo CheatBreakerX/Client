@@ -5,6 +5,7 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
+import com.cheatbreaker.client.ui.util.font.CBXFontRenderer;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
@@ -14,7 +15,6 @@ import com.cheatbreaker.client.ui.element.module.ModulePreviewContainer;
 import com.cheatbreaker.client.ui.element.module.ModulesGuiButtonElement;
 import com.cheatbreaker.client.ui.element.profile.ProfilesListElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
-import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -404,7 +404,7 @@ public class CBModulesGui extends CBGuiScreen {
     }
 
     private void renderRoundButton(String string, int x, int y) {
-        CBFontRenderer font = FontRegistry.getPlayRegular14px();
+        CBXFontRenderer font = FontRegistry.getPlayRegular14px();
         float width = font.getStringWidth(string);
         RenderUtil.drawRoundedRect(x, y, (float)x + width + (float)4, y + 10, (double)2, -1073741825);
         font.drawString(string, x + 2, (float)y, -16777216);

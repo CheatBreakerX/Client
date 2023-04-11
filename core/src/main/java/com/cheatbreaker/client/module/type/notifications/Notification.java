@@ -3,7 +3,7 @@ package com.cheatbreaker.client.module.type.notifications;
 import com.cheatbreaker.bridge.client.gui.ScaledResolutionBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.ui.util.RenderUtil;
-import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
+import com.cheatbreaker.client.ui.util.font.CBXFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 
 class Notification {
@@ -52,9 +52,9 @@ class Notification {
     }
 
     public void lIIIIlIIllIIlIIlIIIlIIllI(int n) {
-        CBFontRenderer lIlIllIlIlIIIllllIlIllIll2 = FontRegistry.getPlayRegular16px();
+        CBXFontRenderer font = FontRegistry.getPlayRegular16px();
         int n2 = this.IIIIllIIllIIIIllIllIIIlIl;
-        float f = lIlIllIlIlIIIllllIlIllIll2.getStringWidth(this.lIIIIIIIIIlIllIIllIlIIlIl);
+        float f = font.getStringWidth(this.lIIIIIIIIIlIllIIllIlIIlIl);
         int n3 = (int)(this.type == CBNotificationType.DEFAULT ? f + (float)10 : f + (float)30);
         Ref.modified$drawRect(n - 5 - n3, n2, n - 5, n2 + this.IIIllIllIlIlllllllIlIlIII, -1358954496);
         switch (this.type) {
@@ -80,6 +80,6 @@ class Notification {
         float f2 = f * ((float)l / (float)this.IlllIIIlIlllIllIlIIlllIlI * (float)100 / (float)100);
         Ref.modified$drawRect((float)(n - 10) - f, (float)(n2 + this.IIIllIllIlIlllllllIlIlIII) - 56.46667f * 0.077922076f, (float)(n - 10) - f + f, n2 + this.IIIllIllIlIlllllllIlIlIII - 4, 0x30666666);
         Ref.modified$drawRect((float)(n - 10) - f, (float)(n2 + this.IIIllIllIlIlllllllIlIlIII) - 2.2f * 2.0f, (float)(n - 10) - f + f2, n2 + this.IIIllIllIlIlllllllIlIlIII - 4, -1878982912);
-        lIlIllIlIlIIIllllIlIllIll2.drawString(this.lIIIIIIIIIlIllIIllIlIIlIl, (float)(n - 10) - f, (float)(n2 + (this.type == CBNotificationType.DEFAULT ? 2 : 4)), -1);
+        font.drawString(this.lIIIIIIIIIlIllIIllIlIIlIl, (float)(n - 10) - f, (float)(n2 + (this.type == CBNotificationType.DEFAULT ? 2 : 4)), -1);
     }
 }

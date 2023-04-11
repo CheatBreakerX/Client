@@ -7,7 +7,8 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.ui.AbstractGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
-import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
+import com.cheatbreaker.client.ui.util.font.CBXFontRenderer;
+import org.apache.logging.log4j.LogManager;
 
 import java.awt.*;
 
@@ -20,13 +21,16 @@ public class LoadingScreen extends AbstractGui {
     private final int amountOfCalls;
     private int amountOfCallsDone;
     private String message;
-    private final CBFontRenderer font = new CBFontRenderer(Ref.getInstanceCreator().createResourceLocation("client/font/Ubuntu-M.ttf"), 16);
+    private final CBXFontRenderer font = new CBXFontRenderer(Ref.getInstanceCreator().createResourceLocation("client/font/ubuntu/medium.ttf"), 16);
 
     public LoadingScreen(int capacity) {
         this.amountOfCalls = capacity;
         this.res = Ref.getInstanceCreator().createScaledResolution();
         int n2 = this.res.bridge$getScaleFactor();
         this.frameBuffer = Ref.getInstanceCreator().createFrameBuffer(res.bridge$getScaledWidth() * n2, res.bridge$getScaledHeight() * n2, true);
+        if (!this.font.isLoaded()) {
+            LogManager.getLogger("CheatBreakerX").warn("Font did not load successfully. (" + this.font.getTranslation() + ")");
+        }
     }
 
     public void newMessage(String string) {

@@ -117,7 +117,7 @@ public class MessagesElement extends DraggableElement {
                 int n3 = 0;
                 for (int messageIndex = messages.size() - 1; messageIndex >= 0; --messageIndex) {
                     String message = messages.get(messageIndex);
-                    restring = FontRegistry.getPlayRegular16px().lIIIIIIIIIlIllIIllIlIIlIl(message, this.width - (float)25).split("\n");
+                    restring = FontRegistry.getPlayRegular16px().setWrapWords(message, this.width - (float)25).split("\n");
                     n3 += restring.length * 10;
                     int n4 = 0;
                     for (String string2 : restring) {

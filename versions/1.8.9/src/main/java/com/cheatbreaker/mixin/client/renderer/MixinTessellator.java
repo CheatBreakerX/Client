@@ -5,8 +5,11 @@ import com.cheatbreaker.bridge.ext.GLColor;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.renderer.vertex.VertexFormat;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+
+import java.util.Locale;
 
 @Mixin(Tessellator.class)
 public abstract class MixinTessellator implements TessellatorBridge {
@@ -87,5 +90,54 @@ public abstract class MixinTessellator implements TessellatorBridge {
 
     public void bridge$endVertex() {
         this.worldRenderer.endVertex();
+    }
+
+    public TessellatorBridge bridge$begin(int glMode, String vertexFmt) {
+        VertexFormat fmt = null;
+
+        switch (vertexFmt.toLowerCase(Locale.ROOT)) {
+            case "block":
+                fmt = DefaultVertexFormats.BLOCK;
+                break;
+            case "item":
+                fmt = DefaultVertexFormats.ITEM;
+                break;
+            case "oldmodel_position_tex_normal":
+                fmt = DefaultVertexFormats.OLDMODEL_POSITION_TEX_NORMAL;
+                break;
+            case "particle_position_tex_color_lmap":
+                fmt = DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP;
+                break;
+            case "position":
+                fmt = DefaultVertexFormats.POSITION;
+                break;
+            case "position_color":
+                fmt = DefaultVertexFormats.POSITION_COLOR;
+                break;
+            case "position_tex":
+                fmt = DefaultVertexFormats.POSITION_TEX;
+                break;
+            case "position_normal":
+                fmt = DefaultVertexFormats.POSITION_NORMAL;
+                break;
+            case "position_tex_color":
+                fmt = DefaultVertexFormats.POSITION_TEX_COLOR;
+                break;
+            case "position_tex_normal":
+                fmt = DefaultVertexFormats.POSITION_TEX_NORMAL;
+                break;
+            case "position_tex_lmap_color":
+                fmt = DefaultVertexFormats.POSITION_TEX_LMAP_COLOR;
+                break;
+            case "position_tex_color_normal":
+                fmt = DefaultVertexFormats.POSITION_TEX_COLOR_NORMAL;
+                break;
+        }
+
+        if (fmt != null) {
+            this.worldRenderer.begin(glMode, fmt);
+        }
+
+        return this;
     }
 }

@@ -5,10 +5,10 @@ import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
 import com.cheatbreaker.client.ui.overlay.StringSanitizer;
-import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
+import com.cheatbreaker.client.ui.util.font.CBXFontRenderer;
 
 public class InputFieldElement extends AbstractElement {
-    private final CBFontRenderer fontRenderer;
+    private final CBXFontRenderer fontRenderer;
     private String IllIIIIIIIlIlIllllIIllIII = "";
     private int lIIIIllIIlIlIllIIIlIllIlI = 32;
     private int IlllIllIlIIIIlIIlIIllIIIl;
@@ -25,7 +25,7 @@ public class InputFieldElement extends AbstractElement {
     private final int IlIIlIIIIlIIIIllllIIlIllI;
     private final String text;
 
-    public InputFieldElement(CBFontRenderer fontRenderer, String text, int n, int n2) {
+    public InputFieldElement(CBXFontRenderer fontRenderer, String text, int n, int n2) {
         this.fontRenderer = fontRenderer;
         this.text = text;
         this.IlIIlIIIIlIIIIllllIIlIllI = n;
@@ -287,8 +287,8 @@ public class InputFieldElement extends AbstractElement {
             if (this.IlIlllIIIIllIllllIllIIlIl) {
                 f3 -= (float)4;
             }
-            String string = this.fontRenderer.lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), this.IIIIIIlIlIlIllllllIlllIlI());
-            this.IIIIllIIllIIIIllIllIIIlIl(this.fontRenderer.lIIIIlIIllIIlIIlIIIlIIllI(string, f3).length() + this.llIlIIIlIIIIlIlllIlIIIIll);
+            String string = this.fontRenderer.setWrapWords(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), this.IIIIIIlIlIlIllllllIlllIlI());
+            this.IIIIllIIllIIIIllIllIIIlIl(this.fontRenderer.setWrapWords(string, f3).length() + this.llIlIIIlIIIIlIlllIlIIIIll);
         }
         return false;
     }
@@ -301,7 +301,7 @@ public class InputFieldElement extends AbstractElement {
             int n = this.IIIlllIIIllIllIlIIIIIIlII ? this.lIIIIIllllIIIIlIlIIIIlIlI : this.IIIIIIlIlIlIllllllIlllIlI;
             int n2 = this.IIIlIIllllIIllllllIlIIIll - this.llIlIIIlIIIIlIlllIlIIIIll;
             int n3 = this.lllIIIIIlIllIlIIIllllllII - this.llIlIIIlIIIIlIlllIlIIIIll;
-            String string = this.fontRenderer.lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), this.IIIIIIlIlIlIllllllIlllIlI());
+            String string = this.fontRenderer.setWrapWords(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), this.IIIIIIlIlIlIllllllIlllIlI());
             boolean bl = n2 >= 0 && n2 <= string.length();
             boolean bl2 = this.lIIlIlIllIIlIIIlIIIlllIII && this.IlllIllIlIIIIlIIlIIllIIIl / 6 % 2 == 0 && bl;
             float f = this.IlIlllIIIIllIllllIllIIlIl ? this.x + (float)4 : this.x;
@@ -442,10 +442,10 @@ public class InputFieldElement extends AbstractElement {
                 this.llIlIIIlIIIIlIlllIlIIIIll = n2;
             }
             float f = this.IIIIIIlIlIlIllllllIlllIlI();
-            String string = this.fontRenderer.lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), f);
+            String string = this.fontRenderer.setWrapWords(this.IllIIIIIIIlIlIllllIIllIII.substring(this.llIlIIIlIIIIlIlllIlIIIIll), f);
             int n3 = string.length() + this.llIlIIIlIIIIlIlllIlIIIIll;
             if (n == this.llIlIIIlIIIIlIlllIlIIIIll) {
-                this.llIlIIIlIIIIlIlllIlIIIIll -= this.fontRenderer.lIIIIlIIllIIlIIlIIIlIIllI(this.IllIIIIIIIlIlIllllIIllIII, f, true).length();
+                this.llIlIIIlIIIIlIlllIlIIIIll -= this.fontRenderer.wrapWords(this.IllIIIIIIIlIlIllllIIllIII, f, true).length();
             }
             if (n > n3) {
                 this.llIlIIIlIIIIlIlllIlIIIIll += n - n3;

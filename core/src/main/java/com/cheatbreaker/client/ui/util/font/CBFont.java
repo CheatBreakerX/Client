@@ -4,6 +4,7 @@ import com.cheatbreaker.bridge.client.renderer.texture.DynamicTextureBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.main.CheatBreaker;
+import com.cheatbreaker.main.identification.MinecraftVersion;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -11,8 +12,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-@SuppressWarnings("WeakerAccess") public class CBFont {
-
+@SuppressWarnings("WeakerAccess")
+public class CBFont {
 	protected CharData[] charData = new CharData[256];
 
 	protected DynamicTextureBridge tex;
@@ -139,23 +140,32 @@ import java.io.InputStream;
 		float renderSRCWidth = srcWidth / imgSize;
 		float renderSRCHeight = srcHeight / imgSize;
 
-		Ref.getGlBridge().bridge$texCoord2f(renderSRCX + renderSRCWidth, renderSRCY);
-		Ref.getGlBridge().bridge$vertex2d(x + width, y);
+		if (Ref.getMinecraftVersion().isNewerThan(MinecraftVersion.v1_10_2)) {
+			Ref.getTessellator().bridge$pos(x + width, y, 0).bridge$tex(renderSRCX + renderSRCWidth, renderSRCY).bridge$endVertex();
+			Ref.getTessellator().bridge$pos(x, y, 0).bridge$tex(renderSRCX, renderSRCY).bridge$endVertex();
+			Ref.getTessellator().bridge$pos(x, y + height, 0).bridge$tex(renderSRCX, renderSRCY + renderSRCHeight).bridge$endVertex();
+			Ref.getTessellator().bridge$pos(x, y + height, 0).bridge$tex(renderSRCX, renderSRCY + renderSRCHeight).bridge$endVertex();
+			Ref.getTessellator().bridge$pos(x + width, y + height, 0).bridge$tex(renderSRCX + renderSRCWidth, renderSRCY + renderSRCHeight).bridge$endVertex();
+			Ref.getTessellator().bridge$pos(x + width, y, 0).bridge$tex(renderSRCX + renderSRCWidth, renderSRCY).bridge$endVertex();
+		} else {
+			Ref.getGlBridge().bridge$texCoord2f(renderSRCX + renderSRCWidth, renderSRCY);
+			Ref.getGlBridge().bridge$vertex2d(x + width, y);
 
-		Ref.getGlBridge().bridge$texCoord2f(renderSRCX, renderSRCY);
-		Ref.getGlBridge().bridge$vertex2d(x, y);
+			Ref.getGlBridge().bridge$texCoord2f(renderSRCX, renderSRCY);
+			Ref.getGlBridge().bridge$vertex2d(x, y);
 
-		Ref.getGlBridge().bridge$texCoord2f(renderSRCX, renderSRCY + renderSRCHeight);
-		Ref.getGlBridge().bridge$vertex2d(x, y + height);
+			Ref.getGlBridge().bridge$texCoord2f(renderSRCX, renderSRCY + renderSRCHeight);
+			Ref.getGlBridge().bridge$vertex2d(x, y + height);
 
-		Ref.getGlBridge().bridge$texCoord2f(renderSRCX, renderSRCY + renderSRCHeight);
-		Ref.getGlBridge().bridge$vertex2d(x, y + height);
+			Ref.getGlBridge().bridge$texCoord2f(renderSRCX, renderSRCY + renderSRCHeight);
+			Ref.getGlBridge().bridge$vertex2d(x, y + height);
 
-		Ref.getGlBridge().bridge$texCoord2f(renderSRCX + renderSRCWidth, renderSRCY + renderSRCHeight);
-		Ref.getGlBridge().bridge$vertex2d(x + width, y + height);
+			Ref.getGlBridge().bridge$texCoord2f(renderSRCX + renderSRCWidth, renderSRCY + renderSRCHeight);
+			Ref.getGlBridge().bridge$vertex2d(x + width, y + height);
 
-		Ref.getGlBridge().bridge$texCoord2f(renderSRCX + renderSRCWidth, renderSRCY);
-		Ref.getGlBridge().bridge$vertex2d(x + width, y);
+			Ref.getGlBridge().bridge$texCoord2f(renderSRCX + renderSRCWidth, renderSRCY);
+			Ref.getGlBridge().bridge$vertex2d(x + width, y);
+		}
 	}
 
 	public int getHeight() {

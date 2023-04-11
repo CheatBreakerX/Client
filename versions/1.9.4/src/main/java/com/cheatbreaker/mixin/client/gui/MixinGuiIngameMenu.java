@@ -2,6 +2,7 @@ package com.cheatbreaker.mixin.client.gui;
 
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
+import com.cheatbreaker.common.IngameMenu;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.fading.CosineFade;
 import com.cheatbreaker.client.ui.mainmenu.MainMenu;
@@ -101,55 +102,8 @@ public class MixinGuiIngameMenu extends GuiScreen {
     @Overwrite
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
-        int n3 = 600;
-        int n4 = 356;
-        double d = (double)Math.min(this.width, this.height) / ((double)n3 * (double)9);
-        this.renderRotatingLogo(this.width, this.height);
-        boolean bl = false;
-        for (SessionServer server : CheatBreaker.getInstance().statusServers) {
-            if (server.getStatus() != SessionServer.Status.UP) continue;
-            bl = true;
-        }
-        if (bl) {
-            if (!this.errorMsgFade.hasStartTime()) {
-                this.errorMsgFade.reset();
-            }
-            this.errorMsgFade.enableShouldResetOnceCalled();
-
-            Ref.modified$drawRect(this.width / 2f - 100, this.height / 4f + 128, this.width / 2f + 100, this.height / 4f + 142, 0x6F000000);
-            Ref.modified$drawRect(this.width / 2f - 100, this.height / 4f + 128, this.width / 2f + 100, this.height / 4f + 142, new Color(1.0f, 0.15f, 0.15f, 0.65f * this.errorMsgFade.getCurrentValue()).getRGB());
-            FontRegistry.getUbuntuMedium16px().drawCenteredString("Some login services might be offline".toUpperCase(), this.width / 2f, this.height / 4f + 130, -1);
-        }
+        IngameMenu.renderRotatingLogo(this.width, this.buttonList.size() > 2 ? (double)(this.buttonList.get(1).yPosition - 50f) : -100d);
+        IngameMenu.renderErrorMsgIfExists(this.width, this.height);
         super.drawScreen(mouseX, mouseY, partialTicks);
-    }
-
-    // Logo stuff
-    private final ResourceLocationBridge outerLogo = Ref.getInstanceCreator().createResourceLocation("client/logo_255_outer.png");
-    private final ResourceLocationBridge innerLogo = Ref.getInstanceCreator().createResourceLocation("client/logo_108_inner.png");
-    private final CosineFade rotatingFade = new CosineFade(4000L);
-    private final CosineFade errorMsgFade = new CosineFade(1500L);
-
-    private void renderRotatingLogo(double d, double d2) {
-        try {
-            if (!this.rotatingFade.hasStartTime()) {
-                this.rotatingFade.reset();
-                this.rotatingFade.enableShouldResetOnceCalled();
-            }
-            float f = 18;
-            double d3 = d / (double)2 - (double)f;
-            double d4 = this.buttonList.size() > 2 ? (double)(((GuiButton)this.buttonList.get(1)).yPosition - f - (float)32) : (double)-100;
-            Ref.getGlBridge().bridge$pushMatrix();
-            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
-            Ref.getGlBridge().bridge$translate((float)d3, (float)d4, 1.0f);
-            Ref.getGlBridge().bridge$translate(f, f, f);
-            Ref.getGlBridge().bridge$rotate((float)180 * this.rotatingFade.getCurrentValue(), 0.0f, 0.0f, 1.0f);
-            Ref.getGlBridge().bridge$translate(-f, -f, -f);
-            RenderUtil.drawIcon(this.outerLogo, f, 0.0f, 0.0f);
-            Ref.getGlBridge().bridge$popMatrix();
-            RenderUtil.drawIcon(this.innerLogo, f, (float)d3, (float)d4);
-        }
-        catch (Exception exception) {
-            // empty catch block
-        }
     }
 }

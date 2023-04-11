@@ -12,7 +12,7 @@ import com.cheatbreaker.client.ui.mainmenu.cosmetics.GuiCosmetics;
 import com.cheatbreaker.client.ui.mainmenu.element.IconButtonElement;
 import com.cheatbreaker.client.ui.mainmenu.element.TextButtonElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
-import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
+import com.cheatbreaker.client.ui.util.font.CBXFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.main.CheatBreaker;
 import com.google.gson.JsonElement;
@@ -151,7 +151,7 @@ public class MainMenuBase extends AbstractGui {
     @Override
     public void drawMenu(float mouseX, float mouseY) {
         CheatBreaker cb = CheatBreaker.getInstance();
-        CBFontRenderer font = FontRegistry.getRobotoRegular24px();
+        CBXFontRenderer font = FontRegistry.getRobotoRegular24px();
 
         if ((Boolean)cb.globalSettings.mainMenuLightGradient.getValue())
             Ref.modified$drawGradientRect(0f, 0f, this.getScaledWidth(), this.getScaledHeight(), 0x5FFFFFFF, 0x2FFFFFFF);

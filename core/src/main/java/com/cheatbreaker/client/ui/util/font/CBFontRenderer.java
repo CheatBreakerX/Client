@@ -9,8 +9,8 @@ import com.cheatbreaker.main.CheatBreaker;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("WeakerAccess") public final class CBFontRenderer extends CBFont {
-
+@SuppressWarnings("WeakerAccess")
+public final class CBFontRenderer extends CBFont {
 	protected final CharData[] boldItalicChars = new CharData[256];
 	protected final CharData[] italicChars = new CharData[256];
 	protected final CharData[] boldChars = new CharData[256];

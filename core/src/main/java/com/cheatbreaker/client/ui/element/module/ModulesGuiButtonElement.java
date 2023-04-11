@@ -6,7 +6,7 @@ import com.cheatbreaker.client.ui.element.AbstractModulesGuiElement;
 import com.cheatbreaker.client.ui.element.AbstractScrollableElement;
 import com.cheatbreaker.client.ui.module.CBModulesGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
-import com.cheatbreaker.client.ui.util.font.CBFontRenderer;
+import com.cheatbreaker.client.ui.util.font.CBXFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
 
 public class ModulesGuiButtonElement
@@ -14,11 +14,11 @@ public class ModulesGuiButtonElement
     public int lIIIIlIIllIIlIIlIIIlIIllI;
     public String displayString;
     public final AbstractScrollableElement lIIIIllIIlIlIllIIIlIllIlI;
-    private final CBFontRenderer fontRenderer;
+    private final CBXFontRenderer fontRenderer;
     public boolean IlllIllIlIIIIlIIlIIllIIIl = true;
     private int llIIlllIIIIlllIllIlIlllIl = 0;
 
-    public ModulesGuiButtonElement(CBFontRenderer fontRenderer, AbstractScrollableElement lllIllIllIlIllIlIIllllIIl2, String displayString, int n, int n2, int n3, int n4, int n5, float f) {
+    public ModulesGuiButtonElement(CBXFontRenderer fontRenderer, AbstractScrollableElement lllIllIllIlIllIlIIllllIIl2, String displayString, int n, int n2, int n3, int n4, int n5, float f) {
         super(f);
         this.displayString = displayString;
         this.setDimensions(n, n2, n3, n4);

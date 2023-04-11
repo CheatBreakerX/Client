@@ -11,8 +11,8 @@ import com.cheatbreaker.client.ui.util.RenderUtil;
 import java.awt.*;
 
 public class MainMenu extends MainMenuBase {
-    private final ResourceLocationBridge outerLogo = Ref.getInstanceCreator().createResourceLocation("client/logo_255_outer.png");
-    private final ResourceLocationBridge innerLogo = Ref.getInstanceCreator().createResourceLocation("client/logo_108_inner.png");
+    private final ResourceLocationBridge outerLogo = Ref.getInstanceCreator().createResourceLocation("client/logo_255_outer_remake.png");
+    private final ResourceLocationBridge innerLogo = Ref.getInstanceCreator().createResourceLocation("client/logo_108_inner_remake.png");
     private final GradientTextButton singleplayerButton = new GradientTextButton("SINGLEPLAYER");
     private final GradientTextButton multiplayerButton = new GradientTextButton("MULTIPLAYER");
     private final GradientTextButton realmsButton = new GradientTextButton("REALMS");
@@ -83,12 +83,6 @@ public class MainMenu extends MainMenuBase {
         }
 
         this.drawCheatBreakerLogo(this.getScaledWidth(), this.getScaledHeight(), logoY);
-
-        // For some reason this is a thing - don't ask me why
-
-        //float f5 = this.getScaledWidth() / 2.0f - (float)80;
-        //float f6 = this.getScaledHeight() - (float)40;
-        //RenderUtil.drawTexturedModalRect(f5, f6, f5 + 160f, f6 + 10f, 8, new Color(218, 66, 83, (int)((float)255 * (1.0f - logoY))).getRGB());
 
         if (CheatBreaker.getInstance().isInDebugMode()) {
             this.fontRendererObj.bridge$drawString("[p] " + RenderUtil.getTimeAccurateFrameRate() + " FPS (" + RenderUtil.getFrameTimeAsMs() + "ms/frame) ", 5, 55, -1);

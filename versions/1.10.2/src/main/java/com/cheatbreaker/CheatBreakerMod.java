@@ -5,6 +5,7 @@ import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.forge.RenderGameOverlayEventBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.impl.ref.*;
+import com.cheatbreaker.impl.ref.statics.TextureUtilBridgeImpl;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.main.identification.MinecraftVersion;
 import com.cheatbreaker.util.Utils;
@@ -38,6 +39,8 @@ public class CheatBreakerMod {
         Ref.setTessellator((TessellatorBridge) Tessellator.getInstance());
         Ref.setInstanceCreator(new InstanceCreator());
         Ref.setUtils(new RefUtils());
+
+        Ref.getImplementations().setTextureUtil(new TextureUtilBridgeImpl());
     }
 
     @Mod.EventHandler

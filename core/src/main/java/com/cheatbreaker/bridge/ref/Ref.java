@@ -9,6 +9,7 @@ import com.cheatbreaker.bridge.client.resources.I18nBridge;
 import com.cheatbreaker.bridge.entity.boss.BossStatusBridge;
 import com.cheatbreaker.bridge.ext.GLBridge;
 import com.cheatbreaker.bridge.forge.ForgeEventBusBridge;
+import com.cheatbreaker.bridge.ref.implementations.Implementations;
 import com.cheatbreaker.main.identification.MinecraftVersion;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,6 +42,8 @@ public class Ref {
     private static IInstanceCreator instanceCreator;
     @Getter @Setter
     private static IRefUtils utils;
+    @Getter
+    private static final Implementations implementations = new Implementations();
 
     public static void modified$drawRect(float left, float top, float right, float bottom, int color) {
         getDrawingUtils().drawRect(left, top, right, bottom, color);

@@ -279,7 +279,7 @@ public class OverlayGui extends AbstractGui {
 
     public void queueAlert(String string, String string2) {
         int n = Alert.IIIIllIlIIIllIlllIlllllIl();
-        string2 = FontRegistry.getPlayRegular16px().lIIIIIIIIIlIllIIllIlIIlIl(string2, n - 10);
+        string2 = FontRegistry.getPlayRegular16px().setWrapWords(string2, n - 10);
         Alert alert = new Alert(string, string2.split("\n"), this.getScaledWidth() - (float)n, this.getScaledHeight());
         alert.lIIIIlIIllIIlIIlIIIlIIllI(string.equals(""));
         this.alertQueue.add(alert);
