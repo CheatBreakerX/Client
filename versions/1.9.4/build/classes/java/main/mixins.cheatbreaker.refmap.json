@@ -1,0 +1,64 @@
+{
+  "mappings": {
+    "com/cheatbreaker/mixin/client/MixinMinecraft": {
+      "runGameLoop": "Lnet/minecraft/client/Minecraft;func_71411_J()V",
+      "Lnet/minecraft/client/gui/GuiScreen;handleInput()V": "Lnet/minecraft/client/gui/GuiScreen;func_146269_k()V",
+      "Lnet/minecraft/client/Minecraft;dispatchKeypresses()V": "Lnet/minecraft/client/Minecraft;func_152348_aa()V",
+      "runTickKeyboard": "Lnet/minecraft/client/Minecraft;func_184118_az()V",
+      "Lnet/minecraft/profiler/Profiler;endStartSection(Ljava/lang/String;)V": "Lnet/minecraft/profiler/Profiler;func_76318_c(Ljava/lang/String;)V",
+      "createDisplay": "Lnet/minecraft/client/Minecraft;func_175609_am()V",
+      "startGame": "Lnet/minecraft/client/Minecraft;func_71384_a()V",
+      "runTick": "Lnet/minecraft/client/Minecraft;func_71407_l()V",
+      "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V": "Lnet/minecraft/client/Minecraft;func_71361_d(Ljava/lang/String;)V",
+      "displayGuiScreen": "Lnet/minecraft/client/Minecraft;func_147108_a(Lnet/minecraft/client/gui/GuiScreen;)V"
+    },
+    "com/cheatbreaker/mixin/client/gui/MixinGuiBossOverlay": {
+      "renderBossHealth": "Lnet/minecraft/client/gui/GuiBossOverlay;func_184051_a()V"
+    },
+    "com/cheatbreaker/mixin/client/gui/MixinGuiConnecting": {
+      "drawScreen": "Lnet/minecraft/client/multiplayer/GuiConnecting;func_73863_a(IIF)V"
+    },
+    "com/cheatbreaker/mixin/client/gui/MixinGuiScreen": {
+      "drawWorldBackground": "Lnet/minecraft/client/gui/GuiScreen;func_146270_b(I)V",
+      "keyTyped": "Lnet/minecraft/client/gui/GuiScreen;func_73869_a(CI)V"
+    },
+    "com/cheatbreaker/mixin/client/renderer/MixinGlStateManager": {
+      "color(FFFF)V": "Lnet/minecraft/client/renderer/GlStateManager;func_179131_c(FFFF)V"
+    },
+    "com/cheatbreaker/mixin/client/audio/MixinSoundManager": {
+      "loadSoundSystem": "Lnet/minecraft/client/audio/SoundManager;func_148608_i()V"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "com/cheatbreaker/mixin/client/MixinMinecraft": {
+        "runGameLoop": "Lnet/minecraft/client/Minecraft;func_71411_J()V",
+        "Lnet/minecraft/client/gui/GuiScreen;handleInput()V": "Lnet/minecraft/client/gui/GuiScreen;func_146269_k()V",
+        "Lnet/minecraft/client/Minecraft;dispatchKeypresses()V": "Lnet/minecraft/client/Minecraft;func_152348_aa()V",
+        "runTickKeyboard": "Lnet/minecraft/client/Minecraft;func_184118_az()V",
+        "Lnet/minecraft/profiler/Profiler;endStartSection(Ljava/lang/String;)V": "Lnet/minecraft/profiler/Profiler;func_76318_c(Ljava/lang/String;)V",
+        "createDisplay": "Lnet/minecraft/client/Minecraft;func_175609_am()V",
+        "startGame": "Lnet/minecraft/client/Minecraft;func_71384_a()V",
+        "runTick": "Lnet/minecraft/client/Minecraft;func_71407_l()V",
+        "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V": "Lnet/minecraft/client/Minecraft;func_71361_d(Ljava/lang/String;)V",
+        "displayGuiScreen": "Lnet/minecraft/client/Minecraft;func_147108_a(Lnet/minecraft/client/gui/GuiScreen;)V"
+      },
+      "com/cheatbreaker/mixin/client/gui/MixinGuiBossOverlay": {
+        "renderBossHealth": "Lnet/minecraft/client/gui/GuiBossOverlay;func_184051_a()V"
+      },
+      "com/cheatbreaker/mixin/client/gui/MixinGuiConnecting": {
+        "drawScreen": "Lnet/minecraft/client/multiplayer/GuiConnecting;func_73863_a(IIF)V"
+      },
+      "com/cheatbreaker/mixin/client/gui/MixinGuiScreen": {
+        "drawWorldBackground": "Lnet/minecraft/client/gui/GuiScreen;func_146270_b(I)V",
+        "keyTyped": "Lnet/minecraft/client/gui/GuiScreen;func_73869_a(CI)V"
+      },
+      "com/cheatbreaker/mixin/client/renderer/MixinGlStateManager": {
+        "color(FFFF)V": "Lnet/minecraft/client/renderer/GlStateManager;func_179131_c(FFFF)V"
+      },
+      "com/cheatbreaker/mixin/client/audio/MixinSoundManager": {
+        "loadSoundSystem": "Lnet/minecraft/client/audio/SoundManager;func_148608_i()V"
+      }
+    }
+  }
+}

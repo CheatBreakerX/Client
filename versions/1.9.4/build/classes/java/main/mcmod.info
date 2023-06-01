@@ -1,0 +1,25 @@
+[
+    {
+        "modid": "cheatbreaker",
+        "name": "CheatBreaker",
+        "description": "The free FPS boosting modpack for Minecraft 1.7.10.",
+        "version": "unspecified",
+        "mcversion": "1.9.4",
+        "url": "",
+        "updateUrl": "",
+        "authorList": [
+            "Telecode/Lifix",
+            "JHalt",
+            "Decencies",
+            "tuzeynah",
+            "Freddie",
+            "Noxiuam"
+        ],
+        "credits": "Decencies, tuzeynah, Noxiuam, Freddie: CheatBreaker Source (https://github.com/Decencies/CheatBreaker), 
+JHalt: Creator of CheatBreaker, 
+Telecode/Lifix: CheatBreaker Forge",
+        "logoFile": "assets/minecraft/client/logo_red_circle.png",
+        "screenshots": [],
+        "dependencies": []
+    }
+]
