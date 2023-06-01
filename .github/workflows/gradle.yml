@@ -29,25 +29,25 @@ jobs:
       - name: Make 'gradlew' executable
         run: chmod +x gradlew
       - name: Compile CheatBreakerX 1.8.9
-        run: ./gradlew :versions:1.8.9:setupCiWorkspace :versions:1.8.9:build
+        run: ./gradlew :versions:1.8.9:build
       - uses: actions/upload-artifact@v3
         with:
           name: CheatBreakerX-1.8.9
           path: versions/1.8.9/build/libs
       - name: Compile CheatBreakerX 1.9.4
-        run: ./gradlew :versions:1.9.4:setupCiWorkspace :versions:1.9.4:build
+        run: ./gradlew :versions:1.9.4:build
       - uses: actions/upload-artifact@v3
         with:
           name: CheatBreakerX-1.9.4
           path: versions/1.9.4/build/libs
       - name: Compile CheatBreakerX 1.10.2
-        run: ./gradlew :versions:1.10.2:setupCiWorkspace :versions:1.10.2:build
+        run: ./gradlew :versions:1.10.2:build
       - uses: actions/upload-artifact@v3
         with:
           name: CheatBreakerX-1.10.2
           path: versions/1.10.2/build/libs
       - name: Compile CheatBreakerX 1.11.2
-        run: ./gradlew :versions:1.11.2:setupCiWorkspace :versions:1.11.2:build
+        run: ./gradlew :versions:1.11.2:build
       - uses: actions/upload-artifact@v3
         with:
           name: CheatBreakerX-1.11.2
