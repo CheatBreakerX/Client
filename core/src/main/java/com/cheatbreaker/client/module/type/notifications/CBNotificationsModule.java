@@ -34,14 +34,14 @@ public class CBNotificationsModule extends AbstractModule
         final Iterator<Notification> iterator = this.notifications.iterator();
         while (iterator.hasNext()) {
             final Notification notification = iterator.next();
-            notification.lIIIIlIIllIIlIIlIIIlIIllI();
-            if (notification.IIIIllIlIIIllIlllIlllllIl + notification.IlllIIIlIlllIllIlIIlllIlI - System.currentTimeMillis() <= 0L) {
-                int ilIlIIIlllIIIlIlllIlIllIl = notification.IIIIllIIllIIIIllIllIIIlIl;
+            notification.update();
+            if (notification.startTime + notification.duration - System.currentTimeMillis() <= 0L) {
+                int ilIlIIIlllIIIlIlllIlIllIl = notification.notificationBottom;
                 for (final Notification illlIlIlllIlIlllIIlllIlIl2 : this.notifications) {
-                    if (illlIlIlllIlIlllIIlllIlIl2.IIIIllIIllIIIIllIllIIIlIl < notification.IIIIllIIllIIIIllIllIIIlIl) {
-                        illlIlIlllIlIlllIIlllIlIl2.IllIIIIIIIlIlIllllIIllIII = 0;
-                        illlIlIlllIlIlllIIlllIlIl2.IlIlIIIlllIIIlIlllIlIllIl = ilIlIIIlllIIIlIlllIlIllIl;
-                        ilIlIIIlllIIIlIlllIlIllIl = illlIlIlllIlIlllIIlllIlIl2.IIIIllIIllIIIIllIllIIIlIl;
+                    if (illlIlIlllIlIlllIIlllIlIl2.notificationBottom < notification.notificationBottom) {
+                        illlIlIlllIlIlllIIlllIlIl2.framesAlive = 0;
+                        illlIlIlllIlIlllIIlllIlIl2.notificationTop = ilIlIIIlllIIIlIlllIlIllIl;
+                        ilIlIIIlllIIIlIlllIlIllIl = illlIlIlllIlIlllIIlllIlIl2.notificationBottom;
                     }
                 }
                 iterator.remove();
@@ -51,38 +51,37 @@ public class CBNotificationsModule extends AbstractModule
 
     private void onDraw(final GuiDrawEvent event) {
         for (Notification notification : this.notifications) {
-            notification.lIIIIlIIllIIlIIlIIIlIIllI((int) event.getResolution().bridge$getScaledWidth());
+            notification.render((int) event.getResolution().bridge$getScaledWidth());
         }
     }
 
     public void queueNotification(final String type, String content, long duration) {
         final ScaledResolutionBridge scaledResolution = Ref.getInstanceCreator().createScaledResolution();
-        if (duration < 2000L) duration = 2000L;
+        duration = Math.max(2000L, duration);
         content = content.replaceAll("&([abcdefghijklmrABCDEFGHIJKLMNR0-9])|(&$)", "\u00a7$1");
+
         final String lowerCase = type.toLowerCase();
         CBNotificationType resolvedType;
         switch (lowerCase) {
-            case "info": {
+            case "info":
                 resolvedType = CBNotificationType.INFO;
                 break;
-            }
-            case "error": {
+            case "error":
                 resolvedType = CBNotificationType.ERROR;
                 break;
-            }
-            default: {
+            default:
                 resolvedType = CBNotificationType.DEFAULT;
                 break;
-            }
         }
-        final Notification illlIlIlllIlIlllIIlllIlIl = new Notification(this, scaledResolution, resolvedType, content, duration);
-        int ilIlIIIlllIIIlIlllIlIllIl = illlIlIlllIlIlllIIlllIlIl.IlIlIIIlllIIIlIlllIlIllIl - illlIlIlllIlIlllIIlllIlIl.IIIllIllIlIlllllllIlIlIII - 2;
+
+        final Notification notificationInstance = new Notification(this, scaledResolution, resolvedType, content, duration);
+        int ilIlIIIlllIIIlIlllIlIllIl = notificationInstance.notificationTop - notificationInstance.notificationHeight - 2;
         for (int i = this.notifications.size() - 1; i >= 0; --i) {
             final Notification notification = this.notifications.get(i);
-            notification.IllIIIIIIIlIlIllllIIllIII = 0;
-            notification.IlIlIIIlllIIIlIlllIlIllIl = ilIlIIIlllIIIlIlllIlIllIl;
-            ilIlIIIlllIIIlIlllIlIllIl -= 2 + notification.IIIllIllIlIlllllllIlIlIII;
+            notification.framesAlive = 0;
+            notification.notificationTop = ilIlIIIlllIIIlIlllIlIllIl;
+            ilIlIIIlllIIIlIlllIlIllIl -= 2 + notification.notificationHeight;
         }
-        this.notifications.add(illlIlIlllIlIlllIIlllIlIl);
+        this.notifications.add(notificationInstance);
     }
 }

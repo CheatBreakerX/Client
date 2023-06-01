@@ -5,81 +5,92 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.CBXFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
+import com.cheatbreaker.main.utils.Utility;
 
 class Notification {
     public CBNotificationType type;
-    public String lIIIIIIIIIlIllIIllIlIIlIl;
-    public long IlllIIIlIlllIllIlIIlllIlI;
-    public long IIIIllIlIIIllIlllIlllllIl = System.currentTimeMillis();
-    public int IIIIllIIllIIIIllIllIIIlIl = 2;
-    public int IlIlIIIlllIIIlIlllIlIllIl;
-    public int IIIllIllIlIlllllllIlIlIII = 20;
-    public int IllIIIIIIIlIlIllllIIllIII = 0;
+    public String content;
+    public long duration;
+    public long startTime = System.currentTimeMillis();
+    public int notificationBottom;
+    public int notificationTop;
+    public int notificationHeight;
+    public int framesAlive = 0;
     final CBNotificationsModule notificationsModule;
 
-    Notification(CBNotificationsModule notificationsModule, ScaledResolutionBridge scaledResolution, CBNotificationType notificationType, String string, long l) {
+    Notification(CBNotificationsModule notificationsModule, ScaledResolutionBridge scaledResolution, CBNotificationType type, String content, long duration) {
         this.notificationsModule = notificationsModule;
-        this.type = notificationType;
-        this.lIIIIIIIIIlIllIIllIlIIlIl = string;
-        this.IlllIIIlIlllIllIlIIlllIlI = l;
-        this.IIIllIllIlIlllllllIlIlIII = notificationType == CBNotificationType.DEFAULT ? 16 : 20;
-        this.IlIlIIIlllIIIlIlllIlIllIl = (int) (scaledResolution.bridge$getScaledHeight() - 14 - this.IIIllIllIlIlllllllIlIlIII);
-        this.IIIIllIIllIIIIllIllIIIlIl = (int) (scaledResolution.bridge$getScaledHeight() + this.IIIllIllIlIlllllllIlIlIII);
+        this.type = type;
+        this.content = content;
+        this.duration = duration;
+        this.notificationHeight = type == CBNotificationType.DEFAULT ? 16 : 20;
+        this.notificationTop = (int) (scaledResolution.bridge$getScaledHeight() - 14 - this.notificationHeight);
+        this.notificationBottom = (int) (scaledResolution.bridge$getScaledHeight() + this.notificationHeight);
     }
 
-    public void lIIIIlIIllIIlIIlIIIlIIllI() {
-        if (this.IlIlIIIlllIIIlIlllIlIllIl != -1) {
-            ++this.IllIIIIIIIlIlIllllIIllIII;
-            float f = (float)this.IllIIIIIIIlIlIllllIIllIII * ((float)this.IllIIIIIIIlIlIllllIIllIII / (float)5) / (float)7;
-            if (this.IIIIllIIllIIIIllIllIIIlIl > this.IlIlIIIlllIIIlIlllIlIllIl) {
-                if ((float)this.IIIIllIIllIIIIllIllIIIlIl - f < (float)this.IlIlIIIlllIIIlIlllIlIllIl) {
-                    this.IIIIllIIllIIIIllIllIIIlIl = this.IlIlIIIlllIIIlIlllIlIllIl;
-                    this.IlIlIIIlllIIIlIlllIlIllIl = -1;
+    public void update() {
+        if (this.notificationTop != -1) {
+            ++this.framesAlive;
+            float f = this.framesAlive * (this.framesAlive / 5f) / 7f;
+            if (this.notificationBottom > this.notificationTop) {
+                if ((float)this.notificationBottom - f < (float)this.notificationTop) {
+                    this.notificationBottom = this.notificationTop;
+                    this.notificationTop = -1;
                 } else {
-                    this.IIIIllIIllIIIIllIllIIIlIl = (int)((float)this.IIIIllIIllIIIIllIllIIIlIl - f);
+                    this.notificationBottom = (int)((float)this.notificationBottom - f);
                 }
-            } else if (this.IIIIllIIllIIIIllIllIIIlIl < this.IlIlIIIlllIIIlIlllIlIllIl) {
-                if ((float)this.IIIIllIIllIIIIllIllIIIlIl + f > (float)this.IlIlIIIlllIIIlIlllIlIllIl) {
-                    this.IIIIllIIllIIIIllIllIIIlIl = this.IlIlIIIlllIIIlIlllIlIllIl;
-                    this.IlIlIIIlllIIIlIlllIlIllIl = -1;
+            } else if (this.notificationBottom < this.notificationTop) {
+                if ((float)this.notificationBottom + f > (float)this.notificationTop) {
+                    this.notificationBottom = this.notificationTop;
+                    this.notificationTop = -1;
                 } else {
-                    this.IIIIllIIllIIIIllIllIIIlIl = (int)((float)this.IIIIllIIllIIIIllIllIIIlIl + f);
+                    this.notificationBottom = (int)((float)this.notificationBottom + f);
                 }
             } else {
-                this.IlIlIIIlllIIIlIlllIlIllIl = -1;
+                this.notificationTop = -1;
             }
         }
     }
 
-    public void lIIIIlIIllIIlIIlIIIlIIllI(int n) {
+    public void render(int n) {
         CBXFontRenderer font = FontRegistry.getPlayRegular16px();
-        int n2 = this.IIIIllIIllIIIIllIllIIIlIl;
-        float f = font.getStringWidth(this.lIIIIIIIIIlIllIIllIlIIlIl);
-        int n3 = (int)(this.type == CBNotificationType.DEFAULT ? f + (float)10 : f + (float)30);
-        Ref.modified$drawRect(n - 5 - n3, n2, n - 5, n2 + this.IIIllIllIlIlllllllIlIlIII, -1358954496);
+        int n2 = this.notificationBottom;
+        float contentWidth = font.getStringWidth(this.content);
+        int n3 = (int)(this.type == CBNotificationType.DEFAULT ? contentWidth + (float)10 : contentWidth + (float)30);
+        Ref.modified$drawRect(n - 5 - n3, n2, n - 5, n2 + this.notificationHeight, 0xFF000000);
+
         switch (this.type) {
-            case ERROR: {
+            case ERROR:
                 Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
                 RenderUtil.drawIcon(Ref.getInstanceCreator().createResourceLocation("client/icons/error-64.png"), (float)6, (float)(n - 10 - n3 + 9), (float)(n2 + 4));
-                Ref.modified$drawRect((float)(n - 10) - f - 7.8428574f * 0.57377046f, n2 + 4, (float)(n - 10) - f - (float)4, n2 + this.IIIllIllIlIlllllllIlIlIII - 4, -1342177281);
+                Ref.modified$drawRect((float)(n - 10) - contentWidth - 4.5f, n2 + 4, (float)(n - 10) - contentWidth - 4f, n2 + this.notificationHeight - 4, 0xFFFFFFFF);
                 break;
-            }
-            case INFO: {
-                Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 0.7955224f * 0.81707317f);
+            case INFO:
+                Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 0.65f);
                 RenderUtil.drawIcon(Ref.getInstanceCreator().createResourceLocation("client/icons/info-64.png"), (float)6, (float)(n - 10 - n3 + 9), (float)(n2 + 4));
-                Ref.modified$drawRect((float)(n - 10) - f - 11.142858f * 0.40384614f, n2 + 4, (float)(n - 10) - f - (float)4, n2 + this.IIIllIllIlIlllllllIlIlIII - 4, -1342177281);
-            }
+                Ref.modified$drawRect(n - 10f - contentWidth - 4.5f, n2 + 4, (float)(n - 10) - contentWidth - 4f, n2 + this.notificationHeight - 4, 0xFFFFFFFF);
+                break;
         }
-        long l = this.IlllIIIlIlllIllIlIIlllIlI - (this.IIIIllIlIIIllIlllIlllllIl + this.IlllIIIlIlllIllIlIIlllIlI - System.currentTimeMillis());
-        if (l > this.IlllIIIlIlllIllIlIIlllIlI) {
-            l = this.IlllIIIlIlllIllIlIIlllIlI;
-        }
-        if (l < 0L) {
-            l = 0L;
-        }
-        float f2 = f * ((float)l / (float)this.IlllIIIlIlllIllIlIIlllIlI * (float)100 / (float)100);
-        Ref.modified$drawRect((float)(n - 10) - f, (float)(n2 + this.IIIllIllIlIlllllllIlIlIII) - 56.46667f * 0.077922076f, (float)(n - 10) - f + f, n2 + this.IIIllIllIlIlllllllIlIlIII - 4, 0x30666666);
-        Ref.modified$drawRect((float)(n - 10) - f, (float)(n2 + this.IIIllIllIlIlllllllIlIlIII) - 2.2f * 2.0f, (float)(n - 10) - f + f2, n2 + this.IIIllIllIlIlllllllIlIlIII - 4, -1878982912);
-        font.drawString(this.lIIIIIIIIIlIllIIllIlIIlIl, (float)(n - 10) - f, (float)(n2 + (this.type == CBNotificationType.DEFAULT ? 2 : 4)), -1);
+
+        long millisElapsed = Utility.clamp(this.duration - (this.startTime + this.duration - System.currentTimeMillis()), 0L, this.duration);
+        float millisElapsedDisplay = contentWidth * ((float)millisElapsed / (float)this.duration * 100f / 100f);
+
+        Ref.modified$drawRect(
+                n - 10f - contentWidth,
+                n2 + this.notificationHeight - 4.4f,
+                n - 10f - contentWidth + contentWidth,
+                n2 + this.notificationHeight - 4f,
+                0x30666666
+        );
+
+        Ref.modified$drawRect(
+                n - 10f - contentWidth,
+                n2 + this.notificationHeight - 4.4f,
+                n - 10f - contentWidth + millisElapsedDisplay,
+                n2 + this.notificationHeight - 4f,
+                0xFF00FF00
+        );
+
+        font.drawString(this.content, n - 10f - contentWidth, n2 + (this.type == CBNotificationType.DEFAULT ? 2f : 4f), -1);
     }
 }

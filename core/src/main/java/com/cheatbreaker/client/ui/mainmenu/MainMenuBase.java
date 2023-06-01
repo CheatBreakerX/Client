@@ -11,6 +11,7 @@ import com.cheatbreaker.client.ui.fading.ColorFade;
 import com.cheatbreaker.client.ui.mainmenu.cosmetics.GuiCosmetics;
 import com.cheatbreaker.client.ui.mainmenu.element.IconButtonElement;
 import com.cheatbreaker.client.ui.mainmenu.element.TextButtonElement;
+import com.cheatbreaker.client.ui.screens.ConnectionWarningScreen;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.CBXFontRenderer;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
@@ -33,7 +34,7 @@ import java.util.List;
 import java.util.*;
 
 public class MainMenuBase extends AbstractGui {
-    private static int panoramaTimer = 4100;
+    protected static int panoramaTimer = 4100;
     private final ResourceLocationBridge logo = Ref.getInstanceCreator().createResourceLocation("client/logo_42.png");
     private final IconButtonElement exitButton;
     private final IconButtonElement languageButton;
@@ -42,7 +43,7 @@ public class MainMenuBase extends AbstractGui {
     private final TextButtonElement changelogButton;
     private final TextButtonElement cosmeticsButton;
     private final ColorFade cbTextShadowFade;
-    private final ResourceLocationBridge[] panoramaImages = new ResourceLocationBridge[] {
+    protected final ResourceLocationBridge[] panoramaImages = new ResourceLocationBridge[] {
             Ref.getInstanceCreator().createResourceLocation("client/panorama/0.png"),
             Ref.getInstanceCreator().createResourceLocation("client/panorama/1.png"),
             Ref.getInstanceCreator().createResourceLocation("client/panorama/2.png"),
@@ -50,10 +51,12 @@ public class MainMenuBase extends AbstractGui {
             Ref.getInstanceCreator().createResourceLocation("client/panorama/4.png"),
             Ref.getInstanceCreator().createResourceLocation("client/panorama/5.png")
     };
-    private ResourceLocationBridge panoramaBackgroundLocation;
+    protected ResourceLocationBridge panoramaBackgroundLocation;
     private final File launcherAccounts;
     private final List<Account> accountsList;
     private float accountButtonWidth;
+
+    public boolean renderExtraButtons = true;
 
     public MainMenuBase() {
         this.launcherAccounts = new File(Ref.getMinecraft().bridge$getMcDataDir() + File.separator + "launcher_accounts.json");
@@ -129,11 +132,14 @@ public class MainMenuBase extends AbstractGui {
         super.initGui();
         DynamicTextureBridge texture = Ref.getInstanceCreator().createDynamicTexture(256, 256);
         this.panoramaBackgroundLocation = this.mc.bridge$getTextureManager().bridge$getDynamicTextureLocation("background", texture);
-        this.optionsButton.setElementDimensions(124f, 6f, 42f, 20f);
-        this.cosmeticsButton.setElementDimensions(167f, 6f, 48f, 20f);
-        this.exitButton.setElementDimensions(this.getScaledWidth() - 30f, 7f, 23f, 17f);
-        this.languageButton.setElementDimensions(this.getScaledWidth() / 2f - 13f, this.getScaledHeight() - 17f, 26f, 18f);
-        this.updateAccountButtonSize();
+        this.allowUserInput = true;
+        if (this.renderExtraButtons) {
+            this.optionsButton.setElementDimensions(124f, 6f, 42f, 20f);
+            this.cosmeticsButton.setElementDimensions(167f, 6f, 48f, 20f);
+            this.exitButton.setElementDimensions(this.getScaledWidth() - 30f, 7f, 23f, 17f);
+            this.languageButton.setElementDimensions(this.getScaledWidth() / 2f - 13f, this.getScaledHeight() - 17f, 26f, 18f);
+            this.updateAccountButtonSize();
+        }
     }
 
     public void updateAccountButtonSize() {
@@ -184,11 +190,14 @@ public class MainMenuBase extends AbstractGui {
         font.drawRightAlignedStringWithShadow(copyright, this.getScaledWidth() - 5f, this.getScaledHeight() - 14f, textColor);
 
         // Render buttons
-        this.exitButton.drawElement(mouseX, mouseY, true);
-        if (!(mc.bridge$getCurrentScreen() instanceof GuiCosmetics)) this.languageButton.drawElement(mouseX, mouseY, true);
-        this.accountList.drawElement(mouseX, mouseY, true);
-        this.optionsButton.drawElement(mouseX, mouseY, true);
-        this.cosmeticsButton.drawElement(mouseX, mouseY, true);
+        if (this.renderExtraButtons) {
+            this.exitButton.drawElement(mouseX, mouseY, true);
+            if (!(mc.bridge$getCurrentScreen() instanceof GuiCosmetics))
+                this.languageButton.drawElement(mouseX, mouseY, true);
+            this.accountList.drawElement(mouseX, mouseY, true);
+            this.optionsButton.drawElement(mouseX, mouseY, true);
+            this.cosmeticsButton.drawElement(mouseX, mouseY, true);
+        }
     }
 
     @Override
@@ -198,25 +207,27 @@ public class MainMenuBase extends AbstractGui {
 
     @Override
     public void onMouseClicked(float mouseX, float mouseY, int button) {
-        this.exitButton.handleElementMouseClicked(mouseX, mouseY, button, true);
-        this.accountList.handleElementMouseClicked(mouseX, mouseY, button, true);
-        if (this.exitButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.mc.bridge$shutdown();
-        } else if (this.optionsButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.OPTIONS, new MainMenu());
-        } else if (this.languageButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.LANGUAGE, new MainMenu());
-        } else if (this.cosmeticsButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.mc.bridge$displayGuiScreen(new GuiCosmetics());
-        } else {
-            boolean bl = mouseX < this.optionsButton.getX() && mouseY < (float) 30;
-            if (bl && !(this.mc.bridge$getCurrentScreen() instanceof MainMenu)) {
+        if (this.renderExtraButtons) {
+            this.exitButton.handleElementMouseClicked(mouseX, mouseY, button, true);
+            this.accountList.handleElementMouseClicked(mouseX, mouseY, button, true);
+            if (this.exitButton.isMouseInside(mouseX, mouseY)) {
                 this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-                this.mc.bridge$displayGuiScreen(new MainMenu());
+                this.mc.bridge$shutdown();
+            } else if (this.optionsButton.isMouseInside(mouseX, mouseY)) {
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.OPTIONS, new MainMenu());
+            } else if (this.languageButton.isMouseInside(mouseX, mouseY)) {
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.LANGUAGE, new MainMenu());
+            } else if (this.cosmeticsButton.isMouseInside(mouseX, mouseY)) {
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                this.mc.bridge$displayGuiScreen(new GuiCosmetics());
+            } else {
+                boolean bl = mouseX < this.optionsButton.getX() && mouseY < (float) 30;
+                if (bl && !(this.mc.bridge$getCurrentScreen() instanceof MainMenu)) {
+                    this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                    this.mc.bridge$displayGuiScreen(new MainMenu());
+                }
             }
         }
     }

@@ -6,7 +6,7 @@ def getShortCommitVersion() {
         commitHashProc.waitFor()
         if (commitHashProc.exitValue() == 0) {
             def commitHash = commitHashProc.text.trim()
-            return commitHash
+            return commitHash.substring(0, 7)
         } else {
             println commitHashProc.err.text
             throw new Exception("git exited with non-zero return value")
@@ -87,4 +87,11 @@ updateClientCommitProperties()
 
 ext {
     getShortCommitVersion = this.&getShortCommitVersion
+
+    projModID = "cheatbreaker"
+    projGroup = "com.cheatbreaker"
+    projMixinTweaker = "org.spongepowered.asm.launch.MixinTweaker"
+    projMixinConfigs = "mixins.cheatbreaker.json"
+    projMixinRefmap = "mixins.cheatbreaker.refmap.json"
+    projDepsLocation = "com.cheatbreaker.lib"
 }

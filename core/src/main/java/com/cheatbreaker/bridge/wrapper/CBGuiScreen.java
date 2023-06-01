@@ -23,6 +23,7 @@ public class CBGuiScreen {
     private int eventButton;
     private long lastMouseEvent;
     private int field_146298_h;
+    public boolean allowUserInput;
 
     public Runnable externalValues$execute = () -> {};
     public void setExternalValues() {

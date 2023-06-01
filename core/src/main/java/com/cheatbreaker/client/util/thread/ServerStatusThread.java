@@ -1,52 +1,86 @@
 package com.cheatbreaker.client.util.thread;
 
-import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.client.config.types.PinnedServer;
+import com.cheatbreaker.client.config.types.UnrecommendedServer;
 import com.cheatbreaker.main.CheatBreaker;
-import com.cheatbreaker.client.util.SessionServer;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServerStatusThread extends Thread {
+    public static final String serverMetadataBase = "https://cdn.jsdelivr.net/gh/CheatBreakerX/Resources@66de1e9/servers/";
 
     @Override
     public void run() {
         try {
-            URL uRL = new URL(CheatBreaker.getInstance().getGlobalSettings().mojangStatusURL);
-            URLConnection uRLConnection = uRL.openConnection();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(uRLConnection.getInputStream()));
+            CheatBreaker.getInstance().getGlobalSettings().pinnedServers.clear();
+            CheatBreaker.getInstance().getGlobalSettings().unrecommendedServers.clear();
+
+            URL pinnedServersURL = new URL(serverMetadataBase + "pinned.json");
+            URL unrecommendedServersURL = new URL(serverMetadataBase + "unrecommended.json");
+            URLConnection pinnedServersConnection = pinnedServersURL.openConnection();
+            URLConnection unrecommendedServersConnection = unrecommendedServersURL.openConnection();
+
             JsonParser jsonParser = new JsonParser();
-            JsonElement jsonElement = jsonParser.parse(bufferedReader);
-            JsonArray jsonArray = jsonElement.getAsJsonArray();
-            for (int i = 0; i < jsonArray.size(); ++i) {
-                JsonElement jsonElement2 = jsonArray.get(i);
-                for (Map.Entry entry : jsonElement2.getAsJsonObject().entrySet()) {
-                    for (SessionServer serverObject : CheatBreaker.getInstance().statusServers) {
-                        SessionServer.Status serverStatus = null;
-                        if (!serverStatus.getType().equalsIgnoreCase((String)entry.getKey()) || (serverStatus = SessionServer.Status.getStatusByName(((JsonElement)entry.getValue()).getAsString())) == null) continue;
-                        if (serverStatus != serverObject.getStatus() && serverObject.getStatus() != SessionServer.Status.UNKNOWN && serverObject.getStatus() != SessionServer.Status.BUSY && (serverStatus == SessionServer.Status.DOWN || serverStatus == SessionServer.Status.UP)) {
-                            String string;
-                            String colorOfText = serverStatus == SessionServer.Status.UP ? "\u00a7a" : "\u00a7c";
-                            String string2 = string = serverStatus == SessionServer.Status.UP ? "online" : "offline";
-                            if (Ref.getMinecraft().bridge$getTheWorld() != null) {
-                                CheatBreaker.getInstance().getModuleManager().notifications.queueNotification("info", "Minecraft " + serverObject.getType().toLowerCase() + " server is now " + string + ".", 7500L);
-                                System.out.println("Minecraft servers are now " + colorOfText + string + ".");
-                            }
-                        }
-                        serverObject.setStatus(serverStatus);
-                    }
+
+            BufferedReader pinnedServersBuffer =
+                    new BufferedReader(new InputStreamReader(pinnedServersConnection.getInputStream()));
+            JsonArray pinnedServers = jsonParser.parse(pinnedServersBuffer).getAsJsonArray();
+            for (JsonElement serverElement : pinnedServers) {
+                JsonObject obj = serverElement.getAsJsonObject();
+
+                if (obj.has("name") && obj.has("ip")) {
+                    CheatBreaker.getInstance().getGlobalSettings().pinnedServers.add(
+                        new PinnedServer(
+                            obj.get("name").getAsString(),
+                            obj.get("ip").getAsString()
+                        )
+                    );
                 }
             }
-            bufferedReader.close();
+            pinnedServersBuffer.close();
+
+            BufferedReader unrecommendedServersBuffer =
+                    new BufferedReader(new InputStreamReader(unrecommendedServersConnection.getInputStream()));
+            JsonObject unrecommendedServers = jsonParser.parse(unrecommendedServersBuffer).getAsJsonObject();
+            for (JsonElement serverElement : unrecommendedServers.get("servers").getAsJsonArray()) {
+                JsonObject obj = serverElement.getAsJsonObject();
+
+                if (obj.has("name") && obj.has("reason")
+                        && obj.has("knownAddresses")) {
+                    String reason = obj.get("reason").getAsString();
+                    if (unrecommendedServers.has("reasons")) {
+                        if (unrecommendedServers.get("reasons").getAsJsonObject().has(reason)) {
+                            reason = unrecommendedServers.get("reasons").getAsJsonObject().get(reason).getAsString();
+                        }
+                    }
+
+                    List<String> addresses = new ArrayList<>();
+                    for (JsonElement addressElement : obj.get("knownAddresses").getAsJsonArray()) {
+                        addresses.add(addressElement.getAsString());
+                    }
+
+                    CheatBreaker.getInstance().getGlobalSettings().unrecommendedServers.add(
+                            new UnrecommendedServer(
+                                    obj.get("name").getAsString(),
+                                    reason,
+                                    addresses.toArray(new String[0])
+                            )
+                    );
+                }
+            }
+            unrecommendedServersBuffer.close();
         }
-        catch (Exception exception) {
-            exception.printStackTrace();
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

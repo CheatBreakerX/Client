@@ -87,7 +87,7 @@ public class MainMenu extends MainMenuBase {
         if (CheatBreaker.getInstance().isInDebugMode()) {
             this.fontRendererObj.bridge$drawString("[p] " + RenderUtil.getTimeAccurateFrameRate() + " FPS (" + RenderUtil.getFrameTimeAsMs() + "ms/frame) ", 5, 55, -1);
             this.fontRendererObj.bridge$drawString("[p] Min/Max FPS: " + RenderUtil.minFps + "/" + RenderUtil.maxFps, 5, 65, -1);
-            this.fontRendererObj.bridge$drawString("[i] Press \u00a7cF9 \u00a7fto reset the Min/Max values.", 5, 75, -1);
+            this.fontRendererObj.bridge$drawString("[i] Press §cF9 §fto reset the Min/Max values.", 5, 75, -1);
         }
     }
 
@@ -114,13 +114,6 @@ public class MainMenu extends MainMenuBase {
         if (Ref.getMinecraftVersion().isLatestVersion()) {
             this.realmsButton.handleElementMouseClicked(mouseX, mouseY, button, true);
         }
-/*        if (this.singleplayerButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.SINGLEPLAYER, this);
-        } else if (this.multiplayerButton.isMouseInside(mouseX, mouseY)) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.mc.bridge$displayInternalGuiScreen(MinecraftBridge.InternalScreen.MULTIPLAYER, this);
-        }*/
     }
 
     public boolean isFirstOpened() {

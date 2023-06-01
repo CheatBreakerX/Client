@@ -23,6 +23,7 @@ public class WrappedGuiScreen extends GuiScreen {
 
     private boolean setDrawScreen = false;
     public void drawScreen(int mouseX, int mouseY, float delta) {
+        //this.allowUserInput = this.cbScreen.allowUserInput;
         if (!this.setDrawScreen) {
             this.cbScreen.super$drawScreen = () -> super.drawScreen(mouseX, mouseY, delta);
             this.setDrawScreen = true;

@@ -3,6 +3,8 @@ package com.cheatbreaker.client.config;
 import com.cheatbreaker.bridge.client.settings.GameSettingsBridge;
 import com.cheatbreaker.bridge.client.settings.KeyBindingBridge;
 import com.cheatbreaker.bridge.ref.Ref;
+import com.cheatbreaker.client.config.types.PinnedServer;
+import com.cheatbreaker.client.config.types.UnrecommendedServer;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.element.type.ColorPickerColorElement;
 import com.cheatbreaker.client.util.dash.DashUtil;
@@ -24,8 +26,8 @@ public class GlobalSettings {
     public KeyBindingBridge dragLook;
     public KeyBindingBridge hideNames;
     public final List<Setting> settingsList = new ArrayList<>();
-    public List<String[]> pinnedServers;
-    public List<String> warnedServers;
+    public List<PinnedServer> pinnedServers;
+    public List<UnrecommendedServer> unrecommendedServers;
     public boolean isDebug = true;
     public String crashReportURL = "https://cheatbreaker.com/crash-report-upload";
     public String debugUploadURL = "https://cheatbreaker.com/debug-upload";
@@ -169,8 +171,8 @@ public class GlobalSettings {
         this.customCrosshair = new Setting(this.settingsList, "Custom crosshair").setValue(false);
         this.crosshairOutline = new Setting(this.settingsList, "Outline").setValue(false);
         this.crosshairColor = new Setting(this.settingsList, "Color").setValue(-1).setMinMax(Integer.MIN_VALUE, Integer.MAX_VALUE);
-        this.crosshairThickness = new Setting(this.settingsList, "Thickness").setValue(2.0F).setMinMax(1.0F, 1.8478261F * 1.3529412F);
-        this.crosshairSize = new Setting(this.settingsList, "Size").setValue(4f).setMinMax(1.0F, 10f);
+        this.crosshairThickness = new Setting(this.settingsList, "Thickness").setValue(2f).setMinMax(1f, 2.5f);
+        this.crosshairSize = new Setting(this.settingsList, "Size").setValue(4f).setMinMax(1f, 10f);
         this.crosshairGap = new Setting(this.settingsList, "Gap").setValue(1.75f).setMinMax(0f, 7.5f);
 
         this.colorOptionsLabel = new Setting(this.settingsList, "label").setValue("Color Options");
@@ -182,18 +184,50 @@ public class GlobalSettings {
         this.followMinecraftScale = new Setting(this.settingsList, "Follow Minecraft GUI Scale").setValue(true);
 
         this.pinnedServers = new ArrayList<>();
-        this.pinnedServers.add(new String[] { "MineHQ Network", "minehq.com" });
-        this.pinnedServers.add(new String[] { "VeltPvP", "veltpvp.com" });
-        this.warnedServers = new ArrayList<>();
-        this.warnedServers.add("xyz.com");
+        //this.pinnedServers.add(new PinnedServer("MineHQ Network", "minehq.com"));
+        //this.pinnedServers.add(new PinnedServer("VeltPvP", "veltpvp.com"));
 
-        GameSettingsBridge var2 = Ref.getMinecraft().bridge$getGameSettings();
-        this.pushToTalk = Ref.getInstanceCreator().createKeyBinding("Voice Chat", 47, "CheatBreaker Client");
-        this.openMenu = Ref.getInstanceCreator().createKeyBinding("Open Menu", 54, "CheatBreaker Client");
-        this.openVoiceMenu = Ref.getInstanceCreator().createKeyBinding("Open Voice Menu", 25, "CheatBreaker Client");
-        this.dragLook = Ref.getInstanceCreator().createKeyBinding("Drag to look", 56, "CheatBreaker Client");
-        this.hideNames = Ref.getInstanceCreator().createKeyBinding("Hide name plates", 0, "CheatBreaker Client");
-        var2.bridge$setKeyBindings(ArrayUtils.addAll(var2.bridge$getKeyBindings(), this.pushToTalk, this.openMenu, this.openVoiceMenu, this.dragLook, this.hideNames));
+        this.unrecommendedServers = new ArrayList<>();
+        /*this.unrecommendedServers.add(
+            new UnrecommendedServer("Purple Prison", UnrecommendedServer.REASON_P2W,
+                ".*(\\.)?purple\\.wtf",                 ".*(\\.)?purpleprison\\.net",   ".*(\\.)?moxmc\\.net",
+                ".*(\\.)?purpleprison\\.co",            ".*(\\.)?prisonfun\\.com",      ".*(\\.)?purpleprison\\.org",
+                ".*(\\.)?minecraftsexserver\\.club",    ".*(\\.)?moxmc\\.com",          ".*(\\.)?purpleore\\.com",
+                ".*(\\.)?purpleprison\\.xyz"
+            )
+        );
+        this.unrecommendedServers.add(
+            new UnrecommendedServer("LoverCraft", UnrecommendedServer.REASON_P2W,
+                ".*(\\.)?loverfella\\.com"
+            )
+        );
+        this.unrecommendedServers.add(
+            new UnrecommendedServer("Glorious Realms", UnrecommendedServer.REASON_P2W,
+                ".*(\\.)?gloriousrealms\\.com"
+            )
+        );
+        this.unrecommendedServers.add(
+            new UnrecommendedServer("Project Eden", UnrecommendedServer.REASON_P2W,
+                ".*(\\.)?bnn\\.gg"
+            )
+        );
+        this.unrecommendedServers.add(
+            new UnrecommendedServer("Wild Prison", UnrecommendedServer.REASON_P2W,
+                ".*(\\.)?wildprison\\.net"
+            )
+        );*/
+
+        GameSettingsBridge gameSettings = Ref.getMinecraft().bridge$getGameSettings();
+        gameSettings.bridge$setKeyBindings(
+                ArrayUtils.addAll(
+                        gameSettings.bridge$getKeyBindings(),
+                        this.pushToTalk = Ref.getInstanceCreator().createKeyBinding("Voice Chat", 47, "CheatBreaker Client"),
+                        this.openMenu = Ref.getInstanceCreator().createKeyBinding("Open Menu", 54, "CheatBreaker Client"),
+                        this.openVoiceMenu = Ref.getInstanceCreator().createKeyBinding("Open Voice Menu", 25, "CheatBreaker Client"),
+                        this.dragLook = Ref.getInstanceCreator().createKeyBinding("Drag to look", 56, "CheatBreaker Client"),
+                        this.hideNames = Ref.getInstanceCreator().createKeyBinding("Hide name plates", 0, "CheatBreaker Client")
+                )
+        );
     }
 
     public boolean isDarkMode() {

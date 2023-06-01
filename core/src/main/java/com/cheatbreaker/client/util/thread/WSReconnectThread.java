@@ -3,8 +3,7 @@ package com.cheatbreaker.client.util.thread;
 import com.cheatbreaker.main.CheatBreaker;
 
 public class WSReconnectThread extends Thread {
-
-    private long delay = 10000L;
+    private final long delay = 10000L;
 
     @Override
     public void run() {

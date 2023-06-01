@@ -41,6 +41,8 @@ import com.cheatbreaker.client.util.worldborder.WorldBorderManager;
 import com.cheatbreaker.client.websocket.AssetsWebSocket;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
 import javax.sound.sampled.*;
@@ -55,6 +57,8 @@ import java.util.*;
 @Getter
 @BridgedMod(modid = "cheatbreaker", name = "CheatBreaker", version = "3ac10ce")
 public class CheatBreaker {
+    public static final Logger LOGGER = LogManager.getLogger("CheatBreakerX");
+
     private static CheatBreaker instance;
     public static CheatBreaker getInstance() {
         return instance == null ? new CheatBreaker() : instance;
@@ -197,6 +201,9 @@ public class CheatBreaker {
             if (e.getKeyboardKey() == Keyboard.KEY_F9) {
                 RenderUtil.minFps = 2147483647;
                 RenderUtil.maxFps = 0;
+            }
+            if (e.getKeyboardKey() == Keyboard.KEY_F10) {
+                new ServerStatusThread().start();
             }
         });
         this.cbInfo("Registered main events.");

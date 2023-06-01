@@ -11,7 +11,7 @@ public class FloatFade extends AbstractFade {
 
     @Override
     protected float getValue() {
-        return (float)(this.duration - this.llIIlllIIIIlllIllIlIlllIl()) / (float)this.duration;
+        return (float)(this.duration - this.getTimeUntilEnd()) / (float)this.duration;
     }
 }
 

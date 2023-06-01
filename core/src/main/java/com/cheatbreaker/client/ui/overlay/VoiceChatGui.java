@@ -46,7 +46,7 @@ public class VoiceChatGui extends AbstractGui {
                 this.someRandomAssButtons.add(lIIIllIIIIlIIllIIIIIIIlll2);
                 lIIIllIIIIlIIllIIIIIIIlll2.setElementDimensions(f2, f3 + (float)12 + f * (float)n, (float)110, 12);
                 if (this.voiceChannel == llIIIlllllIIllIlllIlIlIll2) {
-                    lIIIllIIIIlIIllIIIIIIIlll2.lIIIIllIIlIlIllIIIlIllIlI();
+                    lIIIllIIIIlIIllIIIIIIIlll2.applySelectedColorState();
                 }
                 ++n;
             }
@@ -99,23 +99,23 @@ public class VoiceChatGui extends AbstractGui {
             if (!randomAssButton.isMouseInside(f, f2) || this.voiceChannel == (voiceChannel = this.lIIIIlIIllIIlIIlIIIlIIllI(randomAssButton.getText()))) continue;
             for (GradientTextButton lIIIllIIIIlIIllIIIIIIIlll3 : this.someRandomAssButtons) {
                 if (this.voiceChannel == cheatBreaker.getNetHandler().getVoiceChannel() || !lIIIllIIIIlIIllIIIIIIIlll3.getText().equals(this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl())) continue;
-                lIIIllIIIIlIIllIIIIIIIlll3.setDefaultColors();
+                lIIIllIIIIlIIllIIIIIIIlll3.applyDefaultColorState();
             }
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.voiceChannel = voiceChannel;
             if (this.voiceChannel == cheatBreaker.getNetHandler().getVoiceChannel()) continue;
-            randomAssButton.IllIIIIIIIlIlIllllIIllIII();
+            randomAssButton.applyLighterColorState();
         }
         if (this.voiceChannel != null) {
             if (this.joinChannelButton.isMouseInside(f, f2)) {
                 Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 cheatBreaker.getNetHandler().sendPacketToQueue(new PacketVoiceMute(this.voiceChannel.getUUID()));
                 for (GradientTextButton lIIIllIIIIlIIllIIIIIIIlll2 : this.someRandomAssButtons) {
-                    lIIIllIIIIlIIllIIIIIIIlll2.setDefaultColors();
+                    lIIIllIIIIlIIllIIIIIIIlll2.applyDefaultColorState();
                 }
                 for (GradientTextButton lIIIllIIIIlIIllIIIIIIIlll2 : this.someRandomAssButtons) {
                     if (!lIIIllIIIIlIIllIIIIIIIlll2.getText().equals(this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl())) continue;
-                    lIIIllIIIIlIIllIIIIIIIlll2.lIIIIllIIlIlIllIIIlIllIlI();
+                    lIIIllIIIIlIIllIIIIIIIlll2.applySelectedColorState();
                 }
             }
             if (this.undeafenButton.isMouseInside(f, f2)) {

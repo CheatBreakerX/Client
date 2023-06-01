@@ -8,6 +8,7 @@ import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.client.ui.AbstractGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.CBXFontRenderer;
+import com.cheatbreaker.main.CheatBreaker;
 import org.apache.logging.log4j.LogManager;
 
 import java.awt.*;
@@ -29,7 +30,7 @@ public class LoadingScreen extends AbstractGui {
         int n2 = this.res.bridge$getScaleFactor();
         this.frameBuffer = Ref.getInstanceCreator().createFrameBuffer(res.bridge$getScaledWidth() * n2, res.bridge$getScaledHeight() * n2, true);
         if (!this.font.isLoaded()) {
-            LogManager.getLogger("CheatBreakerX").warn("Font did not load successfully. (" + this.font.getTranslation() + ")");
+            CheatBreaker.LOGGER.warn("Font did not load successfully. (" + this.font.getTranslation() + ")");
         }
     }
 

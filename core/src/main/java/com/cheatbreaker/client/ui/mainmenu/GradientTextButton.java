@@ -15,42 +15,57 @@ public class GradientTextButton extends AbstractElement {
     public GradientTextButton(String string) {
         this.text = string;
         this.outlineFade = new ColorFade(
-                new Color(-14277082),
-                new Color(-11493284)
+                new Color(0xFF262626),
+                new Color(0xFF50A05C)
         );
 
         this.upperBackgroundFade = new ColorFade(
-                new Color(-13487566),
-                new Color(-10176146)
+                new Color(0xFF323232),
+                new Color(0xFF64B96E)
         );
 
         this.lowerBackgroundFade = new ColorFade(
-                new Color(-14013910),
-                new Color(-11164318)
+                new Color(0xFF2A2A2A),
+                new Color(0xFF55A562)
         );
     }
 
-    public void IllIIIIIIIlIlIllllIIllIII() {
+    public void applyLighterColorState() {
         this.setColors(new int[] {
-                -11119018, -11493284,
-                -10329502, -10176146,
-                -11579569, -11164318
+                new Color(0xFF565656).getRGB(),
+                new Color(0xFF50A05C).getRGB(),
+
+                new Color(0xFF626262).getRGB(),
+                new Color(0xFF64B96E).getRGB(),
+
+                new Color(0xFF4F4F4F).getRGB(),
+                new Color(0xFF55A562).getRGB()
         });
     }
 
-    public void lIIIIllIIlIlIllIIIlIllIlI() {
+    public void applySelectedColorState() {
         this.setColors(new int[] {
-                -11493284, -11493284,
-                -10176146, -10176146,
-                -11164318, -11164318
+                new Color(0xFF50A05C).getRGB(),
+                new Color(0xFF50A05C).getRGB(),
+
+                new Color(0xFF64B96E).getRGB(),
+                new Color(0xFF64B96E).getRGB(),
+
+                new Color(0xFF55A562).getRGB(),
+                new Color(0xFF55A562).getRGB()
         });
     }
 
-    public void setDefaultColors() {
+    public void applyDefaultColorState() {
         this.setColors(new int[] {
-                -14277082, -11493284,
-                -13487566, -10176146,
-                -14013910, -11164318
+                new Color(0xFF262626).getRGB(),
+                new Color(0xFF50A05C).getRGB(),
+
+                new Color(0xFF323232).getRGB(),
+                new Color(0xFF64B96E).getRGB(),
+
+                new Color(0xFF2A2A2A).getRGB(),
+                new Color(0xFF55A562).getRGB()
         });
     }
 

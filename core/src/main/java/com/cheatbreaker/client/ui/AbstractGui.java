@@ -6,6 +6,7 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,10 +14,13 @@ import java.util.Iterator;
 import java.util.List;
 
 public abstract class AbstractGui extends CBGuiScreen {
-
+    @Getter
     protected ScaledResolutionBridge resolution;
+    @Getter
     protected float scaledWidth;
+    @Getter
     protected float scaledHeight;
+    @Getter
     protected List<AbstractElement> elements;
     protected int elementListSize = 0;
 
@@ -97,7 +101,9 @@ public abstract class AbstractGui extends CBGuiScreen {
     protected void drawElements(float f, float f2, AbstractElement... elements) {
         List<AbstractElement> list = Arrays.asList(elements);
         for (AbstractElement element : this.elements) {
-            if (list.contains(element)) continue;
+            if (list.contains(element)) {
+                continue;
+            }
             element.drawElement(f, f2, this.isMouseHovered(element, f, f2));
         }
     }
@@ -109,21 +115,21 @@ public abstract class AbstractGui extends CBGuiScreen {
         }
     }
 
-    protected void onMouseClicked(final float n, final float n2, final int n3, final AbstractElement... array) {
-        final List<AbstractElement> list = Arrays.asList(array);
+    protected void onMouseClicked(final float mouseX, final float mouseY, final int n3, final AbstractElement... elementArray) {
+        final List<AbstractElement> list = Arrays.asList(elementArray);
         Object o = null;
         boolean b = false;
-        for (final AbstractElement llllIIIIlIlIllIIIllllIIll : this.elements) {
-            if (list.contains(llllIIIIlIlIllIIIllllIIll)) {
+        for (final AbstractElement element : this.elements) {
+            if (list.contains(element)) {
                 continue;
             }
-            if (!llllIIIIlIlIllIIIllllIIll.isMouseInside(n, n2)) {
+            if (!element.isMouseInside(mouseX, mouseY)) {
                 continue;
             }
-            if (!this.elements.contains(llllIIIIlIlIllIIIllllIIll)) {
-                o = llllIIIIlIlIllIIIllllIIll;
+            if (!this.elements.contains(element)) {
+                o = element;
             }
-            if (llllIIIIlIlIllIIIllllIIll.handleElementMouseClicked(n, n2, n3, this.isMouseHovered(llllIIIIlIlIllIIIllllIIll, n, n2, array))) {
+            if (element.handleElementMouseClicked(mouseX, mouseY, n3, this.isMouseHovered(element, mouseX, mouseY, elementArray))) {
                 b = true;
                 break;
             }
@@ -135,7 +141,7 @@ public abstract class AbstractGui extends CBGuiScreen {
             this.elements.add(this.elements.remove(this.elements.indexOf(o)));
         }
         final Iterator<AbstractElement> iterator2 = this.elements.iterator();
-        while (iterator2.hasNext() && !iterator2.next().handleMouseClickedInternal(n, n2, n3)) {
+        while (iterator2.hasNext() && !iterator2.next().handleMouseClickedInternal(mouseX, mouseY, n3)) {
         }
     }
 
@@ -156,46 +162,11 @@ public abstract class AbstractGui extends CBGuiScreen {
             return 1f;
         }
 
-        float n;
-        switch (resolution.bridge$getScaleFactor()) {
-            case 1: {
-                n = 0.5f;
-                break;
-            }
-            case 3: {
-                n = 1.5f;
-                break;
-            }
-            case 4: {
-                n = 2.0f;
-                break;
-            }
-            default: {
-                n = 1.0f;
-                break;
-            }
-        }
-        return 1.0f / n;
-    }
-
-    public List<AbstractElement> getElements() {
-        return elements;
+        return 1f / (this.resolution.bridge$getScaleFactor() / 2f);
     }
 
     protected void setElements(AbstractElement... elements) {
         this.elements = new ArrayList<>();
         this.elements.addAll(Arrays.asList(elements));
-    }
-
-    public float getScaledWidth() {
-        return scaledWidth;
-    }
-
-    public float getScaledHeight() {
-        return scaledHeight;
-    }
-
-    public ScaledResolutionBridge getResolution() {
-        return resolution;
     }
 }
