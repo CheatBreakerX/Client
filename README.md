@@ -13,4 +13,4 @@ CheatBreakerX is an open source, community driven project, unlike many other Che
 ---
 
 > *This repository and organization is currently maintained fully by [iAmSpace](https://github.com/iAmSpace) aka. Lifix.  
-> Any inquiries should go to Discord direct messages with [Lifix#9999](https://discord.com/users/201022516506918912/)*
+> Any inquiries should go to Discord direct messages with [Lifix#0101](https://discord.com/users/201022516506918912/)*
