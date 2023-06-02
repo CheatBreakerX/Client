@@ -700,12 +700,12 @@ public class CBModulesGui extends CBGuiScreen {
     private void IlllIIIlIlllIllIlIIlllIlI(int n, int n2, int n3) {
         for (ModulesGuiButtonElement llllIIIIIlIlIlIlIllIIIIII2 : this.buttons) {
             if (n3 != 0 || !llllIIIIIlIlIlIlIllIIIIII2.isMouseInside(n, n2) || IlIlllIIIIllIllllIllIIlIl) continue;
-            if (llllIIIIIlIlIlIlIllIIIIII2.lIIIIllIIlIlIllIIIlIllIlI != null && this.lIIIIllIIlIlIllIIIlIllIlI != llllIIIIIlIlIlIlIllIIIIII2.lIIIIllIIlIlIllIIIlIllIlI && this.currentScrollableElement == null) {
+            if (llllIIIIIlIlIlIlIllIIIIII2.parentElement != null && this.lIIIIllIIlIlIllIIIlIllIlI != llllIIIIIlIlIlIlIllIIIIII2.parentElement && this.currentScrollableElement == null) {
                 Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-                this.currentScrollableElement = llllIIIIIlIlIlIlIllIIIIII2.lIIIIllIIlIlIllIIIlIllIlI;
+                this.currentScrollableElement = llllIIIIIlIlIlIlIllIIIIII2.parentElement;
                 continue;
             }
-            if (llllIIIIIlIlIlIlIllIIIIII2.lIIIIllIIlIlIllIIIlIllIlI == null || this.currentScrollableElement != null) continue;
+            if (llllIIIIIlIlIlIlIllIIIIII2.parentElement == null || this.currentScrollableElement != null) continue;
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             IlIlllIIIIllIllllIllIIlIl = true;
         }

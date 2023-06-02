@@ -28,7 +28,7 @@ public class KeybindElement
         if (this.lIIIIllIIlIlIllIIIlIllIlI && Keyboard.getEventKeyState()) {
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.lIIIIlIIllIIlIIlIIIlIIllI.setValue(Keyboard.getEventKey());
-            this.IllIIIIIIIlIlIllllIIllIII.displayString = Keyboard.getKeyName((Integer)this.lIIIIlIIllIIlIIlIIIlIIllI.getValue());
+            this.IllIIIIIIIlIlIllllIIllIII.text = Keyboard.getKeyName((Integer)this.lIIIIlIIllIIlIIlIIIlIIllI.getValue());
             this.lIIIIllIIlIlIllIIIlIllIlI = false;
         }
         this.IllIIIIIIIlIlIllllIIllIII.yOffset = this.yOffset;
@@ -41,7 +41,7 @@ public class KeybindElement
         if (this.IllIIIIIIIlIlIllllIIllIII.isMouseInside(mouseX, mouseY)) {
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.lIIIIllIIlIlIllIIIlIllIlI = true;
-            this.IllIIIIIIIlIlIllllIIllIII.displayString = "<PRESS ANY KEY>";
+            this.IllIIIIIIIlIlIllllIIllIII.text = "<PRESS ANY KEY>";
         }
     }
 }

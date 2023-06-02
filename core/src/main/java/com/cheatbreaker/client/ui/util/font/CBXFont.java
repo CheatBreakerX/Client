@@ -8,6 +8,7 @@ package com.cheatbreaker.client.ui.util.font;
 import com.cheatbreaker.bridge.client.renderer.TessellatorBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
+import com.cheatbreaker.main.CheatBreaker;
 
 import javax.swing.*;
 import java.awt.Color;
@@ -144,12 +145,23 @@ public class CBXFont {
         var1.bridge$pos(x + width, y).bridge$tex(renderSrcX + renderSrcWidth, renderSrcY).bridge$endVertex();
     }
 
-    public int getHeight(String var1) {
-        return this.getHeight();
-    }
-
     public int getHeight() {
-        return (this.fontHeight - 8) / 2;
+        float scaleFactor = Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor();
+        float scale = (2.0f / scaleFactor);
+
+        boolean followMinecraftScale = false;
+
+        try {
+            followMinecraftScale = (Boolean) CheatBreaker.getInstance().globalSettings.followMinecraftScale.getValue();
+        } catch (Exception ignored) {
+
+        }
+
+        if (followMinecraftScale) {
+            return (int) (((this.fontHeight * scale) - 8) / 2);
+        } else {
+            return (this.fontHeight - 8) / 2;
+        }
     }
 
     public int getStringWidth(String var1) {

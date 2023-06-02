@@ -35,7 +35,7 @@
     "client.resources.MixinIResourceManager",
     "client.settings.MixinGameSettings",
     "client.settings.MixinKeyBinding",
-    "client.shader.MixinFrameBuffer",
+    "client.shader.MixinFramebuffer",
     "client.shader.MixinShader",
     "client.shader.MixinShaderGroup",
     "client.shader.MixinShaderUniform",
@@ -44,7 +44,7 @@
   ],
   "mixins": [
     "block.MixinBlock",
-    "client.entity.MixinEntityClientPlayerMP",
+    "client.entity.MixinEntityPlayerMP",
     "client.gui.MixinFontRenderer",
     "client.gui.MixinGuiTextField",
     "client.renderer.MixinEntityRenderer",

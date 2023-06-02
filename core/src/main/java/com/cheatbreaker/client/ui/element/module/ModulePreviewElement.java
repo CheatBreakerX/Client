@@ -97,11 +97,11 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
         float moduleNameOffset = this.y + this.height / 2f;
         playBold18px.drawCenteredString(this.module.getName(), (float)(this.x + this.width / 2) - 1.0681819f * 0.46808508f, moduleNameOffset + 1, 0x5F000000);
         playBold18px.drawCenteredString(this.module.getName(), (float)(this.x + this.width / 2) - 1.125f * 1.3333334f, moduleNameOffset, -1);
-        this.toggle.displayString = this.module.isEnabled() ? "Disable" : "Enable";
+        this.toggle.text = this.module.isEnabled() ? "Disable" : "Enable";
         this.toggle.yOffset = this.yOffset;
-        int n5 = this.toggle.lIIIIlIIllIIlIIlIIIlIIllI = this.module.isEnabled() ? -5756117 : -13916106;
-        this.toggleOrHideFromHud.displayString = this.module.getGuiAnchor() == null ? (this.module.isRenderHud() && this.module.isEnabled() ? "Disable" : "Enable") : (this.module.isRenderHud() && this.module.isEnabled() ? "Hide from HUD" : "Add to HUD");
-        this.toggleOrHideFromHud.lIIIIlIIllIIlIIlIIIlIIllI = this.module.isRenderHud() && this.module.isEnabled() ? -5756117 : -13916106;
+        int n5 = this.toggle.highlightColor = this.module.isEnabled() ? -5756117 : -13916106;
+        this.toggleOrHideFromHud.text = this.module.getGuiAnchor() == null ? (this.module.isRenderHud() && this.module.isEnabled() ? "Disable" : "Enable") : (this.module.isRenderHud() && this.module.isEnabled() ? "Hide from HUD" : "Add to HUD");
+        this.toggleOrHideFromHud.highlightColor = this.module.isRenderHud() && this.module.isEnabled() ? -5756117 : -13916106;
         this.optionsButton.setDimensions(this.x + 4, this.y + this.height - 20, this.width - 8, 16);
         this.optionsButton.yOffset = this.yOffset;
         this.optionsButton.handleDrawElement(mouseX, mouseY, partialTicks);
@@ -125,8 +125,8 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
         } else if (!this.module.isEditable && this.toggle.isMouseInside(mouseX, mouseY)) {
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.module.setState(!this.module.isEnabled());
-            this.toggle.displayString = this.module.isEnabled() ? "Disable" : "Enable";
-            int n4 = this.toggle.lIIIIlIIllIIlIIlIIIlIIllI = this.module.isEnabled() ? -5756117 : -13916106;
+            this.toggle.text = this.module.isEnabled() ? "Disable" : "Enable";
+            int n4 = this.toggle.highlightColor = this.module.isEnabled() ? -5756117 : -13916106;
             if (this.module.isEnabled()) {
                 this.lIIIIIIIIIlIllIIllIlIIlIl();
                 this.module.setState(true);
@@ -154,8 +154,8 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
                     this.module.setState(false);
                 }
             }
-            this.toggleOrHideFromHud.displayString = this.module.getGuiAnchor() == null ? (this.module.isRenderHud() && this.module.isEnabled() ? "Disable" : "Enable") : (this.module.isRenderHud() && this.module.isEnabled() ? "Hide from HUD" : "Add to HUD");
-            this.toggleOrHideFromHud.lIIIIlIIllIIlIIlIIIlIIllI = this.module.isRenderHud() && this.module.isEnabled() ? -5756117 : -13916106;
+            this.toggleOrHideFromHud.text = this.module.getGuiAnchor() == null ? (this.module.isRenderHud() && this.module.isEnabled() ? "Disable" : "Enable") : (this.module.isRenderHud() && this.module.isEnabled() ? "Hide from HUD" : "Add to HUD");
+            this.toggleOrHideFromHud.highlightColor = this.module.isRenderHud() && this.module.isEnabled() ? -5756117 : -13916106;
         }
     }
 

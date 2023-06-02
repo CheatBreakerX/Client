@@ -4,5 +4,5 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(EntityPlayerMP.class)
-public class MixinEntityClientPlayerMP {
+public class MixinEntityPlayerMP {
 }

@@ -2,7 +2,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
 # Every version supported by CheatBreakerX will be added here once added in the full project.
-# As of currently, the only supported version is 1.8.9 Forge
+# As of currently, the only supported versions are 1.8.9, 1.9.4, 1.10.2, 1.11.2 and 1.12.2
 
 name: Java CI with Gradle
 
@@ -11,8 +11,8 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
+      # Gradle setup (JDK 17 is needed for 1: later versions, and 2: Architectury Loom)
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -28,27 +28,40 @@ jobs:
           distribution: liberica
       - name: Make 'gradlew' executable
         run: chmod +x gradlew
+
+      # Build the different projects
       - name: Compile CheatBreakerX 1.8.9
         run: ./gradlew :versions:1.8.9:build
-      - uses: actions/upload-artifact@v3
+      - name: Compile CheatBreakerX 1.9.4
+        run: ./gradlew :versions:1.9.4:build
+      - name: Compile CheatBreakerX 1.10.2
+        run: ./gradlew :versions:1.10.2:build
+      - name: Compile CheatBreakerX 1.11.2
+        run: ./gradlew :versions:1.11.2:build
+
+      # Upload the artifacts through GitHub Actions
+      - name: Upload 1.8.9 artifact
+        uses: actions/upload-artifact@v3
         with:
           name: CheatBreakerX-1.8.9
           path: versions/1.8.9/build/libs
-      - name: Compile CheatBreakerX 1.9.4
-        run: ./gradlew :versions:1.9.4:build
-      - uses: actions/upload-artifact@v3
+      - name: Upload 1.9.4 artifact
+        uses: actions/upload-artifact@v3
         with:
           name: CheatBreakerX-1.9.4
           path: versions/1.9.4/build/libs
-      - name: Compile CheatBreakerX 1.10.2
-        run: ./gradlew :versions:1.10.2:build
-      - uses: actions/upload-artifact@v3
+      - name: Upload 1.10.2 artifact
+        uses: actions/upload-artifact@v3
         with:
           name: CheatBreakerX-1.10.2
           path: versions/1.10.2/build/libs
-      - name: Compile CheatBreakerX 1.11.2
-        run: ./gradlew :versions:1.11.2:build
-      - uses: actions/upload-artifact@v3
+      - name: Upload 1.11.2 artifact
+        uses: actions/upload-artifact@v3
         with:
           name: CheatBreakerX-1.11.2
           path: versions/1.11.2/build/libs
+      - name: Upload 1.12.2 artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: CheatBreakerX-1.12.2
+          path: versions/1.12.2/build/libs

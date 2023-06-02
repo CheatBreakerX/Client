@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Framebuffer.class)
-public abstract class MixinFrameBuffer implements FrameBufferBridge {
+public abstract class MixinFramebuffer implements FrameBufferBridge {
     @Shadow public abstract void unbindFramebuffer();
     @Shadow public abstract void bindFramebuffer(boolean p_147610_1_);
     @Shadow public abstract void framebufferRender(int p_147615_1_, int p_147615_2_);

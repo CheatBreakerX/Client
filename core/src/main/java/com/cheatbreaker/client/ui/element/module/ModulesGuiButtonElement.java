@@ -11,24 +11,24 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 
 public class ModulesGuiButtonElement
         extends AbstractModulesGuiElement {
-    public int lIIIIlIIllIIlIIlIIIlIIllI;
-    public String displayString;
-    public final AbstractScrollableElement lIIIIllIIlIlIllIIIlIllIlI;
+    public int highlightColor;
+    public String text;
+    public final AbstractScrollableElement parentElement;
     private final CBXFontRenderer fontRenderer;
     public boolean IlllIllIlIIIIlIIlIIllIIIl = true;
     private int llIIlllIIIIlllIllIlIlllIl = 0;
 
-    public ModulesGuiButtonElement(CBXFontRenderer fontRenderer, AbstractScrollableElement lllIllIllIlIllIlIIllllIIl2, String displayString, int n, int n2, int n3, int n4, int n5, float f) {
+    public ModulesGuiButtonElement(CBXFontRenderer fontRenderer, AbstractScrollableElement parentElement, String text, int x, int y, int width, int height, int highlightColor, float f) {
         super(f);
-        this.displayString = displayString;
-        this.setDimensions(n, n2, n3, n4);
-        this.lIIIIlIIllIIlIIlIIIlIIllI = n5;
-        this.lIIIIllIIlIlIllIIIlIllIlI = lllIllIllIlIllIlIIllllIIl2;
+        this.text = text;
+        this.setDimensions(x, y, width, height);
+        this.highlightColor = highlightColor;
+        this.parentElement = parentElement;
         this.fontRenderer = fontRenderer;
     }
 
-    public ModulesGuiButtonElement(AbstractScrollableElement lllIllIllIlIllIlIIllllIIl2, String string, int n, int n2, int n3, int n4, int n5, float f) {
-        this(FontRegistry.getPlayBold22px(), lllIllIllIlIllIlIIllllIIl2, string, n, n2, n3, n4, n5, f);
+    public ModulesGuiButtonElement(AbstractScrollableElement parentElement, String text, int x, int y, int width, int height, int highlightColor, float f) {
+        this(FontRegistry.getPlayBold22px(), parentElement, text, x, y, width, height, highlightColor, f);
     }
 
     @Override
@@ -51,26 +51,22 @@ public class ModulesGuiButtonElement
         }
         if (this.llIIlllIIIIlllIllIlIlllIl > 0) {
             f2 = (float)this.llIIlllIIIIlllIllIlIlllIl / (float)n3 * (float)100;
-            Ref.modified$drawRect(this.x, (int)((float)this.y + ((float)this.height - (float)this.height * f2 / (float)100)), this.x + this.width, this.y + this.height, this.lIIIIlIIllIIlIIlIIIlIIllI);
+            Ref.modified$drawRect(this.x, (int)((float)this.y + ((float)this.height - (float)this.height * f2 / (float)100)), this.x + this.width, this.y + this.height, this.highlightColor);
         }
-        if (this.displayString.contains(".png")) {
+        if (this.text.endsWith(".png")) {
             Ref.getGlBridge().bridge$pushMatrix();
             float var1 = CheatBreaker.getInstance().globalSettings.isDarkMode() ? 1.0f : 0.0f;
             Ref.getGlBridge().bridge$color(var1, var1, var1, CheatBreaker.getInstance().globalSettings.isDarkMode() ? 1.0f : 0.45f);
-            RenderUtil.drawIcon(Ref.getInstanceCreator().createResourceLocation("client/icons/" + this.displayString), 8f, (float)(this.x + 6), (float)(this.y + 6));
+            RenderUtil.drawIcon(Ref.getInstanceCreator().createResourceLocation("client/icons/" + this.text), 8f, (float)(this.x + 6), (float)(this.y + 6));
             Ref.getGlBridge().bridge$popMatrix();
         } else {
             f2 = this.fontRenderer == FontRegistry.getPlayBold22px() ? 2.0f : 0.5f;
-            this.fontRenderer.drawCenteredString(this.displayString.toUpperCase(), this.x + this.width / 2, (float)(this.y + this.height / 2 - this.fontRenderer.getHeight()) + f2, CheatBreaker.getInstance().globalSettings.isDarkMode() ? -1 : 1862270976);
+            this.fontRenderer.drawCenteredString(this.text.toUpperCase(), this.x + this.width / 2, (float)(this.y + this.height / 2 - this.fontRenderer.getHeight()) + f2, CheatBreaker.getInstance().globalSettings.isDarkMode() ? -1 : 1862270976);
         }
     }
 
     @Override
     public void handleMouseClick(int mouseX, int mouseY, int button) {
-    }
-
-    public int lIIIIIIIIIlIllIIllIlIIlIl() {
-        return this.width;
     }
 
     public void lIIIIlIIllIIlIIlIIIlIIllI(boolean bl) {
