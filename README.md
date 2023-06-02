@@ -1,8 +1,8 @@
 <!-- markdownlint-disable-file MD001 MD033 -->
 <h1 align="center"><a href="https://github.com/CheatBreakerX">CheatBreakerX</a>/<a href="https://github.com/CheatBreakerX/Client">Client</a></h1>
-<p align="center">The #1 modpack to use for all common versions of Minecraft Java Edition (1.7.10 - 1.19.2)</p>
+<p align="center">The #1 modpack to use for all common versions of Minecraft Java Edition (1.7.10 - 1.19.4)</p>
 
-I lied, a bit. Right now, CheatBreakerX is in development. The main version being worked on right now is 1.8.9 - though new versions will come soon. To preview these 1.8.9 versions, you can download them from the latest successful workflow package found in the [Actions tab](https://github.com/CheatBreakerX/Client/actions).
+Although, we aren't quite at the 1.19.x stage yet. Right now, CheatBreakerX is in development. The versions being currently worked on include 1.8.9, 1.9.4, 1.10.2, 1.11.2 and 1.12.2 - though new versions will come soon. To preview these versions, you can download them from the latest successful workflow package found in the [Actions tab](https://github.com/CheatBreakerX/Client/actions).
 
 This repository contains the source code of the base of the client (in the `core` folder) and all the supported versions (e.g. `versions/1.8.9/`). It works by implementation in Mixin, which you can dive into yourself by looking at the decompilation of [Lunar Client](https://github.com/Decencies/LunarClient), whom of which we are not associated with. The original base of this can be found [here](https://github.com/iAmSpace/CheatBreaker) for the former Forge port, or [here](https://github.com/Decencies/CheatBreaker) for the original source; both of which are only on 1.7.10.
 
