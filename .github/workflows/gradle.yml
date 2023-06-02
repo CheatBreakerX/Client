@@ -38,6 +38,8 @@ jobs:
         run: ./gradlew :versions:1.10.2:build
       - name: Compile CheatBreakerX 1.11.2
         run: ./gradlew :versions:1.11.2:build
+      - name: Compile CheatBreakerX 1.12.2
+        run: ./gradlew :versions:1.12.2:build
 
       # Upload the artifacts through GitHub Actions
       - name: Upload 1.8.9 artifact
