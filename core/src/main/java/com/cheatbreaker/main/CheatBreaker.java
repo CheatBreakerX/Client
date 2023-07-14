@@ -159,7 +159,7 @@ public class CheatBreaker {
             this.cbInfo("Solution: Connect an audio device");
             this.cbInfo("(For Pojav users I don't know your solution, sorry!)");
         }
-        Ref.getMinecraft().bridge$getSoundHandler().bridge$getSoundManager().bridge$loadSoundSystem();
+        //Ref.getMinecraft().bridge$getSoundHandler().bridge$getSoundManager().bridge$loadSoundSystem();
         this.cbInfo("Loaded SoundSystem manually (Using Bridge method " + SoundManagerBridge.class.getCanonicalName() + ".bridge$loadSoundSystem())");
         this.globalSettings = new GlobalSettings();
         this.cbInfo("Created Settings Manager", GlobalSettings.class);

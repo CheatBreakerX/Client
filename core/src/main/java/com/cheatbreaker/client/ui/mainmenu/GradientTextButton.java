@@ -76,7 +76,7 @@ public class GradientTextButton extends AbstractElement {
     @Override
     protected void handleElementDraw(float f, float f2, boolean bl) {
         boolean bl2 = bl && this.isMouseInside(f, f2);
-        if (this.colors != null && this.outlineFade.IIIIllIIllIIIIllIllIIIlIl()) {
+        if (this.colors != null && this.outlineFade.isExpired()) {
             this.outlineFade.setStartColor(this.colors[0]);
             this.outlineFade.setEndColor(this.colors[1]);
             this.upperBackgroundFade.setStartColor(this.colors[2]);

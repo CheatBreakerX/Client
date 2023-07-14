@@ -2,10 +2,10 @@ package com.cheatbreaker.main.utils;
 
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.remote.GitCommitProperties;
+import com.cheatbreaker.main.identification.MinecraftVersion;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.List;
 
 public class Utility {
     public static String fmt(String format, Object... args) {
@@ -27,10 +27,10 @@ public class Utility {
         return new ByteArrayInputStream(imageBytes);
     }
 
-    public static String getFullTitle() {
+    public static String getFullTitle(MinecraftVersion minecraftVersion) {
         GitCommitProperties.loadProperties();
         return fmt("CheatBreaker {} ({}/{})",
-                Ref.getMinecraftVersion(),
+                minecraftVersion,
                 GitCommitProperties.getGitCommit(),
                 GitCommitProperties.getGitBranch()
         );

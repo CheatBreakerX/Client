@@ -1,11 +1,9 @@
 package com.cheatbreaker.impl.ref;
 
-import com.cheatbreaker.bridge.client.gui.GuiBridge;
 import com.cheatbreaker.bridge.item.ItemBridge;
 import com.cheatbreaker.bridge.ref.IRefUtils;
 import com.cheatbreaker.bridge.ref.extra.CBMovementInputHelper;
 import com.cheatbreaker.impl.extra.CBMovementInputHelperImpl;
-import net.minecraft.client.Minecraft;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
@@ -41,10 +39,6 @@ public class RefUtils implements IRefUtils {
 
     public float bridge$MathHelper$sin(float toSine) {
         return MathHelper.sin(toSine);
-    }
-
-    public float bridge$Gui$getZLevel() {
-        return ((GuiBridge) Minecraft.getMinecraft().currentScreen).bridge$getZLevel();
     }
 
     public ItemBridge getItemFromName(String name) {

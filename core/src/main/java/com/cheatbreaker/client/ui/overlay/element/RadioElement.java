@@ -203,7 +203,7 @@ public class RadioElement extends DraggableElement {
             }
             if (this.pin.isMouseInside(f, f2)) {
                 this.client.getGlobalSettings().pinRadio.setValue(!((Boolean) this.client.getGlobalSettings().pinRadio.getValue()));
-                this.pin.lIIIIlIIllIIlIIlIIIlIIllI((Boolean) this.client.getGlobalSettings().pinRadio.getValue() ? "Unpin" : "Pin");
+                this.pin.setText((Boolean) this.client.getGlobalSettings().pinRadio.getValue() ? "Unpin" : "Pin");
             }
         }
         if (this.isMouseInside(f, f2) && f2 < this.y + this.IlIlllIIIIllIllllIllIIlIl && !bl2 && !this.slider.isMouseInside(f, f2) && !this.scrollableContainer.isMouseInside(f, f2)) {

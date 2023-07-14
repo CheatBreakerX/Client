@@ -31,7 +31,7 @@ public class MainMenu extends MainMenuBase {
         if (this.isFirstOpened() && !this.logoPositionFade.hasStartTime()) {
             this.logoPositionFade.reset();
         }
-        if (!(this.isFirstOpened() && !this.logoPositionFade.IIIIllIIllIIIIllIllIIIlIl() || this.logoTurnAmount.hasStartTime())) {
+        if (!(this.isFirstOpened() && !this.logoPositionFade.isExpired() || this.logoTurnAmount.hasStartTime())) {
             this.loadingScreenBackgroundFade.reset();
             this.logoTurnAmount.reset();
             this.logoTurnAmount.enableShouldResetOnceCalled();

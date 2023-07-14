@@ -58,10 +58,6 @@ public class BridgedGL implements GLBridge {
         GLU.gluProject(objX, objY, objZ, modelMatrix, projMatrix, viewport, win_pos);
     }
 
-    public void bridge$gluPerspective(float v, float v1, float v2, float v3) {
-        GLU.gluPerspective(v, v1, v2, v3);
-    }
-
     public void bridge$blendFunc(int i, int i1) {
         GlStateManager.blendFunc(i, i1);
     }

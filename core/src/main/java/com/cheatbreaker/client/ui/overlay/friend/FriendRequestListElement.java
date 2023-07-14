@@ -92,7 +92,7 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
             this.filter.drawElement(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), true);
             this.username.drawElement(f, f2, true);
             this.addButton.drawElement(f, f2, true);
-            this.toggleRequests.lIIIIlIIllIIlIIlIIIlIIllI((CheatBreaker.getInstance().isAcceptingFriendRequests() ? "Disable" : "Enable") + " incoming friend requests", f, f2, true);
+            this.toggleRequests.render((CheatBreaker.getInstance().isAcceptingFriendRequests() ? "Disable" : "Enable") + " incoming friend requests", f, f2, true);
             Ref.getGlBridge().bridge$disableScissoring();
             Ref.getGlBridge().bridge$popMatrix();
             this.scrollableElement.handleElementDraw(f, f2, bl);

@@ -3,29 +3,26 @@ package com.cheatbreaker.client.ui.overlay.element;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
+import lombok.Getter;
+import lombok.Setter;
 
 public class FlatButtonElement extends AbstractElement {
-    private String IIIllIllIlIlllllllIlIlIII;
+    @Getter
+    @Setter
+    private String text;
 
-    public FlatButtonElement(String string) {
-        this.IIIllIllIlIlllllllIlIlIII = string;
+    public FlatButtonElement(String text) {
+        this.text = text;
     }
 
-    @Override
-    public void handleElementDraw(float f, float f2, boolean bl) {
-        this.lIIIIlIIllIIlIIlIIIlIIllI(this.IIIllIllIlIlllllllIlIlIII, f, f2, bl);
+    public void handleElementDraw(float mouseX, float mouseY, boolean enableMouseInput) {
+        this.render(this.text, mouseX, mouseY, enableMouseInput);
     }
 
-    public void lIIIIlIIllIIlIIlIIIlIIllI(String string, float f, float f2, boolean bl) {
-        Ref.modified$drawRect(this.x, this.y, this.x + this.width, this.y + this.height, bl && this.isMouseInside(f, f2) ? -16747106 : -13158601);
-        FontRegistry.getPlayRegular14px().drawCenteredString(string, this.x + this.width / 2.0f, this.y + this.height / 2.0f - (float)5, -1);
-    }
-
-    public String IllIIIIIIIlIlIllllIIllIII() {
-        return this.IIIllIllIlIlllllllIlIlIII;
-    }
-
-    public void lIIIIlIIllIIlIIlIIIlIIllI(String string) {
-        this.IIIllIllIlIlllllllIlIlIII = string;
+    public void render(String text, float mouseX, float mouseY, boolean enableMouseInput) {
+        Ref.modified$drawRect(this.x, this.y, this.x + this.width, this.y + this.height,
+                enableMouseInput && this.isMouseInside(mouseX, mouseY) ? -16747106 : -13158601);
+        FontRegistry.getPlayRegular14px().drawCenteredString(text, this.x + this.width / 2f,
+                this.y + this.height / 2f - 5f, -1);
     }
 }

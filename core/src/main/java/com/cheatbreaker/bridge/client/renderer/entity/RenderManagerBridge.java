@@ -4,7 +4,6 @@ public interface RenderManagerBridge {
     double bridge$getRenderPosX();
     double bridge$getRenderPosY();
     double bridge$getRenderPosZ();
-
     float bridge$getPlayerViewX();
     float bridge$getPlayerViewY();
 }

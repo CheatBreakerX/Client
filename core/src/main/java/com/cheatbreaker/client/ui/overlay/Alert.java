@@ -7,56 +7,56 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 
 public class Alert {
     private final AbstractFade fade = new FloatFade(275L);
-    private static final int lIIIIIIIIIlIllIIllIlIIlIl = 140;
-    private static final int IlllIIIlIlllIllIlIIlllIlI = 55;
-    private boolean IIIIllIlIIIllIlllIlllllIl;
+    private static final int ELEMENT_WIDTH = 140;
+    private static final int ELEMENT_HEIGHT = 55;
+    private boolean disableTitle;
     private float x;
-    private float IlIlIIIlllIIIlIlllIlIllIl;
-    private float IIIllIllIlIlllllllIlIlIII;
-    private final String IllIIIIIIIlIlIllllIIllIII;
+    private float y;
+    private float targetY;
+    private final String title;
     private final String[] lines;
     private final long createdTime;
 
-    public Alert(String string, String[] arrstring, float f, float f2) {
-        this.IllIIIIIIIlIlIllllIIllIII = string;
-        this.lines = arrstring;
-        this.x = f;
-        this.IIIllIllIlIlllllllIlIlIII = f2;
-        this.IlIlIIIlllIIIlIlllIlIllIl = f2;
+    public Alert(String title, String[] lines, float x, float y) {
+        this.title = title;
+        this.lines = lines;
+        this.x = x;
+        this.targetY = y;
+        this.y = y;
         this.createdTime = System.currentTimeMillis();
     }
 
     public void drawAlert() {
-        float f = this.IlIlIIIlllIIIlIlllIlIllIl - (this.IlIlIIIlllIIIlIlllIlIllIl - this.IIIllIllIlIlllllllIlIlIII) * this.fade.getCurrentValue();
-        if (this.IIIIllIlIIIllIlllIlllllIl) {
-            Ref.modified$drawGradientRect(this.x, f, this.x + (float)140, f + (float)55, -819057106, -822083584);
+        float y = this.y - (this.y - this.targetY) * this.fade.getCurrentValue();
+        if (this.disableTitle) {
+            Ref.modified$drawGradientRect(this.x, y, this.x + getElementWidth(), y + getElementHeight(), -819057106, -822083584);
             for (int i = 0; i < this.lines.length && i <= 3; ++i) {
-                FontRegistry.getPlayRegular16px().drawString(this.lines[i], this.x + (float)4, f + (float)4 + (float)(i * 10), -1);
+                FontRegistry.getPlayRegular16px().drawString(this.lines[i], this.x + 4f, y + 4f + (i * 10f), -1);
             }
         } else {
-            Ref.modified$drawGradientRect(this.x, f, this.x + (float)140, f + (float)55, -819057106, -822083584);
-            FontRegistry.getPlayRegular16px().drawString(this.IllIIIIIIIlIlIllllIIllIII, this.x + (float)4, f + (float)4, -1);
-            Ref.modified$drawRect(this.x + (float)4, f + 14.5f, this.x + (float)140 - (float)5, f + (float)15, 0x2E5E5E5E);
+            Ref.modified$drawGradientRect(this.x, y, this.x + getElementWidth(), y + getElementHeight(), -819057106, -822083584);
+            FontRegistry.getPlayRegular16px().drawString(this.title, this.x + 4f, y + 4f, -1);
+            Ref.modified$drawRect(this.x + 4f, y + 14.5f, this.x + getElementWidth() - 5f, y + 15f, 0x2E5E5E5E);
             for (int i = 0; i < this.lines.length && i <= 2; ++i) {
-                FontRegistry.getPlayRegular16px().drawString(this.lines[i], this.x + (float)4, f + (float)17 + (float)(i * 10), -1);
+                FontRegistry.getPlayRegular16px().drawString(this.lines[i], this.x + 4f, y + 17f + (i * 10f), -1);
             }
         }
         if (!(Ref.getMinecraft().bridge$getCurrentScreen() instanceof OverlayGui)) {
-            FontRegistry.getPlayRegular16px().drawString("Press Shift + Tab", this.x + (float)4, f + (float) Alert.IIIIllIIllIIIIllIllIIIlIl() - (float)12, 0x6FFFFFFF);
+            FontRegistry.getPlayRegular16px().drawString("Press Shift + Tab", this.x + 4f, y + getElementHeight() - 12f, 0x6FFFFFFF);
         }
     }
 
-    public void lIIIIlIIllIIlIIlIIIlIIllI(float f) {
-        this.IlIlIIIlllIIIlIlllIlIllIl = this.IIIllIllIlIlllllllIlIlIII;
-        this.IIIllIllIlIlllllllIlIlIII = f;
+    public void safeSetY(float f) {
+        this.y = this.targetY;
+        this.targetY = f;
         this.fade.reset();
     }
 
-    public boolean lIIIIIIIIIlIllIIllIlIIlIl() {
-        return !this.fade.hasStartTime() || this.fade.IIIIllIIllIIIIllIllIIIlIl();
+    public boolean hasFadeFinished() {
+        return !this.fade.hasStartTime() || this.fade.isExpired();
     }
 
-    public boolean IlllIIIlIlllIllIlIIlllIlI() {
+    public boolean alertExpired() {
         return System.currentTimeMillis() - this.createdTime > 3500L;
     }
 
@@ -64,43 +64,43 @@ public class Alert {
         OverlayGui.getInstance().queueAlert(string, string2);
     }
 
-    public static void lIIIIlIIllIIlIIlIIIlIIllI(String string) {
+    public static void setSection(String string) {
         OverlayGui.getInstance().setSection(string);
     }
 
-    public static int IIIIllIlIIIllIlllIlllllIl() {
-        return 140;
+    public static int getElementWidth() {
+        return ELEMENT_WIDTH;
     }
 
-    public static int IIIIllIIllIIIIllIllIIIlIl() {
-        return 55;
+    public static int getElementHeight() {
+        return ELEMENT_HEIGHT;
     }
 
-    public void lIIIIlIIllIIlIIlIIIlIIllI(boolean bl) {
-        this.IIIIllIlIIIllIlllIlllllIl = bl;
+    public void setDisableTitle(boolean bl) {
+        this.disableTitle = bl;
     }
 
     public float getX() {
         return this.x;
     }
 
-    public float IIIllIllIlIlllllllIlIlIII() {
-        return this.IlIlIIIlllIIIlIlllIlIllIl;
+    public float getY() {
+        return this.y;
     }
 
-    public float IllIIIIIIIlIlIllllIIllIII() {
-        return this.IIIllIllIlIlllllllIlIlIII;
+    public float getTargetY() {
+        return this.targetY;
     }
 
     public void setX(float f) {
         this.x = f;
     }
 
-    public void IlllIIIlIlllIllIlIIlllIlI(float f) {
-        this.IlIlIIIlllIIIlIlllIlIllIl = f;
+    public void setY(float f) {
+        this.y = f;
     }
 
-    public void IIIIllIlIIIllIlllIlllllIl(float f) {
-        this.IIIllIllIlIlllllllIlIlIII = f;
+    public void setTargetY(float f) {
+        this.targetY = f;
     }
 }

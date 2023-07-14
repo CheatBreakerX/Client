@@ -8,7 +8,7 @@ public abstract class AbstractFade {
     protected long lIIIIIIIIIlIllIIllIlIIlIl;
     @Getter
     protected long duration;
-    protected boolean IIIIllIlIIIllIlllIlllllIl = true;
+    protected boolean expireAtEndTime = true;
     protected float IIIIllIIllIIIIllIllIIIlIl;
     @Getter
     protected long timeElapsed;
@@ -28,14 +28,14 @@ public abstract class AbstractFade {
 
     public void reset() {
         this.startTime = System.currentTimeMillis();
-        this.IIIIllIlIIIllIlllIlllllIl = true;
+        this.expireAtEndTime = true;
         this.inputtedTimeElapsed = 0L;
     }
 
     public void lIIIIlIIllIIlIIlIIIlIIllI(float f) {
         this.startTime = System.currentTimeMillis();
         this.inputtedTimeElapsed = f == 0.0f ? 0L : (long)((float)this.duration * (1.0f - f));
-        this.IIIIllIlIIIllIlllIlllllIl = true;
+        this.expireAtEndTime = true;
     }
 
     public void enableShouldResetOnceCalled() {
@@ -46,8 +46,8 @@ public abstract class AbstractFade {
         return this.startTime != 0L;
     }
 
-    public boolean IIIIllIIllIIIIllIllIIIlIl() {
-        return this.getTimeUntilEnd() <= 0L && this.IIIIllIlIIIllIlllIlllllIl;
+    public boolean isExpired() {
+        return this.getTimeUntilEnd() <= 0L && this.expireAtEndTime;
     }
 
     public void IlIlIIIlllIIIlIlllIlIllIl() {
@@ -88,32 +88,32 @@ public abstract class AbstractFade {
         if (this.startTime == 0L) {
             return 0.0f;
         }
-        if (this.IIIIllIIllIIIIllIllIIIlIl()) {
+        if (this.isExpired()) {
             if (this.shouldResetOnceCalled || this.lIIIIllIIlIlIllIIIlIllIlI < 1) {
                 this.reset();
                 ++this.lIIIIllIIlIlIllIIIlIllIlI;
             }
             return this.currentFadePercentage;
         }
-        if (this.IIIIllIlIIIllIlllIlllllIl) {
+        if (this.expireAtEndTime) {
             return this.getValue();
         }
         return this.IIIIllIIllIIIIllIllIIIlIl;
     }
 
     public void lIIIIllIIlIlIllIIIlIllIlI() {
-        this.IIIIllIlIIIllIlllIlllllIl = false;
+        this.expireAtEndTime = false;
         this.IIIIllIIllIIIIllIllIIIlIl = this.getValue();
         this.timeElapsed = System.currentTimeMillis() - this.startTime;
     }
 
     public void IlllIllIlIIIIlIIlIIllIIIl() {
         this.startTime = System.currentTimeMillis() - this.timeElapsed;
-        this.IIIIllIlIIIllIlllIlllllIl = true;
+        this.expireAtEndTime = true;
     }
 
     public long IlIlllIIIIllIllllIllIIlIl() {
-        long l = this.IIIIllIlIIIllIlllIlllllIl ? this.getTimeUntilEnd() : System.currentTimeMillis() - this.timeElapsed + this.duration - System.currentTimeMillis();
+        long l = this.expireAtEndTime ? this.getTimeUntilEnd() : System.currentTimeMillis() - this.timeElapsed + this.duration - System.currentTimeMillis();
         return Math.min(this.duration, Math.max(0L, l));
     }
 

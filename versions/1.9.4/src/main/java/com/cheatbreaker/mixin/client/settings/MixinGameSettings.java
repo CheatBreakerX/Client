@@ -37,14 +37,6 @@ public abstract class MixinGameSettings implements GameSettingsBridge {
         return this.guiScale;
     }
 
-    public KeyBindingBridge bridge$getKeyBindInventory() {
-        return (KeyBindingBridge) this.keyBindInventory;
-    }
-
-    public String bridge$getKeyDisplayString(int keyCode) {
-        return getKeyDisplayString(keyCode);
-    }
-
     public KeyBindingBridge[] bridge$getKeyBindings() {
         return (KeyBindingBridge[]) this.keyBindings;
     }

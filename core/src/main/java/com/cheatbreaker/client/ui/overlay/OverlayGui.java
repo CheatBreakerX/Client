@@ -37,7 +37,6 @@ public class OverlayGui extends AbstractGui {
     private final Queue<Alert> alertQueue = new LinkedList<>();
     private final List<Alert> alertList = new ArrayList<>();
     private CBGuiScreen context;
-    private long revertToContextTime;
 
     public OverlayGui() {
         List<FriendElement> arrayList = new ArrayList<>();
@@ -83,13 +82,12 @@ public class OverlayGui extends AbstractGui {
 //        if (this.mc.previousGuiScreen != this) {
 //            this.IllIllIIIlIIlllIIIllIllII(); // gui blur
 //        }
-        this.friendsButton.setElementDimensions(0.0f, 28f, 96.976746f * 0.71666664f, 20);
-        this.requestsButton.setElementDimensions(55.315384f * 1.2745098f, (float)28, 0.5588235f * 124.36842f, 20);
-        float f = (float)28 + this.friendsButton.getHeight() + 1.0f;
-        this.friendsListElement.setElementDimensions(0.0f, f, 140f, this.getScaledHeight() - f);
-        this.friendRequestsElement.setElementDimensions(0.0f, f, 140f, this.getScaledHeight() - f);
-        float f2 = 190;
-        this.radioElement.setElementDimensions(this.getScaledWidth() - f2 - (float)20, (float)20, f2, 28);
+        this.friendsButton.setElementDimensions(0f, 28f, 96.976746f * 0.71666664f, 20);
+        this.requestsButton.setElementDimensions(55.315384f * 1.2745098f, 28f, 0.5588235f * 124.36842f, 20);
+        float f = (float)28 + this.friendsButton.getHeight() + 1f;
+        this.friendsListElement.setElementDimensions(0f, f, 140f, this.getScaledHeight() - f);
+        this.friendRequestsElement.setElementDimensions(0f, f, 140f, this.getScaledHeight() - f);
+        this.radioElement.setElementDimensions(this.getScaledWidth() - 210f, 20f, 190f, 28);
     }
 
     @Override
@@ -124,7 +122,7 @@ public class OverlayGui extends AbstractGui {
             boolean onlineHovered = f > 24f && f < 40f;
             boolean awayHovered = f > 42f && f < 58f;
             boolean busyHovered = f > 60f && f < 76f;
-            boolean offlineHovered = f > 78f && f < 94f;
+            boolean offlineHovered = f > 78f;
             Ref.getGlBridge().bridge$color(onlineHovered ? 0.35f : 0.15f, onlineHovered ? 0.35f :0.15f, onlineHovered ?0.35f :0.15f, 1.0f);
             RenderUtil.drawIcon(headLocation, (float)7, (float)25, (float)7);
             Ref.getGlBridge().bridge$color(awayHovered ? 0.35f : 0.15f, awayHovered ? 0.35f :0.15f, awayHovered ? 0.35f :0.15f, 1.0f);
@@ -144,7 +142,6 @@ public class OverlayGui extends AbstractGui {
     @Override
     public void keyTyped(char c, int n) {
         if (n == 15 && Keyboard.isKeyDown(42) && System.currentTimeMillis() - this.initGuiMillis > 200L || n == 1) {
-            this.revertToContextTime = System.currentTimeMillis();
             this.mc.bridge$displayGuiScreen(this.context);
         }
         super.handleKeyTyped(c, n);
@@ -217,27 +214,30 @@ public class OverlayGui extends AbstractGui {
         if (this.context != null) {
             this.context.updateScreen();
         }
-        this.friendsButton.lIIIIlIIllIIlIIlIIIlIIllI("FRIENDS (" + this.friendsListElement.getElements().size() + ")");
-        this.requestsButton.lIIIIlIIllIIlIIlIIIlIIllI("REQUESTS (" + this.friendRequestsElement.getElements().stream().filter(ilIIlIllIllllIIlIllllIlII -> !ilIIlIllIllllIIlIllllIlII.getFriendRequest().isFriend()).count() + ")");
+        this.friendsButton.setText("FRIENDS (" + this.friendsListElement.getElements().size() + ")");
+        this.requestsButton.setText("REQUESTS (" + this.friendRequestsElement.getElements().stream()
+                .filter(element -> !element.getFriendRequest().isFriend()).count() + ")");
         this.updateElements();
     }
 
     public void pollNotifications() {
-        this.alertList.removeIf(Alert::IlllIIIlIlllIllIlIIlllIlI);
+        this.alertList.removeIf(Alert::alertExpired);
         if (this.alertQueue.isEmpty()) {
             return;
         }
         boolean bl = true;
         for (Alert alert : this.alertList) {
-            if (alert.lIIIIIIIIIlIllIIllIlIIlIl()) continue;
+            if (alert.hasFadeFinished()) continue;
             bl = false;
         }
         if (bl) {
             System.out.println("drawing");
             Alert alert = this.alertQueue.poll();
-            alert.lIIIIlIIllIIlIIlIIIlIIllI(this.getScaledWidth() - (float) Alert.IIIIllIIllIIIIllIllIIIlIl());
-            this.alertList.forEach(alert1 -> alert1.lIIIIlIIllIIlIIlIIIlIIllI(alert1.IllIIIIIIIlIlIllllIIllIII() - (float) Alert.IIIIllIIllIIIIllIllIIIlIl()));
-            this.alertList.add(alert);
+            if (alert != null) {
+                alert.safeSetY(this.getScaledWidth() - (float) Alert.getElementHeight());
+                this.alertList.forEach(alert1 -> alert1.safeSetY(alert1.getTargetY() - (float) Alert.getElementHeight()));
+                this.alertList.add(alert);
+            }
         }
     }
 
@@ -249,20 +249,20 @@ public class OverlayGui extends AbstractGui {
     }
 
     @Override
-    public void setWorldAndResolution(MinecraftBridge minecraft, int n, int n2) {
+    public void setWorldAndResolution(MinecraftBridge minecraft, int displayWidth, int displayHeight) {
         if (this.context != null) {
-            this.context.setWorldAndResolution(minecraft, n, n2);
+            this.context.setWorldAndResolution(minecraft, displayWidth, displayHeight);
         }
-        super.setWorldAndResolution(minecraft, n, n2);
-        float f = this.getScaleFactor();
-        this.alertList.forEach(alert -> this.renderAlert(alert, this.getScaledHeight() - f));
-        this.alertQueue.forEach(alert -> this.renderAlert(alert, this.getScaledHeight() - f));
+        super.setWorldAndResolution(minecraft, displayWidth, displayHeight);
+        float scaleFactor = this.getScaleFactor();
+        this.alertList.forEach(alert -> this.renderAlert(alert, this.getScaledHeight() - scaleFactor));
+        this.alertQueue.forEach(alert -> this.renderAlert(alert, this.getScaledHeight() - scaleFactor));
     }
 
     private void renderAlert(Alert alert, float f) {
-        alert.setX(this.getScaledWidth() - (float) Alert.IIIIllIlIIIllIlllIlllllIl());
-        alert.IlllIIIlIlllIllIlIIlllIlI(alert.IIIllIllIlIlllllllIlIlIII() + f);
-        alert.IIIIllIlIIIllIlllIlllllIl(alert.IllIIIIIIIlIlIllllIIllIII() + f);
+        alert.setX(this.getScaledWidth() - (float) Alert.getElementWidth());
+        alert.setY(alert.getY() + f);
+        alert.setTargetY(alert.getTargetY() + f);
     }
 
     @Override
@@ -277,11 +277,11 @@ public class OverlayGui extends AbstractGui {
         this.queueAlert("", string);
     }
 
-    public void queueAlert(String string, String string2) {
-        int n = Alert.IIIIllIlIIIllIlllIlllllIl();
-        string2 = FontRegistry.getPlayRegular16px().setWrapWords(string2, n - 10);
-        Alert alert = new Alert(string, string2.split("\n"), this.getScaledWidth() - (float)n, this.getScaledHeight());
-        alert.lIIIIlIIllIIlIIlIIIlIIllI(string.equals(""));
+    public void queueAlert(String title, String content) {
+        int width = Alert.getElementWidth();
+        content = FontRegistry.getPlayRegular16px().setWrapWords(content, width - 10);
+        Alert alert = new Alert(title, content.split("\n"), this.getScaledWidth() - width, this.getScaledHeight());
+        alert.setDisableTitle(title.equals(""));
         this.alertQueue.add(alert);
     }
 
@@ -289,7 +289,7 @@ public class OverlayGui extends AbstractGui {
         if (add) {
             this.friendsListElement.getElements().add(new FriendElement(friend));
         } else {
-            this.friendsListElement.getElements().removeIf(friendElement -> friendElement.getFriend() == friend);
+            this.friendsListElement.getElements().removeIf(element -> element.getFriend() == friend);
         }
         this.friendsListElement.updateSize();
     }
@@ -298,16 +298,16 @@ public class OverlayGui extends AbstractGui {
         if (add) {
             this.friendRequestsElement.getElements().add(new FriendRequestElement(friendRequest));
         } else {
-            this.friendRequestsElement.getElements().removeIf(friendRequestElement -> friendRequestElement.getFriendRequest() == friendRequest);
+            this.friendRequestsElement.getElements().removeIf(element -> element.getFriendRequest() == friendRequest);
         }
         this.friendRequestsElement.resetSize();
     }
 
-    public static OverlayGui createInstance(CBGuiScreen guiScreen) {
-        if (guiScreen != instance) {
-            OverlayGui.getInstance().context = guiScreen;
+    public static OverlayGui createInstance(CBGuiScreen screen) {
+        if (screen != instance) {
+            getInstance().context = screen;
         }
-        return OverlayGui.getInstance();
+        return getInstance();
     }
 
     public static OverlayGui getInstance() {
@@ -324,9 +324,5 @@ public class OverlayGui extends AbstractGui {
 
     public FriendRequestListElement getFriendRequestsElement() {
         return this.friendRequestsElement;
-    }
-
-    public long lIIIIIllllIIIIlIlIIIIlIlI() {
-        return this.revertToContextTime;
     }
 }

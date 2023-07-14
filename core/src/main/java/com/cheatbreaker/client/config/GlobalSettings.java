@@ -217,17 +217,23 @@ public class GlobalSettings {
             )
         );*/
 
-        GameSettingsBridge gameSettings = Ref.getMinecraft().bridge$getGameSettings();
+        this.pushToTalk = Ref.getInstanceCreator().createKeyBinding("Voice Chat", 47, "CheatBreaker Client");
+        this.openMenu = Ref.getInstanceCreator().createKeyBinding("Open Menu", 54, "CheatBreaker Client");
+        this.openVoiceMenu = Ref.getInstanceCreator().createKeyBinding("Open Voice Menu", 25, "CheatBreaker Client");
+        this.dragLook = Ref.getInstanceCreator().createKeyBinding("Drag to look", 56, "CheatBreaker Client");
+        this.hideNames = Ref.getInstanceCreator().createKeyBinding("Hide name plates", 0, "CheatBreaker Client");
+
+/*        GameSettingsBridge gameSettings = Ref.getMinecraft().bridge$getGameSettings();
         gameSettings.bridge$setKeyBindings(
                 ArrayUtils.addAll(
                         gameSettings.bridge$getKeyBindings(),
-                        this.pushToTalk = Ref.getInstanceCreator().createKeyBinding("Voice Chat", 47, "CheatBreaker Client"),
-                        this.openMenu = Ref.getInstanceCreator().createKeyBinding("Open Menu", 54, "CheatBreaker Client"),
-                        this.openVoiceMenu = Ref.getInstanceCreator().createKeyBinding("Open Voice Menu", 25, "CheatBreaker Client"),
-                        this.dragLook = Ref.getInstanceCreator().createKeyBinding("Drag to look", 56, "CheatBreaker Client"),
-                        this.hideNames = Ref.getInstanceCreator().createKeyBinding("Hide name plates", 0, "CheatBreaker Client")
+                        this.pushToTalk,
+                        this.openMenu,
+                        this.openVoiceMenu,
+                        this.dragLook,
+                        this.hideNames
                 )
-        );
+        );*/
     }
 
     public boolean isDarkMode() {

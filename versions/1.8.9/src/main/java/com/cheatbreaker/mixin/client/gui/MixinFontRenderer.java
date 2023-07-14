@@ -22,8 +22,8 @@ public abstract class MixinFontRenderer implements FontRendererBridge {
     @Shadow protected float posY;
     @Shadow protected abstract void renderStringAtPos(String text, boolean shadow);
 
-    public int[] bridge$getColorCode() {
-        return this.colorCode;
+    public int bridge$getColorForID(int id) {
+        return this.colorCode[id];
     }
 
     public void bridge$drawString(String string, float x, float y, int color) {

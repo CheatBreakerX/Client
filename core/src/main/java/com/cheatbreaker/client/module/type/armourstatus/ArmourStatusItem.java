@@ -45,7 +45,10 @@ public class ArmourStatusItem {
     }
 
     private void IlllIIIlIlllIllIlIIlllIlI() {
-        int n = this.IlIlIIIlllIIIlIlllIlIllIl = (Boolean) ArmourStatusModule.itemName.getValue() ? Math.max(9 * 2, this.IlllIIIlIlllIllIlIIlllIlI) : Math.max(9, this.IlllIIIlIlllIllIlIIlllIlI);
+        int n = this.IlIlIIIlllIIIlIlllIlIllIl = (Boolean) ArmourStatusModule.itemName.getValue()
+                ? Math.max(18, this.IlllIIIlIlllIllIlIIlllIlI)
+                : Math.max(9, this.IlllIIIlIlllIllIlIIlllIlI);
+
         if (this.lIIIIlIIllIIlIIlIIIlIIllI != null) {
             int n2 = 1;
             int n3 = 1;

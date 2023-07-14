@@ -86,8 +86,9 @@ public class KeystrokesModule
     }
 
     public void initialize() {
+    // TODO: Fix NullPointerException caused by line 91
 
-        int n = this.minecraft.bridge$getGameSettings().bridge$getKeyBindForward().bridge$getKeyCode();
+/*        int n = this.minecraft.bridge$getGameSettings().bridge$getKeyBindForward().bridge$getKeyCode();
         int n2 = this.minecraft.bridge$getGameSettings().bridge$getKeyBindLeft().bridge$getKeyCode();
         int n3 = this.minecraft.bridge$getGameSettings().bridge$getKeyBindBack().bridge$getKeyCode();
         int n4 = this.minecraft.bridge$getGameSettings().bridge$getKeyBindRight().bridge$getKeyCode();
@@ -113,6 +114,6 @@ public class KeystrokesModule
         float f5 = (this.leftKey.getWidth() + this.downkey.getWidth() + this.rightKey.getWidth() + gap) / 2.0f;
         this.leftMouseKey = new Key(boxSize < 14 ? "L" : "LMB", attack, f5, boxSize, fadeTime);
         this.rightMouseKey = new Key(boxSize < 14 ? "R" : "RMB", use, f5, boxSize, fadeTime);
-        this.spaceBarKey = new Key(Keyboard.getKeyName(jump), jump, this.leftKey.getWidth() + this.downkey.getWidth() + this.rightKey.getWidth() + gap*2, (float)boxSize / 2, fadeTime);
+        this.spaceBarKey = new Key(Keyboard.getKeyName(jump), jump, this.leftKey.getWidth() + this.downkey.getWidth() + this.rightKey.getWidth() + gap*2, (float)boxSize / 2, fadeTime);*/
     }
 }

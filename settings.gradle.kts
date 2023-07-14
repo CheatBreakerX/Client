@@ -25,7 +25,9 @@ val supportedForgeVersions = listOf(
         "1.9.4",
         "1.10.2",
         "1.11.2",
-        "1.12.2"
+        "1.12.2",
+        //"1.14.4", // mixins are being a pain
+        "1.14.4-Fabric"
 )
 
 include(":core")
