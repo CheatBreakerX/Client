@@ -93,17 +93,17 @@ public class MainMenu extends MainMenuBase {
 
     private void drawCheatBreakerLogo(double dispWidth, double dispHeight, float f) {
         float halfSize = 27;
-        double x = dispWidth / (double)2 - (double)halfSize;
-        double y = dispHeight / (double)2 - (double)halfSize - (double)((float)35 * f);
+        double x = dispWidth / 2d - halfSize;
+        double y = dispHeight / 2d - halfSize - (35f * f);
         Ref.getGlBridge().bridge$pushMatrix();
-        Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
-        Ref.getGlBridge().bridge$translate((float)x, (float)y, 1.0f);
+        Ref.getGlBridge().bridge$color(1f, 1f, 1f, 1f);
+        Ref.getGlBridge().bridge$translate(x, y, 1f);
         Ref.getGlBridge().bridge$translate(halfSize, halfSize, halfSize);
-        Ref.getGlBridge().bridge$rotate((float)180 * this.logoTurnAmount.getCurrentValue(), 0.0f, 0.0f, 1.0f);
+        Ref.getGlBridge().bridge$rotate(180f * this.logoTurnAmount.getCurrentValue(), 0f, 0f, 1f);
         Ref.getGlBridge().bridge$translate(-halfSize, -halfSize, -halfSize);
         RenderUtil.drawIcon(this.outerLogo, halfSize, 0f, 0f);
         Ref.getGlBridge().bridge$popMatrix();
-        RenderUtil.drawIcon(this.innerLogo, halfSize, (float)x, (float)y);
+        RenderUtil.drawIcon(this.innerLogo, halfSize, (float) x, (float) y);
     }
 
     @Override

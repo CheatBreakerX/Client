@@ -156,11 +156,11 @@ public class BridgedGL implements GLBridge {
     }
 
     public void bridge$rotate(float angle, float x, float y, float z) {
-        GL11.glRotatef(angle, x, y, z);
+        GlStateManager.rotatef(angle, x, y, z);
     }
 
     public void bridge$texCoord2f(float x, float y) {
-        GL11.glTexCoord2f(x, y);
+        GlStateManager.texCoord2f(x, y);
     }
 
     public void bridge$bindTexture(int id) {

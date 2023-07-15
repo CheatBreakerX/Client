@@ -1,8 +1,0 @@
-[11:40:20] [main/INFO] (net.minecraftforge.userdev.ArgumentList) Duplicate entries for mixin.config Unindexable
-[11:40:20] [main/INFO] (cpw.mods.modlauncher.Launcher) ModLauncher running: args [-mixin.config, mixins.cheatbreaker.json, -mixin.config=mixins.cheatbreaker.json, --tweakClass, org.spongepowered.asm.launch.MixinTweaker, --mixin, mixins.cheatbreaker.json, --gameDir, ., --launchTarget, fmluserdevclient, --fml.mcpVersion, 20190829.143755, --fml.mcVersion, 1.14.4, --fml.forgeGroup, net.minecraftforge, --fml.forgeVersion, 28.2.26, --version, MOD_DEV, --assetIndex, 1.14.4-1.14, --assetsDir, C:\Users\Zero\.gradle\caches\essential-loom\assets, --username, Dev, --accessToken, ????????, --userProperties, {}]
-[11:40:20] [main/INFO] (cpw.mods.modlauncher.Launcher) ModLauncher 4.1.0+62+5bfa59b starting: java version 17.0.7 by BellSoft
-[11:40:20] [main/DEBUG] (cpw.mods.modlauncher.LaunchServiceHandler) Found launch services [minecraft,fmldevdata,fmldevclient,fmldevserver,fmluserdevserver,testharness,fmluserdevdata,fmlclient,fmluserdevclient,fmlserver]
-[11:40:20] [main/DEBUG] (cpw.mods.modlauncher.NameMappingServiceHandler) Found naming services : [srgtoyarn]
-[11:40:20] [main/DEBUG] (cpw.mods.modlauncher.LaunchPluginHandler) Found launch plugins: [eventbus,object_holder_definalize,runtime_enum_extender,accesstransformer,capability_inject_definalize,runtimedistcleaner]
-[11:40:20] [main/DEBUG] (cpw.mods.modlauncher.TransformationServicesHandler) Discovering transformation services
-[11:40:20] [main/DEBUG] (cpw.mods.modlauncher.TransformationServicesHandler) Found additional transformation services from discovery services: []

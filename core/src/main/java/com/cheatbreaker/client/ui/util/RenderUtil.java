@@ -110,34 +110,55 @@ public class RenderUtil {
         Ref.getGlBridge().bridge$popAttrib();
     }
 
-    public static void renderCircle(double x, double y, double size) {
+    public static void renderCircle(double x, double y, double radius) {
         Ref.getGlBridge().bridge$enableBlend();
         Ref.getGlBridge().bridge$disableTexture2D();
         Ref.getGlBridge().bridge$blendFunc(770, 771);
         TessellatorBridge tessellator = Ref.getTessellator();
-        tessellator.bridge$startDrawing(6);
-        tessellator.bridge$pos(x, y, zLevel).bridge$endVertex();
-        double d4 = 3.0 * 2.0943951023931953;
-        double d5 = d4 / (double)30;
-        for (double d6 = -d5; d6 < d4; d6 += d5) {
-            tessellator.bridge$pos(x + size * Math.cos(-d6), y + size * Math.sin(-d6), zLevel).bridge$endVertex();
+
+        tessellator.bridge$begin(6 /* GL_TRIANGLE_FAN */, "position");
+        tessellator.bridge$pos(x, y, 1.0D).bridge$endVertex();
+
+        int numSides = 30;
+
+        double doublePi = Math.PI * 2D;
+        double vertexGap = doublePi / numSides;
+
+        for (double angle = -vertexGap; angle < doublePi; angle += vertexGap) {
+            tessellator.bridge$pos(x + radius * Math.cos(-angle), y + radius * Math.sin(-angle), 10.0D)
+                    .bridge$endVertex();
         }
+
         tessellator.bridge$finish();
         Ref.getGlBridge().bridge$enableTexture2D();
         Ref.getGlBridge().bridge$disableBlend();
     }
 
-    public static void lIIIIlIIllIIlIIlIIIlIIllI(double d, double d2, double d3, double d4, double d5, int n, double d6) {
+    public static void renderHollowCircle(double d, double d2, double d3, double d4, double d5, int n, double d6) {
         Ref.getGlBridge().bridge$enableBlend();
         Ref.getGlBridge().bridge$disableTexture2D();
         Ref.getGlBridge().bridge$enableLineSmooth();
-        d5 = (d5 + (double)n) % (double)n;
+        d5 = (d5 + n) % n;
         TessellatorBridge tessellator = Ref.getTessellator();
-        for (double d7 = (double)360 / (double)n * d5; d7 < (double)360 / (double)n * (d5 + d6); d7 += 1.0) {
-            double d8 = d7 * Math.PI / (double)180;
-            double d9 = (d7 - 1.0) * (1.9384295391612096 * 1.6206896305084229) / (double)180;
-            double[] arrd = new double[]{Math.cos(d8) * d3, -Math.sin(d8) * d3, Math.cos(d9) * d3, -Math.sin(d9) * d3};
-            double[] arrd2 = new double[]{Math.cos(d8) * d4, -Math.sin(d8) * d4, Math.cos(d9) * d4, -Math.sin(d9) * d4};
+
+        for (double d7 = 360d / n * d5; d7 < 360d / n * (d5 + d6); d7 += 1.0) {
+            double d8 = d7 * Math.PI / 180d;
+            double d9 = (d7 - 1.0) * Math.PI / 180d;
+
+            double[] arrd = new double[] {
+                    Math.cos(d8) * d3,
+                    -Math.sin(d8) * d3,
+                    Math.cos(d9) * d3,
+                    -Math.sin(d9) * d3
+            };
+
+            double[] arrd2 = new double[] {
+                    Math.cos(d8) * d4,
+                    -Math.sin(d8) * d4,
+                    Math.cos(d9) * d4,
+                    -Math.sin(d9) * d4
+            };
+
             tessellator.bridge$startDrawing(7);
             tessellator.bridge$pos(d + arrd2[0], d2 + arrd2[1], 0.0).bridge$inheritGLSMColor().bridge$endVertex();
             tessellator.bridge$pos(d + arrd2[2], d2 + arrd2[3], 0.0).bridge$inheritGLSMColor().bridge$endVertex();
@@ -171,17 +192,18 @@ public class RenderUtil {
     }
 
     public static void drawCorneredGradientRectWithOutline(float left, float top, float right, float bottom, int outlineColour, int gradientStart, int gradientEnd) {
-        Ref.getGlBridge().bridge$scale(0.5f, 0.5f, 0.5f);
-        Ref.modified$drawGradientRect((left *= 2.0f) + 1.0f, (top *= 2.0f) + 1.0f, (right *= 2.0f) - 1.0f, (bottom *= 2.0f) - 1.0f, gradientStart, gradientEnd);
-        RenderUtil.drawVerticalLine(left, top + 1.0f, bottom - 2.0f, outlineColour);
-        RenderUtil.drawVerticalLine(right - 1.0f, top + 1.0f, bottom - 2.0f, outlineColour);
-        RenderUtil.drawHorizontalLine(left + 2.0f, right - (float)3, top, outlineColour);
-        RenderUtil.drawHorizontalLine(left + 2.0f, right - (float)3, bottom - 1.0f, outlineColour);
-        RenderUtil.drawHorizontalLine(left + 1.0f, left + 1.0f, top + 1.0f, outlineColour);
-        RenderUtil.drawHorizontalLine(right - 2.0f, right - 2.0f, top + 1.0f, outlineColour);
-        RenderUtil.drawHorizontalLine(right - 2.0f, right - 2.0f, bottom - 2.0f, outlineColour);
-        RenderUtil.drawHorizontalLine(left + 1.0f, left + 1.0f, bottom - 2.0f, outlineColour);
-        Ref.getGlBridge().bridge$scale(2.0f, 2.0f, 2.0f);
+        Ref.getGlBridge().bridge$scale(.5f, .5f, .5f);
+        Ref.modified$drawGradientRect((left *= 2f) + 1.0f, (top *= 2f) + 1f, (right *= 2f) - 1f,
+                (bottom *= 2f) - 1f, gradientStart, gradientEnd);
+        RenderUtil.drawVerticalLine(left, top + 1f, bottom - 2.0f, outlineColour);
+        RenderUtil.drawVerticalLine(right - 1f, top + 1f, bottom - 2f, outlineColour);
+        RenderUtil.drawHorizontalLine(left + 2f, right - 3f, top, outlineColour);
+        RenderUtil.drawHorizontalLine(left + 2f, right - 3f, bottom - 1f, outlineColour);
+        RenderUtil.drawHorizontalLine(left + 1f, left + 1f, top + 1f, outlineColour);
+        RenderUtil.drawHorizontalLine(right - 2f, right - 2f, top + 1f, outlineColour);
+        RenderUtil.drawHorizontalLine(right - 2f, right - 2f, bottom - 2f, outlineColour);
+        RenderUtil.drawHorizontalLine(left + 1f, left + 1f, bottom - 2f, outlineColour);
+        Ref.getGlBridge().bridge$scale(2f, 2f, 2f);
     }
 
     public static long timeOfPreviousFrame = 0L;

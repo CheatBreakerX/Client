@@ -71,7 +71,7 @@ public class WrappedGuiScreen extends Screen {
         this.cbScreen.setWorldAndResolution((MinecraftBridge) mc, width, height);
     }
 
-    public void initGui() {
+    public void init() {
         this.cbScreen.initGui();
     }
 
@@ -92,11 +92,11 @@ public class WrappedGuiScreen extends Screen {
         this.cbScreen.handleMouseInput();
     }
 
-    public void updateScreen() {
+    public void tick() {
         this.cbScreen.updateScreen();
     }
 
-    public void onGuiClosed() {
+    public void removed() {
         this.cbScreen.onGuiClosed();
     }
 
@@ -109,7 +109,7 @@ public class WrappedGuiScreen extends Screen {
         this.cbScreen.drawDefaultBackground();
     }
 
-    public boolean doesGuiPauseGame() {
+    public boolean isPauseScreen() {
         return this.cbScreen.doesGuiPauseGame();
     }
 }

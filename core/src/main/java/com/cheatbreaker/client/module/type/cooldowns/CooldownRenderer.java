@@ -44,20 +44,20 @@ public class CooldownRenderer {
         }
         if (((String)cBSetting.getValue()).equalsIgnoreCase("Bright")) {
             Ref.getGlBridge().bridge$color(0f, 0f, 0f, 0.2f);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, n2, 0.0, (float)this.duration / (0.9574468f * 4.1255555f), (int)this.duration, d);
+            RenderUtil.renderHollowCircle(f + (float)n2, f2 + (float)n2, n2, 0.0, (float)this.duration / (0.9574468f * 4.1255555f), (int)this.duration, d);
             Ref.getGlBridge().bridge$color(0.9f, 0.9f, 0.9f, 1.0f);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, (float)n2 + 1.1688311f * 0.08555556f, n2 - 2, (float)this.duration / (0.625f * 6.32f), (int)this.duration, this.duration);
+            RenderUtil.renderHollowCircle(f + (float)n2, f2 + (float)n2, (float)n2 + 1.1688311f * 0.08555556f, n2 - 2, (float)this.duration / (0.625f * 6.32f), (int)this.duration, this.duration);
             Ref.getGlBridge().bridge$color(2.6249998f * 0.13333334f, 0.16578947f * 2.1111112f, 0.62999994f * 0.5555556f, 1.6315789f * 0.36774194f);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, (float)n2 + 0.886076f * 0.11285714f, n2 - 2, (float)this.duration / (2.5510418f * 1.548387f), (int)this.duration, d);
+            RenderUtil.renderHollowCircle(f + (float)n2, f2 + (float)n2, (float)n2 + 0.886076f * 0.11285714f, n2 - 2, (float)this.duration / (2.5510418f * 1.548387f), (int)this.duration, d);
         } else if (((String)cBSetting.getValue()).equalsIgnoreCase("Dark")) {
             Ref.getGlBridge().bridge$color(0f, 0f, 0f, 0.2f);
             RenderUtil.renderCircle(f + (float)n2, f2 + (float)n2, n2);
             Ref.getGlBridge().bridge$color(0f, 0f, 0f, 0.2f);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, n2, 0.0, (float)this.duration / (3.95f), (int)this.duration, d);
+            RenderUtil.renderHollowCircle(f + (float)n2, f2 + (float)n2, n2, 0.0, (float)this.duration / (3.95f), (int)this.duration, d);
             Ref.getGlBridge().bridge$color(0f, 0.9f, 0.0f, 1.0f);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, (float)n2 + 0.19f * 0.5263158f, n2 - 2, (float)this.duration / (0.24074075f * 16.407692f), (int)this.duration, this.duration);
+            RenderUtil.renderHollowCircle(f + (float)n2, f2 + (float)n2, (float)n2 + 0.19f * 0.5263158f, n2 - 2, (float)this.duration / (0.24074075f * 16.407692f), (int)this.duration, this.duration);
             Ref.getGlBridge().bridge$color(0f, 0.022727273f * 22.0f, 0.0f, 1.0f);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, (float)n2 + 0.315f * 0.31746033f, n2 - 2, (float)this.duration / (55.3f * 0.071428575f), (int)this.duration, d);
+            RenderUtil.renderHollowCircle(f + (float)n2, f2 + (float)n2, (float)n2 + 0.315f * 0.31746033f, n2 - 2, (float)this.duration / (55.3f * 0.071428575f), (int)this.duration, d);
         } else if (((String)cBSetting.getValue()).equalsIgnoreCase("Colored")) {
             f3 = (float)(n >> 16 & 0xFF) / (float)255;
             float f7 = (float)(n >> 8 & 0xFF) / (float)255;
@@ -65,11 +65,11 @@ public class CooldownRenderer {
             Ref.getGlBridge().bridge$color(f3, f7, f8, 0.26086956f * 0.57500005f);
             RenderUtil.renderCircle(f + (float)n2, f2 + (float)n2, n2);
             Ref.getGlBridge().bridge$color(f3, f7, f8, 0.060606062f * 4.125f);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, n2, 0.0, (float)this.duration / (7.0413046f * 0.5609756f), (int)this.duration, d);
+            RenderUtil.renderHollowCircle(f + (float)n2, f2 + (float)n2, n2, 0.0, (float)this.duration / (7.0413046f * 0.5609756f), (int)this.duration, d);
             Ref.getGlBridge().bridge$color(f3, f7, f8, 1.0f);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, (float)n2 + 0.10759494f * 0.92941177f, n2 - 2, (float)this.duration / (3.2223685f * 1.2258065f), (int)this.duration, this.duration);
+            RenderUtil.renderHollowCircle(f + (float)n2, f2 + (float)n2, (float)n2 + 0.10759494f * 0.92941177f, n2 - 2, (float)this.duration / (3.2223685f * 1.2258065f), (int)this.duration, this.duration);
             Ref.getGlBridge().bridge$color(f3, f7, f8, 0.058333337f * 2.5714285f);
-            RenderUtil.lIIIIlIIllIIlIIlIIIlIIllI(f + (float)n2, f2 + (float)n2, (float)n2 + 0.31707317f * 0.31538463f, n2 - 2, (float)this.duration / (4.761644f * 0.82954544f), (int)this.duration, d);
+            RenderUtil.renderHollowCircle(f + (float)n2, f2 + (float)n2, (float)n2 + 0.31707317f * 0.31538463f, n2 - 2, (float)this.duration / (4.761644f * 0.82954544f), (int)this.duration, d);
         }
         String string = String.format("%.1f", d / (double)1000);
         FontRegistry.getUbuntuMedium16px().drawCenteredStringWithShadow(string, f + (float)n2, f2 + (float)(n2 / 2) + 4, -1);

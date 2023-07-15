@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "client": [
     "blaze3d.pipeline.MixinRenderTarget",
+    "blaze3d.platform.MixinGlStateManager",
     "blaze3d.vertex.MixinTesselator",
     "client.KeyMappingAccessor",
     "client.MixinKeyMapping",
