@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "cheatbreaker",
+  "id": "${modid}",
   "version": "${version}",
 
   "name": "CheatBreaker",

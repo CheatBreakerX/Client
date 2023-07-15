@@ -84,7 +84,12 @@ public class InstanceCreator implements IInstanceCreator {
     }
 
     public ISoundBridge createSoundFromPSR(ResourceLocationBridge location, float pitch) {
-        return (ISoundBridge) SimpleSoundInstance.forUI(new SoundEvent((ResourceLocation) location), pitch);
+        ResourceLocation mcLocation = (ResourceLocation) location;
+        if (mcLocation.getPath().equals("gui.button.press")) {
+            mcLocation = new ResourceLocation("ui.button.click");
+        }
+
+        return (ISoundBridge) SimpleSoundInstance.forUI(new SoundEvent(mcLocation), pitch);
     }
 
     public KeyBindingBridge createKeyBinding(String description, int keyCode, String category) {

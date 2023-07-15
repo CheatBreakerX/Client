@@ -363,7 +363,9 @@ public abstract class MixinMinecraft implements MinecraftBridge {
     @Inject(method = "setScreen", at = @At("HEAD"), cancellable = true)
     public void impl$setScreen(Screen screen, CallbackInfo callbackInfo) {
         if (screen instanceof TitleScreen || (screen == null && this.level == null)) {
-//            this.bridge$displayGuiScreen(new MainMenu());
+            if (CheatBreaker.getInstance().isInitialized()) {
+                this.bridge$displayGuiScreen(new MainMenu());
+            }
             callbackInfo.cancel();
         }
 

@@ -3,10 +3,40 @@ package com.cheatbreaker.client.ui.util.font;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.main.CheatBreaker;
+import com.cheatbreaker.main.utils.Utility;
 
 public class FontRegistry {
-    private static CBXFontRenderer createNewFont(ResourceLocationBridge font, float size) {
-        CBXFontRenderer instance = new CBXFontRenderer(font, size);
+    private static int fixFontSize(int size, float scale) {
+        if (scale - ((int) scale) == 0f) { // if scale == 1 (mc:2), == 2 (mc:4), == 3 (mc:6), and so on
+            return size * (int) scale;
+        }
+
+        float scaledSize = size * scale;
+        if (scaledSize - ((int) scaledSize) == 0) {
+            if (scaledSize % 2 == 0) {
+                return (int) scaledSize;
+            }
+        }
+
+        int castedSize = (int) scaledSize - 1;
+        float sizeRemaining = (size - 1) - castedSize;
+
+        if (sizeRemaining >= 0.5f) {
+            castedSize += 1;
+        }
+
+        if (castedSize % 2 != 0) {
+            castedSize += 1;
+        }
+
+        return castedSize;
+    }
+
+    private static CBXFontRenderer createNewFont(ResourceLocationBridge font, int size, float scale) {
+        int castedSize = fixFontSize(size, scale);
+        CheatBreaker.LOGGER.info(Utility.fmt("{} {} -> {}", font.bridge$getResourcePath(), size, castedSize));
+        CBXFontRenderer instance = new CBXFontRenderer(font, (Boolean) CheatBreaker.getInstance().globalSettings
+                .followMinecraftScale.getValue() ? castedSize : size * scale);
         if (instance.isLoaded()) {
             return instance;
         } else {
@@ -16,8 +46,8 @@ public class FontRegistry {
 
     private static boolean validFont(CBXFontRenderer font, int ogSize) {
         if ((Boolean) CheatBreaker.getInstance().globalSettings.followMinecraftScale.getValue()) {
-            float realSize = (Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor() / 2f) * ogSize;
-            return realSize == font.size;
+            float scale = (Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor() / 2f);
+            return fixFontSize(ogSize, scale) == font.size;
         } else {
             return ogSize == font.size;
         }
@@ -34,27 +64,27 @@ public class FontRegistry {
                 switch (ogSize) {
                     case 12:
                         if (!validFont(playRegular12px, ogSize)) {
-                            playRegular12px = createNewFont(playRegular, ogSize * scale);
+                            playRegular12px = createNewFont(playRegular, ogSize, scale);
                         }
                         return playRegular12px;
                     case 14:
                         if (!validFont(playRegular14px, ogSize)) {
-                            playRegular14px = createNewFont(playRegular, ogSize * scale);
+                            playRegular14px = createNewFont(playRegular, ogSize, scale);
                         }
                         return playRegular14px;
                     case 16:
                         if (!validFont(playRegular16px, ogSize)) {
-                            playRegular16px = createNewFont(playRegular, ogSize * scale);
+                            playRegular16px = createNewFont(playRegular, ogSize, scale);
                         }
                         return playRegular16px;
                     case 18:
                         if (!validFont(playRegular18px, ogSize)) {
-                            playRegular18px = createNewFont(playRegular, ogSize * scale);
+                            playRegular18px = createNewFont(playRegular, ogSize, scale);
                         }
                         return playRegular18px;
                     case 22:
                         if (!validFont(playRegular22px, ogSize)) {
-                            playRegular22px = createNewFont(playRegular, ogSize * scale);
+                            playRegular22px = createNewFont(playRegular, ogSize, scale);
                         }
                         return playRegular22px;
                 }
@@ -63,12 +93,12 @@ public class FontRegistry {
                 switch (ogSize) {
                     case 18:
                         if (!validFont(playBold18px, ogSize)) {
-                            playBold18px = createNewFont(playBold, ogSize * scale);
+                            playBold18px = createNewFont(playBold, ogSize, scale);
                         }
                         return playBold18px;
                     case 22:
                         if (!validFont(playBold22px, ogSize)) {
-                            playBold22px = createNewFont(playBold, ogSize * scale);
+                            playBold22px = createNewFont(playBold, ogSize, scale);
                         }
                         return playBold22px;
                 }
@@ -77,12 +107,12 @@ public class FontRegistry {
                 switch (ogSize) {
                     case 13:
                         if (!validFont(robotoRegular13px, ogSize)) {
-                            robotoRegular13px = createNewFont(robotoRegular, ogSize * scale);
+                            robotoRegular13px = createNewFont(robotoRegular, ogSize, scale);
                         }
                         return robotoRegular13px;
                     case 24:
                         if (!validFont(robotoRegular24px, ogSize)) {
-                            robotoRegular24px = createNewFont(robotoRegular, ogSize * scale);
+                            robotoRegular24px = createNewFont(robotoRegular, ogSize, scale);
                         }
                         return robotoRegular24px;
                 }
@@ -91,7 +121,7 @@ public class FontRegistry {
                 switch (ogSize) {
                     case 14:
                         if (!validFont(robotoBold14px, ogSize)) {
-                            robotoBold14px = createNewFont(robotoBold, ogSize * scale);
+                            robotoBold14px = createNewFont(robotoBold, ogSize, scale);
                         }
                         return robotoBold14px;
                 }
@@ -100,7 +130,7 @@ public class FontRegistry {
                 switch (ogSize) {
                     case 16:
                         if (!validFont(ubuntuMedium16px, ogSize)) {
-                            ubuntuMedium16px = createNewFont(ubuntuMedium, ogSize * scale);
+                            ubuntuMedium16px = createNewFont(ubuntuMedium, ogSize, scale);
                         }
                         return ubuntuMedium16px;
                 }
@@ -112,11 +142,6 @@ public class FontRegistry {
     }
 
     // Textures
-    /*private static final ResourceLocationBridge playRegular = Ref.getInstanceCreator().createResourceLocation("client/font/Play-Regular.ttf");
-    private static final ResourceLocationBridge playBold = Ref.getInstanceCreator().createResourceLocation("client/font/Play-Bold.ttf");
-    private static final ResourceLocationBridge robotoRegular = Ref.getInstanceCreator().createResourceLocation("client/font/Roboto-Regular.ttf");
-    private static final ResourceLocationBridge robotoBold = Ref.getInstanceCreator().createResourceLocation("client/font/Roboto-Bold.ttf");
-    private static final ResourceLocationBridge ubuntuMedium = Ref.getInstanceCreator().createResourceLocation("client/font/Ubuntu-M.ttf");*/
     private static final ResourceLocationBridge playRegular = Ref.getInstanceCreator().createResourceLocation("client/font/play/regular.ttf");
     private static final ResourceLocationBridge playBold = Ref.getInstanceCreator().createResourceLocation("client/font/play/bold.ttf");
     private static final ResourceLocationBridge robotoRegular = Ref.getInstanceCreator().createResourceLocation("client/font/roboto/regular.ttf");
@@ -124,17 +149,17 @@ public class FontRegistry {
     private static final ResourceLocationBridge ubuntuMedium = Ref.getInstanceCreator().createResourceLocation("client/font/ubuntu/medium.ttf");
 
     // Font objects
-    private static CBXFontRenderer playRegular12px = createNewFont(playRegular, 12);
-    private static CBXFontRenderer playRegular14px = createNewFont(playRegular, 14);
-    private static CBXFontRenderer playRegular16px = createNewFont(playRegular, 16);
-    private static CBXFontRenderer playRegular18px = createNewFont(playRegular, 18);
-    private static CBXFontRenderer playRegular22px = createNewFont(playRegular, 22);
-    private static CBXFontRenderer playBold18px = createNewFont(playBold, 18);
-    private static CBXFontRenderer playBold22px = createNewFont(playBold, 22);
-    private static CBXFontRenderer robotoRegular13px = createNewFont(robotoRegular, 13);
-    private static CBXFontRenderer robotoRegular24px = createNewFont(robotoRegular, 24);
-    private static CBXFontRenderer robotoBold14px = createNewFont(robotoBold, 14);
-    private static CBXFontRenderer ubuntuMedium16px = createNewFont(ubuntuMedium, 16);
+    private static CBXFontRenderer playRegular12px = createNewFont(playRegular, 12, 1f);
+    private static CBXFontRenderer playRegular14px = createNewFont(playRegular, 14, 1f);
+    private static CBXFontRenderer playRegular16px = createNewFont(playRegular, 16, 1f);
+    private static CBXFontRenderer playRegular18px = createNewFont(playRegular, 18, 1f);
+    private static CBXFontRenderer playRegular22px = createNewFont(playRegular, 22, 1f);
+    private static CBXFontRenderer playBold18px = createNewFont(playBold, 18, 1f);
+    private static CBXFontRenderer playBold22px = createNewFont(playBold, 22, 1f);
+    private static CBXFontRenderer robotoRegular13px = createNewFont(robotoRegular, 13, 1f);
+    private static CBXFontRenderer robotoRegular24px = createNewFont(robotoRegular, 24, 1f);
+    private static CBXFontRenderer robotoBold14px = createNewFont(robotoBold, 14, 1f);
+    private static CBXFontRenderer ubuntuMedium16px = createNewFont(ubuntuMedium, 16, 1f);
 
     // Getters
     public static CBXFontRenderer getPlayRegular12px() {

@@ -108,6 +108,9 @@ public class CheatBreaker {
 
     private final Map<String, ResourceLocationBridge> playerSkins = new HashMap<>();
 
+    @Getter
+    private boolean initialized = false;
+
     public boolean isConsoleAllowed() {
         return true;
     }
@@ -137,81 +140,85 @@ public class CheatBreaker {
     }
 
     public void initialize() {
-        this.audioDevices = new ArrayList<>();
-        this.presetLocations = new ArrayList<>();
-        this.cosmetics = new ArrayList<>();
-        this.sessions = new ArrayList<>();
-        this.statusServers = new ArrayList<>();
-        this.profiles = new ArrayList<>();
-        this.consoleLines = new ArrayList<>();
-        this.startTime = System.currentTimeMillis();
-        this.cbInfo("Starting CheatBreaker setup...");
-        this.createDefaultConfigPresets();
-        this.cbInfo("Created default configuration presets.");
-        this.initAudioDevices();
-        if (audioDevices.size() != 0) {
-            this.cbInfo("Initialized all audio devices.");
-            this.voiceChatManager = new VoiceChatManager(audioDevices.get(0));
-            this.cbInfo("Created Voice Chat Manager", VoiceChatManager.class);
-        } else {
-            this.voiceChatManager = new VoiceChatManager(); // No microphone / device passed through, it is hypothetically non-existent.
-            this.cbInfo("Couldn't load audio devices. This could be because there is no available microphone, or you are using PojavLauncher.");
-            this.cbInfo("Solution: Connect an audio device");
-            this.cbInfo("(For Pojav users I don't know your solution, sorry!)");
-        }
-        //Ref.getMinecraft().bridge$getSoundHandler().bridge$getSoundManager().bridge$loadSoundSystem();
-        this.cbInfo("Loaded SoundSystem manually (Using Bridge method " + SoundManagerBridge.class.getCanonicalName() + ".bridge$loadSoundSystem())");
-        this.globalSettings = new GlobalSettings();
-        this.cbInfo("Created Settings Manager", GlobalSettings.class);
-        this.eventBus = new EventBus();
-        this.cbInfo("Created Event Bus", EventBus.class);
-        this.moduleManager = new ModuleManager();
-        this.cbInfo("Created Module Manager", ModuleManager.class);
-        this.netHandler = new NetHandler();
-        this.cbInfo("Created Network Handler", NetHandler.class);
-        this.titleManager = new TitleManager();
-        this.cbInfo("Created Title Manager", TitleManager.class);
-        this.cosmetics.add(new Cosmetic("Steve", "CheatBreaker Cape", 1.0f, true, "client/defaults/cb.png"));
-        this.cosmetics.add(new Cosmetic("Steve", "CheatBreaker Black Cape", 1.0f, false, "client/defaults/cb_black.png"));
-        this.status = Status.AWAY;
-        this.radioManager = new CBDashManager();
-        this.cbInfo("Created Radio Manager", CBDashManager.class);
-        this.loadProfiles();
-        this.cbInfo("Loaded " + this.profiles.size() + " custom profiles.");
-        (this.configManager = new ConfigManager()).read();
-        this.cbInfo("Created Configuration Manager", ConfigManager.class);
-
-        this.cbInfo("Connecting to websocket server...");
-        this.connectToAssetsServer();
-        this.friendsManager = new FriendsManager();
-        this.cbInfo("Created Friends Manager", FriendsManager.class);
-        OverlayGui.setInstance(new OverlayGui());
-        this.cbInfo("Created Overlay UI", OverlayGui.class);
-
-        this.eventBus.addEvent(PluginMessageEvent.class, this.netHandler::onPluginMessage);
-        this.eventBus.addEvent(KeyboardEvent.class, (e) -> {
-            if (e.getKeyboardKey() == Keyboard.KEY_H) {
-                Alert.displayMessage("Hello", "Hello, World\nNew Line");
+        if (!this.initialized) {
+            this.audioDevices = new ArrayList<>();
+            this.presetLocations = new ArrayList<>();
+            this.cosmetics = new ArrayList<>();
+            this.sessions = new ArrayList<>();
+            this.statusServers = new ArrayList<>();
+            this.profiles = new ArrayList<>();
+            this.consoleLines = new ArrayList<>();
+            this.startTime = System.currentTimeMillis();
+            this.cbInfo("Starting CheatBreaker setup...");
+            this.createDefaultConfigPresets();
+            this.cbInfo("Created default configuration presets.");
+            this.initAudioDevices();
+            if (audioDevices.size() != 0) {
+                this.cbInfo("Initialized all audio devices.");
+                this.voiceChatManager = new VoiceChatManager(audioDevices.get(0));
+                this.cbInfo("Created Voice Chat Manager", VoiceChatManager.class);
+            } else {
+                this.voiceChatManager = new VoiceChatManager(); // No microphone / device passed through, it is hypothetically non-existent.
+                this.cbInfo("Couldn't load audio devices. This could be because there is no available microphone, or you are using PojavLauncher.");
+                this.cbInfo("Solution: Connect an audio device");
+                this.cbInfo("(For Pojav users I don't know your solution, sorry!)");
             }
-            if (e.getKeyboardKey() == Keyboard.KEY_RSHIFT) {
-                if (Ref.getMinecraft().bridge$isIngame()) {
-                    Ref.getMinecraft().bridge$displayGuiScreen(new CBModulesGui());
+            //Ref.getMinecraft().bridge$getSoundHandler().bridge$getSoundManager().bridge$loadSoundSystem();
+            this.cbInfo("Loaded SoundSystem manually (Using Bridge method " + SoundManagerBridge.class.getCanonicalName() + ".bridge$loadSoundSystem())");
+            this.globalSettings = new GlobalSettings();
+            this.cbInfo("Created Settings Manager", GlobalSettings.class);
+            this.eventBus = new EventBus();
+            this.cbInfo("Created Event Bus", EventBus.class);
+            this.moduleManager = new ModuleManager();
+            this.cbInfo("Created Module Manager", ModuleManager.class);
+            this.netHandler = new NetHandler();
+            this.cbInfo("Created Network Handler", NetHandler.class);
+            this.titleManager = new TitleManager();
+            this.cbInfo("Created Title Manager", TitleManager.class);
+            this.cosmetics.add(new Cosmetic("Steve", "CheatBreaker Cape", 1.0f, true, "client/defaults/cb.png"));
+            this.cosmetics.add(new Cosmetic("Steve", "CheatBreaker Black Cape", 1.0f, false, "client/defaults/cb_black.png"));
+            this.status = Status.AWAY;
+            this.radioManager = new CBDashManager();
+            this.cbInfo("Created Radio Manager", CBDashManager.class);
+            this.loadProfiles();
+            this.cbInfo("Loaded " + this.profiles.size() + " custom profiles.");
+            (this.configManager = new ConfigManager()).read();
+            this.cbInfo("Created Configuration Manager", ConfigManager.class);
+
+            this.cbInfo("Connecting to websocket server...");
+            this.connectToAssetsServer();
+            this.friendsManager = new FriendsManager();
+            this.cbInfo("Created Friends Manager", FriendsManager.class);
+            OverlayGui.setInstance(new OverlayGui());
+            this.cbInfo("Created Overlay UI", OverlayGui.class);
+
+            this.eventBus.addEvent(PluginMessageEvent.class, this.netHandler::onPluginMessage);
+            this.eventBus.addEvent(KeyboardEvent.class, (e) -> {
+                if (e.getKeyboardKey() == Keyboard.KEY_H) {
+                    Alert.displayMessage("Hello", "Hello, World\nNew Line");
                 }
-            }
-            if (e.getKeyboardKey() == Keyboard.KEY_F9) {
-                RenderUtil.minFps = 2147483647;
-                RenderUtil.maxFps = 0;
-            }
-            if (e.getKeyboardKey() == Keyboard.KEY_F10) {
-                new ServerStatusThread().start();
-            }
-        });
-        this.cbInfo("Registered main events.");
+                if (e.getKeyboardKey() == Keyboard.KEY_RSHIFT) {
+                    if (Ref.getMinecraft().bridge$isIngame()) {
+                        Ref.getMinecraft().bridge$displayGuiScreen(new CBModulesGui());
+                    }
+                }
+                if (e.getKeyboardKey() == Keyboard.KEY_F9) {
+                    RenderUtil.minFps = 2147483647;
+                    RenderUtil.maxFps = 0;
+                }
+                if (e.getKeyboardKey() == Keyboard.KEY_F10) {
+                    new ServerStatusThread().start();
+                }
+            });
+            this.cbInfo("Registered main events.");
 
-        new ServerStatusThread().start();
-        this.cbInfo("Loaded version data.");
-        this.borderManager = new WorldBorderManager();
-        this.cbInfo("Created World Border Manager", WorldBorderManager.class);
+            new ServerStatusThread().start();
+            this.cbInfo("Loaded version data.");
+            this.borderManager = new WorldBorderManager();
+            this.cbInfo("Created World Border Manager", WorldBorderManager.class);
+
+            this.initialized = true;
+        }
     }
 
     private void createDefaultConfigPresets() {

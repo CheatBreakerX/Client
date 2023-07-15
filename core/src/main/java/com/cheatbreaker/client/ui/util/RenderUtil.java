@@ -191,10 +191,17 @@ public class RenderUtil {
         Ref.modified$drawRect(left, top + 1.0f, left + 1.0f, bottom, color);
     }
 
-    public static void drawCorneredGradientRectWithOutline(float left, float top, float right, float bottom, int outlineColour, int gradientStart, int gradientEnd) {
-        Ref.getGlBridge().bridge$scale(.5f, .5f, .5f);
-        Ref.modified$drawGradientRect((left *= 2f) + 1.0f, (top *= 2f) + 1f, (right *= 2f) - 1f,
-                (bottom *= 2f) - 1f, gradientStart, gradientEnd);
+    public static void drawCorneredGradientRectWithOutline(float left, float top, float right, float bottom,
+                                                           int outlineColour, int gradientStart, int gradientEnd) {
+        float scaleFactor = Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor();
+        float scaleModifier = 1f / Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor();
+
+        Ref.getGlBridge().bridge$scale(scaleModifier, scaleModifier, scaleModifier);
+        Ref.modified$drawGradientRect((left *= scaleFactor) + 1.0f,
+                (top *= scaleFactor) + 1f,
+                (right *= scaleFactor) - 1f,
+                (bottom *= scaleFactor) - 1f,
+                gradientStart, gradientEnd);
         RenderUtil.drawVerticalLine(left, top + 1f, bottom - 2.0f, outlineColour);
         RenderUtil.drawVerticalLine(right - 1f, top + 1f, bottom - 2f, outlineColour);
         RenderUtil.drawHorizontalLine(left + 2f, right - 3f, top, outlineColour);
@@ -203,7 +210,7 @@ public class RenderUtil {
         RenderUtil.drawHorizontalLine(right - 2f, right - 2f, top + 1f, outlineColour);
         RenderUtil.drawHorizontalLine(right - 2f, right - 2f, bottom - 2f, outlineColour);
         RenderUtil.drawHorizontalLine(left + 1f, left + 1f, bottom - 2f, outlineColour);
-        Ref.getGlBridge().bridge$scale(2f, 2f, 2f);
+        Ref.getGlBridge().bridge$scale(scaleFactor, scaleFactor, scaleFactor);
     }
 
     public static long timeOfPreviousFrame = 0L;

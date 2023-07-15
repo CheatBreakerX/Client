@@ -2,6 +2,7 @@ package com.cheatbreaker.mixin.client.gui.components;
 
 import com.cheatbreaker.bridge.client.gui.GuiTextFieldBridge;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.screens.controls.ControlsScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 

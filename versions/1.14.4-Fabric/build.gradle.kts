@@ -93,7 +93,7 @@ tasks.processResources {
     inputs.property("modid", projModID)
     inputs.property("mixinGroup", projMixinGroup)
 
-    filesMatching(listOf("mcmod.info", projMixinConfigs)) {
+    filesMatching(listOf("fabric.mod.json", projMixinConfigs)) {
         expand(inputs.properties)
     }
 
