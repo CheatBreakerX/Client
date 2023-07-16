@@ -18,7 +18,7 @@ public class SliderElement extends AbstractModulesGuiElement {
         super(f);
         this.setting = cBSetting;
         this.height = 14;
-        this.initialValue = Float.parseFloat(String.valueOf(cBSetting.value()));
+        this.initialValue = Float.parseFloat(cBSetting.value().toString());
     }
 
     @Override

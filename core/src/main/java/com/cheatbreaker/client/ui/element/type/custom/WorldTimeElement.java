@@ -21,7 +21,7 @@ public class WorldTimeElement extends AbstractModulesGuiElement {
         super(f);
         this.setting = cBSetting;
         this.height = 22;
-        this.time = Float.parseFloat(String.valueOf(cBSetting.value()));
+        this.time = Float.parseFloat(cBSetting.value().toString());
     }
 
     @Override

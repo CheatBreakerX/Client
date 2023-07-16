@@ -17,6 +17,8 @@ import com.cheatbreaker.client.ui.util.font.FontRegistry;
 import com.cheatbreaker.client.util.dash.DashUtil;
 import com.cheatbreaker.client.util.friend.Friend;
 import com.cheatbreaker.client.util.friend.Status;
+import lombok.Getter;
+import lombok.Setter;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -26,8 +28,12 @@ import java.util.List;
 import java.util.Queue;
 
 public class OverlayGui extends AbstractGui {
+    @Getter
+    @Setter
     private static OverlayGui instance;
+    @Getter
     private final FriendsListElement friendsListElement;
+    @Getter
     private final FriendRequestListElement friendRequestsElement;
     private final FlatButtonElement friendsButton;
     private final FlatButtonElement requestsButton;
@@ -44,13 +50,12 @@ public class OverlayGui extends AbstractGui {
                 .getFriendsManager()
                 .getFriends()
                 .forEach((string, friend) -> arrayList.add(new FriendElement(friend)));
-        AbstractElement[] elements = new AbstractElement[5];
-        elements[0] = (this.friendsListElement = new FriendsListElement(arrayList));
-        elements[1] = (this.friendRequestsElement = new FriendRequestListElement(new ArrayList<>()));
-        elements[2] = (this.requestsButton = new FlatButtonElement("REQUESTS"));
-        elements[3] = (this.friendsButton = new FlatButtonElement("FRIENDS"));
-        elements[4] = (this.radioElement = new RadioElement());
-        this.setElementsAndUpdateSize(elements);
+        this.setElementsAndUpdateSize(
+                this.friendsListElement = new FriendsListElement(arrayList),
+                this.friendRequestsElement = new FriendRequestListElement(new ArrayList<>()),
+                this.requestsButton = new FlatButtonElement("REQUESTS"),
+                this.friendsButton = new FlatButtonElement("FRIENDS"),
+                this.radioElement = new RadioElement());
         this.selectedElement = this.friendsListElement;
     }
 
@@ -82,9 +87,9 @@ public class OverlayGui extends AbstractGui {
 //        if (this.mc.previousGuiScreen != this) {
 //            this.IllIllIIIlIIlllIIIllIllII(); // gui blur
 //        }
-        this.friendsButton.setElementDimensions(0f, 28f, 96.976746f * 0.71666664f, 20);
-        this.requestsButton.setElementDimensions(55.315384f * 1.2745098f, 28f, 0.5588235f * 124.36842f, 20);
-        float f = (float)28 + this.friendsButton.getHeight() + 1f;
+        this.friendsButton.setElementDimensions(0f, 28f, 69.5f, 20f);
+        this.requestsButton.setElementDimensions(70.5f, 28f, 69.5f, 20f);
+        float f = 28f + this.friendsButton.getHeight() + 1f;
         this.friendsListElement.setElementDimensions(0f, f, 140f, this.getScaledHeight() - f);
         this.friendRequestsElement.setElementDimensions(0f, f, 140f, this.getScaledHeight() - f);
         this.radioElement.setElementDimensions(this.getScaledWidth() - 210f, 20f, 190f, 28);
@@ -123,18 +128,36 @@ public class OverlayGui extends AbstractGui {
             boolean awayHovered = f > 42f && f < 58f;
             boolean busyHovered = f > 60f && f < 76f;
             boolean offlineHovered = f > 78f;
-            Ref.getGlBridge().bridge$color(onlineHovered ? 0.35f : 0.15f, onlineHovered ? 0.35f :0.15f, onlineHovered ?0.35f :0.15f, 1.0f);
-            RenderUtil.drawIcon(headLocation, (float)7, (float)25, (float)7);
-            Ref.getGlBridge().bridge$color(awayHovered ? 0.35f : 0.15f, awayHovered ? 0.35f :0.15f, awayHovered ? 0.35f :0.15f, 1.0f);
-            RenderUtil.drawIcon(headLocation, (float)7, (float)43, (float)7);
-            Ref.getGlBridge().bridge$color(busyHovered ? 0.35f : 0.15f, busyHovered ? 0.35f :0.15f, busyHovered ? 0.35f :0.15f, 1.0f);
-            RenderUtil.drawIcon(headLocation, (float)7, (float)61, (float)7);
-            Ref.getGlBridge().bridge$color(offlineHovered ? 0.35f : 0.15f, offlineHovered ? 0.35f :0.15f, offlineHovered ? 0.35f :0.15f, 1.0f);
-            RenderUtil.drawIcon(headLocation, (float)7, (float)79, (float)7);
+            Ref.getGlBridge().bridge$color(
+                    onlineHovered ? 0.35f : 0.15f,
+                    onlineHovered ? 0.35f : 0.15f,
+                    onlineHovered ? 0.35f : 0.15f,
+                    1f);
+            RenderUtil.drawIcon(headLocation, 7f, 25f, 7f);
+            Ref.getGlBridge().bridge$color(
+                    awayHovered ? 0.35f : 0.15f,
+                    awayHovered ? 0.35f : 0.15f,
+                    awayHovered ? 0.35f : 0.15f,
+                    1f);
+            RenderUtil.drawIcon(headLocation, 7f, 43f, 7f);
+            Ref.getGlBridge().bridge$color(
+                    busyHovered ? 0.35f : 0.15f,
+                    busyHovered ? 0.35f : 0.15f,
+                    busyHovered ? 0.35f : 0.15f,
+                    1f);
+            RenderUtil.drawIcon(headLocation, 7f, 61f, 7f);
+            Ref.getGlBridge().bridge$color(
+                    offlineHovered ? 0.35f : 0.15f,
+                    offlineHovered ? 0.35f : 0.15f,
+                    offlineHovered ? 0.35f : 0.15f,
+                    1f);
+            RenderUtil.drawIcon(headLocation, 7f, 79f, 7f);
         }
         this.selectedElement.drawElement(f, f2, this.isMouseHovered(this.requestsButton, f, f2));
-        Ref.modified$drawRect(69.5f, 28, 70.5f, (float)28 + this.friendsButton.getHeight(), -14869219);
-        Ref.modified$drawRect(0.0f, (float)28 + this.friendsButton.getHeight(), 140, (float)28 + this.friendsButton.getHeight() + 1.0f, -15395563);
+        Ref.modified$drawRect(69.5f, 28f, 70.5f, 28f + this.friendsButton.getHeight(),
+                -14869219);
+        Ref.modified$drawRect(0f, 28f + this.friendsButton.getHeight(), 140f,
+                28f + this.friendsButton.getHeight() + 1f, -15395563);
         this.drawElements(f, f2, this.friendsListElement, this.friendRequestsElement);
         Ref.getGlBridge().bridge$disableAlphaTest();
     }
@@ -156,7 +179,7 @@ public class OverlayGui extends AbstractGui {
                 ConsoleElement consoleGui = new ConsoleElement();
                 cbAbstractElements[0] = consoleGui;
                 this.addElements(cbAbstractElements);
-                consoleGui.setElementDimensions((float)60, (float)30, (float)300, 145);
+                consoleGui.setElementDimensions(60f, 30f, 300f, 145f);
             }
         }
     }
@@ -181,16 +204,24 @@ public class OverlayGui extends AbstractGui {
             boolean offlineHovered = f > 78f && f < 94f;
             if (onlineHovered) {
                 CheatBreaker.getInstance().setStatus(Status.ONLINE);
-                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator()
+                        .createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"),
+                                1.0f));
             } else if (awayHovered) {
                 CheatBreaker.getInstance().setStatus(Status.AWAY);
-                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator()
+                        .createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"),
+                                1.0f));
             } else if (busyHovered) {
                 CheatBreaker.getInstance().setStatus(Status.BUSY);
-                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator()
+                        .createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"),
+                                1.0f));
             } else if (offlineHovered) {
                 CheatBreaker.getInstance().setStatus(Status.HIDDEN);
-                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator()
+                        .createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"),
+                                1.0f));
             }
             CheatBreaker.getInstance().getAssetsWebSocket().updateClientStatus();
         }
@@ -227,15 +258,18 @@ public class OverlayGui extends AbstractGui {
         }
         boolean bl = true;
         for (Alert alert : this.alertList) {
-            if (alert.hasFadeFinished()) continue;
+            if (alert.hasFadeFinished()) {
+                continue;
+            }
+
             bl = false;
         }
         if (bl) {
             System.out.println("drawing");
             Alert alert = this.alertQueue.poll();
             if (alert != null) {
-                alert.safeSetY(this.getScaledWidth() - (float) Alert.getElementHeight());
-                this.alertList.forEach(alert1 -> alert1.safeSetY(alert1.getTargetY() - (float) Alert.getElementHeight()));
+                alert.safeSetY(this.getScaledWidth() - Alert.getElementHeight());
+                this.alertList.forEach(alert1 -> alert1.safeSetY(alert1.getTargetY() - Alert.getElementHeight()));
                 this.alertList.add(alert);
             }
         }
@@ -309,21 +343,5 @@ public class OverlayGui extends AbstractGui {
             getInstance().context = screen;
         }
         return getInstance();
-    }
-
-    public static OverlayGui getInstance() {
-        return instance;
-    }
-
-    public static void setInstance(OverlayGui instance) {
-        OverlayGui.instance = instance;
-    }
-
-    public FriendsListElement getFriendsListElement() {
-        return this.friendsListElement;
-    }
-
-    public FriendRequestListElement getFriendRequestsElement() {
-        return this.friendRequestsElement;
     }
 }

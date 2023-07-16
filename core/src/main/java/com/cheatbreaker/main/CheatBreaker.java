@@ -308,19 +308,10 @@ public class CheatBreaker {
     }
 
     public float getScaleFactor() {
-        switch (Ref.getMinecraft().bridge$getGameSettings().bridge$getGuiScale()) {
-            case 0: {
-                return 2.0f;
-            }
-            case 1: {
-                return 0.5f;
-            }
-            case 3: {
-                return 1.5f;
-            }
-            default: {
-                return 1.0f;
-            }
+        if (CheatBreaker.getInstance().getGlobalSettings().followMinecraftScale.<Boolean>value()) {
+            return 1f;
+        } else {
+            return Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor() / 2f;
         }
     }
 

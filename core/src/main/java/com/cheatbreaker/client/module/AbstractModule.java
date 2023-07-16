@@ -68,7 +68,7 @@ public abstract class AbstractModule {
         this.minecraft = Ref.getMinecraft();
         this.settingsList = new ArrayList<>();
         this.defaultSettingsValues = new ArrayList<>();
-        this.scale = new Setting(this, "Scale").setValue(1.0f).setMinMax(1.0126582f * 0.49375f, 0.55f * 2.7272727f);
+        this.scale = new Setting(this, "Scale").setValue(1.0f).setMinMax(.5f, 1.5f);
     }
 
     protected <T extends EventBus.Event> void addEvent(Class<T> eventClass, Consumer<T> consumer) {
