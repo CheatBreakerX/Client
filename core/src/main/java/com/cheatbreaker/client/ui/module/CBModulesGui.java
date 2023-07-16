@@ -181,9 +181,9 @@ public class CBModulesGui extends CBGuiScreen {
                 float[] modulePoints = cBModule.getScaledPoints(scaledResolution, true);
                 float[] modulePoints2 = cBModule2.getScaledPoints(scaledResolution, true);
                 float[] selectedPoints = draggingModule.getScaledPoints(scaledResolution, true);
-                Rectangle rectangle = new Rectangle((int)(modulePoints[0] * (Float) cBModule.scale.getValue()), (int)(modulePoints[1] * (Float) cBModule.scale.getValue()), (int)(cBModule.width * (Float) cBModule.scale.getValue()), (int)(cBModule.height * (Float) cBModule.scale.getValue()));
-                Rectangle rectangle2 = new Rectangle((int)(modulePoints2[0] * (Float) cBModule2.scale.getValue()), (int)(modulePoints2[1] * (Float) cBModule2.scale.getValue()), (int)(cBModule2.width * (Float) cBModule2.scale.getValue()), (int)(cBModule2.height * (Float) cBModule2.scale.getValue()));
-                Rectangle rectangle3 = new Rectangle((int)(selectedPoints[0] * (Float) draggingModule.scale.getValue()), (int)(selectedPoints[1] * (Float) CBModulesGui.draggingModule.scale.getValue()), (int)(CBModulesGui.draggingModule.width * (Float) CBModulesGui.draggingModule.scale.getValue()), (int)(CBModulesGui.draggingModule.height * (Float) CBModulesGui.draggingModule.scale.getValue()));
+                Rectangle rectangle = new Rectangle((int)(modulePoints[0] * cBModule.scale.<Float>value()), (int)(modulePoints[1] * cBModule.scale.<Float>value()), (int)(cBModule.width * cBModule.scale.<Float>value()), (int)(cBModule.height * cBModule.scale.<Float>value()));
+                Rectangle rectangle2 = new Rectangle((int)(modulePoints2[0] * cBModule2.scale.<Float>value()), (int)(modulePoints2[1] * cBModule2.scale.<Float>value()), (int)(cBModule2.width * cBModule2.scale.<Float>value()), (int)(cBModule2.height * cBModule2.scale.<Float>value()));
+                Rectangle rectangle3 = new Rectangle((int)(selectedPoints[0] * draggingModule.scale.<Float>value()), (int)(selectedPoints[1] * CBModulesGui.draggingModule.scale.<Float>value()), (int)(CBModulesGui.draggingModule.width * CBModulesGui.draggingModule.scale.<Float>value()), (int)(CBModulesGui.draggingModule.height * CBModulesGui.draggingModule.scale.<Float>value()));
                 try {
                     if (this.getIntersectionFloat(rectangle, rectangle3) > this.getIntersectionFloat(rectangle2, rectangle3)) {
                         return -1;
@@ -201,7 +201,12 @@ public class CBModulesGui extends CBGuiScreen {
             }
             for (CBModulePosition position : this.positions) {
                 this.lIIIIlIIllIIlIIlIIIlIIllI(position, mouseX, mouseY, scaledResolution);
-                if (!(Boolean) CheatBreaker.getInstance().globalSettings.snapModules.getValue() || !this.IlIlIIIlllllIIIlIlIlIllII || Mouse.isButtonDown(1) || position.module != draggingModule) continue;
+                if (!CheatBreaker.getInstance().globalSettings.snapModules.<Boolean>value()
+                        || !this.IlIlIIIlllllIIIlIlIlIllII
+                        || Mouse.isButtonDown(1)
+                        || position.module != draggingModule) {
+                    continue;
+                }
                 for (AbstractModule cBModule3 : this.modules) {
                     if (this.getModulePosition(cBModule3) != null || cBModule3.getGuiAnchor() == null || !cBModule3.isEnabled()) continue;
                     float f5 = 18;
@@ -221,14 +226,14 @@ public class CBModulesGui extends CBGuiScreen {
                     boolean bl2 = true;
                     float[] arrf = cBModule3.getScaledPoints(scaledResolution, true);
                     float[] scaledPoints = position.module.getScaledPoints(scaledResolution, true);
-                    float f6 = arrf[0] * (Float) cBModule3.scale.getValue() - scaledPoints[0] * (Float) position.module.scale.getValue();
-                    float f7 = (arrf[0] + cBModule3.width) * (Float) cBModule3.scale.getValue() - (scaledPoints[0] + position.module.width) * (Float) position.module.scale.getValue();
-                    float f8 = (arrf[0] + cBModule3.width) * (Float) cBModule3.scale.getValue() - scaledPoints[0] * (Float) position.module.scale.getValue();
-                    float f9 = arrf[0] * (Float) cBModule3.scale.getValue() - (scaledPoints[0] + position.module.width) * (Float) position.module.scale.getValue();
-                    float f10 = arrf[1] * (Float) cBModule3.scale.getValue() - scaledPoints[1] * (Float) position.module.scale.getValue();
-                    f3 = (arrf[1] + cBModule3.height) * (Float) cBModule3.scale.getValue() - (scaledPoints[1] + position.module.height) * (Float) position.module.scale.getValue();
-                    f2 = (arrf[1] + cBModule3.height) * (Float) cBModule3.scale.getValue() - scaledPoints[1] * (Float) position.module.scale.getValue();
-                    float f11 = arrf[1] * (Float) cBModule3.scale.getValue() - (scaledPoints[1] + position.module.height) * (Float) position.module.scale.getValue();
+                    float f6 = arrf[0] * cBModule3.scale.<Float>value() - scaledPoints[0] * position.module.scale.<Float>value();
+                    float f7 = (arrf[0] + cBModule3.width) * cBModule3.scale.<Float>value() - (scaledPoints[0] + position.module.width) * position.module.scale.<Float>value();
+                    float f8 = (arrf[0] + cBModule3.width) * cBModule3.scale.<Float>value() - scaledPoints[0] * position.module.scale.<Float>value();
+                    float f9 = arrf[0] * cBModule3.scale.<Float>value() - (scaledPoints[0] + position.module.width) * position.module.scale.<Float>value();
+                    float f10 = arrf[1] * cBModule3.scale.<Float>value() - scaledPoints[1] * position.module.scale.<Float>value();
+                    f3 = (arrf[1] + cBModule3.height) * cBModule3.scale.<Float>value() - (scaledPoints[1] + position.module.height) * position.module.scale.<Float>value();
+                    f2 = (arrf[1] + cBModule3.height) * cBModule3.scale.<Float>value() - scaledPoints[1] * position.module.scale.<Float>value();
+                    float f11 = arrf[1] * cBModule3.scale.<Float>value() - (scaledPoints[1] + position.module.height) * position.module.scale.<Float>value();
                     int n3 = 2;
                     if (f6 >= (float)(-n3) && f6 <= (float)n3) {
                         bl = false;
@@ -310,7 +315,7 @@ public class CBModulesGui extends CBGuiScreen {
         }
         Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, f13);
         if (f13 > 1.0f) {
-            Ref.getGlBridge().bridge$translate(-((float)(this.IIllIlIllIlIllIIlIllIlIII * 2) - (float)32) / (float)12 - 1.0f, 0.0f, 0.0f);
+            Ref.getGlBridge().bridge$translate(-((float)(this.IIllIlIllIlIllIIlIllIlIII * 2) - 32f) / 12f - 1f, 0f, 0f);
         }
         RenderUtil.renderIcon(Ref.getInstanceCreator().createResourceLocation("client/logo_white.png"), (float)(n5 / 2 - 14), (float)(n6 / 2 - 47 - (CheatBreaker.getInstance().isUsingStaffModules() ? 22 : 0)), (float)28, 15);
         if (f13 > 2.0f) {
@@ -350,8 +355,8 @@ public class CBModulesGui extends CBGuiScreen {
                     if (cBModule4.getGuiAnchor() == null || !cBModule4.isEnabled())
                         continue;
                     float[] arrf = cBModule4.getScaledPoints(scaledResolution, true);
-                    float f14 = scale / (Float) cBModule4.scale.getValue();
-                    object = new Rectangle((int)(arrf[0] * (Float) cBModule4.scale.getValue() - 2.0f), (int)(arrf[1] * (Float) cBModule4.scale.getValue() - 2.0f), (int)(cBModule4.width * ((Float)cBModule4.scale.getValue()).floatValue() + (float)4), (int)(cBModule4.height * ((Float)cBModule4.scale.getValue()).floatValue() + (float)4));
+                    float f14 = scale / cBModule4.scale.<Float>value();
+                    object = new Rectangle((int)(arrf[0] * cBModule4.scale.<Float>value() - 2.0f), (int)(arrf[1] * cBModule4.scale.<Float>value() - 2.0f), (int)(cBModule4.width * cBModule4.scale.<Float>value() + 4f), (int)(cBModule4.height * cBModule4.scale.<Float>value() + 4f));
                     if (!object.intersects(new Rectangle(n11 = Math.min(this.someMouseX, mouseX), n10 = Math.min(this.someMouseY, mouseY), Math.max(this.someMouseX, mouseX) - n11, Math.max(this.someMouseY, mouseY) - n10))) continue;
                     f3 = (float)mouseX - cBModule4.getXTranslation();
                     f2 = (float)mouseY - cBModule4.getYTranslation();
@@ -420,8 +425,8 @@ public class CBModulesGui extends CBGuiScreen {
             if (!(draggingModule != null && this.IlIlIIIlllllIIIlIlIlIllII || (iterator = this.lIIIIlIIllIIlIIlIIIlIIllI(scaledResolution, mouseX, mouseY)) == null)) {
                 boolean bl;
                 float[] arrf = iterator.getScaledPoints(scaledResolution, true);
-                boolean bl2 = !iterator.getSettingsList().isEmpty() && (float)mouseX >= arrf[0] * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseX <= (arrf[0] + (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY >= (arrf[1] + iterator.height - (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY <= (arrf[1] + iterator.height + 2.0f) * ((Float) iterator.scale.getValue()).floatValue();
-                boolean bl3 = bl = (float)mouseX > (arrf[0] + iterator.width - (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseX < (arrf[0] + iterator.width + 2.0f) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY > (arrf[1] + iterator.height - (float)10) * ((Float) iterator.scale.getValue()).floatValue() && (float)mouseY < (arrf[1] + iterator.height + 2.0f) * ((Float) iterator.scale.getValue()).floatValue();
+                boolean bl2 = !iterator.getSettingsList().isEmpty() && (float)mouseX >= arrf[0] * iterator.scale.<Float>value() && (float)mouseX <= (arrf[0] + (float)10) * iterator.scale.<Float>value() && (float)mouseY >= (arrf[1] + iterator.height - 10f) * iterator.scale.<Float>value() && (float)mouseY <= (arrf[1] + iterator.height + 2.0f) * iterator.scale.<Float>value();
+                boolean bl3 = bl = (float)mouseX > (arrf[0] + iterator.width - 10f) * iterator.scale.<Float>value() && (float)mouseX < (arrf[0] + iterator.width + 2.0f) * iterator.scale.<Float>value() && (float)mouseY > (arrf[1] + iterator.height - 10f) * iterator.scale.<Float>value() && (float)mouseY < (arrf[1] + iterator.height + 2.0f) * iterator.scale.<Float>value();
                 if (bl2) {
                     Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                     ((ModuleListElement)this.settingsElement).llIlIIIlIIIIlIlllIlIIIIll = false;
@@ -438,11 +443,14 @@ public class CBModulesGui extends CBGuiScreen {
                 SomeRandomAssEnum dELETE_ME_D;
                 if (object.getGuiAnchor() == null || !object.isEnabled()) continue;
                 float[] scaledPoints = object.getScaledPoints(scaledResolution, true);
-                boolean bl4 = (float)mouseX > scaledPoints[0] * (Float) object.scale.getValue() && (float)mouseX < (scaledPoints[0] + object.width) * (Float) object.scale.getValue() && (float)mouseY > scaledPoints[1] * ((Float) object.scale.getValue()).floatValue() && (float)mouseY < (scaledPoints[1] + object.height) * ((Float) object.scale.getValue()).floatValue();
-                boolean bl5 = this.dataHolder != null && this.dataHolder.module == object && this.dataHolder.unknown == SomeRandomAssEnum.LEFT_BOTTOM || !bl4 && (float)mouseX >= (scaledPoints[0] + object.width - (float)5) * ((Float) object.scale.getValue()).floatValue() && (float)mouseX <= (scaledPoints[0] + object.width + (float)5) * ((Float) object.scale.getValue()).floatValue() && (float)mouseY >= (scaledPoints[1] - (float)5) * ((Float) object.scale.getValue()).floatValue() && (float)mouseY <= (scaledPoints[1] + (float)5) * (Float) object.scale.getValue();
-                boolean bl6 = this.dataHolder != null && this.dataHolder.module == object && this.dataHolder.unknown == SomeRandomAssEnum.RIGHT_TOP || !bl4 && (float)mouseX >= (scaledPoints[0] - (float)5) * (Float) object.scale.getValue() && (float)mouseX <= (scaledPoints[0] + (float)5) * ((Float) object.scale.getValue()).floatValue() && (float)mouseY >= (scaledPoints[1] + object.height - (float)5) * ((Float) object.scale.getValue()).floatValue() && (float)mouseY <= (scaledPoints[1] + object.height + (float)5) * (Float) object.scale.getValue();
-                boolean bl7 = this.dataHolder != null && this.dataHolder.module == object && this.dataHolder.unknown == SomeRandomAssEnum.RIGHT_BOTTOM || !bl4 && (float)mouseX >= (scaledPoints[0] - (float)5) * (Float) object.scale.getValue() && (float)mouseX <= (scaledPoints[0] + (float)5) * ((Float) object.scale.getValue()).floatValue() && (float)mouseY >= (scaledPoints[1] - (float)5) * ((Float) object.scale.getValue()).floatValue() && (float)mouseY <= (scaledPoints[1] + (float)5) * ((Float) object.scale.getValue()).floatValue();
-                boolean bl = this.dataHolder != null && this.dataHolder.module == object && this.dataHolder.unknown == SomeRandomAssEnum.LEFT_TOP || !bl4 && (float)mouseX >= (scaledPoints[0] + object.width - (float)5) * (Float) object.scale.getValue() && (float)mouseX <= (scaledPoints[0] + object.width + (float)5) * ((Float) object.scale.getValue()).floatValue() && (float)mouseY >= (scaledPoints[1] + object.height - (float)5) * ((Float) object.scale.getValue()).floatValue() && (float)mouseY <= (scaledPoints[1] + object.height + (float)5) * (Float) object.scale.getValue();
+                boolean bl4 = (float)mouseX > scaledPoints[0] * object.scale.<Float>value()
+                                && (float)mouseX < (scaledPoints[0] + object.width) * object.scale.<Float>value()
+                                && (float)mouseY > scaledPoints[1] * object.scale.<Float>value()
+                                && (float)mouseY < (scaledPoints[1] + object.height) * object.scale.<Float>value();
+                boolean bl5 = this.dataHolder != null && this.dataHolder.module == object && this.dataHolder.unknown == SomeRandomAssEnum.LEFT_BOTTOM || !bl4 && (float)mouseX >= (scaledPoints[0] + object.width - 5f) * object.scale.<Float>value() && (float)mouseX <= (scaledPoints[0] + object.width + 5f) * object.scale.<Float>value() && (float)mouseY >= (scaledPoints[1] - 5f) * object.scale.<Float>value() && (float)mouseY <= (scaledPoints[1] + 5f) * object.scale.<Float>value();
+                boolean bl6 = this.dataHolder != null && this.dataHolder.module == object && this.dataHolder.unknown == SomeRandomAssEnum.RIGHT_TOP || !bl4 && (float)mouseX >= (scaledPoints[0] - 5f) * object.scale.<Float>value() && (float)mouseX <= (scaledPoints[0] + (float)5) * object.scale.<Float>value() && (float)mouseY >= (scaledPoints[1] + object.height - 5f) * object.scale.<Float>value() && (float)mouseY <= (scaledPoints[1] + object.height + 5f) * object.scale.<Float>value();
+                boolean bl7 = this.dataHolder != null && this.dataHolder.module == object && this.dataHolder.unknown == SomeRandomAssEnum.RIGHT_BOTTOM || !bl4 && (float)mouseX >= (scaledPoints[0] - 5f) * object.scale.<Float>value() && (float)mouseX <= (scaledPoints[0] + (float)5) * object.scale.<Float>value() && (float)mouseY >= (scaledPoints[1] - 5f) * object.scale.<Float>value() && (float)mouseY <= (scaledPoints[1] + 5f) * object.scale.<Float>value();
+                boolean bl = this.dataHolder != null && this.dataHolder.module == object && this.dataHolder.unknown == SomeRandomAssEnum.LEFT_TOP || !bl4 && (float)mouseX >= (scaledPoints[0] + object.width - 5f) * object.scale.<Float>value() && (float)mouseX <= (scaledPoints[0] + object.width + 5f) * object.scale.<Float>value() && (float)mouseY >= (scaledPoints[1] + object.height - 5f) * object.scale.<Float>value() && (float)mouseY <= (scaledPoints[1] + object.height + 5f) * object.scale.<Float>value();
                 if (this.someMouseX != -1 || !bl5 && !bl6 && !bl7 && !bl) continue;
                 if (bl5) {
                     dELETE_ME_D = SomeRandomAssEnum.LEFT_BOTTOM;
@@ -513,8 +521,8 @@ public class CBModulesGui extends CBGuiScreen {
             cBModule.setAnchor(cBGuiAnchor);
             float[] scaledPointsWithoutTranslations = cBModule.getScaledPoints(scaledResolution, false);
             cBModule.setTranslations(
-                    scaledPointsWithTranslations[0] * (Float) cBModule.scale.getValue() - scaledPointsWithoutTranslations[0] * (Float) cBModule.scale.getValue(),
-                    scaledPointsWithTranslations[1] * (Float) cBModule.scale.getValue() - scaledPointsWithoutTranslations[1] * (Float) cBModule.scale.getValue()
+                    scaledPointsWithTranslations[0] * cBModule.scale.<Float>value() - scaledPointsWithoutTranslations[0] * cBModule.scale.<Float>value(),
+                    scaledPointsWithTranslations[1] * cBModule.scale.<Float>value() - scaledPointsWithoutTranslations[1] * cBModule.scale.<Float>value()
             );
         }
     }
@@ -645,25 +653,25 @@ public class CBModulesGui extends CBGuiScreen {
                 continue;
             float f = cBModule.width;
             float f2 = cBModule.height;
-            float f3 = 18;
+            float f3 = 18f;
             if (f < f3) {
                 cBModule.width = f3;
             }
-            if (f2 < (float) 18) {
-                cBModule.height = 18;
+            if (f2 < 18f) {
+                cBModule.height = 18f;
             }
-            if (!((float) n > (arrf = cBModule.getScaledPoints(scaledResolution, true))[0] * (Float) cBModule.scale.getValue() && (float) n < (arrf[0] + cBModule.width) * ((Float) cBModule.scale.getValue()).floatValue() && (float) n2 > arrf[1] * ((Float) cBModule.scale.getValue()).floatValue() && (float) n2 < (arrf[1] + cBModule.height) * ((Float) cBModule.scale.getValue()).floatValue()))
+            if (!((float) n > (arrf = cBModule.getScaledPoints(scaledResolution, true))[0] * cBModule.scale.<Float>value() && (float) n < (arrf[0] + cBModule.width) * cBModule.scale.<Float>value() && (float) n2 > arrf[1] * cBModule.scale.<Float>value() && (float) n2 < (arrf[1] + cBModule.height) * cBModule.scale.<Float>value()))
                 continue;
-            boolean bl3 = !cBModule.getSettingsList().isEmpty() && (float) n >= arrf[0] * (Float) cBModule.scale.getValue() && (float) n <= (arrf[0] + (float) 10) * ((Float) cBModule.scale.getValue()).floatValue() && (float) n2 >= (arrf[1] + cBModule.height - (float) 10) * ((Float) cBModule.scale.getValue()).floatValue() && (float) n2 <= (arrf[1] + cBModule.height + 2.0f) * ((Float) cBModule.scale.getValue()).floatValue();
-            boolean bl4 = bl = (float) n > (arrf[0] + cBModule.width - (float) 10) * (Float) cBModule.scale.getValue() && (float) n < (arrf[0] + cBModule.width + 2.0f) * ((Float) cBModule.scale.getValue()).floatValue() && (float) n2 > (arrf[1] + cBModule.height - (float) 10) * ((Float) cBModule.scale.getValue()).floatValue() && (float) n2 < (arrf[1] + cBModule.height + 2.0f) * ((Float) cBModule.scale.getValue()).floatValue();
+            boolean bl3 = !cBModule.getSettingsList().isEmpty() && (float) n >= arrf[0] * cBModule.scale.<Float>value() && (float) n <= (arrf[0] + (float) 10) * cBModule.scale.<Float>value() && (float) n2 >= (arrf[1] + cBModule.height - (float) 10) * cBModule.scale.<Float>value() && (float) n2 <= (arrf[1] + cBModule.height + 2.0f) * cBModule.scale.<Float>value();
+            boolean bl4 = bl = (float) n > (arrf[0] + cBModule.width - 10f) * cBModule.scale.<Float>value() && (float) n < (arrf[0] + cBModule.width + 2.0f) * cBModule.scale.<Float>value() && (float) n2 > (arrf[1] + cBModule.height - (float) 10) * cBModule.scale.<Float>value() && (float) n2 < (arrf[1] + cBModule.height + 2.0f) * cBModule.scale.<Float>value();
             if (n3 == 0 && !bl3 && !bl) {
                 boolean bl5 = true;
                 if (this.getModulePosition(cBModule) != null) {
                     this.removePositionForModule(cBModule);
                     bl5 = false;
                 }
-                float f4 = (float) n - cBModule.getXTranslation() * (Float) cBModule.scale.getValue();
-                float f5 = (float) n2 - cBModule.getYTranslation() * (Float) cBModule.scale.getValue();
+                float f4 = (float) n - cBModule.getXTranslation() * cBModule.scale.<Float>value();
+                float f5 = (float) n2 - cBModule.getYTranslation() * cBModule.scale.<Float>value();
                 this.IIlIIllIIIllllIIlllIllIIl = n;
                 this.lllIlIIllllIIIIlIllIlIIII = n2;
                 this.IlIlIIIlllllIIIlIlIlIllII = false;
@@ -715,8 +723,8 @@ public class CBModulesGui extends CBGuiScreen {
         for (AbstractModule cBModule : this.modules) {
             if (cBModule.getGuiAnchor() == null) continue;
             float[] arrf = cBModule.getScaledPoints(scaledResolution, true);
-            boolean bl = (float) n > (arrf[0] + cBModule.width - (float) 10) * (Float) cBModule.scale.getValue() && (float) n < (arrf[0] + cBModule.width + 2.0f) * (Float) cBModule.scale.getValue() && (float) n2 > (arrf[1] + cBModule.height - (float) 10) * (Float) cBModule.scale.getValue() && (float) n2 < (arrf[1] + cBModule.height + 2.0f) * (Float) cBModule.scale.getValue();
-            boolean bl2 = !cBModule.getSettingsList().isEmpty() && (float)n >= arrf[0] * (Float) cBModule.scale.getValue() && (float)n <= (arrf[0] + (float)10) * (Float) cBModule.scale.getValue() && (float)n2 >= (arrf[1] + cBModule.height - (float)10) * (Float) cBModule.scale.getValue() && (float)n2 <= (arrf[1] + cBModule.height + 2.0f) * (Float) cBModule.scale.getValue();
+            boolean bl = (float) n > (arrf[0] + cBModule.width - 10f) * cBModule.scale.<Float>value() && (float) n < (arrf[0] + cBModule.width + 2f) * cBModule.scale.<Float>value() && (float) n2 > (arrf[1] + cBModule.height - 10f) * cBModule.scale.<Float>value() && (float) n2 < (arrf[1] + cBModule.height + 2f) * cBModule.scale.<Float>value();
+            boolean bl2 = !cBModule.getSettingsList().isEmpty() && (float)n >= arrf[0] * cBModule.scale.<Float>value() && (float)n <= (arrf[0] + 10f) * cBModule.scale.<Float>value() && (float)n2 >= (arrf[1] + cBModule.height - 10f) * cBModule.scale.<Float>value() && (float)n2 <= (arrf[1] + cBModule.height + 2f) * cBModule.scale.<Float>value();
             if (!bl && !bl2) continue;
             return cBModule;
         }
@@ -728,7 +736,7 @@ public class CBModulesGui extends CBGuiScreen {
         for (AbstractModule cBModule : this.modules) {
             if (cBModule.getGuiAnchor() == null) continue;
             float[] arrf = cBModule.getScaledPoints(scaledResolution, true);
-            boolean bl2 = (float)mouseX > arrf[0] * (Float) cBModule.scale.getValue() && (float)mouseX < (arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue() && (float)mouseY > arrf[1] * (Float) cBModule.scale.getValue() && (float)mouseY < (arrf[1] + cBModule.height) * (Float) cBModule.scale.getValue();
+            boolean bl2 = (float)mouseX > arrf[0] * cBModule.scale.<Float>value() && (float)mouseX < (arrf[0] + cBModule.width) * cBModule.scale.<Float>value() && (float)mouseY > arrf[1] * cBModule.scale.<Float>value() && (float)mouseY < (arrf[1] + cBModule.height) * cBModule.scale.<Float>value();
             bl = bl || bl2;
         }
         return bl;
@@ -757,7 +765,7 @@ public class CBModulesGui extends CBGuiScreen {
         cBModule.scaleAndTranslate(scaledResolution);
         bl2 = this.someMouseX != -1;
         if (bl2) {
-            Rectangle rectangle1 = new Rectangle((int)(arrf[0] * (Float) cBModule.scale.getValue() - 2.0f), (int)(arrf[1] * ((Float)cBModule.scale.getValue()).floatValue() - 2.0f), (int)(cBModule.width * ((Float)cBModule.scale.getValue()).floatValue() + (float)4), (int)(cBModule.height * ((Float)cBModule.scale.getValue()).floatValue() + (float)4));
+            Rectangle rectangle1 = new Rectangle((int)(arrf[0] * cBModule.scale.<Float>value() - 2.0f), (int)(arrf[1] * cBModule.scale.<Float>value() - 2f), (int)(cBModule.width * cBModule.scale.<Float>value() + 4f), (int)(cBModule.height * cBModule.scale.<Float>value() + 4f));
             n6 = Math.min(this.someMouseX, n);
             n5 = Math.min(this.someMouseY, n2);
             n4 = Math.max(this.someMouseX, n) - n6;
@@ -765,55 +773,55 @@ public class CBModulesGui extends CBGuiScreen {
             Rectangle rectangle = new Rectangle(n6, n5, n4, n3);
             bl2 = rectangle1.intersects(rectangle);
         }
-        n6 = (float) n > (object = cBModule.getScaledPoints(scaledResolution, true))[0] * (Float) cBModule.scale.getValue() && (float) n < (object[0] + cBModule.width) * ((Float) cBModule.scale.getValue()).floatValue() && (float) n2 > object[1] * ((Float) cBModule.scale.getValue()).floatValue() && (float) n2 < (object[1] + cBModule.height) * ((Float) cBModule.scale.getValue()).floatValue() ? 1 : 0;
+        n6 = (float) n > (object = cBModule.getScaledPoints(scaledResolution, true))[0] * cBModule.scale.<Float>value() && (float) n < (object[0] + cBModule.width) * cBModule.scale.<Float>value() && (float) n2 > object[1] * cBModule.scale.<Float>value() && (float) n2 < (object[1] + cBModule.height) * cBModule.scale.<Float>value() ? 1 : 0;
         if (!this.IlIIIIllIIIIIlllIIlIIlllI) {
             if (this.getModulePosition(cBModule) != null || bl2) {
-                Ref.modified$drawRectWithOutline(0.0f, 0.0f, cBModule.width, cBModule.height, 2.064516f * 0.2421875f, -1627324417, 0x1AFFFFFF);
+                Ref.modified$drawRectWithOutline(0f, 0f, cBModule.width, cBModule.height, 2.064516f * 0.2421875f, -1627324417, 0x1AFFFFFF);
             } else {
-                Ref.modified$drawRectWithOutline(0.0f, 0.0f, cBModule.width, cBModule.height, 1.2179487f * 0.41052634f, 0x6FFFFFFF, 0x1AFFFFFF);
+                Ref.modified$drawRectWithOutline(0f, 0f, cBModule.width, cBModule.height, 1.2179487f * 0.41052634f, 0x6FFFFFFF, 0x1AFFFFFF);
             }
         }
         if (!this.IlIIIIllIIIIIlllIIlIIlllI && n6 != 0) {
-            n5 = !cBModule.getSettingsList().isEmpty() && (float)n >= (object[0] + 2.0f) * (Float) cBModule.scale.getValue() && (float)n <= (object[0] + (float)10) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 >= (object[1] + cBModule.height - (float)8) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 <= (object[1] + cBModule.height - 2.0f) * ((Float)cBModule.scale.getValue()).floatValue() ? 1 : 0;
-            n4 = (float)n > (object[0] + cBModule.width - (float)10) * (Float) cBModule.scale.getValue() && (float)n < (object[0] + cBModule.width - 2.0f) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 > (object[1] + cBModule.height - (float)8) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 < (object[1] + cBModule.height - 2.0f) * ((Float)cBModule.scale.getValue()).floatValue() ? 1 : 0;
+            n5 = !cBModule.getSettingsList().isEmpty() && (float)n >= (object[0] + 2f) * cBModule.scale.<Float>value() && (float)n <= (object[0] + 10f) * cBModule.scale.<Float>value() && (float)n2 >= (object[1] + cBModule.height - 8f) * cBModule.scale.<Float>value() && (float)n2 <= (object[1] + cBModule.height - 2.0f) * cBModule.scale.<Float>value() ? 1 : 0;
+            n4 = (float)n > (object[0] + cBModule.width - 10f) * cBModule.scale.<Float>value() && (float)n < (object[0] + cBModule.width - 2f) * cBModule.scale.<Float>value() && (float)n2 > (object[1] + cBModule.height - 8f) * cBModule.scale.<Float>value() && (float)n2 < (object[1] + cBModule.height - 2.0f) * cBModule.scale.<Float>value() ? 1 : 0;
             if (!cBModule.getSettingsList().isEmpty()) {
-                Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, n5 != 0 ? 1.0f : 0.20895523f * 2.8714287f);
-                RenderUtil.drawIcon(this.cogIcon, (float)3, 2.0f, cBModule.height - 2.162162f * 3.4687502f);
+                Ref.getGlBridge().bridge$color(1f, 1f, 1f, n5 != 0 ? 1f : 0.20895523f * 2.8714287f);
+                RenderUtil.drawIcon(this.cogIcon, 3f, 2f, cBModule.height - 2.162162f * 3.4687502f);
             }
-            Ref.getGlBridge().bridge$color(0.8f, 0.2f, 0.2f, n4 != 0 ? 1.0f : 0.6f);
-            RenderUtil.drawIcon(this.deleteIcon, (float)3, cBModule.width - (float)8, cBModule.height - 0.2972973f * 25.227272f);
+            Ref.getGlBridge().bridge$color(.8f, .2f, .2f, n4 != 0 ? 1f : .6f);
+            RenderUtil.drawIcon(this.deleteIcon, 3f, cBModule.width - 8f, cBModule.height - 0.2972973f * 25.227272f);
         }
         Ref.getGlBridge().bridge$pushMatrix();
-        float f3 = f / (Float) cBModule.scale.getValue();
+        float f3 = f / cBModule.scale.<Float>value();
         Ref.getGlBridge().bridge$scale(f3, f3, f3);
         if (bl) {
-            n4 = this.dataHolder != null && this.dataHolder.module == cBModule && this.dataHolder.unknown == SomeRandomAssEnum.LEFT_BOTTOM || n6 == 0 && (float)n >= (object[0] + cBModule.width - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n <= (object[0] + cBModule.width + (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 >= (object[1] - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 <= (object[1] + (float)5) * ((Float)cBModule.scale.getValue()).floatValue() ? 1 : 0;
-            n3 = this.dataHolder != null && this.dataHolder.module == cBModule && this.dataHolder.unknown == SomeRandomAssEnum.RIGHT_TOP || n6 == 0 && (float)n >= (object[0] - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n <= (object[0] + (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 >= (object[1] + cBModule.height - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 <= (object[1] + cBModule.height + (float)5) * ((Float)cBModule.scale.getValue()).floatValue() ? 1 : 0;
-            boolean bl5 = this.dataHolder != null && this.dataHolder.module == cBModule && this.dataHolder.unknown == SomeRandomAssEnum.RIGHT_BOTTOM || n6 == 0 && (float)n >= (object[0] - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n <= (object[0] + (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 >= (object[1] - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 <= (object[1] + (float)5) * ((Float)cBModule.scale.getValue()).floatValue();
-            boolean bl6 = this.dataHolder != null && this.dataHolder.module == cBModule && this.dataHolder.unknown == SomeRandomAssEnum.LEFT_TOP || n6 == 0 && (float)n >= (object[0] + cBModule.width - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n <= (object[0] + cBModule.width + (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 >= (object[1] + cBModule.height - (float)5) * ((Float)cBModule.scale.getValue()).floatValue() && (float)n2 <= (object[1] + cBModule.height + (float)5) * ((Float)cBModule.scale.getValue()).floatValue();
+            n4 = this.dataHolder != null && this.dataHolder.module == cBModule && this.dataHolder.unknown == SomeRandomAssEnum.LEFT_BOTTOM || n6 == 0 && (float)n >= (object[0] + cBModule.width - 5f) * cBModule.scale.<Float>value() && (float)n <= (object[0] + cBModule.width + 5f) * cBModule.scale.<Float>value() && (float)n2 >= (object[1] - 5f) * cBModule.scale.<Float>value() && (float)n2 <= (object[1] + 5f) * cBModule.scale.<Float>value() ? 1 : 0;
+            n3 = this.dataHolder != null && this.dataHolder.module == cBModule && this.dataHolder.unknown == SomeRandomAssEnum.RIGHT_TOP || n6 == 0 && (float)n >= (object[0] - 5f) * cBModule.scale.<Float>value() && (float)n <= (object[0] + 5f) * cBModule.scale.<Float>value() && (float)n2 >= (object[1] + cBModule.height - 5f) * cBModule.scale.<Float>value() && (float)n2 <= (object[1] + cBModule.height + 5f) * cBModule.scale.<Float>value() ? 1 : 0;
+            boolean bl5 = this.dataHolder != null && this.dataHolder.module == cBModule && this.dataHolder.unknown == SomeRandomAssEnum.RIGHT_BOTTOM || n6 == 0 && (float)n >= (object[0] - 5f) * cBModule.scale.<Float>value() && (float)n <= (object[0] + 5f) * cBModule.scale.<Float>value() && (float)n2 >= (object[1] - 5f) * cBModule.scale.<Float>value() && (float)n2 <= (object[1] + 5f) * cBModule.scale.<Float>value();
+            boolean bl6 = this.dataHolder != null && this.dataHolder.module == cBModule && this.dataHolder.unknown == SomeRandomAssEnum.LEFT_TOP || n6 == 0 && (float)n >= (object[0] + cBModule.width - 5f) * cBModule.scale.<Float>value() && (float)n <= (object[0] + cBModule.width + 5f) * cBModule.scale.<Float>value() && (float)n2 >= (object[1] + cBModule.height - 5f) * cBModule.scale.<Float>value() && (float)n2 <= (object[1] + cBModule.height + 5f) * cBModule.scale.<Float>value();
             Ref.getGlBridge().bridge$pushMatrix();
             float f4 = 4;
             if (this.someMouseX == -1 && bl5) {
-                Ref.getGlBridge().bridge$translate(0.0f, 0.0f, 0.0f);
-                Ref.modified$drawRect(-f4 / 2.0f, -f4 / 2.0f, f4 / 2.0f, f4 / 2.0f, -16711936);
+                Ref.getGlBridge().bridge$translate(0f, 0f, 0f);
+                Ref.modified$drawRect(-f4 / 2.0f, -f4 / 2f, f4 / 2f, f4 / 2f, -16711936);
             }
             if (this.someMouseX == -1 && n4 != 0) {
-                Ref.getGlBridge().bridge$translate(cBModule.width / f3, 0.0f, 0.0f);
-                Ref.modified$drawRect(-f4 / 2.0f, -f4 / 2.0f, f4 / 2.0f, f4 / 2.0f, -16711936);
+                Ref.getGlBridge().bridge$translate(cBModule.width / f3, 0f, 0f);
+                Ref.modified$drawRect(-f4 / 2.0f, -f4 / 2f, f4 / 2f, f4 / 2f, -16711936);
             }
             if (this.someMouseX == -1 && bl6) {
-                Ref.getGlBridge().bridge$translate(cBModule.width / f3, cBModule.height / f3, 0.0f);
-                Ref.modified$drawRect(-f4 / 2.0f, -f4 / 2.0f, f4 / 2.0f, f4 / 2.0f, -16711936);
+                Ref.getGlBridge().bridge$translate(cBModule.width / f3, cBModule.height / f3, 0f);
+                Ref.modified$drawRect(-f4 / 2.0f, -f4 / 2f, f4 / 2f, f4 / 2f, -16711936);
             }
             if (this.someMouseX == -1 && n3 != 0) {
-                Ref.getGlBridge().bridge$translate(0.0f, cBModule.height / f3, 0.0f);
-                Ref.modified$drawRect(-f4 / 2.0f, -f4 / 2.0f, f4 / 2.0f, f4 / 2.0f, -16711936);
+                Ref.getGlBridge().bridge$translate(0f, cBModule.height / f3, 0f);
+                Ref.modified$drawRect(-f4 / 2f, -f4 / 2f, f4 / 2f, f4 / 2f, -16711936);
             }
             Ref.getGlBridge().bridge$popMatrix();
             bl3 = this.someMouseX == -1 && (bl5 || n4 != 0 || n3 != 0 || bl6);
         }
         n4 = arrf[1] - FontRegistry.getUbuntuMedium16px().getHeight() - (float)6 < 0.0f ? 1 : 0;
-        float f5 = n4 != 0 ? cBModule.height * (Float) cBModule.scale.getValue() / f : (float)(-FontRegistry.getUbuntuMedium16px().getHeight() - 4);
+        float f5 = n4 != 0 ? cBModule.height * cBModule.scale.<Float>value() / f : (-FontRegistry.getUbuntuMedium16px().getHeight() - 4f);
         switch (cBModule.getPosition()) {
             case LEFT: {
                 float f6 = 0.0f;
@@ -821,12 +829,12 @@ public class CBModulesGui extends CBGuiScreen {
                 break;
             }
             case CENTER: {
-                float f7 = cBModule.width * (Float) cBModule.scale.getValue() / f / 2.0f;
+                float f7 = cBModule.width * cBModule.scale.<Float>value() / f / 2.0f;
                 FontRegistry.getUbuntuMedium16px().drawString(cBModule.getName(), f7, f5, -1);
                 break;
             }
             case RIGHT: {
-                float f8 = cBModule.width * (Float) cBModule.scale.getValue() / f - (float) FontRegistry.getUbuntuMedium16px().getStringWidth(cBModule.getName());
+                float f8 = cBModule.width * cBModule.scale.<Float>value() / f - (float) FontRegistry.getUbuntuMedium16px().getStringWidth(cBModule.getName());
                 FontRegistry.getUbuntuMedium16px().drawString(cBModule.getName(), f8, f5, -1);
             }
         }
@@ -838,7 +846,7 @@ public class CBModulesGui extends CBGuiScreen {
     private void lIIIIlIIllIIlIIlIIIlIIllI(ScaledResolutionBridge scaledResolution) {
         if (!Mouse.isButtonDown(1) && draggingModule != null) {
             for (CBModulePosition CBModulePosition : this.positions) {
-                if (CBModulePosition.module != draggingModule || !(Boolean) CheatBreaker.getInstance().globalSettings.snapModules.getValue()) continue;
+                if (CBModulePosition.module != draggingModule || !CheatBreaker.getInstance().globalSettings.snapModules.<Boolean>value()) continue;
                 Object var5_5 = null;
                 for (AbstractModule cBModule : this.modules) {
                     if (this.getModulePosition(cBModule) != null || cBModule.getGuiAnchor() == null || !cBModule.isEnabled() || !cBModule.isEditable && !cBModule.isRenderHud()) continue;
@@ -858,46 +866,46 @@ public class CBModulesGui extends CBGuiScreen {
                     float[] arrf = cBModule.getScaledPoints(scaledResolution, true);
                     float[] arrf2 = CBModulePosition.module.getScaledPoints(scaledResolution, true);
                     boolean bl = false;
-                    float f2 = arrf[0] * (Float) cBModule.scale.getValue() - arrf2[0] * (Float) CBModulePosition.module.scale.getValue();
-                    float f3 = (arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue() - (arrf2[0] + CBModulePosition.module.width) * (Float) CBModulePosition.module.scale.getValue();
-                    float f4 = (arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue() - arrf2[0] * (Float) CBModulePosition.module.scale.getValue();
-                    float f5 = arrf[0] * (Float) cBModule.scale.getValue() - (arrf2[0] + CBModulePosition.module.width) * (Float) CBModulePosition.module.scale.getValue();
-                    float f6 = arrf[1] * (Float) cBModule.scale.getValue() - arrf2[1] * (Float) CBModulePosition.module.scale.getValue();
-                    float f7 = (arrf[1] + cBModule.height) * (Float) cBModule.scale.getValue() - (arrf2[1] + CBModulePosition.module.height) * (Float) CBModulePosition.module.scale.getValue();
-                    float f8 = (arrf[1] + cBModule.height) * (Float) cBModule.scale.getValue() - arrf2[1] * (Float) CBModulePosition.module.scale.getValue();
-                    float f9 = arrf[1] * (Float) cBModule.scale.getValue() - (arrf2[1] + CBModulePosition.module.height) * (Float) CBModulePosition.module.scale.getValue();
+                    float f2 = arrf[0] * cBModule.scale.<Float>value() - arrf2[0] * CBModulePosition.module.scale.<Float>value();
+                    float f3 = (arrf[0] + cBModule.width) * cBModule.scale.<Float>value() - (arrf2[0] + CBModulePosition.module.width) * CBModulePosition.module.scale.<Float>value();
+                    float f4 = (arrf[0] + cBModule.width) * cBModule.scale.<Float>value() - arrf2[0] * CBModulePosition.module.scale.<Float>value();
+                    float f5 = arrf[0] * cBModule.scale.<Float>value() - (arrf2[0] + CBModulePosition.module.width) * CBModulePosition.module.scale.<Float>value();
+                    float f6 = arrf[1] * cBModule.scale.<Float>value() - arrf2[1] * CBModulePosition.module.scale.<Float>value();
+                    float f7 = (arrf[1] + cBModule.height) * cBModule.scale.<Float>value() - (arrf2[1] + CBModulePosition.module.height) * CBModulePosition.module.scale.<Float>value();
+                    float f8 = (arrf[1] + cBModule.height) * cBModule.scale.<Float>value() - arrf2[1] * CBModulePosition.module.scale.<Float>value();
+                    float f9 = arrf[1] * cBModule.scale.<Float>value() - (arrf2[1] + CBModulePosition.module.height) * CBModulePosition.module.scale.<Float>value();
                     int n = 2;
                     if (f2 >= (float)(-n) && f2 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect(arrf[0] * (Float) cBModule.scale.getValue() - 0.6666667f * 0.75f, 0.0, arrf[0] * (Float) cBModule.scale.getValue(), this.height, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect(arrf[0] * cBModule.scale.<Float>value() - 0.6666667f * 0.75f, 0, arrf[0] * cBModule.scale.<Float>value(), this.height, 0, -3596854);
                     }
                     if (f3 >= (float)(-n) && f3 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect((arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue(), 0.0, (arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue() + 1.7272727f * 0.28947368f, this.height, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect((arrf[0] + cBModule.width) * cBModule.scale.<Float>value(), 0, (arrf[0] + cBModule.width) * cBModule.scale.<Float>value() + 1.7272727f * 0.28947368f, this.height, 0, -3596854);
                     }
                     if (f5 >= (float)(-n) && f5 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect(arrf[0] * (Float) cBModule.scale.getValue(), 0.0, arrf[0] * (Float) cBModule.scale.getValue() + 0.29775283f * 1.6792452f, this.height, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect(arrf[0] * cBModule.scale.<Float>value(), 0.0, arrf[0] * cBModule.scale.<Float>value() + 0.29775283f * 1.6792452f, this.height, 0.0, -3596854);
                     }
                     if (f4 >= (float)(-n) && f4 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect((arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue(), 0.0, (arrf[0] + cBModule.width) * (Float) cBModule.scale.getValue() + 1.5238096f * 0.328125f, this.height, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect((arrf[0] + cBModule.width) * cBModule.scale.<Float>value(), 0.0, (arrf[0] + cBModule.width) * cBModule.scale.<Float>value() + 1.5238096f * 0.328125f, this.height, 0.0, -3596854);
                     }
                     if (f6 >= (float)(-n) && f6 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect(0.0, arrf[1] * (Float) cBModule.scale.getValue(), this.width, arrf[1] * (Float) cBModule.scale.getValue() + 0.3888889f * 1.2857143f, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect(0.0, arrf[1] * cBModule.scale.<Float>value(), this.width, arrf[1] * cBModule.scale.<Float>value() + 0.3888889f * 1.2857143f, 0.0, -3596854);
                     }
                     if (f7 >= (float)(-n) && f7 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect(0.0, (arrf[1] + cBModule.height) * (Float) cBModule.scale.getValue(), this.width, (arrf[1] + cBModule.height) * (Float) cBModule.scale.getValue() + 0.51724136f * 0.9666667f, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect(0.0, (arrf[1] + cBModule.height) * cBModule.scale.<Float>value(), this.width, (arrf[1] + cBModule.height) * cBModule.scale.<Float>value() + 0.51724136f * 0.9666667f, 0.0, -3596854);
                     }
                     if (f9 >= (float)(-n) && f9 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect(0.0, arrf[1] * (Float) cBModule.scale.getValue(), this.width, arrf[1] * (Float) cBModule.scale.getValue() + 0.16666667f * 3.0f, 0.0, -3596854);
+                        RenderUtil.drawRoundedRect(0.0, arrf[1] * cBModule.scale.<Float>value(), this.width, arrf[1] * cBModule.scale.<Float>value() + 0.16666667f * 3.0f, 0.0, -3596854);
                     }
                     if (f8 >= (float)(-n) && f8 <= (float)n) {
                         bl = true;
-                        RenderUtil.drawRoundedRect(0.0, (arrf[1] + cBModule.height) * ((Float)cBModule.scale.getValue()).floatValue() - 0.5810811f * 0.8604651f, this.width, (arrf[1] + cBModule.height) * ((Float)cBModule.scale.getValue()).floatValue(), 0.0, -3596854);
+                        RenderUtil.drawRoundedRect(0.0, (arrf[1] + cBModule.height) * cBModule.scale.<Float>value() - 0.5810811f * 0.8604651f, this.width, (arrf[1] + cBModule.height) * cBModule.scale.<Float>value(), 0, -3596854);
                     }
                     if (!bl) continue;
                     Ref.getGlBridge().bridge$pushMatrix();
@@ -912,10 +920,10 @@ public class CBModulesGui extends CBGuiScreen {
     private float lIIIIlIIllIIlIIlIIIlIIllI(AbstractModule cBModule, float f, float[] arrf, int n) {
         float f2 = f;
         float padding = 2.0f;
-        if (f2 + arrf[0] * (Float) cBModule.scale.getValue() < padding) {
-            f2 = -arrf[0] * (Float) cBModule.scale.getValue() + padding;
-        } else if (f2 + arrf[0] * (Float) cBModule.scale.getValue() + (float)n > (float)this.width - padding) {
-            f2 = (float)this.width - arrf[0] * (Float) cBModule.scale.getValue() - (float)n - padding;
+        if (f2 + arrf[0] * cBModule.scale.<Float>value() < padding) {
+            f2 = -arrf[0] * cBModule.scale.<Float>value() + padding;
+        } else if (f2 + arrf[0] * cBModule.scale.<Float>value() + (float)n > (float)this.width - padding) {
+            f2 = (float)this.width - arrf[0] * cBModule.scale.<Float>value() - (float)n - padding;
         }
         return f2;
     }
@@ -923,10 +931,10 @@ public class CBModulesGui extends CBGuiScreen {
     private float lIIIIIIIIIlIllIIllIlIIlIl(AbstractModule cBModule, float f, float[] arrf, int n) {
         float f2 = f;
         float padding = 2.0f;
-        if (f2 + arrf[1] * (Float) cBModule.scale.getValue() < padding) {
-            f2 = -arrf[1] * (Float) cBModule.scale.getValue() + padding;
-        } else if (f2 + arrf[1] * (Float) cBModule.scale.getValue() + (float)n > (float)this.height - padding) {
-            f2 = (float)this.height - arrf[1] * (Float) cBModule.scale.getValue() - (float)n - padding;
+        if (f2 + arrf[1] * cBModule.scale.<Float>value() < padding) {
+            f2 = -arrf[1] * cBModule.scale.<Float>value() + padding;
+        } else if (f2 + arrf[1] * cBModule.scale.<Float>value() + (float)n > (float)this.height - padding) {
+            f2 = (float)this.height - arrf[1] * cBModule.scale.<Float>value() - (float)n - padding;
         }
         return f2;
     }
@@ -949,15 +957,15 @@ public class CBModulesGui extends CBGuiScreen {
         if (!Mouse.isButtonDown(1) && this.IlIlIIIlllllIIIlIlIlIllII && CBModulePosition.module == draggingModule) {
             float f3 = f;
             float f4 = f2;
-            f = this.lIIIIlIIllIIlIIlIIIlIIllI(CBModulePosition.module, f, arrf, (int)(CBModulePosition.module.width * (Float) CBModulePosition.module.scale.getValue()));
-            f2 = this.lIIIIIIIIIlIllIIllIlIIlIl(CBModulePosition.module, f2, arrf, (int)(CBModulePosition.module.height * (Float) CBModulePosition.module.scale.getValue()));
+            f = this.lIIIIlIIllIIlIIlIIIlIIllI(CBModulePosition.module, f, arrf, (int)(CBModulePosition.module.width * CBModulePosition.module.scale.<Float>value()));
+            f2 = this.lIIIIIIIIIlIllIIllIlIIlIl(CBModulePosition.module, f2, arrf, (int)(CBModulePosition.module.height * CBModulePosition.module.scale.<Float>value()));
             float f5 = f3 - f;
             float f6 = f4 - f2;
             for (CBModulePosition dragCache2 : this.positions) {
                 if (dragCache2 == CBModulePosition) continue;
                 arrf = dragCache2.module.getScaledPoints(scaledResolution, false);
-                float f7 = this.lIIIIlIIllIIlIIlIIIlIIllI(dragCache2.module, dragCache2.module.getXTranslation() - f5, arrf, (int)(dragCache2.module.width * (Float) dragCache2.module.scale.getValue()));
-                float f8 = this.lIIIIIIIIIlIllIIllIlIIlIl(dragCache2.module, dragCache2.module.getYTranslation() - f6, arrf, (int)(dragCache2.module.height * (Float) dragCache2.module.scale.getValue()));
+                float f7 = this.lIIIIlIIllIIlIIlIIIlIIllI(dragCache2.module, dragCache2.module.getXTranslation() - f5, arrf, (int)(dragCache2.module.width * dragCache2.module.scale.<Float>value()));
+                float f8 = this.lIIIIIIIIIlIllIIllIlIIlIl(dragCache2.module, dragCache2.module.getYTranslation() - f6, arrf, (int)(dragCache2.module.height * dragCache2.module.scale.<Float>value()));
                 dragCache2.module.setTranslations(f7, f8);
             }
         }

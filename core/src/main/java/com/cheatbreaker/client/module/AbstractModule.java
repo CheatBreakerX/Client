@@ -202,7 +202,7 @@ public abstract class AbstractModule {
     public void scaleAndTranslate(ScaledResolutionBridge resolution, float f, float f2) {
         float f3 = 0.0f;
         float f4 = 0.0f;
-        float scale = (Float) this.scale.getValue();
+        float scale = this.scale.<Float>value();
         Ref.getGlBridge().bridge$scale(scale, scale, scale);
         f *= scale;
         f2 *= scale;
@@ -264,7 +264,7 @@ public abstract class AbstractModule {
     public float[] getScaledPoints(ScaledResolutionBridge resolution, boolean bl) {
         float f = 0.0f;
         float f2 = 0.0f;
-        float scale = (Float) this.scale.getValue();
+        float scale = this.scale.<Float>value();
         float f3 = this.width * scale;
         float f4 = this.height * scale;
         switch (this.guiAnchor) {

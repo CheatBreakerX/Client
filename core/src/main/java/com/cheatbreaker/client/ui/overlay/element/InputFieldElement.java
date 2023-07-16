@@ -270,20 +270,20 @@ public class InputFieldElement extends AbstractElement {
     }
 
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
-        if (!bl) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        if (!enableMouse) {
             this.lIIIIIIIIIlIllIIllIlIIlIl(false);
             return true;
         }
-        if (n == 1 && this.isMouseInside(f, f2)) {
+        if (mouseButton == 1 && this.isMouseInside(mouseX, mouseY)) {
             this.setText("");
         }
-        boolean bl2 = f >= this.x && f < this.x + this.width && f2 >= this.y && f2 < this.y + this.height;
+        boolean bl2 = mouseX >= this.x && mouseX < this.x + this.width && mouseY >= this.y && mouseY < this.y + this.height;
         if (this.llIIlllIIIIlllIllIlIlllIl) {
             this.lIIIIIIIIIlIllIIllIlIIlIl(bl2);
         }
-        if (this.lIIlIlIllIIlIIIlIIIlllIII && n == 0) {
-            float f3 = f - this.x;
+        if (this.lIIlIlIllIIlIIIlIIIlllIII && mouseButton == 0) {
+            float f3 = mouseX - this.x;
             if (this.IlIlllIIIIllIllllIllIIlIl) {
                 f3 -= (float)4;
             }
@@ -479,7 +479,7 @@ public class InputFieldElement extends AbstractElement {
     }
 
     @Override
-    public void handleElementDraw(float f, float f2, boolean bl) {
+    public void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
         this.lIIlIlIllIIlIIIlIIIlllIII();
     }
 

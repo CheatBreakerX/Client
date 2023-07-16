@@ -1,6 +1,8 @@
 package com.cheatbreaker.client.util.dash;
 
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
+import lombok.Getter;
+import lombok.Setter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -14,19 +16,40 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class Station {
-    private String streamURL;
-    private String currentSongURL;
-    private String genre;
-    private String logoURL;
-    private String name;
+    @Getter
+    private final String streamURL;
+    @Getter
+    private final String currentSongURL;
+    @Getter
+    private final String genre;
+    @Getter
+    private final String logoURL;
+    @Getter
+    private final String name;
+    @Getter
+    @Setter
     private boolean favourite;
+    @Getter
+    @Setter
     private static LocalDateTime startTime;
+    @Getter
+    @Setter
     private String title;
+    @Getter
+    @Setter
     private String artist;
+    @Getter
+    @Setter
     private String album;
+    @Getter
+    @Setter
     private String coverURL = "";
+    @Getter
+    @Setter
     private int duration;
+    @Getter
     public ResourceLocationBridge currentResource;
+    @Getter
     public ResourceLocationBridge previousResource;
     public boolean play;
 
@@ -51,20 +74,21 @@ public class Station {
                 Element element = (Element)node;
                 this.setTitle(this.getElement(element, "title"));
                 this.setArtist(this.getElement(element, "artist"));
-                this.getStreamURL(this.getElement(element, "album"));
+                this.setAlbum(this.getElement(element, "album"));
                 this.setCoverURL(this.getElement(element, "cover"));
                 this.setDuration(Integer.parseInt(this.getElement(element, "duration")));
                 String string = this.getElement(element, "programStartTS");
                 String string2 = "dd MMM yy hh:mm:ss";
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(string2);
                 simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-                if (this.currentResource != null && !("client/songs/" + this.getTitle()).equals(this.currentResource.bridge$getResourceDomain())) {
+                if (this.currentResource != null && !("client/songs/" + this.getTitleForResource())
+                        .equals(this.currentResource.bridge$getResourcePath())) {
                     this.previousResource = this.currentResource;
                     this.currentResource = null;
                 }
                 try {
                     Date date = simpleDateFormat.parse(string);
-                    this.setStartTime(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()));
+                    setStartTime(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()));
                     continue;
                 }
                 catch (Exception exception) {
@@ -93,60 +117,8 @@ public class Station {
         }
     }
 
-    public String getStreamURL() {
-        return this.streamURL;
-    }
-
-    public String getCurrentSongURL() {
-        return this.currentSongURL;
-    }
-
-    public String getGenre() {
-        return this.genre;
-    }
-
-    public String getLogoURL() {
-        return this.logoURL;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public boolean isFavourite() {
-        return this.favourite;
-    }
-
-    public static LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public String getTitle() {
-        return this.title;
-    }
-
-    public String getArtist() {
-        return this.artist;
-    }
-
-    public String getAlbum() {
-        return this.album;
-    }
-
-    public String getCoverURL() {
-        return this.coverURL;
-    }
-
-    public int getDuration() {
-        return this.duration;
-    }
-
-    public ResourceLocationBridge getCurrentResource() {
-        return this.currentResource;
-    }
-
-    public ResourceLocationBridge getPreviousResource() {
-        return this.previousResource;
+    public String getTitleForResource() {
+        return this.getTitle().toLowerCase().replaceAll("[^a-z0-9/._-]", "_");
     }
 
     public boolean isPlay() {
@@ -161,7 +133,7 @@ public class Station {
                 ", logoUrl=" + this.getLogoURL() +
                 ", name=" + this.getName() +
                 ", favorite=" + this.isFavourite() +
-                ", startTime=" + this.getStartTime() +
+                ", startTime=" + getStartTime() +
                 ", title=" + this.getTitle() +
                 ", artist=" + this.getArtist() +
                 ", album=" + this.getAlbum() +
@@ -170,34 +142,6 @@ public class Station {
                 ", RESOURCE_CURRENT=" + this.getCurrentResource() +
                 ", RESOURCE_PREVIOUS=" + this.getPreviousResource() +
                 ", play=" + this.isPlay() + ")";
-    }
-
-    public void setFavourite(boolean value) {
-        this.favourite = value;
-    }
-
-    public void setStartTime(LocalDateTime localDateTime) {
-        this.startTime = localDateTime;
-    }
-
-    public void setTitle(String string) {
-        this.title = string;
-    }
-
-    public void setArtist(String string) {
-        this.artist = string;
-    }
-
-    public void getStreamURL(String string) {
-        this.album = string;
-    }
-
-    public void setCoverURL(String string) {
-        this.coverURL = string;
-    }
-
-    public void setDuration(int value) {
-        this.duration = value;
     }
 }
  

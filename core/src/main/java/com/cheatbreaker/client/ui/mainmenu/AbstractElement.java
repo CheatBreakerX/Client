@@ -44,9 +44,9 @@ public abstract class AbstractElement {
     public void handleElementMouse() {
     }
 
-    protected abstract void handleElementDraw(float var1, float var2, boolean var3);
+    protected abstract void handleElementDraw(float mouseX, float mouseY, boolean enableMouse);
 
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
         return false;
     }
 

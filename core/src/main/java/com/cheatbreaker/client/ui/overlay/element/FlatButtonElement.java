@@ -15,8 +15,8 @@ public class FlatButtonElement extends AbstractElement {
         this.text = text;
     }
 
-    public void handleElementDraw(float mouseX, float mouseY, boolean enableMouseInput) {
-        this.render(this.text, mouseX, mouseY, enableMouseInput);
+    public void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
+        this.render(this.text, mouseX, mouseY, enableMouse);
     }
 
     public void render(String text, float mouseX, float mouseY, boolean enableMouseInput) {

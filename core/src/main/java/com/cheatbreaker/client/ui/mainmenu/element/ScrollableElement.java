@@ -12,7 +12,7 @@ public class ScrollableElement extends AbstractElement {
     protected boolean hovered;
     protected boolean alwaysTrueApparently;
     protected float oldTranslateY;
-    private float IIIlllIIIllIllIlIIIIIIlII;
+    private float relativeMouseY;
     private boolean dragClick;
 
     public ScrollableElement(AbstractElement parent) {
@@ -25,12 +25,12 @@ public class ScrollableElement extends AbstractElement {
     }
 
     @Override
-    public void handleElementDraw(float f, float f2, boolean bl) {
+    public void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
         float f3;
         this.alwaysTrueApparently = true;
         Ref.getGlBridge().bridge$popMatrix();
         boolean bl2 = this.lIIIIllIIlIlIllIIIlIllIlI();
-        if (!(!this.hovered || Mouse.isButtonDown(0) && this.isMouseInside(f, f2) && bl)) {
+        if (!(!this.hovered || Mouse.isButtonDown(0) && this.isMouseInside(mouseX, mouseY) && enableMouse)) {
             this.hovered = false;
         }
         if (this.dragClick && !Mouse.isButtonDown(0)) {
@@ -42,27 +42,27 @@ public class ScrollableElement extends AbstractElement {
         float f7 = f4 / (float) 100 * f6;
         float f8 = this.translateY / (float) 100 * f6;
         if (Mouse.isButtonDown(0) && this.dragClick) {
-            f3 = f2 - this.y;
+            f3 = mouseY - this.y;
             float f9 = f3 / this.height;
             this.translateY = -(this.scrollAmount * f9) + f7 / 2.0f;
         }
         if (bl2) {
             boolean bl3;
             f3 = this.height;
-            boolean bl4 = f >= this.x && f <= this.x + this.width && f2 > this.y - f8 && f2 < this.y + f7 - f8;
-            boolean bl5 = bl3 = f >= this.x && f <= this.x + this.width && f2 > this.y && f2 < this.y + f4 - (float) 3;
+            boolean bl4 = mouseX >= this.x && mouseX <= this.x + this.width && mouseY > this.y - f8 && mouseY < this.y + f7 - f8;
+            boolean bl5 = bl3 = mouseX >= this.x && mouseX <= this.x + this.width && mouseY > this.y && mouseY < this.y + f4 - (float) 3;
             if (!Mouse.isButtonDown(0) || !this.hovered || bl3) {
                 //this.hovered = true;
             }
             if (this.hovered) {
                 if (this.translateY != this.oldTranslateY && this.oldTranslateY != f7 / 2.0f && this.oldTranslateY != f7 / 2.0f + -this.scrollAmount + f3) {
-                    if (f2 > this.y + f7 - f7 / (float) 4 - f8) {
+                    if (mouseY > this.y + f7 - f7 / (float) 4 - f8) {
                         this.translateY -= f5 / (float) 7;
-                    } else if (f2 < this.y + f7 / (float) 4 - f8) {
+                    } else if (mouseY < this.y + f7 / (float) 4 - f8) {
                         this.translateY += f5 / (float) 7;
                     }
                     this.oldTranslateY = this.translateY;
-                } else if (f2 > this.y + f7 - f7 / (float) 4 - f8 || f2 < this.y + f7 / (float) 4 - f8) {
+                } else if (mouseY > this.y + f7 - f7 / (float) 4 - f8 || mouseY < this.y + f7 / (float) 4 - f8) {
                     this.oldTranslateY = 1.0f;
                 }
             }
@@ -177,7 +177,7 @@ public class ScrollableElement extends AbstractElement {
         Ref.getGlBridge().bridge$translate(0.0f, -this.translateY, 0.0f);
     }
 
-    public float IllIIIIIIIlIlIllllIIllIII() {
+    public float getTranslateY() {
         return this.translateY;
     }
 
@@ -186,9 +186,9 @@ public class ScrollableElement extends AbstractElement {
     }
 
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
-        if (this.isMouseInside(f, f2) && bl) {
-            this.IIIlllIIIllIllIlIIIIIIlII = f2 - this.y;
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        if (this.isMouseInside(mouseX, mouseY) && enableMouse) {
+            this.relativeMouseY = mouseY - this.y;
             this.dragClick = true;
         }
         return false;

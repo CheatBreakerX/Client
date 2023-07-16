@@ -21,11 +21,11 @@ public class CrosshairElement extends AbstractModulesGuiElement {
         Ref.getGlBridge().bridge$pushMatrix();
         float f2 = 1.0f / CheatBreaker.getInstance().getScaleFactor();
         Ref.getGlBridge().bridge$scale(f2, f2, f2);
-        float f3 = (Float) globalSettings.crosshairSize.getValue();
-        float f4 = (Float) globalSettings.crosshairGap.getValue();
-        float f5 = (Float) globalSettings.crosshairThickness.getValue();
+        float f3 = globalSettings.crosshairSize.<Float>value();
+        float f4 = globalSettings.crosshairGap.<Float>value();
+        float f5 = globalSettings.crosshairThickness.<Float>value();
         int n3 = globalSettings.crosshairColor.getColorValue();
-        boolean bl = (Boolean)globalSettings.crosshairOutline.getValue();
+        boolean bl = globalSettings.crosshairOutline.<Boolean>value();
         int n4 = this.x + this.width / 2 - 15;
         int n5 = this.y + this.height / 2 + 3;
         if (bl) {

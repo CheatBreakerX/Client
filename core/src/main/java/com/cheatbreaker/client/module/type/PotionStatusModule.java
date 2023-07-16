@@ -61,7 +61,7 @@ public class PotionStatusModule extends AbstractModule {
 
     private void renderReal(GuiDrawEvent guiDrawEvent) {
         Ref.getGlBridge().bridge$pushMatrix();
-        if ((Boolean) this.showWhileTying.getValue() || !this.minecraft.bridge$getIngameGUI().bridge$getChatGUI().bridge$getChatOpen()) {
+        if (this.showWhileTying.<Boolean>value() || !this.minecraft.bridge$getIngameGUI().bridge$getChatGUI().bridge$getChatOpen()) {
             Ref.getGlBridge().bridge$pushMatrix();
             this.scaleAndTranslate(guiDrawEvent.getResolution());
             CBPositionEnum position = this.getPosition();
@@ -79,7 +79,7 @@ public class PotionStatusModule extends AbstractModule {
                 String string;
                 boolean shouldBlink = this.shouldBlink(potionEffect.bridge$getDuration());
                 int n4 = 0;
-                if ((Boolean) this.showEffectName.getValue()) {
+                if (this.showEffectName.<Boolean>value()) {
                     string = Ref.getI18n().bridge$format(potionEffect.bridge$getEffectName()) + this.getLevelName(potionEffect.bridge$getAmplifier());
                     n4 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                     if (position == CBPositionEnum.RIGHT) {
@@ -97,11 +97,11 @@ public class PotionStatusModule extends AbstractModule {
                 int n5 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                 if (shouldBlink) {
                     if (position == CBPositionEnum.RIGHT) {
-                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width - n5, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width - n5, n + (this.showEffectName.<Boolean>value() ? 10 : 5), this.durationColor.getColorValue());
                     } else if (position == CBPositionEnum.LEFT) {
-                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", 20, n + (this.showEffectName.<Boolean>value() ? 10 : 5), this.durationColor.getColorValue());
                     } else if (position == CBPositionEnum.CENTER) {
-                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n5 / 2) + 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n5 / 2) + 20, n + (this.showEffectName.<Boolean>value() ? 10 : 5), this.durationColor.getColorValue());
                     }
                 }
                 if ((potion = potionEffect.bridge$toPotionType()).bridge$hasStatusIcon()) {
@@ -151,7 +151,7 @@ public class PotionStatusModule extends AbstractModule {
                 String string;
                 boolean shouldBlink = this.shouldBlink(potionEffect.bridge$getDuration());
                 int n4 = 0;
-                if ((Boolean) this.showEffectName.getValue()) {
+                if (this.showEffectName.<Boolean>value()) {
                     string = Ref.getI18n().bridge$format(potionEffect.bridge$getEffectName()) + this.getLevelName(potionEffect.bridge$getAmplifier());
                     n4 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                     if (position == CBPositionEnum.RIGHT) {
@@ -169,11 +169,11 @@ public class PotionStatusModule extends AbstractModule {
                 int n5 = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string) + 20;
                 if (shouldBlink) {
                     if (position == CBPositionEnum.RIGHT) {
-                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width - n5, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width - n5, n + (this.showEffectName.<Boolean>value() ? 10 : 5), this.durationColor.getColorValue());
                     } else if (position == CBPositionEnum.LEFT) {
-                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", 20, n + (this.showEffectName.<Boolean>value() ? 10 : 5), this.durationColor.getColorValue());
                     } else if (position == CBPositionEnum.CENTER) {
-                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n5 / 2) + 20, n + ((Boolean) this.showEffectName.getValue() ? 10 : 5), this.durationColor.getColorValue());
+                        this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string + "\u00a7r", (int) width / 2 - (n5 / 2) + 20, n + (this.showEffectName.<Boolean>value() ? 10 : 5), this.durationColor.getColorValue());
                     }
                 }
                 if ((potion = potionEffect.bridge$toPotionType()).bridge$hasStatusIcon()) {
@@ -200,7 +200,7 @@ public class PotionStatusModule extends AbstractModule {
     }
 
     private boolean shouldBlink(float f) {
-        if ((Boolean) this.blink.getValue() && f <= (float) ((Integer) this.blinkDuration.getValue() * 22)) {
+        if (this.blink.<Boolean>value() && f <= (float) (this.blinkDuration.<Integer>value() * 22)) {
             if (this.ticks > 20) {
                 this.ticks = 0;
             }

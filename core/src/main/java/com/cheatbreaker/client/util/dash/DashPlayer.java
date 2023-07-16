@@ -50,20 +50,15 @@ public class DashPlayer extends AudioDeviceBase {
                 this.sourceDataLine = (SourceDataLine)line;
                 this.sourceDataLine.open(this.audioFormat);
                 this.sourceDataLine.start();
-                this.setFloatControlValue((float)(CheatBreaker.getInstance().getGlobalSettings().radioVolume.getValue()));
+                this.setFloatControlValue(CheatBreaker.getInstance().getGlobalSettings().radioVolume.<Float>value());
             }
         }
-        catch (RuntimeException runtimeException) {
+        catch (RuntimeException | LinkageError | LineUnavailableException runtimeException) {
             throwable = runtimeException;
         }
-        catch (LinkageError linkageError) {
-            throwable = linkageError;
-        }
-        catch (LineUnavailableException lineUnavailableException) {
-            throwable = lineUnavailableException;
-        }
+
         if (this.sourceDataLine == null) {
-            throw new JavaLayerException("cannot obtain source audio line", throwable);
+            throw new JavaLayerException("Could not obtain source audio line", throwable);
         }
     }
 

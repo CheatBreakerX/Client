@@ -10,25 +10,25 @@ import com.cheatbreaker.client.ui.module.CBPositionEnum;
 import com.cheatbreaker.client.ui.util.HudUtil;
 
 public class ArmourStatusItem {
-    public final ItemStackBridge lIIIIlIIllIIlIIlIIIlIIllI;
+    public final ItemStackBridge itemStack;
     public final int lIIIIIIIIIlIllIIllIlIIlIl;
     public final int IlllIIIlIlllIllIlIIlllIlI;
     public final int IIIIllIlIIIllIlllIlllllIl;
     private int IIIIllIIllIIIIllIllIIIlIl;
     private int IlIlIIIlllIIIlIlllIlIllIl;
-    private String IIIllIllIlIlllllllIlIlIII = "";
+    private String itemDisplayName = "";
     private int IllIIIIIIIlIlIllllIIllIII;
-    private String lIIIIllIIlIlIllIIIlIllIlI = "";
+    private String durabilityDisplayString = "";
     private int IlllIllIlIIIIlIIlIIllIIIl;
     private final boolean IlIlllIIIIllIllllIllIIlIl;
     private final MinecraftBridge mc = Ref.getMinecraft();
 
-    public static String lIIIIlIIllIIlIIlIIIlIIllI(String string) {
+    public static String removeEffectsAndColors(String string) {
         return string.replaceAll("(?i)§[0-9a-fklmnor]", "");
     }
 
     public ArmourStatusItem(ItemStackBridge lIlIlIlIlIllllIlllIIIlIlI2, int n, int n2, int n3, boolean bl) {
-        this.lIIIIlIIllIIlIIlIIIlIIllI = lIlIlIlIlIllllIlllIIIlIlI2;
+        this.itemStack = lIlIlIlIlIllllIlllIIIlIlI2;
         this.lIIIIIIIIIlIllIIllIlIIlIl = n;
         this.IlllIIIlIlllIllIlIIlllIlI = n2;
         this.IIIIllIlIIIllIlllIlllllIl = n3;
@@ -45,29 +45,29 @@ public class ArmourStatusItem {
     }
 
     private void IlllIIIlIlllIllIlIIlllIlI() {
-        int n = this.IlIlIIIlllIIIlIlllIlIllIl = (Boolean) ArmourStatusModule.itemName.getValue()
+        int n = this.IlIlIIIlllIIIlIlllIlIllIl = ArmourStatusModule.itemName.<Boolean>value()
                 ? Math.max(18, this.IlllIIIlIlllIllIlIIlllIlI)
                 : Math.max(9, this.IlllIIIlIlllIllIlIIlllIlI);
 
-        if (this.lIIIIlIIllIIlIIlIIIlIIllI != null) {
+        if (this.itemStack != null) {
             int n2 = 1;
             int n3 = 1;
-            if ((this.IlIlllIIIIllIllllIllIIlIl && (Boolean) ArmourStatusModule.showArmourDamage.getValue() || !this.IlIlllIIIIllIllllIllIIlIl && (Boolean) ArmourStatusModule.showItemDamage.getValue()) && this.lIIIIlIIllIIlIIlIIIlIIllI.bridge$isItemDamaged()) {
-                n3 = this.lIIIIlIIllIIlIIlIIIlIIllI.bridge$getItemDamage() + 1;
-                n2 = n3 - this.lIIIIlIIllIIlIIlIIIlIIllI.bridge$getMaxDamage();
-                if (((String)ArmourStatusModule.damageDisplayType.getValue()).equalsIgnoreCase("value")) {
-                    this.lIIIIllIIlIlIllIIIlIllIlI = "§" + ArmourStatusDamageComparable.getDamageColor(ArmourStatusModule.damageColors, ((String)ArmourStatusModule.damageThreshold.getValue()).equalsIgnoreCase("percent") ? n2 * 100 / n3 : n2) + n2 + ((Boolean) ArmourStatusModule.showMaxDamage.getValue() ? "/" + n3 : "");
-                } else if (((String)ArmourStatusModule.damageDisplayType.getValue()).equalsIgnoreCase("percent")) {
-                    this.lIIIIllIIlIlIllIIIlIllIlI = "§" + ArmourStatusDamageComparable.getDamageColor(ArmourStatusModule.damageColors, ((String)ArmourStatusModule.damageThreshold.getValue()).equalsIgnoreCase("percent") ? n2 * 100 / n3 : n2) + n2 * 100 / n3 + "%";
+            if ((this.IlIlllIIIIllIllllIllIIlIl && ArmourStatusModule.showArmourDamage.<Boolean>value() || !this.IlIlllIIIIllIllllIllIIlIl && ArmourStatusModule.showItemDamage.<Boolean>value()) && this.itemStack.bridge$isItemDamaged()) {
+                n3 = this.itemStack.bridge$getItemDamage() + 1;
+                n2 = n3 - this.itemStack.bridge$getMaxDamage();
+                if (ArmourStatusModule.damageDisplayType.<String>value().equalsIgnoreCase("value")) {
+                    this.durabilityDisplayString = "§" + ArmourStatusDamageComparable.getDamageColor(ArmourStatusModule.damageColors, ArmourStatusModule.damageThreshold.<String>value().equalsIgnoreCase("percent") ? n2 * 100 / n3 : n2) + n2 + (ArmourStatusModule.showMaxDamage.<Boolean>value() ? "/" + n3 : "");
+                } else if (ArmourStatusModule.damageDisplayType.<String>value().equalsIgnoreCase("percent")) {
+                    this.durabilityDisplayString = "§" + ArmourStatusDamageComparable.getDamageColor(ArmourStatusModule.damageColors, ArmourStatusModule.damageThreshold.<String>value().equalsIgnoreCase("percent") ? n2 * 100 / n3 : n2) + n2 * 100 / n3 + "%";
                 }
             }
-            this.IlllIllIlIIIIlIIlIIllIIIl = this.mc.bridge$getFontRenderer().bridge$getStringWidth(lIIIIlIIllIIlIIlIIIlIIllI(this.lIIIIllIIlIlIllIIIlIllIlI));
+            this.IlllIllIlIIIIlIIlIIllIIIl = this.mc.bridge$getFontRenderer().bridge$getStringWidth(removeEffectsAndColors(this.durabilityDisplayString));
             this.IIIIllIIllIIIIllIllIIIlIl = this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl + this.IlllIllIlIIIIlIIlIIllIIIl;
-            if ((Boolean) ArmourStatusModule.itemName.getValue()) {
-                this.IIIllIllIlIlllllllIlIlIII = this.lIIIIlIIllIIlIIlIIIlIIllI.bridge$getDisplayName();
-                this.IIIIllIIllIIIIllIllIIIlIl = this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl + Math.max(this.mc.bridge$getFontRenderer().bridge$getStringWidth(lIIIIlIIllIIlIIlIIIlIIllI(this.IIIllIllIlIlllllllIlIlIII)), this.IlllIllIlIIIIlIIlIIllIIIl);
+            if (ArmourStatusModule.itemName.<Boolean>value()) {
+                this.itemDisplayName = this.itemStack.bridge$getDisplayName();
+                this.IIIIllIIllIIIIllIllIIIlIl = this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl + Math.max(this.mc.bridge$getFontRenderer().bridge$getStringWidth(removeEffectsAndColors(this.itemDisplayName)), this.IlllIllIlIIIIlIIlIIllIIIl);
             }
-            this.IllIIIIIIIlIlIllllIIllIII = this.mc.bridge$getFontRenderer().bridge$getStringWidth(lIIIIlIIllIIlIIlIIIlIIllI(this.IIIllIllIlIlllllllIlIlIII));
+            this.IllIIIIIIIlIlIllllIIllIII = this.mc.bridge$getFontRenderer().bridge$getStringWidth(removeEffectsAndColors(this.itemDisplayName));
         }
     }
 
@@ -80,21 +80,21 @@ public class ArmourStatusItem {
         CBGuiAnchor cBGuiAnchor = CheatBreaker.getInstance().moduleManager.armourStatus.getGuiAnchor();
         boolean bl = CBAnchorHelper.getHorizontalPositionEnum(cBGuiAnchor) == CBPositionEnum.RIGHT;
         if (bl) {
-            ArmourStatusModule.renderItem.bridge$renderItemIntoGUI(this.mc.bridge$getFontRenderer(), this.mc.bridge$getTextureManager(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)(f - (float)(this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl)), (int)f2);
-            HudUtil.renderItemOverlayIntoGUI(this.mc.bridge$getFontRenderer(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)(f - (float)(this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl)), (int)f2, (Boolean)ArmourStatusModule.damageOverlay.getValue(), (Boolean)ArmourStatusModule.itemCount.getValue());
+            ArmourStatusModule.renderItem.bridge$renderItemIntoGUI(this.mc.bridge$getFontRenderer(), this.mc.bridge$getTextureManager(), this.itemStack, (int)(f - (float)(this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl)), (int)f2);
+            HudUtil.renderItemOverlayIntoGUI(this.mc.bridge$getFontRenderer(), this.itemStack, (int)(f - (float)(this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl)), (int)f2, ArmourStatusModule.damageOverlay.<Boolean>value(), ArmourStatusModule.itemCount.<Boolean>value());
             Ref.getRenderHelper().bridge$disableStandardItemLighting();
             Ref.getGlBridge().bridge$disableRescaleNormal();
             Ref.getGlBridge().bridge$disableBlend();
-            this.mc.bridge$getFontRenderer().bridge$drawStringWithShadow(this.IIIllIllIlIlllllllIlIlIII + "§r", (int)f - (this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl) - this.IllIIIIIIIlIlIllllIIllIII, (int)f2, 0xFFFFFF);
-            this.mc.bridge$getFontRenderer().bridge$drawStringWithShadow(this.lIIIIllIIlIlIllIIIlIllIlI + "§r", (int)f - (this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl) - this.IlllIllIlIIIIlIIlIIllIIIl, (int)f2 + ((Boolean) ArmourStatusModule.itemName.getValue() ? this.IlIlIIIlllIIIlIlllIlIllIl / 2 : this.IlIlIIIlllIIIlIlllIlIllIl / 4), 0xFFFFFF);
+            this.mc.bridge$getFontRenderer().bridge$drawStringWithShadow(this.itemDisplayName + "§r", (int)f - (this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl) - this.IllIIIIIIIlIlIllllIIllIII, (int)f2, 0xFFFFFF);
+            this.mc.bridge$getFontRenderer().bridge$drawStringWithShadow(this.durabilityDisplayString + "§r", (int)f - (this.IIIIllIlIIIllIlllIlllllIl + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl) - this.IlllIllIlIIIIlIIlIIllIIIl, (int)f2 + (ArmourStatusModule.itemName.<Boolean>value() ? this.IlIlIIIlllIIIlIlllIlIllIl / 2 : this.IlIlIIIlllIIIlIlllIlIllIl / 4), 0xFFFFFF);
         } else {
-            ArmourStatusModule.renderItem.bridge$renderItemIntoGUI(this.mc.bridge$getFontRenderer(), this.mc.bridge$getTextureManager(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)f, (int)f2);
-            HudUtil.renderItemOverlayIntoGUI(this.mc.bridge$getFontRenderer(), this.lIIIIlIIllIIlIIlIIIlIIllI, (int)f, (int)f2, (Boolean)ArmourStatusModule.damageOverlay.getValue(), (Boolean)ArmourStatusModule.itemCount.getValue());
+            ArmourStatusModule.renderItem.bridge$renderItemIntoGUI(this.mc.bridge$getFontRenderer(), this.mc.bridge$getTextureManager(), this.itemStack, (int)f, (int)f2);
+            HudUtil.renderItemOverlayIntoGUI(this.mc.bridge$getFontRenderer(), this.itemStack, (int)f, (int)f2, ArmourStatusModule.damageOverlay.<Boolean>value(), ArmourStatusModule.itemCount.<Boolean>value());
             Ref.getRenderHelper().bridge$disableStandardItemLighting();
             Ref.getGlBridge().bridge$disableRescaleNormal();
             Ref.getGlBridge().bridge$disableBlend();
-            this.mc.bridge$getFontRenderer().bridge$drawStringWithShadow(this.IIIllIllIlIlllllllIlIlIII + "§r", (int)f + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl, (int)f2, 0xFFFFFF);
-            this.mc.bridge$getFontRenderer().bridge$drawStringWithShadow(this.lIIIIllIIlIlIllIIIlIllIlI + "§r", (int)f + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl, (int)f2 + ((Boolean) ArmourStatusModule.itemName.getValue() ? this.IlIlIIIlllIIIlIlllIlIllIl / 2 : this.IlIlIIIlllIIIlIlllIlIllIl / 4), 0xFFFFFF);
+            this.mc.bridge$getFontRenderer().bridge$drawStringWithShadow(this.itemDisplayName + "§r", (int)f + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl, (int)f2, 0xFFFFFF);
+            this.mc.bridge$getFontRenderer().bridge$drawStringWithShadow(this.durabilityDisplayString + "§r", (int)f + this.lIIIIIIIIIlIllIIllIlIIlIl + this.IIIIllIlIIIllIlllIlllllIl, (int)f2 + (ArmourStatusModule.itemName.<Boolean>value() ? this.IlIlIIIlllIIIlIlllIlIllIl / 2 : this.IlIlIIIlllIIIlIlllIlIllIl / 4), 0xFFFFFF);
         }
         Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
     }

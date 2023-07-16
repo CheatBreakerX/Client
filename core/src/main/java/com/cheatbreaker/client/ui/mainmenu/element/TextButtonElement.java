@@ -14,7 +14,16 @@ public class TextButtonElement extends AbstractElement {
     }
 
     @Override
-    protected void handleElementDraw(float f, float f2, boolean bl) {
-        FontRegistry.getRobotoBold14px().drawString(this.text, this.x + 6f, this.y + 6f, this.textColorFade.get(this.isMouseInside(f, f2) && bl).getRGB());
+    protected void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
+        FontRegistry.getRobotoBold14px().drawString(this.text, this.x + 6f, this.y + 6f, this.textColorFade.get(this.isMouseInside(mouseX, mouseY) && enableMouse).getRGB());
+    }
+
+    public float setElementDimensions(float x, float y) {
+        this.x = x;
+        this.y = y;
+        this.width = FontRegistry.getRobotoBold14px().getStringWidth(this.text) + 12f;
+        this.height = 20f;
+
+        return this.width + 1f;
     }
 }

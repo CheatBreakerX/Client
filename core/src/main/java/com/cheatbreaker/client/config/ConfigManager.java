@@ -169,13 +169,17 @@ public class ConfigManager {
                 bufferedWriter.write("ActiveProfile=" + CheatBreaker.getInstance().activeProfile.getName());
                 bufferedWriter.newLine();
             }
-            for (Setting cBSetting : CheatBreaker.getInstance().globalSettings.settingsList) {
-                if (cBSetting.getLabel().equalsIgnoreCase("label")) continue;
-                if (cBSetting.rainbow) {
-                    bufferedWriter.write(cBSetting.getLabel() + "=" + cBSetting.getValue() + ";rainbow");
-                } else {
-                    bufferedWriter.write(cBSetting.getLabel() + "=" + cBSetting.getValue());
+            for (Setting setting : CheatBreaker.getInstance().globalSettings.settingsList) {
+                if (setting.getLabel().equalsIgnoreCase("label")) {
+                    continue;
                 }
+
+                if (setting.rainbow) {
+                    bufferedWriter.write(setting.getLabel() + "=" + setting.value() + ";rainbow");
+                } else {
+                    bufferedWriter.write(setting.getLabel() + "=" + setting.value());
+                }
+
                 bufferedWriter.newLine();
             }
             bufferedWriter.newLine();
@@ -357,14 +361,17 @@ public class ConfigManager {
                 bufferedWriter.newLine();
                 bufferedWriter.write("-RenderHUD=" + Module.isRenderHud());
                 bufferedWriter.newLine();
-                for (Setting cBSetting : Module.getSettingsList()) {
-                    if (cBSetting.getLabel().equalsIgnoreCase("label")) continue;
-                    if (cBSetting.getType() == Setting.Type.STRING) {
-                        bufferedWriter.write(cBSetting.getLabel() + "=" + (cBSetting.getValue() + "").replaceAll("\u00a7", "&"));
-                    } else if (cBSetting.rainbow) {
-                        bufferedWriter.write(cBSetting.getLabel() + "=" + cBSetting.getValue() + ";rainbow");
+                for (Setting setting : Module.getSettingsList()) {
+                    if (setting.getLabel().equalsIgnoreCase("label")) {
+                        continue;
+                    }
+                    if (setting.getType() == Setting.Type.STRING) {
+                        bufferedWriter.write(setting.getLabel() + "=" + (setting.value().toString())
+                                .replaceAll("\u00a7", "&"));
+                    } else if (setting.rainbow) {
+                        bufferedWriter.write(setting.getLabel() + "=" + setting.value() + ";rainbow");
                     } else {
-                        bufferedWriter.write(cBSetting.getLabel() + "=" + cBSetting.getValue());
+                        bufferedWriter.write(setting.getLabel() + "=" + setting.value());
                     }
                     bufferedWriter.newLine();
                 }

@@ -165,8 +165,8 @@ public class CBAnchorHelper {
         float scaledWidth = scaledResolution.bridge$getScaledWidth();
         float scaledHeight = scaledResolution.bridge$getScaledHeight();
         CBGuiAnchor cBGuiAnchor = CBAnchorHelper.getAnchor(x, y, scaledResolution);
-        float moduleWidth = module.getWidth() * (Float) module.scale.getValue();
-        float moduleHeight = module.getHeight() * (Float) module.scale.getValue();
+        float moduleWidth = module.getWidth() * module.scale.<Float>value();
+        float moduleHeight = module.getHeight() * module.scale.<Float>value();
         float returnX = 0.0f;
         float returnY = 0.0f;
         switch (cBGuiAnchor) {

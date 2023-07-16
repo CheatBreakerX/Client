@@ -3,6 +3,7 @@ package com.cheatbreaker.client.util.voicechat;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
+import com.cheatbreaker.common.KeyMappings;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.event.type.TickEvent;
@@ -83,23 +84,19 @@ public class VoiceChat {
             CheatBreaker.getInstance().getVoiceChatManager().setTalking(false);
             CheatBreaker.getInstance().sendSound("voice_up");
         }
-        if (!this.isTalking && this.minecraft.bridge$isInGameHasFocus() && this.isKeyDown(this.cheatbreaker.getGlobalSettings().pushToTalk.bridge$getKeyCode())) {
+        if (!this.isTalking && this.minecraft.bridge$isInGameHasFocus() && KeyMappings.PUSH_TO_TALK.bridge$isDown()) {
             this.isTalking = true;
-            if (checkMicVolume && (Integer) CheatBreaker.getInstance().getGlobalSettings().microphoneVolume.getValue() < 10) {
+            if (checkMicVolume && CheatBreaker.getInstance().getGlobalSettings().microphoneVolume.<Integer>value() < 10) {
                 CheatBreaker.getInstance().getModuleManager().notifications.queueNotification("info", "Your microphone is muted.", 3000L);
             } else {
                 checkMicVolume = false;
                 CheatBreaker.getInstance().getVoiceChatManager().setTalking(true);
                 CheatBreaker.getInstance().sendSound("voice_down");
             }
-        } else if (this.isTalking && this.minecraft.bridge$isInGameHasFocus() && !this.isKeyDown(this.cheatbreaker.getGlobalSettings().pushToTalk.bridge$getKeyCode())) {
+        } else if (this.isTalking && this.minecraft.bridge$isInGameHasFocus() && !KeyMappings.PUSH_TO_TALK.bridge$isDown()) {
             this.isTalking = false;
             CheatBreaker.getInstance().getVoiceChatManager().setTalking(false);
             CheatBreaker.getInstance().sendSound("voice_up");
         }
-    }
-
-    private boolean isKeyDown(int n) {
-        return n != 0 && (n < 0 ? Mouse.isButtonDown(n + 100) : Keyboard.isKeyDown(n));
     }
 }

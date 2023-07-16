@@ -32,9 +32,9 @@ public class FriendElement extends AbstractElement {
     }
 
     @Override
-    public void handleElementDraw(float f, float f2, boolean bl) {
+    public void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
         List<?> object;
-        if (bl && this.isMouseInside(f, f2)) {
+        if (enableMouse && this.isMouseInside(mouseX, mouseY)) {
             Ref.modified$drawRect(this.x, this.y, this.x + this.width, this.y + this.height, -13750738);
         }
         Ref.getGlBridge().bridge$pushMatrix();
@@ -66,7 +66,7 @@ public class FriendElement extends AbstractElement {
         Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         ResourceLocationBridge headLocation = CheatBreaker.getInstance().getHeadLocation(EnumChatFormattingBridge.getTextWithoutFormattingCodes(this.friend.getName()));
         RenderUtil.drawIcon(headLocation, (float)7, this.x + (float)5, this.y + (float)4);
-        boolean bl2 = bl && this.isMouseInside(f, f2) && f > this.x + this.width - (float)20;
+        boolean bl2 = enableMouse && this.isMouseInside(mouseX, mouseY) && mouseX > this.x + this.width - (float)20;
         float f3 = this.lIIIIllIIlIlIllIIIlIllIlI.lIIIIlIIllIIlIIlIIIlIIllI(bl2);
         float f4 = this.x + this.width - 20.5f * f3;
         Ref.modified$drawRect(f4, this.y, this.x + this.width, this.y + this.height, -52429);
@@ -76,11 +76,11 @@ public class FriendElement extends AbstractElement {
     }
 
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
-        if (!bl) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        if (!enableMouse) {
             return false;
         }
-        boolean bl2 = this.isMouseInside(f, f2) && f > this.x + this.width - (float) 20;
+        boolean bl2 = this.isMouseInside(mouseX, mouseY) && mouseX > this.x + this.width - (float) 20;
         if (bl2 && this.lIIIIllIIlIlIllIIIlIllIlI.isExpired()) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRemove(this.friend.getPlayerId()));
@@ -88,13 +88,13 @@ public class FriendElement extends AbstractElement {
             CheatBreaker.getInstance().getFriendsManager().getFriends().remove(this.friend.getPlayerId());
             return true;
         }
-        if (!bl2 && this.isMouseInside(f, f2)) {
+        if (!bl2 && this.isMouseInside(mouseX, mouseY)) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             OverlayGui.getInstance().lIIIIlIIllIIlIIlIIIlIIllI(this.friend);
             CheatBreaker.getInstance().getFriendsManager().readMessages(this.friend.getPlayerId());
             return true;
         }
-        return super.handleElementMouseClicked(f, f2, n, true);
+        return super.handleElementMouseClicked(mouseX, mouseY, mouseButton, true);
     }
 
     public Friend getFriend() {

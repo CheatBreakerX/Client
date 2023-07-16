@@ -41,9 +41,9 @@ public class AliasesElement
     }
 
     @Override
-    protected void handleElementDraw(float f, float f2, boolean bl) {
-        this.drag(f, f2);
-        this.scrollContainer.drawScrollable(f, f2, bl);
+    protected void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
+        this.drag(mouseX, mouseY);
+        this.scrollContainer.drawScrollable(mouseX, mouseY, enableMouse);
         Ref.modified$drawBoxWithOutLine(this.x, this.y, this.x + this.width, this.y + this.height, 0.06666667f * 7.5f, -16777216, -14869219);
         FontRegistry.getPlayRegular16px().drawString(this.friend.getName(), this.x + (float)4, this.y + (float)4, -1);
         Ref.modified$drawRect(this.x + (float)3, this.y + (float)15, this.x + this.width - (float)3, this.y + 0.9791667f * 15.829787f, 0x2FFFFFFF);
@@ -57,24 +57,24 @@ public class AliasesElement
             FontRegistry.getPlayRegular16px().drawString(string, this.x + (float)4, this.y + (float)18 + (float)(n * 10), -1);
             ++n;
         }
-        this.scrollContainer.handleElementDraw(f, f2, bl);
-        this.closeButton.handleElementDraw(f, f2, bl);
+        this.scrollContainer.handleElementDraw(mouseX, mouseY, enableMouse);
+        this.closeButton.handleElementDraw(mouseX, mouseY, enableMouse);
     }
 
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
-        if (!bl) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        if (!enableMouse) {
             return false;
         }
-        this.scrollContainer.handleElementMouseClicked(f, f2, n, bl);
-        this.closeButton.handleElementMouseClicked(f, f2, n, bl);
-        if (this.closeButton.isMouseInside(f, f2)) {
+        this.scrollContainer.handleElementMouseClicked(mouseX, mouseY, mouseButton, enableMouse);
+        this.closeButton.handleElementMouseClicked(mouseX, mouseY, mouseButton, enableMouse);
+        if (this.closeButton.isMouseInside(mouseX, mouseY)) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             OverlayGui.getInstance().removeElements(this);
             return true;
         }
-        if (this.isMouseInside(f, f2)) {
-            this.updateDraggingPosition(f, f2);
+        if (this.isMouseInside(mouseX, mouseY)) {
+            this.updateDraggingPosition(mouseX, mouseY);
         }
         return false;
     }

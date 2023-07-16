@@ -1,9 +1,13 @@
 package com.cheatbreaker.client.ui.fading;
 
+import lombok.Setter;
+
 import java.awt.*;
 
 public class ColorFade extends ExponentialFade {
+    @Setter
     private int startColor;
+    @Setter
     private int endColor;
     private boolean switched;
     private Color awtStartColor;
@@ -36,7 +40,7 @@ public class ColorFade extends ExponentialFade {
             this.awtEndColor = new Color(this.startColor, true);
             this.reset();
         }
-        if (this.IIIllIllIlIlllllllIlIlIII()) {
+        if (this.isFadeOngoing()) {
             float f = super.getCurrentValue();
             int red = (int)Math.abs(f * (float)this.awtEndColor.getRed() + (1.0f - f) * (float)this.awtStartColor.getRed());
             int green = (int)Math.abs(f * (float)this.awtEndColor.getGreen() + (1.0f - f) * (float)this.awtStartColor.getGreen());
@@ -45,13 +49,5 @@ public class ColorFade extends ExponentialFade {
             color = new Color(red, green, blue, alpha);
         }
         return color;
-    }
-
-    public void setStartColor(int startColor) {
-        this.startColor = startColor;
-    }
-
-    public void setEndColor(int endColor) {
-        this.endColor = endColor;
     }
 }

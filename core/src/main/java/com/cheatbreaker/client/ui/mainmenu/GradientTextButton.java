@@ -3,9 +3,13 @@ package com.cheatbreaker.client.ui.mainmenu;
 import com.cheatbreaker.client.ui.fading.ColorFade;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.Color;
 
 public class GradientTextButton extends AbstractElement {
+    @Getter @Setter
     private String text;
     private final ColorFade outlineFade;
     private final ColorFade upperBackgroundFade;
@@ -74,8 +78,8 @@ public class GradientTextButton extends AbstractElement {
     }
 
     @Override
-    protected void handleElementDraw(float f, float f2, boolean bl) {
-        boolean bl2 = bl && this.isMouseInside(f, f2);
+    protected void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
+        boolean bl2 = enableMouse && this.isMouseInside(mouseX, mouseY);
         if (this.colors != null && this.outlineFade.isExpired()) {
             this.outlineFade.setStartColor(this.colors[0]);
             this.outlineFade.setEndColor(this.colors[1]);
@@ -94,8 +98,8 @@ public class GradientTextButton extends AbstractElement {
     }
 
     @Override
-    public boolean handleElementMouseClicked(float mouseX, float mouseY, int button, boolean enabled) {
-        if (!enabled) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        if (!enableMouse) {
             return false;
         }
         if (this.isMouseInside(mouseX, mouseY)) {
@@ -103,13 +107,5 @@ public class GradientTextButton extends AbstractElement {
             return true;
         }
         return false;
-    }
-
-    public String getText() {
-        return this.text;
-    }
-
-    public void setText(String string) {
-        this.text = string;
     }
 }

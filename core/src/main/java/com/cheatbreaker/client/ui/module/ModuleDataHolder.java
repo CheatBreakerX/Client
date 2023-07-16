@@ -20,12 +20,12 @@ class ModuleDataHolder {
         this.module = module;
         this.xTranslation = module.getXTranslation();
         this.yTranslation = module.getYTranslation();
-        this.scaledWidth = module.width * (Float) module.scale.getValue();
-        this.scaledHeight = module.height * (Float) module.scale.getValue();
+        this.scaledWidth = module.width * module.scale.<Float>value();
+        this.scaledHeight = module.height * module.scale.<Float>value();
         this.mouseX = mouseX;
         this.mouseY = mouseY;
         this.unknown = unknown;
-        this.scale = (Float) module.scale.getValue();
+        this.scale = module.scale.<Float>value();
         this.anchor = module.getGuiAnchor();
     }
 }

@@ -9,71 +9,58 @@ import org.lwjgl.input.Mouse;
 
 public class HorizontalSliderElement
         extends AbstractElement {
-    private final Setting IIIllIllIlIlllllllIlIlIII;
-    private final AbstractFade IllIIIIIIIlIlIllllIIllIII;
-    private Number lIIIIllIIlIlIllIIIlIllIlI;
+    private final Setting settingObject;
+    private final AbstractFade sliderFade;
+    private Number settingValue;
 
-    public HorizontalSliderElement(Setting cBSetting) {
-        this.IIIllIllIlIlllllllIlIlIII = cBSetting;
-        this.IllIIIIIIIlIlIllllIIllIII = new MinMaxFade(200L);
-        this.lIIIIllIIlIlIllIIIlIllIlI = (Number)cBSetting.getValue();
+    public HorizontalSliderElement(Setting settingObject) {
+        this.settingObject = settingObject;
+        this.sliderFade = new MinMaxFade(200L);
+        this.settingValue = settingObject.value();
     }
 
     @Override
-    protected void handleElementDraw(float f, float f2, boolean bl) {
+    protected void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
         Ref.modified$drawRect(this.x, this.y, this.x + this.width, this.y + this.height, -13158601);
-        if (!this.IllIIIIIIIlIlIllllIIllIII.hasStartTime()) {
-            this.lIIIIllIIlIlIllIIIlIllIlI = (Number)this.IIIllIllIlIlllllllIlIlIII.getValue();
+        if (!this.sliderFade.hasStartTime()) {
+            this.settingValue = this.settingObject.value();
         }
-        float f3 = ((Number)this.IIIllIllIlIlllllllIlIlIII.getValue()).floatValue();
-        float f4 = this.IIIllIllIlIlllllllIlIlIII.getMinimumValue().floatValue();
-        float f5 = this.IIIllIllIlIlllllllIlIlIII.getMaximumValue().floatValue();
-        float f6 = f3 - this.lIIIIllIIlIlIllIIIlIllIlI.floatValue();
-        float f7 = (float)100 * ((this.lIIIIllIIlIlIllIIIlIllIlI.floatValue() + f6 * this.IllIIIIIIIlIlIllllIIllIII.getCurrentValue() - f4) / (f5 - f4));
+        float f3 = this.settingObject.<Number>value().floatValue();
+        float f4 = this.settingObject.getMinimumValue().floatValue();
+        float f5 = this.settingObject.getMaximumValue().floatValue();
+        float f6 = f3 - this.settingValue.floatValue();
+        float f7 = (float)100 * ((this.settingValue.floatValue() + f6 * this.sliderFade.getCurrentValue() - f4) / (f5 - f4));
         Ref.modified$drawRect(this.x, this.y, this.x + this.width / (float)100 * f7, this.y + this.height, -52429);
     }
 
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
-        if (!bl) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        if (!enableMouse) {
             return false;
         }
-        if (Mouse.isButtonDown((int)0) && this.isMouseInside(f, f2)) {
-            this.IllIIIIIIIlIlIllllIIllIII.reset();
-            this.lIIIIllIIlIlIllIIIlIllIlI = (Number)this.IIIllIllIlIlllllllIlIlIII.getValue();
-            float f3 = ((Number)this.IIIllIllIlIlllllllIlIlIII.getMinimumValue()).floatValue();
-            float f4 = ((Number)this.IIIllIllIlIlllllllIlIlIII.getMaximumValue()).floatValue();
-            if (f - this.x > this.width / 2.0f) {
-                f += 2.0f;
+        if (Mouse.isButtonDown(0) && this.isMouseInside(mouseX, mouseY)) {
+            this.sliderFade.reset();
+            this.settingValue = this.settingObject.value();
+            float f3 = this.settingObject.getMinimumValue().floatValue();
+            float f4 = this.settingObject.getMaximumValue().floatValue();
+            if (mouseX - this.x > this.width / 2.0f) {
+                mouseX += 2.0f;
             }
-            float f5 = f3 + (f - this.x) * ((f4 - f3) / this.width);
-            switch (this.IIIllIllIlIlllllllIlIlIII.getType()) {
+            float f5 = f3 + (mouseX - this.x) * ((f4 - f3) / this.width);
+            switch (this.settingObject.getType()) {
                 case INTEGER: {
-                    this.IIIllIllIlIlllllllIlIlIII.setValue(this.lIIIIlIIllIIlIIlIIIlIIllI((Object)Integer.parseInt((int)f5 + "")));
+                    this.settingObject.setValue((int) f5);
                     break;
                 }
                 case FLOAT: {
-                    this.IIIllIllIlIlllllllIlIlIII.setValue(this.lIIIIlIIllIIlIIlIIIlIIllI(f5));
+                    this.settingObject.setValue(f5);
                     break;
                 }
                 case DOUBLE: {
-                    this.IIIllIllIlIlllllllIlIlIII.setValue(this.lIIIIlIIllIIlIIlIIIlIIllI(Double.parseDouble((double)f5 + "")));
+                    this.settingObject.setValue((double) f5);
                 }
             }
         }
-        return super.handleElementMouseClicked(f, f2, n, bl);
-    }
-
-    private Object lIIIIlIIllIIlIIlIIIlIIllI(Object object) {
-        try {
-            return object;
-        }
-        catch (ClassCastException classCastException) {
-            return null;
-        }
-    }
-
-    public Setting IllIIIIIIIlIlIllllIIllIII() {
-        return this.IIIllIllIlIlllllllIlIlIII;
+        return super.handleElementMouseClicked(mouseX, mouseY, mouseButton, enableMouse);
     }
 }

@@ -10,7 +10,7 @@ import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
 
-import com.cheatbreaker.mixin.client.KeyMappingAccessor;
+import com.cheatbreaker.mixin.net.minecraft.client.KeyMappingAccessor;
 
 public final class KeyMappingRegistryImpl {
     private static final List<KeyMapping> MODDED_KEY_BINDINGS = new ReferenceArrayList<>(); // ArrayList with identity based comparisons for contains/remove/indexOf etc., required for correctly handling duplicate keybinds

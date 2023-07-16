@@ -5,7 +5,6 @@ import com.cheatbreaker.client.config.Setting;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.module.AbstractModule;
 import com.cheatbreaker.client.ui.module.CBGuiAnchor;
-import org.lwjgl.input.Keyboard;
 
 public class KeystrokesModule
         extends AbstractModule {
@@ -61,8 +60,8 @@ public class KeystrokesModule
         int textColorPressed = this.textColorPressed.getColorValue();
         int backgroundColor = this.backgroundColor.getColorValue();
         int backgroundColorPressed = this.backgroundColorPressed.getColorValue();
-        int gap = (Integer)this.gap.getValue();
-        if ((Boolean) this.showMovementKeys.getValue()) {
+        int gap = this.gap.<Integer>value();
+        if (this.showMovementKeys.<Boolean>value()) {
             this.upKey.render(this.leftKey.getWidth() + gap, 0.0f, textColor, textColorPressed, backgroundColor, backgroundColorPressed);
             this.leftKey.render(0.0f, this.upKey.getHeight() + gap, textColor, textColorPressed, backgroundColor, backgroundColorPressed);
             this.downkey.render(this.leftKey.getWidth() + gap, this.upKey.getHeight() + gap, textColor, textColorPressed, backgroundColor, backgroundColorPressed);
@@ -71,13 +70,13 @@ public class KeystrokesModule
             //f = this.leftKey.getWidth() + this.downkey.getWidth() + this.rightKey.getWidth() + gap;
             f2 += this.upKey.getHeight() + gap*2 + this.downkey.getHeight();
         }
-        if ((Boolean) this.showClicks.getValue()) {
+        if (this.showClicks.<Boolean>value()) {
             this.leftMouseKey.render(0.0f, f2, textColor, textColorPressed, backgroundColor, backgroundColorPressed);
             this.rightMouseKey.render(this.leftMouseKey.getWidth() + gap, f2, textColor, textColorPressed, backgroundColor, backgroundColorPressed);
             f = this.leftMouseKey.getWidth() + this.rightMouseKey.getWidth() + gap;
             f2 += this.rightMouseKey.getHeight() + gap;
         }
-        if ((Boolean) this.showSpacebar.getValue()) {
+        if (this.showSpacebar.<Boolean>value()) {
             this.spaceBarKey.render(0.0f, f2, textColor, textColorPressed, backgroundColor, backgroundColorPressed);
             f2 += this.spaceBarKey.getHeight() + gap;
         }

@@ -53,19 +53,19 @@ public class AccountList extends AbstractElement {
     }
 
     @Override
-    protected void handleElementDraw(float f, float f2, boolean bl) {
-        boolean bl2 = bl && this.isMouseInside(f, f2);
+    protected void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
+        boolean bl2 = enableMouse && this.isMouseInside(mouseX, mouseY);
         RenderUtil.drawCorneredGradientRectWithOutline(this.x, this.y, this.x + this.width, this.y + this.elementHeight,
                 this.outlineColour.get(bl2).getRGB(), this.rectGradientStartColour.get(bl2).getRGB(), this.rectGradientEndColour.get(bl2).getRGB());
         float f3 = 6;
         Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
         RenderUtil.drawIcon(this.headLocation, f3, this.x + (float)4, this.y + this.elementHeight / 2.0f - f3);
         FontRegistry.getRobotoRegular13px().drawString(this.displayName, this.x + (float)22, this.y + 1.56f * 2.8846154f, -1342177281);
-        float f4 = this.openAccountMenuTransition.lIIIIlIIllIIlIIlIIIlIIllI(this.isMouseInside(f, f2) && bl);
-        if (this.openAccountMenuTransition.IIIllIllIlIlllllllIlIlIII()) {
+        float f4 = this.openAccountMenuTransition.lIIIIlIIllIIlIIlIIIlIIllI(this.isMouseInside(mouseX, mouseY) && enableMouse);
+        if (this.openAccountMenuTransition.isFadeOngoing()) {
             this.setElementDimensions(this.x, this.y, this.width, this.elementHeight + this.containerHeight * f4);
             this.IIIlllIIIllIllIlIIIIIIlII = true;
-        } else if (!this.openAccountMenuTransition.IIIllIllIlIlllllllIlIlIII() && !this.isMouseInside(f, f2)) {
+        } else if (!this.openAccountMenuTransition.isFadeOngoing() && !this.isMouseInside(mouseX, mouseY)) {
             this.IIIlllIIIllIllIlIIIIIIlII = false;
         }
         if (this.IIIlllIIIllIllIlIIIIIIlII) {
@@ -85,49 +85,56 @@ public class AccountList extends AbstractElement {
                     (float)((int)((float)this.base.getResolution().bridge$getScaleFactor() * this.base.getScaleFactor())),
                     (int)this.base.getScaledHeight()
             );
-            this.scrollableElement.drawScrollable(f, f2, bl);
+            this.scrollableElement.drawScrollable(mouseX, mouseY, enableMouse);
             int n = 1;
             for (Account account : this.base.getAccounts()) {
                 float left = this.x;
                 float right = this.x + this.width;
                 float f10 = this.y + this.elementHeight + (float)(n * 16) - (float)8;
                 float f11 = f10 + (float)16;
-                boolean hovered = f > left && f < right && f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII() > f10 && f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII() < f11 && bl && !this.scrollableElement.isMouseInside(f, f2) && !this.scrollableElement.isDragClick();
+                boolean hovered = mouseX > left && mouseX < right && mouseY - this.scrollableElement.getTranslateY() > f10 && mouseY - this.scrollableElement.getTranslateY() < f11 && enableMouse && !this.scrollableElement.isMouseInside(mouseX, mouseY) && !this.scrollableElement.isDragClick();
                 Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, hovered ? 1.0f : 0.8148148f * 0.8590909f);
                 RenderUtil.drawIcon(account.getHeadLocation(), f3, this.x + (float)4, f10 + (float)8 - f3);
                 FontRegistry.getRobotoRegular13px().drawString(account.getDisplayName(), this.x + (float)22, f10 + (float)4, hovered ? -1 : -1342177281);
                 ++n;
             }
-            this.scrollableElement.handleElementDraw(f, f2, bl);
+            this.scrollableElement.handleElementDraw(mouseX, mouseY, enableMouse);
             Ref.getGlBridge().bridge$disableScissoring();
             Ref.getGlBridge().bridge$popMatrix();
         }
     }
 
     public float getMaxWidthFor(float f) {
-        return (float)22 + f + (float)10;
+        return f + 32f;
     }
 
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
-        if (!bl) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        if (!enableMouse) {
             return false;
         }
         if (this.openAccountMenuTransition.isCurrentlyInverted()) {
-            this.scrollableElement.handleElementMouseClicked(f, f2, n, bl);
-            int n2 = 1;
+            this.scrollableElement.handleElementMouseClicked(mouseX, mouseY, mouseButton, enableMouse);
+            int currentAccountIndex = 1;
             for (Account account : this.base.getAccounts()) {
-                boolean bl2;
-                float f3 = this.x;
-                float f4 = this.x + this.width;
-                float f5 = this.y + this.elementHeight + (float)(n2 * 16) - (float)8;
-                float f6 = f5 + (float)16;
-                boolean bl3 = bl2 = f > f3 && f < f4 && f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII() > f5 && f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII() < f6 && bl && !this.scrollableElement.isMouseInside(f, f2) && !this.scrollableElement.isDragClick();
+                float left = this.x;
+                float right = this.x + this.width;
+                float top = this.y + this.elementHeight + (currentAccountIndex * 16f) - 8f;
+                float bottom = top + 16f;
+
+                boolean bl2 = mouseX > left
+                        && mouseX < right
+                        && mouseY - this.scrollableElement.getTranslateY() > top
+                        && mouseY - this.scrollableElement.getTranslateY() < bottom
+                        && enableMouse && !this.scrollableElement.isMouseInside(mouseX, mouseY)
+                        && !this.scrollableElement.isDragClick();
                 if (bl2) {
-                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+                    Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator()
+                            .createSoundFromPSR(Ref.getInstanceCreator()
+                                    .createResourceLocation("gui.button.press"), 1.0f));
                     this.base.login(account.getDisplayName());
                 }
-                ++n2;
+                ++currentAccountIndex;
             }
         }
         return false;

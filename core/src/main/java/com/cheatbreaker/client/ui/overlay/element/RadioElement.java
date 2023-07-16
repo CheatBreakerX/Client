@@ -22,7 +22,7 @@ public class RadioElement extends DraggableElement {
     private final ResourceLocationBridge playIcon = Ref.getInstanceCreator().createResourceLocation("client/icons/play-24.png");
     private final List<RadioStationElement> radioStationElements;
     private final MinMaxFade fade = new MinMaxFade(300L);
-    private float IlIlllIIIIllIllllIllIIlIl;
+    private float cachedHeight;
     private boolean hovered;
     private final HorizontalSliderElement slider;
     private final ScrollableElement scrollableContainer;
@@ -33,50 +33,50 @@ public class RadioElement extends DraggableElement {
         this.slider = new HorizontalSliderElement(CheatBreaker.getInstance().getGlobalSettings().radioVolume);
         this.scrollableContainer = new ScrollableElement(this);
         this.filter = new InputFieldElement(FontRegistry.getPlayRegular16px(), "Filter", -11842741, -11842741);
-        this.pin = new FlatButtonElement((Boolean) this.client.getGlobalSettings().pinRadio.getValue() ? "Unpin" : "Pin");
+        this.pin = new FlatButtonElement(this.client.getGlobalSettings().pinRadio.<Boolean>value() ? "Unpin" : "Pin");
         this.radioStationElements = new ArrayList<>();
         for (Station station : CheatBreaker.getInstance().getRadioManager().getStations()) {
             this.radioStationElements.add(new RadioStationElement(this, station));
         }
     }
 
-    public void lIIIIllIIlIlIllIIIlIllIlI() {
+    public void resetSize() {
         this.setElementDimensions(this.x, this.y, this.width, this.height);
     }
 
     private boolean isFilterMatch(RadioStationElement radioStationElement) {
-        return this.filter.getText().equals("") || radioStationElement.getStation().getName().toLowerCase().startsWith(this.filter.getText().toLowerCase()) || radioStationElement.getStation().getName().toLowerCase().startsWith(this.filter.getText().toLowerCase());
+        return this.filter.getText().equals("") || radioStationElement.getStation().getName().toLowerCase()
+                .startsWith(this.filter.getText().toLowerCase());
     }
 
     @Override
     public void setElementDimensions(float x, float y, float width, float height) {
         super.setElementDimensions(x, y, width, height);
-        if (this.IlIlllIIIIllIllllIllIIlIl == 0.0f) {
-            this.IlIlllIIIIllIllllIllIIlIl = height;
+        if (this.cachedHeight == 0.0f) {
+            this.cachedHeight = height;
         }
-        this.radioStationElements.sort(Comparator.comparing(llllIllIIIlIIIlIllIlIlIlI2 -> llllIllIIIlIIIlIllIlIlIlI2.getStation().getName()));
-        this.slider.setElementDimensions(x, y + this.IlIlllIIIIllIllllIllIIlIl, width, 8);
-        this.filter.setElementDimensions(x, y + this.IlIlllIIIIllIllllIllIIlIl + (float)8, width - (float)30, 13);
-        this.pin.setElementDimensions(x + width - (float)30, y + this.IlIlllIIIIllIllllIllIIlIl + (float)8, (float)30, 13);
-        this.scrollableContainer.setElementDimensions(x + width - (float)5, y + this.IlIlllIIIIllIllllIllIIlIl + (float)21, (float)5, 99);
+        this.radioStationElements.sort(Comparator.comparing(elem -> elem.getStation().getName()));
+        this.slider.setElementDimensions(x, y + this.cachedHeight, width, 8f);
+        this.filter.setElementDimensions(x, y + this.cachedHeight + 8f, width - 30f, 13f);
+        this.pin.setElementDimensions(x + width - 30f, y + this.cachedHeight + 8f, 30f, 13f);
+        this.scrollableContainer.setElementDimensions(x + width - 5f, y + this.cachedHeight + 21f,
+                5f, 99f);
+
         int n = 0;
         for (RadioStationElement radioStationElement : this.radioStationElements) {
             if (!this.isFilterMatch(radioStationElement)) continue;
-            float f5 = y + (float)20 + this.IlIlllIIIIllIllllIllIIlIl + (float)n;
-            radioStationElement.setElementDimensions(x, f5, width - (float)5, 20);
+            float f5 = y + 20f + this.cachedHeight + n;
+            radioStationElement.setElementDimensions(x, f5, width - 5f, 20f);
             n += 20;
         }
+
         this.scrollableContainer.setScrollAmount(n);
     }
 
-    public boolean IIIIllIlIIIllIlllIlllllIl(float f, float f2) {
-        return f > this.x && f < this.x + this.width && f2 > this.y && f2 < this.y + this.IlIlllIIIIllIllllIllIIlIl;
-    }
-
     @Override
-    protected void handleElementDraw(float f, float f2, boolean bl) {
-        this.drag(f, f2);
-        Ref.modified$drawRect(this.x, this.y, this.x + this.width, this.y + this.IlIlllIIIIllIllllIllIIlIl, -14540254);
+    protected void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
+        this.drag(mouseX, mouseY);
+        Ref.modified$drawRect(this.x, this.y, this.x + this.width, this.y + this.cachedHeight, -14540254);
         Station station = CheatBreaker.getInstance().getRadioManager().getCurrentStation();
         if (station != null) {
             if (station.currentResource == null && !station.getName().equals("")) {
@@ -84,53 +84,71 @@ public class RadioElement extends DraggableElement {
                     this.mc.bridge$getTextureManager().bridge$deleteTexture(station.currentResource);
                     station.currentResource = null;
                 }
-                station.currentResource = Ref.getInstanceCreator().createResourceLocation("client/songs/" + station.getName());
-                ThreadDownloadImageDataBridge threadDownloadImageData = Ref.getInstanceCreator().createThreadDownloadImageData(null, station.getCoverURL(), this.dashIcon, null);
-                Ref.getMinecraft().bridge$getTextureManager().bridge$loadTexture(station.currentResource, threadDownloadImageData);
+                station.currentResource = Ref.getInstanceCreator().createResourceLocation("client/songs/"
+                        + station.getTitleForResource());
+                ThreadDownloadImageDataBridge threadDownloadImageData = Ref.getInstanceCreator()
+                        .createThreadDownloadImageData(null, station.getCoverURL(), station.currentResource,
+                                this.dashIcon, null);
+                try {
+                    Ref.getMinecraft().bridge$getTextureManager().bridge$loadTexture(station.currentResource, threadDownloadImageData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.0f);
+            Ref.getGlBridge().bridge$color(1f, 1f, 1f, 1f);
             ResourceLocationBridge location = station.currentResource == null ? this.dashIcon : station.currentResource;
-            RenderUtil.drawIcon(location, this.IlIlllIIIIllIllllIllIIlIl / 2.0f, this.x, this.y);
-            float f3 = this.x + (float)50;
+            RenderUtil.drawIcon(location, this.cachedHeight / 2f, this.x, this.y);
+            float f3 = this.x + 50f;
             if (this.mc.bridge$getCurrentScreen() == OverlayGui.getInstance()) {
-                boolean bl2 = this.isMouseInside(f, f2) && f > this.x + (float)34 && f < this.x + (float)44 && f2 < this.y + this.IlIlllIIIIllIllllIllIIlIl;
+                boolean bl2 = this.isMouseInside(mouseX, mouseY) && mouseX > this.x + 34f && mouseX < this.x + 44f && mouseY < this.y + this.cachedHeight;
                 if (!DashUtil.isPlayerNotNull()) {
                     Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, bl2 ? 1.0f : 0.8f);
-                    RenderUtil.drawIcon(this.playIcon, (float)6, this.x + (float)34, this.y + 7.5f);
+                    RenderUtil.drawIcon(this.playIcon, 6f, this.x + (float)34, this.y + 7.5f);
                 } else {
-                    Ref.modified$drawRect(this.x + (float)36, this.y + (float)9, this.x + (float)38, this.y + this.IlIlllIIIIllIllllIllIIlIl - (float)11, bl2 ? -1 : -1342177281);
-                    Ref.modified$drawRect(this.x + (float)40, this.y + (float)9, this.x + (float)42, this.y + this.IlIlllIIIIllIllllIllIIlIl - (float)11, bl2 ? -1 : -1342177281);
+                    Ref.modified$drawRect(this.x + 36f, this.y + 9f, this.x + 38f, this.y + this.cachedHeight - 11f, bl2 ? -1 : -1342177281);
+                    Ref.modified$drawRect(this.x + 40f, this.y + 9f, this.x + 42f, this.y + this.cachedHeight - 11f, bl2 ? -1 : -1342177281);
                 }
             } else {
                 f3 = this.x + (float)34;
             }
             String string = station.getName();
-            FontRegistry.getPlayRegular16px().drawString(string, f3, this.y + (float)4, -1);
-            FontRegistry.getPlayRegular12px().drawString(station.getArtist(), f3, this.y + (float)14, -1342177281);
+            FontRegistry.getPlayRegular16px().drawString(string, f3, this.y + 4f, -1);
+            FontRegistry.getPlayRegular12px().drawString(station.getArtist(), f3, this.y + 14f, -1342177281);
         }
-        float f4 = this.fade.lIIIIlIIllIIlIIlIIIlIIllI(this.isMouseInside(f, f2) && bl);
-        if (this.fade.IIIllIllIlIlllllllIlIlIII()) {
-            this.setElementDimensions(this.x, this.y, this.width, this.IlIlllIIIIllIllllIllIIlIl + (float)120 * f4);
+        float f4 = this.fade.lIIIIlIIllIIlIIlIIIlIIllI(this.isMouseInside(mouseX, mouseY) && enableMouse);
+        if (this.fade.isFadeOngoing()) {
+            this.setElementDimensions(this.x, this.y, this.width, this.cachedHeight + 120f * f4);
             this.hovered = true;
-        } else if (!this.fade.IIIllIllIlIlllllllIlIlIII() && !this.isMouseInside(f, f2)) {
+        } else if (!this.fade.isFadeOngoing() && !this.isMouseInside(mouseX, mouseY)) {
             this.hovered = false;
         }
         if (this.hovered) {
             Ref.getGlBridge().bridge$pushMatrix();
-            Ref.getGlBridge().bridge$enableScissoring(); // GL_SCISSOR_TEST
+            Ref.getGlBridge().bridge$enableScissoring();
             OverlayGui overlayGui = OverlayGui.getInstance();
-            RenderUtil.scissorArea((int)this.x, (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl), (int)(this.x + this.width), (int)(this.y + this.IlIlllIIIIllIllllIllIIlIl + (this.height - this.IlIlllIIIIllIllllIllIIlIl) * f4), (float)((int)((float)overlayGui.getResolution().bridge$getScaleFactor() * overlayGui.getScaleFactor())), (int)overlayGui.getScaledHeight());
-            Ref.modified$drawRect(this.x, this.y + this.IlIlllIIIIllIllllIllIIlIl, this.x + this.width, this.y + this.height, -14540254);
-            this.scrollableContainer.drawScrollable(f, f2, bl);
+            RenderUtil.scissorArea(
+                    (int)this.x,
+                    (int)(this.y + this.cachedHeight),
+                    (int)(this.x + this.width),
+                    (int)(this.y + this.cachedHeight + (this.height - this.cachedHeight) * f4),
+                    (float)((int)((float)overlayGui.getResolution().bridge$getScaleFactor()
+                            * overlayGui.getScaleFactor())),
+                    (int)overlayGui.getScaledHeight());
+            Ref.modified$drawRect(this.x, this.y + this.cachedHeight, this.x + this.width,
+                    this.y + this.height, -14540254);
+            this.scrollableContainer.drawScrollable(mouseX, mouseY, enableMouse);
             for (RadioStationElement radioStationElement : this.radioStationElements) {
                 if (!this.isFilterMatch(radioStationElement)) continue;
-                radioStationElement.handleElementDraw(f, f2 - this.scrollableContainer.IllIIIIIIIlIlIllllIIllIII(), bl && !this.scrollableContainer.isDragClick() && !this.scrollableContainer.isMouseInside(f, f2));
+                radioStationElement.handleElementDraw(mouseX, mouseY - this.scrollableContainer.getTranslateY(),
+                        enableMouse
+                                && !this.scrollableContainer.isDragClick()
+                                && !this.scrollableContainer.isMouseInside(mouseX, mouseY));
             }
-            this.scrollableContainer.handleElementDraw(f, f2, bl);
-            this.slider.drawElement(f, f2, bl);
-            this.filter.handleElementDraw(f, f2, bl);
-            this.pin.handleElementDraw(f, f2, bl);
-            Ref.getGlBridge().bridge$disableScissoring(); // GL_SCISSOR_TEST
+            this.scrollableContainer.handleElementDraw(mouseX, mouseY, enableMouse);
+            this.slider.drawElement(mouseX, mouseY, enableMouse);
+            this.filter.handleElementDraw(mouseX, mouseY, enableMouse);
+            this.pin.handleElementDraw(mouseX, mouseY, enableMouse);
+            Ref.getGlBridge().bridge$disableScissoring();
             Ref.getGlBridge().bridge$popMatrix();
         }
     }
@@ -158,7 +176,7 @@ public class RadioElement extends DraggableElement {
         this.pin.handleElementKeyTyped(c, n);
         this.scrollableContainer.handleElementKeyTyped(c, n);
         if (this.filter.lllIIIIIlIllIlIIIllllllII()) {
-            this.lIIIIllIIlIlIllIIIlIllIlI();
+            this.resetSize();
         }
     }
 
@@ -171,15 +189,15 @@ public class RadioElement extends DraggableElement {
     }
 
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
-        this.filter.handleElementMouseClicked(f, f2, n, bl);
-        if (this.filter.lllIIIIIlIllIlIIIllllllII() && n == 1 && this.filter.getText().equals("")) {
-            this.lIIIIllIIlIlIllIIIlIllIlI();
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        this.filter.handleElementMouseClicked(mouseX, mouseY, mouseButton, enableMouse);
+        if (this.filter.lllIIIIIlIllIlIIIllllllII() && mouseButton == 1 && this.filter.getText().equals("")) {
+            this.resetSize();
         }
-        if (!bl) {
+        if (!enableMouse) {
             return false;
         }
-        boolean bl2 = this.isMouseInside(f, f2) && f > this.x + (float) 34 && f < this.x + (float) 44 && f2 < this.y + this.IlIlllIIIIllIllllIllIIlIl;
+        boolean bl2 = this.isMouseInside(mouseX, mouseY) && mouseX > this.x + (float) 34 && mouseX < this.x + (float) 44 && mouseY < this.y + this.cachedHeight;
         if (bl2) {
             if (!DashUtil.isPlayerNotNull()) {
                 CheatBreaker.getInstance().getRadioManager().getCurrentStation().endStream();
@@ -187,29 +205,35 @@ public class RadioElement extends DraggableElement {
                 DashUtil.end();
             }
         }
-        float f3 = this.fade.lIIIIlIIllIIlIIlIIIlIIllI(this.isMouseInside(f, f2));
+        float f3 = this.fade.lIIIIlIIllIIlIIlIIIlIIllI(this.isMouseInside(mouseX, mouseY));
         if (this.fade.isCurrentlyInverted()) {
-            boolean bl4;
-            this.slider.handleElementMouseClicked(f, f2, n, true);
-            this.scrollableContainer.handleElementMouseClicked(f, f2, n, true);
-            this.filter.handleElementMouseClicked(f, f2, n, true);
-            this.pin.handleElementMouseClicked(f, f2, n, true);
-            boolean bl5 = bl4 = f > (float)((int)this.x) && f < (float)((int)(this.x + this.width)) && f2 > (float)((int)(this.y + this.IlIlllIIIIllIllllIllIIlIl + (float)21)) && f2 < (float)((int)(this.y + this.IlIlllIIIIllIllllIllIIlIl + (float)21 + (this.height - this.IlIlllIIIIllIllllIllIIlIl - (float)21) * f3));
+            this.slider.handleElementMouseClicked(mouseX, mouseY, mouseButton, true);
+            this.scrollableContainer.handleElementMouseClicked(mouseX, mouseY, mouseButton, true);
+            this.filter.handleElementMouseClicked(mouseX, mouseY, mouseButton, true);
+            this.pin.handleElementMouseClicked(mouseX, mouseY, mouseButton, true);
+            boolean bl4 = mouseX > (float)((int)this.x)
+                    && mouseX < (float)((int)(this.x + this.width))
+                    && mouseY > (float)((int)(this.y + this.cachedHeight + 21f))
+                    && mouseY < (float)((int)(this.y + this.cachedHeight + 21f
+                        + (this.height - this.cachedHeight - 21f) * f3));
             if (bl4) {
                 RadioStationElement element;
-                Iterator iterator = this.radioStationElements.iterator();
-                while (!(!iterator.hasNext() || this.isFilterMatch(element = (RadioStationElement)iterator.next()) && element.handleElementMouseClicked(f, f2 - this.scrollableContainer.IllIIIIIIIlIlIllllIIllIII(), n, bl))) {
+                Iterator<RadioStationElement> iterator = this.radioStationElements.iterator();
+                while (!(!iterator.hasNext() || this.isFilterMatch(element = iterator.next())
+                        && element.handleElementMouseClicked(mouseX, mouseY - this.scrollableContainer.getTranslateY(),
+                        mouseButton, enableMouse))) {
+                    // Was there supposed to be something here?
                 }
             }
-            if (this.pin.isMouseInside(f, f2)) {
-                this.client.getGlobalSettings().pinRadio.setValue(!((Boolean) this.client.getGlobalSettings().pinRadio.getValue()));
-                this.pin.setText((Boolean) this.client.getGlobalSettings().pinRadio.getValue() ? "Unpin" : "Pin");
+            if (this.pin.isMouseInside(mouseX, mouseY)) {
+                this.client.getGlobalSettings().pinRadio.setValue(!this.client.getGlobalSettings().pinRadio.<Boolean>value());
+                this.pin.setText(this.client.getGlobalSettings().pinRadio.<Boolean>value() ? "Unpin" : "Pin");
             }
         }
-        if (this.isMouseInside(f, f2) && f2 < this.y + this.IlIlllIIIIllIllllIllIIlIl && !bl2 && !this.slider.isMouseInside(f, f2) && !this.scrollableContainer.isMouseInside(f, f2)) {
-            this.updateDraggingPosition(f, f2);
+        if (this.isMouseInside(mouseX, mouseY) && mouseY < this.y + this.cachedHeight && !bl2 && !this.slider.isMouseInside(mouseX, mouseY) && !this.scrollableContainer.isMouseInside(mouseX, mouseY)) {
+            this.updateDraggingPosition(mouseX, mouseY);
         }
-        return super.handleElementMouseClicked(f, f2, n, true);
+        return super.handleElementMouseClicked(mouseX, mouseY, mouseButton, true);
     }
 }
 

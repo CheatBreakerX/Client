@@ -1,5 +1,6 @@
 package com.cheatbreaker.client.ui.util.font;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -71,7 +72,7 @@ public class CBXFontRenderer extends CBXFont {
         boolean followMinecraftScale = false;
 
         try {
-            followMinecraftScale = (Boolean) CheatBreaker.getInstance().globalSettings.followMinecraftScale.getValue();
+            followMinecraftScale = CheatBreaker.getInstance().globalSettings.followMinecraftScale.<Boolean>value();
         } catch (Exception ignored) {
 
         }
@@ -330,7 +331,7 @@ public class CBXFontRenderer extends CBXFont {
         boolean followMinecraftScale = false;
 
         try {
-            followMinecraftScale = (Boolean) CheatBreaker.getInstance().globalSettings.followMinecraftScale.getValue();
+            followMinecraftScale = CheatBreaker.getInstance().globalSettings.followMinecraftScale.<Boolean>value();
         } catch (Exception ignored) {
 
         }
@@ -359,9 +360,12 @@ public class CBXFontRenderer extends CBXFont {
         Ref.getImplementations().getTextureUtil().bridge$deleteTexture(this.texBold);
         Ref.getImplementations().getTextureUtil().bridge$deleteTexture(this.texItalic);
         Ref.getImplementations().getTextureUtil().bridge$deleteTexture(this.texItalicBold);
-        this.texBold = this.setupTexture(this.font.deriveFont(1), this.antiAlias, this.fractionalMetrics, this.boldItalicChars);
-        this.texItalic = this.setupTexture(this.font.deriveFont(2), this.antiAlias, this.fractionalMetrics, this.italicChars);
-        this.texItalicBold = this.setupTexture(this.font.deriveFont(3), this.antiAlias, this.fractionalMetrics, this.boldChars);
+        this.texBold = this.setupTexture(this.font.deriveFont(Font.BOLD), this.antiAlias, this.fractionalMetrics,
+                this.boldItalicChars);
+        this.texItalic = this.setupTexture(this.font.deriveFont(Font.ITALIC), this.antiAlias, this.fractionalMetrics,
+                this.italicChars);
+        this.texItalicBold = this.setupTexture(this.font.deriveFont(Font.BOLD | Font.ITALIC), this.antiAlias,
+                this.fractionalMetrics, this.boldChars);
     }
 
     private void drawLine(double x, double y, double x1, double y1, float lineWidth) {

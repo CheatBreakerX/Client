@@ -86,6 +86,7 @@ def updateClientCommitProperties() {
 updateClientCommitProperties()
 
 ext {
+    getBranch = this.&getBranch
     getShortCommitVersion = this.&getShortCommitVersion
 
     projModID = "cheatbreaker"

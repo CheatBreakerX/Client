@@ -243,8 +243,9 @@ public class OverlayGui extends AbstractGui {
 
     public void renderGameOverlay() {
         this.alertList.forEach(Alert::drawAlert);
-        if (this.mc != null && this.mc.bridge$isIngame() && (Boolean) CheatBreaker.getInstance().getGlobalSettings().pinRadio.getValue() && DashUtil.isPlayerNotNull()) {
-            this.radioElement.drawElement(0.0f, 0.0f, false);
+        if (this.mc != null && this.mc.bridge$isIngame() && CheatBreaker.getInstance().getGlobalSettings().pinRadio
+                .<Boolean>value() && DashUtil.isPlayerNotNull()) {
+            this.radioElement.drawElement(0f, 0f, false);
         }
     }
 

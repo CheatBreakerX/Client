@@ -11,31 +11,16 @@ public class RenderUtil {
         float multiplier = 0.00390625f;
         TessellatorBridge tessellator = Ref.getTessellator();
         tessellator.bridge$startDrawingQuads();
-        tessellator.bridge$pos(left, top + (float)v, zLevel).bridge$tex(right * multiplier, (bottom + (float)v) * multiplier).bridge$endVertex();
-        tessellator.bridge$pos(left + (float)u, top + (float)v, zLevel).bridge$tex((right + (float)u) * multiplier, (bottom + (float)v) * multiplier).bridge$endVertex();
-        tessellator.bridge$pos(left + (float)u, top, zLevel).bridge$tex((right + (float)u) * multiplier, bottom * multiplier).bridge$endVertex();
+        tessellator.bridge$pos(left, top + v, zLevel).bridge$tex(right * multiplier, (bottom + v) * multiplier).bridge$endVertex();
+        tessellator.bridge$pos(left + u, top + v, zLevel).bridge$tex((right + u) * multiplier, (bottom + v) * multiplier).bridge$endVertex();
+        tessellator.bridge$pos(left + u, top, zLevel).bridge$tex((right + u) * multiplier, bottom * multiplier).bridge$endVertex();
         tessellator.bridge$pos(left, top, zLevel).bridge$tex(right * multiplier, bottom * multiplier).bridge$endVertex();
         tessellator.bridge$finish();
     }
 
     public static void drawIcon(ResourceLocationBridge location, float size, float x, float y) {
-        float width = size * 2.0f;
-        float height = size * 2.0f;
-        float f6 = 0.0f;
-        float f7 = 0.0f;
-        Ref.getGlBridge().bridge$enableBlend();
-        Ref.getMinecraft().bridge$getTextureManager().bridge$bindTexture(location);
-        Ref.getGlBridge().bridge$begin(7);
-        Ref.getGlBridge().bridge$texCoord2d(f6 / size, f7 / size);
-        Ref.getGlBridge().bridge$vertex2d(x, y);
-        Ref.getGlBridge().bridge$texCoord2d(f6 / size, (f7 + size) / size);
-        Ref.getGlBridge().bridge$vertex2d(x, y + height);
-        Ref.getGlBridge().bridge$texCoord2d((f6 + size) / size, (f7 + size) / size);
-        Ref.getGlBridge().bridge$vertex2d(x + width, y + height);
-        Ref.getGlBridge().bridge$texCoord2d((f6 + size) / size, f7 / size);
-        Ref.getGlBridge().bridge$vertex2d(x + width, y);
-        Ref.getGlBridge().bridge$end();
-        Ref.getGlBridge().bridge$disableBlend();
+        float imageSize = size * 2.0f;
+        renderIcon(location, x, y, imageSize, imageSize);
     }
 
     public static void drawIcon(String location, float size, float x, float y) {
@@ -43,19 +28,16 @@ public class RenderUtil {
     }
 
     public static void renderIcon(ResourceLocationBridge location, float x, float y, float width, float height) {
-        float midWidth = width / 2.0f;
-        float u = 0.0f;
-        float v = 0.0f;
         Ref.getGlBridge().bridge$enableBlend();
         Ref.getMinecraft().bridge$getTextureManager().bridge$bindTexture(location);
         Ref.getGlBridge().bridge$begin(7);
-        Ref.getGlBridge().bridge$texCoord2d(u / midWidth, v / midWidth);
+        Ref.getGlBridge().bridge$texCoord2d(0f, 0f);
         Ref.getGlBridge().bridge$vertex2d(x, y);
-        Ref.getGlBridge().bridge$texCoord2d(u / midWidth, (v + midWidth) / midWidth);
+        Ref.getGlBridge().bridge$texCoord2d(0f, 1f);
         Ref.getGlBridge().bridge$vertex2d(x, y + height);
-        Ref.getGlBridge().bridge$texCoord2d((u + midWidth) / midWidth, (v + midWidth) / midWidth);
+        Ref.getGlBridge().bridge$texCoord2d(1f, 1f);
         Ref.getGlBridge().bridge$vertex2d(x + width, y + height);
-        Ref.getGlBridge().bridge$texCoord2d((u + midWidth) / midWidth, v / midWidth);
+        Ref.getGlBridge().bridge$texCoord2d(1f, 0f);
         Ref.getGlBridge().bridge$vertex2d(x + width, y);
         Ref.getGlBridge().bridge$end();
         Ref.getGlBridge().bridge$disableBlend();
@@ -70,13 +52,13 @@ public class RenderUtil {
 
     public static void drawRoundedRect(double left, double top, double right, double bottom, double rounding, int color) {
         int i;
-        float a = (float)(color >> 24 & 0xFF) / (float)255;
-        float r = (float)(color >> 16 & 0xFF) / (float)255;
-        float g = (float)(color >> 8 & 0xFF) / (float)255;
-        float b = (float)(color & 0xFF) / (float)255;
+        float a = (color >> 24 & 0xFF) / 255f;
+        float r = (color >> 16 & 0xFF) / 255f;
+        float g = (color >> 8 & 0xFF) / 255f;
+        float b = (color & 0xFF) / 255f;
 
         Ref.getGlBridge().bridge$pushAttrib(0);
-        Ref.getGlBridge().bridge$scale(0.5f, 0.5f, 0.5f);
+        Ref.getGlBridge().bridge$scale(.5f, .5f, .5f);
 
         left *= 2;
         top *= 2;

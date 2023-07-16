@@ -1,20 +1,24 @@
 package com.cheatbreaker.client.util.voicechat;
 
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class VoiceChannel {
+    @Getter
     private final UUID uuid;
-    private final String string;
+    @Getter
+    private final String channelName;
+    @Getter
     private final List<VoiceUser> voiceUsers = new ArrayList<>();
     private final List<UUID> listeningList = new ArrayList<>();
 
-    public VoiceChannel(UUID uuid, String string) {
+    public VoiceChannel(UUID uuid, String channelName) {
         this.uuid = uuid;
-        this.string = string;
+        this.channelName = channelName;
     }
 
     public VoiceUser getOrCreateVoiceUser(UUID uuid, String string) {
@@ -28,37 +32,25 @@ public class VoiceChannel {
         return voiceUser;
     }
 
-    public boolean lIIIIlIIllIIlIIlIIIlIIllI(UUID uUID) {
-        return this.voiceUsers.removeIf(voiceUser -> voiceUser.getUUID().equals(uUID));
+    public void removeUser(UUID uuid) {
+        this.voiceUsers.removeIf(voiceUser -> voiceUser.getUUID().equals(uuid));
     }
 
-    public void addToListening(UUID uuid, String string) {
+    public void addToListening(UUID uuid) {
         if (this.isInChannel(uuid)) {
             this.listeningList.add(uuid);
         }
     }
 
-    public boolean removeListener(UUID uUID) {
-        return this.listeningList.removeIf(uUID2 -> uUID2.equals(uUID));
+    public void removeListener(UUID uuid) {
+        this.listeningList.removeIf(voiceUser -> voiceUser.equals(uuid));
     }
 
-    public boolean isListening(UUID uUID) {
-        return this.listeningList.stream().anyMatch(uUID2 -> uUID2.equals(uUID));
+    public boolean isListening(UUID uuid) {
+        return this.listeningList.stream().anyMatch(voiceUser -> voiceUser.equals(uuid));
     }
 
-    public boolean isInChannel(UUID uUID) {
-        return this.voiceUsers.stream().anyMatch(voiceUser -> voiceUser.getUUID().equals(uUID));
-    }
-
-    public UUID getUUID() {
-        return this.uuid;
-    }
-
-    public String lIIIIIIIIIlIllIIllIlIIlIl() {
-        return this.string;
-    }
-
-    public List<VoiceUser> getUsers() {
-        return this.voiceUsers;
+    public boolean isInChannel(UUID uuid) {
+        return this.voiceUsers.stream().anyMatch(voiceUser -> voiceUser.getUUID().equals(uuid));
     }
 }

@@ -6,65 +6,62 @@ import com.cheatbreaker.client.ui.fading.ColorFade;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
 import com.cheatbreaker.client.ui.util.RenderUtil;
 import com.cheatbreaker.client.ui.util.font.FontRegistry;
+import lombok.Setter;
 
 public class IconButtonElement extends AbstractElement {
-    private ResourceLocationBridge IIIllIllIlIlllllllIlIlIII;
-    private String IllIIIIIIIlIlIllllIIllIII;
-    private boolean lIIIIllIIlIlIllIIIlIllIlI;
-    private final ColorFade IlllIllIlIIIIlIIlIIllIIIl;
-    private final ColorFade IlIlllIIIIllIllllIllIIlIl;
-    private final ColorFade llIIlllIIIIlllIllIlIlllIl;
-    private float lIIlIlIllIIlIIIlIIIlllIII = 4;
+    @Setter
+    private ResourceLocationBridge icon;
+    @Setter
+    private String text;
+    private boolean usesText;
+    private final ColorFade outlineFade;
+    private final ColorFade upperBackgroundFade;
+    private final ColorFade lowerBackgroundFade;
+    private float iconSize = 4;
 
-    public IconButtonElement(ResourceLocationBridge location) {
-        this.IIIllIllIlIlllllllIlIlIII = location;
-        this.IlllIllIlIIIIlIIlIIllIIIl = new ColorFade(0x4FFFFFFF, -1353670564);
-        this.IlIlllIIIIllIllllIllIIlIl = new ColorFade(444958085, 1063565678);
-        this.llIIlllIIIIlllIllIlIlllIl = new ColorFade(444958085, 1062577506);
+    public IconButtonElement(ResourceLocationBridge icon) {
+        this.icon = icon;
+        this.outlineFade = new ColorFade(0x4FFFFFFF, 0xAF50A05C);
+        this.upperBackgroundFade = new ColorFade(0x1A858585, 0x3F64B96E);
+        this.lowerBackgroundFade = new ColorFade(0x1A858585, 0x3F55A562);
     }
 
-    public IconButtonElement(float f, ResourceLocationBridge location) {
-        this.IIIllIllIlIlllllllIlIlIII = location;
-        this.lIIlIlIllIIlIIIlIIIlllIII = f;
-        this.IlllIllIlIIIIlIIlIIllIIIl = new ColorFade(0x4FFFFFFF, -1353670564);
-        this.IlIlllIIIIllIllllIllIIlIl = new ColorFade(444958085, 1063565678);
-        this.llIIlllIIIIlllIllIlIlllIl = new ColorFade(444958085, 1062577506);
+    public IconButtonElement(float iconSize, ResourceLocationBridge icon) {
+        this.icon = icon;
+        this.iconSize = iconSize;
+        this.outlineFade = new ColorFade(0x4FFFFFFF, 0xAF50A05C);
+        this.upperBackgroundFade = new ColorFade(0x1A858585, 0x3F64B96E);
+        this.lowerBackgroundFade = new ColorFade(0x1A858585, 0x3F55A562);
     }
 
     public IconButtonElement(String string) {
-        this.IllIIIIIIIlIlIllllIIllIII = string;
-        this.lIIIIllIIlIlIllIIIlIllIlI = true;
-        this.IlllIllIlIIIIlIIlIIllIIIl = new ColorFade(0x4FFFFFFF, -1353670564);
-        this.IlIlllIIIIllIllllIllIIlIl = new ColorFade(444958085, 1063565678);
-        this.llIIlllIIIIlllIllIlIlllIl = new ColorFade(444958085, 1062577506);
+        this.text = string;
+        this.usesText = true;
+        this.outlineFade = new ColorFade(0x4FFFFFFF, 0xAF50A05C);
+        this.upperBackgroundFade = new ColorFade(0x1A858585, 0x3F64B96E);
+        this.lowerBackgroundFade = new ColorFade(0x1A858585, 0x3F55A562);
     }
 
     @Override
-    protected void handleElementDraw(float f, float f2, boolean bl) {
-        boolean bl2 = bl && this.isMouseInside(f, f2);
-        RenderUtil.drawCorneredGradientRectWithOutline(this.x, this.y, this.x + this.width, this.y + this.height, this.IlllIllIlIIIIlIIlIIllIIIl.get(bl2).getRGB(), this.IlIlllIIIIllIllllIllIIlIl.get(bl2).getRGB(), this.llIIlllIIIIlllIllIlIlllIl.get(bl2).getRGB());
-        if (this.lIIIIllIIlIlIllIIIlIllIlI) {
-            FontRegistry.getRobotoRegular13px().drawString(this.IllIIIIIIIlIlIllllIIllIII, this.x + this.width / 2.0f, this.y + 2.0f, -1);
+    protected void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
+        boolean useSecondary = enableMouse && this.isMouseInside(mouseX, mouseY);
+        RenderUtil.drawCorneredGradientRectWithOutline(this.x, this.y,
+                this.x + this.width, this.y + this.height,
+                this.outlineFade.get(useSecondary).getRGB(),
+                this.upperBackgroundFade.get(useSecondary).getRGB(),
+                this.lowerBackgroundFade.get(useSecondary).getRGB());
+        if (this.usesText) {
+            FontRegistry.getRobotoRegular13px().drawString(this.text,
+                    this.x + this.width / 2f, this.y + 2f, -1);
         } else {
-            Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, 1.4444444f * 0.5538462f);
-            RenderUtil.drawIcon(this.IIIllIllIlIlllllllIlIlIII, this.lIIlIlIllIIlIIIlIIIlllIII, this.x + this.width / 2.0f - this.lIIlIlIllIIlIIIlIIIlllIII, this.y + this.height / 2.0f - this.lIIlIlIllIIlIIIlIIIlllIII);
+            Ref.getGlBridge().bridge$color(1f, 1f, 1f, .8f);
+            RenderUtil.drawIcon(this.icon, this.iconSize,
+                    this.x + this.width / 2f - this.iconSize, this.y + this.height / 2f - this.iconSize);
         }
     }
 
-    public float IllIIIIIIIlIlIllllIIllIII() {
-        return 22 + FontRegistry.getRobotoRegular13px().getStringWidth(this.IllIIIIIIIlIlIllllIIllIII) + 6;
-    }
-
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
         return false;
-    }
-
-    public void lIIIIlIIllIIlIIlIIIlIIllI(ResourceLocationBridge location) {
-        this.IIIllIllIlIlllllllIlIlIII = location;
-    }
-
-    public void lIIIIlIIllIIlIIlIIIlIIllI(String string) {
-        this.IllIIIIIIIlIlIllllIIllIII = string;
     }
 }

@@ -13,8 +13,8 @@ public class ElementListElement<T extends AbstractElement> extends AbstractEleme
     }
 
     @Override
-    public void handleElementDraw(float f, float f2, boolean bl) {
-        this.elements.forEach(element -> element.drawElement(f, f2, bl));
+    public void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
+        this.elements.forEach(element -> element.drawElement(mouseX, mouseY, enableMouse));
     }
 
     @Override
@@ -33,14 +33,14 @@ public class ElementListElement<T extends AbstractElement> extends AbstractEleme
     }
 
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
-        if (!bl) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        if (!enableMouse) {
             return false;
         }
         boolean bl2 = false;
         for (AbstractElement element : this.elements) {
             if (bl2) break;
-            bl2 = element.handleElementMouseClicked(f, f2, n, true);
+            bl2 = element.handleElementMouseClicked(mouseX, mouseY, mouseButton, true);
         }
         return bl2;
     }

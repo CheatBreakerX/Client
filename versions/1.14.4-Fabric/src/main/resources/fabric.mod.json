@@ -6,7 +6,7 @@
   "name": "CheatBreaker",
   "description": "The free FPS boosting modpack for Minecraft 1.14.4.",
   "authors": [
-    "Telecode/Lifix",
+    "Lifix",
     "JHalt",
     "Decencies",
     "tuzeynah",
@@ -19,7 +19,7 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/minecraft/client/logo_red_circle.png",
+  "icon": "assets/minecraft/client/logo_1024.png",
 
   "environment": "*",
   "entrypoints": {

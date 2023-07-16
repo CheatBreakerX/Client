@@ -1,5 +1,6 @@
 package org.lwjgl.input;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.glfw.GLFW;
 
@@ -9,11 +10,11 @@ import org.lwjgl.glfw.GLFW;
  */
 public class Keyboard {
     public static boolean isKeyDown(int key) {
-        return GLFW.glfwGetKey(Minecraft.getInstance().window.getWindow(), key) == GLFW.GLFW_PRESS;
+        return InputConstants.isKeyDown(Minecraft.getInstance().window.getWindow(), key);
     }
 
     public static void enableRepeatEvents(boolean enable) {
-
+        Minecraft.getInstance().keyboardHandler.setSendRepeatsToGui(enable);
     }
 
     public static String getKeyName(int key) {

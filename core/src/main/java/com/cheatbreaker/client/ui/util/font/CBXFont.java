@@ -42,14 +42,16 @@ public class CBXFont {
     public boolean isLoaded() {
         Font var1;
         try {
-            InputStream var2;
+            InputStream trueTypeInputStream;
             if (Ref.getMinecraft() != null && Ref.getMinecraft().bridge$getResourceManager() != null) {
-                var2 = Ref.getMinecraft().bridge$getResourceManager().bridge$getResource(this.resourceLocation).bridge$getInputStream();
+                trueTypeInputStream = Ref.getMinecraft().bridge$getResourceManager()
+                        .bridge$getResource(this.resourceLocation).bridge$getInputStream();
             } else {
-                var2 = Ref.getMinecraft().bridge$getDefaultResourcePack().bridge$getInputStream(this.resourceLocation);
+                trueTypeInputStream = Ref.getMinecraft().bridge$getDefaultResourcePack()
+                        .bridge$getInputStream(this.resourceLocation);
             }
 
-            var1 = Font.createFont(0, var2).deriveFont(this.size);
+            var1 = Font.createFont(Font.TRUETYPE_FONT, trueTypeInputStream).deriveFont(this.size);
         } catch (Exception var3) {
             JOptionPane.showMessageDialog(null,
                     "Failed to load font \"" + this.resourceLocation.bridge$getResourceDomain() + ":" + this.resourceLocation.bridge$getResourcePath() + "\" - using fallback Arial.",
@@ -152,7 +154,7 @@ public class CBXFont {
         boolean followMinecraftScale = false;
 
         try {
-            followMinecraftScale = (Boolean) CheatBreaker.getInstance().globalSettings.followMinecraftScale.getValue();
+            followMinecraftScale = CheatBreaker.getInstance().globalSettings.followMinecraftScale.<Boolean>value();
         } catch (Exception ignored) {
 
         }

@@ -35,8 +35,8 @@ public class FontRegistry {
     private static CBXFontRenderer createNewFont(ResourceLocationBridge font, int size, float scale) {
         int castedSize = fixFontSize(size, scale);
         CheatBreaker.LOGGER.info(Utility.fmt("{} {} -> {}", font.bridge$getResourcePath(), size, castedSize));
-        CBXFontRenderer instance = new CBXFontRenderer(font, (Boolean) CheatBreaker.getInstance().globalSettings
-                .followMinecraftScale.getValue() ? castedSize : size * scale);
+        CBXFontRenderer instance = new CBXFontRenderer(font, CheatBreaker.getInstance().globalSettings
+                .followMinecraftScale.<Boolean>value() ? castedSize : size * scale);
         if (instance.isLoaded()) {
             return instance;
         } else {
@@ -45,7 +45,7 @@ public class FontRegistry {
     }
 
     private static boolean validFont(CBXFontRenderer font, int ogSize) {
-        if ((Boolean) CheatBreaker.getInstance().globalSettings.followMinecraftScale.getValue()) {
+        if (CheatBreaker.getInstance().globalSettings.followMinecraftScale.<Boolean>value()) {
             float scale = (Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor() / 2f);
             return fixFontSize(ogSize, scale) == font.size;
         } else {
@@ -55,7 +55,7 @@ public class FontRegistry {
 
     private static CBXFontRenderer getFont(String fontName, int ogSize) {
         float scale = (Ref.getInstanceCreator().createScaledResolution().bridge$getScaleFactor() / 2f);
-        if (!(Boolean) CheatBreaker.getInstance().globalSettings.followMinecraftScale.getValue()) {
+        if (!CheatBreaker.getInstance().globalSettings.followMinecraftScale.<Boolean>value()) {
             scale = 1f;
         }
 

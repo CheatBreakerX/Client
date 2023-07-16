@@ -33,10 +33,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.User;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.renderer.HttpTextureProcessor;
+import net.minecraft.client.renderer.MobSkinTextureProcessor;
 import net.minecraft.client.renderer.PostChain;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.HttpTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.texture.TextureObject;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.Registry;
@@ -67,8 +69,24 @@ public class InstanceCreator implements IInstanceCreator {
         return (ResourceLocationBridge) new ResourceLocation(domain, path);
     }
 
-    public ThreadDownloadImageDataBridge createThreadDownloadImageData(File p_i1049_1_, String p_i1049_2_, ResourceLocationBridge p_i1049_3_, IImageBufferBridge p_i1049_4_) {
-        return (ThreadDownloadImageDataBridge) new HttpTexture(p_i1049_1_, p_i1049_2_, (ResourceLocation) p_i1049_3_, (HttpTextureProcessor) p_i1049_4_);
+    private DynamicTexture registerTexture(File file, String url, ResourceLocation target, ResourceLocation fallback) {
+        TextureManager textureManager = Minecraft.getInstance().getTextureManager();
+        TextureObject textureObject = textureManager.getTexture(target);
+        TextureObject fallbackTextureObject = textureManager.getTexture(fallback);
+        if (textureObject == null) {
+            //textureObject = new HttpTexture(file, url, fallback, new MobSkinTextureProcessor());
+            textureObject = DownloadableTextures.getHttpTexture(url);
+        }
+
+        return textureObject == null ? (DynamicTexture) fallbackTextureObject : (DynamicTexture) textureObject;
+    }
+
+    public ThreadDownloadImageDataBridge createThreadDownloadImageData(File file, String url,
+                                                                       ResourceLocationBridge targetLocation,
+                                                                       ResourceLocationBridge fallbackLocation,
+                                                                       IImageBufferBridge imageBuffer) {
+        return (ThreadDownloadImageDataBridge) this.registerTexture(file, url, (ResourceLocation) targetLocation,
+                (ResourceLocation) fallbackLocation); //test
     }
 
     public ScaledResolutionBridge createScaledResolution() {

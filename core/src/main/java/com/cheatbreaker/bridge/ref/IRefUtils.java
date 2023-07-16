@@ -13,4 +13,5 @@ public interface IRefUtils {
     CBMovementInputHelper getToggleSprintInputHelper();
     float bridge$MathHelper$sin(float toSine);
     ItemBridge getItemFromName(String name);
+    Class<?> getScreenClass();
 }

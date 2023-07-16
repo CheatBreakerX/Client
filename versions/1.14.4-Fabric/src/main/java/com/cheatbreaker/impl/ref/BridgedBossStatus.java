@@ -1,7 +1,7 @@
 package com.cheatbreaker.impl.ref;
 
-import com.cheatbreaker.bridge.client.gui.components.BossHealthOverlayBridge;
 import com.cheatbreaker.bridge.entity.boss.BossStatusBridge;
+import com.cheatbreaker.mixin.net.minecraft.client.gui.components.BossHealthOverlayAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.LerpingBossEvent;
 
@@ -10,12 +10,13 @@ import java.util.UUID;
 
 public class BridgedBossStatus implements BossStatusBridge {
     private Map<UUID, LerpingBossEvent> getMapBossInfos() {
-        return ((BossHealthOverlayBridge) Minecraft.getInstance().gui.getBossOverlay()).bridge$mapBossInfos();
+        return ((BossHealthOverlayAccessor) Minecraft.getInstance().gui.getBossOverlay()).accessor$events();
     }
 
     public String bridge$getBossName() {
         if (!this.getMapBossInfos().isEmpty()) {
-            for (LerpingBossEvent inf : ((BossHealthOverlayBridge) Minecraft.getInstance().gui.getBossOverlay()).bridge$mapBossInfos().values()) {
+            for (LerpingBossEvent inf : ((BossHealthOverlayAccessor) Minecraft.getInstance().gui.getBossOverlay())
+                    .accessor$events().values()) {
                 return inf.getName().getColoredString();
             }
         }
@@ -24,7 +25,8 @@ public class BridgedBossStatus implements BossStatusBridge {
 
     public int bridge$getStatusBarTime() {
         if (!this.getMapBossInfos().isEmpty()) {
-            for (LerpingBossEvent inf : ((BossHealthOverlayBridge) Minecraft.getInstance().gui.getBossOverlay()).bridge$mapBossInfos().values()) {
+            for (LerpingBossEvent inf : ((BossHealthOverlayAccessor) Minecraft.getInstance().gui.getBossOverlay())
+                    .accessor$events().values()) {
                 return (int) (inf.getPercent() * 100);
             }
         }

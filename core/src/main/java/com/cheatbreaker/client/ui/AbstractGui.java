@@ -158,7 +158,7 @@ public abstract class AbstractGui extends CBGuiScreen {
     }
 
     public float getScaleFactor() {
-        if ((Boolean) CheatBreaker.getInstance().globalSettings.followMinecraftScale.getValue()) {
+        if (CheatBreaker.getInstance().globalSettings.followMinecraftScale.<Boolean>value()) {
             return 1f;
         }
 

@@ -100,6 +100,6 @@ public class ScoreboardModule extends AbstractModule {
     }
 
     private boolean isRemoveNumbers() {
-        return rule == ModuleRule.SCOREBOARD ? (Boolean) this.removeNumbers.getValue() : false;
+        return rule == ModuleRule.SCOREBOARD ? this.removeNumbers.<Boolean>value() : false;
     }
 }

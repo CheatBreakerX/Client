@@ -18,8 +18,8 @@ public class FriendRequestElement extends AbstractElement {
     }
 
     @Override
-    public void handleElementDraw(float mouseX, float mouseY, boolean bl) {
-        if (bl && this.isMouseInside(mouseX, mouseY)) {
+    public void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
+        if (enableMouse && this.isMouseInside(mouseX, mouseY)) {
             Ref.modified$drawRect(this.x, this.y, this.x + this.width, this.y + this.height, -13750738);
         }
         Ref.getGlBridge().bridge$pushMatrix();
@@ -28,11 +28,11 @@ public class FriendRequestElement extends AbstractElement {
         Ref.modified$drawRect(this.x + (float)4, this.y + (float)3, this.x + (float)20, this.y + (float)19, -16747106);
         FontRegistry.getPlayRegular16px().drawString(this.friendRequest.getUsername(), this.x + (float)24, this.y + 2.0f, -1);
         if (this.friendRequest.isFriend()) {
-            boolean cancelHovered = mouseX > this.x + (float)24 && mouseX < this.x + (float)52 && mouseY < this.y + this.height && mouseY > this.y + (float)10 && bl;
+            boolean cancelHovered = mouseX > this.x + (float)24 && mouseX < this.x + (float)52 && mouseY < this.y + this.height && mouseY > this.y + (float)10 && enableMouse;
             FontRegistry.getPlayRegular14px().drawString("CANCEL", this.x + (float)24, this.y + (float)11, cancelHovered ? -52429 : 0x7FFF3333);
         } else {
-            boolean acceptHovered = mouseX > this.x + (float)24 && mouseX < this.x + (float)52 && mouseY < this.y + this.height && mouseY > this.y + (float)10 && bl;
-            boolean denyHovered = mouseX > this.x + (float)52 && mouseX < this.x + (float)84 && mouseY < this.y + this.height && mouseY > this.y + (float)10 && bl;
+            boolean acceptHovered = mouseX > this.x + (float)24 && mouseX < this.x + (float)52 && mouseY < this.y + this.height && mouseY > this.y + (float)10 && enableMouse;
+            boolean denyHovered = mouseX > this.x + (float)52 && mouseX < this.x + (float)84 && mouseY < this.y + this.height && mouseY > this.y + (float)10 && enableMouse;
             FontRegistry.getPlayRegular16px().drawString("ACCEPT", this.x + (float)24, this.y + (float)11, acceptHovered ? -13369549 : 0x7F33FF33);
             FontRegistry.getPlayRegular16px().drawString("DENY", this.x + (float)56, this.y + (float)11, denyHovered ? -52429 : 0x7FFF3333);
         }
@@ -43,20 +43,20 @@ public class FriendRequestElement extends AbstractElement {
     }
 
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
-        if (!bl) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        if (!enableMouse) {
             return false;
         }
         if (this.friendRequest.isFriend()) {
-            boolean cancelHovered  = f > this.x + (float) 24 && f < this.x + (float) 52 && f2 < this.y + this.height && f2 > this.y + (float) 10;
+            boolean cancelHovered  = mouseX > this.x + (float) 24 && mouseX < this.x + (float) 52 && mouseY < this.y + this.height && mouseY > this.y + (float) 10;
             if (cancelHovered) {
                 this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(false, this.friendRequest.getPlayerId()));
                 OverlayGui.getInstance().getFriendRequestsElement().getFrientRequestElementList().add(this);
             }
         } else {
-            boolean acceptHovered = f > this.x + (float)24 && f < this.x + (float)52 && f2 < this.y + this.height && f2 > this.y + (float)10;
-            boolean denyHovered = f > this.x + (float) 52 && f < this.x + (float) 84 && f2 < this.y + this.height && f2 > this.y + (float) 10;
+            boolean acceptHovered = mouseX > this.x + (float)24 && mouseX < this.x + (float)52 && mouseY < this.y + this.height && mouseY > this.y + (float)10;
+            boolean denyHovered = mouseX > this.x + (float) 52 && mouseX < this.x + (float) 84 && mouseY < this.y + this.height && mouseY > this.y + (float) 10;
             if (acceptHovered) {
                 this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
                 CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientFriendRequestUpdate(true, this.friendRequest.getPlayerId()));
@@ -67,7 +67,7 @@ public class FriendRequestElement extends AbstractElement {
                 OverlayGui.getInstance().getFriendRequestsElement().getFrientRequestElementList().add(this);
             }
         }
-        return super.handleElementMouseClicked(f, f2, n, true);
+        return super.handleElementMouseClicked(mouseX, mouseY, mouseButton, true);
     }
 
     public FriendRequest getFriendRequest() {

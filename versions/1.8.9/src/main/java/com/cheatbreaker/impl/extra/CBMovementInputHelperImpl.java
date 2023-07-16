@@ -58,7 +58,8 @@ public class CBMovementInputHelperImpl extends MovementInputFromOptions implemen
             }
         }
         movementInputFromOptions.jump = gameSettings.keyBindJump.isPressed();
-        if ((Boolean) ToggleSprintModule.toggleSneak.getValue() && CheatBreaker.getInstance().getModuleManager().toggleSprint.isEnabled()) {
+        if (ToggleSprintModule.toggleSneak.<Boolean>value() && CheatBreaker.getInstance().getModuleManager()
+                .toggleSprint.isEnabled()) {
             if (gameSettings.keyBindSneak.isPressed() && !lIIlIlIllIIlIIIlIIIlllIII) {
                 if (entityPlayerSP.isRiding() || entityPlayerSP.capabilities.isFlying) {
                     movementInputFromOptions.sneak = true;
@@ -86,8 +87,8 @@ public class CBMovementInputHelperImpl extends MovementInputFromOptions implemen
         }
         boolean bl = (float)entityPlayerSP.getFoodStats().getFoodLevel() > (float)6 || entityPlayerSP.capabilities.isFlying;
         boolean bl2 = !movementInputFromOptions.sneak && !entityPlayerSP.capabilities.isFlying && bl;
-        toggleSprintDisabled = !((Boolean) ToggleSprintModule.toggleSprint.getValue());
-        useDoubleTapping = (Boolean) ToggleSprintModule.doubleTap.getValue();
+        toggleSprintDisabled = !ToggleSprintModule.toggleSprint.<Boolean>value();
+        useDoubleTapping = ToggleSprintModule.doubleTap.<Boolean>value();
         if ((bl2 || toggleSprintDisabled) && gameSettings.keyBindSprint.isPressed() && !IIIlllIIIllIllIlIIIIIIlII && !entityPlayerSP.capabilities.isFlying && !toggleSprintDisabled) {
             isSprinting = !isSprinting;
             timePlayerStartedSprinting = System.currentTimeMillis();
@@ -114,21 +115,41 @@ public class CBMovementInputHelperImpl extends MovementInputFromOptions implemen
         boolean riding = entityPlayerSP.isRiding();
         boolean sneakHeld = gameSettings.keyBindSneak.isPressed();
         boolean sprintHeld = gameSettings.keyBindSprint.isPressed();
+        ToggleSprintModule module = CheatBreaker.getInstance().getModuleManager().toggleSprint;
+
         if (flying) {
             DecimalFormat decimalFormat = new DecimalFormat("#.00");
-            string = (Boolean) ToggleSprintModule.flyBoost.getValue() && sprintHeld && entityPlayerSP.capabilities.isCreativeMode ? string + ((String)CheatBreaker.getInstance().getModuleManager().toggleSprint.flyBoostString.getValue()).replaceAll("%BOOST%", decimalFormat.format(ToggleSprintModule.flyBoostAmount.getValue())) : string + CheatBreaker.getInstance().getModuleManager().toggleSprint.flyString.getValue();
+            if (ToggleSprintModule.flyBoost.<Boolean>value() && sprintHeld && entityPlayerSP.capabilities
+                    .isCreativeMode) {
+                string = module.flyBoostString.<String>value().replaceAll("%BOOST%",
+                        decimalFormat.format(ToggleSprintModule.flyBoostAmount.<String>value()));
+            } else {
+                string = module.flyString.value();
+            }
         }
         if (riding) {
-            string = string + CheatBreaker.getInstance().getModuleManager().toggleSprint.ridingString.getValue();
+            string += module.ridingString.value();
         }
         if (movementInputFromOptions.sneak) {
-            string = flying ? CheatBreaker.getInstance().getModuleManager().toggleSprint.decendString.getValue().toString() :
-                    (riding ? CheatBreaker.getInstance().getModuleManager().toggleSprint.dismountString.getValue().toString() :
-                            (sneakHeld ? string + CheatBreaker.getInstance().getModuleManager().toggleSprint.sneakHeldString.getValue() :
-                                    string + CheatBreaker.getInstance().getModuleManager().toggleSprint.sneakToggledString.getValue()));
+            if (flying) {
+                string = module.decendString.value();
+            } else if (riding) {
+                string = module.dismountString.value();
+            } else if (sneakHeld) {
+                string += module.sneakHeldString.value();
+            } else {
+                string += module.sneakToggledString.value();
+            }
         } else if (isSprinting && !flying && !riding) {
             boolean bl5 = vanillaSprinting || toggleSprintDisabled || aSusBoolean;
-            string = sprintHeld ? string + CheatBreaker.getInstance().getModuleManager().toggleSprint.sprintHeldString.getValue() : (bl5 ? string + CheatBreaker.getInstance().getModuleManager().toggleSprint.sprintVanillaString.getValue() : string + CheatBreaker.getInstance().getModuleManager().toggleSprint.sprintToggledString.getValue());
+
+            if (sprintHeld) {
+                string += module.sprintHeldString.value();
+            } else if (bl5) {
+                string += module.sprintVanillaString.value();
+            } else {
+                string += module.sprintToggledString.value();
+            }
         }
         toggleSprintString = string;
     }

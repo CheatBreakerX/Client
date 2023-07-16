@@ -129,12 +129,12 @@ public class TeammatesModule {
         Ref.getGlBridge().bridge$pushMatrix();
         Ref.getGlBridge().bridge$translate(f4, (float)scaledResolution.bridge$getScaledHeight() - f5, 0.0f);
         if (ilIlIIlllIIIIIlIlIlIIIllI != null) {
-            if (((Boolean) CheatBreaker.getInstance().getGlobalSettings().showOffScreenMarker.getValue())) {
+            if (CheatBreaker.getInstance().getGlobalSettings().showOffScreenMarker.<Boolean>value()) {
                 this.drawOffscreenMarker(ilIlllIlIlIIllllIlllIlIII, ilIlIIlllIIIIIlIlIlIIIllI, 0.0f, 0.0f);
             }
         } else {
             this.drawMarker(ilIlllIlIlIIllllIlllIlIII, n2, (float)n4, (float)n3);
-            if (n > 40 && ((Boolean) CheatBreaker.getInstance().getGlobalSettings().showDistance.getValue())) {
+            if (n > 40 && CheatBreaker.getInstance().getGlobalSettings().showDistance.<Boolean>value()) {
                 this.minecraft.bridge$getFontRenderer().bridge$drawString("(" + n + "m)", 0, 10, -1);
             }
         }

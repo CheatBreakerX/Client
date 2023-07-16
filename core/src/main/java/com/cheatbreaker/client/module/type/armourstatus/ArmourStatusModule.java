@@ -79,9 +79,9 @@ public class ArmourStatusModule extends AbstractModule {
             arrayList.add(new ArmourStatusItem(Ref.getInstanceCreator().createItemStack(Ref.getUtils().getMostPowerfulArmourLeggings()), 16, 16, 2, true));
             arrayList.add(new ArmourStatusItem(Ref.getInstanceCreator().createItemStack(Ref.getUtils().getMostPowerfulArmourBoots()), 16, 16, 2, true));
         }
-        if ((Boolean) equippedItem.getValue() && this.minecraft.bridge$getThePlayer().bridge$getCurrentEquippedItem() != null) {
+        if (equippedItem.<Boolean>value() && this.minecraft.bridge$getThePlayer().bridge$getCurrentEquippedItem() != null) {
             arrayList.add(new ArmourStatusItem(this.minecraft.bridge$getThePlayer().bridge$getCurrentEquippedItem(), 16, 16, 2, false));
-        } else if ((Boolean) equippedItem.getValue()) {
+        } else if (equippedItem.<Boolean>value()) {
             arrayList.add(new ArmourStatusItem(Ref.getInstanceCreator().createItemStack(Ref.getUtils().getMostPowerfulDamageItem()), 16, 16, 2, false));
         }
         Ref.getGlBridge().bridge$pushMatrix();
@@ -97,7 +97,7 @@ public class ArmourStatusModule extends AbstractModule {
         if (!this.isRenderHud()) {
             return;
         }
-        if (!(this.minecraft.bridge$getCurrentScreen() instanceof CBModulesGui || this.minecraft.bridge$getCurrentScreen() instanceof CBModulePlaceGui || this.minecraft.bridge$getCurrentScreen() instanceof GuiChatBridge && !(Boolean) showWhileTying.getValue())) {
+        if (!(this.minecraft.bridge$getCurrentScreen() instanceof CBModulesGui || this.minecraft.bridge$getCurrentScreen() instanceof CBModulePlaceGui || this.minecraft.bridge$getCurrentScreen() instanceof GuiChatBridge && !showWhileTying.<Boolean>value())) {
             this.updateItems(this.minecraft);
             if (!items.isEmpty()) {
                 Ref.getGlBridge().bridge$pushMatrix();
@@ -115,7 +115,7 @@ public class ArmourStatusModule extends AbstractModule {
         items.clear();
         for (int i = 3; i >= -1; --i) {
             ItemStackBridge stack = null;
-            if (i == -1 && (Boolean) equippedItem.getValue()) {
+            if (i == -1 && equippedItem.<Boolean>value()) {
                 stack = minecraft.bridge$getThePlayer().bridge$getCurrentEquippedItem();
             } else if (i != -1) {
                 stack = minecraft.bridge$getThePlayer().bridge$getInventory().bridge$getArmorInventory()[i];
@@ -127,8 +127,8 @@ public class ArmourStatusModule extends AbstractModule {
 
     private void lIIIIlIIllIIlIIlIIIlIIllI(MinecraftBridge minecraft, List<ArmourStatusItem> list) {
         if (list.size() > 0) {
-            int n = (Boolean) itemName.getValue() ? 18 : 16;
-            if (((String) listMode.getValue()).equalsIgnoreCase("vertical")) {
+            int n = itemName.<Boolean>value() ? 18 : 16;
+            if (listMode.<String>value().equalsIgnoreCase("vertical")) {
                 int n3 = 0;
                 int n4 = 0;
                 boolean bl = CBAnchorHelper.getHorizontalPositionEnum(this.getGuiAnchor()) == CBPositionEnum.RIGHT;
@@ -140,7 +140,7 @@ public class ArmourStatusModule extends AbstractModule {
                 }
                 this.height = n3;
                 this.width = n4;
-            } else if (((String) listMode.getValue()).equalsIgnoreCase("horizontal")) {
+            } else if (listMode.<String>value().equalsIgnoreCase("horizontal")) {
                 boolean bl = false;
                 int n5 = 0;
                 int n6 = 0;

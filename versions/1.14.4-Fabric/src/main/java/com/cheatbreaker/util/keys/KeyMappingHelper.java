@@ -5,7 +5,7 @@ import java.util.Objects;
 import net.minecraft.client.KeyMapping;
 import com.mojang.blaze3d.platform.InputConstants;
 
-import com.cheatbreaker.mixin.client.KeyMappingAccessor;
+import com.cheatbreaker.mixin.net.minecraft.client.KeyMappingAccessor;
 
 /**
  * Helper for registering {@link KeyMapping}s.

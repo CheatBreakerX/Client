@@ -66,7 +66,7 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
     }
 
     @Override
-    public void handleElementDraw(float f, float f2, boolean bl) {
+    public void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
         if (!this.friendRequestElements.isEmpty()) {
             this.elements.removeAll(this.friendRequestElements);
             OverlayGui.getInstance().getFriendRequestsElement().resetSize();
@@ -79,23 +79,23 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
             Ref.getGlBridge().bridge$pushMatrix();
             Ref.getGlBridge().bridge$enableScissoring();
             OverlayGui illlllIllIIIllIIIllIllIII = OverlayGui.getInstance();
-            this.scrollableElement.drawScrollable(f, f2, bl);
+            this.scrollableElement.drawScrollable(mouseX, mouseY, enableMouse);
             RenderUtil.scissorArea((int)this.x, (int)this.y, (int)(this.x + this.width), (int)(this.y + this.height), (float)((int)((float)illlllIllIIIllIIIllIllIII.getResolution().bridge$getScaleFactor() * illlllIllIIIllIIIllIllIII.getScaleFactor())), (int)illlllIllIIIllIIIllIllIII.getScaledHeight());
             ImmutableList<FriendRequestElement> immutableList = ImmutableList.copyOf(this.elements);
             for (FriendRequestElement friendRequestElement : immutableList) {
                 if (!this.isFilterMatch(friendRequestElement)) continue;
-                friendRequestElement.drawElement(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), bl);
+                friendRequestElement.drawElement(mouseX, mouseY - this.scrollableElement.getTranslateY(), enableMouse);
             }
             if (immutableList.isEmpty()) {
                 FontRegistry.getPlayRegular16px().drawCenteredString("No friend requests", this.x + this.width / 2.0f, this.y + (float)30, -1);
             }
-            this.filter.drawElement(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), true);
-            this.username.drawElement(f, f2, true);
-            this.addButton.drawElement(f, f2, true);
-            this.toggleRequests.render((CheatBreaker.getInstance().isAcceptingFriendRequests() ? "Disable" : "Enable") + " incoming friend requests", f, f2, true);
+            this.filter.drawElement(mouseX, mouseY - this.scrollableElement.getTranslateY(), true);
+            this.username.drawElement(mouseX, mouseY, true);
+            this.addButton.drawElement(mouseX, mouseY, true);
+            this.toggleRequests.render((CheatBreaker.getInstance().isAcceptingFriendRequests() ? "Disable" : "Enable") + " incoming friend requests", mouseX, mouseY, true);
             Ref.getGlBridge().bridge$disableScissoring();
             Ref.getGlBridge().bridge$popMatrix();
-            this.scrollableElement.handleElementDraw(f, f2, bl);
+            this.scrollableElement.handleElementDraw(mouseX, mouseY, enableMouse);
         }
     }
 
@@ -134,22 +134,22 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
     }
 
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
-        this.filter.handleElementMouseClicked(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), n, bl);
-        this.username.handleElementMouseClicked(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), n, bl);
-        if (this.filter.lllIIIIIlIllIlIIIllllllII() && n == 1 && this.filter.getText().equals("")) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        this.filter.handleElementMouseClicked(mouseX, mouseY - this.scrollableElement.getTranslateY(), mouseButton, enableMouse);
+        this.username.handleElementMouseClicked(mouseX, mouseY - this.scrollableElement.getTranslateY(), mouseButton, enableMouse);
+        if (this.filter.lllIIIIIlIllIlIIIllllllII() && mouseButton == 1 && this.filter.getText().equals("")) {
             this.resetSize();
         }
-        if (!bl) {
+        if (!enableMouse) {
             return false;
         }
-        this.addButton.handleElementMouseClicked(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), n, bl);
-        this.toggleRequests.handleElementMouseClicked(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), n, bl);
-        this.scrollableElement.handleElementMouseClicked(f, f2, n, bl);
-        if (this.addButton.isMouseInside(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII())) {
+        this.addButton.handleElementMouseClicked(mouseX, mouseY - this.scrollableElement.getTranslateY(), mouseButton, enableMouse);
+        this.toggleRequests.handleElementMouseClicked(mouseX, mouseY - this.scrollableElement.getTranslateY(), mouseButton, enableMouse);
+        this.scrollableElement.handleElementMouseClicked(mouseX, mouseY, mouseButton, enableMouse);
+        if (this.addButton.isMouseInside(mouseX, mouseY - this.scrollableElement.getTranslateY())) {
             this.lIIlIlIllIIlIIIlIIIlllIII();
         }
-        if (this.toggleRequests.isMouseInside(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII())) {
+        if (this.toggleRequests.isMouseInside(mouseX, mouseY - this.scrollableElement.getTranslateY())) {
             CheatBreaker.getInstance().getAssetsWebSocket().sendToServer(new WSPacketClientRequestsStatus(!CheatBreaker.getInstance().isAcceptingFriendRequests()));
             CheatBreaker.getInstance().setAcceptingFriendRequests(!CheatBreaker.getInstance().isAcceptingFriendRequests());
             return false;
@@ -158,7 +158,7 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
         for (FriendRequestElement ilIIlIllIllllIIlIllllIlII : this.elements) {
             if (!this.isFilterMatch(ilIIlIllIllllIIlIllllIlII)) continue;
             if (bl2) break;
-            bl2 = ilIIlIllIllllIIlIllllIlII.handleElementMouseClicked(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), n, bl);
+            bl2 = ilIIlIllIllllIIlIllllIlII.handleElementMouseClicked(mouseX, mouseY - this.scrollableElement.getTranslateY(), mouseButton, enableMouse);
         }
         return bl2;
     }
@@ -182,15 +182,15 @@ public class FriendRequestListElement extends ElementListElement<FriendRequestEl
         if (!bl) {
             return false;
         }
-        this.filter.handleElementMouseRelease(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), n, bl);
-        this.username.handleElementMouseRelease(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), n, bl);
-        this.addButton.handleElementMouseRelease(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), n, bl);
-        this.scrollableElement.handleElementMouseRelease(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), n, bl);
+        this.filter.handleElementMouseRelease(f, f2 - this.scrollableElement.getTranslateY(), n, bl);
+        this.username.handleElementMouseRelease(f, f2 - this.scrollableElement.getTranslateY(), n, bl);
+        this.addButton.handleElementMouseRelease(f, f2 - this.scrollableElement.getTranslateY(), n, bl);
+        this.scrollableElement.handleElementMouseRelease(f, f2 - this.scrollableElement.getTranslateY(), n, bl);
         boolean bl2 = false;
         for (FriendRequestElement ilIIlIllIllllIIlIllllIlII : this.elements) {
             if (!this.isFilterMatch(ilIIlIllIllllIIlIllllIlII)) continue;
             if (bl2) break;
-            bl2 = ilIIlIllIllllIIlIllllIlII.handleElementMouseRelease(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), n, bl);
+            bl2 = ilIIlIllIllllIIlIllllIlII.handleElementMouseRelease(f, f2 - this.scrollableElement.getTranslateY(), n, bl);
         }
         return bl2;
     }

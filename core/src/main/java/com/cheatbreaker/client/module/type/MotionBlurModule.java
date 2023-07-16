@@ -50,11 +50,11 @@ public class MotionBlurModule extends AbstractModule {
                 for (ShaderBridge shader : shaderGroup.bridge$getListShaders()) {
                     ShaderUniformBridge uniform = shader.bridge$getShaderManager().bridge$func_147991_a("Phosphor");
                     if (uniform == null) continue;
-                    float f = 1.028125f * 0.68085104f + (float) (Integer) this.amount.getValue() / (float)100 * (float)3 - 0.7f * 0.014285714f;
+                    float f = .7f + this.amount.<Integer>value() / 100f * 3f - .01f;
                     int n = this.color.getColorValue();
-                    float f2 = (float)(n >> 16 & 0xFF) / (float)255;
-                    float f3 = (float)(n >> 8 & 0xFF) / (float)255;
-                    float f4 = (float)(n & 0xFF) / (float)255;
+                    float f2 = (n >> 16 & 0xFF) / 255f;
+                    float f3 = (n >> 8 & 0xFF) / 255f;
+                    float f4 = (n & 0xFF) / 255f;
                     uniform.bridge$func_148095_a(f * f2, f * f3, f * f4);
                 }
             }

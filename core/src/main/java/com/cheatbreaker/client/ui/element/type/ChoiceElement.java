@@ -26,11 +26,11 @@ public class ChoiceElement
 
     @Override
     public void handleDrawElement(int mouseX, int mouseY, float partialTicks) {
-        boolean leftHovered = (float) mouseX > (float)(this.x + this.width - 92) * this.scale && (float) mouseX < (float)(this.x + this.width - 48) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 14 + this.yOffset) * this.scale;
-        boolean rightHovered = (float) mouseX > (float)(this.x + this.width - 48) * this.scale && (float) mouseX < (float)(this.x + this.width - 10) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 14 + this.yOffset) * this.scale;
-        FontRegistry.getUbuntuMedium16px().drawString(this.setting.getLabel().toUpperCase(), this.x + 10, (float)(this.y + 4), CheatBreaker.getInstance().globalSettings.isDarkMode() ? -1 : (leftHovered || rightHovered ? -1090519040 : -1895825408));
+        boolean leftHovered = (float) mouseX > (this.x + this.width - 92f) * this.scale && (float) mouseX < (this.x + this.width - 48f) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (this.y + 14f + this.yOffset) * this.scale;
+        boolean rightHovered = (float) mouseX > (this.x + this.width - 48f) * this.scale && (float) mouseX < (this.x + this.width - 10f) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (this.y + 14f + this.yOffset) * this.scale;
+        FontRegistry.getUbuntuMedium16px().drawString(this.setting.getLabel().toUpperCase(), this.x + 10f, this.y + 4f, CheatBreaker.getInstance().globalSettings.isDarkMode() ? -1 : (leftHovered || rightHovered ? -1090519040 : -1895825408));
         boolean bl3 = this.setting.getLabel().toLowerCase().endsWith("color");
-        String value = this.setting.getValue().toString();
+        String value = this.setting.value().toString();
         String[] split;
         if ((split = value.split(" ")).length > 1) {
             value = split[1].substring(0, Math.min(split[1].length(), 5)).trim() + "...";
@@ -99,8 +99,11 @@ public class ChoiceElement
         if ((leftHovered || rightHovered) && this.IlllIllIlIIIIlIIlIIllIIIl == 0) {
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             for (int i = 0; i < this.setting.getAcceptedValues().length; ++i) {
-                if (!((String[])this.setting.getAcceptedValues())[i].toLowerCase().equalsIgnoreCase((String)this.setting.getValue())) continue;
-                this.llIIlllIIIIlllIllIlIlllIl = (String)this.setting.getValue();
+                if (!((String[])this.setting.getAcceptedValues())[i].toLowerCase()
+                        .equalsIgnoreCase(this.setting.value())) {
+                    continue;
+                }
+                this.llIIlllIIIIlllIllIlIlllIl = this.setting.value();
                 if (rightHovered) {
                     if (i + 1 >= this.setting.getAcceptedValues().length) {
                         this.IlllIllIlIIIIlIIlIIllIIIl = 2;

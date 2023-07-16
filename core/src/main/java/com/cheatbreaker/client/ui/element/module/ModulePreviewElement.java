@@ -163,10 +163,18 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
         if (this.module == CheatBreaker.getInstance().moduleManager.llIIlllIIIIlllIllIlIlllIl) {
             return;
         }
-        for (Setting cBSetting : this.module.getSettingsList()) {
-            if (cBSetting.getType() != Setting.Type.INTEGER || !cBSetting.getLabel().toLowerCase().contains("color") || cBSetting.getLabel().toLowerCase().contains("background") || cBSetting.getLabel().toLowerCase().contains("pressed")) continue;
-            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            cBSetting.setValue(CheatBreaker.getInstance().globalSettings.defaultColor.getValue());
+        for (Setting setting : this.module.getSettingsList()) {
+            if (setting.getType() != Setting.Type.INTEGER
+                    || !setting.getLabel().toLowerCase().contains("color")
+                    || setting.getLabel().toLowerCase().contains("background")
+                    || setting.getLabel().toLowerCase().contains("pressed")) {
+                continue;
+            }
+
+            Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator()
+                    .createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"),
+                            1.0f));
+            setting.setValue(CheatBreaker.getInstance().globalSettings.defaultColor.value());
         }
     }
 }

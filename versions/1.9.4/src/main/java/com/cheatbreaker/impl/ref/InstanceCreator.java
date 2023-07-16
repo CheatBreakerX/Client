@@ -63,8 +63,12 @@ public class InstanceCreator implements IInstanceCreator {
         return (ResourceLocationBridge) new ResourceLocation(domain, path);
     }
 
-    public ThreadDownloadImageDataBridge createThreadDownloadImageData(File p_i1049_1_, String p_i1049_2_, ResourceLocationBridge p_i1049_3_, IImageBufferBridge p_i1049_4_) {
-        return (ThreadDownloadImageDataBridge) new ThreadDownloadImageData(p_i1049_1_, p_i1049_2_, (ResourceLocation) p_i1049_3_, (IImageBuffer) p_i1049_4_);
+    public ThreadDownloadImageDataBridge createThreadDownloadImageData(File file, String url,
+                                                                       ResourceLocationBridge targetLocation,
+                                                                       ResourceLocationBridge fallbackLocation,
+                                                                       IImageBufferBridge imageBuffer) {
+        return (ThreadDownloadImageDataBridge) new ThreadDownloadImageData(file, url,
+                (ResourceLocation) fallbackLocation, (IImageBuffer) imageBuffer);
     }
 
     public ScaledResolutionBridge createScaledResolution() {

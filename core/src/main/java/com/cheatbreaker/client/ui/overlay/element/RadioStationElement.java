@@ -22,10 +22,10 @@ public class RadioStationElement
     }
 
     @Override
-    protected void handleElementDraw(float f, float f2, boolean bl) {
-        if (this.isMouseInsideElement(f, f2) && bl) {
+    protected void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
+        if (this.isMouseInsideElement(mouseX, mouseY) && enableMouse) {
             Ref.modified$drawRect(this.x, this.y, this.x + (float)22, this.y + this.height, -13158601);
-        } else if (this.isMouseInside(f, f2) && bl) {
+        } else if (this.isMouseInside(mouseX, mouseY) && enableMouse) {
             Ref.modified$drawRect(this.x, this.y, this.x + this.width, this.y + this.height, -13158601);
         }
         boolean bl2 = this.station.isPlay();
@@ -45,16 +45,16 @@ public class RadioStationElement
     }
 
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
-        if (!bl) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        if (!enableMouse) {
             return false;
         }
-        if (this.isMouseInsideElement(f, f2) && bl) {
+        if (this.isMouseInsideElement(mouseX, mouseY) && enableMouse) {
             this.station.setFavourite(!this.station.isFavourite());
-            this.parent.lIIIIllIIlIlIllIIIlIllIlI();
+            this.parent.resetSize();
             return true;
         }
-        if (this.isMouseInside(f, f2) && bl) {
+        if (this.isMouseInside(mouseX, mouseY) && enableMouse) {
             if (station.isPlay()) {
                 DashUtil.end();
             }

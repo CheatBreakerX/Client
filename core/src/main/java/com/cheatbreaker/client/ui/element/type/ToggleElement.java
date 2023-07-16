@@ -31,14 +31,14 @@ public class ToggleElement
         boolean dark = CheatBreaker.getInstance().globalSettings.isDarkMode();
         FontRegistry.getUbuntuMedium16px().drawString(this.setting.getLabel().toUpperCase(), this.x + 10, (float) (this.y + 2), dark ? -1 : (leftHovered || rightHovered ? -1090519040 : -1895825408));
         if (this.IlllIllIlIIIIlIIlIIllIIIl == 0) {
-            FontRegistry.getUbuntuMedium16px().drawCenteredString((Boolean) this.setting.getValue() ? "ON" : "OFF", this.x + this.width - 48, this.y + 2, dark ? -1 : -1895825408);
+            FontRegistry.getUbuntuMedium16px().drawCenteredString(this.setting.<Boolean>value() ? "ON" : "OFF", this.x + this.width - 48, this.y + 2, dark ? -1 : -1895825408);
         } else {
             boolean bl3 = this.IlllIllIlIIIIlIIlIIllIIIl == 1;
             FontRegistry.getUbuntuMedium16px().drawCenteredString(this.displayString, (float) (this.x + this.width - 48) - (bl3 ? -this.IlIlllIIIIllIllllIllIIlIl : this.IlIlllIIIIllIllllIllIIlIl), this.y + 2, dark ? -1 : -1895825408);
             if (bl3) {
-                FontRegistry.getUbuntuMedium16px().drawCenteredString((Boolean) this.setting.getValue() ? "ON" : "OFF", (float) (this.x + this.width - 98) + this.IlIlllIIIIllIllllIllIIlIl, this.y + 2, dark ? -1 : -1895825408);
+                FontRegistry.getUbuntuMedium16px().drawCenteredString(this.setting.<Boolean>value() ? "ON" : "OFF", (float) (this.x + this.width - 98) + this.IlIlllIIIIllIllllIllIIlIl, this.y + 2, dark ? -1 : -1895825408);
             } else {
-                FontRegistry.getUbuntuMedium16px().drawCenteredString((Boolean) this.setting.getValue() ? "ON" : "OFF", (float) (this.x + this.width + 2) - this.IlIlllIIIIllIllllIllIIlIl, this.y + 2, dark ? -1 : -1895825408);
+                FontRegistry.getUbuntuMedium16px().drawCenteredString(this.setting.<Boolean>value() ? "ON" : "OFF", (float) (this.x + this.width + 2) - this.IlIlllIIIIllIllllIllIIlIl, this.y + 2, dark ? -1 : -1895825408);
             }
             if (this.IlIlllIIIIllIllllIllIIlIl >= (float) 50) {
                 this.IlllIllIlIIIIlIIlIIllIIIl = 0;
@@ -66,12 +66,12 @@ public class ToggleElement
         if ((bl || bl2) && this.IlllIllIlIIIIlIIlIIllIIIl == 0) {
             this.IlllIllIlIIIIlIIlIIllIIIl = bl ? 1 : 2;
             this.IlIlllIIIIllIllllIllIIlIl = 0.0f;
-            this.displayString = (Boolean) this.setting.getValue() ? "ON" : "OFF";
+            this.displayString = this.setting.<Boolean>value() ? "ON" : "OFF";
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            this.setting.setValue(!((Boolean) this.setting.getValue()));
+            this.setting.setValue(!this.setting.<Boolean>value());
             if (this.setting == CheatBreaker.getInstance().moduleManager.keyStrokes.replaceNamesWithArrows) {
                 CheatBreaker.getInstance().moduleManager.keyStrokes.initialize();
-            } else if (this.setting == CheatBreaker.getInstance().globalSettings.enableTeamView && !(Boolean) CheatBreaker.getInstance().globalSettings.enableTeamView.getValue()) {
+            } else if (this.setting == CheatBreaker.getInstance().globalSettings.enableTeamView && !CheatBreaker.getInstance().globalSettings.enableTeamView.<Boolean>value()) {
                 CheatBreaker.getInstance().globalSettings.enableTeamView.setValue(false);
             }
         }

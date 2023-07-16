@@ -20,11 +20,6 @@ public class GlobalSettings {
     public Setting miscellaneousOptionsLabel;
     public Setting mainMenuTopGradient;
     public Setting mainMenuLightGradient;
-    public KeyBindingBridge openMenu;
-    public KeyBindingBridge openVoiceMenu;
-    public KeyBindingBridge pushToTalk;
-    public KeyBindingBridge dragLook;
-    public KeyBindingBridge hideNames;
     public final List<Setting> settingsList = new ArrayList<>();
     public List<PinnedServer> pinnedServers;
     public List<UnrecommendedServer> unrecommendedServers;
@@ -188,40 +183,13 @@ public class GlobalSettings {
         //this.pinnedServers.add(new PinnedServer("VeltPvP", "veltpvp.com"));
 
         this.unrecommendedServers = new ArrayList<>();
-        /*this.unrecommendedServers.add(
-            new UnrecommendedServer("Purple Prison", UnrecommendedServer.REASON_P2W,
-                ".*(\\.)?purple\\.wtf",                 ".*(\\.)?purpleprison\\.net",   ".*(\\.)?moxmc\\.net",
-                ".*(\\.)?purpleprison\\.co",            ".*(\\.)?prisonfun\\.com",      ".*(\\.)?purpleprison\\.org",
-                ".*(\\.)?minecraftsexserver\\.club",    ".*(\\.)?moxmc\\.com",          ".*(\\.)?purpleore\\.com",
-                ".*(\\.)?purpleprison\\.xyz"
-            )
-        );
-        this.unrecommendedServers.add(
-            new UnrecommendedServer("LoverCraft", UnrecommendedServer.REASON_P2W,
-                ".*(\\.)?loverfella\\.com"
-            )
-        );
-        this.unrecommendedServers.add(
-            new UnrecommendedServer("Glorious Realms", UnrecommendedServer.REASON_P2W,
-                ".*(\\.)?gloriousrealms\\.com"
-            )
-        );
-        this.unrecommendedServers.add(
-            new UnrecommendedServer("Project Eden", UnrecommendedServer.REASON_P2W,
-                ".*(\\.)?bnn\\.gg"
-            )
-        );
-        this.unrecommendedServers.add(
-            new UnrecommendedServer("Wild Prison", UnrecommendedServer.REASON_P2W,
-                ".*(\\.)?wildprison\\.net"
-            )
-        );*/
 
+        /*
         this.pushToTalk = Ref.getInstanceCreator().createKeyBinding("Voice Chat", 47, "CheatBreaker Client");
         this.openMenu = Ref.getInstanceCreator().createKeyBinding("Open Menu", 54, "CheatBreaker Client");
         this.openVoiceMenu = Ref.getInstanceCreator().createKeyBinding("Open Voice Menu", 25, "CheatBreaker Client");
         this.dragLook = Ref.getInstanceCreator().createKeyBinding("Drag to look", 56, "CheatBreaker Client");
-        this.hideNames = Ref.getInstanceCreator().createKeyBinding("Hide name plates", 0, "CheatBreaker Client");
+        this.hideNames = Ref.getInstanceCreator().createKeyBinding("Hide name plates", 0, "CheatBreaker Client");*/
 
 /*        GameSettingsBridge gameSettings = Ref.getMinecraft().bridge$getGameSettings();
         gameSettings.bridge$setKeyBindings(
@@ -237,6 +205,6 @@ public class GlobalSettings {
     }
 
     public boolean isDarkMode() {
-        return this.theme.getValue().equals("Dark");
+        return this.theme.<String>value().equals("Dark");
     }
 }

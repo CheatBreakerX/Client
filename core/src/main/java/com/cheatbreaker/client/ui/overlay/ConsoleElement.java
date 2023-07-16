@@ -37,7 +37,7 @@ public class ConsoleElement extends DraggableElement {
     }
 
     @Override
-    public void handleElementDraw(float mouseX, float mouseY, boolean bl) {
+    public void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
         this.drag(mouseX, mouseY);
         Ref.modified$drawBoxWithOutLine(this.x, this.y, this.x + this.width, this.y + this.height, 0.2972973f * 1.6818181f, -16777216, -15395563);
         Ref.getGlBridge().bridge$pushMatrix();
@@ -46,7 +46,7 @@ public class ConsoleElement extends DraggableElement {
         FontRegistry.getPlayRegular16px().drawString("Console", this.x + (float)4, this.y + (float)3, -1);
         Ref.getGlBridge().bridge$color((float)1.0f, (float)1.0f, (float)1.0f, (float)1.0f);
         Ref.modified$drawRect(this.x + 2.0f, this.y + (float)12 + (float)3, this.x + this.width - 2.0f, this.y + this.height - (float)17, -1356783327);
-        this.scrollableElement.handleScrollableMouseClicked(mouseX, mouseY, bl);
+        this.scrollableElement.handleScrollableMouseClicked(mouseX, mouseY, enableMouse);
         try {
             if (CheatBreaker.getInstance().isConsoleAllowed()) {
                 Ref.getGlBridge().bridge$pushMatrix();
@@ -73,11 +73,11 @@ public class ConsoleElement extends DraggableElement {
         catch (Exception exception) {
             exception.printStackTrace();
         }
-        this.scrollableElement.scrollableOnMouseClick(mouseX, mouseY, bl);
+        this.scrollableElement.scrollableOnMouseClick(mouseX, mouseY, enableMouse);
         Ref.getGlBridge().bridge$popMatrix();
-        this.textInputElement.drawElement(mouseX, mouseY, bl);
-        this.sentButton.drawElement(mouseX, mouseY, bl);
-        this.closeButton.drawElement(mouseX, mouseY, bl);
+        this.textInputElement.drawElement(mouseX, mouseY, enableMouse);
+        this.sentButton.drawElement(mouseX, mouseY, enableMouse);
+        this.closeButton.drawElement(mouseX, mouseY, enableMouse);
     }
 
     @Override
@@ -116,20 +116,20 @@ public class ConsoleElement extends DraggableElement {
     }
 
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
-        this.textInputElement.handleElementMouseClicked(f, f2, n, bl);
-        this.scrollableElement.handleElementMouseClicked(f, f2, n, bl);
-        if (!bl) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        this.textInputElement.handleElementMouseClicked(mouseX, mouseY, mouseButton, enableMouse);
+        this.scrollableElement.handleElementMouseClicked(mouseX, mouseY, mouseButton, enableMouse);
+        if (!enableMouse) {
             return false;
         }
-        if (!this.textInputElement.getText().equals("") && this.sentButton.isMouseInside(f, f2)) {
+        if (!this.textInputElement.getText().equals("") && this.sentButton.isMouseInside(mouseX, mouseY)) {
             this.sendCommandToServer();
         }
-        this.sentButton.handleElementMouseClicked(f, f2, n, true);
-        if (this.isMouseInside(f, f2) && f2 < this.y + (float)12) {
-            this.updateDraggingPosition(f, f2);
+        this.sentButton.handleElementMouseClicked(mouseX, mouseY, mouseButton, true);
+        if (this.isMouseInside(mouseX, mouseY) && mouseY < this.y + (float)12) {
+            this.updateDraggingPosition(mouseX, mouseY);
         }
-        if (this.closeButton.isMouseInside(f, f2)) {
+        if (this.closeButton.isMouseInside(mouseX, mouseY)) {
             this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             OverlayGui.getInstance().removeElements(this);
             return true;

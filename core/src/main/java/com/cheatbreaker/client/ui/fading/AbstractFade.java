@@ -58,23 +58,23 @@ public abstract class AbstractFade {
     public float lIIIIlIIllIIlIIlIIIlIIllI(boolean bl) {
         if (bl && !this.currentlyInverted) {
             this.currentlyInverted = true;
-            this.lIIIIlIIllIIlIIlIIIlIIllI(this.IlIIlIIIIlIIIIllllIIlIllI());
+            this.lIIIIlIIllIIlIIlIIIlIIllI(this.getValueInternal());
         } else if (this.currentlyInverted && !bl) {
             this.currentlyInverted = false;
-            this.lIIIIlIIllIIlIIlIIIlIIllI(this.IlIIlIIIIlIIIIllllIIlIllI());
+            this.lIIIIlIIllIIlIIlIIIlIIllI(this.getValueInternal());
         }
         if (this.startTime == 0L) {
             return 0.0f;
         }
-        float f = this.IlIIlIIIIlIIIIllllIIlIllI();
+        float f = this.getValueInternal();
         return this.currentlyInverted ? f : 1.0f - f;
     }
 
-    public boolean IIIllIllIlIlllllllIlIlIII() {
+    public boolean isFadeOngoing() {
         return this.startTime != 0L && this.getTimeUntilEnd() > 0L;
     }
 
-    private float IlIIlIIIIlIIIIllllIIlIllI() {
+    private float getValueInternal() {
         if (this.startTime == 0L) {
             return 0.0f;
         }

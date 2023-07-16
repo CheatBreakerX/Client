@@ -39,7 +39,7 @@ public class CPSModule extends AbstractModule {
         }
         Ref.getGlBridge().bridge$pushMatrix();
         this.scaleAndTranslate(drawEvent.getResolution());
-        if ((Boolean) this.showBackground.getValue()) {
+        if (this.showBackground.<Boolean>value()) {
             this.setDimensions(56, 18);
             Ref.modified$drawRect(0.0f, 0.0f, 56, 13, this.backgroundColor.getColorValue());
             String string = this.clicks.size() + " CPS";

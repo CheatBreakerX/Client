@@ -21,14 +21,18 @@ public class WorldTimeElement extends AbstractModulesGuiElement {
         super(f);
         this.setting = cBSetting;
         this.height = 22;
-        this.time = Float.parseFloat("" + cBSetting.getValue());
+        this.time = Float.parseFloat(String.valueOf(cBSetting.value()));
     }
 
     @Override
     public void handleMouseClick(int mouseX, int mouseY, int button) {
         boolean bl;
         int n4 = 170;
-        bl = (float) mouseX > (float) (this.x + 170) * this.scale && (float) mouseX < (float) (this.x + 170 + n4 - 2) * this.scale && (float) mouseY > (float) (this.y + 4 + this.yOffset) * this.scale && (float) mouseY < (float) (this.y + 20 + this.yOffset) * this.scale;
+        bl = (float) mouseX > (this.x + 170f) * this.scale
+                && (float) mouseX < (this.x + 170f + n4 - 2) * this.scale
+                && (float) mouseY > (this.y + 4f + this.yOffset) * this.scale
+                && (float) mouseY < (this.y + 20f + this.yOffset) * this.scale;
+
         if (button == 0 && bl) {
             this.IlllIllIlIIIIlIIlIIllIIIl = true;
         }
@@ -74,10 +78,10 @@ public class WorldTimeElement extends AbstractModulesGuiElement {
             } else if (this.lIIIIllIIlIlIllIIIlIllIlI > f5) {
                 this.lIIIIllIIlIlIllIIIlIllIlI = f5;
             }
-            Ref.getMinecraft().bridge$getTheWorld().bridge$setWorldTime((long) (Integer) CheatBreaker.getInstance().globalSettings.worldTime.getValue());
+            Ref.getMinecraft().bridge$getTheWorld().bridge$setWorldTime((long) CheatBreaker.getInstance().globalSettings.worldTime.<Integer>value());
             switch (this.setting.getType()) {
                 case INTEGER: {
-                    this.setting.setValue(Integer.parseInt((int)this.lIIIIllIIlIlIllIIIlIllIlI + ""));
+                    this.setting.setValue((int) this.lIIIIllIIlIlIllIIIlIllIlI);
                     break;
                 }
                 case FLOAT: {
@@ -85,16 +89,16 @@ public class WorldTimeElement extends AbstractModulesGuiElement {
                     break;
                 }
                 case DOUBLE: {
-                    this.setting.setValue(Double.parseDouble(this.lIIIIllIIlIlIllIIIlIllIlI + ""));
+                    this.setting.setValue((double) this.lIIIIllIIlIlIllIIIlIllIlI);
                 }
             }
         }
-        f3 = (f3 = Float.parseFloat(this.setting.getValue() + "")) < this.time ? this.time - f3 : (f3 -= this.time);
-        float f6 = ((f5 - f4) / (float)20 + f3 * (float)8) / (float)(Ref.getMinecraft().bridge$getDebugFPS() + 1);
-        if ((double)f6 < (double)0.18f * 5.555555334797621E-4) {
-            f6 = 2.1333334f * 4.6874997E-5f;
+        f3 = (f3 = this.setting.<Number>value().floatValue()) < this.time ? this.time - f3 : f3 - this.time;
+        float f6 = ((f5 - f4) / 20f + f3 * 8f) / (float)(Ref.getMinecraft().bridge$getDebugFPS() + 1);
+        if ((double)f6 < 1.0E-4D) {
+            f6 = 1.0E-4f;
         }
-        if (this.time < (f2 = Float.parseFloat(this.setting.getValue() + ""))) {
+        if (this.time < (f2 = this.setting.<Number>value().floatValue())) {
             this.time = this.time + f6 <= f2 ? (this.time += f6) : f2;
         } else if (this.time > f2) {
             this.time = this.time - f6 >= f2 ? (this.time -= f6) : f2;

@@ -35,9 +35,9 @@ public class ThreadUpdateStream implements Runnable
                         }
                         if (stream.dirty) {
                             if (stream.volume >= 0) {
-                                sndSystem.setVolume(source, (Integer) CheatBreaker.getInstance().globalSettings.speakerVolume.getValue() / 100f * stream.volume * 0.01f);
+                                sndSystem.setVolume(source, CheatBreaker.getInstance().globalSettings.speakerVolume.<Integer>value() / 100f * stream.volume * 0.01f);
                             } else {
-                                sndSystem.setVolume(source, (Integer) CheatBreaker.getInstance().globalSettings.speakerVolume.getValue() / 100f);
+                                sndSystem.setVolume(source, CheatBreaker.getInstance().globalSettings.speakerVolume.<Integer>value() / 100f);
                             }
                             sndSystem.setAttenuation(source, 2);
                             sndSystem.setDistOrRoll(source, (float) 63);
@@ -47,7 +47,7 @@ public class ThreadUpdateStream implements Runnable
 
                         sndSystem.setPosition(source, vector.x, vector.y, vector.z);
                         if (stream.volume >= 0) {
-                            sndSystem.setVolume(source, (Integer) CheatBreaker.getInstance().globalSettings.speakerVolume.getValue() / 100f * stream.volume * 0.01f);
+                            sndSystem.setVolume(source, CheatBreaker.getInstance().globalSettings.speakerVolume.<Integer>value() / 100f * stream.volume * 0.01f);
                         }
                     }
                     mc.bridge$func_152344_a(() -> stream.proxy.update(ThreadUpdateStream.this.mc.bridge$getTheWorld()));

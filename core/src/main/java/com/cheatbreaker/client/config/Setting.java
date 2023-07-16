@@ -57,8 +57,12 @@ public class Setting {
         return this.maximumValue;
     }
 
-    public Object getValue() {
+    private Object getValue() {
         return this.value;
+    }
+
+    public <T> T value() {
+        return (T) this.getValue();
     }
 
     public Setting setValue(Object object) {
@@ -86,7 +90,7 @@ public class Setting {
     }
 
     public boolean getParentValue() {
-        return this.parent != null && (Boolean) this.parent.getValue();
+        return this.parent != null && this.parent.<Boolean>value();
     }
 
     public Setting setValue(Object object, boolean createProfile) {

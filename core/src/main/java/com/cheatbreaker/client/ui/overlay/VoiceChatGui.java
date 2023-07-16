@@ -42,7 +42,7 @@ public class VoiceChatGui extends AbstractGui {
             float f3 = this.getScaleFactor() / 2.0f - (float)8 - f * (float)cheatBreaker.getNetHandler().getVoiceChannels().size() / 2.0f;
             int n = 0;
             for (VoiceChannel llIIIlllllIIllIlllIlIlIll2 : cheatBreaker.getNetHandler().getVoiceChannels()) {
-                GradientTextButton lIIIllIIIIlIIllIIIIIIIlll2 = new GradientTextButton(llIIIlllllIIllIlllIlIlIll2.lIIIIIIIIIlIllIIllIlIIlIl());
+                GradientTextButton lIIIllIIIIlIIllIIIIIIIlll2 = new GradientTextButton(llIIIlllllIIllIlllIlIlIll2.getChannelName());
                 this.someRandomAssButtons.add(lIIIllIIIIlIIllIIIIIIIlll2);
                 lIIIllIIIIlIIllIIIIIIIlll2.setElementDimensions(f2, f3 + (float)12 + f * (float)n, (float)110, 12);
                 if (this.voiceChannel == llIIIlllllIIllIlllIlIlIll2) {
@@ -74,7 +74,7 @@ public class VoiceChatGui extends AbstractGui {
                     float xPos = randomAssButton.getX();
                     float yPos = randomAssButton.getY();
                     RenderUtil.renderIcon(Ref.getInstanceCreator().createResourceLocation("client/icons/microphone-64.png"), xPos + (float)4, yPos + 2.0f, (float)8, 8);
-                } else if (this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() == randomAssButton.getText()) {
+                } else if (this.voiceChannel.getChannelName() == randomAssButton.getText()) {
                     randomAssButton.publicDraw(f, f2, true);
                 } else {
                     randomAssButton.drawElement(f, f2, true);
@@ -98,7 +98,7 @@ public class VoiceChatGui extends AbstractGui {
             VoiceChannel voiceChannel;
             if (!randomAssButton.isMouseInside(f, f2) || this.voiceChannel == (voiceChannel = this.lIIIIlIIllIIlIIlIIIlIIllI(randomAssButton.getText()))) continue;
             for (GradientTextButton lIIIllIIIIlIIllIIIIIIIlll3 : this.someRandomAssButtons) {
-                if (this.voiceChannel == cheatBreaker.getNetHandler().getVoiceChannel() || !lIIIllIIIIlIIllIIIIIIIlll3.getText().equals(this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl())) continue;
+                if (this.voiceChannel == cheatBreaker.getNetHandler().getVoiceChannel() || !lIIIllIIIIlIIllIIIIIIIlll3.getText().equals(this.voiceChannel.getChannelName())) continue;
                 lIIIllIIIIlIIllIIIIIIIlll3.applyDefaultColorState();
             }
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
@@ -109,12 +109,12 @@ public class VoiceChatGui extends AbstractGui {
         if (this.voiceChannel != null) {
             if (this.joinChannelButton.isMouseInside(f, f2)) {
                 Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-                cheatBreaker.getNetHandler().sendPacketToQueue(new PacketVoiceMute(this.voiceChannel.getUUID()));
+                cheatBreaker.getNetHandler().sendPacketToQueue(new PacketVoiceMute(this.voiceChannel.getUuid()));
                 for (GradientTextButton lIIIllIIIIlIIllIIIIIIIlll2 : this.someRandomAssButtons) {
                     lIIIllIIIIlIIllIIIIIIIlll2.applyDefaultColorState();
                 }
                 for (GradientTextButton lIIIllIIIIlIIllIIIIIIIlll2 : this.someRandomAssButtons) {
-                    if (!lIIIllIIIIlIIllIIIIIIIlll2.getText().equals(this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl())) continue;
+                    if (!lIIIllIIIIlIIllIIIIIIIlll2.getText().equals(this.voiceChannel.getChannelName())) continue;
                     lIIIllIIIIlIIllIIIIIIIlll2.applySelectedColorState();
                 }
             }
@@ -141,15 +141,15 @@ public class VoiceChatGui extends AbstractGui {
      */
     private void lIIIIlIIllIIlIIlIIIlIIllI(float f, float f2, float f3, float f4) {
         float f5 = 14;
-        float f6 = (float)this.voiceChannel.getUsers().size() * f5;
-        FontRegistry.getPlayBold18px().drawCenteredString(this.voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl(), f3, (f4 -= f6 / 2.0f) - (float)14, -1);
+        float f6 = (float)this.voiceChannel.getVoiceUsers().size() * f5;
+        FontRegistry.getPlayBold18px().drawCenteredString(this.voiceChannel.getChannelName(), f3, (f4 -= f6 / 2.0f) - (float)14, -1);
         if (!this.lIIlIlIllIIlIIIlIIIlllIII()) {
             this.joinChannelButton.setElementDimensions(f3 + (float)125, f4 - (float)14, (float)50, 12);
             this.joinChannelButton.drawElement(f, f2, true);
         }
         Ref.modified$drawRect(f3, f4, f3 + (float)175, f4 + f6, -1626337264);
         int n = 0;
-        ArrayList<VoiceUser> arrayList = Lists.newArrayList(this.voiceChannel.getUsers());
+        ArrayList<VoiceUser> arrayList = Lists.newArrayList(this.voiceChannel.getVoiceUsers());
         arrayList.sort((voiceUser, voiceUser2) -> {
             if (this.voiceChannel.isListening(voiceUser.getUUID()) && !this.voiceChannel.isListening(voiceUser2.getUUID())) {
                 return -1;
@@ -188,10 +188,10 @@ public class VoiceChatGui extends AbstractGui {
 
     private void lIIIIIIIIIlIllIIllIlIIlIl(float f, float f2, float f3, float f4) {
         float f5 = 14;
-        float f6 = (float)this.voiceChannel.getUsers().size() * f5;
+        float f6 = (float)this.voiceChannel.getVoiceUsers().size() * f5;
         f4 -= f6 / 2.0f;
         int n = 0;
-        for (VoiceUser voiceUser : this.voiceChannel.getUsers()) {
+        for (VoiceUser voiceUser : this.voiceChannel.getVoiceUsers()) {
             boolean bl;
             float f7 = f4 + (float)n * f5;
             boolean bl2 = bl = f > f3 + (float)158 && f < f3 + (float)184 && f2 > f7 && f2 < f7 + f5;
@@ -218,7 +218,7 @@ public class VoiceChatGui extends AbstractGui {
 
     private VoiceChannel lIIIIlIIllIIlIIlIIIlIIllI(String string) {
         for (VoiceChannel llIIIlllllIIllIlllIlIlIll2 : cheatBreaker.getNetHandler().getVoiceChannels()) {
-            if (!llIIIlllllIIllIlllIlIlIll2.lIIIIIIIIIlIllIIllIlIIlIl().equals(string)) continue;
+            if (!llIIIlllllIIllIlllIlIlIll2.getChannelName().equals(string)) continue;
             return llIIIlllllIIllIlllIlIlIll2;
         }
         return null;

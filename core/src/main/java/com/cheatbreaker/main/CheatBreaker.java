@@ -329,14 +329,19 @@ public class CheatBreaker {
     }
 
     public void sendSound(final String sound, final float volume) {
-        if (!(boolean)this.globalSettings.muteCheatBreakerSounds.getValue())
+        if (!this.globalSettings.muteCheatBreakerSounds.<Boolean>value()) {
             Ref.getMinecraft().bridge$getSoundHandler().bridge$getSoundManager().playSound(sound, volume);
+        }
     }
 
     public ResourceLocationBridge getHeadLocation(String displayName) {
         ResourceLocationBridge playerSkin = this.playerSkins.getOrDefault(displayName, Ref.getInstanceCreator().createResourceLocation("client/heads/" + displayName + ".png"));
         if (!this.playerSkins.containsKey(displayName)) {
-            ThreadDownloadImageDataBridge skinData = Ref.getInstanceCreator().createThreadDownloadImageData(null, "https://minotar.net/helm/" + displayName + "/32.png", Ref.getInstanceCreator().createResourceLocation("client/defaults/steve.png"), null);
+            ThreadDownloadImageDataBridge skinData = Ref.getInstanceCreator()
+                    .createThreadDownloadImageData(null, "https://minotar.net/helm/" + displayName + "/32.png",
+                            playerSkin,
+                            Ref.getInstanceCreator().createResourceLocation("client/defaults/steve.png"),
+                            null);
             Ref.getMinecraft().bridge$getTextureManager().bridge$loadTexture(playerSkin, skinData);
             this.playerSkins.put(displayName, playerSkin);
         }

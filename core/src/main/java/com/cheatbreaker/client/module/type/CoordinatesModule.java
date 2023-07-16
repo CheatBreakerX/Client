@@ -64,29 +64,42 @@ public class CoordinatesModule extends AbstractModule {
         int n2 = (int) this.minecraft.bridge$getThePlayer().bridge$getBoundingBox().bridge$getMinY();
         int n3 = MathHelper$floor_double(this.minecraft.bridge$getThePlayer().bridge$getPosZ());
 
-        if (!this.minecraft.bridge$getIngameGUI().bridge$getChatGUI().bridge$getChatOpen() || ((Boolean) this.showWhileTyping.getValue())) {
+        if (!this.minecraft.bridge$getIngameGUI().bridge$getChatGUI().bridge$getChatOpen()
+                || this.showWhileTyping.<Boolean>value()) {
             int n4;
             String object;
             float f = 4;
-            if (this.mode.getValue().equals("Horizontal")) {
-                object = (Boolean) this.hideYCoordinate.getValue() ? (Boolean) this.showCoordinates.getValue() ? String.format("(%1$d, %2$d) ", n, n3) : "" : (Boolean) this.showCoordinates.getValue() ? String.format("(%1$d, %2$d, %3$d) ", n, n2, n3) : "";
-                n4 = this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(object, 0, 0, this.coordinatesColor.getColorValue());
+            if (this.mode.<String>value().equals("Horizontal")) {
+                object = this.hideYCoordinate.<Boolean>value()
+                        ? this.showCoordinates.<Boolean>value()
+                            ? String.format("(%1$d, %2$d) ", n, n3)
+                            : ""
+                        : this.showCoordinates.<Boolean>value()
+                            ? String.format("(%1$d, %2$d, %3$d) ", n, n2, n3)
+                            : "";
+                n4 = this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(object, 0, 0,
+                        this.coordinatesColor.getColorValue());
             } else {
                 n4 = 50;
-                f = (Boolean) this.hideYCoordinate.getValue() ? 8.066038f * 1.1777778f : (float) 16;
-                this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow("X: " + n, 0, 0, this.coordinatesColor.getColorValue());
-                if (!((Boolean) this.hideYCoordinate.getValue())) {
-                    this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow("Y: " + n2, 0, 12, this.coordinatesColor.getColorValue());
+                f = this.hideYCoordinate.<Boolean>value() ? 8.066038f * 1.1777778f : (float) 16;
+                this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow("X: " + n, 0, 0,
+                        this.coordinatesColor.getColorValue());
+                if (!this.hideYCoordinate.<Boolean>value()) {
+                    this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow("Y: " + n2, 0, 12,
+                            this.coordinatesColor.getColorValue());
                 }
-                this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow("Z: " + n3, 0, (Boolean) this.hideYCoordinate.getValue() ? 12 : 24, this.coordinatesColor.getColorValue());
+                this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow("Z: " + n3, 0,
+                        this.hideYCoordinate.<Boolean>value() ? 12 : 24, this.coordinatesColor.getColorValue());
             }
-            if (((Boolean)this.showDirection.getValue())) {
-                String[] directions = new String[]{"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
-                double d = MathHelper$wrapAngleTo180_double(this.minecraft.bridge$getThePlayer().bridge$getRotationYaw()) + (double)180;
-                d += 11.682692039868188 * (double)1.925926f;
+            if (this.showDirection.<Boolean>value()) {
+                String[] directions = new String[] { "N", "NE", "E", "SE", "S", "SW", "W", "NW" };
+                double d = MathHelper$wrapAngleTo180_double(this.minecraft.bridge$getThePlayer()
+                        .bridge$getRotationYaw()) + 180D;
+                d += 22.5D;
                 d %= 360;
-                String string = directions[MathHelper$floor_double(d /= (double)45)];
-                this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string, n4, (int) f - 4, this.directionColor.getColorValue());
+                String string = directions[MathHelper$floor_double(d / 45)];
+                this.minecraft.bridge$getFontRenderer().bridge$drawStringWithShadow(string, n4, (int) f - 4,
+                        this.directionColor.getColorValue());
                 n4 += this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(string);
             }
             this.setDimensions(n4, (float) 18 + f);

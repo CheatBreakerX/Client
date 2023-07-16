@@ -62,7 +62,7 @@ public class MessagesElement extends DraggableElement {
     }
 
     @Override
-    public void handleElementDraw(float mouseX, float mouseY, boolean bl) {
+    public void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
         String[] restring;
         this.drag(mouseX, mouseY);
         Ref.modified$drawBoxWithOutLine(this.x, this.y, this.x + (float)23, this.y + this.height, 0.074324325f * 6.7272725f, -16777216, -14869219);
@@ -77,7 +77,7 @@ public class MessagesElement extends DraggableElement {
         ResourceLocationBridge location = CheatBreaker.getInstance().getHeadLocation(EnumChatFormattingBridge.getTextWithoutFormattingCodes(this.friend.getName()));
         RenderUtil.drawIcon(location, (float)7, this.x + (float)28, this.y + (float)4);
         Ref.modified$drawRect(this.x + (float) 27, this.y + (float) 22, this.x + this.width - 2.0f, this.y + this.height - (float) 17, -1356783327);
-        this.recentsScrollable.drawScrollable(mouseX, mouseY, bl);
+        this.recentsScrollable.drawScrollable(mouseX, mouseY, enableMouse);
         Ref.getGlBridge().bridge$pushMatrix();
         Ref.getGlBridge().bridge$enableScissoring();
         OverlayGui overlayGui = OverlayGui.getInstance();
@@ -87,7 +87,7 @@ public class MessagesElement extends DraggableElement {
         for (Friend friend : this.client.getFriendsManager().getFriends().values()) {
             if (friend != this.friend && !this.client.getFriendsManager().getMessages().containsKey(friend.getPlayerId()) && !friend.isOnline()) continue;
             float f3 = this.y + (float)3 + (float)n2;
-            boolean bl2 = mouseX > this.x && mouseX < this.x + (float)25 && mouseY > f3 - this.recentsScrollable.IllIIIIIIIlIlIllllIIllIII() && mouseY < f3 + (float)16 - this.recentsScrollable.IllIIIIIIIlIlIllllIIllIII() && mouseY > this.y && mouseY < this.y + this.height;
+            boolean bl2 = mouseX > this.x && mouseX < this.x + (float)25 && mouseY > f3 - this.recentsScrollable.getTranslateY() && mouseY < f3 + (float)16 - this.recentsScrollable.getTranslateY() && mouseY > this.y && mouseY < this.y + this.height;
             Ref.modified$drawRect(this.x + (float)3, f3, this.x + (float)19, f3 + (float)16, friend.isOnline() ? Friend.getStatusColor(friend.getOnlineStatus()) : -13158601);
             Ref.getGlBridge().bridge$color(1.0f, 1.0f, 1.0f, bl2 ? 1.0f : 0.6016854f * 1.4126984f);
             ResourceLocationBridge location1 = CheatBreaker.getInstance().getHeadLocation(EnumChatFormattingBridge.getTextWithoutFormattingCodes(friend.getName()));
@@ -106,8 +106,8 @@ public class MessagesElement extends DraggableElement {
         this.recentsScrollable.setScrollAmount(n2);
         Ref.getGlBridge().bridge$disableScissoring();
         Ref.getGlBridge().bridge$popMatrix();
-        this.recentsScrollable.handleElementDraw(mouseX, mouseY, bl);
-        this.messageListScrollable.handleScrollableMouseClicked(mouseX, mouseY, bl);
+        this.recentsScrollable.handleElementDraw(mouseX, mouseY, enableMouse);
+        this.messageListScrollable.handleScrollableMouseClicked(mouseX, mouseY, enableMouse);
         try {
             if (CheatBreaker.getInstance().getFriendsManager().getMessages().containsKey(this.friend.getPlayerId())) {
                 Ref.getGlBridge().bridge$pushMatrix();
@@ -133,12 +133,12 @@ public class MessagesElement extends DraggableElement {
         catch (Exception exception) {
             exception.printStackTrace();
         }
-        this.messageListScrollable.scrollableOnMouseClick(mouseX, mouseY, bl);
+        this.messageListScrollable.scrollableOnMouseClick(mouseX, mouseY, enableMouse);
         Ref.getGlBridge().bridge$popMatrix();
-        this.inputFieldElement.drawElement(mouseX, mouseY, bl);
-        this.sendButton.drawElement(mouseX, mouseY, bl);
-        this.aliasesButton.drawElement(mouseX, mouseY, bl);
-        this.closeButton.drawElement(mouseX, mouseY, bl);
+        this.inputFieldElement.drawElement(mouseX, mouseY, enableMouse);
+        this.sendButton.drawElement(mouseX, mouseY, enableMouse);
+        this.aliasesButton.drawElement(mouseX, mouseY, enableMouse);
+        this.closeButton.drawElement(mouseX, mouseY, enableMouse);
     }
 
     @Override
@@ -180,17 +180,17 @@ public class MessagesElement extends DraggableElement {
     }
 
     @Override
-    public boolean handleElementMouseClicked(float mouseX, float mouseY, int n, boolean bl) {
-        this.inputFieldElement.handleElementMouseClicked(mouseX, mouseY, n, bl);
-        if (!bl) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        this.inputFieldElement.handleElementMouseClicked(mouseX, mouseY, mouseButton, enableMouse);
+        if (!enableMouse) {
             return false;
         }
         if (!this.inputFieldElement.getText().equals("") && this.sendButton.isMouseInside(mouseX, mouseY)) {
             this.sendMessage();
         }
-        this.sendButton.handleElementMouseClicked(mouseX, mouseY, n, true);
-        this.messageListScrollable.handleElementMouseClicked(mouseX, mouseY, n, true);
-        this.aliasesButton.handleElementMouseClicked(mouseX, mouseY, n, true);
+        this.sendButton.handleElementMouseClicked(mouseX, mouseY, mouseButton, true);
+        this.messageListScrollable.handleElementMouseClicked(mouseX, mouseY, mouseButton, true);
+        this.aliasesButton.handleElementMouseClicked(mouseX, mouseY, mouseButton, true);
         if (!this.aliasesButton.isMouseInside(mouseX, mouseY) && this.isMouseInside(mouseX, mouseY) && mouseY < this.y + (float)22) {
             this.updateDraggingPosition(mouseX, mouseY);
         }

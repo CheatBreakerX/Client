@@ -66,7 +66,7 @@ public class ToggleSprintModule extends AbstractModule {
         if (!this.isRenderHud()) {
             return;
         }
-        if ((Boolean) showHudText.getValue() && ((Boolean) showWhileTyping.getValue() || !(this.minecraft.bridge$getCurrentScreen() instanceof GuiChatBridge))) {
+        if (showHudText.<Boolean>value() && (showWhileTyping.<Boolean>value() || !(this.minecraft.bridge$getCurrentScreen() instanceof GuiChatBridge))) {
             Ref.getGlBridge().bridge$pushMatrix();
             int n = this.minecraft.bridge$getFontRenderer().bridge$getStringWidth(Ref.getUtils().getToggleSprintInputHelper().getToggleSprintString());
             this.setDimensions(n, 18);

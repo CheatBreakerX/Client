@@ -33,7 +33,7 @@ public interface IInstanceCreator {
         return this.createResourceLocation("minecraft", path);
     }
 
-    ThreadDownloadImageDataBridge createThreadDownloadImageData(File p_i1049_1_, String p_i1049_2_, ResourceLocationBridge p_i1049_3_, IImageBufferBridge p_i1049_4_);
+    ThreadDownloadImageDataBridge createThreadDownloadImageData(File file, String url, ResourceLocationBridge targetLocation, ResourceLocationBridge fallbackLocation, IImageBufferBridge imageBuffer);
     ScaledResolutionBridge createScaledResolution();
     DynamicTextureBridge createDynamicTexture(BufferedImage img);
     DynamicTextureBridge createDynamicTexture(int width, int height);

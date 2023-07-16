@@ -35,7 +35,7 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
     public ColorPickerElement(Setting setting, float f) {
         super(f);
         this.setting = setting;
-        this.colorPickerColorElement = new ColorPickerColorElement(f, (Integer)setting.getValue());
+        this.colorPickerColorElement = new ColorPickerColorElement(f, setting.<Integer>value());
         this.colors = new ArrayList<>();
         for (int i = 0; i < 16; ++i) {
             int n = Ref.getMinecraft().bridge$getFontRenderer().bridge$getColorForID(i);
@@ -65,7 +65,7 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
                 CheatBreaker.getInstance().getGlobalSettings().isDarkMode() ? 0xAFFFFFFF : 0xAF000000);
         boolean bl = (float) mouseX > (float)(this.x + this.width - 40) * this.scale && (float) mouseX < (float)(this.x + this.width - 12) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 18 + this.yOffset) * this.scale;
         string = bl ? "(Favorite)" : "(+)";
-        if (CheatBreaker.getInstance().globalSettings.isFavouriteColor((Integer)this.setting.getValue())) {
+        if (CheatBreaker.getInstance().globalSettings.isFavouriteColor(this.setting.<Integer>value())) {
             string = bl ? "(Un-favorite)" : "(-)";
         }
         FontRegistry.getPlayBold18px().drawString(string, this.x + this.width - 16 - FontRegistry.getPlayBold18px().getStringWidth(string), (float)(this.y + 4),
@@ -115,7 +115,7 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
                     }
                     if (this.setting.colorArray != null) {
                         arrn = this.setting.colorArray;
-                    } else if (n5 == (Integer)this.setting.getValue()) {
+                    } else if (n5 == this.setting.<Integer>value()) {
                         arrn = new int[]{n3, n4};
                     }
                     tessellator.bridge$startDrawingQuads();
@@ -156,7 +156,7 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
         if (CheatBreaker.getInstance().globalSettings.IlIIlIIlIllIIIIllIIllIlIl.size() >= 16) {
             CheatBreaker.getInstance().globalSettings.IlIIlIIlIllIIIIllIIllIlIl.remove(0);
         }
-        CheatBreaker.getInstance().globalSettings.IlIIlIIlIllIIIIllIIllIlIl.add(new ColorPickerColorElement(this.scale, (Integer)this.setting.getValue()));
+        CheatBreaker.getInstance().globalSettings.IlIIlIIlIllIIIIllIIllIlIl.add(new ColorPickerColorElement(this.scale, this.setting.<Integer>value()));
         Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
     }
 
@@ -165,7 +165,7 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
         this.IlllIIIlIlllIllIlIIlllIlI();
         int n3 = 0;
         while ((float)n3 < this.pickerHeight) {
-            int n4 = (Integer)this.setting.getValue();
+            int n4 = this.setting.<Integer>value();
             int n5 = new Color(n4 >> 16 & 0xFF, n4 >> 8 & 0xFF, n4 & 0xFF, Math.round((float)255 - (float)n3 / this.pickerHeight * (float)255)).getRGB();
             if (this.llIIlllIIIIlllIllIlIlllIl && (float)n2 >= ((float)this.yOffset + this.pickerY + (float)n3) * this.scale && (float)n2 <= ((float)this.yOffset + this.pickerY + (float)n3 + 1.0f) * this.scale) {
                 this.llIlIIIlIIIIlIlllIlIIIIll = (float)n3 / this.pickerHeight;
@@ -185,7 +185,7 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
         while ((float)n3 < this.pickerHeight) {
             int n4;
             if (this.IlIlllIIIIllIllllIllIIlIl && (float)n2 >= ((float)this.yOffset + this.pickerY + (float)n3) * this.scale && (float)n2 <= ((float)this.yOffset + this.pickerY + (float)n3 + 1.0f) * this.scale) {
-                n4 = (Integer)this.setting.getValue();
+                n4 = this.setting.<Integer>value();
                 float[] arrf = Color.RGBtoHSB(n4 >> 16 & 0xFF, n4 >> 8 & 0xFF, n4 & 0xFF, null);
                 this.setting.setValue(Color.HSBtoRGB(this.IIIlllIIIllIllIlIIIIIIlII, arrf[1], arrf[2]));
                 this.IIIlllIIIllIllIlIIIIIIlII = (float)n3 / this.pickerHeight;
@@ -289,20 +289,20 @@ public class ColorPickerElement extends AbstractModulesGuiElement {
         bl = (float) mouseX > (float)this.x * this.scale && (float) mouseX < (float)(this.x + this.width - 40) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 18 + this.yOffset) * this.scale;
         if (bl) {
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-            float[] arrf = Color.RGBtoHSB((Integer)this.setting.getValue() >> 16 & 0xFF, (Integer)this.setting.getValue() >> 8 & 0xFF, (Integer)this.setting.getValue() & 0xFF, null);
+            float[] arrf = Color.RGBtoHSB(this.setting.<Integer>value() >> 16 & 0xFF, this.setting.<Integer>value() >> 8 & 0xFF, this.setting.<Integer>value() & 0xFF, null);
             this.IIIlllIIIllIllIlIIIIIIlII = arrf[0];
             int n4 = (int)(arrf[1] * this.pickerWidth);
             int n5 = (int)(this.pickerHeight - arrf[2] * this.pickerHeight);
             this.setting.colorArray = new int[]{n4, n5};
             this.lIIIIllIIlIlIllIIIlIllIlI = !this.lIIIIllIIlIlIllIIIlIllIlI;
         } else if (bl2) {
-            if (CheatBreaker.getInstance().globalSettings.isFavouriteColor((Integer)this.setting.getValue())) {
-                CheatBreaker.getInstance().globalSettings.removeFavouriteColor((Integer)this.setting.getValue());
+            if (CheatBreaker.getInstance().globalSettings.isFavouriteColor(this.setting.<Integer>value())) {
+                CheatBreaker.getInstance().globalSettings.removeFavouriteColor(this.setting.<Integer>value());
             } else {
                 if (CheatBreaker.getInstance().globalSettings.favouriteColors.size() >= 16) {
                     CheatBreaker.getInstance().globalSettings.favouriteColors.remove(0);
                 }
-                CheatBreaker.getInstance().globalSettings.favouriteColors.add(new ColorPickerColorElement(this.scale, (Integer)this.setting.getValue()));
+                CheatBreaker.getInstance().globalSettings.favouriteColors.add(new ColorPickerColorElement(this.scale, this.setting.<Integer>value()));
             }
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
         } else if (this.lIIIIllIIlIlIllIIIlIllIlI) {

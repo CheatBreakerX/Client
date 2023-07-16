@@ -26,7 +26,7 @@ class ModuleActionData {
             anchors.add(position.module.getGuiAnchor());
             xTranslations.add(position.module.getXTranslation());
             yTranslations.add(position.module.getYTranslation());
-            scales.add((Float) position.module.scale.getValue());
+            scales.add(position.module.scale.<Float>value());
         }
         this.modules = modules;
         this.anchors = anchors;

@@ -7,6 +7,7 @@ import com.cheatbreaker.bridge.util.ChatComponentStyleBridge;
 import com.cheatbreaker.bridge.util.ChatComponentTextBridge;
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.bridge.util.IChatComponentBridge;
+import com.cheatbreaker.common.KeyMappings;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.event.type.PluginMessageEvent;
 import com.cheatbreaker.client.module.AbstractModule;
@@ -169,7 +170,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
         Map<UUID, Map<String, Double>> map = packet.getPlayers();
         UUID uUID = packet.getLeader();
         long l = packet.getLastMs();
-        if (!((Boolean) CheatBreaker.getInstance().getGlobalSettings().enableTeamView.getValue()) || map == null || map.isEmpty() || map.size() == 1 && map.containsKey(Ref.getMinecraft().bridge$getThePlayer().bridge$getUniqueID())) {
+        if (!CheatBreaker.getInstance().getGlobalSettings().enableTeamView.<Boolean>value() || map == null || map.isEmpty() || map.size() == 1 && map.containsKey(Ref.getMinecraft().bridge$getThePlayer().bridge$getUniqueID())) {
             CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIlIIllIIlIIlIIIlIIllI().clear();
             System.out.println("[CB Teammates] Cleared Map..");
             return;
@@ -299,7 +300,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
         this.addUsers(voiceUserList);
         for (Map.Entry<UUID, String> entry : packet.getPlayers().entrySet()) {
             System.out.println("[CB] Added listener [" + entry.getValue() + "]");
-            voiceChannel.addToListening(entry.getKey(), entry.getValue());
+            voiceChannel.addToListening(entry.getKey());
         }
     }
 
@@ -329,33 +330,52 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
             }
             case 1: {
                 // Removing player
-                voiceChannel.lIIIIlIIllIIlIIlIIIlIIllI(packet.getUuid());
+                voiceChannel.removeUser(packet.getUuid());
                 System.out.println("[CB Voice] Packet status 1");
                 break;
             }
             case 2: {
-                System.out.println("[CB Voice] Joined " + voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() + " channel.");
-                System.out.println("[CB Voice] " + packet.getUuid() + " - " + Ref.getMinecraft().bridge$getSession().bridge$getPlayerID());
+                System.out.println("[CB Voice] Joined " + voiceChannel.getChannelName() + " channel.");
+                System.out.println("[CB Voice] " + packet.getUuid() + " - " + Ref.getMinecraft().bridge$getSession()
+                        .bridge$getPlayerID());
 
-                if (packet.getName().toString().equals(Ref.getMinecraft().bridge$getSession().bridge$getPlayerID())) {
+                if (packet.getName().equals(Ref.getMinecraft().bridge$getSession().bridge$getPlayerID())) {
                     this.voiceChannel = voiceChannel;
                     for (VoiceChannel voiceChannel2 : this.voiceChannels) {
                         voiceChannel2.removeListener(packet.getUuid());
                     }
-                    ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator().createChatComponentText(EnumChatFormattingBridge.AQUA + "Joined " + voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() + " channel. Press '" + Keyboard.getKeyName(CheatBreaker.getInstance().getGlobalSettings().pushToTalk.bridge$getKeyCode()) + "' to talk!" + EnumChatFormattingBridge.RESET);
-                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(chatComponentText);
+                    ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator()
+                            .createChatComponentText(EnumChatFormattingBridge.AQUA + "Joined "
+                                    + voiceChannel.getChannelName() + " channel. Press '"
+                                    + Keyboard.getKeyName(KeyMappings.PUSH_TO_TALK.bridge$getKeyCode()) + "' to talk!"
+                                    + EnumChatFormattingBridge.RESET);
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI()
+                            .bridge$printChatMessage(chatComponentText);
                 } else if (this.voiceChannel == voiceChannel) {
-                    ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator().createChatComponentText(EnumChatFormattingBridge.AQUA + packet.getName() + EnumChatFormattingBridge.AQUA + " joined " + voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() + " channel. Press '" + Keyboard.getKeyName(CheatBreaker.getInstance().getGlobalSettings().openVoiceMenu.bridge$getKeyCode()) + "'!" + EnumChatFormattingBridge.RESET);
-                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(chatComponentText);
+                    ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator()
+                            .createChatComponentText(EnumChatFormattingBridge.AQUA + packet.getName()
+                                    + EnumChatFormattingBridge.AQUA + " joined "
+                                    + voiceChannel.getChannelName() + " channel. Press '"
+                                    + Keyboard.getKeyName(KeyMappings.OPEN_VOICE_MENU.bridge$getKeyCode()) + "'!"
+                                    + EnumChatFormattingBridge.RESET);
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI()
+                            .bridge$printChatMessage(chatComponentText);
                 }
-                voiceChannel.addToListening(packet.getUuid(), packet.getName());
+                voiceChannel.addToListening(packet.getUuid());
                 break;
             }
             case 3: {
                 // remove listening
-                if (this.voiceChannel == voiceChannel && !packet.getUuid().toString().equals(Ref.getMinecraft().bridge$getSession().bridge$getPlayerID())) {
-                    ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator().createChatComponentText(EnumChatFormattingBridge.AQUA + packet.getName() + EnumChatFormattingBridge.AQUA + " left " + voiceChannel.lIIIIIIIIIlIllIIllIlIIlIl() + " channel. Press '" + Keyboard.getKeyName(CheatBreaker.getInstance().getGlobalSettings().openVoiceMenu.bridge$getKeyCode()) + "'!" + EnumChatFormattingBridge.RESET);
-                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI().bridge$printChatMessage(chatComponentText);
+                if (this.voiceChannel == voiceChannel && !packet.getUuid().toString().equals(Ref.getMinecraft()
+                        .bridge$getSession().bridge$getPlayerID())) {
+                    ChatComponentTextBridge chatComponentText = Ref.getInstanceCreator()
+                            .createChatComponentText(EnumChatFormattingBridge.AQUA + packet.getName()
+                                    + EnumChatFormattingBridge.AQUA + " left "
+                                    + voiceChannel.getChannelName() + " channel. Press '"
+                                    + Keyboard.getKeyName(KeyMappings.OPEN_VOICE_MENU.bridge$getKeyCode()) + "'!"
+                                    + EnumChatFormattingBridge.RESET);
+                    Ref.getMinecraft().bridge$getIngameGUI().bridge$getChatGUI()
+                            .bridge$printChatMessage(chatComponentText);
                 }
                 voiceChannel.removeListener(packet.getUuid());
             }
@@ -366,9 +386,9 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
     public void handleDeleteVoiceChannel(PacketDeleteVoiceChannel cbPacketDeleteVoiceChannel) {
         System.out.println("[CB] Deleted channel: " + cbPacketDeleteVoiceChannel.getUuid().toString());
         if (this.voiceChannels != null) {
-            this.voiceChannels.removeIf(voiceChannel -> voiceChannel.getUUID().equals(cbPacketDeleteVoiceChannel.getUuid()));
+            this.voiceChannels.removeIf(voiceChannel -> voiceChannel.getUuid().equals(cbPacketDeleteVoiceChannel.getUuid()));
         }
-        if (this.voiceChannel != null && this.voiceChannel.getUUID().equals(cbPacketDeleteVoiceChannel.getUuid())) {
+        if (this.voiceChannel != null && this.voiceChannel.getUuid().equals(cbPacketDeleteVoiceChannel.getUuid())) {
             this.voiceChannel = null;
         }
     }
@@ -410,7 +430,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
         if (this.voiceChannels == null || this.voiceChannel == null) {
             return null;
         }
-        for (VoiceUser voiceUser : this.voiceChannel.getUsers()) {
+        for (VoiceUser voiceUser : this.voiceChannel.getVoiceUsers()) {
             if (!voiceUser.getUUID().equals(uuid)) continue;
             return voiceUser;
         }
@@ -423,7 +443,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
             return null;
         }
         for (VoiceChannel voiceChannel : this.voiceChannels) {
-            if (!voiceChannel.getUUID().equals(uuid)) continue;
+            if (!voiceChannel.getUuid().equals(uuid)) continue;
             return voiceChannel;
         }
         return null;

@@ -60,7 +60,7 @@ public class FriendsListElement extends ElementListElement<FriendElement> {
      * Iterators could be improved
      */
     @Override
-    public void handleElementDraw(float f, float f2, boolean bl) {
+    public void handleElementDraw(float mouseX, float mouseY, boolean enableMouse) {
         if (!this.friendElements.isEmpty()) {
             this.elements.removeAll(this.friendElements);
             OverlayGui.getInstance().getFriendsListElement().updateSize();
@@ -72,20 +72,20 @@ public class FriendsListElement extends ElementListElement<FriendElement> {
             Ref.getGlBridge().bridge$pushMatrix();
             Ref.getGlBridge().bridge$enableScissoring();
             OverlayGui illlllIllIIIllIIIllIllIII = OverlayGui.getInstance();
-            this.scrollableElement.drawScrollable(f, f2, bl);
+            this.scrollableElement.drawScrollable(mouseX, mouseY, enableMouse);
             RenderUtil.scissorArea((int)this.x, (int)this.y, (int)(this.x + this.width), (int)(this.y + this.height), (float)((int)((float)illlllIllIIIllIIIllIllIII.getResolution().bridge$getScaleFactor() * illlllIllIIIllIIIllIllIII.getScaleFactor())), (int)illlllIllIIIllIIIllIllIII.getScaledHeight());
             ImmutableList<FriendElement> immutableList = ImmutableList.copyOf(this.elements);
             for (FriendElement friendElement : immutableList) {
                 if (!this.isFilterMatch(friendElement)) continue;
-                friendElement.drawElement(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), bl && !this.scrollableElement.isMouseInside(f, f2));
+                friendElement.drawElement(mouseX, mouseY - this.scrollableElement.getTranslateY(), enableMouse && !this.scrollableElement.isMouseInside(mouseX, mouseY));
             }
             if (immutableList.isEmpty()) {
                 FontRegistry.getPlayRegular16px().drawCenteredString("No friends", this.x + this.width / 2.0f, this.y + (float)30, -1);
             }
-            this.filterElement.drawElement(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), bl);
+            this.filterElement.drawElement(mouseX, mouseY - this.scrollableElement.getTranslateY(), enableMouse);
             Ref.getGlBridge().bridge$disableScissoring();
             Ref.getGlBridge().bridge$popMatrix();
-            this.scrollableElement.handleElementDraw(f, f2, bl);
+            this.scrollableElement.handleElementDraw(mouseX, mouseY, enableMouse);
         }
     }
 
@@ -115,27 +115,27 @@ public class FriendsListElement extends ElementListElement<FriendElement> {
     }
 
     @Override
-    public boolean handleElementMouseClicked(float f, float f2, int n, boolean bl) {
-        this.filterElement.handleElementMouseClicked(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), n, bl);
-        if (this.filterElement.lllIIIIIlIllIlIIIllllllII() && n == 1 && this.filterElement.getText().equals("")) {
+    public boolean handleElementMouseClicked(float mouseX, float mouseY, int mouseButton, boolean enableMouse) {
+        this.filterElement.handleElementMouseClicked(mouseX, mouseY - this.scrollableElement.getTranslateY(), mouseButton, enableMouse);
+        if (this.filterElement.lllIIIIIlIllIlIIIllllllII() && mouseButton == 1 && this.filterElement.getText().equals("")) {
             this.updateSize();
         }
-        if (!bl) {
+        if (!enableMouse) {
             return false;
         }
-        this.scrollableElement.handleElementMouseClicked(f, f2, n, bl);
+        this.scrollableElement.handleElementMouseClicked(mouseX, mouseY, mouseButton, enableMouse);
         boolean bl2 = false;
         for (FriendElement frientElement : this.elements) {
             if (!this.isFilterMatch(frientElement)) continue;
             if (bl2) break;
-            bl2 = frientElement.handleElementMouseClicked(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), n, bl && !this.scrollableElement.isMouseInside(f, f2));
+            bl2 = frientElement.handleElementMouseClicked(mouseX, mouseY - this.scrollableElement.getTranslateY(), mouseButton, enableMouse && !this.scrollableElement.isMouseInside(mouseX, mouseY));
         }
         return bl2;
     }
 
     @Override
     public boolean handleElementMouseRelease(float f, float f2, int n, boolean bl) {
-        this.filterElement.handleElementMouseRelease(f, f2 - this.scrollableElement.IllIIIIIIIlIlIllllIIllIII(), n, bl);
+        this.filterElement.handleElementMouseRelease(f, f2 - this.scrollableElement.getTranslateY(), n, bl);
         this.scrollableElement.handleElementMouseRelease(f, f2, n, bl);
         if (!bl) {
             return false;

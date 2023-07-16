@@ -4,6 +4,7 @@ import com.cheatbreaker.bridge.item.ItemBridge;
 import com.cheatbreaker.bridge.ref.IRefUtils;
 import com.cheatbreaker.bridge.ref.extra.CBMovementInputHelper;
 import com.cheatbreaker.impl.extra.CBMovementInputHelperImpl;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
@@ -43,5 +44,9 @@ public class RefUtils implements IRefUtils {
 
     public ItemBridge getItemFromName(String name) {
         return (ItemBridge) Item.getByNameOrId(name);
+    }
+
+    public Class<?> getScreenClass() {
+        return GuiScreen.class;
     }
 }

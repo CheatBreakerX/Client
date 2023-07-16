@@ -145,7 +145,7 @@ public class VoiceChatManager {
                 if (data.volume != -1) {
                     sndSystem.setVolume(identifier, data.volume);
                 } else {
-                    sndSystem.setVolume(identifier, (Integer) CheatBreaker.getInstance().globalSettings.speakerVolume.getValue() / 100f);
+                    sndSystem.setVolume(identifier, CheatBreaker.getInstance().globalSettings.speakerVolume.<Integer>value() / 100f);
                 }
             }
             addStreamSafe(new ClientStream(player, data.id, data.direct));
@@ -263,7 +263,7 @@ public class VoiceChatManager {
     public void volumeControlStart() {
         if (isExistent()) {
             if (!this.volumeControlActive) {
-                final float attenuation = (Integer) CheatBreaker.getInstance().getGlobalSettings().attenuation.getValue() / 100f;
+                final float attenuation = CheatBreaker.getInstance().getGlobalSettings().attenuation.<Integer>value() / 100f;
                 this.WEATHER = this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategoryBridge.WEATHER);
                 this.RECORDS = this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategoryBridge.RECORDS);
                 this.BLOCKS = this.mc.bridge$getGameSettings().bridge$getSoundLevel(SoundCategoryBridge.BLOCKS);

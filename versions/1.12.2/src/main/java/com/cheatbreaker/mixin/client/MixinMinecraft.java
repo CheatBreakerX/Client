@@ -132,10 +132,18 @@ public abstract class MixinMinecraft implements MinecraftBridge {
         return this.currentCBScreen;
     }
 
+    public Object bridge$getCurrentScreenNative() {
+        return this.currentScreen;
+    }
+
     private CBGuiScreen currentCBScreen = null;
     public void bridge$displayGuiScreen(CBGuiScreen screen) {
         this.currentCBScreen = screen;
         this.displayGuiScreen(screen == null ? null : new WrappedGuiScreen(screen));
+    }
+
+    public void bridge$displayGuiScreenNative(Object screen) {
+        this.displayGuiScreen((GuiScreen) screen);
     }
 
     public void bridge$displayInternalGuiScreen(InternalScreen screen, CBGuiScreen parent) {

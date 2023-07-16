@@ -10,6 +10,7 @@ plugins {
 
 apply(from="$rootDir/project.gradle")
 val getShortCommitVersion: Closure<String> by ext
+val getBranch: Closure<String> by ext
 val projGroup: String by ext
 val projMixinGroup = "$projGroup.mixin"
 val projMixinTweaker: String by ext
@@ -88,7 +89,7 @@ tasks.withType(Jar::class) {
 }
 
 tasks.processResources {
-    inputs.property("version", project.version)
+    inputs.property("version", mcVersion + "-" + getShortCommitVersion() + "/" + getBranch())
     inputs.property("mcversion", mcVersion)
     inputs.property("modid", projModID)
     inputs.property("mixinGroup", projMixinGroup)

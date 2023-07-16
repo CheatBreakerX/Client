@@ -27,7 +27,9 @@ public interface MinecraftBridge {
     TimerBridge bridge$getTimer();
     FontRendererBridge bridge$getFontRenderer();
     CBGuiScreen bridge$getCurrentScreen();
+    Object bridge$getCurrentScreenNative();
     void bridge$displayGuiScreen(CBGuiScreen screen);
+    void bridge$displayGuiScreenNative(Object screen);
     void bridge$displayInternalGuiScreen(InternalScreen screen, CBGuiScreen parent);
     WorldClientBridge bridge$getTheWorld();
     GameSettingsBridge bridge$getGameSettings();

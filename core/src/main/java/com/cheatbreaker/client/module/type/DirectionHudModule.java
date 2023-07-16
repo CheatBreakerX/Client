@@ -36,11 +36,17 @@ public class DirectionHudModule extends AbstractModule {
         Ref.getGlBridge().bridge$pushMatrix();
         Ref.getGlBridge().bridge$enableBlend();
         this.scaleAndTranslate(guiDrawEvent.getResolution());
-        this.setDimensions(66, 18);
-        if (!(minecraft.bridge$getCurrentScreen() instanceof GuiChatBridge) || (Boolean) this.showWhileTyping.getValue()) {
-            Ref.getGlBridge().bridge$color((float)(backgroundColor >> 16 & 0xFF) / (float)255, (float)(backgroundColor >> 8 & 0xFF) / (float)255, (float)(backgroundColor & 0xFF) / (float)255, (float)(backgroundColor >> 24 & 255) / (float)255);
+        this.setDimensions(66f, 18f);
+        if (!(minecraft.bridge$getCurrentScreen() instanceof GuiChatBridge) || this.showWhileTyping.<Boolean>value()) {
+            Ref.getGlBridge().bridge$color((backgroundColor >> 16 & 0xFF) / 255f,
+                    (backgroundColor >> 8 & 0xFF) / 255f,
+                    (backgroundColor & 0xFF) / 255f,
+                    (backgroundColor >> 24 & 255) / 255f);
             this.render(guiDrawEvent.getResolution());
-            Ref.getGlBridge().bridge$color((float)(backgroundColor >> 16 & 0xFF) / (float)255, (float)(backgroundColor >> 8 & 0xFF) / (float)255, (float)(backgroundColor & 0xFF) / (float)255, (float)(backgroundColor >> 24 & 255) / (float)255);
+            Ref.getGlBridge().bridge$color((backgroundColor >> 16 & 0xFF) / 255f,
+                    (backgroundColor >> 8 & 0xFF) / 255f,
+                    (backgroundColor & 0xFF) / 255f,
+                    (backgroundColor >> 24 & 255) / 255f);
         }
         Ref.getGlBridge().bridge$disableBlend();
         Ref.getGlBridge().bridge$popMatrix();
@@ -57,7 +63,7 @@ public class DirectionHudModule extends AbstractModule {
         int n3 = 0;
         int backgroundColor = 0xFF212121;
 
-        if ((Integer)this.directionColor.getValue() != 4095) {
+        if (this.directionColor.<Integer>value() != 4095) {
             int n4 = this.directionColor.getColorValue();
             this.minecraft.bridge$getTextureManager().bridge$bindTexture(this.texture);
             if (n < 128) {

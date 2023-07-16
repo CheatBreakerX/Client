@@ -1,11 +1,10 @@
 package com.cheatbreaker.impl.ref;
 
-import com.cheatbreaker.bridge.client.gui.GuiBridge;
 import com.cheatbreaker.bridge.item.ItemBridge;
 import com.cheatbreaker.bridge.ref.IRefUtils;
 import com.cheatbreaker.bridge.ref.extra.CBMovementInputHelper;
 import com.cheatbreaker.impl.extra.CBMovementInputHelperImpl;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -47,5 +46,9 @@ public class RefUtils implements IRefUtils {
 
     public ItemBridge getItemFromName(String name) {
         return (ItemBridge) Registry.ITEM.get(new ResourceLocation(name));
+    }
+
+    public Class<?> getScreenClass() {
+        return Screen.class;
     }
 }

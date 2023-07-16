@@ -106,21 +106,30 @@ public class ModuleListElement extends AbstractScrollableElement {
                     break;
                 }
                 case STRING_ARRAY: {
-                    if (object == CheatBreaker.getInstance().globalSettings.clearGlass) continue;
+                    if (object == CheatBreaker.getInstance().globalSettings.clearGlass) {
+                        continue;
+                    }
+
                     this.elementsList.add(new ChoiceElement(object, f));
                     break;
                 }
                 case STRING: {
-                    if (!object.getLabel().equalsIgnoreCase("label")) break;
+                    if (!object.getLabel().equalsIgnoreCase("label")) {
+                        break;
+                    }
+
                     this.elementsList.add(new LabelElement(object, f));
-                    if (!CheatBreaker.getInstance().globalSettings.getCrosshairSettingsLabel().getValue().equals(object.getValue())) break;
+                    if (!CheatBreaker.getInstance().globalSettings.getCrosshairSettingsLabel().<String>value()
+                            .equals(object.<String>value())) {
+                        break;
+                    }
                     this.elementsList.add(new CrosshairElement(f));
                 }
             }
         }
         int n5 = 25;
-        for (Object object2 : this.elementsList) {
-            n5 += ((AbstractModulesGuiElement)object2).getHeight();
+        for (AbstractModulesGuiElement object2 : this.elementsList) {
+            n5 += object2.getHeight();
         }
         this.applyToAllTextButton = new ModulesGuiButtonElement(FontRegistry.getPlayBold18px(), null, "Apply to all text", this.x + n3 - 120, this.y + n5 + 4, 110, 28, -12418828, f);
     }
@@ -229,7 +238,7 @@ public class ModuleListElement extends AbstractScrollableElement {
                         for (Setting cBSetting : cBModule.getSettingsList()) {
                             if (cBSetting.getType() != Setting.Type.INTEGER || !cBSetting.getLabel().toLowerCase().contains("color") || cBSetting.getLabel().toLowerCase().contains("background")) continue;
                             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
-                            cBSetting.setValue(CheatBreaker.getInstance().globalSettings.defaultColor.getValue());
+                            cBSetting.setValue(CheatBreaker.getInstance().globalSettings.defaultColor.value());
                         }
                     }
                 } else {

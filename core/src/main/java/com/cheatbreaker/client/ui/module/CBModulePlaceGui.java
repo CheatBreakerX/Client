@@ -39,9 +39,9 @@ public class CBModulePlaceGui extends CBModulesGui {
         CBGuiAnchor cBGuiAnchor = CBAnchorHelper.getAnchor(mouseX, mouseY, scaledResolution);
         if (cBGuiAnchor != CBGuiAnchor.MIDDLE_MIDDLE) {
             if (cBGuiAnchor == CBGuiAnchor.MIDDLE_BOTTOM_LEFT || cBGuiAnchor == CBGuiAnchor.MIDDLE_BOTTOM_RIGHT) {
-                Ref.modified$drawRect(positions[0], positions[1], positions[0] + (float)(scaledResolution.bridge$getScaledWidth() / 6), positions[1] + (float)(scaledResolution.bridge$getScaledHeight() / 3), 0x2F000000);
+                Ref.modified$drawRect(positions[0], positions[1], positions[0] + (scaledResolution.bridge$getScaledWidth() / 6), positions[1] + (scaledResolution.bridge$getScaledHeight() / 3), 0x2F000000);
             } else {
-                Ref.modified$drawRect(positions[0], positions[1], positions[0] + (float)(scaledResolution.bridge$getScaledWidth() / 3), positions[1] + (float)(scaledResolution.bridge$getScaledHeight() / 3), 0x2F000000);
+                Ref.modified$drawRect(positions[0], positions[1], positions[0] + (scaledResolution.bridge$getScaledWidth() / 3), positions[1] + (scaledResolution.bridge$getScaledHeight() / 3), 0x2F000000);
             }
         }
         int n3 = (int) scaledResolution.bridge$getScaledWidth();
@@ -61,13 +61,13 @@ public class CBModulePlaceGui extends CBModulesGui {
         float f5 = (float)mouseY - positions[1] - arrf2[1];
         if (!Mouse.isButtonDown(1)) {
             float[] scaledPoints = this.module.getScaledPoints(scaledResolution, false);
-            f4 = this.getXTranslation(this.module, f4, scaledPoints, (float)((int)(this.module.width * (Float) this.module.scale.getValue())));
-            f5 = this.getYTranslation(this.module, f5, scaledPoints, (float)((int)(this.module.height * (Float) this.module.scale.getValue())));
+            f4 = this.getXTranslation(this.module, f4, scaledPoints, (float)((int)(this.module.width * this.module.scale.<Float>value())));
+            f5 = this.getYTranslation(this.module, f5, scaledPoints, (float)((int)(this.module.height * this.module.scale.<Float>value())));
         }
         this.module.setTranslations(f4, f5);
         Ref.getGlBridge().bridge$pushMatrix();
         this.module.scaleAndTranslate(scaledResolution);
-        RenderUtil.drawRoundedRect(-2, -2, this.module.width + 2.0f, this.module.height + 2.0f, (double)4, 551805923);
+        RenderUtil.drawRoundedRect(-2, -2, this.module.width + 2.0f, this.module.height + 2.0f, 4, 551805923);
         Ref.getGlBridge().bridge$pushMatrix();
         Ref.getGlBridge().bridge$scale(f2, f2, f2);
         FontRegistry.getUbuntuMedium16px().drawString(this.module.getName(), 0.0f, -1f, 0x6F000000); // 0x6F000000
@@ -78,8 +78,8 @@ public class CBModulePlaceGui extends CBModulesGui {
     private float getXTranslation(AbstractModule cBModule, float f, float[] arrf, float f2) {
         if (f + arrf[0] < 3f) {
             f = -arrf[0] + 3f;
-        } else if (f + arrf[0] * (Float) cBModule.scale.getValue() + f2 > (this.width - 3f)) {
-            f = (int)((float)this.width - arrf[0] * (Float) cBModule.scale.getValue() - f2 - 3f);
+        } else if (f + arrf[0] * cBModule.scale.<Float>value() + f2 > (this.width - 3f)) {
+            f = (int)((float)this.width - arrf[0] * cBModule.scale.<Float>value() - f2 - 3f);
         }
         return f;
     }
@@ -87,8 +87,8 @@ public class CBModulePlaceGui extends CBModulesGui {
     private float getYTranslation(AbstractModule cBModule, float f, float[] arrf, float f2) {
         if (f + arrf[1] < 2f) {
             f = -arrf[1] + 2f;
-        } else if (f + arrf[1] * (Float) cBModule.scale.getValue() + f2 > (this.height - 2f)) {
-            f = (int)((float)this.height - arrf[1] * (Float) cBModule.scale.getValue() - f2 - 2f);
+        } else if (f + arrf[1] * cBModule.scale.<Float>value() + f2 > (this.height - 2f)) {
+            f = (int)((float)this.height - arrf[1] * cBModule.scale.<Float>value() - f2 - 2f);
         }
         return f;
     }

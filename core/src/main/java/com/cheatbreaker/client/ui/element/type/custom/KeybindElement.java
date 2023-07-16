@@ -17,18 +17,28 @@ public class KeybindElement
         super(f);
         this.lIIIIlIIllIIlIIlIIIlIIllI = cBSetting;
         this.height = 12;
-        this.IllIIIIIIIlIlIllllIIllIII = new ModulesGuiButtonElement(FontRegistry.getPlayBold18px(), null, Keyboard.getKeyName((Integer)cBSetting.getValue()), this.x + this.width - 100, this.y, 96, 18, -9442858, f);
+        this.IllIIIIIIIlIlIllllIIllIII = new ModulesGuiButtonElement(FontRegistry.getPlayBold18px(), null,
+                Keyboard.getKeyName(cBSetting.<Integer>value()), this.x + this.width - 100, this.y, 96,
+                18, -9442858, f);
     }
 
     @Override
     public void handleDrawElement(int mouseX, int mouseY, float partialTicks) {
-        boolean bl = (float) mouseX > (float)(this.x + this.width - 48) * this.scale && (float) mouseX < (float)(this.x + this.width - 10) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 10 + this.yOffset) * this.scale;
-        boolean bl2 = (float) mouseX > (float)(this.x + this.width - 92) * this.scale && (float) mouseX < (float)(this.x + this.width - 48) * this.scale && (float) mouseY > (float)(this.y + this.yOffset) * this.scale && (float) mouseY < (float)(this.y + 10 + this.yOffset) * this.scale;
-        FontRegistry.getUbuntuMedium16px().drawString(this.lIIIIlIIllIIlIIlIIIlIIllI.getLabel().toUpperCase(), this.x + 10, (float)(this.y + 4), bl2 || bl ? -1090519040 : -1895825408);
+        boolean bl = (float) mouseX > (this.x + this.width - 48f) * this.scale
+                && (float) mouseX < (this.x + this.width - 10f) * this.scale
+                && (float) mouseY > (float)(this.y + this.yOffset) * this.scale
+                && (float) mouseY < (this.y + 10f + this.yOffset) * this.scale;
+
+        boolean bl2 = (float) mouseX > (this.x + this.width - 92f) * this.scale
+                && (float) mouseX < (this.x + this.width - 48f) * this.scale
+                && (float) mouseY > (float)(this.y + this.yOffset) * this.scale
+                && (float) mouseY < (this.y + 10f + this.yOffset) * this.scale;
+
+        FontRegistry.getUbuntuMedium16px().drawString(this.lIIIIlIIllIIlIIlIIIlIIllI.getLabel().toUpperCase(), this.x + 10f, this.y + 4f, bl2 || bl ? -1090519040 : -1895825408);
         if (this.lIIIIllIIlIlIllIIIlIllIlI && Keyboard.getEventKeyState()) {
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.lIIIIlIIllIIlIIlIIIlIIllI.setValue(Keyboard.getEventKey());
-            this.IllIIIIIIIlIlIllllIIllIII.text = Keyboard.getKeyName((Integer)this.lIIIIlIIllIIlIIlIIIlIIllI.getValue());
+            this.IllIIIIIIIlIlIllllIIllIII.text = Keyboard.getKeyName(this.lIIIIlIIllIIlIIlIIIlIIllI.<Integer>value());
             this.lIIIIllIIlIlIllIIIlIllIlI = false;
         }
         this.IllIIIIIIIlIlIllllIIllIII.yOffset = this.yOffset;

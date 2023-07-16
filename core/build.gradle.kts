@@ -17,6 +17,9 @@ dependencies {
     shadowImpl("org.java-websocket:Java-WebSocket:1.4.1")
     shadowImpl("org.slf4j:slf4j-api:1.7.26")
     shadowImpl("javazoom:jlayer:1.0.1")
+    shadowImpl("java3d:vecmath:1.3.1")
+    shadowImpl("com.github.f4b6a3:uuid-creator:5.2.0")
+
     compileOnly("com.paulscode:codecjorbis:20101023")
     compileOnly("com.paulscode:codecwav:20101023")
     compileOnly("com.paulscode:libraryjavasound:20101123")
@@ -24,7 +27,6 @@ dependencies {
     compileOnly("com.paulscode:soundsystem:20120107")
     compileOnly("com.google.code.gson:gson:2.2.4")
     compileOnly("com.google.guava:guava:17.0")
-    shadowImpl("java3d:vecmath:1.3.1")
     compileOnly("com.mojang:netty:1.8.8")
     compileOnly("com.mojang:authlib:1.5.16")
     compileOnly("io.netty:netty-all:4.0.10.Final")
