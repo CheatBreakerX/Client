@@ -31,7 +31,7 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
         CBXFontRenderer hideOrToggleFontRenderer = FontRegistry.getPlayRegular14px();
         this.optionsButton = new ModulesGuiButtonElement(optionsFontRenderer, null, "Options", this.x + 4, this.y + this.height - 20, this.x + this.width - 4, this.y + this.height - 6, -12418828, f);
         this.toggleOrHideFromHud = new ModulesGuiButtonElement(hideOrToggleFontRenderer, null, module.getGuiAnchor() == null ? (module.isRenderHud() ? "Disable" : "Enable") : (module.isRenderHud() ? "Hide from HUD" : "Add to HUD"), this.x + 4, this.y + this.height - 38, this.x + this.width / 2 - 2, this.y + this.height - 24, module.isRenderHud() ? -5756117 : -13916106, f);
-        this.toggleOrHideFromHud.lIIIIlIIllIIlIIlIIIlIIllI(module != CheatBreaker.getInstance().moduleManager.notifications);
+        this.toggleOrHideFromHud.setField1(module != CheatBreaker.getInstance().moduleManager.notifications);
         this.toggle = new ModulesGuiButtonElement(hideOrToggleFontRenderer, null, module.isEnabled() ? "Disable" : "Enable", this.x + this.width / 2 + 2, this.y + this.height - 38, this.x + this.width - 4, this.y + this.height - 24, module.isEnabled() ? -5756117 : -13916106, f);
     }
 
@@ -131,7 +131,7 @@ public class ModulePreviewElement extends AbstractModulesGuiElement {
                 this.lIIIIIIIIIlIllIIllIlIIlIl();
                 this.module.setState(true);
             }
-        } else if (this.toggleOrHideFromHud.IlllIllIlIIIIlIIlIIllIIIl && this.toggleOrHideFromHud.isMouseInside(mouseX, mouseY)) {
+        } else if (this.toggleOrHideFromHud.field_1 && this.toggleOrHideFromHud.isMouseInside(mouseX, mouseY)) {
             Ref.getMinecraft().bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             if (!this.module.isEnabled()) {
                 this.module.setRenderHud(true);

@@ -5,6 +5,7 @@ import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.EnumChatFormattingBridge;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
+import com.cheatbreaker.client.event.data.KeyObject;
 import com.cheatbreaker.client.ui.util.font.CBXFontRenderer;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.module.AbstractModule;
@@ -121,10 +122,10 @@ public class CBModulesGui extends CBGuiScreen {
         int n = (int)((float)this.width / f);
         this.lIIIIlIIllIIlIIlIIIlIIllI(n);
         if (!this.positions.isEmpty()) {
-            boolean leftKey = Keyboard.isKeyDown(Keyboard.KEY_LEFT);
-            boolean rightDown = Keyboard.isKeyDown(Keyboard.KEY_RIGHT);
-            boolean upDown = Keyboard.isKeyDown(Keyboard.KEY_UP);
-            boolean downDown = Keyboard.isKeyDown(Keyboard.KEY_DOWN);
+            boolean leftKey = Keyboard.isKeyDown(KeyObject.LEFT.getId());
+            boolean rightDown = Keyboard.isKeyDown(KeyObject.RIGHT.getId());
+            boolean upDown = Keyboard.isKeyDown(KeyObject.UP.getId());
+            boolean downDown = Keyboard.isKeyDown(KeyObject.DOWN.getId());
             if (leftKey || rightDown || upDown || downDown) {
                 ++this.arrowKeyMoves;
                 if (this.arrowKeyMoves > 10) {
@@ -567,7 +568,7 @@ public class CBModulesGui extends CBGuiScreen {
             }
         }
 //        super.keyTyped(c, n);
-        if (n == Keyboard.KEY_Z && wrapped$isCtrlKeyDown()) {
+        if (n == KeyObject.Z.getId() && wrapped$isCtrlKeyDown()) {
             if (!this.undoList.isEmpty()) {
                 int n2 = this.undoList.size() - 1;
                 ModuleActionData moduleActionData = this.undoList.get(this.undoList.size() - 1);
@@ -587,7 +588,7 @@ public class CBModulesGui extends CBGuiScreen {
                 this.redo.add(moduleActionData);
                 this.undoList.remove(n2);
             }
-        } else if (n == Keyboard.KEY_Y && wrapped$isCtrlKeyDown()) {
+        } else if (n == KeyObject.Y.getId() && wrapped$isCtrlKeyDown()) {
             if (!this.redo.isEmpty()) {
                 int n3 = this.redo.size() - 1;
                 ModuleActionData moduleActionData = this.redo.get(this.redo.size() - 1);

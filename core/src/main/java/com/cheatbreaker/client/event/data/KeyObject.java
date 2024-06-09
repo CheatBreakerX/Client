@@ -145,4 +145,8 @@ public enum KeyObject {
     public static KeyObject getKey(int id) {
         return getKey(id, Ref.getMinecraftVersion().isNewerThan(MinecraftVersion.v1_12_2));
     }
+
+    public int getId() {
+        return Ref.getMinecraftVersion().isNewerThan(MinecraftVersion.v1_12_2) ? this.glfwId : this.legacyId;
+    }
 }

@@ -4,6 +4,7 @@ import com.cheatbreaker.bridge.client.MinecraftBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.ResourceLocationBridge;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
+import com.cheatbreaker.client.event.data.KeyObject;
 import com.cheatbreaker.main.CheatBreaker;
 import com.cheatbreaker.client.ui.AbstractGui;
 import com.cheatbreaker.client.ui.mainmenu.AbstractElement;
@@ -171,7 +172,7 @@ public class OverlayGui extends AbstractGui {
             this.mc.bridge$displayGuiScreen(this.context);
         }
         super.handleKeyTyped(c, n);
-        if (n == Keyboard.KEY_GRAVE && CheatBreaker.getInstance().isConsoleAllowed()) {
+        if (n == KeyObject.GRAVE.getId() && CheatBreaker.getInstance().isConsoleAllowed()) {
             boolean shouldOpen = true;
             for (AbstractElement element : this.elements) {
                 if (element instanceof ConsoleElement) {

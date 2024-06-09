@@ -68,7 +68,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
         }
         CheatBreaker.getInstance().getBorderManager().lIIIIlIIllIIlIIlIIIlIIllI();
         Hologram.getHolograms().clear();
-        CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIlIIllIIlIIlIIIlIIllI().clear();
+        CheatBreaker.getInstance().getModuleManager().teammatesModule.getTeammates().clear();
         this.lIIIIlIIllIIlIIlIIIlIIllI();
     }
     public void lIIIIlIIllIIlIIlIIIlIIllI() {
@@ -171,26 +171,26 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
         UUID uUID = packet.getLeader();
         long l = packet.getLastMs();
         if (!CheatBreaker.getInstance().getGlobalSettings().enableTeamView.<Boolean>value() || map == null || map.isEmpty() || map.size() == 1 && map.containsKey(Ref.getMinecraft().bridge$getThePlayer().bridge$getUniqueID())) {
-            CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIlIIllIIlIIlIIIlIIllI().clear();
+            CheatBreaker.getInstance().getModuleManager().teammatesModule.getTeammates().clear();
             System.out.println("[CB Teammates] Cleared Map..");
             return;
         }
         int n = 0;
         for (Map.Entry<UUID, Map<String, Double>> entry : map.entrySet()) {
             System.out.println("[CB Teammates] Entry: " + entry.toString());
-            Teammate teammate = CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIlIIllIIlIIlIIIlIIllI((entry.getKey()).toString());
+            Teammate teammate = CheatBreaker.getInstance().getModuleManager().teammatesModule.getTeammate((entry.getKey()).toString());
             if (teammate == null) {
                 teammate = new Teammate((entry.getKey()).toString(), uUID != null && uUID.equals(entry.getKey()));
-                CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIlIIllIIlIIlIIIlIIllI().add(teammate);
+                CheatBreaker.getInstance().getModuleManager().teammatesModule.getTeammates().add(teammate);
                 System.out.println("[CB Teammates] New Teammate Added: " + entry);
                 Random random = new Random();
                 if (n < CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIIIIIIlIllIIllIlIIlIl().length) {
-                    teammate.lIIIIlIIllIIlIIlIIIlIIllI(new Color(CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIIIIIIlIllIIllIlIIlIl()[n]));
+                    teammate.setColor(new Color(CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIIIIIIlIllIIllIlIIlIl()[n]));
                 } else {
                     float f = random.nextFloat();
                     float f2 = random.nextFloat();
                     float f3 = random.nextFloat() / 2.0f;
-                    teammate.lIIIIlIIllIIlIIlIIIlIIllI(new Color(f, f2, f3));
+                    teammate.setColor(new Color(f, f2, f3));
                 }
             }
             try {
@@ -204,7 +204,7 @@ public class NetHandler implements ICBNetHandler, ICBNetHandlerClient {
             }
             ++n;
         }
-        CheatBreaker.getInstance().getModuleManager().teammatesModule.lIIIIlIIllIIlIIlIIIlIIllI().removeIf(teammate -> !map.containsKey(UUID.fromString(teammate.IlllIIIlIlllIllIlIIlllIlI())));
+        CheatBreaker.getInstance().getModuleManager().teammatesModule.getTeammates().removeIf(teammate -> !map.containsKey(UUID.fromString(teammate.getUuid())));
     }
 
     @Override

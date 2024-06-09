@@ -9,6 +9,9 @@ import org.lwjgl.glfw.GLFW;
  *  modern versions of Minecraft.
  */
 public class Keyboard {
+    public static boolean eventKeyState = false;
+    public static int eventKey = -1;
+
     public static boolean isKeyDown(int key) {
         return InputConstants.isKeyDown(Minecraft.getInstance().window.getWindow(), key);
     }
@@ -19,5 +22,13 @@ public class Keyboard {
 
     public static String getKeyName(int key) {
         return GLFW.glfwGetKeyName(key, GLFW.glfwGetKeyScancode(key));
+    }
+
+    public static boolean getEventKeyState() {
+        return eventKeyState;
+    }
+
+    public static int getEventKey() {
+        return eventKey;
     }
 }

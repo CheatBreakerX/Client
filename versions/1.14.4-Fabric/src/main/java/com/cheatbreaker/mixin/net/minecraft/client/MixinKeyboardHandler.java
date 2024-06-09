@@ -8,6 +8,7 @@ import net.minecraft.client.KeyboardHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.input.Keyboard;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,11 +21,17 @@ public class MixinKeyboardHandler {
                               CallbackInfo callbackInfo) {
         if (window == Minecraft.getInstance().window.getWindow()) {
             if (action == GLFW.GLFW_PRESS) {
+                Keyboard.eventKeyState = true;
+                Keyboard.eventKey = key;
+
                 CheatBreaker.getInstance().getEventBus().callEvent(new KeyboardEvent(key));
 
                 if (Screen.hasShiftDown() && key == GLFW.GLFW_KEY_TAB) {
                     Ref.getMinecraft().bridge$displayGuiScreen(OverlayGui.getInstance());
                 }
+            } else if (action == GLFW.GLFW_RELEASE) {
+                Keyboard.eventKeyState = false;
+                Keyboard.eventKey = -1;
             }
         }
     }
