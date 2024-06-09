@@ -15,6 +15,7 @@ import com.cheatbreaker.client.config.ConfigManager;
 import com.cheatbreaker.client.config.GlobalSettings;
 import com.cheatbreaker.client.config.Profile;
 import com.cheatbreaker.client.event.EventBus;
+import com.cheatbreaker.client.event.data.KeyObject;
 import com.cheatbreaker.client.event.type.GuiDrawEvent;
 import com.cheatbreaker.client.event.type.KeyboardEvent;
 import com.cheatbreaker.client.event.type.PluginMessageEvent;
@@ -194,19 +195,19 @@ public class CheatBreaker {
 
             this.eventBus.addEvent(PluginMessageEvent.class, this.netHandler::onPluginMessage);
             this.eventBus.addEvent(KeyboardEvent.class, (e) -> {
-                if (e.getKeyboardKey() == Keyboard.KEY_H) {
+                if (e.getKeyboardKey() == KeyObject.H) {
                     Alert.displayMessage("Hello", "Hello, World\nNew Line");
                 }
-                if (e.getKeyboardKey() == Keyboard.KEY_RSHIFT) {
+                if (e.getKeyboardKey() == KeyObject.RSHIFT) {
                     if (Ref.getMinecraft().bridge$isIngame()) {
                         Ref.getMinecraft().bridge$displayGuiScreen(new CBModulesGui());
                     }
                 }
-                if (e.getKeyboardKey() == Keyboard.KEY_F9) {
+                if (e.getKeyboardKey() == KeyObject.F9) {
                     RenderUtil.minFps = 2147483647;
                     RenderUtil.maxFps = 0;
                 }
-                if (e.getKeyboardKey() == Keyboard.KEY_F10) {
+                if (e.getKeyboardKey() == KeyObject.F10) {
                     new ServerStatusThread().start();
                 }
             });

@@ -62,10 +62,13 @@ public class OverlayGui extends AbstractGui {
     public void lIIIIlIIllIIlIIlIIIlIIllI(Friend friend) {
         try {
             MessagesElement messagesElement2 = null;
+
             for (AbstractElement element : this.elements) {
-                if (!(element instanceof MessagesElement)) continue;
-                messagesElement2 = (MessagesElement)element;
+                if (element instanceof MessagesElement) {
+                    messagesElement2 = (MessagesElement) element;
+                }
             }
+
             if (messagesElement2 == null) {
                 MessagesElement messagesElement = new MessagesElement(friend);
                 this.elements.add(messagesElement);
@@ -75,8 +78,8 @@ public class OverlayGui extends AbstractGui {
                 messagesElement2.setFriend(friend);
             }
         }
-        catch (Exception exception) {
-            exception.printStackTrace();
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -171,14 +174,14 @@ public class OverlayGui extends AbstractGui {
         if (n == Keyboard.KEY_GRAVE && CheatBreaker.getInstance().isConsoleAllowed()) {
             boolean shouldOpen = true;
             for (AbstractElement element : this.elements) {
-                if (!(element instanceof ConsoleElement)) continue;
-                shouldOpen = false;
+                if (element instanceof ConsoleElement) {
+                    shouldOpen = false;
+                    break;
+                }
             }
             if (shouldOpen) {
-                AbstractElement[] cbAbstractElements = new AbstractElement[1];
                 ConsoleElement consoleGui = new ConsoleElement();
-                cbAbstractElements[0] = consoleGui;
-                this.addElements(cbAbstractElements);
+                this.addElements(consoleGui);
                 consoleGui.setElementDimensions(60f, 30f, 300f, 145f);
             }
         }
@@ -190,10 +193,12 @@ public class OverlayGui extends AbstractGui {
         this.onMouseClicked(f, f2, n, this.friendsListElement, this.friendRequestsElement);
         boolean bl2 = this.isMouseHovered(this.friendsButton, f, f2);
         if (bl2 && this.friendsButton.isMouseInside(f, f2) && this.selectedElement != this.friendsListElement) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref
+                    .getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.selectedElement = this.friendsListElement;
         } else if (bl2 && this.requestsButton.isMouseInside(f, f2) && this.selectedElement != this.friendRequestsElement) {
-            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref.getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
+            this.mc.bridge$getSoundHandler().bridge$playSound(Ref.getInstanceCreator().createSoundFromPSR(Ref
+                    .getInstanceCreator().createResourceLocation("gui.button.press"), 1.0f));
             this.selectedElement = this.friendRequestsElement;
         }
         boolean bl = f > 6f && f < 134f && f2 > 6f && f2 < 22f;
