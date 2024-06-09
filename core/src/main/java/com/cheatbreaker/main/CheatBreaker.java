@@ -326,7 +326,8 @@ public class CheatBreaker {
     }
 
     public ResourceLocationBridge getHeadLocation(String displayName) {
-        ResourceLocationBridge playerSkin = this.playerSkins.getOrDefault(displayName, Ref.getInstanceCreator().createResourceLocation("client/heads/" + displayName + ".png"));
+        ResourceLocationBridge playerSkin = this.playerSkins.getOrDefault(displayName, Ref.getInstanceCreator()
+                .createResourceLocation("client/heads/" + displayName + ".png"));
         if (!this.playerSkins.containsKey(displayName)) {
             ThreadDownloadImageDataBridge skinData = Ref.getInstanceCreator()
                     .createThreadDownloadImageData(null, "https://minotar.net/helm/" + displayName + "/32.png",

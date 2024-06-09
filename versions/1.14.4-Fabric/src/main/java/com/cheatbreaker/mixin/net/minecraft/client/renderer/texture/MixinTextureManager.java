@@ -19,7 +19,11 @@ public abstract class MixinTextureManager implements TextureManagerBridge {
     @Shadow public abstract boolean register(ResourceLocation textureLocation, TextureObject textureObj);
 
     public void bridge$loadTexture(ResourceLocationBridge textureLocation, ThreadDownloadImageDataBridge textureObj) {
-        this.register((ResourceLocation) textureLocation, (TextureObject) textureObj);
+        try {
+            this.register((ResourceLocation) textureLocation, (TextureObject) textureObj);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
     }
 
     public void bridge$bindTexture(ResourceLocationBridge location) {

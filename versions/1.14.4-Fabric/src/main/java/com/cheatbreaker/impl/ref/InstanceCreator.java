@@ -66,7 +66,7 @@ import java.io.File;
 
 public class InstanceCreator implements IInstanceCreator {
     public ResourceLocationBridge createResourceLocation(String domain, String path) {
-        return (ResourceLocationBridge) new ResourceLocation(domain, path);
+        return (ResourceLocationBridge) new ResourceLocation(domain.toLowerCase(), path.toLowerCase());
     }
 
     private DynamicTexture registerTexture(File file, String url, ResourceLocation target, ResourceLocation fallback) {

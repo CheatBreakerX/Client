@@ -24,7 +24,7 @@ import com.cheatbreaker.bridge.potion.PotionEffectBridge;
 import com.cheatbreaker.bridge.ref.Ref;
 import com.cheatbreaker.bridge.util.*;
 import com.cheatbreaker.bridge.wrapper.CBGuiScreen;
-import com.cheatbreaker.client.event.type.KeyboardEvent;
+import com.cheatbreaker.client.remote.GitCommitProperties;
 import com.cheatbreaker.client.ui.mainmenu.MainMenu;
 import com.cheatbreaker.client.ui.overlay.OverlayGui;
 import com.cheatbreaker.client.ui.util.RenderUtil;
@@ -37,12 +37,10 @@ import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.Util;
 import net.minecraft.client.*;
+import net.minecraft.client.Timer;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.screens.LanguageSelectScreen;
-import net.minecraft.client.gui.screens.OptionsScreen;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.gui.screens.*;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.client.multiplayer.ClientPacketListener;
@@ -55,6 +53,8 @@ import net.minecraft.client.resources.ClientPackSource;
 import net.minecraft.client.resources.language.LanguageManager;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.realms.RealmsBridge;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ReloadableResourceManager;
 import net.minecraft.world.InteractionHand;
 import org.lwjgl.glfw.GLFW;
@@ -69,6 +69,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.Proxy;
 import java.util.Collection;
 import java.util.Queue;
@@ -105,6 +107,10 @@ public abstract class MixinMinecraft implements MinecraftBridge {
     @Shadow public GameRenderer gameRenderer;
 
     @Shadow @Final private ClientPackSource clientPackSource;
+
+    @Shadow public abstract ClientPackSource getClientPackSource();
+
+    @Shadow public Overlay overlay;
 
     public SoundHandlerBridge bridge$getSoundHandler() {
         return (SoundHandlerBridge) this.getSoundManager();
@@ -384,7 +390,13 @@ public abstract class MixinMinecraft implements MinecraftBridge {
 
     @Inject(method = "init", at = @At("RETURN"))
     public void impl$init(CallbackInfo callbackInfo) {
-        //CheatBreakerMod.CheatBreaker$preInitialize();
+        try (InputStream inputStream = this.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES,
+                new ResourceLocation("client/properties/app.properties"))) {
+            GitCommitProperties.applyPropertiesFromInputStream(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         CheatBreaker.getInstance().initialize();
         GLFW.glfwSetWindowTitle(Minecraft.getInstance().window.getWindow(),
                 Utility.getFullTitle(CheatBreakerMod.MINECRAFT_VERSION));
@@ -430,6 +442,6 @@ public abstract class MixinMinecraft implements MinecraftBridge {
      */
     @Overwrite
     private int getFramerateLimit() {
-        return this.options.framerateLimit;
+        return this.level != null || this.screen == null && this.overlay == null ? this.options.framerateLimit : 120;
     }
 }

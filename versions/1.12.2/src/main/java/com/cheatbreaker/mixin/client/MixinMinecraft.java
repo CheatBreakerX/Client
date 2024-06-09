@@ -456,6 +456,6 @@ public abstract class MixinMinecraft implements MinecraftBridge {
      */
     @Overwrite
     public int getLimitFramerate() {
-        return this.gameSettings.limitFramerate;
+        return this.world == null && this.currentScreen != null ? 120 : this.gameSettings.limitFramerate;
     }
 }

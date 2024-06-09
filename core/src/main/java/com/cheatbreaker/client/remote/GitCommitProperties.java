@@ -16,28 +16,34 @@ public class GitCommitProperties {
 
     private static boolean loaded = false;
 
+    public static void applyPropertiesFromInputStream(final InputStream inputStream) throws IOException {
+        if (!loaded) {
+            final Properties properties = new Properties();
+
+            if (inputStream == null) {
+                return;
+            }
+
+            properties.load(inputStream);
+
+            if (properties.getProperty("git.commit.id.abbrev") != null) {
+                gitCommit = properties.getProperty("git.commit.id.abbrev");
+            }
+            if (properties.getProperty("git.commit.id") != null) {
+                gitCommitId = properties.getProperty("git.commit.id");
+            }
+            if (properties.getProperty("git.branch") != null) {
+                gitBranch = properties.getProperty("git.branch");
+            }
+            loaded = true;
+        }
+    }
+
     public static void loadProperties() {
         if (!loaded) {
             try (InputStream inputStream = ClassLoader.class.getResourceAsStream("/assets/minecraft/client/" +
                     "properties/app.properties")) {
-                final Properties properties = new Properties();
-
-                if (inputStream == null) {
-                    return;
-                }
-
-                properties.load(inputStream);
-
-                if (properties.getProperty("git.commit.id.abbrev") != null) {
-                    gitCommit = properties.getProperty("git.commit.id.abbrev");
-                }
-                if (properties.getProperty("git.commit.id") != null) {
-                    gitCommitId = properties.getProperty("git.commit.id");
-                }
-                if (properties.getProperty("git.branch") != null) {
-                    gitBranch = properties.getProperty("git.branch");
-                }
-                loaded = true;
+                applyPropertiesFromInputStream(inputStream);
             } catch (IOException e) {
                 e.printStackTrace();
             }
