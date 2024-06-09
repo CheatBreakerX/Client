@@ -50,8 +50,8 @@ jobs:
         run: ./gradlew :versions:1.11.2:build
       - name: Compile CheatBreakerX 1.12.2
         run: ./gradlew :versions:1.12.2:build
-      - name: Compile CheatBreakerX 1.14.4
-        run: ./gradlew :versions:1.14.4:build
+      - name: Compile CheatBreakerX 1.14.4-Fabric
+        run: ./gradlew :versions:1.14.4-Fabric:build
 
       # Upload the artifacts through GitHub Actions
       - name: Upload 1.8.9 artifact
@@ -79,8 +79,8 @@ jobs:
         with:
           name: CheatBreakerX-1.12.2
           path: versions/1.12.2/build/libs
-      - name: Upload 1.14.4 artifact
+      - name: Upload 1.14.4-Fabric artifact
         uses: actions/upload-artifact@v3
         with:
-          name: CheatBreakerX-1.14.4
-          path: versions/1.14.4/build/libs
+          name: CheatBreakerX-1.14.4-Fabric
+          path: versions/1.14.4-Fabric/build/libs
