@@ -29,16 +29,16 @@ jobs:
           java-version: 16.0.2+7
           distribution: liberica
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4.2.1
-        with:
-          java-version: 21.0.3+12
-          distribution: liberica
-
       - name: Set up JDK 17
         uses: actions/setup-java@v4.2.1
         with:
           java-version: 17.0.11+10
+          distribution: liberica
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4.2.1
+        with:
+          java-version: 21.0.3+12
           distribution: liberica
 
       - name: Make 'gradlew' executable
