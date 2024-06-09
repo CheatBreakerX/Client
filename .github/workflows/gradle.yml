@@ -191,4 +191,4 @@ jobs:
             ${{ needs.build_nightly.outputs.full_sha }}
             ```
           files: |
-            **/CheatBreaker-???????.jar
+            **/CheatBreaker-${{ needs.obtain_info.outputs.short_sha }}.jar
