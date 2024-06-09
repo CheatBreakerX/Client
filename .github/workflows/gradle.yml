@@ -153,3 +153,21 @@ jobs:
         with:
           name: CheatBreakerX-1.20.6-Fabric (currently unimplemented)
           path: versions/1.20.6-Fabric/build/libs
+
+      - name: Upload files to new release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: CheatBreakerX ${{ needs.build_nightly.outputs.short_sha }}
+          tag_name: cbx-${{ needs.build_nightly.outputs.short_sha }}
+          body: |
+            **This release has been built by GitHub Actions**
+            [Link to build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+            Files are linked below. This action is executed after the `upload-artifact` commands that upload to Actions, because they tend to expire and is only harder to access.
+
+            Full commit hash:
+            ```
+            ${{ needs.build_nightly.outputs.full_sha }}
+            ```
+          files: |
+            **/CheatBreaker-???????.jar
