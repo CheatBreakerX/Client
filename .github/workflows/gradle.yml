@@ -9,24 +9,25 @@ name: Java CI with Gradle
 on: [push, pull_request]
 
 jobs:
-  obtain_info:
-    runs-on: ubuntu-latest
-    name: Obtain commit information
-    outputs:
-      full_sha: ${{ steps.var.outputs.full_sha }}
-      short_sha: ${{ steps.var.outputs.short_sha }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Generate Build Info
-        id: var
-        run: |
-          echo "full_sha=$(git rev-parse HEAD)" >> $env:GITHUB_OUTPUT
-          echo "short_sha=$(git rev-parse --short HEAD)" >> $env:GITHUB_OUTPUT
+  #obtain_info:
+  #  runs-on: ubuntu-latest
+  #  name: Obtain commit information
+  #  outputs:
+  #    full_sha: ${{ steps.var.outputs.full_sha }}
+  #    short_sha: ${{ steps.var.outputs.short_sha }}
+  #  steps:
+  #    - uses: actions/checkout@v4
+  #      with:
+  #        fetch-depth: 0
+  #    - name: Generate Build Info
+  #      id: var
+  #      run: |
+  #        echo "full_sha=$(git rev-parse HEAD)" >> $env:GITHUB_OUTPUT
+  #        echo "short_sha=$(git rev-parse --short HEAD)" >> $env:GITHUB_OUTPUT
+  
   build:
     runs-on: ubuntu-latest
-    needs: obtain_info
+  #  needs: obtain_info
     steps:
       # Gradle setup (JDK 1.8 is for 1.8.9-1.16.5, JDK 16 for 1.17.1, JDK 17 for 1.18.2-1.19.4 and JDK 21 for 1.20.6 and Gradle)
       - uses: actions/checkout@v4
@@ -170,25 +171,25 @@ jobs:
           name: CheatBreakerX-1.20.6-Fabric (currently unimplemented)
           path: versions/1.20.6-Fabric/build/libs
 
-      - name: Run latest-tag
-        uses: EndBug/latest-tag@84c87607fcb948bcef069c9a27445e653113979f
-        with:
-          ref: cbx-${{ needs.obtain_info.outputs.short_sha }}
+  #    - name: Run latest-tag
+  #      uses: EndBug/latest-tag@84c87607fcb948bcef069c9a27445e653113979f
+  #      with:
+  #        ref: cbx-${{ needs.obtain_info.outputs.short_sha }}
 
-      - name: Upload files to new release
-        uses: softprops/action-gh-release@v1
-        with:
-          name: CheatBreakerX ${{ needs.obtain_info.outputs.short_sha }}
-          tag_name: cbx-${{ needs.obtain_info.outputs.short_sha }}
-          body: |
-            **This release has been built by GitHub Actions**
-            [Link to build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-
-            Files are linked below. This action is executed after the `upload-artifact` commands that upload to Actions, because they tend to expire and is only harder to access.
-
-            Full commit hash:
-            ```
-            ${{ needs.build_nightly.outputs.full_sha }}
-            ```
-          files: |
-            **/CheatBreaker-${{ needs.obtain_info.outputs.short_sha }}.jar
+  #    - name: Upload files to new release
+  #      uses: softprops/action-gh-release@v1
+  #      with:
+  #        name: CheatBreakerX ${{ needs.obtain_info.outputs.short_sha }}
+  #        tag_name: cbx-${{ needs.obtain_info.outputs.short_sha }}
+  #        body: |
+  #          **This release has been built by GitHub Actions**
+  #          [Link to build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+  #  
+  #          Files are linked below. This action is executed after the `upload-artifact` commands that upload to Actions, because they tend to expire and is only harder to access.
+  #  
+  #          Full commit hash:
+  #          ```
+  #          ${{ needs.build_nightly.outputs.full_sha }}
+  #          ```
+  #        files: |
+  #          **/CheatBreaker-${{ needs.obtain_info.outputs.short_sha }}.jar
