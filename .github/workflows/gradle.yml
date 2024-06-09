@@ -2,7 +2,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
 # Every version supported by CheatBreakerX will be added here once added in the full project.
-# As of currently, the only supported versions are 1.8.9, 1.9.4, 1.10.2, 1.11.2 and 1.12.2
+# As of currently, the only supported versions are 1.8.9, 1.9.4, 1.10.2, 1.11.2, 1.12.2 and 1.14.4
 
 name: Java CI with Gradle
 
@@ -16,6 +16,9 @@ jobs:
       full_sha: ${{ steps.var.outputs.full_sha }}
       short_sha: ${{ steps.var.outputs.short_sha }}
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Generate Build Info
         id: var
         run: |
@@ -25,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: obtain_info
     steps:
-      # Gradle setup (JDK 17 is needed for 1: later versions, and 2: Architectury Loom)
+      # Gradle setup (JDK 1.8 is for 1.8.9-1.16.5, JDK 16 for 1.17.1, JDK 17 for 1.18.2-1.19.4 and JDK 21 for 1.20.6 and Gradle)
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
