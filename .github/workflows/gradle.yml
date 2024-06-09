@@ -16,42 +16,70 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - name: Set up JDK 1.8
         uses: actions/setup-java@v4.2.1
         with:
           java-version: 8.0.412+9
           distribution: liberica
+
       - name: Set up JDK 16
         uses: actions/setup-java@v4.2.1
         with:
           java-version: 16.0.2+7
           distribution: liberica
+
       - name: Set up JDK 21
         uses: actions/setup-java@v4.2.1
         with:
           java-version: 21.0.3+12
           distribution: liberica
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4.2.1
         with:
           java-version: 17.0.11+10
           distribution: liberica
+
       - name: Make 'gradlew' executable
         run: chmod +x gradlew
 
       # Build the different projects
       - name: Compile CheatBreakerX 1.8.9
         run: ./gradlew :versions:1.8.9:build
+
       - name: Compile CheatBreakerX 1.9.4
         run: ./gradlew :versions:1.9.4:build
+
       - name: Compile CheatBreakerX 1.10.2
         run: ./gradlew :versions:1.10.2:build
+
       - name: Compile CheatBreakerX 1.11.2
         run: ./gradlew :versions:1.11.2:build
+
       - name: Compile CheatBreakerX 1.12.2
         run: ./gradlew :versions:1.12.2:build
+
       - name: Compile CheatBreakerX 1.14.4-Fabric
         run: ./gradlew :versions:1.14.4-Fabric:build
+
+      - name: Compile CheatBreakerX 1.15.2-Fabric (currently unimplemented)
+        run: ./gradlew :versions:1.15.2-Fabric:build
+
+      - name: Compile CheatBreakerX 1.16.5-Fabric (currently unimplemented)
+        run: ./gradlew :versions:1.16.5-Fabric:build
+
+      - name: Compile CheatBreakerX 1.17.1-Fabric (currently unimplemented)
+        run: ./gradlew :versions:1.17.1-Fabric:build
+
+      - name: Compile CheatBreakerX 1.18.2-Fabric (currently unimplemented)
+        run: ./gradlew :versions:1.18.2-Fabric:build
+
+      - name: Compile CheatBreakerX 1.19.4-Fabric (currently unimplemented)
+        run: ./gradlew :versions:1.19.4-Fabric:build
+
+      - name: Compile CheatBreakerX 1.20.6-Fabric (currently unimplemented)
+        run: ./gradlew :versions:1.20.6-Fabric:build
 
       # Upload the artifacts through GitHub Actions
       - name: Upload 1.8.9 artifact
@@ -59,28 +87,69 @@ jobs:
         with:
           name: CheatBreakerX-1.8.9
           path: versions/1.8.9/build/libs
+
       - name: Upload 1.9.4 artifact
         uses: actions/upload-artifact@v3
         with:
           name: CheatBreakerX-1.9.4
           path: versions/1.9.4/build/libs
+
       - name: Upload 1.10.2 artifact
         uses: actions/upload-artifact@v3
         with:
           name: CheatBreakerX-1.10.2
           path: versions/1.10.2/build/libs
+
       - name: Upload 1.11.2 artifact
         uses: actions/upload-artifact@v3
         with:
           name: CheatBreakerX-1.11.2
           path: versions/1.11.2/build/libs
+
       - name: Upload 1.12.2 artifact
         uses: actions/upload-artifact@v3
         with:
           name: CheatBreakerX-1.12.2
           path: versions/1.12.2/build/libs
+
       - name: Upload 1.14.4-Fabric artifact
         uses: actions/upload-artifact@v3
         with:
           name: CheatBreakerX-1.14.4-Fabric
           path: versions/1.14.4-Fabric/build/libs
+
+      - name: Upload 1.15.2-Fabric artifact (currently unimplemented)
+        uses: actions/upload-artifact@v3
+        with:
+          name: CheatBreakerX-1.15.2-Fabric (currently unimplemented)
+          path: versions/1.15.2-Fabric/build/libs
+
+      - name: Upload 1.16.5-Fabric artifact (currently unimplemented)
+        uses: actions/upload-artifact@v3
+        with:
+          name: CheatBreakerX-1.16.5-Fabric (currently unimplemented)
+          path: versions/1.16.5-Fabric/build/libs
+
+      - name: Upload 1.17.1-Fabric artifact (currently unimplemented)
+        uses: actions/upload-artifact@v3
+        with:
+          name: CheatBreakerX-1.17.1-Fabric (currently unimplemented)
+          path: versions/1.17.1-Fabric/build/libs
+
+      - name: Upload 1.18.2-Fabric artifact (currently unimplemented)
+        uses: actions/upload-artifact@v3
+        with:
+          name: CheatBreakerX-1.18.2-Fabric (currently unimplemented)
+          path: versions/1.18.2-Fabric/build/libs
+
+      - name: Upload 1.19.4-Fabric artifact (currently unimplemented)
+        uses: actions/upload-artifact@v3
+        with:
+          name: CheatBreakerX-1.19.4-Fabric (currently unimplemented)
+          path: versions/1.19.4-Fabric/build/libs
+
+      - name: Upload 1.20.6-Fabric artifact (currently unimplemented)
+        uses: actions/upload-artifact@v3
+        with:
+          name: CheatBreakerX-1.20.6-Fabric (currently unimplemented)
+          path: versions/1.20.6-Fabric/build/libs

@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "${modid}",
+	"version": "${version}",
+
+	"name": "CheatBreaker",
+	"description": "The free FPS boosting modpack for Minecraft 1.15.2.",
+	"authors": [
+		"Lifix",
+		"JHalt",
+		"Decencies",
+		"tuzeynah",
+		"Freddie",
+		"Noxiuam"
+	],
+	"contact": {
+		"homepage": "https://discordapp.com/invite/dPzJajt",
+		"sources": "https://github.com/CheatBreakerX/Client"
+	},
+
+	"license": "CC0-1.0",
+	"icon": "assets/minecraft/client/logo_1024.png",
+
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.cheatbreaker.CheatBreakerMod"
+		]
+	},
+	"mixins": [
+		"mixins.cheatbreaker.json"
+	],
+
+	"depends": {
+		"fabricloader": ">=0.15.10",
+		"minecraft": "~1.15.2"
+	}
+}
