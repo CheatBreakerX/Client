@@ -1,6 +1,6 @@
 <!-- markdownlint-disable-file MD001 MD033 -->
 <h1 align="center"><a href="https://github.com/CheatBreakerX">CheatBreakerX</a>/<a href="https://github.com/CheatBreakerX/Client">Client</a></h1>
-<p align="center">The #1 modpack to use for all common versions of Minecraft Java Edition (1.7.10 - 1.20.1)</p>
+<p align="center">The #1 modpack to use for all common versions of Minecraft Java Edition (1.7.10 - 1.20.6)</p>
 
 Although, we aren't quite at the 1.20.x stage yet. Right now, CheatBreakerX is in development. The versions being currently worked on include 1.8.9, 1.9.4, 1.10.2, 1.11.2, 1.12.2 and 1.14.4 - though new versions will come soon. To preview these versions, you can download them from the latest successful workflow package found in the [Actions tab](https://github.com/CheatBreakerX/Client/actions).
 
